@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import React from 'react';
 
 const Footer = () => {
@@ -94,21 +95,21 @@ const Footer = () => {
                             <li className="pt-[9px] pb-[10px]">
                                 Find Consultants
                             </li>
-                            <a href="../Universities">
+                            <Link href="/universities">
                                 <li className="pt-[9px] pb-[10px]">
                                     Find Institutions
                                 </li>
-                            </a>
-                            <a href="../Fields">
+                            </Link>
+                            <Link href="/fields">
                                 <li className="pt-[9px] pb-[10px]">
                                     Find Courses
                                 </li>
-                            </a>
-                            <a href="../Countries">
+                            </Link>
+                            <Link href="/countries">
                                 <li className="pt-[9px] pb-[10px]">
                                     Find Country
                                 </li>
-                            </a>
+                            </Link>
                         </ul>
                     </div>
                     <div className="flex flex-col">
@@ -116,30 +117,20 @@ const Footer = () => {
                             SUPPORT
                         </h1>
                         <ul className="text-lightGrayColor">
-                            <a href="../AboutUs">
+                            <Link href="/blog">
                                 <li className="pt-[9px] pb-[10px]">About Us</li>
-                            </a>
-                            <a href="../ContactUs">
-                                <li className="pt-[9px] pb-[10px]">
-                                    Contact Us
-                                </li>
-                            </a>
-                            <a href="../FAQs">
-                                <li className="pt-[9px] pb-[10px]">FAQs</li>
-                            </a>
-                            <a href="../PrivacyPolicy">
-                                <li className="pt-[9px] pb-[10px]">
-                                    Privacy Policy
-                                </li>
-                            </a>
-                            <a href="../T&C">
-                                <li className="pt-[9px] pb-[10px]">
-                                    Terms and Condition
-                                </li>
-                            </a>
-                            <a href="../Blog">
+                            </Link>
+                            <li className="pt-[9px] pb-[10px]">Contact Us</li>
+                            <li className="pt-[9px] pb-[10px]">FAQs</li>
+                            <li className="pt-[9px] pb-[10px]">
+                                Privacy Policy
+                            </li>
+                            <li className="pt-[9px] pb-[10px]">
+                                Terms and Condition
+                            </li>
+                            <Link href="/blog">
                                 <li className="pt-[9px] pb-[10px]">Blogs</li>
-                            </a>
+                            </Link>
                             <li className="pt-[9px] pb-[10px]">Book a Demo</li>
                         </ul>
                     </div>
