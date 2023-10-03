@@ -1,7 +1,9 @@
 import Image from 'next/image'
+import { useRouter } from 'next/router'
 import React from 'react'
 
 const Testimonal = () => {
+    const router = useRouter()
   return (
     <div className="bg-testimonalBgColor pt-8 pb-60">
     <div className="relative pb-0">
@@ -34,7 +36,11 @@ const Testimonal = () => {
         </div>
     </div>
     </div>
+    {router.pathname === "/universities" || router.pathname === "/fields" ? 
+    <Image height={94} width={94} alt='testimonal-round-2' className="absolute right-20 top-9" src="/images/Universities/Ellipse 422.svg"/>
+     : 
     <Image height={228} width={228} alt='testimonal-round-2' className="absolute right-0 top-0" src="/images/Blogs/Ellipse 427.svg"/>
+}
 </div>
 </div>
   )

@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import Link from 'next/link'
 import React from 'react'
 
 interface cardProps {
@@ -12,6 +13,7 @@ interface cardProps {
 
 const Card = ({cardTitle, cardTitleTwo, cardTitleThree, title, hearts, image} : cardProps) => {
   return (
+    <Link href="/blogsDetail">
     <div className="custom-shadow w-[100%]">
     <Image height={203.29} width={366} alt='cardimg' className="rounded-[10px] rounded-b-none mb-4 w-full" src={`${image}`} priority/>
     <div className="px-[25px] flex flex-col gap-y-6">
@@ -35,6 +37,7 @@ const Card = ({cardTitle, cardTitleTwo, cardTitleThree, title, hearts, image} : 
         </div>
     </div>
 </div>
+</Link>
   )
 }
 
