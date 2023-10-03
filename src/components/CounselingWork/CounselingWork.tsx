@@ -5,17 +5,39 @@ import React from 'react';
 const CounselingWork = () => {
     const router = useRouter();
     return (
-        <div className="w-full relative pb-0">
-            <Image
-                height={314}
-                width={237}
-                alt="circle"
-                className={`absolute right-0 ${
-                    router.pathname === '/aboutUs' ? 'top-[-100px]' : ''
-                }`}
-                src="/images/Fields/Applicatio circle img.svg"
-                priority
-            />
+        <div
+            className={`w-full relative pb-0 ${
+                router.pathname === '/apply'
+                    ? 'bg-profileBgColor'
+                    : router.pathname === '/courseDetail'
+                    ? 'bg-lightColor'
+                    : ''
+            }`}
+        >
+            {router.pathname === '/courseDetail' ? (
+                <Image
+                    height={217}
+                    width={175}
+                    alt="circle"
+                    className="absolute left-0 top-0"
+                    src="/images/CourseDetail/circle 1.svg"
+                    priority
+                />
+            ) : (
+                <Image
+                    height={314}
+                    width={237}
+                    alt="circle"
+                    className={`absolute right-0 ${
+                        router.pathname === '/aboutUs' ||
+                        router.pathname === '/apply'
+                            ? 'top-[-100px]'
+                            : ''
+                    }`}
+                    src="/images/Fields/Applicatio circle img.svg"
+                    priority
+                />
+            )}
             <div className="w-full py-28">
                 <div className="max-w-[1200px] 2xl:max-w-[2400px] mx-auto px-2 2xl:px-8 transition-all duration-300 flex flex-col items-center gap-y-24">
                     <div className="flex flex-col items-center gap-y-16">
@@ -206,14 +228,20 @@ const CounselingWork = () => {
                     </div>
                 </div>
             </div>
-            <Image
-                height={314}
-                width={192}
-                alt="counselling-work"
-                className="absolute bottom-44 left-0"
-                src="/images/Fields/Ellipse 427.svg"
-                priority
-            />
+            {router.pathname === '/courseDetail' ? (
+                ''
+            ) : (
+                <Image
+                    height={314}
+                    width={192}
+                    alt="counselling-work"
+                    className={`absolute left-0 ${
+                        router.pathname === '/apply' ? 'top-56' : 'bottom-44'
+                    }`}
+                    src="/images/Fields/Ellipse 427.svg"
+                    priority
+                />
+            )}
         </div>
     );
 };

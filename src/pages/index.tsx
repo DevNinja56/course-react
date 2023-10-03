@@ -30,13 +30,13 @@ const Home = () => {
                     <div className="flex flex-col pl-36 pr-12 pt-32">
                         <div className="pr-60 mb-5">
                             <h1 className="text-mainTextColor text-[45px] font-black mb-2">
-                                World's Largest Course Search Platform
+                                World&lsquo;s Largest Course Search Platform
                             </h1>
                             <p className="text-aboutUsTextColor text-[15px] leading-6 aboutUsTextColor mb-5 font-normal">
                                 Make your university application stress free and
-                                discover in minutes if you'd get into your dream
-                                university. Enter your academic profile and get
-                                a decision in real time.
+                                discover in minutes if you&lsquo;d get into your
+                                dream university. Enter your academic profile
+                                and get a decision in real time.
                             </p>
                         </div>
                         <div className="rounded-[10px] bg-white custom-shadow p-2 pl-5 z-20">
@@ -152,8 +152,8 @@ const Home = () => {
             </div>
             <div className="w-full p-10 pb-32 relative">
                 <Image
-                    height={166}
-                    width={166}
+                    height={100}
+                    width={100}
                     alt="card-round"
                     src="/images/Home/ourEventsRoundImgone.svg"
                     className="absolute left-0 bottom-52"

@@ -39,27 +39,27 @@ const Universities = () => {
                         <UniversitiesCards
                             img="/images/Universities/Main 1.svg"
                             title="Rusell Group Universities"
-                            insideImg="/images/Universities/Institution+Group+logo_russell+group.svg"
+                            insideImg="/images/Universities/institutionGroupLogo.svg"
                         />
                         <UniversitiesCards
                             img="/images/Universities/Main 2.svg"
                             title="IVY League Universities"
-                            insideImg="/images/Universities/Institution+Group+logo_russell+group(4).svg"
+                            insideImg="/images/Universities/institutionGroupLogo2.svg"
                         />
                         <UniversitiesCards
                             img="/images/Universities/Main 3.svg"
                             title="TU9 Universities"
-                            insideImg="/images/Universities/Institution+Group+logo_russell+group (1).svg"
+                            insideImg="/images/Universities/institutionGroupLogo3.svg"
                         />
                         <UniversitiesCards
                             img="/images/Universities/Main 4.svg"
                             title="GO8-Group of Eight Universities"
-                            insideImg="/images/Universities/Institution+Group+logo_russell+group (2).svg"
+                            insideImg="/images/Universities/institutionGroupLogo4.svg"
                         />
                         <UniversitiesCards
                             img="/images/Universities/Main 5.svg"
                             title="U15-Group of Canadian Research Universities"
-                            insideImg="/images/Universities/Institution+Group+logo_russell+group (3).svg"
+                            insideImg="/images/Universities/institutionGroupLogo5.svg"
                         />
                     </div>
                 </div>

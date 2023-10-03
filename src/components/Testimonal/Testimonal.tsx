@@ -5,7 +5,11 @@ import React from 'react';
 const Testimonal = () => {
     const router = useRouter();
     return (
-        <div className="bg-testimonalBgColor pt-8 pb-60">
+        <div
+            className={`bg-testimonalBgColor ${
+                router.pathname === '/apply' ? '' : 'pt-8'
+            } pb-60`}
+        >
             <div className="relative pb-0">
                 <Image
                     height={96}
@@ -103,6 +107,22 @@ const Testimonal = () => {
                         alt="testimonal-round-2"
                         className="absolute right-0 top-[-120px]"
                         src="/images/Home/testimoalRoundImg.svg"
+                    />
+                ) : router.pathname === '/apply' ? (
+                    <Image
+                        height={289}
+                        width={245}
+                        alt="testimonal-round-2"
+                        className="absolute right-0 top-0"
+                        src="/images/Apply/testimonalCircle.svg"
+                    />
+                ) : router.pathname === '/courseDetail' ? (
+                    <Image
+                        height={174}
+                        width={175}
+                        alt="testimonal-round-2"
+                        className="absolute right-0 top-0"
+                        src="/images/CourseDetail/Circle 2.svg"
                     />
                 ) : (
                     <Image

@@ -19,9 +19,11 @@ const Footer = () => {
                             Want to study at Online
                             <br /> program ?
                         </h1>
-                        <button className="bg-white py-4 lg:py-[21px] px-8 lg:px-[51px] rounded-[5px] text-mainTextColor">
-                            Apply Now
-                        </button>
+                        <Link href="/apply">
+                            <button className="bg-white py-4 lg:py-[21px] px-8 lg:px-[51px] rounded-[5px] text-mainTextColor">
+                                Apply Now
+                            </button>
+                        </Link>
                     </div>
                 </div>
             </div>
@@ -117,17 +119,21 @@ const Footer = () => {
                             SUPPORT
                         </h1>
                         <ul className="text-lightGrayColor">
-                            <Link href="/blog">
+                            <Link href="/aboutUs">
                                 <li className="pt-[9px] pb-[10px]">About Us</li>
                             </Link>
                             <li className="pt-[9px] pb-[10px]">Contact Us</li>
-                            <li className="pt-[9px] pb-[10px]">FAQs</li>
-                            <li className="pt-[9px] pb-[10px]">
-                                Privacy Policy
-                            </li>
-                            <li className="pt-[9px] pb-[10px]">
-                                Terms and Condition
-                            </li>
+                            <li className="pt-[9px] pb-[10px]">FAQ&lsquo;s</li>
+                            <Link href="/privacyPolicy">
+                                <li className="pt-[9px] pb-[10px]">
+                                    Privacy Policy
+                                </li>
+                            </Link>
+                            <Link href="/t&c">
+                                <li className="pt-[9px] pb-[10px]">
+                                    Terms and Condition
+                                </li>
+                            </Link>
                             <Link href="/blog">
                                 <li className="pt-[9px] pb-[10px]">Blogs</li>
                             </Link>

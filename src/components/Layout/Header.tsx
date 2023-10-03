@@ -36,30 +36,34 @@ const Header = () => {
                                 Discover
                             </p>
                         </div>
-                        <div className="flex items-center px-[10px] gap-x-[10px]">
-                            <Image
-                                width={32}
-                                height={32}
-                                alt="compare-icon"
-                                src="/images/Decide.svg"
-                                priority
-                            />
-                            <p className="font-semibold text-textBlackColor">
-                                Compare
-                            </p>
-                        </div>
-                        <div className="flex items-center px-[10px] gap-x-[10px]">
-                            <Image
-                                width={32}
-                                height={32}
-                                alt="apply-icon"
-                                src="/images/Apply.svg"
-                                priority
-                            />
-                            <p className="font-semibold text-textBlackColor">
-                                Apply
-                            </p>
-                        </div>
+                        <Link href="/compare">
+                            <div className="flex items-center px-[10px] gap-x-[10px]">
+                                <Image
+                                    width={32}
+                                    height={32}
+                                    alt="compare-icon"
+                                    src="/images/Decide.svg"
+                                    priority
+                                />
+                                <p className="font-semibold text-textBlackColor">
+                                    Compare
+                                </p>
+                            </div>
+                        </Link>
+                        <Link href="/apply">
+                            <div className="flex items-center px-[10px] gap-x-[10px]">
+                                <Image
+                                    width={32}
+                                    height={32}
+                                    alt="apply-icon"
+                                    src="/images/Apply.svg"
+                                    priority
+                                />
+                                <p className="font-semibold text-textBlackColor">
+                                    Apply
+                                </p>
+                            </div>
+                        </Link>
                     </div>
                     <div className="flex items-center gap-x-6">
                         <Image
