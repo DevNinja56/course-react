@@ -562,7 +562,7 @@ const Scholarship = () => {
                 <div className="flex items-center gap-x-4">
                     <p className="text-grayColor">Sort by:</p>
                     <div className="relative group">
-                    <button className="py-2 px-4 rounded-[5px] border-2 border-scholarshipBorderColor flex items-center gap-x-[6px] text-sm text-darkGrayColor">Select Option <img src="/images/Scholarships/chevron-down.svg"/></button>
+                    <button className="py-2 px-4 rounded-[5px] border-2 border-scholarshipBorderColor flex items-center gap-x-[6px] text-sm text-darkGrayColor">Select Option <Image height={20} width={20} alt='chaveron-down' src="/images/Scholarships/chevron-down.svg" priority/></button>
                     <SelectOptionDropDown/>
                 </div>
                 </div>
@@ -592,7 +592,7 @@ const Scholarship = () => {
             <div className="w-full flex justify-center">
                 <div className="flex items-center gap-x-6">
                     <button className="h-[39px] w-[39px] rounded-full bg-profileBgColor flex items-center justify-center">
-                        <img src="/images/Scholarships/Vector2.svg"/>
+                        <Image height={5.56} width={5.56} alt='arrow-left' src="/images/Scholarships/Vector2.svg" priority/>
                     </button>                    
                     <p className="font-medium text-darkGrayColor">1</p>
                     <p className="font-medium border-b border-blueColor text-blueColor">2</p>
@@ -600,7 +600,7 @@ const Scholarship = () => {
                     <p className="font-medium text-darkGrayColor">---</p>
                     <p className="font-medium text-darkGrayColor">67</p>
                     <button className="h-[39px] w-[39px] rounded-full bg-profileBgColor flex items-center justify-center">
-                        <img src="/images/Scholarships/Vector.svg"/>
+                        <Image height={5.56} width={5.56} alt='arrow-right' src="/images/Scholarships/Vector.svg" priority/>
                     </button>
                 </div>
             </div>

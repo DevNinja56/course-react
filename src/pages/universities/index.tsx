@@ -18,11 +18,11 @@ const Universities = () => {
         <div className="w-full pb-20">
         <div className="max-w-[1100px] 2xl:max-w-[2300px] mx-auto px-2 2xl:px-8 transition-all duration-300 flex justify-between">
             <div className="flex flex-wrap gap-[30px] items-center justify-center w-full">
-                <UniversitiesCards img='/images/Universities/Main 1.svg' title='Rusell Group Universities'/>
-                <UniversitiesCards img='/images/Universities/Main 2.svg' title='IVY League Universities'/>
-                <UniversitiesCards img='/images/Universities/Main 3.svg' title='TU9 Universities'/>
-                <UniversitiesCards img='/images/Universities/Main 4.svg' title='GO8-Group of Eight Universities'/>
-                <UniversitiesCards img='/images/Universities/Main 5.svg' title='U15-Group of Canadian Research Universities'/>
+                <UniversitiesCards img='/images/Universities/Main 1.svg' title='Rusell Group Universities' insideImg='/images/Universities/Institution+Group+logo_russell+group.svg'/>
+                <UniversitiesCards img='/images/Universities/Main 2.svg' title='IVY League Universities' insideImg='/images/Universities/Institution+Group+logo_russell+group.svg'/>
+                <UniversitiesCards img='/images/Universities/Main 3.svg' title='TU9 Universities' insideImg='/images/Universities/Institution+Group+logo_russell+group.svg'/>
+                <UniversitiesCards img='/images/Universities/Main 4.svg' title='GO8-Group of Eight Universities' insideImg='/images/Universities/Institution+Group+logo_russell+group.svg'/>
+                <UniversitiesCards img='/images/Universities/Main 5.svg' title='U15-Group of Canadian Research Universities' insideImg='/images/Universities/Institution+Group+logo_russell+group.svg'/>
             </div>
         </div>
     </div>

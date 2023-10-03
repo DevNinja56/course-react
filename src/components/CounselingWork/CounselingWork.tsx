@@ -4,7 +4,7 @@ import React from 'react'
 const CounselingWork = () => {
   return (
     <div className="w-full relative pb-0">
-        <img className="absolute right-0" src="/images/Fields/Applicatio circle img.svg"/>
+        <Image height={314} width={237} alt='circle' className="absolute right-0" src="/images/Fields/Applicatio circle img.svg" priority/>
         <div className="w-full py-28">
         <div className="max-w-[1200px] 2xl:max-w-[2400px] mx-auto px-2 2xl:px-8 transition-all duration-300 flex flex-col items-center gap-y-24">
         <div className="flex flex-col items-center gap-y-16">
