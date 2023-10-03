@@ -3,8 +3,8 @@ import MainLayout from '@/Layout/index'
 import '@/styles/globals.css'
 
 export default function App({ Component, pageProps }: AppProps) {
-  return <MainLayout>
+    return <MainLayout>
 
-    <Component {...pageProps} />
-  </MainLayout>
+        <Component {...pageProps} />
+    </MainLayout>
 }
