@@ -9,7 +9,7 @@ interface CardProps {
 
 const Card = ({ img, title, detail }: CardProps) => {
     return (
-        <div className="flex flex-col gap-[15px] w-full">
+        <div className="flex flex-col gap-[15px] w-full z-10">
             <Image
                 height={40}
                 width={40}

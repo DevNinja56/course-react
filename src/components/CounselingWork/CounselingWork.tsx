@@ -23,6 +23,8 @@ const CounselingWork = () => {
                     src="/images/CourseDetail/circle 1.svg"
                     priority
                 />
+            ) : router.pathname === '/faq' ? (
+                ''
             ) : (
                 <Image
                     height={314}
@@ -236,7 +238,7 @@ const CounselingWork = () => {
                     width={192}
                     alt="counselling-work"
                     className={`absolute left-0 ${
-                        router.pathname === '/apply' ? 'top-56' : 'bottom-44'
+                        router.pathname === '/apply' || router.pathname === '/faq' ? 'top-56' : 'bottom-44'
                     }`}
                     src="/images/Fields/Ellipse 427.svg"
                     priority

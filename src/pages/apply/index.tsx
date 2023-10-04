@@ -138,7 +138,7 @@ const Apply = () => {
                     </p>
                 </div>
             </div>
-            <div className="w-full mb-40">
+            <div className="w-full mb-40 2xl:mb-[600px]">
                 <div className="max-w-[1100px] 2xl:max-w-[2300px] mx-auto px-2 2xl:px-8 transition-all duration-300">
                     <div className="w-full flex flex-col items-center mb-12">
                         <p className="text-blueColor font-bold text-[23px]">
@@ -172,7 +172,12 @@ const Apply = () => {
                             />
                         </div>
                     </div>
-                    <Map />
+                    <Map
+                        mapRoundImg="/images/Apply/mapRoundImg1.svg"
+                        mapRoundImg2="/images/Apply/mapRoundImg2.svg"
+                        mapRoundImg3="/images/Apply/mapRoundImg3.svg"
+                        mapRoundImg4="/images/Apply/mapRoundImg4.svg"
+                    />
                 </div>
             </div>
             <CounselingWork />

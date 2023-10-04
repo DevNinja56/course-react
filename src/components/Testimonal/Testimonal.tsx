@@ -6,11 +6,13 @@ const Testimonal = () => {
     const router = useRouter();
     return (
         <div
-            className={`bg-testimonalBgColor ${
-                router.pathname === '/apply' ? '' : 'pt-8'
+            className={`bg-white ${
+                router.pathname === '/apply' || router.pathname === '/faq'
+                    ? ''
+                    : 'pt-8'
             } pb-60`}
         >
-            <div className="relative pb-0">
+            <div className={`relative pb-0 ${router.pathname === '/faq' ? "pt-10" : ""}`}>
                 <Image
                     height={96}
                     width={96}
@@ -100,7 +102,8 @@ const Testimonal = () => {
                         className="absolute right-20 top-9"
                         src="/images/Universities/Ellipse 422.svg"
                     />
-                ) : router.pathname === '/' ? (
+                ) : router.pathname === '/' ||
+                  router.pathname === '/contactUs' ? (
                     <Image
                         height={280}
                         width={280}
@@ -108,7 +111,8 @@ const Testimonal = () => {
                         className="absolute right-0 top-[-120px]"
                         src="/images/Home/testimoalRoundImg.svg"
                     />
-                ) : router.pathname === '/apply' ? (
+                ) : router.pathname === '/apply' ||
+                  router.pathname === '/faq' ? (
                     <Image
                         height={289}
                         width={245}

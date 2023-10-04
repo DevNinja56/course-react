@@ -6,7 +6,7 @@ import React from 'react';
 const AboutUs = () => {
     return (
         <>
-            <div className="w-full flex items-center justify-between h-[200px] mt-[100px] bg-white mb-12">
+            <div className="w-full flex items-center justify-between h-[200px] mt-[100px] mb-12">
                 <Image
                     height={193}
                     width={193}

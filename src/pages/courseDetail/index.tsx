@@ -1,6 +1,7 @@
 import CounselingWork from '@/components/CounselingWork/CounselingWork';
 import Testimonal from '@/components/Testimonal/Testimonal';
 import Image from 'next/image';
+import Link from 'next/link';
 import React from 'react';
 
 const CourseDetail = () => {
@@ -78,16 +79,16 @@ const CourseDetail = () => {
                             </span>{' '}
                             for more information
                         </p>
-                        <a href="../Apply">
+                        <Link href="/apply">
                             <button className="w-full pt-[19px] pb-[18px] rounded-[5px] text-white text-lg font-semibold bg-blueColor hover:bg-blue-600 mb-4">
                                 Apply
                             </button>
-                        </a>
-                        <a href="../Compare">
+                        </Link>
+                        <Link href="/compare">
                             <button className="w-full pt-[19px] pb-[18px] rounded-[5px] hover:text-white text-lg font-semibold bg-white hover:bg-blueColor border border-blueColor text-blueColor mb-2">
                                 Compare
                             </button>
-                        </a>
+                        </Link>
                     </div>
                     <div className="px-3 pt-5 mb-5">
                         <h1 className="text-mainTextColor text-xl font-bold mb-6">
@@ -232,7 +233,7 @@ const CourseDetail = () => {
                     priority
                 />
             </div>
-            <div className="w-full pb-28">
+            <div className="w-full pb-28 bg-white">
                 <div className="max-w-[1110px] 2xl:max-w-[2300px] mx-auto px-2 2xl:px-8 transition-all duration-300 pt-16 pr-[360px] 2xl:pr-[700px]">
                     <div className="w-full flex items-center gap-x-5 border-b-2 border-borderColor mb-20 text-sm">
                         <h1 className="py-[10px] border-b-2 border-blueColor font-medium text-blueColor">

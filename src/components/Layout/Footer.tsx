@@ -122,8 +122,16 @@ const Footer = () => {
                             <Link href="/aboutUs">
                                 <li className="pt-[9px] pb-[10px]">About Us</li>
                             </Link>
-                            <li className="pt-[9px] pb-[10px]">Contact Us</li>
-                            <li className="pt-[9px] pb-[10px]">FAQ&lsquo;s</li>
+                            <Link href="/contactUs">
+                                <li className="pt-[9px] pb-[10px]">
+                                    Contact Us
+                                </li>
+                            </Link>
+                            <Link href="/faq">
+                                <li className="pt-[9px] pb-[10px]">
+                                    FAQ&lsquo;s
+                                </li>
+                            </Link>
                             <Link href="/privacyPolicy">
                                 <li className="pt-[9px] pb-[10px]">
                                     Privacy Policy

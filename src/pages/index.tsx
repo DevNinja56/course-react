@@ -9,7 +9,7 @@ import React from 'react';
 const Home = () => {
     return (
         <>
-            <div className="w-full flex items-center mt-[100px] bg-white py-20 relative mb-12">
+            <div className="w-full flex items-center mt-[100px] bg-white py-20 relative pb-12">
                 <Image
                     height={104}
                     width={104}
@@ -77,7 +77,7 @@ const Home = () => {
                     priority
                 />
             </div>
-            <div className="w-full p-10 pb-40 relative">
+            <div className="w-full p-10 pb-40 relative bg-white pt-16">
                 <Image
                     height={74}
                     width={74}
@@ -90,7 +90,7 @@ const Home = () => {
                     height={450}
                     width={450}
                     alt="home-round-5"
-                    className="absolute right-0 top-0"
+                    className="absolute right-0 top-3"
                     src="/images/Home/topCategoryRound2.svg"
                     priority
                 />
@@ -141,7 +141,7 @@ const Home = () => {
                     </div>
                 </div>
             </div>
-            <div className="w-full pb-20 2xl:pb-[700px] flex flex-col items-center overflow-hidden">
+            <div className="w-full pb-20 2xl:pb-[700px] flex flex-col items-center overflow-hidden bg-white">
                 <p className="text-[23px] font-bold text-blueColor mb-1">
                     Scholarships
                 </p>
@@ -150,7 +150,7 @@ const Home = () => {
                 </h1>
                 <Slider />
             </div>
-            <div className="w-full p-10 pb-32 relative">
+            <div className="w-full p-10 pb-32 relative bg-white">
                 <Image
                     height={100}
                     width={100}

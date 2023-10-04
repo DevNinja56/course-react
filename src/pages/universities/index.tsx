@@ -7,7 +7,7 @@ import React from 'react';
 const Universities = () => {
     return (
         <>
-            <div className="w-full flex items-center justify-between h-[270px] mt-[100px] bg-white mb-16">
+            <div className="w-full flex items-center justify-between h-[270px] mt-[100px] mb-16">
                 <Image
                     height={193}
                     width={193}

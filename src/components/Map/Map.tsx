@@ -1,7 +1,20 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import React from 'react';
 
-const Map = () => {
+interface MapProps {
+    mapRoundImg: string;
+    mapRoundImg2: string;
+    mapRoundImg3: string;
+    mapRoundImg4: string;
+}
+
+const Map = ({
+    mapRoundImg,
+    mapRoundImg2,
+    mapRoundImg3,
+    mapRoundImg4
+}: MapProps) => {
     return (
         <div className="bg-white relative w-full">
             <Image
@@ -9,7 +22,7 @@ const Map = () => {
                 width={124}
                 alt="map-round-img"
                 className="absolute left-[-20px] 2xl:left-0 top-[-28px] 2xl:top-0 z-10"
-                src="/images/Apply/mapRoundImg1.svg"
+                src={`${mapRoundImg}`}
                 priority
             />
             <Image
@@ -17,7 +30,7 @@ const Map = () => {
                 width={84}
                 alt="map-round-img-2"
                 className="absolute right-52 top-[-28px] 2xl:top-0 z-10"
-                src="/images/Apply/mapRoundImg2.svg"
+                src={`${mapRoundImg2}`}
                 priority
             />
             <div className="relative w-full flex justify-end pr-20 2xl:pr-40 py-[71px]">
@@ -98,11 +111,11 @@ const Map = () => {
                             />
                         </label>
                     </form>
-                    <a href="../SignIn">
+                    <Link href="/signIn">
                         <button className="w-full pt-[14px] pb-[13px] rounded-[10px] bg-blueColor text-white">
                             Send Message
                         </button>
-                    </a>
+                    </Link>
                 </div>
             </div>
             <Image
@@ -110,7 +123,7 @@ const Map = () => {
                 width={66}
                 alt="map-round-img-3"
                 className="absolute left-[-11px] 2xl:left-4 top-[322px] 2xl:top-[652px] z-10"
-                src="/images/Apply/mapRoundImg3.svg"
+                src={`${mapRoundImg3}`}
                 priority
             />
             <Image
@@ -118,7 +131,7 @@ const Map = () => {
                 width={114}
                 alt="map-round-img"
                 className="absolute left-[300px] 2xl:left-0 top-[630px] 2xl:top-[100%] z-10"
-                src="/images/Apply/mapRoundImg4.svg"
+                src={`${mapRoundImg4}`}
                 priority
             />
         </div>
