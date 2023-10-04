@@ -18,6 +18,7 @@
     "next": "latest",
     "react": "latest",
     "react-dom": "latest",
+    "sass": "^1.68.0",
     "swiper": "^6.8.4"
   },
   "devDependencies": {
