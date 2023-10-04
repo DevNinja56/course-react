@@ -1,39 +1,61 @@
 import Image from 'next/image';
-import { useRouter } from 'next/router';
-import React, { useState } from 'react';
-import ProfileDropDown from '../DropDown/ProfileDropDown';
 import Link from 'next/link';
-import Sidebar from '../Sidebar/Sidebar';
+import { useRouter } from 'next/router';
+import React from 'react';
 
-const Header = () => {
+interface modalProps {
+    setShowSideBar: (show: boolean) => void;
+}
+
+const Sidebar = ({ setShowSideBar }: modalProps) => {
     const router = useRouter();
-    const [showDropDown, setShowDropDown] = useState(false);
-    const [showSideBar, setShowSideBar] = useState(false);
 
-    const onShowSideBar = () => {
-        setShowSideBar(!showSideBar);
-    };
-
-    const onShowDropDown = () => {
-        setShowDropDown(!showDropDown);
+    const onHideSideBar = () => {
+        setShowSideBar(false);
     };
 
     return (
-        <div className="w-full fixed top-0 bg-white z-40">
-            <div className="max-w-[920px] lg:max-w-[1100px] 2xl:max-w-[2300px] mx-auto py-6 flex justify-between items-center px-2 2xl:px-8 transition-all duration-300">
-                <Link href="/">
-                    <Image
-                        width={204}
-                        height={50}
-                        alt="Logo"
-                        src="/images/courseoptionslogo 1.svg"
-                        priority
-                    />
-                </Link>
-                <div className="flex items-center gap-x-6">
-                    <div className="hidden lg:flex items-center gap-x-6">
+        <div className="w-full flex lg:hidden">
+            <div className="backgroundBlack fixed top-0 left-0 h-[100vh] w-full z-40 flex items-center justify-end">
+                <div className="bg-white h-[100%] w-[481px] px-[34px]">
+                    <div className="flex w-full items-center justify-between border-b border-siderBarBottom py-4 mb-8">
+                        <Image
+                            width={187.68}
+                            height={46}
+                            alt="Logo"
+                            src="/images/courseoptionslogo 1.svg"
+                            priority
+                        />
+                        <div
+                            onClick={onHideSideBar}
+                            className="h-[38.33px] w-[38.33px] bg-blueColor flex items-center justify-center rounded-full"
+                        >
+                            <Image
+                                width={9.58}
+                                height={9.58}
+                                alt="Logo"
+                                src="/images/cross.svg"
+                                priority
+                            />
+                        </div>
+                    </div>
+                    <div className="relative flex items-center justify-between border-b border-siderBarBottom pb-2 mb-10">
+                        <input
+                            className="h-[38px] w-full text-sm text-textLightBlackColor outline-none"
+                            placeholder="What are you searching for?"
+                        />
+                        <Image
+                            width={24}
+                            height={24}
+                            alt="Logo"
+                            src="/images/search.svg"
+                            className="absolute right-0"
+                            priority
+                        />
+                    </div>
+                    <div className="flex flex-col gap-y-11">
                         <Link href="/filterPage">
-                            <div className="flex items-center px-[10px] gap-x-[10px]">
+                            <div className="flex items-center gap-x-[10px]">
                                 <svg
                                     width="32"
                                     height="33"
@@ -78,7 +100,7 @@ const Header = () => {
                             </div>
                         </Link>
                         <Link href="/compare">
-                            <div className="flex items-center px-[10px] gap-x-[10px]">
+                            <div className="flex items-center gap-x-[10px]">
                                 <svg
                                     width="32"
                                     height="33"
@@ -107,7 +129,7 @@ const Header = () => {
                             </div>
                         </Link>
                         <Link href="/apply">
-                            <div className="flex items-center px-[10px] gap-x-[10px]">
+                            <div className="flex items-center gap-x-[10px]">
                                 <svg
                                     width="32"
                                     height="33"
@@ -143,69 +165,11 @@ const Header = () => {
                                 </p>
                             </div>
                         </Link>
-                    </div>
-                    {showSideBar && <Sidebar setShowSideBar={setShowSideBar} />}
-                    <div className="flex items-center gap-x-6">
-                        <Image
-                            width={46}
-                            height={46}
-                            alt="menu-icon"
-                            onClick={onShowSideBar}
-                            className="block lg:hidden"
-                            src="/images/Menu.svg"
-                            priority
-                        />
-                        <Image
-                            width={32}
-                            height={32}
-                            alt="search-icon"
-                            className="hidden lg:block"
-                            src="/images/search.svg"
-                            priority
-                        />
-                        {router.pathname === '/profile' ? (
-                            <div className="flex items-center gap-x-3 relative">
-                                <Image
-                                    onClick={onShowDropDown}
-                                    height={36}
-                                    width={36}
-                                    alt="profile-img"
-                                    src="/images/Image-36.svg"
-                                    priority
-                                />
-                                <p className="text-lightGrayColor hidden lg:flex gap-x-1 text-[13px]">
-                                    Daniyal
-                                    <Image
-                                        onClick={onShowDropDown}
-                                        height={12}
-                                        width={12}
-                                        alt="down-arrow"
-                                        className="cursor-pointer"
-                                        src="/images/chevron-down.svg"
-                                        priority
-                                    />
-                                </p>
-                                <ProfileDropDown showDropDown={showDropDown} />
-                            </div>
-                        ) : (
-                            <Link href="/signIn">
-                                <button className="py-[13px] px-[34px] gap-x-[6px] flex items-center rounded-[5px] bg-blueColor hover:bg-blue-600 text-white text-base font-medium">
-                                    <Image
-                                        width={20}
-                                        height={20}
-                                        alt="user-icon"
-                                        src="/images/Profile.svg"
-                                        priority
-                                    />
-                                    Login
-                                </button>
-                            </Link>
-                        )}
-                    </div>
+                    </div>{' '}
                 </div>
             </div>
         </div>
     );
 };
 
-export default Header;
+export default Sidebar;
