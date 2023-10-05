@@ -42,3 +42,6 @@
         width: 408.68px !important;
     }
 }
+.removeScrollBar::-webkit-scrollbar {
+    display: none;
+}

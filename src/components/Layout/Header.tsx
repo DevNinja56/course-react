@@ -20,13 +20,14 @@ const Header = () => {
 
     return (
         <div className="w-full fixed top-0 bg-white z-40">
-            <div className="max-w-[920px] lg:max-w-[1100px] 2xl:max-w-[2300px] mx-auto py-6 flex justify-between items-center px-2 2xl:px-8 transition-all duration-300">
+            <div className="max-w-[1100px] 2xl:max-w-[2300px] mx-auto py-6 flex justify-between items-center px-[20px] md:px-[50px] lg:px-2 2xl:px-8 transition-all duration-300">
                 <Link href="/">
                     <Image
                         width={204}
                         height={50}
                         alt="Logo"
                         src="/images/courseoptionslogo 1.svg"
+                        className="w-[187.68px] h-[46px] md:h-[50px] md:w-[204px]"
                         priority
                     />
                 </Link>
@@ -145,24 +146,7 @@ const Header = () => {
                         </Link>
                     </div>
                     {showSideBar && <Sidebar setShowSideBar={setShowSideBar} />}
-                    <div className="flex items-center gap-x-6">
-                        <Image
-                            width={46}
-                            height={46}
-                            alt="menu-icon"
-                            onClick={onShowSideBar}
-                            className="block lg:hidden"
-                            src="/images/Menu.svg"
-                            priority
-                        />
-                        <Image
-                            width={32}
-                            height={32}
-                            alt="search-icon"
-                            className="hidden lg:block"
-                            src="/images/search.svg"
-                            priority
-                        />
+                    <div className="flex items-center gap-x-3 md:gap-x-6">
                         {router.pathname === '/profile' ? (
                             <div className="flex items-center gap-x-3 relative">
                                 <Image
@@ -188,19 +172,48 @@ const Header = () => {
                                 <ProfileDropDown showDropDown={showDropDown} />
                             </div>
                         ) : (
-                            <Link href="/signIn">
-                                <button className="py-[13px] px-[34px] gap-x-[6px] flex items-center rounded-[5px] bg-blueColor hover:bg-blue-600 text-white text-base font-medium">
+                            <>
+                                <Link href="/signIn">
+                                    <button className="py-2 lg:py-[13px] px-5 lg:px-[34px] gap-x-[6px] md:flex items-center rounded-[5px] bg-blueColor hover:bg-blue-600 text-white text-base font-medium hidden">
+                                        <Image
+                                            width={20}
+                                            height={20}
+                                            alt="user-icon"
+                                            src="/images/Profile.svg"
+                                            priority
+                                        />
+                                        Login
+                                    </button>
+                                </Link>
+                                <Link href="/signIn">
                                     <Image
-                                        width={20}
-                                        height={20}
-                                        alt="user-icon"
-                                        src="/images/Profile.svg"
+                                        height={36}
+                                        width={36}
+                                        alt=""
+                                        src="/images/User Circle.svg"
+                                        className="block md:hidden"
                                         priority
                                     />
-                                    Login
-                                </button>
-                            </Link>
+                                </Link>
+                            </>
                         )}
+                        <Image
+                            width={46}
+                            height={46}
+                            alt="menu-icon"
+                            onClick={onShowSideBar}
+                            className="block lg:hidden"
+                            src="/images/Menu.svg"
+                            priority
+                        />
+                        <Image
+                            width={32}
+                            height={32}
+                            alt="search-icon"
+                            className="hidden lg:block"
+                            src="/images/search.svg"
+                            priority
+                        />
                     </div>
                 </div>
             </div>

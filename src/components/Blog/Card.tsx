@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import React from 'react';
 
 interface cardProps {
@@ -19,9 +20,16 @@ const Card = ({
     hearts,
     image
 }: cardProps) => {
+    const router = useRouter();
     return (
         <Link href="/blogsDetail">
-            <div className="custom-shadow w-[100%]">
+            <div
+                className={`custom-shadow ${
+                    router.pathname === '/blogsDetail'
+                        ? 'min-w-[340px] 2xl:min-w-0 2xl:w-[27vw]'
+                        : ''
+                }`}
+            >
                 <Image
                     height={203.29}
                     width={366}

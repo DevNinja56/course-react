@@ -10,29 +10,33 @@ const Testimonal = () => {
                 router.pathname === '/apply' || router.pathname === '/faq'
                     ? ''
                     : 'pt-8'
-            } pb-60`}
+            } pb-28 md:pb-32 lg:pb-60 overflow-hidden`}
         >
-            <div className={`relative pb-0 ${router.pathname === '/faq' ? "pt-10" : ""}`}>
+            <div
+                className={`relative pb-0 ${
+                    router.pathname === '/faq' ? 'pt-10' : ''
+                }`}
+            >
                 <Image
                     height={96}
                     width={96}
                     alt="testimonal-round"
-                    className="absolute bottom-0 left-8"
+                    className="absolute bottom-12 left-8 hidden md:block"
                     src="/images/Blogs/Ellipse 426.svg"
                     priority
                 />
-                <div className="flex justify-between items-start max-w-[1100px] 2xl:max-w-[2300px] mx-auto px-2 2xl:px-8 transition-all duration-300 py-20 gap-x-16">
+                <div className="flex flex-col lg:flex-row justify-between items-start max-w-[1100px] 2xl:max-w-[2300px] mx-auto px-5 md:px-[90px] lg:px-2 2xl:px-8 transition-all duration-300 py-3 md:py-12 lg:py-20 gap-x-16 gap-y-5 lg:gap-y-0">
                     <div className="flex flex-col gap-y-2 z-10 relative">
-                        <p className="font-bold text-[23px] text-blueColor">
+                        <p className="font-bold text-xl md:text-[23px] text-blueColor">
                             Testimonial
                         </p>
                         <h1
                             style={{ lineHeight: '57.6px' }}
-                            className="text-[40px] font-extrabold text-mainTextColor w-[340px] mb-2"
+                            className="text-[32px] md:text-[40px] font-extrabold text-mainTextColor w-[340px] mb-2"
                         >
                             See What OurClient Say’s
                         </h1>
-                        <p className="text-darkGrayColor text-sm w-[559px]">
+                        <p className="text-darkGrayColor text-sm w-auto md:w-[559px]">
                             Curabitur tristique, sem id sagittis varius, lacus
                             ligula mollis dui, ac condimentum felis metus ut
                             nulla. Aenean ut ultricies turpis, sed sollicitudin
@@ -43,23 +47,33 @@ const Testimonal = () => {
                             height={290}
                             width={290}
                             alt="message"
-                            className="absolute top-7 right-6"
+                            className="absolute bottom-[-150px] left-0 w-[218px] h-[218px] lg:h-[290px] lg:w-[290px] hidden md:block"
                             src="/images/Messages.svg"
                             priority
                         />
                     </div>
-                    <div className="flex flex-col items-center gap-y-7">
+                    <div className="flex flex-col items-center gap-y-7 px-0 md:px-20 lg:px-0">
                         <div className="bg-white rounded-[10px] py-5 px-5 pr-6 flex flex-col gap-y-4 custom-shadow z-10">
-                            <div className="flex gap-x-5">
-                                <Image
-                                    height={100}
-                                    width={100}
-                                    alt="testimonal-user"
-                                    src="/images/Blogs/testimoanlals.svg"
-                                    priority
-                                />
+                            <div className="flex flex-col md:flex-row gap-y-5 md:gap-x-5">
+                                <div className="flex items-center justify-between w-full md:w-auto">
+                                    <Image
+                                        height={100}
+                                        width={100}
+                                        alt="testimonal-user"
+                                        src="/images/Blogs/testimoanlals.svg"
+                                        priority
+                                    />
+                                    <Image
+                                        height={38}
+                                        width={50}
+                                        alt="comment"
+                                        src="/images/Blogs/“.svg"
+                                        className="block md:hidden"
+                                        priority
+                                    />
+                                </div>
                                 <div className="w-full flex items-center justify-between">
-                                    <div className="flex flex-col gap-y-3">
+                                    <div className="flex flex-col gap-y-0 md:gap-y-3">
                                         <h1 className="font-bold text-xl text-mainTextColor">
                                             David Karry
                                         </h1>
@@ -72,6 +86,7 @@ const Testimonal = () => {
                                         width={50}
                                         alt="comment"
                                         src="/images/Blogs/“.svg"
+                                        className="hidden md:block"
                                         priority
                                     />
                                 </div>
@@ -133,7 +148,7 @@ const Testimonal = () => {
                         height={228}
                         width={228}
                         alt="testimonal-round-2"
-                        className="absolute right-0 top-0"
+                        className="absolute right-[-50px] md:right-0 top-0 h-[190px] w-[153px] lg:h-[228px] lg:w-[228px]"
                         src="/images/Blogs/Ellipse 427.svg"
                     />
                 )}
