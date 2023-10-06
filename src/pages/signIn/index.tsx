@@ -1,13 +1,58 @@
 import ResetPasswordModal from '@/components/Modal/ResetPasswordModal';
+import { API_ENDPOINTS } from '@/config/Api_EndPoints';
+import { ROUTES } from '@/config/constant';
+import { useUserAuth } from '@/hooks/auth';
+import { signInForm } from '@/types';
+import { fetchRequest } from '@/utils/axios/fetch';
+import { signInFormSchema } from '@/utils/formSchemas';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import React, { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
 
 const SignIn = () => {
     const [showResetModal, setShowResetModal] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
+    const { updateUserDetails, loggedInUser } = useUserAuth();
+    const { push } = useRouter();
+    const {
+        register,
+        handleSubmit: fromSubmit,
+        formState: { errors },
+        setError
+    } = useForm<signInForm>({ resolver: signInFormSchema });
 
-    const onShow = () => {
-        setShowResetModal(!showResetModal);
+    console.log(errors);
+
+    const handleSubmit = (body: signInForm) => {
+        setIsLoading(true);
+        fetchRequest({
+            url: API_ENDPOINTS.AUTH.SIGNIN,
+            type: 'post',
+            body
+        })
+            .then((res) => {
+                updateUserDetails(res.data.user);
+                loggedInUser({
+                    access: res.data.accessToken,
+                    refresh: res.data.refreshToken
+                });
+                push(ROUTES.HOMEPAGE);
+                toast.success('User Logged In Success');
+            })
+            .catch((err) => {
+                setError('email', {
+                    type: 'custom',
+                    message: err.response.data.message
+                });
+                setError('password', {
+                    type: 'custom',
+                    message: err.response.data.message
+                });
+            })
+            .finally(() => setIsLoading(false));
     };
 
     return (
@@ -63,62 +108,75 @@ const SignIn = () => {
                                 I do not have an account yet
                             </p>
                         </Link>
-                        <div className="flex flex-col w-full gap-y-7 mb-3">
-                            <label className="text-lg text-darkGrayColor flex flex-col gap-y-1">
-                                Username
-                                <div className="relative">
-                                    <input
-                                        className="pt-[10px] pb-[9px] pl-12 text-grayColor border border-grayColor rounded-[10px] w-full outline-none"
-                                        placeholder="Username"
-                                    />
-                                    <Image
-                                        height={20}
-                                        width={20}
-                                        alt="user"
-                                        className="absolute left-5 top-[15.4px]"
-                                        src="/images/user (1).svg"
-                                        priority
-                                    />
-                                </div>
-                            </label>
-                            <label className="text-lg text-darkGrayColor flex flex-col gap-y-1">
-                                Password
-                                <div className="relative">
-                                    <input
-                                        className="pt-[10px] pb-[9px] pl-12 text-grayColor border border-grayColor rounded-[10px] w-full outline-none"
-                                        placeholder="Password"
-                                    />
-                                    <Image
-                                        height={20}
-                                        width={20}
-                                        alt="lock"
-                                        className="absolute left-5 top-[15.4px]"
-                                        src="/images/Keyhole Minimalistic.svg"
-                                        priority
-                                    />
-                                </div>
-                            </label>
-                        </div>
-                        <div className="flex items-center gap-x-3 w-full mb-10">
-                            <input
-                                type="checkbox"
-                                className="h-5 w-5 border border-grayColor"
-                            />
-                            <p className="text-lightGrayColor pt-[2px]">
-                                Remember me
-                            </p>
-                        </div>
-                        <Link href="/profile" className="w-full">
-                            <button className="bg-blueColor w-full pt-[14px] pb-[13px] rounded-[10px] text-white font-semibold mb-1">
+                        <form onSubmit={fromSubmit(handleSubmit)}>
+                            <div className="flex flex-col w-full gap-y-7 mb-3">
+                                <label className="text-lg text-darkGrayColor flex flex-col gap-y-1">
+                                    Username
+                                    <div className="relative">
+                                        <input
+                                            {...register('email', {
+                                                required: true
+                                            })}
+                                            className="pt-[10px] pb-[9px] pl-12 text-grayColor border border-grayColor rounded-[10px] w-full outline-none"
+                                            placeholder="Username"
+                                        />
+                                        <Image
+                                            height={20}
+                                            width={20}
+                                            alt="user"
+                                            className="absolute left-5 top-[15.4px]"
+                                            src="/images/user (1).svg"
+                                            priority
+                                        />
+                                    </div>
+                                </label>
+                                <label className="text-lg text-darkGrayColor flex flex-col gap-y-1">
+                                    Password
+                                    <div className="relative">
+                                        <input
+                                            className="pt-[10px] pb-[9px] pl-12 text-grayColor border border-grayColor rounded-[10px] w-full outline-none"
+                                            placeholder="Password"
+                                            type="password"
+                                            {...register('password', {
+                                                required: true
+                                            })}
+                                        />
+                                        <Image
+                                            height={20}
+                                            width={20}
+                                            alt="lock"
+                                            className="absolute left-5 top-[15.4px]"
+                                            src="/images/Keyhole Minimalistic.svg"
+                                            priority
+                                        />
+                                    </div>
+                                </label>
+                            </div>
+                            <div className="flex items-center gap-x-3 w-full mb-10">
+                                <input
+                                    type="checkbox"
+                                    className="h-5 w-5 border border-grayColor"
+                                />
+                                <p className="text-lightGrayColor pt-[2px]">
+                                    Remember me
+                                </p>
+                            </div>
+                            <button
+                                type="submit"
+                                disabled={isLoading}
+                                className="bg-blueColor w-full pt-[14px] pb-[13px] rounded-[10px] text-white font-semibold mb-1"
+                            >
                                 Sign In
                             </button>
-                        </Link>
-                        <button
-                            onClick={onShow}
-                            className="w-full pt-[14px] rounded-10px text-darkGrayColor"
-                        >
-                            Forgot password?
-                        </button>
+                            <button
+                                onClick={() =>
+                                    setShowResetModal((prev) => !prev)
+                                }
+                                className="w-full pt-[14px] rounded-10px text-darkGrayColor"
+                            >
+                                Forgot password?
+                            </button>
+                        </form>
                         {showResetModal && (
                             <ResetPasswordModal
                                 setShowResetModal={setShowResetModal}
@@ -130,5 +188,7 @@ const SignIn = () => {
         </div>
     );
 };
+
+SignIn.layout = { header: false, footer: false, isPublic: true };
 
 export default SignIn;

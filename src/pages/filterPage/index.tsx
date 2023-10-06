@@ -2,7 +2,6 @@ import Card from '@/components/FilterPage/Card';
 import Slider from '@/components/Slider/Slider';
 import Testimonal from '@/components/Testimonal/Testimonal';
 import Image from 'next/image';
-import React from 'react';
 
 const FilterPage = () => {
     return (
@@ -101,9 +100,9 @@ const FilterPage = () => {
                                                 <path
                                                     d="M1 4L4 8.5L12 1"
                                                     className="stroke-white cursor-pointer"
-                                                    stroke-width="2"
-                                                    stroke-linecap="round"
-                                                    stroke-linejoin="round"
+                                                    strokeWidth="2"
+                                                    strokeLinecap="round"
+                                                    strokeLinejoin="round"
                                                 />
                                             </svg>
                                         </label>
@@ -129,9 +128,9 @@ const FilterPage = () => {
                                                 <path
                                                     d="M1 4L4 8.5L12 1"
                                                     className="stroke-white cursor-pointer"
-                                                    stroke-width="2"
-                                                    stroke-linecap="round"
-                                                    stroke-linejoin="round"
+                                                    strokeWidth="2"
+                                                    strokeLinecap="round"
+                                                    strokeLinejoin="round"
                                                 />
                                             </svg>
                                         </label>
@@ -157,9 +156,9 @@ const FilterPage = () => {
                                                 <path
                                                     d="M1 4L4 8.5L12 1"
                                                     className="stroke-white cursor-pointer"
-                                                    stroke-width="2"
-                                                    stroke-linecap="round"
-                                                    stroke-linejoin="round"
+                                                    strokeWidth="2"
+                                                    strokeLinecap="round"
+                                                    strokeLinejoin="round"
                                                 />
                                             </svg>
                                         </label>
@@ -185,9 +184,9 @@ const FilterPage = () => {
                                                 <path
                                                     d="M1 4L4 8.5L12 1"
                                                     className="stroke-white cursor-pointer"
-                                                    stroke-width="2"
-                                                    stroke-linecap="round"
-                                                    stroke-linejoin="round"
+                                                    strokeWidth="2"
+                                                    strokeLinecap="round"
+                                                    strokeLinejoin="round"
                                                 />
                                             </svg>
                                         </label>
@@ -213,9 +212,9 @@ const FilterPage = () => {
                                                 <path
                                                     d="M1 4L4 8.5L12 1"
                                                     className="stroke-white cursor-pointer"
-                                                    stroke-width="2"
-                                                    stroke-linecap="round"
-                                                    stroke-linejoin="round"
+                                                    strokeWidth="2"
+                                                    strokeLinecap="round"
+                                                    strokeLinejoin="round"
                                                 />
                                             </svg>
                                         </label>
@@ -241,9 +240,9 @@ const FilterPage = () => {
                                                 <path
                                                     d="M1 4L4 8.5L12 1"
                                                     className="stroke-white cursor-pointer"
-                                                    stroke-width="2"
-                                                    stroke-linecap="round"
-                                                    stroke-linejoin="round"
+                                                    strokeWidth="2"
+                                                    strokeLinecap="round"
+                                                    strokeLinejoin="round"
                                                 />
                                             </svg>
                                         </label>
@@ -269,9 +268,9 @@ const FilterPage = () => {
                                                 <path
                                                     d="M1 4L4 8.5L12 1"
                                                     className="stroke-white cursor-pointer"
-                                                    stroke-width="2"
-                                                    stroke-linecap="round"
-                                                    stroke-linejoin="round"
+                                                    strokeWidth="2"
+                                                    strokeLinecap="round"
+                                                    strokeLinejoin="round"
                                                 />
                                             </svg>
                                         </label>
@@ -297,9 +296,9 @@ const FilterPage = () => {
                                                 <path
                                                     d="M1 4L4 8.5L12 1"
                                                     className="stroke-white cursor-pointer"
-                                                    stroke-width="2"
-                                                    stroke-linecap="round"
-                                                    stroke-linejoin="round"
+                                                    strokeWidth="2"
+                                                    strokeLinecap="round"
+                                                    strokeLinejoin="round"
                                                 />
                                             </svg>
                                         </label>
@@ -325,9 +324,9 @@ const FilterPage = () => {
                                                 <path
                                                     d="M1 4L4 8.5L12 1"
                                                     className="stroke-white cursor-pointer"
-                                                    stroke-width="2"
-                                                    stroke-linecap="round"
-                                                    stroke-linejoin="round"
+                                                    strokeWidth="2"
+                                                    strokeLinecap="round"
+                                                    strokeLinejoin="round"
                                                 />
                                             </svg>
                                         </label>
@@ -353,9 +352,9 @@ const FilterPage = () => {
                                                 <path
                                                     d="M1 4L4 8.5L12 1"
                                                     className="stroke-white cursor-pointer"
-                                                    stroke-width="2"
-                                                    stroke-linecap="round"
-                                                    stroke-linejoin="round"
+                                                    strokeWidth="2"
+                                                    strokeLinecap="round"
+                                                    strokeLinejoin="round"
                                                 />
                                             </svg>
                                         </label>
@@ -381,9 +380,9 @@ const FilterPage = () => {
                                                 <path
                                                     d="M1 4L4 8.5L12 1"
                                                     className="stroke-white cursor-pointer"
-                                                    stroke-width="2"
-                                                    stroke-linecap="round"
-                                                    stroke-linejoin="round"
+                                                    strokeWidth="2"
+                                                    strokeLinecap="round"
+                                                    strokeLinejoin="round"
                                                 />
                                             </svg>
                                         </label>
@@ -420,9 +419,9 @@ const FilterPage = () => {
                                                     <path
                                                         d="M1 4L4 8.5L12 1"
                                                         className="stroke-white cursor-pointer"
-                                                        stroke-width="2"
-                                                        stroke-linecap="round"
-                                                        stroke-linejoin="round"
+                                                        strokeWidth="2"
+                                                        strokeLinecap="round"
+                                                        strokeLinejoin="round"
                                                     />
                                                 </svg>
                                             </label>
@@ -456,9 +455,9 @@ const FilterPage = () => {
                                                 <path
                                                     d="M1 4L4 8.5L12 1"
                                                     className="stroke-white cursor-pointer"
-                                                    stroke-width="2"
-                                                    stroke-linecap="round"
-                                                    stroke-linejoin="round"
+                                                    strokeWidth="2"
+                                                    strokeLinecap="round"
+                                                    strokeLinejoin="round"
                                                 />
                                             </svg>
                                         </label>
@@ -484,9 +483,9 @@ const FilterPage = () => {
                                                 <path
                                                     d="M1 4L4 8.5L12 1"
                                                     className="stroke-white cursor-pointer"
-                                                    stroke-width="2"
-                                                    stroke-linecap="round"
-                                                    stroke-linejoin="round"
+                                                    strokeWidth="2"
+                                                    strokeLinecap="round"
+                                                    strokeLinejoin="round"
                                                 />
                                             </svg>
                                         </label>
@@ -512,9 +511,9 @@ const FilterPage = () => {
                                                 <path
                                                     d="M1 4L4 8.5L12 1"
                                                     className="stroke-white cursor-pointer"
-                                                    stroke-width="2"
-                                                    stroke-linecap="round"
-                                                    stroke-linejoin="round"
+                                                    strokeWidth="2"
+                                                    strokeLinecap="round"
+                                                    strokeLinejoin="round"
                                                 />
                                             </svg>
                                         </label>
@@ -540,9 +539,9 @@ const FilterPage = () => {
                                                 <path
                                                     d="M1 4L4 8.5L12 1"
                                                     className="stroke-white cursor-pointer"
-                                                    stroke-width="2"
-                                                    stroke-linecap="round"
-                                                    stroke-linejoin="round"
+                                                    strokeWidth="2"
+                                                    strokeLinecap="round"
+                                                    strokeLinejoin="round"
                                                 />
                                             </svg>
                                         </label>
@@ -568,9 +567,9 @@ const FilterPage = () => {
                                                 <path
                                                     d="M1 4L4 8.5L12 1"
                                                     className="stroke-white cursor-pointer"
-                                                    stroke-width="2"
-                                                    stroke-linecap="round"
-                                                    stroke-linejoin="round"
+                                                    strokeWidth="2"
+                                                    strokeLinecap="round"
+                                                    strokeLinejoin="round"
                                                 />
                                             </svg>
                                         </label>
@@ -596,9 +595,9 @@ const FilterPage = () => {
                                                 <path
                                                     d="M1 4L4 8.5L12 1"
                                                     className="stroke-white cursor-pointer"
-                                                    stroke-width="2"
-                                                    stroke-linecap="round"
-                                                    stroke-linejoin="round"
+                                                    strokeWidth="2"
+                                                    strokeLinecap="round"
+                                                    strokeLinejoin="round"
                                                 />
                                             </svg>
                                         </label>
@@ -624,9 +623,9 @@ const FilterPage = () => {
                                                 <path
                                                     d="M1 4L4 8.5L12 1"
                                                     className="stroke-white cursor-pointer"
-                                                    stroke-width="2"
-                                                    stroke-linecap="round"
-                                                    stroke-linejoin="round"
+                                                    strokeWidth="2"
+                                                    strokeLinecap="round"
+                                                    strokeLinejoin="round"
                                                 />
                                             </svg>
                                         </label>
@@ -653,9 +652,9 @@ const FilterPage = () => {
                                                     <path
                                                         d="M1 4L4 8.5L12 1"
                                                         className="stroke-white cursor-pointer"
-                                                        stroke-width="2"
-                                                        stroke-linecap="round"
-                                                        stroke-linejoin="round"
+                                                        strokeWidth="2"
+                                                        strokeLinecap="round"
+                                                        strokeLinejoin="round"
                                                     />
                                                 </svg>
                                             </label>
@@ -690,9 +689,9 @@ const FilterPage = () => {
                                                     <path
                                                         d="M1 4L4 8.5L12 1"
                                                         className="stroke-white cursor-pointer"
-                                                        stroke-width="2"
-                                                        stroke-linecap="round"
-                                                        stroke-linejoin="round"
+                                                        strokeWidth="2"
+                                                        strokeLinecap="round"
+                                                        strokeLinejoin="round"
                                                     />
                                                 </svg>
                                             </label>
@@ -745,9 +744,9 @@ const FilterPage = () => {
                                                 <path
                                                     d="M1 4L4 8.5L12 1"
                                                     className="stroke-white cursor-pointer"
-                                                    stroke-width="2"
-                                                    stroke-linecap="round"
-                                                    stroke-linejoin="round"
+                                                    strokeWidth="2"
+                                                    strokeLinecap="round"
+                                                    strokeLinejoin="round"
                                                 />
                                             </svg>
                                         </label>
@@ -773,9 +772,9 @@ const FilterPage = () => {
                                                 <path
                                                     d="M1 4L4 8.5L12 1"
                                                     className="stroke-white cursor-pointer"
-                                                    stroke-width="2"
-                                                    stroke-linecap="round"
-                                                    stroke-linejoin="round"
+                                                    strokeWidth="2"
+                                                    strokeLinecap="round"
+                                                    strokeLinejoin="round"
                                                 />
                                             </svg>
                                         </label>
@@ -801,9 +800,9 @@ const FilterPage = () => {
                                                 <path
                                                     d="M1 4L4 8.5L12 1"
                                                     className="stroke-white cursor-pointer"
-                                                    stroke-width="2"
-                                                    stroke-linecap="round"
-                                                    stroke-linejoin="round"
+                                                    strokeWidth="2"
+                                                    strokeLinecap="round"
+                                                    strokeLinejoin="round"
                                                 />
                                             </svg>
                                         </label>
@@ -829,9 +828,9 @@ const FilterPage = () => {
                                                 <path
                                                     d="M1 4L4 8.5L12 1"
                                                     className="stroke-white cursor-pointer"
-                                                    stroke-width="2"
-                                                    stroke-linecap="round"
-                                                    stroke-linejoin="round"
+                                                    strokeWidth="2"
+                                                    strokeLinecap="round"
+                                                    strokeLinejoin="round"
                                                 />
                                             </svg>
                                         </label>
@@ -857,9 +856,9 @@ const FilterPage = () => {
                                                 <path
                                                     d="M1 4L4 8.5L12 1"
                                                     className="stroke-white cursor-pointer"
-                                                    stroke-width="2"
-                                                    stroke-linecap="round"
-                                                    stroke-linejoin="round"
+                                                    strokeWidth="2"
+                                                    strokeLinecap="round"
+                                                    strokeLinejoin="round"
                                                 />
                                             </svg>
                                         </label>
@@ -885,9 +884,9 @@ const FilterPage = () => {
                                                 <path
                                                     d="M1 4L4 8.5L12 1"
                                                     className="stroke-white cursor-pointer"
-                                                    stroke-width="2"
-                                                    stroke-linecap="round"
-                                                    stroke-linejoin="round"
+                                                    strokeWidth="2"
+                                                    strokeLinecap="round"
+                                                    strokeLinejoin="round"
                                                 />
                                             </svg>
                                         </label>
@@ -913,9 +912,9 @@ const FilterPage = () => {
                                                 <path
                                                     d="M1 4L4 8.5L12 1"
                                                     className="stroke-white cursor-pointer"
-                                                    stroke-width="2"
-                                                    stroke-linecap="round"
-                                                    stroke-linejoin="round"
+                                                    strokeWidth="2"
+                                                    strokeLinecap="round"
+                                                    strokeLinejoin="round"
                                                 />
                                             </svg>
                                         </label>
@@ -941,9 +940,9 @@ const FilterPage = () => {
                                                 <path
                                                     d="M1 4L4 8.5L12 1"
                                                     className="stroke-white cursor-pointer"
-                                                    stroke-width="2"
-                                                    stroke-linecap="round"
-                                                    stroke-linejoin="round"
+                                                    strokeWidth="2"
+                                                    strokeLinecap="round"
+                                                    strokeLinejoin="round"
                                                 />
                                             </svg>
                                         </label>
@@ -969,9 +968,9 @@ const FilterPage = () => {
                                                 <path
                                                     d="M1 4L4 8.5L12 1"
                                                     className="stroke-white cursor-pointer"
-                                                    stroke-width="2"
-                                                    stroke-linecap="round"
-                                                    stroke-linejoin="round"
+                                                    strokeWidth="2"
+                                                    strokeLinecap="round"
+                                                    strokeLinejoin="round"
                                                 />
                                             </svg>
                                         </label>
@@ -997,9 +996,9 @@ const FilterPage = () => {
                                                 <path
                                                     d="M1 4L4 8.5L12 1"
                                                     className="stroke-white cursor-pointer"
-                                                    stroke-width="2"
-                                                    stroke-linecap="round"
-                                                    stroke-linejoin="round"
+                                                    strokeWidth="2"
+                                                    strokeLinecap="round"
+                                                    strokeLinejoin="round"
                                                 />
                                             </svg>
                                         </label>
@@ -1025,9 +1024,9 @@ const FilterPage = () => {
                                                 <path
                                                     d="M1 4L4 8.5L12 1"
                                                     className="stroke-white cursor-pointer"
-                                                    stroke-width="2"
-                                                    stroke-linecap="round"
-                                                    stroke-linejoin="round"
+                                                    strokeWidth="2"
+                                                    strokeLinecap="round"
+                                                    strokeLinejoin="round"
                                                 />
                                             </svg>
                                         </label>
@@ -1065,9 +1064,9 @@ const FilterPage = () => {
                                                 <path
                                                     d="M1 4L4 8.5L12 1"
                                                     className="stroke-white cursor-pointer"
-                                                    stroke-width="2"
-                                                    stroke-linecap="round"
-                                                    stroke-linejoin="round"
+                                                    strokeWidth="2"
+                                                    strokeLinecap="round"
+                                                    strokeLinejoin="round"
                                                 />
                                             </svg>
                                         </label>
@@ -1093,9 +1092,9 @@ const FilterPage = () => {
                                                 <path
                                                     d="M1 4L4 8.5L12 1"
                                                     className="stroke-white cursor-pointer"
-                                                    stroke-width="2"
-                                                    stroke-linecap="round"
-                                                    stroke-linejoin="round"
+                                                    strokeWidth="2"
+                                                    strokeLinecap="round"
+                                                    strokeLinejoin="round"
                                                 />
                                             </svg>
                                         </label>
@@ -1121,9 +1120,9 @@ const FilterPage = () => {
                                                 <path
                                                     d="M1 4L4 8.5L12 1"
                                                     className="stroke-white cursor-pointer"
-                                                    stroke-width="2"
-                                                    stroke-linecap="round"
-                                                    stroke-linejoin="round"
+                                                    strokeWidth="2"
+                                                    strokeLinecap="round"
+                                                    strokeLinejoin="round"
                                                 />
                                             </svg>
                                         </label>
@@ -1149,9 +1148,9 @@ const FilterPage = () => {
                                                 <path
                                                     d="M1 4L4 8.5L12 1"
                                                     className="stroke-white cursor-pointer"
-                                                    stroke-width="2"
-                                                    stroke-linecap="round"
-                                                    stroke-linejoin="round"
+                                                    strokeWidth="2"
+                                                    strokeLinecap="round"
+                                                    strokeLinejoin="round"
                                                 />
                                             </svg>
                                         </label>
@@ -1177,9 +1176,9 @@ const FilterPage = () => {
                                                 <path
                                                     d="M1 4L4 8.5L12 1"
                                                     className="stroke-white cursor-pointer"
-                                                    stroke-width="2"
-                                                    stroke-linecap="round"
-                                                    stroke-linejoin="round"
+                                                    strokeWidth="2"
+                                                    strokeLinecap="round"
+                                                    strokeLinejoin="round"
                                                 />
                                             </svg>
                                         </label>
@@ -1205,9 +1204,9 @@ const FilterPage = () => {
                                                 <path
                                                     d="M1 4L4 8.5L12 1"
                                                     className="stroke-white cursor-pointer"
-                                                    stroke-width="2"
-                                                    stroke-linecap="round"
-                                                    stroke-linejoin="round"
+                                                    strokeWidth="2"
+                                                    strokeLinecap="round"
+                                                    strokeLinejoin="round"
                                                 />
                                             </svg>
                                         </label>
@@ -1233,9 +1232,9 @@ const FilterPage = () => {
                                                 <path
                                                     d="M1 4L4 8.5L12 1"
                                                     className="stroke-white cursor-pointer"
-                                                    stroke-width="2"
-                                                    stroke-linecap="round"
-                                                    stroke-linejoin="round"
+                                                    strokeWidth="2"
+                                                    strokeLinecap="round"
+                                                    strokeLinejoin="round"
                                                 />
                                             </svg>
                                         </label>
@@ -1273,9 +1272,9 @@ const FilterPage = () => {
                                                 <path
                                                     d="M1 4L4 8.5L12 1"
                                                     className="stroke-white cursor-pointer"
-                                                    stroke-width="2"
-                                                    stroke-linecap="round"
-                                                    stroke-linejoin="round"
+                                                    strokeWidth="2"
+                                                    strokeLinecap="round"
+                                                    strokeLinejoin="round"
                                                 />
                                             </svg>
                                         </label>
@@ -1301,9 +1300,9 @@ const FilterPage = () => {
                                                 <path
                                                     d="M1 4L4 8.5L12 1"
                                                     className="stroke-white cursor-pointer"
-                                                    stroke-width="2"
-                                                    stroke-linecap="round"
-                                                    stroke-linejoin="round"
+                                                    strokeWidth="2"
+                                                    strokeLinecap="round"
+                                                    strokeLinejoin="round"
                                                 />
                                             </svg>
                                         </label>
@@ -1329,9 +1328,9 @@ const FilterPage = () => {
                                                 <path
                                                     d="M1 4L4 8.5L12 1"
                                                     className="stroke-white cursor-pointer"
-                                                    stroke-width="2"
-                                                    stroke-linecap="round"
-                                                    stroke-linejoin="round"
+                                                    strokeWidth="2"
+                                                    strokeLinecap="round"
+                                                    strokeLinejoin="round"
                                                 />
                                             </svg>
                                         </label>
@@ -1357,9 +1356,9 @@ const FilterPage = () => {
                                                 <path
                                                     d="M1 4L4 8.5L12 1"
                                                     className="stroke-white cursor-pointer"
-                                                    stroke-width="2"
-                                                    stroke-linecap="round"
-                                                    stroke-linejoin="round"
+                                                    strokeWidth="2"
+                                                    strokeLinecap="round"
+                                                    strokeLinejoin="round"
                                                 />
                                             </svg>
                                         </label>
@@ -1385,9 +1384,9 @@ const FilterPage = () => {
                                                 <path
                                                     d="M1 4L4 8.5L12 1"
                                                     className="stroke-white cursor-pointer"
-                                                    stroke-width="2"
-                                                    stroke-linecap="round"
-                                                    stroke-linejoin="round"
+                                                    strokeWidth="2"
+                                                    strokeLinecap="round"
+                                                    strokeLinejoin="round"
                                                 />
                                             </svg>
                                         </label>
@@ -1413,9 +1412,9 @@ const FilterPage = () => {
                                                 <path
                                                     d="M1 4L4 8.5L12 1"
                                                     className="stroke-white cursor-pointer"
-                                                    stroke-width="2"
-                                                    stroke-linecap="round"
-                                                    stroke-linejoin="round"
+                                                    strokeWidth="2"
+                                                    strokeLinecap="round"
+                                                    strokeLinejoin="round"
                                                 />
                                             </svg>
                                         </label>
@@ -1441,9 +1440,9 @@ const FilterPage = () => {
                                                 <path
                                                     d="M1 4L4 8.5L12 1"
                                                     className="stroke-white cursor-pointer"
-                                                    stroke-width="2"
-                                                    stroke-linecap="round"
-                                                    stroke-linejoin="round"
+                                                    strokeWidth="2"
+                                                    strokeLinecap="round"
+                                                    strokeLinejoin="round"
                                                 />
                                             </svg>
                                         </label>
@@ -1481,9 +1480,9 @@ const FilterPage = () => {
                                                 <path
                                                     d="M1 4L4 8.5L12 1"
                                                     className="stroke-white cursor-pointer"
-                                                    stroke-width="2"
-                                                    stroke-linecap="round"
-                                                    stroke-linejoin="round"
+                                                    strokeWidth="2"
+                                                    strokeLinecap="round"
+                                                    strokeLinejoin="round"
                                                 />
                                             </svg>
                                         </label>
@@ -1509,9 +1508,9 @@ const FilterPage = () => {
                                                 <path
                                                     d="M1 4L4 8.5L12 1"
                                                     className="stroke-white cursor-pointer"
-                                                    stroke-width="2"
-                                                    stroke-linecap="round"
-                                                    stroke-linejoin="round"
+                                                    strokeWidth="2"
+                                                    strokeLinecap="round"
+                                                    strokeLinejoin="round"
                                                 />
                                             </svg>
                                         </label>
@@ -1537,9 +1536,9 @@ const FilterPage = () => {
                                                 <path
                                                     d="M1 4L4 8.5L12 1"
                                                     className="stroke-white cursor-pointer"
-                                                    stroke-width="2"
-                                                    stroke-linecap="round"
-                                                    stroke-linejoin="round"
+                                                    strokeWidth="2"
+                                                    strokeLinecap="round"
+                                                    strokeLinejoin="round"
                                                 />
                                             </svg>
                                         </label>
@@ -1565,9 +1564,9 @@ const FilterPage = () => {
                                                 <path
                                                     d="M1 4L4 8.5L12 1"
                                                     className="stroke-white cursor-pointer"
-                                                    stroke-width="2"
-                                                    stroke-linecap="round"
-                                                    stroke-linejoin="round"
+                                                    strokeWidth="2"
+                                                    strokeLinecap="round"
+                                                    strokeLinejoin="round"
                                                 />
                                             </svg>
                                         </label>
@@ -1638,9 +1637,9 @@ const FilterPage = () => {
                                                     <path
                                                         d="M12 20V4M12 4L18 10M12 4L6 10"
                                                         className="stroke-mainTextColor"
-                                                        stroke-width="1.5"
-                                                        stroke-linecap="round"
-                                                        stroke-linejoin="round"
+                                                        strokeWidth="1.5"
+                                                        strokeLinecap="round"
+                                                        strokeLinejoin="round"
                                                     />
                                                 </svg>
                                             </div>
@@ -1663,9 +1662,9 @@ const FilterPage = () => {
                                                     <path
                                                         d="M12 4V20M12 20L18 14M12 20L6 14"
                                                         className="stroke-mainTextColor"
-                                                        stroke-width="1.5"
-                                                        stroke-linecap="round"
-                                                        stroke-linejoin="round"
+                                                        strokeWidth="1.5"
+                                                        strokeLinecap="round"
+                                                        strokeLinejoin="round"
                                                     />
                                                 </svg>
                                             </div>

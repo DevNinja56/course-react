@@ -4,11 +4,15 @@ import React, { useState } from 'react';
 import ProfileDropDown from '../DropDown/ProfileDropDown';
 import Link from 'next/link';
 import Sidebar from '../Sidebar/Sidebar';
+import { useUserAuth } from '@/hooks/auth';
+import { ROUTES } from '@/config/constant';
 
 const Header = () => {
     const router = useRouter();
     const [showDropDown, setShowDropDown] = useState(false);
     const [showSideBar, setShowSideBar] = useState(false);
+
+    const { isAuthenticated } = useUserAuth();
 
     const onShowSideBar = () => {
         setShowSideBar(!showSideBar);
@@ -43,8 +47,8 @@ const Header = () => {
                                     xmlns="http://www.w3.org/2000/svg"
                                 >
                                     <path
-                                        fill-rule="evenodd"
-                                        clip-rule="evenodd"
+                                        fillRule="evenodd"
+                                        clipRule="evenodd"
                                         d="M11.0269 20.4347L13.1509 13.6494L19.9362 11.5254L17.8122 18.3107L11.0269 20.4347Z"
                                         className={`font-semibold ${
                                             router.pathname === '/filterPage'
@@ -147,10 +151,12 @@ const Header = () => {
                     </div>
                     {showSideBar && <Sidebar setShowSideBar={setShowSideBar} />}
                     <div className="flex items-center gap-x-3 md:gap-x-6">
-                        {router.pathname === '/profile' ? (
-                            <div className="flex items-center gap-x-3 relative">
+                        {isAuthenticated ? (
+                            <div
+                                className="flex items-center gap-x-3 relative select-none cursor-pointer "
+                                onClick={onShowDropDown}
+                            >
                                 <Image
-                                    onClick={onShowDropDown}
                                     height={36}
                                     width={36}
                                     alt="profile-img"
@@ -160,7 +166,6 @@ const Header = () => {
                                 <p className="text-lightGrayColor hidden lg:flex gap-x-1 text-[13px]">
                                     Daniyal
                                     <Image
-                                        onClick={onShowDropDown}
                                         height={12}
                                         width={12}
                                         alt="down-arrow"
@@ -173,7 +178,7 @@ const Header = () => {
                             </div>
                         ) : (
                             <>
-                                <Link href="/signIn">
+                                <Link href={ROUTES.SIGN_IN}>
                                     <button className="py-2 lg:py-[13px] px-5 lg:px-[34px] gap-x-[6px] md:flex items-center rounded-[5px] bg-blueColor hover:bg-blue-600 text-white text-base font-medium hidden">
                                         <Image
                                             width={20}
@@ -185,7 +190,7 @@ const Header = () => {
                                         Login
                                     </button>
                                 </Link>
-                                <Link href="/signIn">
+                                <Link href={ROUTES.SIGN_IN}>
                                     <Image
                                         height={36}
                                         width={36}

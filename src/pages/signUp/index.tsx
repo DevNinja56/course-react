@@ -136,4 +136,6 @@ const SignUp = () => {
     );
 };
 
+SignUp.layout = { header: false, footer: false };
+
 export default SignUp;

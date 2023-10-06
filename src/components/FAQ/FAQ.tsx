@@ -52,18 +52,18 @@ const FAQ = () => {
                         <p>How does it work?</p>
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
-                            width="24"
-                            height="24"
+                            width={24}
+                            height={24}
                             viewBox="0 0 24 24"
                             fill="none"
                         >
                             <path
                                 d="M12 5V19M5 12H19"
                                 stroke="#717070"
-                                stroke-opacity="0.5"
-                                stroke-width="2"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
+                                strokeOpacity="0.5"
+                                strokeWidth={2}
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
                             />
                         </svg>
                     </div>
@@ -71,18 +71,18 @@ const FAQ = () => {
                         <p>What`&lsquo;`s included with membership?</p>
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
-                            width="24"
-                            height="24"
+                            width={24}
+                            height={24}
                             viewBox="0 0 24 24"
                             fill="none"
                         >
                             <path
                                 d="M12 5V19M5 12H19"
                                 stroke="#717070"
-                                stroke-opacity="0.5"
-                                stroke-width="2"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
+                                strokeOpacity="0.5"
+                                strokeWidth={2}
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
                             />
                         </svg>
                     </div>
@@ -90,18 +90,18 @@ const FAQ = () => {
                         <p>All the free API services really unlimited?</p>
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
-                            width="24"
-                            height="24"
+                            width={24}
+                            height={24}
                             viewBox="0 0 24 24"
                             fill="none"
                         >
                             <path
                                 d="M12 5V19M5 12H19"
                                 stroke="#717070"
-                                stroke-opacity="0.5"
-                                stroke-width="2"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
+                                strokeOpacity="0.5"
+                                strokeWidth={2}
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
                             />
                         </svg>
                     </div>
@@ -109,18 +109,18 @@ const FAQ = () => {
                         <p>All the free API services really unlimited?</p>
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
-                            width="24"
-                            height="24"
+                            width={24}
+                            height={24}
                             viewBox="0 0 24 24"
                             fill="none"
                         >
                             <path
                                 d="M12 5V19M5 12H19"
                                 stroke="#717070"
-                                stroke-opacity="0.5"
-                                stroke-width="2"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
+                                strokeOpacity="0.5"
+                                strokeWidth={2}
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
                             />
                         </svg>
                     </div>
@@ -128,18 +128,18 @@ const FAQ = () => {
                         <p>Can I sign up for dedicated support?</p>
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
-                            width="24"
-                            height="24"
+                            width={24}
+                            height={24}
                             viewBox="0 0 24 24"
                             fill="none"
                         >
                             <path
                                 d="M12 5V19M5 12H19"
                                 stroke="#717070"
-                                stroke-opacity="0.5"
-                                stroke-width="2"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
+                                strokeOpacity="0.5"
+                                strokeWidth={2}
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
                             />
                         </svg>
                     </div>
@@ -147,18 +147,18 @@ const FAQ = () => {
                         <p>How do I upgrade my account?</p>
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
-                            width="24"
-                            height="24"
+                            width={24}
+                            height={24}
                             viewBox="0 0 24 24"
                             fill="none"
                         >
                             <path
                                 d="M12 5V19M5 12H19"
                                 stroke="#717070"
-                                stroke-opacity="0.5"
-                                stroke-width="2"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
+                                strokeOpacity="0.5"
+                                strokeWidth={2}
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
                             />
                         </svg>
                     </div>

@@ -4,7 +4,6 @@ import Slider from '@/components/Slider/Slider';
 import Testimonal from '@/components/Testimonal/Testimonal';
 import Image from 'next/image';
 import Link from 'next/link';
-import React from 'react';
 
 const Home = () => {
     return (
@@ -264,5 +263,7 @@ const Home = () => {
         </>
     );
 };
+
+Home.layout = { auth: true };
 
 export default Home;

@@ -22,6 +22,7 @@ module.exports = {
   ],
   "rules": {
     "react/react-in-jsx-scope": "off",
+    "react-hooks/exhaustive-deps": "off",
     "@typescript-eslint/no-explicit-any": 'error',
     "@typescript-eslint/no-var-requires": 1,
     "@typescript-eslint/no-use-before-define": 1,
