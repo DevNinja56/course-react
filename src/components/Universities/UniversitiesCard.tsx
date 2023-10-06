@@ -11,7 +11,7 @@ interface UniProps {
 const UniversitiesCards = ({ img, title, insideImg }: UniProps) => {
     return (
         <Link
-            className="custom-shadow w-[31%] rounded-[10px] bg-white relative overflow-hidden group"
+            className="custom-shadow w-[80%] md:w-[35%] lg:w-[31%] rounded-[10px] bg-white relative overflow-hidden group z-10"
             href="/filterPage"
         >
             <Image

@@ -60,10 +60,10 @@ const FAQ = () => {
                             <path
                                 d="M12 5V19M5 12H19"
                                 stroke="#717070"
-                                stroke-opacity="0.5"
-                                stroke-width="2"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
+                                strokeOpacity="0.5"
+                                strokeWidth="2"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
                             />
                         </svg>
                     </div>
@@ -79,10 +79,10 @@ const FAQ = () => {
                             <path
                                 d="M12 5V19M5 12H19"
                                 stroke="#717070"
-                                stroke-opacity="0.5"
-                                stroke-width="2"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
+                                strokeOpacity="0.5"
+                                strokeWidth="2"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
                             />
                         </svg>
                     </div>
@@ -98,10 +98,10 @@ const FAQ = () => {
                             <path
                                 d="M12 5V19M5 12H19"
                                 stroke="#717070"
-                                stroke-opacity="0.5"
-                                stroke-width="2"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
+                                strokeOpacity="0.5"
+                                strokeWidth="2"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
                             />
                         </svg>
                     </div>
@@ -117,10 +117,10 @@ const FAQ = () => {
                             <path
                                 d="M12 5V19M5 12H19"
                                 stroke="#717070"
-                                stroke-opacity="0.5"
-                                stroke-width="2"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
+                                strokeOpacity="0.5"
+                                strokeWidth="2"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
                             />
                         </svg>
                     </div>
@@ -136,10 +136,10 @@ const FAQ = () => {
                             <path
                                 d="M12 5V19M5 12H19"
                                 stroke="#717070"
-                                stroke-opacity="0.5"
-                                stroke-width="2"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
+                                strokeOpacity="0.5"
+                                strokeWidth="2"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
                             />
                         </svg>
                     </div>
@@ -155,10 +155,10 @@ const FAQ = () => {
                             <path
                                 d="M12 5V19M5 12H19"
                                 stroke="#717070"
-                                stroke-opacity="0.5"
-                                stroke-width="2"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
+                                strokeOpacity="0.5"
+                                strokeWidth="2"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
                             />
                         </svg>
                     </div>

@@ -43,8 +43,8 @@ const Header = () => {
                                     xmlns="http://www.w3.org/2000/svg"
                                 >
                                     <path
-                                        fill-rule="evenodd"
-                                        clip-rule="evenodd"
+                                        fillRule="evenodd"
+                                        clipRule="evenodd"
                                         d="M11.0269 20.4347L13.1509 13.6494L19.9362 11.5254L17.8122 18.3107L11.0269 20.4347Z"
                                         className={`font-semibold ${
                                             router.pathname === '/filterPage'

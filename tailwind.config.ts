@@ -38,7 +38,8 @@ const config: Config = {
                 heartBgColor: '#ccd2db',
                 loginBgColor: '#fbfcff',
                 pinkColor: '#F2277E',
-                siderBarBottom: '#D9D9D9'
+                siderBarBottom: '#D9D9D9',
+                filterBorderColor: '#cdd5e1'
             }
         }
     },

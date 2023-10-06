@@ -110,13 +110,22 @@ const Testimonal = () => {
                 router.pathname === '/fields' ||
                 router.pathname === '/countries' ||
                 router.pathname === '/aboutUs' ? (
-                    <Image
-                        height={94}
-                        width={94}
-                        alt="testimonal-round-2"
-                        className="absolute right-20 top-9"
-                        src="/images/Universities/Ellipse 422.svg"
-                    />
+                    <>
+                        <Image
+                            height={94}
+                            width={94}
+                            alt="testimonal-round-2"
+                            className="absolute right-20 top-9 hidden md:block"
+                            src="/images/Universities/Ellipse 422.svg"
+                        />
+                        <Image
+                            height={228}
+                            width={228}
+                            alt="testimonal-round-2"
+                            className="absolute right-[-50px] md:right-0 top-0 h-[190px] w-[153px] lg:h-[228px] lg:w-[228px] md:hidden block"
+                            src="/images/Blogs/Ellipse 427.svg"
+                        />
+                    </>
                 ) : router.pathname === '/' ||
                   router.pathname === '/contactUs' ? (
                     <Image
