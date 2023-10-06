@@ -142,7 +142,7 @@ const Card = () => {
                         </p>
                     </div>
                 </div>
-                <button className="py-[9px] px-[70px] text-blueColor border border-blueColor group-hover:bg-blueColor group-hover:text-white transition-all duration-300 rounded-[5px] mb-2">
+                <button className="py-[9px] lg:px-[50px] xl:px-[70px] text-blueColor border border-blueColor group-hover:bg-blueColor group-hover:text-white transition-all duration-300 rounded-[5px] mb-2">
                     View Details
                 </button>
             </div>

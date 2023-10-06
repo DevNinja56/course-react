@@ -9,8 +9,8 @@ interface CountryProps {
 
 const Card = ({ img, countryName }: CountryProps) => {
     return (
-        <Link href="/filterPage">
-            <div className="border-2 border-countryBorderColor py-3 px-5 flex items-center gap-x-[35px] rounded-[5px] cursor-pointer hover:border-blueColor">
+        <Link href="/filterPage" className='z-10'>
+            <div className="border-2 border-countryBorderColor py-3 px-5 flex items-center gap-x-[35px] rounded-[5px] cursor-pointer hover:border-blueColor bg-white">
                 <Image
                     height={54}
                     width={54}

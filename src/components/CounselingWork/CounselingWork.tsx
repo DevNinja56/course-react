@@ -30,7 +30,7 @@ const CounselingWork = () => {
                     height={314}
                     width={237}
                     alt="circle"
-                    className={`absolute right-0 ${
+                    className={`absolute right-0 h-[206px] w-[156px] lg:h-[314px] lg:w-[237px] top-[-100px] md:top-44 lg:top-0${
                         router.pathname === '/aboutUs' ||
                         router.pathname === '/apply'
                             ? 'top-[-100px]'
@@ -41,13 +41,13 @@ const CounselingWork = () => {
                 />
             )}
             <div className="w-full py-28">
-                <div className="max-w-[1200px] 2xl:max-w-[2400px] mx-auto px-2 2xl:px-8 transition-all duration-300 flex flex-col items-center gap-y-24">
+                <div className="max-w-[1200px] 2xl:max-w-[2400px] mx-auto px-3 lg:px-2 2xl:px-8 transition-all duration-300 flex flex-col items-center gap-y-24">
                     <div className="flex flex-col items-center gap-y-16">
-                        <h1 className="font-bold text-[36px] text-mainTextColor">
+                        <h1 className="font-bold text-[32px] md:text-[36px] text-mainTextColor z-10 text-center">
                             Learn More About Application Process
                         </h1>
-                        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 w-full gap-[30px] z-10">
-                            <div className="custom-shadow rounded-[10px] py-7 flex flex-col gap-y-5 items-center bg-white px-1">
+                        <div className="flex flex-wrap justify-center w-full gap-[30px] z-10">
+                            <div className="custom-shadow rounded-[10px] py-7 flex flex-col gap-y-5 items-center bg-white px-1 w-[50%] md:w-[29%] lg:w-[17%]">
                                 <Image
                                     height={64}
                                     width={64}
@@ -55,11 +55,11 @@ const CounselingWork = () => {
                                     src="/images/Fields/Documents.svg"
                                     priority
                                 />
-                                <h1 className="text-xl font-medium text-mainTextColor text-center px-5">
+                                <h1 className="text-[17px] w-[200px] md:w-[200px] lg:w-auto lg:text-base xl:text-xl font-medium text-mainTextColor text-center px-5">
                                     Statement of purpose
                                 </h1>
                             </div>
-                            <div className="custom-shadow rounded-[10px] py-7 flex flex-col gap-y-5 items-center bg-white px-1">
+                            <div className="custom-shadow rounded-[10px] py-7 flex flex-col gap-y-5 items-center bg-white px-1 w-[50%] md:w-[29%] lg:w-[17%]">
                                 <Image
                                     height={64}
                                     width={64}
@@ -67,11 +67,11 @@ const CounselingWork = () => {
                                     src="/images/Fields/Letter Opened.svg"
                                     priority
                                 />
-                                <h1 className="text-xl font-medium text-mainTextColor text-center px-5">
+                                <h1 className="text-[17px] w-[200px] md:w-[200px] lg:w-auto lg:text-base xl:text-xl font-medium text-mainTextColor text-center px-5">
                                     Letter of Recommendation
                                 </h1>
                             </div>
-                            <div className="custom-shadow rounded-[10px] py-7 flex flex-col gap-y-5 items-center bg-white px-1">
+                            <div className="custom-shadow rounded-[10px] py-7 flex flex-col gap-y-5 items-center bg-white px-1 w-[50%] md:w-[29%] lg:w-[17%]">
                                 <Image
                                     height={64}
                                     width={64}
@@ -79,11 +79,11 @@ const CounselingWork = () => {
                                     src="/images/Fields/Documents Minimalistic.svg"
                                     priority
                                 />
-                                <h1 className="text-xl font-medium text-mainTextColor text-center px-5">
+                                <h1 className="text-[17px] w-[200px] md:w-[200px] lg:w-auto lg:text-base xl:text-xl font-medium text-mainTextColor text-center px-5">
                                     Student Visa Application
                                 </h1>
                             </div>
-                            <div className="custom-shadow rounded-[10px] py-7 flex flex-col gap-y-5 items-center bg-white px-1">
+                            <div className="custom-shadow rounded-[10px] py-7 flex flex-col gap-y-5 items-center bg-white px-1 w-[50%] md:w-[29%] lg:w-[17%]">
                                 <Image
                                     height={64}
                                     width={64}
@@ -91,11 +91,11 @@ const CounselingWork = () => {
                                     src="/images/Fields/Document Add.svg"
                                     priority
                                 />
-                                <h1 className="text-xl font-medium text-mainTextColor text-center px-5">
+                                <h1 className="text-[17px] w-[200px] md:w-[200px] lg:w-auto lg:text-base xl:text-xl font-medium text-mainTextColor text-center px-5">
                                     Admission Essay Writing
                                 </h1>
                             </div>
-                            <div className="custom-shadow rounded-[10px] py-7 flex flex-col gap-y-5 items-center bg-white px-1">
+                            <div className="custom-shadow rounded-[10px] py-7 flex flex-col gap-y-5 items-center bg-white px-1 w-[50%] md:w-[29%] lg:w-[17%]">
                                 <Image
                                     height={64}
                                     width={64}
@@ -103,29 +103,29 @@ const CounselingWork = () => {
                                     src="/images/Fields/User Id.svg"
                                     priority
                                 />
-                                <h1 className="text-xl font-medium text-mainTextColor text-center px-5">
+                                <h1 className="text-[17px] w-[200px] md:w-[200px] lg:w-auto lg:text-base xl:text-xl font-medium text-mainTextColor text-center px-5">
                                     Student Curriculum Vitae
                                 </h1>
                             </div>
                         </div>
                     </div>
-                    <div className="flex flex-col items-center gap-y-16">
+                    <div className="flex flex-col items-center gap-y-16 w-full">
                         <div className="flex flex-col gap-y-2 items-center">
-                            <h1 className="font-bold text-[36px] text-mainTextColor">
+                            <h1 className="font-bold text-[32px] md:text-[36px] text-mainTextColor text-center">
                                 How does Counselling Work?
                             </h1>
-                            <p className="text-darkGrayColor">
+                            <p className="text-darkGrayColor text-center">
                                 Every student is guided from initial college
                                 selection all the way up to a successful student
                                 visa.
                             </p>
                         </div>
-                        <div className="grid grid-cols-6 justify-between relative z-10">
-                            <hr className="absolute top-[30%] left-[92px] border-2 border-grayColor w-[80%] 2xl:w-[1400px]" />
+                        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 justify-between relative z-10 gap-[56px] lg:gap-0 w-full px-0 md:px-8 lg:px-0">
+                            <hr className="absolute top-[30%] left-[92px] border-2 border-grayColor w-[80%] 2xl:w-[1400px] hidden lg:block" />
                             <div className="flex flex-col gap-[28px] items-center">
                                 <div
                                     style={{ border: '3px dotted #717070' }}
-                                    className="h-[160px] w-[160px] rounded-full flex items-center justify-center bg-white z-10"
+                                    className="h-[140px] w-[140px] md:h-[160px] md:w-[160px] rounded-full flex items-center justify-center bg-white z-10"
                                 >
                                     <Image
                                         height={85.06}
@@ -136,13 +136,14 @@ const CounselingWork = () => {
                                     />
                                 </div>
                                 <h1 className="font-bold text-xl text-darkGrayColor text-center">
-                                    Send Academic Documents
+                                    Send Academic <br />
+                                    Documents
                                 </h1>
                             </div>
                             <div className="flex flex-col gap-[28px] items-center">
                                 <div
                                     style={{ border: '3px dotted #717070' }}
-                                    className="h-[160px] w-[160px] rounded-full flex items-center justify-center bg-white z-10"
+                                    className="h-[140px] w-[140px] md:h-[160px] md:w-[160px] rounded-full flex items-center justify-center bg-white z-10"
                                 >
                                     <Image
                                         height={91.91}
@@ -160,7 +161,7 @@ const CounselingWork = () => {
                             <div className="flex flex-col gap-[28px] items-center">
                                 <div
                                     style={{ border: '3px dotted #717070' }}
-                                    className="h-[160px] w-[160px] rounded-full flex items-center justify-center bg-white z-10"
+                                    className="h-[140px] w-[140px] md:h-[160px] md:w-[160px] rounded-full flex items-center justify-center bg-white z-10"
                                 >
                                     <Image
                                         height={89.94}
@@ -178,7 +179,7 @@ const CounselingWork = () => {
                             <div className="flex flex-col gap-[28px] items-center">
                                 <div
                                     style={{ border: '3px dotted #717070' }}
-                                    className="h-[160px] w-[160px] rounded-full flex items-center justify-center bg-white z-10"
+                                    className="h-[140px] w-[140px] md:h-[160px] md:w-[160px] rounded-full flex items-center justify-center bg-white z-10"
                                 >
                                     <Image
                                         height={90.03}
@@ -189,13 +190,14 @@ const CounselingWork = () => {
                                     />
                                 </div>
                                 <h1 className="font-bold text-xl text-darkGrayColor text-center">
-                                    Document Preparation
+                                    Document <br />
+                                    Preparation
                                 </h1>
                             </div>
                             <div className="flex flex-col gap-[28px] items-center">
                                 <div
                                     style={{ border: '3px dotted #717070' }}
-                                    className="h-[160px] w-[160px] rounded-full flex items-center justify-center bg-white z-10"
+                                    className="h-[140px] w-[140px] md:h-[160px] md:w-[160px] rounded-full flex items-center justify-center bg-white z-10"
                                 >
                                     <Image
                                         height={90.6}
@@ -205,14 +207,14 @@ const CounselingWork = () => {
                                         priority
                                     />
                                 </div>
-                                <h1 className="font-bold text-xl text-darkGrayColor text-center">
+                                <h1 className="font-bold text-xl text-darkGrayColor text-center w-[114px] lg:w-auto">
                                     Application Submission
                                 </h1>
                             </div>
                             <div className="flex flex-col gap-[28px] items-center">
                                 <div
                                     style={{ border: '3px dotted #717070' }}
-                                    className="h-[160px] w-[160px] rounded-full flex items-center justify-center bg-white z-10"
+                                    className="h-[140px] w-[140px] md:h-[160px] md:w-[160px] rounded-full flex items-center justify-center bg-white z-10"
                                 >
                                     <Image
                                         height={90.18}
@@ -237,8 +239,11 @@ const CounselingWork = () => {
                     height={314}
                     width={192}
                     alt="counselling-work"
-                    className={`absolute left-0 ${
-                        router.pathname === '/apply' || router.pathname === '/faq' ? 'top-56' : 'bottom-44'
+                    className={`absolute left-0 h-[180px] w-[180px] md:h-[206px] md:w-[206px] lg:h-[314px] lg:w-[192px] ${
+                        router.pathname === '/apply' ||
+                        router.pathname === '/faq'
+                            ? 'top-56'
+                            : 'bottom-[1170px] md:bottom-44'
                     }`}
                     src="/images/Fields/Ellipse 427.svg"
                     priority

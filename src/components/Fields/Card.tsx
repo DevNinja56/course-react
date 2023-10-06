@@ -9,7 +9,7 @@ interface CardProps {
 
 const Card = ({ title, img }: CardProps) => {
     return (
-        <div className="custom-shadow w-[100%] rounded-[10px] bg-white">
+        <div className="custom-shadow min-w-[276px] md:min-w-full rounded-[10px] bg-white w-[100%] z-10">
             <div className="flex flex-col">
                 <Image
                     height={165}

@@ -6,28 +6,28 @@ import React from 'react';
 const AboutUs = () => {
     return (
         <>
-            <div className="w-full flex items-center justify-between h-[200px] mt-[100px] mb-12">
+            <div className="w-full flex items-center justify-center h-[200px] mt-[100px] mb-12 relative">
                 <Image
                     height={193}
                     width={193}
-                    alt="aboutUs-round"
-                    className="mt-[-200px] ml-[-8px]"
+                    alt="uni-round"
+                    className="top-[-50px] left-[-8px] w-[100px] h-[100px] md:w-[150px] md:h-[150px] lg:w-[193px] lg:h-[193px] absolute"
                     src="/images/profileImages/Ellipse 418.svg"
                     priority
                 />
                 <div className="flex flex-col items-center">
-                    <h1 className="text-mainTextColor text-[48px] font-bold">
+                    <h1 className="text-mainTextColor text-[32px] md:text-[48px] font-bold">
                         About Us
                     </h1>
-                    <p className="text-aboutUsTextColor text-[23px]">
+                    <p className="text-aboutUsTextColor text-lg md:text-[23px]">
                         Check out the details below
                     </p>
                 </div>
                 <Image
                     height={235}
                     width={100}
-                    alt="aboutUs-round-2"
-                    className="mt-60"
+                    alt="uni-round-2"
+                    className="top-24 md:top-20 h-[175px] w-[50px] md:h-[215px] md:w-[80px] lg:h-[235px] lg:w-[100px] absolute right-0"
                     src="/images/Fields/Frame 691.svg"
                     priority
                 />
@@ -36,10 +36,10 @@ const AboutUs = () => {
                 <div className="max-w-[1100px] 2xl:max-w-[2300px] mx-auto px-2 2xl:px-8 transition-all duration-300">
                     <div className="flex items-center gap-[70px]">
                         <Image
-                            height={406}
-                            width={465}
+                            height={506}
+                            width={565}
                             alt="mainImg"
-                            className="rounded-[10px] custom-shadow mb-24"
+                            className="rounded-[10px] custom-shadow mb-24 h-full"
                             src="/images/About us/Main Img 1.png"
                             priority
                         />

@@ -31,7 +31,7 @@ const Slider = () => {
                     height={349.34}
                     width={354.35}
                     alt="sliderImg"
-                    className="swiper-slide"
+                    className="swiper-slide h-[248.55px] w-[252.11px] lg:h-[349.34px] lg:w-[354.35]"
                     src="/images/Scholarships/pic 1.svg"
                     priority
                 />
@@ -39,7 +39,7 @@ const Slider = () => {
                     height={349.34}
                     width={354.35}
                     alt="sliderImg"
-                    className="swiper-slide"
+                    className="swiper-slide h-[248.55px] w-[252.11px] lg:h-[349.34px] lg:w-[354.35]"
                     src="/images/Scholarships/Pic 2.svg"
                     priority
                 />
@@ -47,7 +47,7 @@ const Slider = () => {
                     height={349.34}
                     width={354.35}
                     alt="sliderImg"
-                    className="swiper-slide"
+                    className="swiper-slide h-[248.55px] w-[252.11px] lg:h-[349.34px] lg:w-[354.35]"
                     src="/images/Scholarships/Pic 3.svg"
                     priority
                 />
@@ -55,7 +55,7 @@ const Slider = () => {
                     height={349.34}
                     width={354.35}
                     alt="sliderImg"
-                    className="swiper-slide"
+                    className="swiper-slide h-[248.55px] w-[252.11px] lg:h-[349.34px] lg:w-[354.35]"
                     src="/images/Scholarships/Pic 4.svg"
                     priority
                 />
@@ -63,7 +63,7 @@ const Slider = () => {
                     height={349.34}
                     width={354.35}
                     alt="sliderImg"
-                    className="swiper-slide"
+                    className="swiper-slide h-[248.55px] w-[252.11px] lg:h-[349.34px] lg:w-[354.35]"
                     src="/images/Scholarships/Pic 5.svg"
                     priority
                 />
