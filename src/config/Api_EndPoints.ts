@@ -12,5 +12,9 @@ export const API_ENDPOINTS = {
         PROFILE_IMAGE: '/user/upload-avatar/:id',
         UPDATE_PROFILE: '/user/:id',
         CHANGE_PASSWORD: '/user/change-password'
-    }
+    },
+    COUNTRY: '/country',
+    DEGREE: '/degree',
+    DISCIPLINE: '/discipline',
+    SCHOLARSHIP: '/scholarship'
 };

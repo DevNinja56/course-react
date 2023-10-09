@@ -22,3 +22,59 @@ export type signInForm = {
     password: string;
     phone_number?: string;
 };
+
+export type signUpForm = {
+    email: string;
+    name: string;
+    password: string;
+    phone_number: string;
+};
+
+export type scholarshipType = {
+    name: string;
+    description: string;
+    type: string;
+    intakeYear: number;
+    applicable: string;
+    startDate: string;
+    endDate: string;
+    course: scholarshipType[];
+    institute: '651cfcc5d1e3ed362bd4d153';
+    country: countryType;
+    undergraduate: [];
+    postgraduate: [];
+    research: [];
+    favoriteId: [];
+    createdAt: string;
+    updatedAt: string;
+    id: string;
+};
+
+export type countryType = {
+    id: string;
+    name: string;
+    code: string;
+    logo: string;
+    institutes: [];
+    scholarship: [];
+    createdAt: string;
+    updatedAt: string;
+};
+
+export type degreeType = {
+    name: string;
+    course: [];
+    createdAt: string;
+    updatedAt: string;
+    id: string;
+};
+
+export type disciplineType = {
+    name: string;
+    undergraduate: [];
+    postgraduate: [];
+    research: [];
+    createdAt: string;
+    updatedAt: string;
+    id: string;
+};

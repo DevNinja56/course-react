@@ -1,5 +1,5 @@
 import Card from '@/components/Blog/Card';
-import Testimonal from '@/components/Testimonal/Testimonal';
+import Testimonial from '@/components/Testimonial/Testimonal';
 import Image from 'next/image';
 import React from 'react';
 
@@ -203,7 +203,7 @@ const Blog = () => {
                     </button>
                 </div>
             </div>
-            <Testimonal />
+            <Testimonial />
         </>
     );
 };

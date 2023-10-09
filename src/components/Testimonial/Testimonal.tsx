@@ -2,7 +2,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 import React from 'react';
 
-const Testimonal = () => {
+const Testimonial = () => {
     const router = useRouter();
     return (
         <div
@@ -20,7 +20,7 @@ const Testimonal = () => {
                 <Image
                     height={96}
                     width={96}
-                    alt="testimonal-round"
+                    alt="testimonial-round"
                     className="absolute bottom-12 left-8 hidden md:block"
                     src="/images/Blogs/Ellipse 426.svg"
                     priority
@@ -59,7 +59,7 @@ const Testimonal = () => {
                                     <Image
                                         height={100}
                                         width={100}
-                                        alt="testimonal-user"
+                                        alt="testimonial-user"
                                         src="/images/Blogs/testimoanlals.svg"
                                         priority
                                     />
@@ -114,14 +114,14 @@ const Testimonal = () => {
                         <Image
                             height={94}
                             width={94}
-                            alt="testimonal-round-2"
+                            alt="testimonial-round-2"
                             className="absolute right-20 top-9 hidden md:block"
                             src="/images/Universities/Ellipse 422.svg"
                         />
                         <Image
                             height={228}
                             width={228}
-                            alt="testimonal-round-2"
+                            alt="testimonial-round-2"
                             className="absolute right-[-50px] md:right-0 top-0 h-[190px] w-[153px] lg:h-[228px] lg:w-[228px] md:hidden block"
                             src="/images/Blogs/Ellipse 427.svg"
                         />
@@ -131,7 +131,7 @@ const Testimonal = () => {
                     <Image
                         height={280}
                         width={280}
-                        alt="testimonal-round-2"
+                        alt="testimonial-round-2"
                         className="absolute right-0 top-[-120px]"
                         src="/images/Home/testimoalRoundImg.svg"
                     />
@@ -140,15 +140,15 @@ const Testimonal = () => {
                     <Image
                         height={289}
                         width={245}
-                        alt="testimonal-round-2"
+                        alt="testimonial-round-2"
                         className="absolute right-0 top-0"
-                        src="/images/Apply/testimonalCircle.svg"
+                        src="/images/Apply/testimonialCircle.svg"
                     />
                 ) : router.pathname === '/courseDetail' ? (
                     <Image
                         height={174}
                         width={175}
-                        alt="testimonal-round-2"
+                        alt="testimonial-round-2"
                         className="absolute right-0 top-0"
                         src="/images/CourseDetail/Circle 2.svg"
                     />
@@ -156,7 +156,7 @@ const Testimonal = () => {
                     <Image
                         height={228}
                         width={228}
-                        alt="testimonal-round-2"
+                        alt="testimonial-round-2"
                         className="absolute right-[-50px] md:right-0 top-0 h-[190px] w-[153px] lg:h-[228px] lg:w-[228px]"
                         src="/images/Blogs/Ellipse 427.svg"
                     />
@@ -166,4 +166,4 @@ const Testimonal = () => {
     );
 };
 
-export default Testimonal;
+export default Testimonial;

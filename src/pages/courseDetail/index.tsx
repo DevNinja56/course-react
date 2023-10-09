@@ -1,5 +1,5 @@
 import CounselingWork from '@/components/CounselingWork/CounselingWork';
-import Testimonal from '@/components/Testimonal/Testimonal';
+import Testimonial from '@/components/Testimonial/Testimonal';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
@@ -298,7 +298,7 @@ const CourseDetail = () => {
                 </div>
             </div>
             <CounselingWork />
-            <Testimonal />
+            <Testimonial />
         </>
     );
 };

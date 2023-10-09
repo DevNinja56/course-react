@@ -1,5 +1,5 @@
 import CounselingWork from '@/components/CounselingWork/CounselingWork';
-import Testimonal from '@/components/Testimonal/Testimonal';
+import Testimonial from '@/components/Testimonial/Testimonal';
 import UniversitiesCards from '@/components/Universities/UniversitiesCard';
 import Image from 'next/image';
 import React from 'react';
@@ -65,7 +65,7 @@ const Universities = () => {
                 </div>
             </div>
             <CounselingWork />
-            <Testimonal />
+            <Testimonial />
         </>
     );
 };

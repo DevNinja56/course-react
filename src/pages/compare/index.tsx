@@ -1,6 +1,6 @@
 import CourseModal from '@/components/Modal/CourseModal';
 import Slider from '@/components/Slider/Slider';
-import Testimonal from '@/components/Testimonal/Testimonal';
+import Testimonial from '@/components/Testimonial/Testimonal';
 import Image from 'next/image';
 import React, { useState } from 'react';
 
@@ -237,7 +237,7 @@ const Compare = () => {
                 </h1>
                 <Slider />
             </div>
-            <Testimonal />
+            <Testimonial />
         </>
     );
 };

@@ -1,6 +1,6 @@
 import CounselingWork from '@/components/CounselingWork/CounselingWork';
 import Card from '@/components/Fields/Card';
-import Testimonal from '@/components/Testimonal/Testimonal';
+import Testimonial from '@/components/Testimonial/Testimonal';
 import Image from 'next/image';
 import React from 'react';
 
@@ -101,7 +101,7 @@ const Fields = () => {
                 </div>
             </div>
             <CounselingWork />
-            <Testimonal />
+            <Testimonial />
         </>
     );
 };

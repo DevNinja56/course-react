@@ -8,6 +8,7 @@ import ScreenLoader from '@/components/Loader/ScreenLoader';
 import { getCookie } from '@/utils/cookies';
 import { useRouter } from 'next/router';
 import { ROUTES } from '@/config/constant';
+import ModalWraper from '@/Modal';
 
 export interface propsType {
     children: React.ReactElement;
@@ -36,7 +37,7 @@ const MainLayout = ({
         }
 
         // If the route is public and the user is already authenticated, redirect to the homepage
-        if (isPublic && isAuthenticated) {
+        if (isPublic && isAuthenticated && token) {
             router.push(ROUTES.HOMEPAGE);
             return;
         }
@@ -65,6 +66,7 @@ const MainLayout = ({
                 <Layout />
             )}
             <Toaster position="bottom-right" reverseOrder={false} />
+            <ModalWraper />
         </>
     );
 };

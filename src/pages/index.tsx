@@ -1,7 +1,8 @@
 import Card from '@/components/Home/Card';
 import EventCard from '@/components/Home/EventCard';
+import SearchBox from '@/components/Home/SearchBox';
 import Slider from '@/components/Slider/Slider';
-import Testimonal from '@/components/Testimonal/Testimonal';
+import Testimonial from '@/components/Testimonial/Testimonal';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -38,24 +39,7 @@ const Home = () => {
                                 and get a decision in real time.
                             </p>
                         </div>
-                        <div className="rounded-[10px] bg-white custom-shadow p-2 pl-5 z-20">
-                            <div className="bg-white flex items-center justify-between">
-                                <div className="flex items-center">
-                                    <div className="flex items-center">
-                                        <p className="p-[10px] pb-[9px] font-medium text-darkGrayColor text-base w-[130px]">
-                                            What to Study?
-                                        </p>
-                                        <div className="w-[37px] rotate-[-90deg] border border-textLightBlackColor ml-28"></div>
-                                    </div>
-                                    <p className="p-[10px] pb-[9px] font-medium text-darkGrayColor text-base w-[130px] ml-5">
-                                        What to Study?
-                                    </p>
-                                </div>
-                                <button className="py-4 px-[67px] rounded-[5px] bg-blueColor text-white font-medium text-lg">
-                                    Search
-                                </button>
-                            </div>
-                        </div>
+                        <SearchBox />
                     </div>
                     <Image
                         height={597}
@@ -259,7 +243,7 @@ const Home = () => {
                     </button>
                 </div>
             </div>
-            <Testimonal />
+            <Testimonial />
         </>
     );
 };

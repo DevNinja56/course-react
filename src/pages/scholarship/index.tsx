@@ -2,7 +2,7 @@ import SelectOptionDropDown from '@/components/DropDown/SelectOptionDropDown';
 import FilterSideBar from '@/components/FilterSideBar/FilterSideBar';
 import Card from '@/components/Scholarship/Card';
 import Slider from '@/components/Slider/Slider';
-import Testimonal from '@/components/Testimonal/Testimonal';
+import Testimonial from '@/components/Testimonial/Testimonal';
 import Image from 'next/image';
 import React, { useState } from 'react';
 
@@ -1731,7 +1731,7 @@ const Scholarship = () => {
                 </h1>
                 <Slider />
             </div>
-            <Testimonal />
+            <Testimonial />
         </>
     );
 };
