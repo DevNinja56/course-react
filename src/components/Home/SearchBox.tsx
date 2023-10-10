@@ -8,6 +8,7 @@ import {
 } from '@/store/slices/allRequests';
 import { useRouter } from 'next/router';
 import { ROUTES } from '@/config/constant';
+import { useFilterQuery } from '@/hooks/filterQuery';
 
 export type selectType = {
     value: string;
@@ -15,25 +16,27 @@ export type selectType = {
 };
 
 const SearchBox = () => {
+    const { addQuery } = useFilterQuery();
     const [value, setValue] = useState({ degrees: '', countries: '' });
     const { data: countries, isLoading: countryLoading } =
         useGetCountriesQuery();
     const { data: degrees, isLoading: degreeLoading } = useGetDegreesQuery();
     const degreesList =
         degrees?.map((degree) => ({
-            value: degree.name,
+            value: degree.id,
             label: degree.name
         })) ?? [];
 
     const countriesList =
         countries?.map((country) => ({
-            value: country.code,
+            value: country.id,
             label: country.name
         })) ?? [];
     const { push } = useRouter();
 
     const handleClick = () => {
-        push({ pathname: ROUTES.FILTER, query: value });
+        push(ROUTES.FILTER);
+        addQuery(value);
     };
 
     return (
@@ -48,9 +51,9 @@ const SearchBox = () => {
                         onChange={(val: any) =>
                             setValue((prev) => ({
                                 ...prev,
-                                degrees: val
-                                    .map((item: selectType) => item.value)
-                                    .join()
+                                degrees: val.map(
+                                    (item: selectType) => item.value
+                                )
                             }))
                         }
                     />
@@ -62,22 +65,15 @@ const SearchBox = () => {
                         onChange={(val: any) =>
                             setValue((prev) => ({
                                 ...prev,
-                                countries: val
-                                    .map((item: selectType) => item.value)
-                                    .join()
+                                countries: val.map(
+                                    (item: selectType) => item.value
+                                )
                             }))
                         }
                     />
                 </div>
                 <div className="w-[230px] ml-5 ">
-                    <Button
-                        text="Search"
-                        onClick={handleClick}
-                        disabled={
-                            value.countries.length < 1 &&
-                            value.degrees.length < 1
-                        }
-                    />
+                    <Button text="Search" onClick={handleClick} />
                 </div>
             </div>
         </div>

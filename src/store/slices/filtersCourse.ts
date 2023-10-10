@@ -1,0 +1,65 @@
+import { courseType } from '@/types';
+import { createSlice } from '@reduxjs/toolkit';
+import { fetchPaginatedCourses } from '../actions/getFilteredCourse';
+
+export interface getAllCourseTypes {
+    data: courseType[];
+    paginatorInfo: {
+        count: number;
+        page: number;
+        limit: number;
+        totalPage: number;
+        nextPage: number | null;
+    };
+    error: string | null;
+    isLoading: boolean;
+}
+
+const initialState: getAllCourseTypes = {
+    data: [],
+    paginatorInfo: {
+        count: 0,
+        page: 0,
+        limit: 0,
+        totalPage: 0,
+        nextPage: null
+    },
+    error: null,
+    isLoading: false
+};
+const courses = createSlice({
+    name: 'getAllCourses',
+    initialState,
+    reducers: {
+        setLoading(state) {
+            state.isLoading = true;
+        },
+
+        setInitialValue(state) {
+            state.data = [];
+            state.paginatorInfo = initialState.paginatorInfo;
+            state.error = null;
+            state.isLoading = false;
+        }
+    },
+    extraReducers: (builder) => {
+        builder
+            .addCase(fetchPaginatedCourses.pending, (state) => {
+                state.isLoading = true;
+            })
+            .addCase(fetchPaginatedCourses.fulfilled, (state, action) => {
+                const { data, ...pagination } = action.payload;
+                state.data = data;
+                state.paginatorInfo = pagination;
+                state.error = null;
+                state.isLoading = false;
+            })
+            .addCase(fetchPaginatedCourses.rejected, (state, action) => {
+                state.error = action.error.message ?? 'An error occurred';
+            });
+    }
+});
+
+export const { setLoading, setInitialValue } = courses.actions;
+
+export default courses.reducer;

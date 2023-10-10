@@ -1,13 +1,17 @@
 import { configureStore } from '@reduxjs/toolkit';
+import { stateQueryApi } from './slices/allRequests';
 import authUserInfo from '@/store/slices/auth.slice';
 import uiSlice from './slices/ui.slice';
-import { stateQueryApi } from './slices/allRequests';
+import courses from './slices/filtersCourse';
+import filterQuery from './slices/filterQuery';
 
 export const store = configureStore({
     reducer: {
         [stateQueryApi.reducerPath]: stateQueryApi.reducer,
         auth: authUserInfo,
-        userInterface: uiSlice
+        userInterface: uiSlice,
+        courses,
+        filterQuery
     },
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware().concat(stateQueryApi.middleware)

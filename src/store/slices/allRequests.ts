@@ -31,7 +31,7 @@ export const stateQueryApi = createApi({
             transformResponse: (res: { data: degreeType[] }) => res.data! ?? res
         }),
         getDiscipline: builder.query<disciplineType[], void>({
-            query: () => ({ url: API_ENDPOINTS.DEGREE }),
+            query: () => ({ url: API_ENDPOINTS.DISCIPLINE }),
             transformResponse: (res: { data: disciplineType[] }) =>
                 res.data! ?? res
         }),

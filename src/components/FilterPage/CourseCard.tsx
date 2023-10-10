@@ -1,15 +1,16 @@
+import { ROUTES } from '@/config/constant';
+import { courseType } from '@/types';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 
 interface CardProps {
-    img: string;
-    title: string;
+    course: courseType;
 }
 
-const Card = ({ title, img }: CardProps) => {
+const CourseCard = ({ course }: CardProps) => {
     return (
-        <Link href="/courseDetail">
+        <Link href={ROUTES.COURSE_DETAILS + `/${course.id}`}>
             <div className="border-2 border-scholarshipBorderColor rounded-[10px] p-3 flex flex-col gap-y-5 w-[100%] group cursor-pointer hover:border-blueColor custom-shadow">
                 <div className="relative w-full">
                     <Image
@@ -17,7 +18,10 @@ const Card = ({ title, img }: CardProps) => {
                         width={246}
                         alt="mainImg"
                         className="w-full"
-                        src={`${img}`}
+                        src={`${
+                            course.imgUrl ??
+                            '/images/FilterPage/Rectangle 3634.svg'
+                        }`}
                         priority
                     />
                     <button className="h-[36px] w-[36px] rounded-full flex items-center justify-center group absolute top-4 right-3 z-10 bg-black opacity-[0.4]">
@@ -37,23 +41,23 @@ const Card = ({ title, img }: CardProps) => {
                 </div>
                 <div>
                     <h1 className="font-bold text-[17px] text-textLightBlackColor mb-4 group-hover:text-blueColor h-[46px]">
-                        {title}
+                        {course.name}
                     </h1>
                     <div className="flex flex-col gap-y-3 mb-5">
                         <p className="text-sm text-darkGrayColor">
-                            Oxford University Press Masters/PhD Degrees
+                            {course.instituteId?.name}
                         </p>
                         <p className="text-sm text-darkGrayColor">
-                            Study in: UK
+                            Study in: {course?.instituteId?.country?.name ?? ''}
                         </p>
                         <p className="text-sm text-darkGrayColor">
-                            Course starts October 2024
+                            Course starts {course.startDate}
                         </p>
                         <p className="font-medium text-sm text-darkGrayColor">
                             <span className="font-bold text-mainTextColor group-hover:text-blueColor">
                                 Deadline:
                             </span>{' '}
-                            5 Jan/19 Jan 2024 (annual)
+                            {course.endDate}
                         </p>
                     </div>
                     <button className="w-full py-[9px] rounded-[5px] text-blueColor border border-blueColor mb-3 group-hover:bg-blueColor group-hover:text-white">
@@ -65,4 +69,4 @@ const Card = ({ title, img }: CardProps) => {
     );
 };
 
-export default Card;
+export default CourseCard;

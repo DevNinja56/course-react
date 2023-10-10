@@ -16,5 +16,6 @@ export const API_ENDPOINTS = {
     COUNTRY: '/country',
     DEGREE: '/degree',
     DISCIPLINE: '/discipline',
-    SCHOLARSHIP: '/scholarship'
+    SCHOLARSHIP: '/scholarship',
+    COURSE_SEARCH: '/course/filter'
 };

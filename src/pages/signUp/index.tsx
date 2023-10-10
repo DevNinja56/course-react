@@ -12,9 +12,9 @@ import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
-import { BiLock } from 'react-icons/Bi';
+import { BiLock } from 'react-icons/bi';
 import { MdOutlineMail } from 'react-icons/md';
-import { BiUser } from 'react-icons/Bi';
+import { BiUser } from 'react-icons/bi';
 import { IoIosPhonePortrait } from 'react-icons/io';
 
 const SignUp = () => {

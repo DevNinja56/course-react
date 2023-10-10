@@ -15,7 +15,7 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { MdOutlineMail } from 'react-icons/md';
-import { BiLock } from 'react-icons/Bi';
+import { BiLock } from 'react-icons/bi';
 
 const SignIn = () => {
     const { updateModal } = useUi();

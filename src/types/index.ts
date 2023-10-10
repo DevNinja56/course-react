@@ -39,11 +39,11 @@ export type scholarshipType = {
     startDate: string;
     endDate: string;
     course: scholarshipType[];
-    institute: '651cfcc5d1e3ed362bd4d153';
+    institute: instituteType;
     country: countryType;
-    undergraduate: [];
-    postgraduate: [];
-    research: [];
+    undergraduate: degreeType[];
+    postgraduate: degreeType[];
+    research: degreeType[];
     favoriteId: [];
     createdAt: string;
     updatedAt: string;
@@ -55,15 +55,15 @@ export type countryType = {
     name: string;
     code: string;
     logo: string;
-    institutes: [];
-    scholarship: [];
+    institutes: instituteType[];
+    scholarship: scholarshipType[];
     createdAt: string;
     updatedAt: string;
 };
 
 export type degreeType = {
     name: string;
-    course: [];
+    course: courseType[];
     createdAt: string;
     updatedAt: string;
     id: string;
@@ -71,10 +71,53 @@ export type degreeType = {
 
 export type disciplineType = {
     name: string;
-    undergraduate: [];
-    postgraduate: [];
-    research: [];
+    undergraduate: degreeType[];
+    postgraduate: degreeType[];
+    research: degreeType[];
     createdAt: string;
     updatedAt: string;
     id: string;
+};
+
+export type instituteType = {
+    name: string;
+    logo: string;
+    description: string;
+    sector: string;
+    establishedYear: number;
+    location: string;
+    campus: string;
+    country: countryType;
+    scholarship: scholarshipType[];
+    discipline: disciplineType[];
+    course: courseType[];
+    qsWorldRanking: number;
+    usNewsRanking: number;
+    timesHigherRanking: number;
+    shanghaiRanking: number;
+    tcfIndexRanking: number;
+    favoriteId: [];
+    createdAt: string;
+    updatedAt: string;
+    id: string;
+};
+
+export type courseType = {
+    name: string;
+    degreeType: degreeType;
+    studyModel: string;
+    timeModel: string;
+    applicationFee: number;
+    specialization: string;
+    duration: number;
+    language: string[];
+    startDate: string;
+    endDate: string;
+    instituteId: instituteType;
+    scholarshipId: scholarshipType;
+    favoriteId: [];
+    createdAt: string;
+    updatedAt: string;
+    id: string;
+    imgUrl: string;
 };
