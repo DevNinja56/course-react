@@ -23,13 +23,13 @@ const SearchBox = () => {
     const { data: degrees, isLoading: degreeLoading } = useGetDegreesQuery();
     const degreesList =
         degrees?.map((degree) => ({
-            value: degree.id,
+            value: degree.name,
             label: degree.name
         })) ?? [];
 
     const countriesList =
         countries?.map((country) => ({
-            value: country.id,
+            value: country.name,
             label: country.name
         })) ?? [];
     const { push } = useRouter();
