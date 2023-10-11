@@ -121,7 +121,7 @@ const RightCardsBox = () => {
                 ) : (
                     data?.map((course) => (
                         <CourseCard
-                            key={'course__key__' + course.id}
+                            key={'course__key__' + course._id}
                             course={course}
                         />
                     ))

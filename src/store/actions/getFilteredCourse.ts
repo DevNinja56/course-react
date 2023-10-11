@@ -15,8 +15,7 @@ export const fetchPaginatedCourses = createAsyncThunk(
                 .post(
                     `${API_ENDPOINTS.COURSE_SEARCH}`,
                     {
-                        query: query! ?? {},
-                        sort: query.sort! ?? {}
+                        pipeline: Object.values(query)
                     },
                     {
                         params: {

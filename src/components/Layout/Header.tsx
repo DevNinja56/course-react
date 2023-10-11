@@ -37,7 +37,7 @@ const Header = () => {
                 </Link>
                 <div className="flex items-center gap-x-6">
                     <div className="hidden lg:flex items-center gap-x-6">
-                        <Link href="/filterPage">
+                        <Link href={ROUTES.FILTER}>
                             <div className="flex items-center px-[10px] gap-x-[10px]">
                                 <svg
                                     width="32"
@@ -51,7 +51,7 @@ const Header = () => {
                                         clipRule="evenodd"
                                         d="M11.0269 20.4347L13.1509 13.6494L19.9362 11.5254L17.8122 18.3107L11.0269 20.4347Z"
                                         className={`font-semibold ${
-                                            router.pathname === '/filterPage'
+                                            router.pathname === ROUTES.FILTER
                                                 ? 'stroke-blueColor'
                                                 : 'stroke-textBlackColor'
                                         }`}
@@ -62,7 +62,7 @@ const Header = () => {
                                     <path
                                         d="M15.4814 28.7953C22.5588 28.7953 28.2961 23.058 28.2961 15.9807C28.2961 8.90334 22.5588 3.16602 15.4814 3.16602C8.40407 3.16602 2.66675 8.90334 2.66675 15.9807C2.66675 23.058 8.40407 28.7953 15.4814 28.7953Z"
                                         className={`font-semibold ${
-                                            router.pathname === '/filterPage'
+                                            router.pathname === ROUTES.FILTER
                                                 ? 'stroke-blueColor'
                                                 : 'stroke-textBlackColor'
                                         }`}
@@ -73,7 +73,7 @@ const Header = () => {
                                 </svg>
                                 <p
                                     className={`font-semibold ${
-                                        router.pathname === '/filterPage'
+                                        router.pathname === ROUTES.FILTER
                                             ? 'text-blueColor'
                                             : 'text-textBlackColor'
                                     }`}
@@ -82,7 +82,7 @@ const Header = () => {
                                 </p>
                             </div>
                         </Link>
-                        <Link href="/compare">
+                        <Link href={ROUTES.COMPARE}>
                             <div className="flex items-center px-[10px] gap-x-[10px]">
                                 <svg
                                     width="32"
@@ -111,7 +111,7 @@ const Header = () => {
                                 </p>
                             </div>
                         </Link>
-                        <Link href="/apply">
+                        <Link href={ROUTES.APPLY}>
                             <div className="flex items-center px-[10px] gap-x-[10px]">
                                 <svg
                                     width="32"

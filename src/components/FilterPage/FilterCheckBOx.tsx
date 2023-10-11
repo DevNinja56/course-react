@@ -4,10 +4,12 @@ import React, { InputHTMLAttributes } from 'react';
 interface propsType extends InputHTMLAttributes<HTMLInputElement> {
     id: string;
     text: string;
+    customF?: () => void;
+    isChecked?: boolean;
 }
 
 export const FilterCheckBox = React.forwardRef<HTMLInputElement, propsType>(
-    ({ id, text, name = '', ...props }, ref) => {
+    ({ id, text, name = '', customF, isChecked, ...props }, ref) => {
         const { query, addQuery } = useFilterQuery();
         const state = (query[name] as string[]) ?? [];
 
@@ -33,8 +35,8 @@ export const FilterCheckBox = React.forwardRef<HTMLInputElement, propsType>(
                         id={id}
                         type="checkbox"
                         ref={ref}
-                        onChange={handleCheckedCountry}
-                        checked={state?.includes(id)}
+                        onChange={customF! ?? handleCheckedCountry}
+                        checked={isChecked! ?? state?.includes(id)}
                         className="h-5 w-5 rounded-[2px] border border-borderColor cursor-pointer pb-0 group-hover:border-blueColor appearance-none checked:bg-blueColor"
                     />
                     <svg
@@ -64,7 +66,7 @@ export const FilterCheckBox = React.forwardRef<HTMLInputElement, propsType>(
 
 FilterCheckBox.displayName = 'Filter Checkbox';
 
-const FilterCheckBOx = ({ id, name }: propsType) => {
+const FilterCheckBOx = ({ id, text }: propsType) => {
     return (
         <label
             className="w-full p-[6px] hover:bg-profileBgColor px-4 flex gap-x-2 group"
@@ -94,7 +96,7 @@ const FilterCheckBOx = ({ id, name }: propsType) => {
                     />
                 </svg>
                 <p className="text-sm text-grayColor group-hover:text-blueColor ml-2 capitalize ">
-                    {name}
+                    {text}
                 </p>
             </div>
         </label>

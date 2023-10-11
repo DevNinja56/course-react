@@ -10,7 +10,7 @@ interface CardProps {
 
 const CourseCard = ({ course }: CardProps) => {
     return (
-        <Link href={ROUTES.COURSE_DETAILS + `/${course.id}`}>
+        <Link href={ROUTES.COURSE_DETAILS + `/${course._id}`}>
             <div className="border-2 border-scholarshipBorderColor rounded-[10px] p-3 flex flex-col gap-y-5 w-[100%] group cursor-pointer hover:border-blueColor custom-shadow">
                 <div className="relative w-full">
                     <Image
@@ -45,10 +45,10 @@ const CourseCard = ({ course }: CardProps) => {
                     </h1>
                     <div className="flex flex-col gap-y-3 mb-5">
                         <p className="text-sm text-darkGrayColor">
-                            {course.instituteId?.name}
+                            {`${course.instituteId?.name} / ${course.degreeType?.name}`}
                         </p>
                         <p className="text-sm text-darkGrayColor">
-                            Study in: {course?.instituteId?.country?.name ?? ''}
+                            Study in: {course?.country.name ?? ''}
                         </p>
                         <p className="text-sm text-darkGrayColor">
                             Course starts {course.startDate}

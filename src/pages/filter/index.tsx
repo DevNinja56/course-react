@@ -74,4 +74,6 @@ const FilterPage = () => {
     );
 };
 
+FilterPage.layout = { auth: true };
+
 export default FilterPage;

@@ -3,6 +3,7 @@ import { getToken } from '@/utils/axios/token';
 import { API_ENDPOINTS } from '@/config/Api_EndPoints';
 import {
     countryType,
+    degreeLevelType,
     degreeType,
     disciplineType,
     scholarshipType
@@ -39,6 +40,11 @@ export const stateQueryApi = createApi({
             query: () => ({ url: API_ENDPOINTS.SCHOLARSHIP }),
             transformResponse: (res: { data: scholarshipType[] }) =>
                 res.data! ?? res
+        }),
+        getDegreeTypes: builder.query<degreeLevelType[], void>({
+            query: () => ({ url: API_ENDPOINTS.DEGREE_TYPE }),
+            transformResponse: (res: { data: degreeLevelType[] }) =>
+                res.data! ?? res
         })
     })
 });
@@ -47,5 +53,6 @@ export const {
     useGetCountriesQuery,
     useGetDegreesQuery,
     useGetDisciplineQuery,
-    useGetScholarshipQuery
+    useGetScholarshipQuery,
+    useGetDegreeTypesQuery
 } = stateQueryApi;

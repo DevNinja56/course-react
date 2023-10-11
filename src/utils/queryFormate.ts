@@ -1,20 +1,33 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-export const formateWithQuery = (arg: { [key: string]: any }) => {
-    let query = arg;
+export const formateWithQuery = (query: { [key: string]: any }) => {
+    let matches = { $match: {} };
+
     if (query.degrees) {
-        query = {
-            ...query,
-            degreeType: { $in: query.degrees }
+        matches = {
+            $match: {
+                ...matches.$match,
+                'degreeType.name': { $in: query.degrees }
+            }
         };
-        delete query.degrees;
     }
 
     if (query.countries) {
-        query = {
-            ...query,
-            countries: { $in: query.countries }
+        matches = {
+            $match: {
+                ...matches.$match,
+                'country.name': { $in: query.countries }
+            }
         };
     }
 
-    return query;
+    if (query.scholarship) {
+        matches = {
+            $match: {
+                ...matches.$match,
+                'scholarshipId.name': { $in: query.scholarship }
+            }
+        };
+    }
+
+    return [matches];
 };

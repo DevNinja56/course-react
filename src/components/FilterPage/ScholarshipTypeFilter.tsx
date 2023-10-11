@@ -1,5 +1,5 @@
 import React from 'react';
-import FilterCheckBOx from './FilterCheckBOx';
+import { FilterCheckBox } from './FilterCheckBOx';
 import { useGetScholarshipQuery } from '@/store/slices/allRequests';
 
 const ScholarshipTypeFilter = () => {
@@ -14,10 +14,12 @@ const ScholarshipTypeFilter = () => {
             </div>
             <div className="flex flex-col gap-y-1 max-h-[360px]">
                 {scholarshipList?.map((scholarship, i) => (
-                    <FilterCheckBOx
-                        key={'country--list--' + i}
-                        id={scholarship.id}
+                    <FilterCheckBox
+                        key={'scholarship--list--' + i}
+                        id={scholarship.name}
                         text={scholarship.name}
+                        name={'scholarship'}
+                        value={scholarship.name}
                     />
                 ))}
             </div>

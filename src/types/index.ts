@@ -103,8 +103,12 @@ export type instituteType = {
 };
 
 export type courseType = {
+    _id: string;
     name: string;
-    degreeType: degreeType;
+    degreeType: {
+        _id: string;
+        name: string;
+    };
     studyModel: string;
     timeModel: string;
     applicationFee: number;
@@ -113,11 +117,43 @@ export type courseType = {
     language: string[];
     startDate: string;
     endDate: string;
-    instituteId: instituteType;
-    scholarshipId: scholarshipType;
-    favoriteId: [];
-    createdAt: string;
-    updatedAt: string;
-    id: string;
     imgUrl: string;
+    instituteId: {
+        _id: string;
+        name: string;
+        logo: string;
+        description: string;
+        sector: string;
+        establishedYear: number;
+        location: string;
+        campus: string;
+        qsWorldRanking: number;
+        usNewsRanking: number;
+        timesHigherRanking: number;
+        shanghaiRanking: number;
+        tcfIndexRanking: number;
+    };
+    scholarshipId: {
+        _id: string;
+        name: string;
+        description: string;
+        type: string;
+        intakeYear: 0;
+        applicable: string;
+        startDate: string;
+        endDate: string;
+    };
+    favoriteId: [];
+    country: {
+        _id: string;
+        name: string;
+        code: string;
+        logo: string;
+    };
+};
+
+export type degreeLevelType = {
+    name: string;
+    degrees: degreeType[];
+    id: string;
 };
