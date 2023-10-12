@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 export interface FilterQueryInitialStateType {
-    query: { [key: string]: unknown };
+    query: { [key: string]: string[] };
 }
 
 const initialState: FilterQueryInitialStateType = {
@@ -12,7 +12,7 @@ const filterQuery = createSlice({
     name: 'filterQuery',
     initialState,
     reducers: {
-        addQuery(state, action: PayloadAction<{ [key: string]: unknown }>) {
+        addQuery(state, action: PayloadAction<{ [key: string]: string[] }>) {
             state.query = { ...state.query, ...action.payload };
         },
         removeQuery(state, action: PayloadAction<string>) {

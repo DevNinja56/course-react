@@ -6,7 +6,7 @@ export const formateWithQuery = (query: { [key: string]: any }) => {
         matches = {
             $match: {
                 ...matches.$match,
-                'degreeType.name': { $in: query.degrees }
+                'degree.name': { $in: query.degrees }
             }
         };
     }
@@ -25,6 +25,15 @@ export const formateWithQuery = (query: { [key: string]: any }) => {
             $match: {
                 ...matches.$match,
                 'scholarshipId.name': { $in: query.scholarship }
+            }
+        };
+    }
+
+    if (query.degreeType) {
+        matches = {
+            $match: {
+                ...matches.$match,
+                'degreeType.name': { $in: query.degreeType }
             }
         };
     }

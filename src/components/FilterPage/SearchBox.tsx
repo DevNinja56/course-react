@@ -22,8 +22,8 @@ const SearchBox = ({
     return (
         <div className={`flex justify-end w-full ${className}`}>
             <div
-                className={`input-con bg-white rounded-full overflow-hidden p-1 flex ${
-                    showInput && 'w-full'
+                className={` bg-white rounded-full overflow-hidden p-x-0.5 py-1.5 mx-3 flex ${
+                    showInput && 'w-full border '
                 }`}
             >
                 <input

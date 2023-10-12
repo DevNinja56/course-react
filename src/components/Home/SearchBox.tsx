@@ -17,7 +17,7 @@ export type selectType = {
 
 const SearchBox = () => {
     const { addQuery } = useFilterQuery();
-    const [value, setValue] = useState({ degrees: '', countries: '' });
+    const [value, setValue] = useState({ degrees: [], countries: [] });
     const { data: countries, isLoading: countryLoading } =
         useGetCountriesQuery();
     const { data: degrees, isLoading: degreeLoading } = useGetDegreesQuery();
@@ -35,7 +35,7 @@ const SearchBox = () => {
     const { push } = useRouter();
 
     const handleClick = () => {
-        push(ROUTES.FILTER);
+        push(ROUTES.FILTER_COURSE);
         addQuery(value);
     };
 
@@ -73,7 +73,13 @@ const SearchBox = () => {
                     />
                 </div>
                 <div className="w-[230px] ml-5 ">
-                    <Button text="Search" onClick={handleClick} />
+                    <Button
+                        text="Search"
+                        disabled={
+                            !value.degrees.length && !value.countries.length
+                        }
+                        onClick={handleClick}
+                    />
                 </div>
             </div>
         </div>

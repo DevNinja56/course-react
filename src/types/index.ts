@@ -109,6 +109,10 @@ export type courseType = {
         _id: string;
         name: string;
     };
+    degree: {
+        _id: string;
+        name: string;
+    };
     studyModel: string;
     timeModel: string;
     applicationFee: number;
@@ -143,7 +147,7 @@ export type courseType = {
         startDate: string;
         endDate: string;
     };
-    favoriteId: [];
+    favoriteId: [string];
     country: {
         _id: string;
         name: string;

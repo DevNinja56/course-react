@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import http from '.';
+import { AxiosResponse } from 'axios';
 
 interface fetchRequestTypes {
     url: string;
@@ -7,6 +8,10 @@ interface fetchRequestTypes {
     body?: { [key: string]: string | any };
     query?: { [key: string]: string | any };
     token?: string;
+}
+
+interface axiosResponse extends AxiosResponse {
+    message: string;
 }
 
 export const fetchRequest = async ({
@@ -28,5 +33,5 @@ export const fetchRequest = async ({
         type === 'delete' ? url : url,
         type === 'get' ? requestOptions : body,
         requestOptions
-    );
+    ) as Promise<axiosResponse>;
 };

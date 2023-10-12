@@ -9,7 +9,7 @@ export const useFilterQuery = () => {
     const dispatch = useAppDispatch();
     const filterQuery = useAppSelector((state) => state.filterQuery);
 
-    const addQueryAction = (obj: { [key: string]: unknown }) => {
+    const addQueryAction = (obj: { [key: string]: string[] }) => {
         dispatch(addQuery(obj));
     };
 

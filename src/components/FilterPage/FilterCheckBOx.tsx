@@ -10,7 +10,7 @@ interface propsType extends InputHTMLAttributes<HTMLInputElement> {
 
 export const FilterCheckBox = React.forwardRef<HTMLInputElement, propsType>(
     ({ id, text, name = '', customF, isChecked, ...props }, ref) => {
-        const { query, addQuery } = useFilterQuery();
+        const { query, addQuery, removeQuery } = useFilterQuery();
         const state = (query[name] as string[]) ?? [];
 
         const handleCheckedCountry = (
@@ -19,9 +19,13 @@ export const FilterCheckBox = React.forwardRef<HTMLInputElement, propsType>(
             if (e.target.checked) {
                 addQuery({ [name]: [...state, e.target.value] });
             } else {
-                addQuery({
-                    [name]: state.filter((item) => item !== e.target.value)
-                });
+                state.length > 1
+                    ? addQuery({
+                          [name]: state.filter(
+                              (item) => item !== e.target.value
+                          )
+                      })
+                    : removeQuery(name);
             }
         };
         return (
@@ -37,24 +41,8 @@ export const FilterCheckBox = React.forwardRef<HTMLInputElement, propsType>(
                         ref={ref}
                         onChange={customF! ?? handleCheckedCountry}
                         checked={isChecked! ?? state?.includes(id)}
-                        className="h-5 w-5 rounded-[2px] border border-borderColor cursor-pointer pb-0 group-hover:border-blueColor appearance-none checked:bg-blueColor"
+                        className="h-5 w-5 rounded-[2px] border border-borderColor cursor-pointer pb-0 group-hover:border-blueColor accent-[blueColor] "
                     />
-                    <svg
-                        className="absolute left-1 cursor-pointer"
-                        width="13"
-                        height="10"
-                        viewBox="0 0 13 10"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                    >
-                        <path
-                            d="M1 4L4 8.5L12 1"
-                            className="stroke-white cursor-pointer"
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                        />
-                    </svg>
                     <p className="text-sm text-grayColor group-hover:text-blueColor ml-2 capitalize ">
                         {text}
                     </p>

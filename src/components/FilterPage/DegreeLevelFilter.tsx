@@ -2,10 +2,12 @@ import { useGetDegreeTypesQuery } from '@/store/slices/allRequests';
 import React, { useState } from 'react';
 import { FilterCheckBox } from './FilterCheckBOx';
 import { BiChevronRight } from 'react-icons/bi';
+import { useFilterQuery } from '@/hooks/filterQuery';
 
 const DegreeLevelFilter = () => {
     const { data: degreeType } = useGetDegreeTypesQuery();
     const [open, setOpen] = useState<number | null>(null);
+    const { query } = useFilterQuery();
 
     return (
         <div className="flex flex-col gap-y-3">
@@ -20,17 +22,18 @@ const DegreeLevelFilter = () => {
                     <div className="relative flex w-full justify-around items-center">
                         <FilterCheckBox
                             key={'country--list--' + type.id}
-                            id={type.id}
+                            id={type.name}
                             text={type.name}
-                            value={i}
-                            customF={() =>
-                                setOpen((prev) => (prev === i ? null : i))
-                            }
-                            isChecked={i === open}
+                            value={type.name}
+                            name={'degreeType'}
                         />
                         <span className="mx-2">
                             <BiChevronRight
-                                className={`text-grayColor transition-all text-2xl ${
+                                onClick={() =>
+                                    setOpen((prev) => (prev === i ? null : i))
+                                }
+                                className={`text-grayColor transition-all text-2xl cursor-pointer ${
+                                    query['degreeType']?.includes(type.name) ||
                                     i === open
                                         ? 'rotate-[-90deg]'
                                         : 'rotate-[90deg]'
@@ -40,7 +43,10 @@ const DegreeLevelFilter = () => {
                     </div>
                     <div
                         className={`px-5 overflow-hidden transition-all ${
-                            open === i ? 'max-h-[300px]' : 'max-h-0'
+                            query['degreeType']?.includes(type.name) ||
+                            open === i
+                                ? 'max-h-[300px]'
+                                : 'max-h-0'
                         } `}
                     >
                         {type.degrees.map((degree) => (
