@@ -1,6 +1,7 @@
 import FilterLeftBox from '@/components/FilterPage/FilterLeftBox';
 import RightCardsBox from '@/components/FilterPage/RightCardsBox';
-import Slider from '@/components/Slider/Slider';
+import SearchQueryBox from '@/components/FilterPage/SearchQueryBox';
+import Slider from '@/components/Slider';
 import Testimonial from '@/components/Testimonial/Testimonal';
 import Image from 'next/image';
 
@@ -25,25 +26,7 @@ const FilterPage = () => {
                             Explore thousands of scholarships across the world
                         </h1>
                     </div>
-                    <div className="relative">
-                        <div className="relative">
-                            <input
-                                className="custom-shadow rounded-[10px] py-5 pl-[52px] outline-none text-base text-mainTextColor pr-[520px]"
-                                placeholder="Type here"
-                            />
-                            <Image
-                                height={20}
-                                width={20}
-                                alt="search"
-                                className="absolute top-[21px] left-6"
-                                src="/images/Scholarships/search.svg"
-                                priority
-                            />
-                        </div>
-                        <button className="py-[11px] px-[39px] absolute right-3 top-[11px] bg-blueColor rounded-[5px] text-white text-sm">
-                            Search
-                        </button>
-                    </div>
+                    <SearchQueryBox />
                 </div>
                 <Image
                     height={193}

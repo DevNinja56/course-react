@@ -9,7 +9,6 @@ export interface getAllCourseTypes {
         page: number;
         limit: number;
         totalPage: number;
-        nextPage: number | null;
     };
     error: string | null;
     isLoading: boolean;
@@ -19,10 +18,9 @@ const initialState: getAllCourseTypes = {
     data: [],
     paginatorInfo: {
         count: 0,
-        page: 0,
-        limit: 0,
-        totalPage: 0,
-        nextPage: null
+        page: 1,
+        limit: 20,
+        totalPage: 1
     },
     error: null,
     isLoading: false

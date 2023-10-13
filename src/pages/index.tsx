@@ -1,7 +1,7 @@
 import Card from '@/components/Home/Card';
 import EventCard from '@/components/Home/EventCard';
 import SearchBox from '@/components/Home/SearchBox';
-import Slider from '@/components/Slider/Slider';
+import Slider from '@/components/Slider';
 import Testimonial from '@/components/Testimonial/Testimonal';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -111,7 +111,7 @@ const Home = () => {
                         />
                         <Card
                             img="/images/Home/download (32).svg"
-                            title="Devolopment"
+                            title="Development"
                         />
                         <Card
                             img="/images/Home/download (36).svg"
@@ -131,6 +131,7 @@ const Home = () => {
                 <h1 className="text-textLightBlackColor text-[48px] font-extrabold mb-5 text-center">
                     Scholarships you may be interested in
                 </h1>
+                {/* <Slider /> */}
                 <Slider />
             </div>
             <div className="w-full p-10 pb-32 relative bg-white">

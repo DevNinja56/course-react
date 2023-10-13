@@ -1,5 +1,5 @@
 import CourseModal from '@/components/Modal/CourseModal';
-import Slider from '@/components/Slider/Slider';
+import Slider from '@/components/Slider';
 import Testimonial from '@/components/Testimonial/Testimonal';
 import Image from 'next/image';
 import React, { useState } from 'react';
