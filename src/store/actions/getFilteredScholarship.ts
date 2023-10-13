@@ -4,8 +4,8 @@ import { RootState } from '@/store/index';
 import http from '@/utils/axios';
 import { formateWithQuery } from '@/utils/queryFormate';
 
-export const fetchPaginatedCourses = createAsyncThunk(
-    API_ENDPOINTS.COURSE_SEARCH,
+export const fetchPaginatedScholarship = createAsyncThunk(
+    API_ENDPOINTS.SCHOLARSHIP_SEARCH,
     async (nextPageParam: number, { getState }) => {
         const state = getState() as RootState;
         const query = formateWithQuery(state.filterQuery.query);
@@ -13,7 +13,7 @@ export const fetchPaginatedCourses = createAsyncThunk(
         try {
             return http
                 .post(
-                    `${API_ENDPOINTS.COURSE_SEARCH}`,
+                    `${API_ENDPOINTS.SCHOLARSHIP_SEARCH}`,
                     {
                         pipeline: Object.values(query)
                     },

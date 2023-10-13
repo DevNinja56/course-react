@@ -9,6 +9,7 @@ import { getCookie } from '@/utils/cookies';
 import { useRouter } from 'next/router';
 import { ROUTES } from '@/config/constant';
 import ModalWraper from '@/Modal';
+import NextNProgress from 'nextjs-progressbar';
 
 export interface propsType {
     children: React.ReactElement;
@@ -43,7 +44,7 @@ const MainLayout = ({
         }
 
         // If the route requires authentication and the user is not authenticated, refetch user data
-        if (token && !isAuthenticated) {
+        if (token && !isAuthenticated && !isLoading) {
             refetchUser();
         }
     }, [auth, token, isAuthenticated]);
@@ -67,6 +68,7 @@ const MainLayout = ({
             )}
             <Toaster position="bottom-right" reverseOrder={false} />
             <ModalWraper />
+            <NextNProgress color="#435FB5" />
         </>
     );
 };
