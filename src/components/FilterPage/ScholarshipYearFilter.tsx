@@ -1,5 +1,5 @@
 import React from 'react';
-import FilterCheckBOx from './FilterCheckBOx';
+import { FilterCheckBox } from './FilterCheckBOx';
 import { scholarshipYears } from './data';
 
 const ScholarshipYearFilter = () => {
@@ -12,7 +12,7 @@ const ScholarshipYearFilter = () => {
             </div>
             <div className="flex flex-col gap-y-1 max-h-[360px] overflow-y-auto">
                 {scholarshipYears?.map((year, i) => (
-                    <FilterCheckBOx
+                    <FilterCheckBox
                         key={'country--list--' + i}
                         id={year.id}
                         text={year.name}

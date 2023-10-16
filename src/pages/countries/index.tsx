@@ -1,10 +1,14 @@
 import CounselingWork from '@/components/CounselingWork/CounselingWork';
 import Card from '@/components/Countries/Card';
 import Testimonial from '@/components/Testimonial/Testimonal';
+import { useGetCountriesQuery } from '@/store/slices/allRequests';
 import Image from 'next/image';
 import React from 'react';
+import 'flag-icons/css/flag-icons.min.css';
+import LoaderSpinner from '@/components/LoaderSpinner';
 
 const Countries = () => {
+    const { data, isLoading } = useGetCountriesQuery();
     return (
         <>
             <div className="w-full flex items-center justify-center h-[270px] mt-[100px] mb-16 relative">
@@ -39,175 +43,18 @@ const Countries = () => {
                         <h1 className="font-bold text-mainTextColor text-xl md:text-[29px]">
                             Click on one to get more information
                         </h1>
-                        <div className="flex items-center gap-x-3 md:min-w-[218px] lg:w-auto">
-                            <p className="text-grayColor hidden md:block">
-                                Sort by:
-                            </p>
-                            <button className="py-[5px] px-[16px] md:py-2 md:px-[44px] gap-x-[6px] rounded-[5px] border-2 border-scholarshipBorderColor text-darkGrayColor flex items-center">
-                                A-Z{' '}
-                                <Image
-                                    height={20}
-                                    width={20}
-                                    alt="down-arrow"
-                                    src="/images/Countries/chevron-down.svg"
-                                    priority
-                                />
-                            </button>
-                        </div>
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-[24px] px-0 md:px-7 lg:px-0">
-                        <Card
-                            countryName="Australia"
-                            img="/images/Countries/Country 1.svg"
-                        />
-                        <Card
-                            countryName="Austria"
-                            img="/images/Countries/Country 2.svg"
-                        />
-                        <Card
-                            countryName="Azerbaijan"
-                            img="/images/Countries/Country 3.svg"
-                        />
-                        <Card
-                            countryName="Belgium"
-                            img="/images/Countries/Country 4.svg"
-                        />
-                        <Card
-                            countryName="France"
-                            img="/images/Countries/Country 5.svg"
-                        />
-                        <Card
-                            countryName="China"
-                            img="/images/Countries/Country 6.svg"
-                        />
-                        <Card
-                            countryName="Canada"
-                            img="/images/Countries/Country 7.svg"
-                        />
-                        <Card
-                            countryName="Brazil"
-                            img="/images/Countries/Country 8.svg"
-                        />
-                        <Card
-                            countryName="Australia"
-                            img="/images/Countries/Country 1.svg"
-                        />
-                        <Card
-                            countryName="Austria"
-                            img="/images/Countries/Country 2.svg"
-                        />
-                        <Card
-                            countryName="Azerbaijan"
-                            img="/images/Countries/Country 3.svg"
-                        />
-                        <Card
-                            countryName="Belgium"
-                            img="/images/Countries/Country 4.svg"
-                        />
-                        <Card
-                            countryName="France"
-                            img="/images/Countries/Country 5.svg"
-                        />
-                        <Card
-                            countryName="China"
-                            img="/images/Countries/Country 6.svg"
-                        />
-                        <Card
-                            countryName="Canada"
-                            img="/images/Countries/Country 7.svg"
-                        />
-                        <Card
-                            countryName="Brazil"
-                            img="/images/Countries/Country 8.svg"
-                        />
-                        <Card
-                            countryName="Australia"
-                            img="/images/Countries/Country 1.svg"
-                        />
-                        <Card
-                            countryName="Austria"
-                            img="/images/Countries/Country 2.svg"
-                        />
-                        <Card
-                            countryName="Azerbaijan"
-                            img="/images/Countries/Country 3.svg"
-                        />
-                        <Card
-                            countryName="Belgium"
-                            img="/images/Countries/Country 4.svg"
-                        />
-                        <Card
-                            countryName="France"
-                            img="/images/Countries/Country 5.svg"
-                        />
-                        <Card
-                            countryName="China"
-                            img="/images/Countries/Country 6.svg"
-                        />
-                        <Card
-                            countryName="Canada"
-                            img="/images/Countries/Country 7.svg"
-                        />
-                        <Card
-                            countryName="Brazil"
-                            img="/images/Countries/Country 8.svg"
-                        />
-                        <Card
-                            countryName="Australia"
-                            img="/images/Countries/Country 1.svg"
-                        />
-                        <Card
-                            countryName="Austria"
-                            img="/images/Countries/Country 2.svg"
-                        />
-                        <Card
-                            countryName="Azerbaijan"
-                            img="/images/Countries/Country 3.svg"
-                        />
-                        <Card
-                            countryName="Belgium"
-                            img="/images/Countries/Country 4.svg"
-                        />
-                        <Card
-                            countryName="France"
-                            img="/images/Countries/Country 5.svg"
-                        />
-                        <Card
-                            countryName="China"
-                            img="/images/Countries/Country 6.svg"
-                        />
-                        <Card
-                            countryName="Canada"
-                            img="/images/Countries/Country 7.svg"
-                        />
-                        <Card
-                            countryName="Brazil"
-                            img="/images/Countries/Country 8.svg"
-                        />
-                        <Card
-                            countryName="Australia"
-                            img="/images/Countries/Country 1.svg"
-                        />
-                        <Card
-                            countryName="Austria"
-                            img="/images/Countries/Country 2.svg"
-                        />
-                        <Card
-                            countryName="Azerbaijan"
-                            img="/images/Countries/Country 3.svg"
-                        />
-                        <Card
-                            countryName="Belgium"
-                            img="/images/Countries/Country 4.svg"
-                        />
-                        <Card
-                            countryName="France"
-                            img="/images/Countries/Country 5.svg"
-                        />
-                        <Card
-                            countryName="China"
-                            img="/images/Countries/Country 6.svg"
-                        />
+                        {isLoading ? (
+                            <LoaderSpinner />
+                        ) : (
+                            data?.map((country) => (
+                                <Card
+                                    key={country.id + '--CountryList'}
+                                    country={country}
+                                />
+                            ))
+                        )}
                     </div>
                 </div>
             </div>

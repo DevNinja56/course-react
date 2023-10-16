@@ -8,8 +8,10 @@ const SearchQueryBox = () => {
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        addQuery({ searchFilter: [value] });
-        setValue('');
+        if (value) {
+            addQuery({ searchFilter: [value] });
+            setValue('');
+        }
     };
     return (
         <form onSubmit={handleSubmit} className="relative">

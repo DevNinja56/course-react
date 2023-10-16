@@ -32,6 +32,7 @@ export type signUpForm = {
 
 export type scholarshipType = {
     name: string;
+    image: string;
     description: string;
     type: string;
     intakeYear: number;
@@ -71,6 +72,7 @@ export type degreeType = {
 
 export type disciplineType = {
     name: string;
+    image: string;
     undergraduate: degreeType[];
     postgraduate: degreeType[];
     research: degreeType[];

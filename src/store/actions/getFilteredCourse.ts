@@ -2,13 +2,13 @@ import { API_ENDPOINTS } from '@/config/Api_EndPoints';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { RootState } from '@/store/index';
 import http from '@/utils/axios';
-import { formateWithQuery } from '@/utils/queryFormate';
+import { formateCourseQuery } from '@/utils/queryFormate';
 
 export const fetchPaginatedCourses = createAsyncThunk(
     API_ENDPOINTS.COURSE_SEARCH,
     async (nextPageParam: number, { getState }) => {
         const state = getState() as RootState;
-        const query = formateWithQuery(state.filterQuery.query);
+        const query = formateCourseQuery(state.filterQuery.query);
 
         try {
             return http

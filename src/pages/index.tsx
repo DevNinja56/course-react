@@ -131,7 +131,6 @@ const Home = () => {
                 <h1 className="text-textLightBlackColor text-[48px] font-extrabold mb-5 text-center">
                     Scholarships you may be interested in
                 </h1>
-                {/* <Slider /> */}
                 <Slider />
             </div>
             <div className="w-full p-10 pb-32 relative bg-white">

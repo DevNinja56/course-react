@@ -1,13 +1,17 @@
+import { scholarshipType } from '@/types';
 import Link from 'next/link';
 import React from 'react';
 
-const Card = () => {
+interface propsType {
+    data: scholarshipType;
+}
+
+const Card: React.FC<propsType> = ({ data }: propsType) => {
     return (
         <Link href="/courseDetail">
             <div className="border-2 border-scholarshipBorderColor rounded-[10px] px-5 py-4 flex flex-col gap-y-5 w-[100%] group cursor-pointer transition-all duration-300 onHoverShadow">
                 <h1 className="font-bold text-lg text-textLightBlackColor">
-                    10% Diploma Year 2<br />
-                    Retention Scholarship...
+                    {data.name}
                 </h1>
                 <div>
                     <div className="py-3 gap-x-2 flex items-center w-full border-b border-scholarshipBorderColor">
@@ -25,7 +29,9 @@ const Card = () => {
                                 className="fill-[#626262] group-hover:fill-blueColor transition-all duration-300"
                             />
                         </svg>
-                        <p className="text-sm text-darkGrayColor">UK</p>
+                        <p className="text-sm text-darkGrayColor">
+                            {data.country?.name ?? 'No Country'}
+                        </p>
                     </div>
                     <div className="py-3 gap-x-2 flex items-center w-full border-b border-scholarshipBorderColor">
                         <svg
@@ -138,7 +144,7 @@ const Card = () => {
                             />
                         </svg>
                         <p className="text-sm text-darkGrayColor w-full">
-                            Teesside University is offering...
+                            {data.institute.name ?? 'No institute'}
                         </p>
                     </div>
                 </div>

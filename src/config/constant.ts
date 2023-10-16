@@ -6,5 +6,9 @@ export const ROUTES = {
     APPLY: '/apply',
     COURSE: '/course',
     FILTER_COURSE: '/filter/course',
-    FILTER_SCHOLARSHIP: '/filter/scholarship'
+    FILTER_SCHOLARSHIP: '/filter/scholarship',
+    PROFILE: '/profile',
+    COUNTRY: '/countries',
+    UNIVERSITY: '/universities',
+    FIELDS: '/fields'
 };

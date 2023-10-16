@@ -40,9 +40,9 @@ const SortBy = () => {
                     <FiChevronDown className="absolute text-lg right-3 top-[50%] translate-y-[-50%] " />
                 </button>
                 <div className="absolute top-12 left-0 w-full py-4 custom-shadow rounded-[10px] flex-col bg-white hidden group-hover:flex z-20">
-                    {state.map(({ name, value, Left, Right }) => (
+                    {state.map(({ name, value, Left, Right }, index) => (
                         <div
-                            key={name + 'sortBy'}
+                            key={name + '--sortBy--' + index}
                             className="flex items-center gap-x-1 hover:bg-profileBgColor p-3 text-grayColor hover:text-blueColor cursor-pointer"
                             onClick={() => {
                                 addQuery({ sortBy: [value] });

@@ -1,13 +1,13 @@
-import { useSearchedCourses } from '@/hooks/filterCourses';
 import React from 'react';
 import { BiChevronLeft, BiChevronRight } from 'react-icons/bi';
 
-const PaginationBox = () => {
-    const {
-        paginatorInfo: { totalPage, page },
-        fetchSearchedCoursesRequest: refetch
-    } = useSearchedCourses();
+interface propsTypes {
+    totalPage: number;
+    page: number;
+    refetch: (arg0: number) => void;
+}
 
+const PaginationBox: React.FC<propsTypes> = ({ totalPage, page, refetch }) => {
     return (
         <>
             {totalPage > 1 && (

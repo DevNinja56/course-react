@@ -1,8 +1,14 @@
+import { ROUTES } from '@/config/constant';
+import { useGetCountriesQuery } from '@/store/slices/allRequests';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
+import { useFilterQuery } from '@/hooks/filterQuery';
+import * as _ from 'lodash';
 
 const Footer = () => {
+    const { data } = useGetCountriesQuery();
+    const { addQuery } = useFilterQuery();
     return (
         <div className="bg-footerBgColor w-full flex justify-center flex-col">
             <div className="mt-[-70px] lg:mt-[-110px] mb-10 lg:mb-20 2xl:mb-[150px] transition-all duration-300 mx-auto object-cover px-5 md:px-[50px] lg:px-0 relative">
@@ -73,15 +79,29 @@ const Footer = () => {
                             STUDY ABROAD
                         </h1>
                         <ul className="text-lightGrayColor">
-                            <li className="pt-[9px] pb-[10px]">Australia</li>
+                            {_.shuffle(data)
+                                ?.slice(0, 6)
+                                .map((country) => (
+                                    <li
+                                        key={
+                                            'footer_country__list--' +
+                                            country.name
+                                        }
+                                        onClick={() =>
+                                            addQuery({
+                                                country: [country.name]
+                                            })
+                                        }
+                                        className="pt-[9px] pb-[10px]"
+                                    >
+                                        <Link href={ROUTES.FILTER_COURSE}>
+                                            {country.name}
+                                        </Link>
+                                    </li>
+                                ))}
                             <li className="pt-[9px] pb-[10px]">
-                                United Kingdom
+                                <Link href={ROUTES.COUNTRY}>View all</Link>
                             </li>
-                            <li className="pt-[9px] pb-[10px]">USA</li>
-                            <li className="pt-[9px] pb-[10px]">New Zealand</li>
-                            <li className="pt-[9px] pb-[10px]">Ireland</li>
-                            <li className="pt-[9px] pb-[10px]">Singapore</li>
-                            <li className="pt-[9px] pb-[10px]">View all</li>
                         </ul>
                     </div>
                     <div className="flex flex-col w-full md:w-auto mb-8">
@@ -96,17 +116,17 @@ const Footer = () => {
                             <li className="pt-[9px] pb-[10px]">
                                 Find Consultants
                             </li>
-                            <Link href="/universities">
+                            <Link href={ROUTES.UNIVERSITY}>
                                 <li className="pt-[9px] pb-[10px]">
                                     Find Institutions
                                 </li>
                             </Link>
-                            <Link href="/fields">
+                            <Link href={ROUTES.FIELDS}>
                                 <li className="pt-[9px] pb-[10px]">
                                     Find Courses
                                 </li>
                             </Link>
-                            <Link href="/countries">
+                            <Link href={ROUTES.COUNTRY}>
                                 <li className="pt-[9px] pb-[10px]">
                                     Find Country
                                 </li>

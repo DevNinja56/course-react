@@ -1,10 +1,12 @@
 import CounselingWork from '@/components/CounselingWork/CounselingWork';
 import Card from '@/components/Fields/Card';
 import Testimonial from '@/components/Testimonial/Testimonal';
+import { useGetDisciplineQuery } from '@/store/slices/allRequests';
 import Image from 'next/image';
 import React from 'react';
 
 const Fields = () => {
+    const { data } = useGetDisciplineQuery();
     return (
         <>
             <div className="w-full flex items-center justify-between h-[214px] mt-[90px] bg-profileBgColor mb-16">
@@ -52,51 +54,12 @@ const Fields = () => {
             <div className="w-full pb-4 md:pb-20">
                 <div className="max-w-[1150px] 2xl:max-w-[2350px] mx-auto px-[80px] lg:px-2 2xl:px-8 transition-all duration-300 flex justify-between">
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-[30px] w-full place-items-center">
-                        <Card
-                            title="Architecture"
-                            img="/images/Fields/MainImg1.svg"
-                        />
-                        <Card
-                            title="Arts & Humanities"
-                            img="/images/Fields/main 2.svg"
-                        />
-                        <Card
-                            title="Business & Management"
-                            img="/images/Fields/main 3.svg"
-                        />
-                        <Card
-                            title="Computer & IT"
-                            img="/images/Fields/main 4.svg"
-                        />
-                        <Card
-                            title="Education"
-                            img="/images/Fields/main 5.svg"
-                        />
-                        <Card
-                            title="Engineering & Technology"
-                            img="/images/Fields/main 6.svg"
-                        />
-                        <Card
-                            title="Health & Medicine"
-                            img="/images/Fields/main 7.svg"
-                        />
-                        <Card title="Law" img="/images/Fields/main 8.svg" />
-                        <Card
-                            title="Architecture"
-                            img="/images/Fields/MainImg1.svg"
-                        />
-                        <Card
-                            title="Arts & Humanities"
-                            img="/images/Fields/main 2.svg"
-                        />
-                        <Card
-                            title="Business & Management"
-                            img="/images/Fields/main 3.svg"
-                        />
-                        <Card
-                            title="Computer & IT"
-                            img="/images/Fields/main 4.svg"
-                        />
+                        {data?.map((discipline) => (
+                            <Card
+                                key={'discipline--' + discipline.id}
+                                discipline={discipline}
+                            />
+                        ))}
                     </div>
                 </div>
             </div>

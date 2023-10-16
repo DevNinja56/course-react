@@ -72,4 +72,6 @@ const Profile = () => {
     );
 };
 
+Profile.layout = { auth: true };
+
 export default Profile;

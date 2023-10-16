@@ -11,7 +11,7 @@ const RightCardsBox = () => {
         data,
         fetchSearchedCoursesRequest: fetchCourses,
         isLoading,
-        paginatorInfo: { count }
+        paginatorInfo: { count, totalPage, page }
     } = useSearchedCourses();
     const { query } = useFilterQuery();
 
@@ -41,7 +41,11 @@ const RightCardsBox = () => {
                     ))
                 )}
             </div>
-            <PaginationBox />
+            <PaginationBox
+                totalPage={totalPage}
+                page={page}
+                refetch={fetchCourses}
+            />
         </div>
     );
 };

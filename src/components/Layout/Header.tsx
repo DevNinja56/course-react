@@ -179,30 +179,26 @@ const Header = () => {
                                 <ProfileDropDown showDropDown={showDropDown} />
                             </div>
                         ) : (
-                            <>
-                                <Link href={ROUTES.SIGN_IN}>
-                                    <button className="py-2 lg:py-[13px] px-5 lg:px-[34px] gap-x-[6px] md:flex items-center rounded-[5px] bg-blueColor hover:bg-blue-600 text-white text-base font-medium hidden">
-                                        <Image
-                                            width={20}
-                                            height={20}
-                                            alt="user-icon"
-                                            src="/images/Profile.svg"
-                                            priority
-                                        />
-                                        Login
-                                    </button>
-                                </Link>
-                                <Link href={ROUTES.SIGN_IN}>
+                            <Link href={ROUTES.SIGN_IN}>
+                                <button className="py-2 lg:py-[13px] px-5 lg:px-[34px] gap-x-[6px] md:flex items-center rounded-[5px] bg-blueColor hover:bg-blue-600 text-white text-base font-medium hidden">
                                     <Image
-                                        height={36}
-                                        width={36}
-                                        alt=""
-                                        src="/images/User Circle.svg"
-                                        className="block md:hidden"
+                                        width={20}
+                                        height={20}
+                                        alt="user-icon"
+                                        src="/images/Profile.svg"
                                         priority
                                     />
-                                </Link>
-                            </>
+                                    Login
+                                </button>
+                                <Image
+                                    height={36}
+                                    width={36}
+                                    alt=""
+                                    src="/images/User Circle.svg"
+                                    className="block md:hidden"
+                                    priority
+                                />
+                            </Link>
                         )}
                         <Image
                             width={46}

@@ -1,9 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { stateQueryApi } from './slices/allRequests';
+import { stateQueryApi } from '@/store/slices/allRequests';
 import authUserInfo from '@/store/slices/auth.slice';
-import uiSlice from './slices/ui.slice';
-import courses from './slices/filtersCourse';
-import filterQuery from './slices/filterQuery';
+import uiSlice from '@/store/slices/ui.slice';
+import courses from '@/store/slices/filtersCourse';
+import scholarships from '@/store/slices/filtersScholarship';
+import filterQuery from '@/store/slices/filterQuery';
 
 export const store = configureStore({
     reducer: {
@@ -11,6 +12,7 @@ export const store = configureStore({
         auth: authUserInfo,
         userInterface: uiSlice,
         courses,
+        scholarships,
         filterQuery
     },
     middleware: (getDefaultMiddleware) =>

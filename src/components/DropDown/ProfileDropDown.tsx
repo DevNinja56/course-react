@@ -1,10 +1,28 @@
+import { ROUTES } from '@/config/constant';
 import { useUserAuth } from '@/hooks/auth';
-import Image from 'next/image';
+import Link from 'next/link';
 import React from 'react';
+import { BiUser } from 'react-icons/bi';
+import { AiOutlineUnlock } from 'react-icons/ai';
+import { FiSettings } from 'react-icons/fi';
+import { IoMdBook, IoMdLogOut } from 'react-icons/io';
+import { LiaShoppingCartSolid } from 'react-icons/lia';
 
 interface DropDownProps {
     showDropDown: boolean;
 }
+
+const allDropDowns = [
+    { name: 'Profile', Icon: BiUser, to: ROUTES.PROFILE },
+    { name: 'My Courses', Icon: IoMdBook, to: ROUTES.PROFILE },
+    {
+        name: 'My Subscriptions',
+        Icon: LiaShoppingCartSolid,
+        to: ROUTES.PROFILE
+    },
+    { name: 'Setting', Icon: FiSettings, to: ROUTES.PROFILE },
+    { name: 'Change Password', Icon: AiOutlineUnlock, to: ROUTES.PROFILE }
+];
 
 const ProfileDropDown: React.FC<DropDownProps> = ({ showDropDown }) => {
     const { logoutUser } = useUserAuth();
@@ -12,79 +30,25 @@ const ProfileDropDown: React.FC<DropDownProps> = ({ showDropDown }) => {
         <>
             {showDropDown ? (
                 <div className="w-[220px] py-2 custom-shadow absolute top-[55px] right-[-8px] bg-white cursor-pointer showDropDown">
-                    <div className="w-full py-[9px] pl-[15px] hover:bg-profileBgColor text-lightGrayColor hover:text-darkTextBlueColor">
-                        <p className="flex items-center gap-x-2">
-                            <Image
-                                height={18}
-                                width={18}
-                                alt="user-icon"
-                                src="/images/user-01 (1).svg"
-                                priority
-                            />{' '}
-                            Profile
-                        </p>
-                    </div>
-                    <div className="w-full py-[9px] pl-[15px] hover:bg-profileBgColor text-lightGrayColor hover:text-darkTextBlueColor">
-                        <p className="flex items-center gap-x-2">
-                            <Image
-                                height={18}
-                                width={18}
-                                alt="course-icon"
-                                src="/images/Courses (1).svg"
-                                priority
-                            />{' '}
-                            My Courses
-                        </p>
-                    </div>
-                    <div className="w-full py-[9px] pl-[15px] hover:bg-profileBgColor text-lightGrayColor hover:text-darkTextBlueColor">
-                        <p className="flex items-center gap-x-2">
-                            <Image
-                                height={18}
-                                width={18}
-                                alt="cart-icon"
-                                src="/images/shopping-cart-01.svg"
-                                priority
-                            />{' '}
-                            My Subscriptions
-                        </p>
-                    </div>
-                    <div className="w-full py-[9px] pl-[15px] hover:bg-profileBgColor text-lightGrayColor hover:text-darkTextBlueColor">
-                        <p className="flex items-center gap-x-2">
-                            <Image
-                                height={18}
-                                width={18}
-                                alt="setting-icon"
-                                src="/images/lock-unlocked-01.svg"
-                                priority
-                            />{' '}
-                            Setting
-                        </p>
-                    </div>
-                    <div className="w-full py-[9px] pl-[15px] hover:bg-profileBgColor text-lightGrayColor hover:text-darkTextBlueColor mb-2">
-                        <p className="flex items-center gap-x-2">
-                            <Image
-                                height={18}
-                                width={18}
-                                alt="lock-icon"
-                                src="/images/settings-01.svg"
-                                priority
-                            />{' '}
-                            Change Password
-                        </p>
-                    </div>
+                    {allDropDowns.map(({ name, Icon, to }) => (
+                        <Link
+                            key={'dropDown--' + name}
+                            href={to}
+                            className="w-full block py-[9px] pl-[15px] hover:bg-profileBgColor text-lightGrayColor hover:text-darkTextBlueColor"
+                        >
+                            <p className="flex items-center gap-x-2">
+                                <Icon className="text-xl mr-1" /> {name}
+                            </p>
+                        </Link>
+                    ))}
+
                     <hr className="w-full mb-2 border border-borderColor" />
                     <div className="w-full py-[9px] pl-[15px] hover:bg-profileBgColor text-lightGrayColor hover:text-darkTextBlueColor">
                         <p
                             className="flex items-center gap-x-2"
                             onClick={logoutUser}
                         >
-                            <Image
-                                height={18}
-                                width={18}
-                                alt="logout-icon"
-                                src="/images/log-out-04.svg"
-                                priority
-                            />{' '}
+                            <IoMdLogOut className="text-xl mr-1 text-red-600" />{' '}
                             Logout
                         </p>
                     </div>

@@ -2,7 +2,6 @@ import React from 'react';
 import FilterLeftBox from '@/components/FilterPage/FilterLeftBox';
 import RightScholarshipCardBox from '@/components/FilterPage/RightScholarshipCardBox';
 import SearchQueryBox from '@/components/FilterPage/SearchQueryBox';
-import Slider from '@/components/Slider';
 import Testimonial from '@/components/Testimonial/Testimonal';
 import Image from 'next/image';
 
@@ -53,7 +52,6 @@ const Scholarship = () => {
                 <h1 className="text-mainTextColor text-[48px] font-extrabold mb-5 text-center lg:hidden block">
                     Discover Scholarships{' '}
                 </h1>
-                <Slider />
             </div>
             <Testimonial />
         </>

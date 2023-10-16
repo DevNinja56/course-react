@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import FilterCheckBOx from './FilterCheckBOx';
+import { FilterCheckBox } from './FilterCheckBOx';
 import { useGetDisciplineQuery } from '@/store/slices/allRequests';
 import SearchBox from './SearchBox';
 
@@ -22,16 +22,18 @@ const DisciplinesFilter = () => {
             </div>
             <div className="flex flex-col gap-y-1 max-h-[360px] overflow-hidden overflow-y-auto setScrollBar">
                 {disciplineList
-                    ?.filter((country) =>
-                        country.name
+                    ?.filter((discipline) =>
+                        discipline.name
                             .toLowerCase()
                             .includes(search.toLowerCase())
                     )
-                    .map((discipline, i) => (
-                        <FilterCheckBOx
-                            key={'country--list--' + i}
-                            id={discipline.id}
-                            text={discipline.name}
+                    .map(({ name, id }) => (
+                        <FilterCheckBox
+                            key={'discipline--list--' + id}
+                            id={name}
+                            text={name}
+                            name={'discipline'}
+                            value={name}
                         />
                     ))}
             </div>

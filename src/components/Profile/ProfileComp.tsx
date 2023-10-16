@@ -1,7 +1,9 @@
+import { useUserAuth } from '@/hooks/auth';
 import Image from 'next/image';
 import React, { useState } from 'react';
 
 const ProfileComp = () => {
+    const { user } = useUserAuth();
     const [showProfileInfo, setShowProfileInfo] = useState<boolean>(true);
     const [showStudyIntrest, setShowStudyIntrest] = useState<boolean>(false);
     const [showBudgetPreference, setShowBudgetPreference] =
@@ -133,7 +135,7 @@ const ProfileComp = () => {
                             onClick={onShowAcademicBackground}
                             height={20}
                             width={20}
-                            alt="img-aroow-down"
+                            alt="img-arrow-down"
                             src="/images/chevron-down.svg"
                             className={`lg:hidden ${
                                 showAcademicBackground ? 'rotate-[-180deg]' : ''
@@ -170,18 +172,16 @@ const ProfileComp = () => {
                 <div className="rounded-[10px] border border-borderColor px-11 pt-11 pb-4 flex flex-col gap-y-6">
                     <div className="border-b border-personalInfoBorderColor pb-5 flex flex-col gap-y-2 text-mainTextColor">
                         <p>Name</p>
-                        <h1 className="text-xl font-semibold">Daniyal Samim</h1>
+                        <h1 className="text-xl font-semibold">{user.name}</h1>
                     </div>
                     <div className="border-b border-personalInfoBorderColor pb-5 flex flex-col gap-y-2 text-mainTextColor">
                         <p>Email</p>
-                        <h1 className="text-xl font-semibold">
-                            daniyalsamim@gmail.com
-                        </h1>
+                        <h1 className="text-xl font-semibold">{user.email}</h1>
                     </div>
                     <div className="border-b border-personalInfoBorderColor pb-5 flex flex-col gap-y-2 text-mainTextColor">
                         <p>Phone</p>
                         <h1 className="text-xl font-semibold">
-                            +92 321 5251534
+                            {user.phone_number}
                         </h1>
                     </div>
                     <div className="pb-5 flex flex-col gap-y-2 text-mainTextColor">
