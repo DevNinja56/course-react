@@ -1,6 +1,6 @@
 import React from 'react';
-import FilterLeftBox from '@/components/FilterPage/FilterLeftBox';
-import RightScholarshipCardBox from '@/components/FilterPage/RightScholarshipCardBox';
+import ScholarshipFilter from '@/components/FilterPage/Scholarship/FilterLeftBox';
+import RightScholarshipCardBox from '@/components/FilterPage/Scholarship/RightScholarshipCardBox';
 import SearchQueryBox from '@/components/FilterPage/SearchQueryBox';
 import Testimonial from '@/components/Testimonial/Testimonal';
 import Image from 'next/image';
@@ -38,7 +38,7 @@ const Scholarship = () => {
             </div>
             <div className="w-full pb-28">
                 <div className="max-w-[1200px] 2xl:max-w-[2400px] mx-auto px-5 md:px-[50px] lg:px-2 2xl:px-8 transition-all duration-300 flex justify-between">
-                    <FilterLeftBox />
+                    <ScholarshipFilter />
                     <RightScholarshipCardBox />
                 </div>
             </div>

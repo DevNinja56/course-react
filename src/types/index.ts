@@ -124,7 +124,7 @@ export type courseType = {
     startDate: string;
     endDate: string;
     imgUrl: string;
-    instituteId: {
+    institute: {
         _id: string;
         name: string;
         logo: string;
@@ -156,10 +156,4 @@ export type courseType = {
         code: string;
         logo: string;
     };
-};
-
-export type degreeLevelType = {
-    name: string;
-    degrees: degreeType[];
-    id: string;
 };

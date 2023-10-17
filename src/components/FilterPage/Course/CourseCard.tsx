@@ -3,7 +3,7 @@ import { courseType } from '@/types';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
-import FavoriteButton from '../Button/FavoriteButton';
+import FavoriteButton from '../../Button/FavoriteButton';
 
 interface CardProps {
     course: courseType;
@@ -31,18 +31,24 @@ const CourseCard = ({ course }: CardProps) => {
                     />
                 </div>
                 <div>
-                    <h1 className="font-bold text-[17px] text-textLightBlackColor mb-4 group-hover:text-blueColor h-[46px]">
+                    <h1 className="font-bold text-[17px] text-textLightBlackColor mb-4 group-hover:text-blueColor h-[46px] line-clamp-2 ">
                         {course.name}
                     </h1>
                     <div className="flex flex-col gap-y-3 mb-5">
                         <p className="text-sm text-darkGrayColor">
-                            {`${course.instituteId?.name} / ${course.degree?.name}`}
+                            {`${course.institute?.name} / ${course.degree?.name}`}
                         </p>
                         <p className="text-sm text-darkGrayColor">
-                            Study in: {course?.country.name ?? ''}
+                            <span className="font-bold text-mainTextColor group-hover:text-blueColor">
+                                Study in:{' '}
+                            </span>
+                            {course?.country.name ?? ''}
                         </p>
                         <p className="text-sm text-darkGrayColor">
-                            Course starts {course.startDate}
+                            <span className="font-bold text-mainTextColor group-hover:text-blueColor">
+                                Course starts:{' '}
+                            </span>
+                            {course.startDate}
                         </p>
                         <p className="font-medium text-sm text-darkGrayColor">
                             <span className="font-bold text-mainTextColor group-hover:text-blueColor">

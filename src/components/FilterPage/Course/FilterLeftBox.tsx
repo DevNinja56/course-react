@@ -1,15 +1,10 @@
 import React from 'react';
 import DegreeLevelFilter from './DegreeLevelFilter';
-import CountriesFilter from './CountriesFilter';
+import CountriesFilter from '../CountriesFilter';
 import DisciplinesFilter from './DisciplinesFilter';
-import ScholarshipTypeFilter from './ScholarshipTypeFilter';
-import ScholarshipMonthFilter from './ScholarshipMonthFilter';
-import ScholarshipYearFilter from './ScholarshipYearFilter';
 import { useFilterQuery } from '@/hooks/filterQuery';
 import { useSearchedCourses } from '@/hooks/filterCourses';
-import { FilteredButton } from './FilteredButton';
-import { useRouter } from 'next/router';
-import { ROUTES } from '@/config/constant';
+import { FilteredButton } from '../FilteredButton';
 
 export const FilterRow = () => (
     <div className="px-4">
@@ -17,10 +12,9 @@ export const FilterRow = () => (
     </div>
 );
 
-const FilterLeftBox = () => {
+const CourseFilter = () => {
     const { clearALlQuery, query } = useFilterQuery();
     const { fetchSearchedCoursesRequest: refetch } = useSearchedCourses();
-    const { pathname } = useRouter();
 
     const handleClearQuery = () => {
         clearALlQuery();
@@ -63,22 +57,12 @@ const FilterLeftBox = () => {
             <div className="flex flex-col gap-y-6">
                 <CountriesFilter />
                 <FilterRow />
-                <DisciplinesFilter />
-                <FilterRow />
                 <DegreeLevelFilter />
                 <FilterRow />
-                {pathname !== ROUTES.FILTER_SCHOLARSHIP && (
-                    <>
-                        <ScholarshipTypeFilter />
-                        <FilterRow />
-                    </>
-                )}
-                <ScholarshipMonthFilter />
-                <FilterRow />
-                <ScholarshipYearFilter />
+                <DisciplinesFilter />
             </div>
         </div>
     );
 };
 
-export default FilterLeftBox;
+export default CourseFilter;

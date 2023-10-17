@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
-import SortBy from './SortBy';
-import Card from '../Scholarship/Card';
+import SortBy from '../SortBy';
+import Card from '../../Scholarship/Card';
 import { useSearchedScholarship } from '@/hooks/filterScholarship';
 import { useFilterQuery } from '@/hooks/filterQuery';
-import LoaderSpinner from '../LoaderSpinner';
-import PaginationBox from '../Pagination';
+import LoaderSpinner from '../../LoaderSpinner';
+import PaginationBox from '../../Pagination';
 
 const RightScholarshipCardBox = () => {
     const {

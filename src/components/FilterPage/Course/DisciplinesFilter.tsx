@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { FilterCheckBox } from './FilterCheckBOx';
+import { FilterCheckBox } from '../FilterCheckBOx';
 import { useGetDisciplineQuery } from '@/store/slices/allRequests';
-import SearchBox from './SearchBox';
+import SearchBox from '../SearchBox';
 
 const DisciplinesFilter = () => {
     const { data: disciplineList } = useGetDisciplineQuery();

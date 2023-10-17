@@ -248,6 +248,6 @@ const Home = () => {
     );
 };
 
-Home.layout = { auth: true };
+Home.layout = { auth: false };
 
 export default Home;

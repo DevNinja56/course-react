@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
 import { useSearchedCourses } from '@/hooks/filterCourses';
 import CourseCard from './CourseCard';
-import PaginationBox from '../Pagination';
-import LoaderSpinner from '../LoaderSpinner';
+import PaginationBox from '../../Pagination';
+import LoaderSpinner from '../../LoaderSpinner';
 import { useFilterQuery } from '@/hooks/filterQuery';
-import SortBy from './SortBy';
+import SortBy from '../SortBy';
 
 const RightCardsBox = () => {
     const {

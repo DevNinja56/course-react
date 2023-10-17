@@ -1,5 +1,5 @@
-import FilterLeftBox from '@/components/FilterPage/FilterLeftBox';
-import RightCardsBox from '@/components/FilterPage/RightCardsBox';
+import CourseFilter from '@/components/FilterPage/Course/FilterLeftBox';
+import RightCardsBox from '@/components/FilterPage/Course/RightCardsBox';
 import SearchQueryBox from '@/components/FilterPage/SearchQueryBox';
 import Slider from '@/components/Slider';
 import Testimonial from '@/components/Testimonial/Testimonal';
@@ -39,7 +39,7 @@ const FilterPage = () => {
             </div>
             <div className="w-full pb-28">
                 <div className="max-w-[1200px] 2xl:max-w-[2400px] mx-auto px-2 2xl:px-8 transition-all duration-300 flex justify-between">
-                    <FilterLeftBox />
+                    <CourseFilter />
                     <RightCardsBox />
                 </div>
             </div>
