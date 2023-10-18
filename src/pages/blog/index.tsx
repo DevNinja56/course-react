@@ -1,5 +1,5 @@
 import Card from '@/components/Blog/Card';
-import Testimonial from '@/components/Testimonial/Testimonal';
+import Testimonial from '@/components/Testimonial';
 import Image from 'next/image';
 import React from 'react';
 

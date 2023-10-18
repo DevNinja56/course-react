@@ -2,7 +2,7 @@ import Card from '@/components/Home/Card';
 import EventCard from '@/components/Home/EventCard';
 import SearchBox from '@/components/Home/SearchBox';
 import Slider from '@/components/Slider';
-import Testimonial from '@/components/Testimonial/Testimonal';
+import Testimonial from '@/components/Testimonial';
 import Image from 'next/image';
 import Link from 'next/link';
 

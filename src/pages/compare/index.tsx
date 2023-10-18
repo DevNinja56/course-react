@@ -1,16 +1,16 @@
-import CourseModal from '@/components/Modal/CourseModal';
+import React from 'react';
 import Slider from '@/components/Slider';
-import Testimonial from '@/components/Testimonial/Testimonal';
+import Testimonial from '@/components/Testimonial';
 import Image from 'next/image';
-import React, { useState } from 'react';
+import { useUi } from '@/hooks/user-interface';
+import { modalType } from '@/store/slices/ui.slice';
+import { useCompare } from '@/hooks/compare';
 
 const Compare = () => {
-    const [showModal, setShowModal] = useState(false);
+    const { updateModal } = useUi();
+    const { first, second, third } = useCompare();
 
-    const onShow = () => {
-        setShowModal(!showModal);
-    };
-
+    console.log({ first, second, third });
     return (
         <>
             <div className="w-full flex items-center justify-center mt-[100px] bg-profileBgColor py-20 relative mb-16">
@@ -31,25 +31,40 @@ const Compare = () => {
                             Compare Your Study Options
                         </h1>
                         <p className="text-lg text-aboutUsTextColor">
-                            You can compare upto 3 Univeristies
+                            You can compare upto 3 Universities
                         </p>
                     </div>
                     <div className="py-4 px-8 bg-white custom-shadow rounded-[10px]">
                         <div className="flex items-center gap-x-5">
                             <button
-                                onClick={onShow}
+                                onClick={() =>
+                                    updateModal({
+                                        type: modalType.compare_university,
+                                        state: { index: 'first' }
+                                    })
+                                }
                                 className="py-[14px] px-[73px] rounded-[5px] bg-blueColor text-white font-semibold showModalBtn"
                             >
                                 Select Course1
                             </button>
                             <button
-                                onClick={onShow}
+                                onClick={() =>
+                                    updateModal({
+                                        type: modalType.compare_university,
+                                        state: { index: 'second' }
+                                    })
+                                }
                                 className="py-[14px] px-[73px] rounded-[5px] bg-blueColor text-white font-semibold showModalBtn"
                             >
                                 Select Course2
                             </button>
                             <button
-                                onClick={onShow}
+                                onClick={() =>
+                                    updateModal({
+                                        type: modalType.compare_university,
+                                        state: { index: 'third' }
+                                    })
+                                }
                                 className="py-[14px] px-[73px] rounded-[5px] bg-blueColor text-white font-semibold showModalBtn"
                             >
                                 Select Course3
@@ -60,13 +75,12 @@ const Compare = () => {
                 <Image
                     height={193}
                     width={191}
-                    alt="compaere-round-2"
+                    alt="compare-round-2"
                     className="absolute bottom-0 right-0"
                     src="/images/Blogs/Frame 643.svg"
                     priority
                 />
             </div>
-            {showModal && <CourseModal setShowModal={setShowModal} />}
             <div className="w-full pb-32">
                 <div className="max-w-[1120px] 2xl:max-w-[2400px] mx-auto px-2 2xl:px-8 transition-all duration-300">
                     <div className="rounded-[10px] w-full custom-shadow border-2 border-profileBgColor">
@@ -116,7 +130,7 @@ const Compare = () => {
                             <div className="flex flex-col">
                                 <div className="py-5 pl-[35px] border-x border-profileBgColor bg-lightBlue">
                                     <h1 className="font-bold text-grayColor">
-                                        --
+                                        {first?.institute?.logo ?? '--'}
                                     </h1>
                                 </div>
                                 <div className="py-5 pl-[35px] bg-white border-x border-profileBgColor">

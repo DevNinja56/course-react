@@ -5,6 +5,8 @@ import DisciplinesFilter from './DisciplinesFilter';
 import { useFilterQuery } from '@/hooks/filterQuery';
 import { useSearchedCourses } from '@/hooks/filterCourses';
 import { FilteredButton } from '../FilteredButton';
+import SpecializationFilter from './SpecializationFilter';
+import InstituteFilter from './InstituteFilter';
 
 export const FilterRow = () => (
     <div className="px-4">
@@ -60,6 +62,10 @@ const CourseFilter = () => {
                 <DegreeLevelFilter />
                 <FilterRow />
                 <DisciplinesFilter />
+                <FilterRow />
+                <SpecializationFilter />
+                <FilterRow />
+                <InstituteFilter />
             </div>
         </div>
     );

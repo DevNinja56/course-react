@@ -2,7 +2,7 @@ import React from 'react';
 import ScholarshipFilter from '@/components/FilterPage/Scholarship/FilterLeftBox';
 import RightScholarshipCardBox from '@/components/FilterPage/Scholarship/RightScholarshipCardBox';
 import SearchQueryBox from '@/components/FilterPage/SearchQueryBox';
-import Testimonial from '@/components/Testimonial/Testimonal';
+import Testimonial from '@/components/Testimonial';
 import Image from 'next/image';
 
 const Scholarship = () => {

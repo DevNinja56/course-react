@@ -43,7 +43,7 @@ export const FilterCheckBox = React.forwardRef<HTMLInputElement, propsType>(
                         checked={isChecked! ?? state?.includes(id)}
                         className="h-5 w-5 rounded-[2px] border border-borderColor cursor-pointer pb-0 group-hover:border-blueColor accent-[blueColor] "
                     />
-                    <p className="text-sm text-grayColor group-hover:text-blueColor ml-2 capitalize ">
+                    <p className="text-sm flex-1 text-grayColor group-hover:text-blueColor ml-2 capitalize line-clamp-1 ">
                         {text}
                     </p>
                 </div>

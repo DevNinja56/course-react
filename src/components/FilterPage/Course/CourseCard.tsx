@@ -13,18 +13,18 @@ const CourseCard = ({ course }: CardProps) => {
     return (
         <div className="border-2 border-scholarshipBorderColor rounded-[10px] p-3 flex flex-col gap-y-5 w-[100%] group cursor-pointer hover:border-blueColor custom-shadow relative">
             <FavoriteButton
-                isActive={!!course.favoriteId[0]}
+                isActive={!!course?.favoriteId?.[0]}
                 courseId={course._id}
             />
             <Link href={ROUTES.COURSE + `/${course._id}`}>
                 <div className="relative w-full">
                     <Image
+                        width={150}
                         height={150}
-                        width={246}
                         alt="mainImg"
-                        className="w-full"
+                        className="w-full p-3 "
                         src={`${
-                            course.imgUrl ??
+                            course.logo ??
                             '/images/FilterPage/Rectangle 3634.svg'
                         }`}
                         priority

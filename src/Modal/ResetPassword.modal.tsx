@@ -3,11 +3,9 @@ import React from 'react';
 
 const ResetPassword = () => {
     const { hideModal } = useUi();
+
     return (
-        <div
-            style={{ border: '3px solid #CCCCCC' }}
-            className=" rounded-[10px] flex flex-col items-center px-16 py-[35px] bg-white modal relative"
-        >
+        <div className=" rounded-[10px] flex flex-col items-center px-16 py-[35px] bg-white modal relative border-[3px] border-[#CCCCCC] ">
             <svg
                 onClick={hideModal}
                 xmlns="http://www.w3.org/2000/svg"

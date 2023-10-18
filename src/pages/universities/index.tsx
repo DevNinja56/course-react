@@ -1,5 +1,5 @@
 import CounselingWork from '@/components/CounselingWork/CounselingWork';
-import Testimonial from '@/components/Testimonial/Testimonal';
+import Testimonial from '@/components/Testimonial';
 import UniversitiesCards from '@/components/Universities/UniversitiesCard';
 import Image from 'next/image';
 import React from 'react';

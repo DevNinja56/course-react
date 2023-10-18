@@ -1,7 +1,7 @@
 import Card from '@/components/ContactUs/Card';
 import CounselingWork from '@/components/CounselingWork/CounselingWork';
 import Map from '@/components/Map/Map';
-import Testimonial from '@/components/Testimonial/Testimonal';
+import Testimonial from '@/components/Testimonial';
 import Image from 'next/image';
 import React from 'react';
 

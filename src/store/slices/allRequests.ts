@@ -5,7 +5,9 @@ import {
     countryType,
     degreeType,
     disciplineType,
-    scholarshipType
+    instituteType,
+    scholarshipType,
+    specializationType
 } from '@/types';
 
 export const stateQueryApi = createApi({
@@ -39,6 +41,16 @@ export const stateQueryApi = createApi({
             query: () => ({ url: API_ENDPOINTS.SCHOLARSHIP }),
             transformResponse: (res: { data: scholarshipType[] }) =>
                 res.data! ?? res
+        }),
+        getSpecialization: builder.query<specializationType[], void>({
+            query: () => ({ url: API_ENDPOINTS.SPECIALIZATION }),
+            transformResponse: (res: { data: specializationType[] }) =>
+                res.data! ?? res
+        }),
+        getInstitute: builder.query<instituteType[], void>({
+            query: () => ({ url: API_ENDPOINTS.INSTITUTE }),
+            transformResponse: (res: { data: instituteType[] }) =>
+                res.data! ?? res
         })
     })
 });
@@ -47,5 +59,7 @@ export const {
     useGetCountriesQuery,
     useGetDegreesQuery,
     useGetDisciplineQuery,
-    useGetScholarshipQuery
+    useGetScholarshipQuery,
+    useGetSpecializationQuery,
+    useGetInstituteQuery
 } = stateQueryApi;

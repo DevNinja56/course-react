@@ -38,15 +38,27 @@ export const formateCourseQuery = (query: { [key: string]: any }) => {
         });
     }
 
-    if (query.scholarship) {
+    if (query.degreeType) {
         orConditions.push({
-            'scholarshipId.name': { $in: query.scholarship }
+            'degree.type': { $in: query.degreeType }
         });
     }
 
-    if (query.degreeType) {
+    if (query.discipline) {
         orConditions.push({
-            'degreeType.name': { $in: query.degreeType }
+            'discipline.name': { $in: query.discipline }
+        });
+    }
+
+    if (query.specialization) {
+        orConditions.push({
+            'specialization.name': { $in: query.specialization }
+        });
+    }
+
+    if (query.institute) {
+        orConditions.push({
+            'institute.name': { $in: query.institute }
         });
     }
 

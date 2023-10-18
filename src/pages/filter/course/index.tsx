@@ -2,7 +2,7 @@ import CourseFilter from '@/components/FilterPage/Course/FilterLeftBox';
 import RightCardsBox from '@/components/FilterPage/Course/RightCardsBox';
 import SearchQueryBox from '@/components/FilterPage/SearchQueryBox';
 import Slider from '@/components/Slider';
-import Testimonial from '@/components/Testimonial/Testimonal';
+import Testimonial from '@/components/Testimonial';
 import Image from 'next/image';
 
 const FilterPage = () => {
@@ -57,6 +57,6 @@ const FilterPage = () => {
     );
 };
 
-FilterPage.layout = { auth: true };
+FilterPage.layout = { auth: false };
 
 export default FilterPage;

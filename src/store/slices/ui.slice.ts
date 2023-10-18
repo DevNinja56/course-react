@@ -2,7 +2,8 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
 export enum modalType {
     'none',
-    'reset_password'
+    'reset_password',
+    'compare_university'
 }
 
 interface UiState {
