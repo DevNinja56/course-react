@@ -7,6 +7,8 @@ import 'swiper/css';
 import 'swiper/css/effect-coverflow';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
+import Link from 'next/link';
+import { ROUTES } from '@/config/constant';
 
 function ScholarshipSlider() {
     const data = [
@@ -85,15 +87,17 @@ function ScholarshipSlider() {
                         key={'scholarship-slider--' + title}
                         className="relative"
                     >
-                        <Image
-                            width={200}
-                            height={150}
-                            src={logo}
-                            alt="slide_image"
-                        />
-                        <h3 className=" absolute bottom-2 left-2 w-1/2 text-2xl font-bold text-white drop-shadow-md ">
-                            {title}
-                        </h3>
+                        <Link href={ROUTES.FILTER_SCHOLARSHIP}>
+                            <Image
+                                width={200}
+                                height={150}
+                                src={logo}
+                                alt="slide_image"
+                            />
+                            <h3 className=" absolute bottom-2 left-2 w-1/2 text-2xl font-bold text-white drop-shadow-md ">
+                                {title}
+                            </h3>
+                        </Link>
                     </SwiperSlide>
                 ))}
             </Swiper>

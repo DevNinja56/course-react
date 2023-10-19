@@ -42,17 +42,6 @@ const Scholarship = () => {
                     <RightScholarshipCardBox />
                 </div>
             </div>
-            <div className="w-full pb-20 2xl:pb-[700px] flex flex-col items-center overflow-hidden">
-                <p className="text-[23px] font-bold text-blueColor mb-1">
-                    Scholarships
-                </p>
-                <h1 className="text-textLightBlackColor text-[48px] font-extrabold mb-5 text-center hidden lg:block">
-                    Scholarships you may be interested in
-                </h1>
-                <h1 className="text-mainTextColor text-[48px] font-extrabold mb-5 text-center lg:hidden block">
-                    Discover Scholarships{' '}
-                </h1>
-            </div>
             <Testimonial />
         </>
     );
