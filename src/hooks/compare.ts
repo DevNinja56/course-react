@@ -5,9 +5,9 @@ export const useCompare = () => {
     const state = useAppSelector((state) => state.compareInstitute);
     const dispatch = useAppDispatch();
 
-    const compareFirst = (state: object) => dispatch(addFirst(state));
-    const compareSecond = (state: object) => dispatch(addSecond(state));
-    const compareThird = (state: object) => dispatch(addThird(state));
+    const compareFirst = (state: object | null) => dispatch(addFirst(state));
+    const compareSecond = (state: object | null) => dispatch(addSecond(state));
+    const compareThird = (state: object | null) => dispatch(addThird(state));
 
     return {
         ...state,

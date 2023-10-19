@@ -8,8 +8,6 @@ import ScholarshipYearFilter from './ScholarshipYearFilter';
 import { useFilterQuery } from '@/hooks/filterQuery';
 import { useSearchedCourses } from '@/hooks/filterCourses';
 import { FilteredButton } from '../FilteredButton';
-import { useRouter } from 'next/router';
-import { ROUTES } from '@/config/constant';
 
 export const FilterRow = () => (
     <div className="px-4">
@@ -20,7 +18,6 @@ export const FilterRow = () => (
 const ScholarshipFilter = () => {
     const { clearALlQuery, query } = useFilterQuery();
     const { fetchSearchedCoursesRequest: refetch } = useSearchedCourses();
-    const { pathname } = useRouter();
 
     const handleClearQuery = () => {
         clearALlQuery();
@@ -67,12 +64,8 @@ const ScholarshipFilter = () => {
                 <FilterRow />
                 <DegreeLevelFilter />
                 <FilterRow />
-                {pathname !== ROUTES.FILTER_SCHOLARSHIP && (
-                    <>
-                        <ScholarshipTypeFilter />
-                        <FilterRow />
-                    </>
-                )}
+                <ScholarshipTypeFilter />
+                <FilterRow />
                 <ScholarshipMonthFilter />
                 <FilterRow />
                 <ScholarshipYearFilter />

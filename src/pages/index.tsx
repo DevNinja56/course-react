@@ -1,7 +1,7 @@
 import Card from '@/components/Home/Card';
 import EventCard from '@/components/Home/EventCard';
 import SearchBox from '@/components/Home/SearchBox';
-import Slider from '@/components/Slider';
+import ScholarshipSlider from '@/components/Slider/ScholarshipSlider';
 import Testimonial from '@/components/Testimonial';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -131,7 +131,7 @@ const Home = () => {
                 <h1 className="text-textLightBlackColor text-[48px] font-extrabold mb-5 text-center">
                     Scholarships you may be interested in
                 </h1>
-                <Slider />
+                <ScholarshipSlider />
             </div>
             <div className="w-full p-10 pb-32 relative bg-white">
                 <Image

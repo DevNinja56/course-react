@@ -10,6 +10,14 @@ interface CardProps {
 }
 
 const CourseCard = ({ course }: CardProps) => {
+    const state = [
+        { title: 'Institute', value: course?.institute?.name },
+        { title: 'Degree', value: course?.degree.name },
+        { title: 'Study in', value: course?.country.name },
+        { title: 'Course starts', value: course.startDate },
+        { title: 'Deadline', value: course.endDate }
+    ];
+
     return (
         <div className="border-2 border-scholarshipBorderColor rounded-[10px] p-3 flex flex-col gap-y-5 w-[100%] group cursor-pointer hover:border-blueColor custom-shadow relative">
             <FavoriteButton
@@ -31,31 +39,25 @@ const CourseCard = ({ course }: CardProps) => {
                     />
                 </div>
                 <div>
-                    <h1 className="font-bold text-[17px] text-textLightBlackColor mb-4 group-hover:text-blueColor h-[46px] line-clamp-2 ">
+                    <h1
+                        className="font-bold text-base  text-textLightBlackColor mb-4 group-hover:text-blueColor h-12 line-clamp-2 "
+                        title={course.name}
+                    >
                         {course.name}
                     </h1>
                     <div className="flex flex-col gap-y-3 mb-5">
-                        <p className="text-sm text-darkGrayColor">
-                            {`${course.institute?.name} / ${course.degree?.name}`}
-                        </p>
-                        <p className="text-sm text-darkGrayColor">
-                            <span className="font-bold text-mainTextColor group-hover:text-blueColor">
-                                Study in:{' '}
-                            </span>
-                            {course?.country.name ?? ''}
-                        </p>
-                        <p className="text-sm text-darkGrayColor">
-                            <span className="font-bold text-mainTextColor group-hover:text-blueColor">
-                                Course starts:{' '}
-                            </span>
-                            {course.startDate}
-                        </p>
-                        <p className="font-medium text-sm text-darkGrayColor">
-                            <span className="font-bold text-mainTextColor group-hover:text-blueColor">
-                                Deadline:
-                            </span>{' '}
-                            {course.endDate}
-                        </p>
+                        {state.map(({ title, value }) => (
+                            <p
+                                className="text-sm text-darkGrayColor line-clamp-1 flex gap-1.5 whitespace-nowrap "
+                                title={value}
+                                key={'course-card-details--' + value}
+                            >
+                                <span className="font-bold text-mainTextColor group-hover:text-blueColor ">
+                                    {title}:
+                                </span>
+                                {value ?? ''}
+                            </p>
+                        ))}
                     </div>
                     <button className="w-full py-[9px] rounded-[5px] text-blueColor border border-blueColor mb-3 group-hover:bg-blueColor group-hover:text-white">
                         View Details

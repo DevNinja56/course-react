@@ -1,3 +1,13 @@
+export const scholarshipTypesList = [
+    { id: 'scholarship--4', name: 'merit' },
+    { id: 'scholarship--5', name: 'entrance' },
+    { id: 'scholarship--8', name: 'academic' },
+    { id: 'scholarship--7', name: 'government' },
+    { id: 'scholarship--6', name: 'need' },
+    { id: 'scholarship--1', name: 'sports' },
+    { id: 'scholarship--2', name: 'organizational' }
+];
+
 export const scholarshipMonths = [
     { id: 'month-1', name: 'january' },
     { id: 'month-02', name: 'february' },

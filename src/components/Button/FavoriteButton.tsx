@@ -6,6 +6,9 @@ import toast from 'react-hot-toast';
 import { fetchRequest } from '@/utils/axios/fetch';
 import { API_ENDPOINTS } from '@/config/Api_EndPoints';
 import { useSearchedCourses } from '@/hooks/filterCourses';
+import { useUserAuth } from '@/hooks/auth';
+import { useRouter } from 'next/router';
+import { ROUTES } from '@/config/constant';
 
 interface propsType {
     isActive?: boolean;
@@ -18,8 +21,16 @@ const FavoriteButton: React.FC<propsType> = ({
 }) => {
     const [isLoading, setLoading] = useState(false);
     const { fetchSearchedCoursesRequest: refetch } = useSearchedCourses();
+    const { isAuthenticated } = useUserAuth();
+    const { push } = useRouter();
 
     const handleClick = () => {
+        // check if user is not authenticated
+        if (!isAuthenticated) {
+            push(ROUTES.SIGN_IN);
+            return;
+        }
+
         setLoading(true);
         toast
             .promise(
@@ -44,7 +55,7 @@ const FavoriteButton: React.FC<propsType> = ({
 
     return (
         <button
-            className="h-[36px] w-[36px] rounded-full cursor-pointer flex items-center justify-center group absolute top-6 right-6 z-10 bg-black bg-opacity-40 "
+            className="h-[36px] w-[36px] rounded-full cursor-pointer flex items-center justify-center group absolute top-4 right-4 z-10 bg-black bg-opacity-40 "
             onClick={handleClick}
         >
             {isLoading ? (

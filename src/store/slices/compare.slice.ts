@@ -35,10 +35,10 @@ const compareInstitute = createSlice({
             state.first = action.payload;
         },
         addSecond(state, action) {
-            state.first = action.payload;
+            state.second = action.payload;
         },
         addThird(state, action) {
-            state.first = action.payload;
+            state.third = action.payload;
         }
     }
 });

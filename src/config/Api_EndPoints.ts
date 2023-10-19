@@ -26,5 +26,5 @@ export const API_ENDPOINTS = {
     INSTITUTE_WITH_COUNTRY_ID: '/institute/country/:id',
     DISCIPLINES_WITH_INSTITUTE_ID: '/institute/disciplines/:id',
     DEGREE_LEVELS_WITH_DISCIPLINE_ID: '/discipline/degree-levels/:id',
-    COURSES_WITH_DEGREE: '/course/degree/:id'
+    COURSES_WITH_DEGREE: '/course/compare/:degreeId/:instituteId'
 };

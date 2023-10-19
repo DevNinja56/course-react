@@ -1,7 +1,7 @@
 import CourseFilter from '@/components/FilterPage/Course/FilterLeftBox';
 import RightCardsBox from '@/components/FilterPage/Course/RightCardsBox';
 import SearchQueryBox from '@/components/FilterPage/SearchQueryBox';
-import Slider from '@/components/Slider';
+import ScholarshipSlider from '@/components/Slider/ScholarshipSlider';
 import Testimonial from '@/components/Testimonial';
 import Image from 'next/image';
 
@@ -50,7 +50,7 @@ const FilterPage = () => {
                 <h1 className="text-textLightBlackColor text-[48px] font-extrabold mb-5 text-center">
                     Scholarships you may be interested in
                 </h1>
-                <Slider />
+                <ScholarshipSlider />
             </div>
             <Testimonial />
         </>
