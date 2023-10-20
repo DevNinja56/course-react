@@ -1,9 +1,20 @@
 import Card from '@/components/Blog/Card';
+import PaginationBox from '@/components/Pagination';
 import Testimonial from '@/components/Testimonial';
+import { usePaginatedBlogs } from '@/hooks/blogsPaginated';
 import Image from 'next/image';
-import React from 'react';
+import React, { useEffect } from 'react';
 
 const Blog = () => {
+    const {
+        data,
+        fetchBlogs,
+        paginatorInfo: { totalPage, page }
+    } = usePaginatedBlogs();
+
+    useEffect(() => {
+        fetchBlogs();
+    }, []);
     return (
         <>
             <div className="w-full flex items-center justify-center mt-[100px] bg-profileBgColor py-20 relative mb-24">
@@ -53,154 +64,22 @@ const Blog = () => {
             <div className="w-full pb-12">
                 <div className="max-w-[1100px] 2xl:max-w-[2300px] mx-auto px-5 md:px-[90px] lg:px-2 2xl:px-8 transition-all duration-300 flex flex-col items-center gap-y-16">
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-between gap-[31px] w-full">
-                        <Card
-                            cardTitle="Technique"
-                            cardTitleTwo="Speech"
-                            cardTitleThree="Work"
-                            title="All you need to know about the One-on-One meeting"
-                            hearts="99"
-                            image="/images/BlogsDetail/relatedPost3.svg"
-                        />
-                        <Card
-                            cardTitle="Partners"
-                            cardTitleTwo="Team"
-                            cardTitleThree="Business"
-                            title="How networking will help boost your company growth"
-                            hearts="54"
-                            image="/images/BlogsDetail/Rectangle 3662.svg"
-                        />
-                        <Card
-                            cardTitle="Job"
-                            cardTitleTwo="Team"
-                            cardTitleThree="Certifications"
-                            title="Are certifications really worth it when seeking a new job?"
-                            hearts="107"
-                            image="/images/BlogsDetail/relatedPostImg.svg"
-                        />
-                        <Card
-                            cardTitle="Job"
-                            cardTitleTwo="Team"
-                            cardTitleThree="Certifications"
-                            title="Are certifications really worth it when seeking a new job?"
-                            hearts="107"
-                            image="/images/BlogsDetail/relatedPostImg.svg"
-                        />
-                        <Card
-                            cardTitle="Technique"
-                            cardTitleTwo="Speech"
-                            cardTitleThree="Work"
-                            title="All you need to know about the One-on-One meeting"
-                            hearts="99"
-                            image="/images/BlogsDetail/relatedPost3.svg"
-                        />
-                        <Card
-                            cardTitle="Partners"
-                            cardTitleTwo="Team"
-                            cardTitleThree="Business"
-                            title="How networking will help boost your company growth"
-                            hearts="54"
-                            image="/images/BlogsDetail/Rectangle 3662.svg"
-                        />
-                        <Card
-                            cardTitle="Partners"
-                            cardTitleTwo="Team"
-                            cardTitleThree="Business"
-                            title="How networking will help boost your company growth"
-                            hearts="54"
-                            image="/images/BlogsDetail/Rectangle 3662.svg"
-                        />
-                        <Card
-                            cardTitle="Job"
-                            cardTitleTwo="Team"
-                            cardTitleThree="Certifications"
-                            title="Are certifications really worth it when seeking a new job?"
-                            hearts="107"
-                            image="/images/BlogsDetail/relatedPostImg.svg"
-                        />
-                        <Card
-                            cardTitle="Technique"
-                            cardTitleTwo="Speech"
-                            cardTitleThree="Work"
-                            title="All you need to know about the One-on-One meeting"
-                            hearts="99"
-                            image="/images/BlogsDetail/relatedPost3.svg"
-                        />
-                        <Card
-                            cardTitle="Technique"
-                            cardTitleTwo="Speech"
-                            cardTitleThree="Work"
-                            title="All you need to know about the One-on-One meeting"
-                            hearts="99"
-                            image="/images/BlogsDetail/relatedPost3.svg"
-                        />
-                        <Card
-                            cardTitle="Partners"
-                            cardTitleTwo="Team"
-                            cardTitleThree="Business"
-                            title="How networking will help boost your company growth"
-                            hearts="54"
-                            image="/images/BlogsDetail/Rectangle 3662.svg"
-                        />
-                        <Card
-                            cardTitle="Job"
-                            cardTitleTwo="Team"
-                            cardTitleThree="Certifications"
-                            title="Are certifications really worth it when seeking a new job?"
-                            hearts="107"
-                            image="/images/BlogsDetail/relatedPostImg.svg"
-                        />
-                        <Card
-                            cardTitle="Job"
-                            cardTitleTwo="Team"
-                            cardTitleThree="Certifications"
-                            title="Are certifications really worth it when seeking a new job?"
-                            hearts="107"
-                            image="/images/BlogsDetail/relatedPostImg.svg"
-                        />
-                        <Card
-                            cardTitle="Technique"
-                            cardTitleTwo="Speech"
-                            cardTitleThree="Work"
-                            title="All you need to know about the One-on-One meeting"
-                            hearts="99"
-                            image="/images/BlogsDetail/relatedPost3.svg"
-                        />
-                        <Card
-                            cardTitle="Partners"
-                            cardTitleTwo="Team"
-                            cardTitleThree="Business"
-                            title="How networking will help boost your company growth"
-                            hearts="54"
-                            image="/images/BlogsDetail/Rectangle 3662.svg"
-                        />
-                        <Card
-                            cardTitle="Partners"
-                            cardTitleTwo="Team"
-                            cardTitleThree="Business"
-                            title="How networking will help boost your company growth"
-                            hearts="54"
-                            image="/images/BlogsDetail/Rectangle 3662.svg"
-                        />
-                        <Card
-                            cardTitle="Job"
-                            cardTitleTwo="Team"
-                            cardTitleThree="Certifications"
-                            title="Are certifications really worth it when seeking a new job?"
-                            hearts="107"
-                            image="/images/BlogsDetail/relatedPostImg.svg"
-                        />
-                        <Card
-                            cardTitle="Technique"
-                            cardTitleTwo="Speech"
-                            cardTitleThree="Work"
-                            title="All you need to know about the One-on-One meeting"
-                            hearts="99"
-                            image="/images/BlogsDetail/relatedPost3.svg"
-                        />
+                        {data?.map((blog, i) => (
+                            <Card
+                                key={'blogs-card--' + i}
+                                tags={blog.tags}
+                                title={blog.title}
+                                favorite={blog.favoriteId}
+                                id={blog.id}
+                                image="/images/BlogsDetail/relatedPost3.svg"
+                            />
+                        ))}
                     </div>
-                    <button className="py-[11px] px-[27px] md:py-[19px] md:px-[50px] rounded-[10px] bg-blueColor hover:bg-blue-600 text-base md:text-lg font-semibold text-white">
-                        Load More
-                    </button>
+                    <PaginationBox
+                        totalPage={totalPage}
+                        page={page}
+                        refetch={fetchBlogs}
+                    />
                 </div>
             </div>
             <Testimonial />

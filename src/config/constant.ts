@@ -10,5 +10,6 @@ export const ROUTES = {
     PROFILE: '/profile',
     COUNTRY: '/countries',
     UNIVERSITY: '/universities',
-    FIELDS: '/fields'
+    FIELDS: '/fields',
+    BLOGS_DETAIL: '/blogsDetail'
 };

@@ -22,10 +22,10 @@ export const useUserAuth = () => {
 
     const logoutUser = () => {
         fetchRequest({ url: API_ENDPOINTS.AUTH.LOG_OUT }).then(() => {
-            dispatch(logout());
             deleteCookie('access_token');
             deleteCookie('refresh_token');
-            push(ROUTES.SIGN_IN);
+            push(ROUTES.HOMEPAGE);
+            dispatch(logout());
         });
     };
 

@@ -6,6 +6,7 @@ import courses from '@/store/slices/filtersCourse';
 import scholarships from '@/store/slices/filtersScholarship';
 import filterQuery from '@/store/slices/filterQuery';
 import compareInstitute from '@/store/slices/compare.slice';
+import blogs from '@/store/slices/blogsPaginated';
 
 export const store = configureStore({
     reducer: {
@@ -14,6 +15,7 @@ export const store = configureStore({
         userInterface: uiSlice,
         courses,
         scholarships,
+        blogs,
         filterQuery,
         compareInstitute
     },

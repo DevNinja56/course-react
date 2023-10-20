@@ -4,12 +4,14 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 import FavoriteButton from '../../Button/FavoriteButton';
+import { useSearchedCourses } from '@/hooks/filterCourses';
 
 interface CardProps {
     course: courseType;
 }
 
 const CourseCard = ({ course }: CardProps) => {
+    const { fetchSearchedCoursesRequest } = useSearchedCourses();
     const state = [
         { title: 'Institute', value: course?.institute?.name },
         { title: 'Degree', value: course?.degree.name },
@@ -22,7 +24,8 @@ const CourseCard = ({ course }: CardProps) => {
         <div className="border-2 border-scholarshipBorderColor rounded-[10px] p-3 flex flex-col gap-y-5 w-[100%] group cursor-pointer hover:border-blueColor custom-shadow relative">
             <FavoriteButton
                 isActive={!!course?.favoriteId?.[0]}
-                courseId={course._id}
+                body={{ course: course._id }}
+                refetch={fetchSearchedCoursesRequest}
             />
             <Link href={ROUTES.COURSE + `/${course._id}`}>
                 <div className="relative w-full">

@@ -1,6 +1,16 @@
 import Image from 'next/image';
-import Link from 'next/link';
-import React from 'react';
+import React, { useState } from 'react';
+
+import { API_ENDPOINTS } from '@/config/Api_EndPoints';
+import { contactUsForm } from '@/types';
+import { fetchRequest } from '@/utils/axios/fetch';
+import { useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
+import InputBox from '../Input';
+import { MdOutlineMail } from 'react-icons/md';
+import Button from '../Button';
+import { BiUser } from 'react-icons/bi';
+import { GiNotebook } from 'react-icons/gi';
 
 interface MapProps {
     mapRoundImg: string;
@@ -15,6 +25,37 @@ const Map = ({
     mapRoundImg3,
     mapRoundImg4
 }: MapProps) => {
+    const [isLoading, setIsLoading] = useState(false);
+    const {
+        register,
+        handleSubmit: fromSubmit,
+        formState: { errors },
+        reset
+    } = useForm<contactUsForm>();
+
+    console.log(errors);
+
+    const handleSubmit = (body: contactUsForm) => {
+        setIsLoading(true);
+        toast
+            .promise(
+                fetchRequest({
+                    url: API_ENDPOINTS.CONTACT,
+                    type: 'post',
+                    body
+                }),
+                {
+                    loading: 'loading!...',
+                    success: () => {
+                        reset();
+                        return 'Your Message has been sent';
+                    },
+                    error: 'an error has occurred'
+                }
+            )
+            .finally(() => setIsLoading(false));
+    };
+
     return (
         <div className="bg-white relative w-full">
             <Image
@@ -42,81 +83,65 @@ const Map = ({
                     src="/images/Apply/Map.svg"
                     priority
                 />
-                <div className="bg-white rounded-[10px] px-11 py-7 z-10 mt-0 2xl:mt-[10%]">
+                <form
+                    onSubmit={fromSubmit(handleSubmit)}
+                    className="bg-white rounded-[10px] px-11 py-7 z-10 mt-0 2xl:mt-[10%]"
+                >
                     <h1 className="font-bold text-[32px] text-mainTextColor">
                         Contact Us
                     </h1>
                     <p className="font-medium text-[23px] mb-4 text-darkGrayColor">
                         Fill out the form below to reach us
                     </p>
-                    <form className="flex flex-col gap-y-4 mb-8">
+                    <div className="flex flex-col gap-y-4 mb-8">
                         <div className="flex gap-4">
-                            <label className="text-lg text-textLightBlackColor flex flex-col gap-y-1">
-                                First Name
-                                <div className="relative">
-                                    <input
-                                        className="rounded-[10px] pt-[10px] pb-[9px] pl-[50px] pr-[10px] gap-[10px] text-sm text-grayColor border border-grayColor outline-none"
-                                        placeholder="Your First Name..."
-                                    />
-                                    <Image
-                                        height={20}
-                                        width={20}
-                                        alt="user"
-                                        className="absolute top-[11px] left-5"
-                                        src="/images/Apply/user (1).svg"
-                                        priority
-                                    />
-                                </div>
-                            </label>
-                            <label className="text-lg text-textLightBlackColor flex flex-col gap-y-1">
-                                Last Name
-                                <div className="relative">
-                                    <input
-                                        className="rounded-[10px] pt-[10px] pb-[9px] pl-[50px] pr-[10px] gap-[10px] text-sm text-grayColor border border-grayColor outline-none"
-                                        placeholder="Your Last Name..."
-                                    />
-                                    <Image
-                                        height={20}
-                                        width={20}
-                                        alt="user"
-                                        className="absolute top-[11px] left-5"
-                                        src="/images/Apply/user (1).svg"
-                                        priority
-                                    />
-                                </div>
-                            </label>
+                            <InputBox
+                                {...register('name', {
+                                    required: true
+                                })}
+                                placeholder="Your Name..."
+                                title="Name"
+                                error={errors.name?.message}
+                                icon={BiUser}
+                            />
+                            <InputBox
+                                {...register('subject', {
+                                    required: true
+                                })}
+                                placeholder="Subject..."
+                                title="Subject"
+                                error={errors.subject?.message}
+                                icon={GiNotebook}
+                            />
                         </div>
-                        <label className="text-lg text-textLightBlackColor flex flex-col gap-y-1">
-                            Email Address
-                            <div className="relative">
-                                <input
-                                    className="rounded-[10px] pt-[10px] pb-[9px] pl-[50px] w-full gap-[10px] text-sm text-grayColor border border-grayColor outline-none"
-                                    placeholder="Your Email Address..."
-                                />
-                                <Image
-                                    height={20}
-                                    width={20}
-                                    alt="mail"
-                                    className="absolute top-[11px] left-5"
-                                    src="/images/Apply/mail.svg"
-                                    priority
-                                />
-                            </div>
-                        </label>
+                        <InputBox
+                            {...register('email', {
+                                required: true
+                            })}
+                            placeholder="Your Email..."
+                            title="Email Address"
+                            error={errors.email?.message}
+                            icon={MdOutlineMail}
+                        />
                         <label className="text-lg text-textLightBlackColor flex flex-col gap-y-1">
                             Message
-                            <input
-                                className="rounded-[10px] pt-5 pb-[87px] pl-5 w-full gap-[10px] text-sm text-grayColor border border-grayColor outline-none"
+                            <textarea
+                                {...register('message', {
+                                    required: true
+                                })}
+                                className="block p-2.5 w-full text-xl  bg-gray-50 rounded-lg focus:ring-blue-500 focus:border-blue-500 resize-none outline-none text-grayColor border border-grayColor "
                                 placeholder="Write your message..."
+                                rows={5}
                             />
                         </label>
-                    </form>
-                    <Link href="/signIn">
-                        <button className="w-full pt-[14px] pb-[13px] rounded-[10px] bg-blueColor text-white">
-                            Send Message
-                        </button>
-                    </Link>
-                </div>
+                    </div>
+                    <Button
+                        text="Send Message"
+                        type="submit"
+                        isLoader={isLoading}
+                        disabled={isLoading}
+                    />
+                </form>
             </div>
             <Image
                 height={66}

@@ -62,7 +62,7 @@ function ScholarshipSlider() {
         }
     ];
     return (
-        <div className="container">
+        <>
             <Swiper
                 effect={'coverflow'}
                 grabCursor={true}
@@ -101,7 +101,7 @@ function ScholarshipSlider() {
                     </SwiperSlide>
                 ))}
             </Swiper>
-        </div>
+        </>
     );
 }
 

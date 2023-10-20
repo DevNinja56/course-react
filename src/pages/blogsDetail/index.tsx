@@ -328,28 +328,25 @@ const BlogsDetail = () => {
                         </h1>
                         <div className="flex items-center gap-[31px] overflow-x-auto w-full removeScrollBar">
                             <Card
-                                cardTitle="Partners"
-                                cardTitleTwo="Team"
-                                cardTitleThree="Business"
+                                tags={['Partners', 'Team', 'Business']}
                                 title="How networking will help boost your company growth"
-                                hearts="54"
+                                favorite={[]}
                                 image="/images/BlogsDetail/Rectangle 3662.svg"
+                                id="1"
                             />
                             <Card
-                                cardTitle="Job"
-                                cardTitleTwo="Team"
-                                cardTitleThree="Certifications"
-                                title="Are certifications really worth it when seeking a new job?"
-                                hearts="107"
-                                image="/images/BlogsDetail/relatedPostImg.svg"
+                                tags={['Partners', 'Team', 'Business']}
+                                title="How networking will help boost your company growth"
+                                favorite={[]}
+                                image="/images/BlogsDetail/Rectangle 3662.svg"
+                                id="2"
                             />
                             <Card
-                                cardTitle="Technique"
-                                cardTitleTwo="Speech"
-                                cardTitleThree="Work"
-                                title="All you need to know about the One-on-One meeting"
-                                hearts="99"
-                                image="/images/BlogsDetail/relatedPost3.svg"
+                                tags={['Partners', 'Team', 'Business']}
+                                title="How networking will help boost your company growth"
+                                favorite={[]}
+                                image="/images/BlogsDetail/Rectangle 3662.svg"
+                                id="3"
                             />
                         </div>
                         <div className="flex items-center w-full justify-center gap-x-[10px] mt-4 lg:hidden">

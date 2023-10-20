@@ -144,3 +144,19 @@ export type courseType = {
     };
     favoriteId?: string[];
 };
+
+export type contactUsForm = {
+    name: string;
+    subject: string;
+    email: string;
+    message: string;
+};
+
+export type blogsType = {
+    title: string;
+    image: string;
+    description: string;
+    tags: string[];
+    favoriteId: [];
+    id: string;
+};
