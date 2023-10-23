@@ -71,7 +71,7 @@ const Blog = () => {
                                 title={blog.title}
                                 favorite={blog.favoriteId}
                                 id={blog.id}
-                                image="/images/BlogsDetail/relatedPost3.svg"
+                                image={blog.image}
                             />
                         ))}
                     </div>

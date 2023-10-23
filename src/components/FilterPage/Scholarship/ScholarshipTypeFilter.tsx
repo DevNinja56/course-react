@@ -16,7 +16,7 @@ const ScholarshipTypeFilter = () => {
                         key={'scholarship--list--' + i}
                         id={scholarship.name}
                         text={scholarship.name}
-                        name={'scholarship'}
+                        name={'scholarshipType'}
                         value={scholarship.name}
                     />
                 ))}

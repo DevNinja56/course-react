@@ -2,6 +2,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { getToken } from '@/utils/axios/token';
 import { API_ENDPOINTS } from '@/config/Api_EndPoints';
 import {
+    blogsType,
     countryType,
     degreeType,
     disciplineType,
@@ -51,6 +52,12 @@ export const stateQueryApi = createApi({
             query: () => ({ url: API_ENDPOINTS.INSTITUTE }),
             transformResponse: (res: { data: instituteType[] }) =>
                 res.data! ?? res
+        }),
+        getSingleBlog: builder.query<blogsType, string>({
+            query: (id) => ({
+                url: API_ENDPOINTS.SINGLE_BLOG.replace(':id', id)
+            }),
+            transformResponse: (res: { data: blogsType }) => res.data! ?? res
         })
     })
 });
@@ -61,5 +68,6 @@ export const {
     useGetDisciplineQuery,
     useGetScholarshipQuery,
     useGetSpecializationQuery,
-    useGetInstituteQuery
+    useGetInstituteQuery,
+    useGetSingleBlogQuery
 } = stateQueryApi;

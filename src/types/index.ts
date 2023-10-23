@@ -6,7 +6,7 @@ export interface userType {
     avatar: string | null;
     documents: [];
     timezone: null;
-    address: null;
+    address: string;
     password: string;
     phone_number: string;
     createdAt: string;
@@ -39,7 +39,7 @@ export type scholarshipType = {
     applicable: string;
     startDate: string;
     endDate: string;
-    course: scholarshipType[];
+    course: courseType[];
     institute: instituteType;
     country: countryType;
     undergraduate: degreeType[];
@@ -49,6 +49,35 @@ export type scholarshipType = {
     createdAt: string;
     updatedAt: string;
     id: string;
+};
+
+export type filterScholarShipType = {
+    _id: string;
+    name: string;
+    image: string;
+    type: string;
+    intakeYear: string;
+    applicable: string;
+    startDate: string;
+    endDate: string;
+    degrees: {
+        _id: string;
+        name: string;
+        type: string;
+    }[];
+    institute: {
+        _id: string;
+        name: string;
+    };
+    country: {
+        _id: string;
+        name: string;
+    };
+    discipline: {
+        _id: string;
+        name: string;
+    }[];
+    favoriteId?: string[];
 };
 
 export type countryType = {
@@ -98,9 +127,7 @@ export type instituteType = {
     timesHigherRanking: number;
     shanghaiRanking: number;
     tcfIndexRanking: number;
-    favoriteId: [];
-    createdAt: string;
-    updatedAt: string;
+    favoriteId: string[];
     id: string;
 };
 
@@ -159,4 +186,5 @@ export type blogsType = {
     tags: string[];
     favoriteId: [];
     id: string;
+    createdAt: string;
 };

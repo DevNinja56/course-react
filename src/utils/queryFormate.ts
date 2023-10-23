@@ -115,27 +115,32 @@ export const formateScholarshipQuery = (query: { [key: string]: any }) => {
 
     if (query.degrees) {
         orConditions.push({
-            'degree.name': { $in: query.degrees }
+            'degrees.name': { $in: query.degrees }
         });
     }
 
     if (query.degreeType) {
         orConditions.push({
-            'degreeType.name': { $in: query.degreeType }
+            'degrees.type': { $in: query.degreeType }
         });
     }
 
-    if (query.sortBy) {
-        const value = query.sortBy as
-            | 'A-Z'
-            | 'Z-A'
-            | 'Duration-Up'
-            | 'Duration-Down';
+    if (query.scholarshipType) {
+        orConditions.push({
+            type: { $in: query.scholarshipType }
+        });
+    }
 
-        sort =
-            value === ('A-Z' || 'Z-A')
-                ? { $sort: { name: sortState[value] } }
-                : { $sort: { duration: sortState[value] } };
+    if (query.discipline) {
+        orConditions.push({
+            'discipline.name': { $in: query.discipline }
+        });
+    }
+
+    if (query.institute) {
+        orConditions.push({
+            'institute.name': { $in: query.institute }
+        });
     }
 
     if (orConditions.length > 0) {

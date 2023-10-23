@@ -27,7 +27,7 @@ const CourseCard = ({ course }: CardProps) => {
                 body={{ course: course._id }}
                 refetch={fetchSearchedCoursesRequest}
             />
-            <Link href={ROUTES.COURSE + `/${course._id}`}>
+            <Link href={ROUTES.COURSE.replace(':id', course._id)}>
                 <div className="relative w-full">
                     <Image
                         width={150}

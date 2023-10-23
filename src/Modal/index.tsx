@@ -4,6 +4,7 @@ import { useUi } from '@/hooks/user-interface';
 import { modalType } from '@/store/slices/ui.slice';
 import ResetPassword from './ResetPassword.modal';
 import CompareUniversityModal from './CompareUniversity';
+import UpdateUserInfo from './UpdateUser';
 
 const ModalWraper = () => {
     const { modal } = useUi();
@@ -11,7 +12,8 @@ const ModalWraper = () => {
     const AllModal = {
         [modalType.none]: <></>,
         [modalType.reset_password]: <ResetPassword />,
-        [modalType.compare_university]: <CompareUniversityModal />
+        [modalType.compare_university]: <CompareUniversityModal />,
+        [modalType.update_user_info]: <UpdateUserInfo />
     };
 
     return (

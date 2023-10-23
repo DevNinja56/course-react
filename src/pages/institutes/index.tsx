@@ -1,10 +1,13 @@
 import CounselingWork from '@/components/CounselingWork/CounselingWork';
 import Testimonial from '@/components/Testimonial';
 import UniversitiesCards from '@/components/Universities/UniversitiesCard';
+import { useGetInstituteQuery } from '@/store/slices/allRequests';
 import Image from 'next/image';
 import React from 'react';
 
 const Universities = () => {
+    const { data, refetch } = useGetInstituteQuery();
+
     return (
         <>
             <div className="w-full flex items-center justify-center h-[270px] mt-[100px] mb-4 relative">
@@ -36,31 +39,13 @@ const Universities = () => {
             <div className="w-full pb-8 md:pb-20">
                 <div className="max-w-[1100px] 2xl:max-w-[2300px] mx-auto px-2 2xl:px-8 transition-all duration-300 flex justify-between">
                     <div className="flex flex-wrap gap-[30px] items-center justify-center w-full">
-                        <UniversitiesCards
-                            img="/images/Universities/Main 1.svg"
-                            title="Rusell Group Universities"
-                            insideImg="/images/Universities/institutionGroupLogo.svg"
-                        />
-                        <UniversitiesCards
-                            img="/images/Universities/Main 2.svg"
-                            title="IVY League Universities"
-                            insideImg="/images/Universities/institutionGroupLogo2.svg"
-                        />
-                        <UniversitiesCards
-                            img="/images/Universities/Main 3.svg"
-                            title="TU9 Universities"
-                            insideImg="/images/Universities/institutionGroupLogo3.svg"
-                        />
-                        <UniversitiesCards
-                            img="/images/Universities/Main 4.svg"
-                            title="GO8-Group of Eight Universities"
-                            insideImg="/images/Universities/institutionGroupLogo4.svg"
-                        />
-                        <UniversitiesCards
-                            img="/images/Universities/Main 5.svg"
-                            title="U15-Group of Canadian Research Universities"
-                            insideImg="/images/Universities/institutionGroupLogo5.svg"
-                        />
+                        {data?.map((item) => (
+                            <UniversitiesCards
+                                key={'institute_list__' + item.id}
+                                institute={item}
+                                refetch={refetch}
+                            />
+                        ))}
                     </div>
                 </div>
             </div>

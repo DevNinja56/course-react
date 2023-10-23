@@ -18,7 +18,7 @@ export const initialState: authStateType = {
         avatar: null,
         documents: [],
         timezone: null,
-        address: null,
+        address: '',
         password: '',
         phone_number: '',
         createdAt: '',

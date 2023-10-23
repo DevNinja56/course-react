@@ -28,5 +28,6 @@ export const API_ENDPOINTS = {
     DEGREE_LEVELS_WITH_DISCIPLINE_ID: '/discipline/degree-levels/:id',
     COURSES_WITH_DEGREE: '/course/compare/:degreeId/:instituteId',
     CONTACT: '/contact',
-    BLOGS: '/blogs'
+    BLOGS: '/blogs',
+    SINGLE_BLOG: '/blogs/:id'
 };

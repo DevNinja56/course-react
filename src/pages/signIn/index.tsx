@@ -118,7 +118,7 @@ const SignIn = () => {
                                         required: true
                                     })}
                                     placeholder="Email"
-                                    title="Username"
+                                    title="Email"
                                     error={errors.email?.message}
                                     icon={MdOutlineMail}
                                 />

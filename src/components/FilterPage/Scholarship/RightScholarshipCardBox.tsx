@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import SortBy from '../SortBy';
 import Card from '../../Scholarship/Card';
 import { useSearchedScholarship } from '@/hooks/filterScholarship';
 import { useFilterQuery } from '@/hooks/filterQuery';
@@ -25,7 +24,6 @@ const RightScholarshipCardBox = () => {
                     <h1 className="font-bold text-xl md:text-[23px] text-mainTextColor">
                         {count ?? '0'} Results Found
                     </h1>
-                    <SortBy />
                 </div>
                 <hr className="border border-scholarshipBorderColor" />
             </div>
@@ -35,7 +33,7 @@ const RightScholarshipCardBox = () => {
                 ) : (
                     data?.map((scholarship, i) => (
                         <Card
-                            key={'scholarship__key__' + scholarship.id + i}
+                            key={'scholarship__key__' + scholarship._id + i}
                             data={scholarship}
                         />
                     ))

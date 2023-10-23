@@ -31,7 +31,7 @@ const Card = ({ title, favorite, tags, image, id }: cardProps) => {
                 body={{ blog: id }}
                 refetch={fetchBlogs}
             />
-            <Link href={ROUTES.BLOGS_DETAIL}>
+            <Link href={ROUTES.BLOGS_DETAIL.replace(':id', id)}>
                 <Image
                     height={203.29}
                     width={366}

@@ -1,9 +1,9 @@
-import { scholarshipType } from '@/types';
+import { filterScholarShipType } from '@/types';
 import { createSlice } from '@reduxjs/toolkit';
 import { fetchPaginatedScholarship } from '../actions/getFilteredScholarship';
 
 export interface getAllScholarshipTypes {
-    data: scholarshipType[];
+    data: filterScholarShipType[];
     paginatorInfo: {
         count: number;
         page: number;

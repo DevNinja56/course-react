@@ -1,8 +1,19 @@
 import Card from '@/components/Blog/Card';
+import ScreenLoader from '@/components/Loader/ScreenLoader';
+import { useGetSingleBlogQuery } from '@/store/slices/allRequests';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 import React from 'react';
 
 const BlogsDetail = () => {
+    const { query, isReady } = useRouter();
+    const { data } = useGetSingleBlogQuery((query?.id as string) ?? '');
+
+    console.log(data);
+
+    if (!isReady) {
+        return <ScreenLoader />;
+    }
     return (
         <>
             <div className="w-full flex items-center mt-[100px] bg-white relative mb-0 lg:mb-10 overflow-hidden">
@@ -17,21 +28,30 @@ const BlogsDetail = () => {
                 <div className="w-full py-20 z-10">
                     <div className="max-w-[1100px] 2xl:max-w-[2300px] mx-auto px-5 md:px-[50px] lg:px-2 2xl:px-8 transition-all duration-300 flex flex-col lg:flex-row justify-between lg:items-center gap-y-8">
                         <div className="flex flex-col gap-y-4 transition-all duration-300 z-10">
-                            <button
-                                style={{ zIndex: '1' }}
-                                className="py-[6px] px-3 rounded-[5px] border border-blueColor text-blueColor text-[14px] w-[95px] z-20 bg-white"
-                            >
-                                Technology
-                            </button>
+                            <div className="flex gap-3 ">
+                                {data?.tags.map((item) => (
+                                    <button
+                                        key={'single-blogs-tags--' + item}
+                                        className="py-[6px] px-3 rounded-[5px] border border-blueColor text-blueColor text-[14px] w-[95px] z-10 bg-white "
+                                    >
+                                        {item}
+                                    </button>
+                                ))}
+                            </div>
                             <h1
                                 style={{ lineHeight: '48px' }}
                                 className="text-[32px] md:text-[40px] font-black text-mainTextColor leading-10 w-auto md:w-[459px] lg:w-auto"
                             >
-                                How 3D and augmented reality are changing our
-                                world
+                                {data?.title}
                             </h1>
                             <p className="text-darkGrayColor mb-2">
-                                March 17th, 2022 — 2 min read
+                                {new Date(
+                                    data?.createdAt ?? ''
+                                ).toLocaleDateString()}{' '}
+                                ,
+                                {new Date(
+                                    data?.createdAt ?? ''
+                                ).toLocaleTimeString()}
                             </p>
                             <div className="flex items-center gap-x-3">
                                 <Image
@@ -72,181 +92,7 @@ const BlogsDetail = () => {
             <div className="w-full pb-28">
                 <div className="max-w-[834px] 2xl:max-w-[1966px] mx-auto px-5 md:px-[50px] lg:px-2">
                     <div className="flex flex-col gap-y-[35px]">
-                        <div className="flex flex-col gap-y-8 text-lg text-darkGrayColor">
-                            <p>
-                                Companies like Apple and Google are investing
-                                huge amounts of capital into Augmented Reality,
-                                or AR . The Pokemon Go craze of July 2016 was a
-                                taste of how AR can impact our lives. But will
-                                AR really change our lives that much? Does AR
-                                have the potential to be a transformational
-                                technology that totally reorders how we live?
-                            </p>
-                            <p>
-                                I reached out to 39 experts on AR to share how
-                                AR can change our lives. Here are the ideas they
-                                shared.
-                            </p>
-                        </div>
-                        <div className="flex flex-col gap-y-9">
-                            <h1 className="text-mainTextColor text-[24px] md:text-[32px] font-bold">
-                                Digital Twins Will Help Companies See Problems —
-                                and Opportunities
-                            </h1>
-                            <p className="text-darkGrayColor text-lg">
-                                According to Timo Elliott, Innovation Evangelist
-                                at SAP, “Digital twin technology which uses
-                                detailed virtual 3D models and AR will
-                                revolutionize the way companies understand
-                                customer needs, continuously improve their
-                                products and services, and identify new business
-                                models. For example, when an employee at an
-                                energy company with wind farms in Norway detects
-                                a problem, she can put on a pair of VR goggles,
-                                “visualize” the issue, and fix it using digital
-                                twins — no need to send a repair team into the
-                                field. Coupled with other technologies such as
-                                artificial intelligence for image recognition,
-                                companies can optimize the creation, monitoring,
-                                and maintenance of complex systems. Digital
-                                twins will become a part of daily operations in
-                                areas as diverse as building maintenance to
-                                monitoring patients with heart disease.”
-                            </p>
-                        </div>
-                        <div className="flex flex-col gap-y-9">
-                            <h1 className="text-mainTextColor text-[24px] md:text-[32px] font-bold">
-                                AR and Mobile Based Contextual Information
-                            </h1>
-                            <p className="text-darkGrayColor text-lg">
-                                “One of the ways AR will challenge the world
-                                around us is mobile-based contextual
-                                information, leveraging the vast network of
-                                Internet-connected mobile devices in the world
-                                today. Mobile AR systems are innovative and
-                                noteworthy because it transforms the user
-                                experience in real-time. It takes any situation,
-                                and environment to the next level by
-                                incorporating a user’s contextual cues generated
-                                from sensors without a manual search.Because of
-                                this complexity, there may be challenges to
-                                mobile devices being able to process the
-                                technology required to power it. We imagine this
-                                playing out in the next 5 years or so.” — Vishwa
-                                Ranjan, Head of Augmented and Virtual Reality at
-                                Infosys.
-                            </p>
-                        </div>
-                        <div className="flex flex-col gap-y-9">
-                            <h1 className="text-mainTextColor text-[24px] md:text-[32px] font-bold">
-                                AR changing the way families play together
-                            </h1>
-                            <p className="text-darkGrayColor text-lg">
-                                It’s nearly impossible to escape the debate of
-                                screen time for children. For years, it has been
-                                an ongoing concern — adults thinking kids today
-                                are onscreen, leaving the “real world” behind.
-                                Now, we’re at the early stages of rethinking the
-                                split attention between play spaces, to push
-                                beyond use of a traditional 2D screen and find
-                                new ways to get our digital kids up and active.
-                                This is the real challenge today… How can we
-                                create immersive experiences that have physical
-                                and digital intersect seamlessly? AR is
-                                positioning itself to be a daily reality for the
-                                mainstream consumer, and, if you watch the
-                                patents, there’s a big push towards AR Glasses,
-                                arguably the next great leap in wearables. This
-                                will change the way we think about mobile as an
-                                object in our hand to an action and mindset for
-                                both parents and children to play outside
-                                together in story-driven, location based games.
-                                — Erin Reilly, CEO, Reillyworks | Founding
-                                Member of USC Annenberg Innovation Lab
-                            </p>
-                        </div>
-                        <div className="flex flex-col gap-y-9">
-                            <h1 className="text-mainTextColor text-[24px] md:text-[32px] font-bold">
-                                Access to just-in-time information, anytime,
-                                anywhere
-                            </h1>
-                            <div className="flex flex-col gap-y-8 text-lg text-darkGrayColor">
-                                <p>
-                                    Michael Martoccia, Immersive Strategist and
-                                    lead associate for Booz Allen Hamilton,
-                                    shared these thoughts about how augmented
-                                    reality (AR) and other immersive technology
-                                    will change the world:
-                                </p>
-                                <p>
-                                    I reached out to 39 experts on AR to share
-                                    how AR can change our lives. Here are the
-                                    ideas they shared.
-                                </p>
-                                <p>
-                                    These technologies will empower people to
-                                    time travel into the past from anywhere
-                                    using a simple headset or other immersive
-                                    device, enhancing educational and travel
-                                    experiences.
-                                </p>
-                                <p>
-                                    AR will enhance a person’s perception of
-                                    reality, with the ability to alter views to
-                                    delete or add data, scenarios and other
-                                    elements of sight and sound.
-                                </p>
-                                <p>
-                                    And, “what you see is what you get” will
-                                    become the new norm for shopping as
-                                    consumers can see and demand purchase
-                                    anything at any time, everywhere.
-                                </p>
-                            </div>
-                        </div>
-                        <div className="flex flex-col gap-y-9">
-                            <h1 className="text-mainTextColor text-[24px] md:text-[32px] font-bold">
-                                AR will revolutionize management in every
-                                industry
-                            </h1>
-                            <p className="text-darkGrayColor text-lg">
-                                AR will transform how supervisors do their job,
-                                in any industry, according to Simon Wright, an
-                                AR/VR developer at Genesys. Imagine supervisors
-                                walking the floor with a fighter pilot-style
-                                display in front of their eyes. Supervisors can
-                                read performance data instantly to help
-                                employees with difficult issues, or identify
-                                employees who are falling behind. This AR
-                                pinpoints problem issues in real time and shows
-                                a supervisor where to devote time and effort for
-                                the best outcomes. This AR will give supervisors
-                                observational and analytical “superpowers” at
-                                the same time.
-                            </p>
-                        </div>
-                        <div className="flex flex-col gap-y-9 mb-6">
-                            <h1 className="text-mainTextColor text-[24px] md:text-[32px] font-bold">
-                                Replacing User Manuals with Real-Time
-                                Instructions via AR Apps
-                            </h1>
-                            <p className="text-darkGrayColor text-lg">
-                                “Augmented reality is primed to make product
-                                manuals obsolete. Paper manuals require
-                                interpretation of words and graphic
-                                illustrations. AR programs, enabled either
-                                through headwear or smartphones, will recognize
-                                objects and overlay text and/or video
-                                instructions. AR glasses will provide the best
-                                experience of this, allowing for hands-free,
-                                real-time instruction viewing in line with user
-                                action. Early use cases for this will include
-                                LEGO-like toys, and IKEA-like build-your-own
-                                furniture.” — Dr. Yue Fei, CTO of uSens, a
-                                Silicon Valley-based creator of gesture-tracking
-                                software and hardware for AR/VR applications.
-                            </p>
-                        </div>
+                        <div className="content">{data?.description}</div>
                         <div className="w-full flex justify-center items-center">
                             <div className="flex items-center gap-x-[25px]">
                                 <div className="flex items-center justify-center h-[38px] w-[38px] rounded-full border border-darkGrayColor hover:border-blueColor transition-all duration-300 group cursor-pointer">

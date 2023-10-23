@@ -3,11 +3,12 @@ import DegreeLevelFilter from '../Course/DegreeLevelFilter';
 import CountriesFilter from '../CountriesFilter';
 import DisciplinesFilter from '../Course/DisciplinesFilter';
 import ScholarshipTypeFilter from './ScholarshipTypeFilter';
-import ScholarshipMonthFilter from './ScholarshipMonthFilter';
-import ScholarshipYearFilter from './ScholarshipYearFilter';
+// import ScholarshipMonthFilter from './ScholarshipMonthFilter';
+// import ScholarshipYearFilter from './ScholarshipYearFilter';
 import { useFilterQuery } from '@/hooks/filterQuery';
 import { useSearchedCourses } from '@/hooks/filterCourses';
 import { FilteredButton } from '../FilteredButton';
+import InstituteFilter from '../Course/InstituteFilter';
 
 export const FilterRow = () => (
     <div className="px-4">
@@ -60,15 +61,16 @@ const ScholarshipFilter = () => {
             <div className="flex flex-col gap-y-6">
                 <CountriesFilter />
                 <FilterRow />
+                <InstituteFilter />
                 <DisciplinesFilter />
                 <FilterRow />
                 <DegreeLevelFilter />
                 <FilterRow />
                 <ScholarshipTypeFilter />
-                <FilterRow />
+                {/* <FilterRow />
                 <ScholarshipMonthFilter />
                 <FilterRow />
-                <ScholarshipYearFilter />
+                <ScholarshipYearFilter /> */}
             </div>
         </div>
     );

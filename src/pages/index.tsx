@@ -54,7 +54,7 @@ const Home = () => {
                 <Image
                     height={104}
                     width={104}
-                    alt="hoem-round-3"
+                    alt="home-round-3"
                     className="absolute bottom-24 right-[640px]"
                     src="/images/Home/homeRound3.svg"
                     priority

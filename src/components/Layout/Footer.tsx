@@ -138,30 +138,30 @@ const Footer = () => {
                             SUPPORT
                         </h1>
                         <ul className="text-lightGrayColor">
-                            <Link href="/aboutUs">
+                            <Link href={ROUTES.ABOUT_US}>
                                 <li className="pt-[9px] pb-[10px]">About Us</li>
                             </Link>
-                            <Link href="/contactUs">
+                            <Link href={ROUTES.CONTACT_US}>
                                 <li className="pt-[9px] pb-[10px]">
                                     Contact Us
                                 </li>
                             </Link>
-                            <Link href="/faq">
+                            <Link href={ROUTES.FAQ}>
                                 <li className="pt-[9px] pb-[10px]">
                                     FAQ&lsquo;s
                                 </li>
                             </Link>
-                            <Link href="/privacyPolicy">
+                            <Link href={ROUTES.PRIVACY_POLICY}>
                                 <li className="pt-[9px] pb-[10px]">
                                     Privacy Policy
                                 </li>
                             </Link>
-                            <Link href="/t&c">
+                            <Link href={ROUTES.TERMS_CONDITION}>
                                 <li className="pt-[9px] pb-[10px]">
                                     Terms and Condition
                                 </li>
                             </Link>
-                            <Link href="/blog">
+                            <Link href={ROUTES.BLOGS}>
                                 <li className="pt-[9px] pb-[10px]">Blogs</li>
                             </Link>
                             <li className="pt-[9px] pb-[10px]">Book a Demo</li>
@@ -171,7 +171,7 @@ const Footer = () => {
             </div>
             <div className="border border-borderColor py-8 w-full flex justify-center items-center">
                 <p className="text-lightGrayColor">
-                    Copyright © 2023 Educo. All Rights Reserved
+                    Copyright © 2023 Education. All Rights Reserved
                 </p>
             </div>
         </div>

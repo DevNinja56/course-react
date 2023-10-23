@@ -9,60 +9,22 @@ import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import Link from 'next/link';
 import { ROUTES } from '@/config/constant';
+import { useGetCountriesQuery } from '@/store/slices/allRequests';
+import { useFilterQuery } from '@/hooks/filterQuery';
 
 function ScholarshipSlider() {
-    const data = [
-        {
-            title: '918 Scholarships in Canada',
-            logo: '/images/Scholarships/pic 1.svg'
-        },
-        {
-            title: '918 Scholarships in Pakistan',
-            logo: '/images/Scholarships/Pic 2.svg'
-        },
-        {
-            title: '918 Scholarships in India',
-            logo: '/images/Scholarships/Pic 3.svg'
-        },
-        {
-            title: '918 Scholarships in US',
-            logo: '/images/Scholarships/Pic 4.svg'
-        },
-        {
-            title: '918 Scholarships in Australia',
-            logo: '/images/Scholarships/Pic 2.svg'
-        },
-        {
-            title: '918 Scholarships in UK',
-            logo: '/images/Scholarships/Pic 5.svg'
-        },
-        {
-            title: '918 Scholarships in Canada',
-            logo: '/images/Scholarships/pic 1.svg'
-        },
-        {
-            title: '918 Scholarships in Pakistan',
-            logo: '/images/Scholarships/Pic 2.svg'
-        },
-        {
-            title: '918 Scholarships in India',
-            logo: '/images/Scholarships/Pic 3.svg'
-        },
-        {
-            title: '918 Scholarships in US',
-            logo: '/images/Scholarships/Pic 4.svg'
-        },
-        {
-            title: '918 Scholarships in Australia',
-            logo: '/images/Scholarships/Pic 2.svg'
-        },
-        {
-            title: '918 Scholarships in UK',
-            logo: '/images/Scholarships/Pic 5.svg'
-        }
-    ];
+    const { data: countryList } = useGetCountriesQuery();
+    const data = countryList
+        ?.filter((country) => country.scholarship.length > 0)
+        .map((item) => ({
+            title: `${item.scholarship.length} Scholarships in ${item.name}`,
+            logo: item.logo,
+            name: item.name
+        }));
+    const { addQuery } = useFilterQuery();
+
     return (
-        <>
+        <div className="w-full">
             <Swiper
                 effect={'coverflow'}
                 grabCursor={true}
@@ -82,12 +44,15 @@ function ScholarshipSlider() {
                 modules={[EffectCoverflow, Pagination, Navigation]}
                 className="swiper_container"
             >
-                {data.map(({ title, logo }) => (
+                {data?.map(({ title, logo, name }) => (
                     <SwiperSlide
                         key={'scholarship-slider--' + title}
                         className="relative"
                     >
-                        <Link href={ROUTES.FILTER_SCHOLARSHIP}>
+                        <Link
+                            href={ROUTES.FILTER_SCHOLARSHIP}
+                            onClick={() => addQuery({ countries: [name] })}
+                        >
                             <Image
                                 width={200}
                                 height={150}
@@ -101,7 +66,7 @@ function ScholarshipSlider() {
                     </SwiperSlide>
                 ))}
             </Swiper>
-        </>
+        </div>
     );
 }
 
