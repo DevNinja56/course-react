@@ -28,14 +28,15 @@ const Testimonial = () => {
     return (
         <div
             className={`bg-white ${
-                router.pathname === '/apply' || router.pathname === '/faq'
+                router.pathname === ROUTES.APPLY ||
+                router.pathname === ROUTES.FAQ
                     ? ''
                     : 'pt-8'
             } pb-28 md:pb-32 lg:pb-60 overflow-hidden`}
         >
             <div
                 className={`relative pb-0 ${
-                    router.pathname === '/faq' ? 'pt-10' : ''
+                    router.pathname === ROUTES.FAQ ? 'pt-10' : ''
                 }`}
             >
                 <Image
