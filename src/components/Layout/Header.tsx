@@ -6,6 +6,7 @@ import Link from 'next/link';
 import Sidebar from '../Sidebar/Sidebar';
 import { useUserAuth } from '@/hooks/auth';
 import { ROUTES } from '@/config/constant';
+import GlobalSearch from './GlobalSearch';
 
 const Header = () => {
     const router = useRouter();
@@ -209,14 +210,7 @@ const Header = () => {
                             src="/images/Menu.svg"
                             priority
                         />
-                        <Image
-                            width={32}
-                            height={32}
-                            alt="search-icon"
-                            className="hidden lg:block"
-                            src="/images/search.svg"
-                            priority
-                        />
+                        <GlobalSearch />
                     </div>
                 </div>
             </div>
