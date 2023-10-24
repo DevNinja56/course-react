@@ -1,7 +1,7 @@
 import Card from '@/components/ContactUs/Card';
 import FAQ from '@/components/FAQ/FAQ';
 import Map from '@/components/Map/Map';
-import Testimonal from '@/components/Testimonal/Testimonal';
+import Testimonial from '@/components/Testimonial';
 import React from 'react';
 
 const ContactUs = () => {
@@ -57,7 +57,7 @@ transition-all duration-300 px-2 mb-16"
                 </div>
             </div>
             <FAQ />
-            <Testimonal />
+            <Testimonial />
         </>
     );
 };

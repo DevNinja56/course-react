@@ -1,7 +1,7 @@
 import Card from '@/components/ContactUs/Card';
 import CounselingWork from '@/components/CounselingWork/CounselingWork';
 import Map from '@/components/Map/Map';
-import Testimonal from '@/components/Testimonal/Testimonal';
+import Testimonial from '@/components/Testimonial';
 import Image from 'next/image';
 import React from 'react';
 
@@ -181,7 +181,7 @@ const Apply = () => {
                 </div>
             </div>
             <CounselingWork />
-            <Testimonal />
+            <Testimonial />
         </>
     );
 };

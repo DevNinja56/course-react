@@ -4,11 +4,15 @@ import React, { useState } from 'react';
 import ProfileDropDown from '../DropDown/ProfileDropDown';
 import Link from 'next/link';
 import Sidebar from '../Sidebar/Sidebar';
+import { useUserAuth } from '@/hooks/auth';
+import { ROUTES } from '@/config/constant';
 
 const Header = () => {
     const router = useRouter();
     const [showDropDown, setShowDropDown] = useState(false);
     const [showSideBar, setShowSideBar] = useState(false);
+
+    const { isAuthenticated } = useUserAuth();
 
     const onShowSideBar = () => {
         setShowSideBar(!showSideBar);
@@ -33,7 +37,7 @@ const Header = () => {
                 </Link>
                 <div className="flex items-center gap-x-6">
                     <div className="hidden lg:flex items-center gap-x-6">
-                        <Link href="/filterPage">
+                        <Link href={ROUTES.FILTER_COURSE}>
                             <div className="flex items-center px-[10px] gap-x-[10px]">
                                 <svg
                                     width="32"
@@ -47,7 +51,8 @@ const Header = () => {
                                         clipRule="evenodd"
                                         d="M11.0269 20.4347L13.1509 13.6494L19.9362 11.5254L17.8122 18.3107L11.0269 20.4347Z"
                                         className={`font-semibold ${
-                                            router.pathname === '/filterPage'
+                                            router.pathname ===
+                                            ROUTES.FILTER_COURSE
                                                 ? 'stroke-blueColor'
                                                 : 'stroke-textBlackColor'
                                         }`}
@@ -58,7 +63,8 @@ const Header = () => {
                                     <path
                                         d="M15.4814 28.7953C22.5588 28.7953 28.2961 23.058 28.2961 15.9807C28.2961 8.90334 22.5588 3.16602 15.4814 3.16602C8.40407 3.16602 2.66675 8.90334 2.66675 15.9807C2.66675 23.058 8.40407 28.7953 15.4814 28.7953Z"
                                         className={`font-semibold ${
-                                            router.pathname === '/filterPage'
+                                            router.pathname ===
+                                            ROUTES.FILTER_COURSE
                                                 ? 'stroke-blueColor'
                                                 : 'stroke-textBlackColor'
                                         }`}
@@ -69,7 +75,7 @@ const Header = () => {
                                 </svg>
                                 <p
                                     className={`font-semibold ${
-                                        router.pathname === '/filterPage'
+                                        router.pathname === ROUTES.FILTER_COURSE
                                             ? 'text-blueColor'
                                             : 'text-textBlackColor'
                                     }`}
@@ -78,7 +84,7 @@ const Header = () => {
                                 </p>
                             </div>
                         </Link>
-                        <Link href="/compare">
+                        <Link href={ROUTES.COMPARE}>
                             <div className="flex items-center px-[10px] gap-x-[10px]">
                                 <svg
                                     width="32"
@@ -107,7 +113,7 @@ const Header = () => {
                                 </p>
                             </div>
                         </Link>
-                        <Link href="/apply">
+                        <Link href={ROUTES.APPLY}>
                             <div className="flex items-center px-[10px] gap-x-[10px]">
                                 <svg
                                     width="32"
@@ -147,10 +153,12 @@ const Header = () => {
                     </div>
                     {showSideBar && <Sidebar setShowSideBar={setShowSideBar} />}
                     <div className="flex items-center gap-x-3 md:gap-x-6">
-                        {router.pathname === '/profile' ? (
-                            <div className="flex items-center gap-x-3 relative">
+                        {isAuthenticated ? (
+                            <div
+                                className="flex items-center gap-x-3 relative select-none cursor-pointer "
+                                onClick={onShowDropDown}
+                            >
                                 <Image
-                                    onClick={onShowDropDown}
                                     height={36}
                                     width={36}
                                     alt="profile-img"
@@ -160,7 +168,6 @@ const Header = () => {
                                 <p className="text-lightGrayColor hidden lg:flex gap-x-1 text-[13px]">
                                     Daniyal
                                     <Image
-                                        onClick={onShowDropDown}
                                         height={12}
                                         width={12}
                                         alt="down-arrow"
@@ -172,30 +179,26 @@ const Header = () => {
                                 <ProfileDropDown showDropDown={showDropDown} />
                             </div>
                         ) : (
-                            <>
-                                <Link href="/signIn">
-                                    <button className="py-2 lg:py-[13px] px-5 lg:px-[34px] gap-x-[6px] md:flex items-center rounded-[5px] bg-blueColor hover:bg-blue-600 text-white text-base font-medium hidden">
-                                        <Image
-                                            width={20}
-                                            height={20}
-                                            alt="user-icon"
-                                            src="/images/Profile.svg"
-                                            priority
-                                        />
-                                        Login
-                                    </button>
-                                </Link>
-                                <Link href="/signIn">
+                            <Link href={ROUTES.SIGN_IN}>
+                                <button className="py-2 lg:py-[13px] px-5 lg:px-[34px] gap-x-[6px] md:flex items-center rounded-[5px] bg-blueColor hover:bg-blue-600 text-white text-base font-medium hidden">
                                     <Image
-                                        height={36}
-                                        width={36}
-                                        alt=""
-                                        src="/images/User Circle.svg"
-                                        className="block md:hidden"
+                                        width={20}
+                                        height={20}
+                                        alt="user-icon"
+                                        src="/images/Profile.svg"
                                         priority
                                     />
-                                </Link>
-                            </>
+                                    Login
+                                </button>
+                                <Image
+                                    height={36}
+                                    width={36}
+                                    alt=""
+                                    src="/images/User Circle.svg"
+                                    className="block md:hidden"
+                                    priority
+                                />
+                            </Link>
                         )}
                         <Image
                             width={46}

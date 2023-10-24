@@ -1,20 +1,19 @@
-import Card from '@/components/Home/Card';
-import EventCard from '@/components/Home/EventCard';
-import Slider from '@/components/Slider/Slider';
-import Testimonal from '@/components/Testimonal/Testimonal';
 import Image from 'next/image';
-import Link from 'next/link';
-import React from 'react';
+import Testimonial from '@/components/Testimonial';
+import EventCard from '@/components/Home/EventCard';
+import SearchBox from '@/components/Home/SearchBox';
+import ScholarshipSlider from '@/components/Slider/ScholarshipSlider';
+import CategoriesSection from '@/components/Home/CategoriesSection';
 
 const Home = () => {
     return (
         <>
-            <div className="w-full flex items-center mt-[100px] bg-white py-20 relative pb-12">
+            <div className="w-full flex items-center mt-[100px] bg-white py-0 lg:py-20 relative pb-12">
                 <Image
                     height={104}
                     width={104}
                     alt="home-round"
-                    className="absolute top-64 left-0"
+                    className="absolute bottom-0 lg:top-64 left-0"
                     src="/images/Home/homeRound1.svg"
                     priority
                 />
@@ -22,57 +21,42 @@ const Home = () => {
                     height={60}
                     width={60}
                     alt="home-round-2"
-                    className="absolute top-9 right-[542px]"
+                    className="absolute top-[330px] lg:top-9 right-[605px] lg:right-[542px]"
                     src="/images/Home/homeRound2.svg"
                     priority
                 />
-                <div className="flex justify-between z-10 w-full">
-                    <div className="flex flex-col pl-36 pr-12 pt-32">
-                        <div className="pr-60 mb-5">
+                <div className="flex flex-col lg:flex-row justify-between z-10 w-full lg:px-0">
+                    <div className="flex flex-col px-12 lg:px-0 lg:pl-4 xl:pl-36 lg:pr-40 xl:pr-12 pt-16 lg:pt-32">
+                        <div className="pr-0 lg:pr-60 mb-5">
                             <h1 className="text-mainTextColor text-[45px] font-black mb-2">
                                 World&lsquo;s Largest Course Search Platform
                             </h1>
-                            <p className="text-aboutUsTextColor text-[15px] leading-6 aboutUsTextColor mb-5 font-normal">
+                            <p className="text-aboutUsTextColor text-base leading-6 aboutUsTextColor mb-5 font-normal">
                                 Make your university application stress free and
                                 discover in minutes if you&lsquo;d get into your
                                 dream university. Enter your academic profile
                                 and get a decision in real time.
                             </p>
                         </div>
-                        <div className="rounded-[10px] bg-white custom-shadow p-2 pl-5 z-20">
-                            <div className="bg-white flex items-center justify-between">
-                                <div className="flex items-center">
-                                    <div className="flex items-center">
-                                        <p className="p-[10px] pb-[9px] font-medium text-darkGrayColor text-base w-[130px]">
-                                            What to Study?
-                                        </p>
-                                        <div className="w-[37px] rotate-[-90deg] border border-textLightBlackColor ml-28"></div>
-                                    </div>
-                                    <p className="p-[10px] pb-[9px] font-medium text-darkGrayColor text-base w-[130px] ml-5">
-                                        What to Study?
-                                    </p>
-                                </div>
-                                <button className="py-4 px-[67px] rounded-[5px] bg-blueColor text-white font-medium text-lg">
-                                    Search
-                                </button>
-                            </div>
-                        </div>
+                        <SearchBox />
                     </div>
                     <Image
                         height={597}
                         width={512}
                         alt="home-main"
-                        className="absolute top-16 right-16 z-10"
+                        className="absolute bottom-20 lg:top-16 right-16 z-10 w-[577px] lg:w-[512px]"
                         src="/images/Home/Home Img.svg"
                         priority
                     />
-                    <div className="bg-profileBgColor rounded-[10px] relative h-[597px] w-[512px] mt-16"></div>
+                    <div className="h-[765px] lg:h-[597px] w-full lg:w-[512px] flex justify-end">
+                        <div className="bg-profileBgColor rounded-[10px] relative mt-40 lg:mt-16 h-[80%] lg:h-full w-[50%] lg:w-full"></div>
+                    </div>
                 </div>
                 <Image
                     height={104}
                     width={104}
-                    alt="hoem-round-3"
-                    className="absolute bottom-24 right-[640px]"
+                    alt="home-round-3"
+                    className="absolute bottom-0 xl:bottom-24 right-[640px] hidden lg:block"
                     src="/images/Home/homeRound3.svg"
                     priority
                 />
@@ -94,52 +78,7 @@ const Home = () => {
                     src="/images/Home/topCategoryRound2.svg"
                     priority
                 />
-                <div className="max-w-[1100px] 2xl:max-w-[2300px] mx-auto px-2 2xl:px-8 transition-all duration-300 flex gap-x-8">
-                    <div className="pt-16 w-[35%]">
-                        <p className="text-blueColor text-[23px] font-bold">
-                            Top Categories
-                        </p>
-                        <h1 className="text-mainTextColor font-extrabold text-[35px] mb-2">
-                            Explore our Popular Categories
-                        </h1>
-                        <p className="text-darkGrayColor text-base mb-7">
-                            Pellentesque fringilla, massa sit amet feugiat
-                            mollis, leo turpis elementum justo, vel consequat ex
-                            urna ut massa maecenas justo sapien.
-                        </p>
-                        <Link href="/fields">
-                            <button className="pt-4 pb-[17px] px-[48px] bg-blueColor rounded-[5px] font-semibold text-white">
-                                All Categories
-                            </button>
-                        </Link>
-                    </div>
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 z-10 w-[65%]">
-                        <Card
-                            img="/images/Home/download (35).svg"
-                            title="Art & Design"
-                        />
-                        <Card
-                            img="/images/Home/download (39).svg"
-                            title="Marketing"
-                        />
-                        <Card
-                            img="/images/Home/download (31).svg"
-                            title="Business"
-                        />
-                        <Card
-                            img="/images/Home/download (32).svg"
-                            title="Devolopment"
-                        />
-                        <Card
-                            img="/images/Home/download (36).svg"
-                            title="Data Science"
-                        />
-                        <Card
-                            img="/images/Home/Marketion.svg"
-                            title="Marketing"
-                        />
-                    </div>
-                </div>
+                <CategoriesSection />
             </div>
             <div className="w-full pb-20 2xl:pb-[700px] flex flex-col items-center overflow-hidden bg-white">
                 <p className="text-[23px] font-bold text-blueColor mb-1">
@@ -148,7 +87,7 @@ const Home = () => {
                 <h1 className="text-textLightBlackColor text-[48px] font-extrabold mb-5 text-center">
                     Scholarships you may be interested in
                 </h1>
-                <Slider />
+                <ScholarshipSlider />
             </div>
             <div className="w-full p-10 pb-32 relative bg-white">
                 <Image
@@ -260,9 +199,11 @@ const Home = () => {
                     </button>
                 </div>
             </div>
-            <Testimonal />
+            <Testimonial />
         </>
     );
 };
+
+Home.layout = { auth: false };
 
 export default Home;

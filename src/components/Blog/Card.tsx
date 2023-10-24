@@ -1,54 +1,55 @@
+import { ROUTES } from '@/config/constant';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React from 'react';
+import FavoriteButton from '../Button/FavoriteButton';
+import { usePaginatedBlogs } from '@/hooks/blogsPaginated';
+import { nanoid } from '@reduxjs/toolkit';
 
 interface cardProps {
-    cardTitle: string;
     title: string;
-    hearts: string;
-    cardTitleTwo: string;
-    cardTitleThree: string;
+    tags: string[];
     image: string;
+    favorite: string[];
+    id: string;
 }
 
-const Card = ({
-    cardTitle,
-    cardTitleTwo,
-    cardTitleThree,
-    title,
-    hearts,
-    image
-}: cardProps) => {
+const Card = ({ title, favorite, tags, image, id }: cardProps) => {
     const router = useRouter();
+    const { fetchBlogs } = usePaginatedBlogs();
     return (
-        <Link href="/blogsDetail">
-            <div
-                className={`custom-shadow ${
-                    router.pathname === '/blogsDetail'
-                        ? 'min-w-[340px] 2xl:min-w-0 2xl:w-[27vw]'
-                        : ''
-                }`}
-            >
+        <div
+            className={`custom-shadow relative ${
+                router.pathname === ROUTES.BLOGS_DETAIL
+                    ? 'min-w-[340px] 2xl:min-w-0 2xl:w-[27vw]'
+                    : ''
+            }`}
+        >
+            <FavoriteButton
+                isActive={!!favorite?.[0]}
+                body={{ blog: id }}
+                refetch={fetchBlogs}
+            />
+            <Link href={ROUTES.BLOGS_DETAIL.replace(':id', id)}>
                 <Image
                     height={203.29}
                     width={366}
-                    alt="cardimg"
+                    alt="carding"
                     className="rounded-[10px] rounded-b-none mb-4 w-full"
                     src={`${image}`}
                     priority
                 />
                 <div className="px-[25px] flex flex-col gap-y-6">
                     <div className="flex items-center gap-x-3">
-                        <button className="py-1 px-[10px] rounded-[5px] bg-profileBgColor text-xs text-mainTextColor">
-                            {cardTitle}
-                        </button>
-                        <button className="py-1 px-[10px] rounded-[5px] bg-profileBgColor text-xs text-mainTextColor">
-                            {cardTitleTwo}
-                        </button>
-                        <button className="py-1 px-[10px] rounded-[5px] bg-profileBgColor text-xs text-mainTextColor">
-                            {cardTitleThree}
-                        </button>
+                        {tags?.map((tag) => (
+                            <p
+                                key={'tags--' + tags + nanoid()}
+                                className="py-1 px-[10px] rounded-[5px] bg-profileBgColor text-xs text-mainTextColor"
+                            >
+                                {tag}
+                            </p>
+                        ))}
                     </div>
                     <h1 className="font-bold text-lg text-mainTextColor">
                         {title}
@@ -75,22 +76,10 @@ const Card = ({
                                 />
                             </svg>
                         </div>
-                        <div className="py-[7px] gap-x-[6px] flex items-center mb-3">
-                            <Image
-                                height={20}
-                                width={20}
-                                alt="heart"
-                                src="/images/BlogsDetail/Heart.svg"
-                                priority
-                            />
-                            <h1 className="font-medium text-base text-darkGrayColor">
-                                {hearts}
-                            </h1>
-                        </div>
                     </div>
                 </div>
-            </div>
-        </Link>
+            </Link>
+        </div>
     );
 };
 

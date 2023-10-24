@@ -1,0 +1,22 @@
+export const ROUTES = {
+    HOMEPAGE: '/',
+    SIGN_IN: '/signIn',
+    SIGN_UP: '/signUp',
+    COMPARE: '/compare',
+    APPLY: '/apply',
+    FILTER_COURSE: '/filter/course',
+    COURSE: '/course/:id',
+    FILTER_SCHOLARSHIP: '/filter/scholarship',
+    SCHOLARSHIP: '/scholarship/:id',
+    PROFILE: '/profile',
+    COUNTRY: '/countries',
+    FIELDS: '/categories',
+    BLOGS: '/blogs',
+    BLOGS_DETAIL: '/blogs/:id',
+    INSTITUTES: '/institutes',
+    ABOUT_US: '/aboutUs',
+    CONTACT_US: '/contactUs',
+    FAQ: '/faq',
+    PRIVACY_POLICY: '/privacyPolicy',
+    TERMS_CONDITION: '/termsCondition'
+};

@@ -1,8 +1,58 @@
+import Button from '@/components/Button';
+import InputBox from '@/components/Input';
+import { API_ENDPOINTS } from '@/config/Api_EndPoints';
+import { ROUTES } from '@/config/constant';
+import { useUserAuth } from '@/hooks/auth';
+import { signUpForm } from '@/types';
+import { fetchRequest } from '@/utils/axios/fetch';
+import { signUpFormSchema } from '@/utils/formSchemas';
 import Image from 'next/image';
 import Link from 'next/link';
-import React from 'react';
+import { useRouter } from 'next/router';
+import React, { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
+import { BiLock } from 'react-icons/bi';
+import { MdOutlineMail } from 'react-icons/md';
+import { BiUser } from 'react-icons/bi';
+import { IoIosPhonePortrait } from 'react-icons/io';
 
 const SignUp = () => {
+    const [isLoading, setIsLoading] = useState(false);
+    const { updateUserDetails, loggedInUser } = useUserAuth();
+    const { push } = useRouter();
+    const {
+        register,
+        handleSubmit: fromSubmit,
+        formState: { errors },
+        setError
+    } = useForm<signUpForm>({ resolver: signUpFormSchema });
+
+    const handleSubmit = (body: signUpForm) => {
+        setIsLoading(true);
+        fetchRequest({
+            url: API_ENDPOINTS.AUTH.SIGNUP,
+            type: 'post',
+            body
+        })
+            .then((res) => {
+                updateUserDetails(res.data.user);
+                loggedInUser({
+                    access: res.data.accessToken,
+                    refresh: res.data.refreshToken
+                });
+                push(ROUTES.HOMEPAGE);
+                toast.success(res.data.message);
+            })
+            .catch((err) => {
+                setError('email', {
+                    type: 'custom',
+                    message: err.response.data.message
+                });
+            })
+            .finally(() => setIsLoading(false));
+    };
+
     return (
         <div className="w-full flex justify-center items-center py-16 lg:px-16 2xl:px-40 bg-loginBgColor min-h-[100vh]">
             <div className="w-full lg:max-w-[1000px] 2xl:max-w-[2000px] mx-0 lg:mx-auto px-0 lg:px-2 transition-all duration-300">
@@ -34,7 +84,7 @@ const SignUp = () => {
                     <Image
                         height={48}
                         width={48}
-                        alt="ligin-round-2"
+                        alt="login-round-2"
                         className="absolute right-44 bottom-[250px] w-[34px] md:w-[44px]"
                         src="/images/signInRound1.svg"
                         priority
@@ -59,81 +109,80 @@ const SignUp = () => {
                         <h1 className="font-medium text-2xl md:text-[36px] text-mainTextColor mb-3">
                             Welcome Back
                         </h1>
-                        <p className="text-blueColor font-medium mb-4 md:mb-5 text-sm md:text-base">
-                            I do not have an account yet
-                        </p>
-                        <div className="flex flex-col w-full gap-y-5 mb-3">
-                            <label className="text-lg text-darkGrayColor flex flex-col gap-y-1">
-                                Email
-                                <div className="relative">
-                                    <input
-                                        className="pt-[10px] pb-[9px] pl-12 text-grayColor border border-grayColor rounded-[10px] w-full outline-none"
-                                        placeholder="Email Adress..."
-                                    />
-                                    <Image
-                                        height={20}
-                                        width={20}
-                                        alt="user"
-                                        className="absolute left-5 top-[15.4px]"
-                                        src="/images/mail.svg"
-                                        priority
-                                    />
-                                </div>
-                            </label>
-                            <label className="text-lg text-darkGrayColor flex flex-col gap-y-1">
-                                Password
-                                <div className="relative">
-                                    <input
-                                        className="pt-[10px] pb-[9px] pl-12 text-grayColor border border-grayColor rounded-[10px] w-full outline-none"
-                                        placeholder="Password"
-                                    />
-                                    <Image
-                                        height={20}
-                                        width={20}
-                                        alt="lock"
-                                        className="absolute left-5 top-[15.4px]"
-                                        src="/images/Keyhole Minimalistic.svg"
-                                        priority
-                                    />
-                                </div>
-                            </label>
-                            <label className="text-lg text-darkGrayColor flex flex-col gap-y-1">
-                                Repeat Password
-                                <div className="relative">
-                                    <input
-                                        className="pt-[10px] pb-[9px] pl-12 text-grayColor border border-grayColor rounded-[10px] w-full outline-none"
-                                        placeholder="Repeat Password"
-                                    />
-                                    <Image
-                                        height={20}
-                                        width={20}
-                                        alt="lock"
-                                        className="absolute left-5 top-[15.4px]"
-                                        src="/images/Keyhole Minimalistic.svg"
-                                        priority
-                                    />
-                                </div>
-                            </label>
-                        </div>
-                        <div className="flex items-center gap-x-3 w-full mb-8">
-                            <input
-                                type="checkbox"
-                                className="h-5 w-5 border border-grayColor"
-                            />
-                            <p className="text-lightGrayColor pt-[2px]">
-                                I have read the Terms of Service
+                        <Link href={ROUTES.SIGN_IN}>
+                            <p className="text-blueColor font-medium mb-4 md:mb-12 text-sm md:text-base">
+                                I do not have an account yet
                             </p>
-                        </div>
-                        <Link href="/signIn" className="w-full">
-                            <button className="bg-blueColor w-full pt-[14px] pb-[13px] rounded-[10px] text-white font-semibold mb-3">
-                                Sign Up
-                            </button>
                         </Link>
+                        <form
+                            onSubmit={fromSubmit(handleSubmit)}
+                            className="w-full"
+                        >
+                            <div className="flex flex-col w-full gap-y-5 mb-3">
+                                <InputBox
+                                    {...register('name', {
+                                        required: true
+                                    })}
+                                    placeholder="Name"
+                                    title="Full Name..."
+                                    error={errors.name?.message}
+                                    icon={BiUser}
+                                    autoComplete="off"
+                                />
+                                <InputBox
+                                    {...register('email', {
+                                        required: true
+                                    })}
+                                    placeholder="Email Address..."
+                                    title="Email"
+                                    error={errors.email?.message}
+                                    icon={MdOutlineMail}
+                                />
+                                <InputBox
+                                    {...register('phone_number', {
+                                        required: true
+                                    })}
+                                    type="tel"
+                                    placeholder="Phone Number..."
+                                    title="Phone Number"
+                                    error={errors.phone_number?.message}
+                                    icon={IoIosPhonePortrait}
+                                />
+
+                                <InputBox
+                                    {...register('password', {
+                                        required: true
+                                    })}
+                                    type="password"
+                                    placeholder="Password"
+                                    title="Password"
+                                    error={errors.password?.message}
+                                    icon={BiLock}
+                                />
+                            </div>
+                            <div className="flex items-center gap-x-3 w-full mb-8">
+                                <input
+                                    type="checkbox"
+                                    className="h-5 w-5 border border-grayColor"
+                                />
+                                <p className="text-lightGrayColor pt-[2px]">
+                                    I have read the Terms of Service
+                                </p>
+                            </div>
+                            <Button
+                                type="submit"
+                                disabled={isLoading}
+                                isLoader={isLoading}
+                                text="Sign Up"
+                            />
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
     );
 };
+
+SignUp.layout = { header: false, footer: false, isPublic: true };
 
 export default SignUp;

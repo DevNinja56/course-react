@@ -1,25 +1,31 @@
-import Image from 'next/image';
+import { ROUTES } from '@/config/constant';
+import { useFilterQuery } from '@/hooks/filterQuery';
+import { countryType } from '@/types';
 import Link from 'next/link';
 import React from 'react';
 
 interface CountryProps {
-    img: string;
-    countryName: string;
+    country: countryType;
 }
 
-const Card = ({ img, countryName }: CountryProps) => {
+const Card = ({ country }: CountryProps) => {
+    const { addQuery } = useFilterQuery();
+
     return (
-        <Link href="/filterPage" className='z-10'>
-            <div className="border-2 border-countryBorderColor py-3 px-5 flex items-center gap-x-[35px] rounded-[5px] cursor-pointer hover:border-blueColor bg-white">
-                <Image
-                    height={54}
-                    width={54}
-                    alt="country-img"
-                    src={`${img}`}
-                    priority
-                />
-                <p className="font-medium text-[23px] text-mainTextColor">
-                    {countryName}
+        <Link
+            href={ROUTES.FILTER_COURSE}
+            className="z-10"
+            onClick={() => addQuery({ countries: [country.name] })}
+        >
+            <div
+                className="border-2 border-countryBorderColor py-3 px-5 flex items-center gap-x-[35px] rounded-[5px] cursor-pointer hover:border-blueColor bg-white"
+                title={country?.name}
+            >
+                <span
+                    className={`fi-${country?.code.toLowerCase()} h-[55px] min-w-[55px] rounded-full object-contain bg-cover bg-center border  `}
+                ></span>
+                <p className="font-medium text-[23px] text-mainTextColor truncate ">
+                    {country?.name}
                 </p>
             </div>
         </Link>

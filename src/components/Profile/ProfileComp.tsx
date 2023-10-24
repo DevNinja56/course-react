@@ -1,21 +1,27 @@
+import { useUserAuth } from '@/hooks/auth';
+import { useUi } from '@/hooks/user-interface';
+import { modalType } from '@/store/slices/ui.slice';
 import Image from 'next/image';
 import React, { useState } from 'react';
+import { FiEdit } from 'react-icons/fi';
 
 const ProfileComp = () => {
+    const { user } = useUserAuth();
+    const { updateModal } = useUi();
     const [showProfileInfo, setShowProfileInfo] = useState<boolean>(true);
-    const [showStudyIntrest, setShowStudyIntrest] = useState<boolean>(false);
+    const [showStudyInterest, setShowStudyInterest] = useState<boolean>(false);
     const [showBudgetPreference, setShowBudgetPreference] =
         useState<boolean>(false);
     const [showAcademicBackground, setShowAcademicBackground] =
         useState<boolean>(false);
-    const [showEnglishLevel, setshowEnglishLevel] = useState<boolean>(false);
+    const [showEnglishLevel, setShowEnglishLevel] = useState<boolean>(false);
 
     const onShowProfileInfo = () => {
         setShowProfileInfo(!showProfileInfo);
     };
 
-    const onShowStudyIntrest = () => {
-        setShowStudyIntrest(!showStudyIntrest);
+    const onShowStudyInterest = () => {
+        setShowStudyInterest(!showStudyInterest);
     };
 
     const onShowBudgetPreference = () => {
@@ -27,7 +33,7 @@ const ProfileComp = () => {
     };
 
     const onShowEnglishLevel = () => {
-        setshowEnglishLevel(!showEnglishLevel);
+        setShowEnglishLevel(!showEnglishLevel);
     };
 
     return (
@@ -42,7 +48,7 @@ const ProfileComp = () => {
                             onClick={onShowProfileInfo}
                             height={20}
                             width={20}
-                            alt="img-aroow-down"
+                            alt="img-arrow-down"
                             src="/images/chevron-down.svg"
                             className={`lg:hidden ${
                                 showProfileInfo ? 'rotate-[-180deg]' : ''
@@ -92,18 +98,18 @@ const ProfileComp = () => {
                             Study Interests
                         </p>
                         <Image
-                            onClick={onShowStudyIntrest}
+                            onClick={onShowStudyInterest}
                             height={20}
                             width={20}
                             alt="img-aroow-down"
                             src="/images/chevron-down.svg"
                             className={`lg:hidden ${
-                                showStudyIntrest ? 'rotate-[-180deg]' : ''
+                                showStudyInterest ? 'rotate-[-180deg]' : ''
                             }`}
                             priority
                         />
                     </div>
-                    {showStudyIntrest && ''}
+                    {showStudyInterest && ''}
                 </div>
                 <div className="flex flex-col gap-y-6">
                     <div className="py-[14px] md:py-[17px] lg:py-[20px] px-[30px] md:px-[50px] lg:pl-0 lg:pr-5 lg:text-mainTextColor text-blueColor lg:border-r-4 lg:border-white flex justify-between items-center lg:justify-end w-full border md:border-personalInfoBorderColor">
@@ -133,7 +139,7 @@ const ProfileComp = () => {
                             onClick={onShowAcademicBackground}
                             height={20}
                             width={20}
-                            alt="img-aroow-down"
+                            alt="img-arrow-down"
                             src="/images/chevron-down.svg"
                             className={`lg:hidden ${
                                 showAcademicBackground ? 'rotate-[-180deg]' : ''
@@ -163,31 +169,40 @@ const ProfileComp = () => {
                     {showEnglishLevel && ''}
                 </div>
             </div>
-            <div className="hidden lg:flex flex-col gap-y-3 w-full lg:w-[67%]">
+            <div className="hidden lg:flex flex-col gap-y-3 w-full lg:w-[67%]  ">
                 <p className="py-[14px] text-[32px] font-semibold">
                     Personal Info
                 </p>
-                <div className="rounded-[10px] border border-borderColor px-11 pt-11 pb-4 flex flex-col gap-y-6">
+                <div className="rounded-[10px] border border-borderColor px-11 pt-11 pb-4 flex flex-col gap-y-6 relative ">
+                    <button
+                        className="absolute top-2 right-3 p-5 "
+                        onClick={() =>
+                            updateModal({
+                                type: modalType.update_user_info,
+                                state: {}
+                            })
+                        }
+                    >
+                        <FiEdit />
+                    </button>
                     <div className="border-b border-personalInfoBorderColor pb-5 flex flex-col gap-y-2 text-mainTextColor">
                         <p>Name</p>
-                        <h1 className="text-xl font-semibold">Daniyal Samim</h1>
+                        <h1 className="text-xl font-semibold">{user.name}</h1>
                     </div>
                     <div className="border-b border-personalInfoBorderColor pb-5 flex flex-col gap-y-2 text-mainTextColor">
                         <p>Email</p>
-                        <h1 className="text-xl font-semibold">
-                            daniyalsamim@gmail.com
-                        </h1>
+                        <h1 className="text-xl font-semibold">{user.email}</h1>
                     </div>
                     <div className="border-b border-personalInfoBorderColor pb-5 flex flex-col gap-y-2 text-mainTextColor">
                         <p>Phone</p>
                         <h1 className="text-xl font-semibold">
-                            +92 321 5251534
+                            {user.phone_number}
                         </h1>
                     </div>
                     <div className="pb-5 flex flex-col gap-y-2 text-mainTextColor">
                         <p>Address</p>
                         <h1 className="text-xl font-semibold">
-                            Abingdon, Maryland(MD), 21009
+                            {user?.address ?? 'No Address'}
                         </h1>
                     </div>
                 </div>

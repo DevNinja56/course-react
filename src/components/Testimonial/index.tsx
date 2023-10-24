@@ -1,0 +1,139 @@
+import Image from 'next/image';
+import { useRouter } from 'next/router';
+import React from 'react';
+import Card from './Card';
+import { nanoid } from '@reduxjs/toolkit';
+import dynamic from 'next/dynamic';
+const Carrousel = dynamic(() => import('../Slider/Carrousel'), { ssr: false });
+
+const Testimonial = () => {
+    const router = useRouter();
+
+    const cards = [
+        {
+            key: nanoid(),
+            content: <Card />
+        },
+        {
+            key: nanoid(),
+            content: <Card />
+        },
+        {
+            key: nanoid(),
+            content: <Card />
+        }
+    ];
+
+    return (
+        <div
+            className={`bg-white ${
+                router.pathname === '/apply' || router.pathname === '/faq'
+                    ? ''
+                    : 'pt-8'
+            } pb-28 md:pb-32 lg:pb-60 overflow-hidden`}
+        >
+            <div
+                className={`relative pb-0 ${
+                    router.pathname === '/faq' ? 'pt-10' : ''
+                }`}
+            >
+                <Image
+                    height={96}
+                    width={96}
+                    alt="testimonial-round"
+                    className="absolute bottom-12 left-8 hidden md:block"
+                    src="/images/Blogs/Ellipse 426.svg"
+                    priority
+                />
+                <div className="flex flex-col lg:flex-row justify-between items-start max-w-[1100px] 2xl:max-w-[2300px] mx-auto px-5 md:px-[90px] lg:px-2 2xl:px-8 transition-all duration-300 py-3 md:py-12 lg:py-20 gap-x-16 gap-y-5 lg:gap-y-0">
+                    <div className="flex flex-col gap-y-2 z-10 relative">
+                        <p className="font-bold text-xl md:text-[23px] text-blueColor">
+                            Testimonial
+                        </p>
+                        <h1
+                            style={{ lineHeight: '57.6px' }}
+                            className="text-[32px] md:text-[40px] font-extrabold text-mainTextColor w-[340px] mb-2"
+                        >
+                            See What OurClient Say’s
+                        </h1>
+                        <p className="text-darkGrayColor text-sm w-auto md:w-[559px]">
+                            Curabitur tristique, sem id sagittis varius, lacus
+                            ligula mollis dui, ac condimentum felis metus ut
+                            nulla. Aenean ut ultricies turpis, sed sollicitudin
+                            eros. Aliquam quis dui ut diam lobortis dignissim ut
+                            aliquet ex
+                        </p>
+                        <Image
+                            height={290}
+                            width={290}
+                            alt="message"
+                            className="absolute bottom-[-150px] left-0 w-[218px] h-[218px] lg:h-[290px] lg:w-[290px] hidden md:block"
+                            src="/images/Messages.svg"
+                            priority
+                        />
+                    </div>
+                    <div className="w-full mt-[150px] ">
+                        <Carrousel cards={cards} offset={1} />
+                    </div>
+                </div>
+                {router.pathname === '/universities' ||
+                router.pathname === '/fields' ||
+                router.pathname === '/countries' ||
+                router.pathname === '/aboutUs' ? (
+                    <>
+                        <Image
+                            height={94}
+                            width={94}
+                            alt="testimonial-round-2"
+                            className="absolute right-20 top-9 hidden md:block"
+                            src="/images/Universities/Ellipse 422.svg"
+                        />
+                        <Image
+                            height={228}
+                            width={228}
+                            alt="testimonial-round-2"
+                            className="absolute right-[-50px] md:right-0 top-0 h-[190px] w-[153px] lg:h-[228px] lg:w-[228px] md:hidden block"
+                            src="/images/Blogs/Ellipse 427.svg"
+                        />
+                    </>
+                ) : router.pathname === '/' ||
+                  router.pathname === '/contactUs' ? (
+                    <Image
+                        height={280}
+                        width={280}
+                        alt="testimonial-round-2"
+                        className="absolute right-0 top-[-120px]"
+                        src="/images/Home/testimoalRoundImg.svg"
+                    />
+                ) : router.pathname === '/apply' ||
+                  router.pathname === '/faq' ? (
+                    <Image
+                        height={289}
+                        width={245}
+                        alt="testimonial-round-2"
+                        className="absolute right-0 top-0"
+                        src="/images/Apply/testimonialCircle.svg"
+                    />
+                ) : router.pathname === '/courseDetail' ? (
+                    <Image
+                        height={174}
+                        width={175}
+                        alt="testimonial-round-2"
+                        className="absolute right-0 top-0"
+                        src="/images/CourseDetail/Circle 2.svg"
+                    />
+                ) : (
+                    <Image
+                        height={228}
+                        width={228}
+                        alt="testimonial-round-2"
+                        className="absolute right-[-50px] md:right-0 top-0 h-[190px] w-[153px] lg:h-[228px] lg:w-[228px]"
+                        src="/images/Blogs/Ellipse 427.svg"
+                    />
+                )}
+            </div>
+        </div>
+    );
+};
+
+export default Testimonial;

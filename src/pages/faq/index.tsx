@@ -1,7 +1,7 @@
 import Card from '@/components/ContactUs/Card';
 import CounselingWork from '@/components/CounselingWork/CounselingWork';
 import FAQ from '@/components/FAQ/FAQ';
-import Testimonal from '@/components/Testimonal/Testimonal';
+import Testimonial from '@/components/Testimonial';
 import Image from 'next/image';
 import React from 'react';
 
@@ -21,9 +21,7 @@ const FAQs = () => {
                     priority
                 />
                 <div className="max-w-[1100px] 2xl:max-w-[2300px] mx-auto px-2 2xl:px-8 transition-all duration-300 z-10">
-                    <div
-                        className="w-full custom-shadow rounded-[10px] p-11 mb-24 z-10 bg-white relative"
-                    >
+                    <div className="w-full custom-shadow rounded-[10px] p-11 mb-24 z-10 bg-white relative">
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-[25px] z-10">
                             <Card
                                 img="/images/Apply/emailaddress.svg"
@@ -50,7 +48,7 @@ const FAQs = () => {
                 </div>
             </div>
             <CounselingWork />
-            <Testimonal />
+            <Testimonial />
         </>
     );
 };
