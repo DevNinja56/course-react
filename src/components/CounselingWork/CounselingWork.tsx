@@ -30,10 +30,10 @@ const CounselingWork = () => {
                     height={314}
                     width={237}
                     alt="circle"
-                    className={`absolute right-0 h-[206px] w-[156px] lg:h-[314px] lg:w-[237px] top-[-100px] md:top-44 lg:top-0${
+                    className={`absolute right-0 h-[156px] w-[106px] md:h-[206px] md:w-[156px] lg:h-[314px] lg:w-[237px] top-[-100px] md:top-44 lg:top-0 ${
                         router.pathname === '/aboutUs' ||
                         router.pathname === '/apply'
-                            ? 'top-[-100px]'
+                            ? 'top-[-120px] md:top-[-100px] lg:top-[-100px]'
                             : ''
                     }`}
                     src="/images/Fields/Applicatio circle img.svg"
@@ -47,7 +47,7 @@ const CounselingWork = () => {
                             Learn More About Application Process
                         </h1>
                         <div className="flex flex-wrap justify-center w-full gap-[30px] z-10">
-                            <div className="custom-shadow rounded-[10px] py-7 flex flex-col gap-y-5 items-center bg-white px-1 w-[50%] md:w-[29%] lg:w-[17%]">
+                            <div className="custom-shadow rounded-[10px] py-7 flex flex-col gap-y-5 items-center bg-white px-1 w-[90%] md:w-[29%] lg:w-[17%]">
                                 <Image
                                     height={64}
                                     width={64}
@@ -59,7 +59,7 @@ const CounselingWork = () => {
                                     Statement of purpose
                                 </h1>
                             </div>
-                            <div className="custom-shadow rounded-[10px] py-7 flex flex-col gap-y-5 items-center bg-white px-1 w-[50%] md:w-[29%] lg:w-[17%]">
+                            <div className="custom-shadow rounded-[10px] py-7 flex flex-col gap-y-5 items-center bg-white px-1 w-[90%] md:w-[29%] lg:w-[17%]">
                                 <Image
                                     height={64}
                                     width={64}
@@ -71,7 +71,7 @@ const CounselingWork = () => {
                                     Letter of Recommendation
                                 </h1>
                             </div>
-                            <div className="custom-shadow rounded-[10px] py-7 flex flex-col gap-y-5 items-center bg-white px-1 w-[50%] md:w-[29%] lg:w-[17%]">
+                            <div className="custom-shadow rounded-[10px] py-7 flex flex-col gap-y-5 items-center bg-white px-1 w-[90%] md:w-[29%] lg:w-[17%]">
                                 <Image
                                     height={64}
                                     width={64}
@@ -83,7 +83,7 @@ const CounselingWork = () => {
                                     Student Visa Application
                                 </h1>
                             </div>
-                            <div className="custom-shadow rounded-[10px] py-7 flex flex-col gap-y-5 items-center bg-white px-1 w-[50%] md:w-[29%] lg:w-[17%]">
+                            <div className="custom-shadow rounded-[10px] py-7 flex flex-col gap-y-5 items-center bg-white px-1 w-[90%] md:w-[29%] lg:w-[17%]">
                                 <Image
                                     height={64}
                                     width={64}
@@ -95,7 +95,7 @@ const CounselingWork = () => {
                                     Admission Essay Writing
                                 </h1>
                             </div>
-                            <div className="custom-shadow rounded-[10px] py-7 flex flex-col gap-y-5 items-center bg-white px-1 w-[50%] md:w-[29%] lg:w-[17%]">
+                            <div className="custom-shadow rounded-[10px] py-7 flex flex-col gap-y-5 items-center bg-white px-1 w-[90%] md:w-[29%] lg:w-[17%]">
                                 <Image
                                     height={64}
                                     width={64}
@@ -239,11 +239,11 @@ const CounselingWork = () => {
                     height={314}
                     width={192}
                     alt="counselling-work"
-                    className={`absolute left-0 h-[180px] w-[180px] md:h-[206px] md:w-[206px] lg:h-[314px] lg:w-[192px] ${
+                    className={`absolute left-0 h-[130px] w-[130px] md:h-[206px] md:w-[206px] lg:h-[314px] lg:w-[192px] ${
                         router.pathname === '/apply' ||
                         router.pathname === '/faq'
                             ? 'top-56'
-                            : 'bottom-[1170px] md:bottom-44'
+                            : 'bottom-[1190px] md:bottom-44'
                     }`}
                     src="/images/Fields/Ellipse 427.svg"
                     priority

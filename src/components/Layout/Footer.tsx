@@ -13,7 +13,7 @@ const Footer = () => {
                     className="rounded-[10px] object-cover h-[241px] 2xl:h-[400px] md:h-[138px] w-[1160px] lg:w-[1160px] lg:h-[256px] 2xl:w-[2300px]"
                     src="/images/Frame 608.svg"
                 />
-                <div className="absolute top-[20%] lg:top-[30%] 2xl:top-0 left-0 z-10 w-full flex flex-col md:flex-row items-center font-black px-28 justify-between h-auto 2xl:h-[420px]">
+                <div className="absolute top-[20%] lg:top-[30%] 2xl:top-0 left-0 z-10 w-full flex flex-col md:flex-row items-center font-black px-2 md:px-28 justify-between h-auto 2xl:h-[420px]">
                     <h1 className="text-white text-[28px] md:text-[32px] lg:text-5xl leading-10 md:text-start text-center w-[300px] md:w-[313px] lg:w-[531px] mb-6 lg:mb-0">
                         Want to study at Online program ?
                     </h1>
@@ -150,7 +150,7 @@ const Footer = () => {
                 </div>
             </div>
             <div className="border border-borderColor py-8 w-full flex justify-center items-center">
-                <p className="text-lightGrayColor">
+                <p className="text-lightGrayColor text-sm md:text-base">
                     Copyright © 2023 Educo. All Rights Reserved
                 </p>
             </div>
