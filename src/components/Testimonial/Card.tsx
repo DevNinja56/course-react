@@ -49,11 +49,6 @@ const Card = () => {
                     diam lobortis dignissim ut aliquet ex
                 </p>
             </div>
-            {/* <div className="flex items-center gap-x-[10px]">
-                <div className="px-4 rotate-[-0deg] rounded-[10px] border-4 border-grayBorderColor"></div>
-                <div className="px-6 rotate-0 rounded-[10px] border-4 border-blueColor"></div>
-                <div className="px-4 rotate-[-0deg] rounded-[10px] border-4 border-grayBorderColor"></div>
-            </div> */}
         </div>
     );
 };

@@ -4,6 +4,7 @@ import React from 'react';
 import Card from './Card';
 import { nanoid } from '@reduxjs/toolkit';
 import dynamic from 'next/dynamic';
+import { ROUTES } from '@/config/constant';
 const Carrousel = dynamic(() => import('../Slider/Carrousel'), { ssr: false });
 
 const Testimonial = () => {
@@ -72,14 +73,13 @@ const Testimonial = () => {
                             priority
                         />
                     </div>
-                    <div className="w-full mt-[150px] ">
+                    <div className="w-full mt-[150px] relative ">
                         <Carrousel cards={cards} offset={1} />
                     </div>
                 </div>
-                {router.pathname === '/universities' ||
-                router.pathname === '/fields' ||
-                router.pathname === '/countries' ||
-                router.pathname === '/aboutUs' ? (
+                {router.pathname === ROUTES.FIELDS ||
+                router.pathname === ROUTES.COUNTRY ||
+                router.pathname === ROUTES.ABOUT_US ? (
                     <>
                         <Image
                             height={94}
@@ -96,8 +96,8 @@ const Testimonial = () => {
                             src="/images/Blogs/Ellipse 427.svg"
                         />
                     </>
-                ) : router.pathname === '/' ||
-                  router.pathname === '/contactUs' ? (
+                ) : router.pathname === ROUTES.HOMEPAGE ||
+                  router.pathname === ROUTES.CONTACT_US ? (
                     <Image
                         height={280}
                         width={280}
@@ -105,8 +105,8 @@ const Testimonial = () => {
                         className="absolute right-0 top-[-120px]"
                         src="/images/Home/testimoalRoundImg.svg"
                     />
-                ) : router.pathname === '/apply' ||
-                  router.pathname === '/faq' ? (
+                ) : router.pathname === ROUTES.APPLY ||
+                  router.pathname === ROUTES.FAQ ? (
                     <Image
                         height={289}
                         width={245}
@@ -114,7 +114,9 @@ const Testimonial = () => {
                         className="absolute right-0 top-0"
                         src="/images/Apply/testimonialCircle.svg"
                     />
-                ) : router.pathname === '/courseDetail' ? (
+                ) : router.pathname.includes(
+                      ROUTES.COURSE.replace(':id', '')
+                  ) ? (
                     <Image
                         height={174}
                         width={175}
