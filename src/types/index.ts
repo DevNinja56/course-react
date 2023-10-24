@@ -139,6 +139,7 @@ export type specializationType = {
 
 export type courseType = {
     _id: string;
+    id: string;
     name: string;
     logo: string;
     degree: {

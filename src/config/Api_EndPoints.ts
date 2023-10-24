@@ -16,6 +16,7 @@ export const API_ENDPOINTS = {
     COUNTRY: '/country',
     DEGREE: '/degree',
     DISCIPLINE: '/discipline',
+    DISCIPLINE_PAGINATED: '/discipline/paginated',
     SCHOLARSHIP: '/scholarship',
     COURSE_SEARCH: '/course/filter',
     SCHOLARSHIP_SEARCH: '/scholarship/filter',

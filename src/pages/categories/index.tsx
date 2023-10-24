@@ -1,12 +1,18 @@
-import CounselingWork from '@/components/CounselingWork/CounselingWork';
+import React, { useState } from 'react';
+import Image from 'next/image';
 import Card from '@/components/Fields/Card';
 import Testimonial from '@/components/Testimonial';
-import { useGetDisciplineQuery } from '@/store/slices/allRequests';
-import Image from 'next/image';
-import React from 'react';
+import LoaderSpinner from '@/components/LoaderSpinner';
+import { useGetPaginatedDisciplineQuery } from '@/store/slices/allRequests';
+import CounselingWork from '@/components/CounselingWork/CounselingWork';
+import PaginationBox from '@/components/Pagination';
 
 const Fields = () => {
-    const { data } = useGetDisciplineQuery();
+    const [page, setPage] = useState(1);
+    const { data, isLoading } = useGetPaginatedDisciplineQuery({
+        limit: 12,
+        page
+    });
     return (
         <>
             <div className="w-full flex items-center justify-between h-[214px] mt-[90px] bg-profileBgColor mb-16">
@@ -54,14 +60,27 @@ const Fields = () => {
             <div className="w-full pb-4 md:pb-20">
                 <div className="max-w-[1150px] 2xl:max-w-[2350px] mx-auto px-[80px] lg:px-2 2xl:px-8 transition-all duration-300 flex justify-between">
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-[30px] w-full place-items-center">
-                        {data?.map((discipline) => (
-                            <Card
-                                key={'discipline--' + discipline.id}
-                                discipline={discipline}
-                            />
-                        ))}
+                        {isLoading ? (
+                            <LoaderSpinner />
+                        ) : (
+                            data?.data?.map((discipline) => (
+                                <Card
+                                    key={'discipline--' + discipline.id}
+                                    discipline={discipline}
+                                />
+                            ))
+                        )}
                     </div>
                 </div>
+                {data?.totalPage && data?.totalPage > 1 && (
+                    <div className="pt-5">
+                        <PaginationBox
+                            totalPage={data?.totalPage}
+                            page={page}
+                            refetch={setPage}
+                        />
+                    </div>
+                )}
             </div>
             <CounselingWork />
             <Testimonial />

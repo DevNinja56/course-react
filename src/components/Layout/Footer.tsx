@@ -116,7 +116,7 @@ const Footer = () => {
                             <li className="pt-[9px] pb-[10px]">
                                 Find Consultants
                             </li>
-                            <Link href={ROUTES.UNIVERSITY}>
+                            <Link href={ROUTES.INSTITUTES}>
                                 <li className="pt-[9px] pb-[10px]">
                                     Find Institutions
                                 </li>

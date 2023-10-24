@@ -25,13 +25,21 @@ interface compareDataType {
     course: courseType | null;
 }
 
+interface dataType {
+    institute: instituteType[] | [];
+    discipline: disciplineType[] | [];
+    degreeLevel: degreeType[] | [];
+    specialization: specializationType[] | [];
+    course: courseType[] | [];
+}
+
 const CompareUniversityModal = () => {
     const { hideModal, modalState } = useUi();
     const { data: country, isLoading: countryLoading } = useGetCountriesQuery();
     const [isLoading, setIsLoading] = useState(false);
     const { compareFirst, compareSecond, compareThird } = useCompare();
     const { index } = modalState as { index: 'first' | 'second' | 'third' };
-    const [data, setData] = useState({
+    const [data, setData] = useState<dataType>({
         institute: [],
         discipline: [],
         degreeLevel: [],

@@ -1,10 +1,9 @@
-import Card from '@/components/Home/Card';
+import Image from 'next/image';
+import Testimonial from '@/components/Testimonial';
 import EventCard from '@/components/Home/EventCard';
 import SearchBox from '@/components/Home/SearchBox';
 import ScholarshipSlider from '@/components/Slider/ScholarshipSlider';
-import Testimonial from '@/components/Testimonial';
-import Image from 'next/image';
-import Link from 'next/link';
+import CategoriesSection from '@/components/Home/CategoriesSection';
 
 const Home = () => {
     return (
@@ -77,52 +76,7 @@ const Home = () => {
                     src="/images/Home/topCategoryRound2.svg"
                     priority
                 />
-                <div className="max-w-[1100px] 2xl:max-w-[2300px] mx-auto px-2 2xl:px-8 transition-all duration-300 flex gap-x-8">
-                    <div className="pt-16 w-[35%]">
-                        <p className="text-blueColor text-[23px] font-bold">
-                            Top Categories
-                        </p>
-                        <h1 className="text-mainTextColor font-extrabold text-[35px] mb-2">
-                            Explore our Popular Categories
-                        </h1>
-                        <p className="text-darkGrayColor text-base mb-7">
-                            Pellentesque fringilla, massa sit amet feugiat
-                            mollis, leo turpis elementum justo, vel consequat ex
-                            urna ut massa maecenas justo sapien.
-                        </p>
-                        <Link href="/fields">
-                            <button className="pt-4 pb-[17px] px-[48px] bg-blueColor rounded-[5px] font-semibold text-white">
-                                All Categories
-                            </button>
-                        </Link>
-                    </div>
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 z-10 w-[65%]">
-                        <Card
-                            img="/images/Home/download (35).svg"
-                            title="Art & Design"
-                        />
-                        <Card
-                            img="/images/Home/download (39).svg"
-                            title="Marketing"
-                        />
-                        <Card
-                            img="/images/Home/download (31).svg"
-                            title="Business"
-                        />
-                        <Card
-                            img="/images/Home/download (32).svg"
-                            title="Development"
-                        />
-                        <Card
-                            img="/images/Home/download (36).svg"
-                            title="Data Science"
-                        />
-                        <Card
-                            img="/images/Home/Marketion.svg"
-                            title="Marketing"
-                        />
-                    </div>
-                </div>
+                <CategoriesSection />
             </div>
             <div className="w-full pb-20 2xl:pb-[700px] flex flex-col items-center overflow-hidden bg-white">
                 <p className="text-[23px] font-bold text-blueColor mb-1">

@@ -11,6 +11,15 @@ import {
     specializationType
 } from '@/types';
 
+export interface PaginatedResponse<data> {
+    data: data;
+    count: number;
+    page: number;
+    limit: number;
+    totalPage: number;
+    nextPage: number | null;
+}
+
 export const stateQueryApi = createApi({
     reducerPath: 'stateQuery',
     baseQuery: fetchBaseQuery({
@@ -58,6 +67,17 @@ export const stateQueryApi = createApi({
                 url: API_ENDPOINTS.SINGLE_BLOG.replace(':id', id)
             }),
             transformResponse: (res: { data: blogsType }) => res.data! ?? res
+        }),
+        getPaginatedDiscipline: builder.query<
+            PaginatedResponse<disciplineType[]>,
+            { limit: number; page: number }
+        >({
+            query: ({ limit, page }) => ({
+                url: `${API_ENDPOINTS.DISCIPLINE_PAGINATED}?limit=${limit}&page=${page}`
+            }),
+            transformResponse: (res: {
+                data: PaginatedResponse<disciplineType[]>;
+            }) => res.data! ?? res
         })
     })
 });
@@ -69,5 +89,6 @@ export const {
     useGetScholarshipQuery,
     useGetSpecializationQuery,
     useGetInstituteQuery,
-    useGetSingleBlogQuery
+    useGetSingleBlogQuery,
+    useGetPaginatedDisciplineQuery
 } = stateQueryApi;
