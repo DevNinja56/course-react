@@ -18,5 +18,8 @@ export const ROUTES = {
     CONTACT_US: '/contactUs',
     FAQ: '/faq',
     PRIVACY_POLICY: '/privacyPolicy',
-    TERMS_CONDITION: '/termsCondition'
+    TERMS_CONDITION: '/termsCondition',
+    FAVORITES: '/Favorites',
+    SUBSCRIPTIONS: '/subscriptions',
+    SETTINGS: '/settings'
 };

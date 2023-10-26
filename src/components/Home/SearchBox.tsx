@@ -47,7 +47,7 @@ const SearchBox = () => {
                         <ReactSelectCustom
                             options={degreesList}
                             isMulti
-                            placeholder="What to Study?....."
+                            placeholder="What to Study?"
                             isLoading={degreeLoading}
                             onChange={(val: any) =>
                                 setValue((prev) => ({
@@ -63,7 +63,7 @@ const SearchBox = () => {
                         <ReactSelectCustom
                             options={countriesList}
                             isMulti
-                            placeholder="Where to Study?....."
+                            placeholder="Where to Study?"
                             isLoading={countryLoading}
                             onChange={(val: any) =>
                                 setValue((prev) => ({

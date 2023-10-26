@@ -6,12 +6,12 @@ import Image from 'next/image';
 const HeadBox = () => {
     const { updateModal } = useUi();
     return (
-        <div className="w-full px-5 md:px-[50px] lg:px-2 2xl:px-8 flex items-center justify-center mt-[100px] bg-profileBgColor py-20 relative mb-16">
+        <div className="w-full px-5 md:px-[50px] lg:px-2 2xl:px-8 flex items-center justify-center mt-[100px] bg-profileBgColor py-20 relative mb-16 print:py-0">
             <Image
                 height={193}
                 width={191}
                 alt="compareRound"
-                className="absolute top-0 left-0 h-20 w-20 lg:h-[193px] lg:w-[193px]"
+                className="absolute top-0 left-0 h-20 w-20 lg:h-[193px] lg:w-[193px] print:hidden"
                 src="/images/Blogs/Frame 642.svg"
                 priority
             />
@@ -27,7 +27,7 @@ const HeadBox = () => {
                         You can compare upto 3 Universities
                     </p>
                 </div>
-                <div className="py-4 px-4 md:px-8 bg-white custom-shadow rounded-[10px] w-full md:w-auto">
+                <div className="py-4 px-4 md:px-8 bg-white custom-shadow rounded-[10px] w-full md:w-auto print:hidden">
                     <div className="flex flex-wrap justify-center items-center gap-4">
                         <button
                             onClick={() =>
@@ -69,7 +69,7 @@ const HeadBox = () => {
                 height={193}
                 width={191}
                 alt="compare-round-2"
-                className="absolute bottom-0 right-0 h-16 w-16 lg:h-[193px] lg:w-[193px]"
+                className="absolute bottom-0 right-0 h-16 w-16 lg:h-[193px] lg:w-[193px] print:hidden"
                 src="/images/Blogs/Frame 643.svg"
                 priority
             />

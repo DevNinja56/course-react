@@ -24,7 +24,7 @@ export const InstituteLogoImage = ({
         <>
             <Image src={url} alt="institute logo" width={80} height={80} />
             <IoCloseSharp
-                className="absolute top-2 right-2 cursor-pointer hover:text-black "
+                className="absolute top-2 right-2 cursor-pointer hover:text-black print:hidden "
                 onClick={handleClick}
             />
         </>

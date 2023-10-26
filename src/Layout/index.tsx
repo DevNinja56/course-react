@@ -52,7 +52,14 @@ const MainLayout = ({
     const Layout = () => (
         <>
             {header && <Header />}
-            <div className="bg-lightColor">{children}</div>
+            <div
+                className={`bg-lightColor ${header && 'mt-[100px] print:mt-0'}`}
+            >
+                {router.pathname === (ROUTES.SIGN_IN || ROUTES.SIGN_UP) && (
+                    <Header onlyLogo />
+                )}
+                {children}
+            </div>
             {footer && <Footer />}
         </>
     );

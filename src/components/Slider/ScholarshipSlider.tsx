@@ -24,48 +24,51 @@ function ScholarshipSlider() {
     const { addQuery } = useFilterQuery();
 
     return (
-        <div className="w-full">
-            <Swiper
-                effect={'coverflow'}
-                grabCursor={true}
-                autoplay={true}
-                centeredSlides={false}
-                loop={true}
-                slidesPerView={'auto'}
-                coverflowEffect={{
-                    rotate: 0,
-                    stretch: 0,
-                    depth: 100,
-                    modifier: 2.5,
-                    slideShadows: true
-                }}
-                pagination={false}
-                navigation={false}
-                modules={[EffectCoverflow, Pagination, Navigation]}
-                className="swiper_container"
-            >
-                {data?.map(({ title, logo, name }) => (
-                    <SwiperSlide
-                        key={'scholarship-slider--' + title}
-                        className="relative"
-                    >
-                        <Link
-                            href={ROUTES.FILTER_SCHOLARSHIP}
-                            onClick={() => addQuery({ countries: [name] })}
+        <div className="w-full print:hidden">
+            {data && data?.length > 0 && (
+                <Swiper
+                    effect={'coverflow'}
+                    grabCursor={true}
+                    autoplay={true}
+                    centeredSlides={true}
+                    loop={true}
+                    slidesPerView={'auto'}
+                    coverflowEffect={{
+                        rotate: 0,
+                        stretch: 0,
+                        depth: 100,
+                        modifier: 2.5,
+                        slideShadows: true
+                    }}
+                    pagination={false}
+                    navigation={false}
+                    modules={[EffectCoverflow, Pagination, Navigation]}
+                    className="swiper_container"
+                >
+                    {data?.map(({ title, logo, name }) => (
+                        <SwiperSlide
+                            key={'scholarship-slider--' + title}
+                            className="relative"
                         >
-                            <Image
-                                width={200}
-                                height={150}
-                                src={logo}
-                                alt="slide_image"
-                            />
-                            <h3 className=" absolute bottom-2 left-2 w-1/2 text-2xl font-bold text-white drop-shadow-md ">
-                                {title}
-                            </h3>
-                        </Link>
-                    </SwiperSlide>
-                ))}
-            </Swiper>
+                            <Link
+                                href={ROUTES.FILTER_SCHOLARSHIP}
+                                onClick={() => addQuery({ countries: [name] })}
+                            >
+                                <Image
+                                    width={300}
+                                    height={350}
+                                    src={logo}
+                                    alt="slide_image"
+                                    className=" object-cover "
+                                />
+                                <h3 className=" absolute bottom-2 left-2 w-1/2 text-2xl font-bold text-white drop-shadow-md ">
+                                    {title}
+                                </h3>
+                            </Link>
+                        </SwiperSlide>
+                    ))}
+                </Swiper>
+            )}
         </div>
     );
 }

@@ -30,22 +30,25 @@ export type signUpForm = {
     phone_number: string;
 };
 
+export type changePasswordForm = {
+    password: string;
+    new_password: string;
+    confirm_password: string;
+};
+
 export type scholarshipType = {
     name: string;
     image: string;
     description: string;
     type: string;
-    intakeYear: number;
+    intakeYear: string;
     applicable: string;
     startDate: string;
     endDate: string;
-    course: courseType[];
+    degrees: degreeType[];
     institute: instituteType;
     country: countryType;
-    undergraduate: degreeType[];
-    postgraduate: degreeType[];
-    research: degreeType[];
-    favoriteId: [];
+    favoriteId: [string];
     createdAt: string;
     updatedAt: string;
     id: string;
@@ -60,23 +63,10 @@ export type filterScholarShipType = {
     applicable: string;
     startDate: string;
     endDate: string;
-    degrees: {
-        _id: string;
-        name: string;
-        type: string;
-    }[];
-    institute: {
-        _id: string;
-        name: string;
-    };
-    country: {
-        _id: string;
-        name: string;
-    };
-    discipline: {
-        _id: string;
-        name: string;
-    }[];
+    degrees: degreeType[];
+    institute: instituteType;
+    country: countryType;
+    discipline: disciplineType[];
     favoriteId?: string[];
 };
 
@@ -93,6 +83,7 @@ export type countryType = {
 
 export type degreeType = {
     name: string;
+    type: string;
     course: courseType[];
     createdAt: string;
     updatedAt: string;
@@ -113,7 +104,9 @@ export type disciplineType = {
 export type instituteType = {
     name: string;
     logo: string;
+    image: string;
     description: string;
+    instituteURL: string;
     sector: string;
     establishedYear: number;
     location: string;
@@ -127,7 +120,7 @@ export type instituteType = {
     timesHigherRanking: number;
     shanghaiRanking: number;
     tcfIndexRanking: number;
-    favoriteId: string[];
+    favoriteId: [string];
     id: string;
 };
 
@@ -142,34 +135,22 @@ export type courseType = {
     id: string;
     name: string;
     logo: string;
-    degree: {
-        _id: string;
-        name: string;
-        type: string;
-    };
+    degree: degreeType;
     studyModel: string;
     timeModel: string;
-    applicationFee: number;
-    specialization: {
-        _id: string;
-        name: string;
-    };
+    applicationFee: string;
+    specialization: specializationType;
     duration: string;
     language: string[];
     startDate: string;
     endDate: string;
-    institute: {
-        _id: string;
-        name: string;
-    };
-    discipline: {
-        _id: string;
-        name: string;
-    }[];
-    country: {
-        _id: string;
-        name: string;
-    };
+    applyDate: string;
+    delivery: string;
+    description: string;
+    format: string;
+    institute: instituteType;
+    discipline: disciplineType[];
+    country: countryType;
     favoriteId?: string[];
 };
 

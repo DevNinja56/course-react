@@ -10,6 +10,7 @@ interface propsTypes {
     className?: string;
     color?: string;
     isLoader?: boolean;
+    variant?: 'filled' | 'outline';
 }
 type Props = React.ButtonHTMLAttributes<HTMLButtonElement> & propsTypes;
 type PropsLink = LinkProps & propsTypes;
@@ -20,22 +21,34 @@ const Button: React.FC<Props> = ({
     text,
     className,
     isLoader,
+    variant,
     ...props
 }) => {
+    const Button = () => (
+        <button
+            type="submit"
+            disabled={disabled}
+            className={`w-full pt-[14px] pb-[13px] rounded-[10px] disabled:cursor-not-allowed flex gap-2 justify-center items-center font-semibold mb-1 border group ${
+                variant === 'outline'
+                    ? 'bg-white border-blueColor text-blueColor hover:bg-blueColor hover:text-white  '
+                    : 'bg-blueColor border-transparent text-white hover:bg-white hover:border-blueColor hover:text-blueColor    '
+            }   ${className}`}
+            {...props}
+        >
+            <>{text}</>
+            {isLoader && (
+                <LoaderSpinner className="group-hover:text-blueColor" />
+            )}
+        </button>
+    );
     return (
         <>
             {link ? (
-                <></>
+                <Link href={link}>
+                    <Button />
+                </Link>
             ) : (
-                <button
-                    type="submit"
-                    disabled={disabled}
-                    className={`bg-blueColor w-full pt-[14px] pb-[13px] rounded-[10px] text-white font-semibold mb-1 flex gap-2 justify-center items-center disabled:cursor-not-allowed   ${className}`}
-                    {...props}
-                >
-                    <>{text}</>
-                    {isLoader && <LoaderSpinner />}
-                </button>
+                <Button />
             )}
         </>
     );

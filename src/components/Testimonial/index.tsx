@@ -27,9 +27,8 @@ const Testimonial = () => {
 
     return (
         <div
-            className={`bg-white ${
-                router.pathname === '/apply' ||
-                router.pathname === '/faq' ||
+            className={`bg-white print:hidden ${
+                router.pathname === (ROUTES.APPLY || ROUTES.FAQ) ||
                 router.pathname.includes(ROUTES.COURSE.replace(':id', ''))
                     ? ''
                     : 'pt-8'
@@ -37,7 +36,7 @@ const Testimonial = () => {
         >
             <div
                 className={`relative pb-0  ${
-                    router.pathname === '/faq'
+                    router.pathname === ROUTES.FAQ
                         ? 'pt-10'
                         : '' ||
                           router.pathname === ROUTES.HOMEPAGE ||

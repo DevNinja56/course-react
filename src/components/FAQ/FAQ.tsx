@@ -1,9 +1,14 @@
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import React from 'react';
+import React, { useState } from 'react';
+import { accordionList } from '@/utils/data/accordion';
+import dynamic from 'next/dynamic';
+const Accordion = dynamic(() => import('../Accordion'), { ssr: false });
 
 const FAQ = () => {
+    const [accordion, setAccordion] = useState<number | null>(null);
     const router = useRouter();
+
     return (
         <>
             <div
@@ -47,120 +52,17 @@ const FAQ = () => {
                             src="/images/elipse.png"
                         />
                     )}
-                    <div className="flex text-sm md:text-[16px] px-5 md:px-[30px] py-[25.5px] font-bold h-[72px] w-full items-center justify-between border-b border-grayColor border-opacity-10 bg-white z-30">
-                        <p>How does it work?</p>
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width={24}
-                            height={24}
-                            viewBox="0 0 24 24"
-                            fill="none"
-                        >
-                            <path
-                                d="M12 5V19M5 12H19"
-                                stroke="#717070"
-                                strokeOpacity="0.5"
-                                strokeWidth={2}
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                            />
-                        </svg>
-                    </div>
-                    <div className="flex text-sm md:text-[16px] px-5 md:px-[30px] py-[25.5px] font-bold h-[72px] w-full items-center justify-between border-b border-grayColor border-opacity-10 bg-white z-30">
-                        <p>What`&lsquo;`s included with membership?</p>
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width={24}
-                            height={24}
-                            viewBox="0 0 24 24"
-                            fill="none"
-                        >
-                            <path
-                                d="M12 5V19M5 12H19"
-                                stroke="#717070"
-                                strokeOpacity="0.5"
-                                strokeWidth={2}
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                            />
-                        </svg>
-                    </div>
-                    <div className="flex text-sm md:text-[16px] px-5 md:px-[30px] py-[25.5px] font-bold h-[72px] w-full items-center justify-between border-b border-grayColor border-opacity-10 bg-white z-30">
-                        <p>All the free API services really unlimited?</p>
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width={24}
-                            height={24}
-                            viewBox="0 0 24 24"
-                            fill="none"
-                        >
-                            <path
-                                d="M12 5V19M5 12H19"
-                                stroke="#717070"
-                                strokeOpacity="0.5"
-                                strokeWidth={2}
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                            />
-                        </svg>
-                    </div>
-                    <div className="flex text-sm md:text-[16px] px-5 md:px-[30px] py-[25.5px] font-bold h-[72px] w-full items-center justify-between border-b border-grayColor border-opacity-10 bg-white z-30">
-                        <p>All the free API services really unlimited?</p>
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width={24}
-                            height={24}
-                            viewBox="0 0 24 24"
-                            fill="none"
-                        >
-                            <path
-                                d="M12 5V19M5 12H19"
-                                stroke="#717070"
-                                strokeOpacity="0.5"
-                                strokeWidth={2}
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                            />
-                        </svg>
-                    </div>
-                    <div className="flex text-sm md:text-[16px] px-5 md:px-[30px] py-[25.5px] font-bold h-[72px] w-full items-center justify-between border-b border-grayColor border-opacity-10 bg-white z-30">
-                        <p>Can I sign up for dedicated support?</p>
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width={24}
-                            height={24}
-                            viewBox="0 0 24 24"
-                            fill="none"
-                        >
-                            <path
-                                d="M12 5V19M5 12H19"
-                                stroke="#717070"
-                                strokeOpacity="0.5"
-                                strokeWidth={2}
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                            />
-                        </svg>
-                    </div>
-                    <div className="flex text-sm md:text-[16px] px-5 md:px-[30px] py-[25.5px] font-bold h-[72px] w-full items-center justify-between bg-white z-30">
-                        <p>How do I upgrade my account?</p>
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width={24}
-                            height={24}
-                            viewBox="0 0 24 24"
-                            fill="none"
-                        >
-                            <path
-                                d="M12 5V19M5 12H19"
-                                stroke="#717070"
-                                strokeOpacity="0.5"
-                                strokeWidth={2}
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                            />
-                        </svg>
-                    </div>
+                    {accordionList?.map(({ title, content }, i) => (
+                        <Accordion
+                            key={'accordion--key-' + i}
+                            isActive={accordion === i}
+                            title={title}
+                            content={content}
+                            activeFun={() =>
+                                setAccordion((prev) => (prev === i ? null : i))
+                            }
+                        />
+                    ))}
                 </div>
             </div>
         </>

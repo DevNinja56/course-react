@@ -4,6 +4,7 @@ import { API_ENDPOINTS } from '@/config/Api_EndPoints';
 import {
     blogsType,
     countryType,
+    courseType,
     degreeType,
     disciplineType,
     instituteType,
@@ -78,6 +79,19 @@ export const stateQueryApi = createApi({
             transformResponse: (res: {
                 data: PaginatedResponse<disciplineType[]>;
             }) => res.data! ?? res
+        }),
+        getCourseById: builder.query<courseType, string>({
+            query: (id) => ({
+                url: API_ENDPOINTS.COURSE_BY_ID.replace(':id', id)
+            }),
+            transformResponse: (res: { data: courseType }) => res.data! ?? res
+        }),
+        getScholarshipById: builder.query<scholarshipType, string>({
+            query: (id) => ({
+                url: API_ENDPOINTS.SCHOLARSHIP_BY_ID.replace(':id', id)
+            }),
+            transformResponse: (res: { data: scholarshipType }) =>
+                res.data! ?? res
         })
     })
 });
@@ -90,5 +104,7 @@ export const {
     useGetSpecializationQuery,
     useGetInstituteQuery,
     useGetSingleBlogQuery,
-    useGetPaginatedDisciplineQuery
+    useGetPaginatedDisciplineQuery,
+    useGetCourseByIdQuery,
+    useGetScholarshipByIdQuery
 } = stateQueryApi;

@@ -49,6 +49,12 @@ export const changePasswordFormSchema = yupResolver(
             .min(7, 'Min 7 Characters'),
         new_password: Yup.string()
             .required('Password is Required')
-            .min(7, 'Min 7 Characters')
+            .min(7, 'Min 7 Characters'),
+        confirm_password: Yup.string()
+            .required('Confirm Password is Required')
+            .oneOf(
+                [Yup.ref('new_password')],
+                'Old & New Passwords does not match'
+            )
     })
 );
