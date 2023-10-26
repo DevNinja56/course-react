@@ -153,7 +153,7 @@ const Header = () => {
                         </Link>
                     </div>
                     {showSideBar && <Sidebar setShowSideBar={setShowSideBar} />}
-                    <div className="flex items-center gap-x-3 md:gap-x-6">
+                    <div className="flex items-center gap-x-1 md:gap-x-6 mt-1 md:mt-0">
                         {isAuthenticated ? (
                             <div
                                 className="flex items-center gap-x-3 relative select-none cursor-pointer "
@@ -196,7 +196,7 @@ const Header = () => {
                                     width={36}
                                     alt=""
                                     src="/images/User Circle.svg"
-                                    className="block md:hidden"
+                                    className="block md:hidden h-6 w-6"
                                     priority
                                 />
                             </Link>
@@ -206,7 +206,7 @@ const Header = () => {
                             height={46}
                             alt="menu-icon"
                             onClick={onShowSideBar}
-                            className="block lg:hidden"
+                            className="block lg:hidden h-8 w-8 md:h-[46px] md:w-[46px]"
                             src="/images/Menu.svg"
                             priority
                         />

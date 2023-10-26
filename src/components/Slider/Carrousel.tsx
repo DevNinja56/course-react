@@ -26,7 +26,7 @@ export default function Carrousel({
                 showNavigation={arrow}
                 animationConfig={config.gentle}
             />
-            <div className="flex items-center gap-x-3 mt-[150px] cursor-pointer ">
+            <div className="flex items-center gap-x-3 mt-40 md:mt-[150px] cursor-pointer">
                 {data.map((_, i) => (
                     <div
                         key={'slider-icon--' + i}

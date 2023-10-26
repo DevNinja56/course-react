@@ -40,39 +40,43 @@ const SearchBox = () => {
     };
 
     return (
-        <div className="rounded-[10px] bg-white custom-shadow p-2 pl-5 z-20 flex gap-20">
-            <div className="bg-white flex items-center justify-between flex-auto  ">
-                <div className="flex items-center w-full justify-around ">
-                    <ReactSelectCustom
-                        options={degreesList}
-                        isMulti
-                        placeholder="What to Study?....."
-                        isLoading={degreeLoading}
-                        onChange={(val: any) =>
-                            setValue((prev) => ({
-                                ...prev,
-                                degrees: val.map(
-                                    (item: selectType) => item.value
-                                )
-                            }))
-                        }
-                    />
-                    <ReactSelectCustom
-                        options={countriesList}
-                        isMulti
-                        placeholder="Where to Study?....."
-                        isLoading={countryLoading}
-                        onChange={(val: any) =>
-                            setValue((prev) => ({
-                                ...prev,
-                                countries: val.map(
-                                    (item: selectType) => item.value
-                                )
-                            }))
-                        }
-                    />
+        <div className="rounded-[10px] bg-white custom-shadow p-2 px-6 lg:px-2 md:pl-5 z-20 flex gap-20 py-5 lg:py-2">
+            <div className="bg-white flex flex-col md:flex-row items-center justify-between flex-auto gap-y-5 gap-x-5 lg:gap-x-0">
+                <div className="flex flex-col gap-y-4 md:flex-row items-center w-full justify-around ">
+                    <div className="w-full border border-gray-300 md:border-none">
+                        <ReactSelectCustom
+                            options={degreesList}
+                            isMulti
+                            placeholder="What to Study?....."
+                            isLoading={degreeLoading}
+                            onChange={(val: any) =>
+                                setValue((prev) => ({
+                                    ...prev,
+                                    degrees: val.map(
+                                        (item: selectType) => item.value
+                                    )
+                                }))
+                            }
+                        />
+                    </div>
+                    <div className="w-full border border-gray-300 md:border-none">
+                        <ReactSelectCustom
+                            options={countriesList}
+                            isMulti
+                            placeholder="Where to Study?....."
+                            isLoading={countryLoading}
+                            onChange={(val: any) =>
+                                setValue((prev) => ({
+                                    ...prev,
+                                    countries: val.map(
+                                        (item: selectType) => item.value
+                                    )
+                                }))
+                            }
+                        />
+                    </div>
                 </div>
-                <div className="w-[230px] ml-5 ">
+                <div className="w-full md:w-[230px] ml-0 lg:ml-5">
                     <Button
                         text="Search"
                         disabled={

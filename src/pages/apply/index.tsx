@@ -8,34 +8,36 @@ import React from 'react';
 const Apply = () => {
     return (
         <>
-            <div className="w-full flex items-center justify-between h-[170px] mt-[100px] bg-profileBgColor">
+            <div className="w-full flex items-center justify-between h-[170px] mt-[100px] bg-profileBgColor overflow-hidden">
                 <Image
                     height={180}
                     width={180}
-                    alt="apply-round"
-                    className="mt-[-70px] ml-[-10px]"
+                    alt="privacy-round"
+                    className="mt-[-90px] ml-0 hidden lg:block"
                     src="/images/PrivacyPolicy/Ellipse 418.svg"
                     priority
                 />
+                <div className="mt-[-180px] md:mt-[-120px] ml-[-60px] md:ml-[-40px] block lg:hidden h-32 w-32 rounded-full border-[10px] border-blueColor"></div>
                 <div className="flex flex-col items-center">
-                    <h1 className="text-mainTextColor text-[32px] font-extrabold">
-                        Apply Now
+                    <h1 className="text-mainTextColor text-2xl md:text-[32px] font-extrabold">
+                        Apply Now{' '}
                     </h1>
-                    <p className="text-lg text-aboutUsTextColor">
+                    <p className="text-base md:text-lg text-aboutUsTextColor">
                         Check out the details below
                     </p>
                 </div>
                 <Image
-                    height={100}
-                    width={119}
-                    alt="apply-round"
-                    className="mt-12"
+                    height={119}
+                    width={100}
+                    alt="privacy-round-2"
+                    className="mt-12 hidden lg:block"
                     src="/images/profileImages/Frame 691.svg"
                     priority
                 />
+                <div className="mt-44 md:mt-32 mr-[-70px] md:mr-[-40px] block lg:hidden h-32 w-32 rounded-full border-[10px] border-blueColor"></div>
             </div>
             <div className="w-full pb-28">
-                <div className="max-w-[1100px] 2xl:max-w-[2300px] mx-auto px-2 2xl:px-8 transition-all duration-300 pt-16">
+                <div className="max-w-[1100px] 2xl:max-w-[2300px] mx-auto px-5 md:px-[50px] lg:px-2 2xl:px-8 transition-all duration-300 pt-16">
                     <div className="flex flex-col gap-y-8 mb-9">
                         <p className="text-darkGrayColor leading-6">
                             Times Course Finder (TCF) has been created as a
@@ -120,7 +122,7 @@ const Apply = () => {
                             </p>
                         </div>
                     </div>
-                    <div className="w-full rounded-[10px] border-2 border-termsanduseBorderColor pt-6 pb-4 px-20 bg-profileBgColor items-center mb-8">
+                    <div className="w-full rounded-[10px] border-2 border-termsanduseBorderColor p-4 md:p-6 lg:py-10 lg:px-20 flex flex-col gap-y-4 bg-profileBgColor items-center mb-12 text-center">
                         <p className="text-darkGrayColor text-center text-[15px]">
                             Students residing in Pakistan may avail our special
                             offer of getting their admission application fee
@@ -139,12 +141,12 @@ const Apply = () => {
                 </div>
             </div>
             <div className="w-full mb-40 2xl:mb-[600px]">
-                <div className="max-w-[1100px] 2xl:max-w-[2300px] mx-auto px-2 2xl:px-8 transition-all duration-300">
+                <div className="max-w-[1100px] 2xl:max-w-[2300px] mx-auto px-5 md:px-[50px] lg:px-2 2xl:px-8 transition-all duration-300">
                     <div className="w-full flex flex-col items-center mb-12">
-                        <p className="text-blueColor font-bold text-[23px]">
+                        <p className="text-blueColor font-bold text-xl md:text-[23px]">
                             Reach Out
                         </p>
-                        <h1 className="text-mainTextColor text-[48px] font-extrabold">
+                        <h1 className="text-mainTextColor text-[32px] md:text-[48px] font-extrabold">
                             Contact Us
                         </h1>
                     </div>

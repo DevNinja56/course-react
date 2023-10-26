@@ -28,14 +28,22 @@ const Testimonial = () => {
     return (
         <div
             className={`bg-white ${
-                router.pathname === '/apply' || router.pathname === '/faq'
+                router.pathname === '/apply' ||
+                router.pathname === '/faq' ||
+                router.pathname.includes(ROUTES.COURSE.replace(':id', ''))
                     ? ''
                     : 'pt-8'
-            } pb-28 md:pb-32 lg:pb-60 overflow-hidden`}
+            } pb-28 md:pb-32 lg:pb-60 `}
         >
             <div
-                className={`relative pb-0 ${
-                    router.pathname === '/faq' ? 'pt-10' : ''
+                className={`relative pb-0  ${
+                    router.pathname === '/faq'
+                        ? 'pt-10'
+                        : '' ||
+                          router.pathname === ROUTES.HOMEPAGE ||
+                          router.pathname === ROUTES.CONTACT_US
+                        ? 'overflow-visible'
+                        : 'overflow-hidden'
                 }`}
             >
                 <Image
@@ -46,14 +54,14 @@ const Testimonial = () => {
                     src="/images/Blogs/Ellipse 426.svg"
                     priority
                 />
-                <div className="flex flex-col lg:flex-row justify-between items-start max-w-[1100px] 2xl:max-w-[2300px] mx-auto px-5 md:px-[90px] lg:px-2 2xl:px-8 transition-all duration-300 py-3 md:py-12 lg:py-20 gap-x-16 gap-y-5 lg:gap-y-0">
+                <div className="flex flex-col lg:flex-row justify-between items-start max-w-[1100px] 2xl:max-w-[2300px] mx-auto px-5 md:px-[50px] lg:px-2 2xl:px-8 transition-all duration-300 py-5 md:py-12 lg:py-20 gap-x-16 gap-y-5 lg:gap-y-0">
                     <div className="flex flex-col gap-y-2 z-10 relative">
                         <p className="font-bold text-xl md:text-[23px] text-blueColor">
                             Testimonial
                         </p>
                         <h1
                             style={{ lineHeight: '57.6px' }}
-                            className="text-[32px] md:text-[40px] font-extrabold text-mainTextColor w-[340px] mb-2"
+                            className="text-[32px] md:text-[40px] font-extrabold text-mainTextColor w-auto md:w-[340px] mb-2"
                         >
                             See What OurClient Say’s
                         </h1>
@@ -73,7 +81,7 @@ const Testimonial = () => {
                             priority
                         />
                     </div>
-                    <div className="w-full mt-[150px] relative ">
+                    <div className="w-full mt-[150px] relative">
                         <Carrousel cards={cards} offset={1} />
                     </div>
                 </div>
@@ -102,7 +110,7 @@ const Testimonial = () => {
                         height={280}
                         width={280}
                         alt="testimonial-round-2"
-                        className="absolute right-0 top-[-120px]"
+                        className="absolute right-0 top-[-70px] md:top-[-120px] h-20 w-20 md:h-64 md:w-64 lg:h-[280px] lg:w-[280px]"
                         src="/images/Home/testimoalRoundImg.svg"
                     />
                 ) : router.pathname === ROUTES.APPLY ||
@@ -110,9 +118,9 @@ const Testimonial = () => {
                     <Image
                         height={289}
                         width={245}
+                        src="/images/Apply/testimonalCircle.svg"
                         alt="testimonial-round-2"
-                        className="absolute right-0 top-0"
-                        src="/images/Apply/testimonialCircle.svg"
+                        className="absolute right-0 top-0 h-24 w-20 md:h-[150px] md:w-[130px] lg:h-[289px] lg:w-[245px]"
                     />
                 ) : router.pathname.includes(
                       ROUTES.COURSE.replace(':id', '')
@@ -121,7 +129,7 @@ const Testimonial = () => {
                         height={174}
                         width={175}
                         alt="testimonial-round-2"
-                        className="absolute right-0 top-0"
+                        className="absolute right-0 top-0 h-20 w-20 md:h-[174px] md:w-[174px]"
                         src="/images/CourseDetail/Circle 2.svg"
                     />
                 ) : (
@@ -129,7 +137,7 @@ const Testimonial = () => {
                         height={228}
                         width={228}
                         alt="testimonial-round-2"
-                        className="absolute right-[-50px] md:right-0 top-0 h-[190px] w-[153px] lg:h-[228px] lg:w-[228px]"
+                        className="absolute right-[-50px] md:right-0 top-0 h-40 w-40 md:h-[190px] md:w-[153px] lg:h-[228px] lg:w-[228px]"
                         src="/images/Blogs/Ellipse 427.svg"
                     />
                 )}

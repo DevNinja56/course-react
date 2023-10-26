@@ -1,3 +1,4 @@
+import { ROUTES } from '@/config/constant';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import React from 'react';
@@ -7,7 +8,8 @@ const CounselingWork = () => {
     return (
         <div
             className={`w-full relative pb-0 ${
-                router.pathname === '/apply'
+                router.pathname === '/apply' ||
+                router.pathname.includes(ROUTES.COURSE.replace(':id', ''))
                     ? 'bg-profileBgColor'
                     : router.pathname === '/courseDetail'
                     ? 'bg-lightColor'
@@ -23,8 +25,6 @@ const CounselingWork = () => {
                     src="/images/CourseDetail/circle 1.svg"
                     priority
                 />
-            ) : router.pathname === '/faq' ? (
-                ''
             ) : (
                 <Image
                     height={314}
@@ -32,8 +32,18 @@ const CounselingWork = () => {
                     alt="circle"
                     className={`absolute right-0 h-[156px] w-[106px] md:h-[206px] md:w-[156px] lg:h-[314px] lg:w-[237px] top-[-100px] md:top-44 lg:top-0 ${
                         router.pathname === '/aboutUs' ||
-                        router.pathname === '/apply'
-                            ? 'top-[-120px] md:top-[-100px] lg:top-[-100px]'
+                        router.pathname === '/apply' ||
+                        router.pathname.includes(
+                            ROUTES.COURSE.replace(':id', '')
+                        )
+                            ? `${
+                                  router.pathname === ROUTES.APPLY ||
+                                  router.pathname.includes(
+                                      ROUTES.COURSE.replace(':id', '')
+                                  )
+                                      ? 'top-[-50px]'
+                                      : 'top-[-120px]'
+                              } md:top-[-100px] lg:top-[-100px]`
                             : ''
                     }`}
                     src="/images/Fields/Applicatio circle img.svg"
@@ -239,12 +249,7 @@ const CounselingWork = () => {
                     height={314}
                     width={192}
                     alt="counselling-work"
-                    className={`absolute left-0 h-[130px] w-[130px] md:h-[206px] md:w-[206px] lg:h-[314px] lg:w-[192px] ${
-                        router.pathname === '/apply' ||
-                        router.pathname === '/faq'
-                            ? 'top-56'
-                            : 'bottom-[1190px] md:bottom-44'
-                    }`}
+                    className={`absolute left-0 h-[130px] bottom-[1190px] md:bottom-44 w-[130px] md:h-[206px] md:w-[206px] lg:h-[314px] lg:w-[192px]`}
                     src="/images/Fields/Ellipse 427.svg"
                     priority
                 />

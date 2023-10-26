@@ -62,7 +62,7 @@ const Map = ({
                 height={124}
                 width={124}
                 alt="map-round-img"
-                className="absolute left-[-20px] 2xl:left-0 top-[-28px] 2xl:top-0 z-10"
+                className="absolute left-[-20px] md:left-0 lg:left-[-20px] 2xl:left-0 top-[-10px] lg:top-[-28px] 2xl:top-0 z-10 h-16 w-16 lg:h-[124px] lg:w-[124px]"
                 src={`${mapRoundImg}`}
                 priority
             />
@@ -70,31 +70,39 @@ const Map = ({
                 height={84}
                 width={84}
                 alt="map-round-img-2"
-                className="absolute right-52 top-[-28px] 2xl:top-0 z-10"
+                className="absolute right-10 md:right-52 top-0 lg:top-[-28px] 2xl:top-0 z-10 h-11 w-11 lg:h-20 lg:w-20"
                 src={`${mapRoundImg2}`}
                 priority
             />
-            <div className="relative w-full flex justify-end pr-20 2xl:pr-40 py-[71px]">
-                <Image
-                    height={741}
-                    width={1160}
-                    alt="map"
-                    className="absolute top-0 left-0 w-full"
-                    src="/images/Apply/Map.svg"
-                    priority
-                />
+            <Image
+                height={741}
+                width={1160}
+                alt="map"
+                className="absolute top-0 left-0 w-full h-[841px] object-cover hidden lg:block"
+                src="/images/Apply/Map.svg"
+                priority
+            />
+            <Image
+                height={841}
+                width={1160}
+                alt="map"
+                className="absolute top-0 left-0 w-full h-[820px] md:h-[851px] object-cover block lg:hidden"
+                src="/images/Apply/TabletMobile.svg"
+                priority
+            />
+            <div className="relative w-full flex justify-center md:justify-end px-8 md:pr-20 2xl:pr-40 py-[71px]">
                 <form
                     onSubmit={fromSubmit(handleSubmit)}
-                    className="bg-white rounded-[10px] px-11 py-7 z-10 mt-0 2xl:mt-[10%]"
+                    className="bg-white rounded-[10px] px-4 md:px-11 py-7 z-10 mt-0 2xl:mt-[10%] w-full md:w-auto"
                 >
-                    <h1 className="font-bold text-[32px] text-mainTextColor">
+                    <h1 className="font-bold text-3xl md:text-[32px] text-mainTextColor">
                         Contact Us
                     </h1>
-                    <p className="font-medium text-[23px] mb-4 text-darkGrayColor">
+                    <p className="font-medium text-lg md:text-xl md:text-[23px] mb-4 text-darkGrayColor">
                         Fill out the form below to reach us
                     </p>
                     <div className="flex flex-col gap-y-4 mb-8">
-                        <div className="flex gap-4">
+                        <div className="flex flex-col lg:flex-row gap-4">
                             <InputBox
                                 {...register('name', {
                                     required: true
@@ -129,7 +137,7 @@ const Map = ({
                                 {...register('message', {
                                     required: true
                                 })}
-                                className="block p-2.5 w-full text-xl  bg-gray-50 rounded-lg focus:ring-blue-500 focus:border-blue-500 resize-none outline-none text-grayColor border border-grayColor "
+                                className="block p-2.5 w-full text-sm md:text-xl bg-gray-50 rounded-lg focus:ring-blue-500 focus:border-blue-500 resize-none outline-none text-grayColor border border-grayColor "
                                 placeholder="Write your message..."
                                 rows={5}
                             />
@@ -147,7 +155,7 @@ const Map = ({
                 height={66}
                 width={66}
                 alt="map-round-img-3"
-                className="absolute left-[-11px] 2xl:left-4 top-[322px] 2xl:top-[652px] z-10"
+                className="absolute left-[-12px] md:left-[-5px] lg:left-[-11px] 2xl:left-4 top-36 md:top-[322px] 2xl:top-[652px] z-10 h-6 w-6 md:h-9 md:w-9 lg:h-10 lg:w-10"
                 src={`${mapRoundImg3}`}
                 priority
             />
@@ -155,7 +163,7 @@ const Map = ({
                 height={114}
                 width={114}
                 alt="map-round-img"
-                className="absolute left-[300px] 2xl:left-0 top-[630px] 2xl:top-[100%] z-10"
+                className="absolute left-20 lg:left-[300px] 2xl:left-0 top-[770px] md:top-[790px] lg:top-[750px] 2xl:top-[100%] z-10 h-12 w-12 lg:h-32 lg:w-32"
                 src={`${mapRoundImg4}`}
                 priority
             />

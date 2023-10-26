@@ -4,20 +4,21 @@ import React from 'react';
 const TermsAndCondition = () => {
     return (
         <>
-            <div className="w-full flex items-center justify-between h-[170px] mt-[100px] bg-profileBgColor">
+            <div className="w-full flex items-center justify-between h-[170px] mt-[100px] bg-profileBgColor overflow-hidden">
                 <Image
                     height={85}
                     width={86}
                     alt="t&cRounded"
-                    className="mt-[-90px] ml-0"
+                    className="mt-[-90px] ml-0 hidden lg:block"
                     src="/images/T&C/roundedImg 1.svg"
                     priority
                 />
+                <div className="mt-[-180px] md:mt-[-120px] ml-[-60px] md:ml-[-40px] block lg:hidden h-32 w-32 rounded-full border-[10px] border-blueColor"></div>
                 <div className="flex flex-col items-center">
-                    <h1 className="text-mainTextColor text-[32px] font-extrabold">
+                    <h1 className="text-mainTextColor text-2xl md:text-[32px] font-extrabold">
                         Terms of Use
                     </h1>
-                    <p className="text-lg text-aboutUsTextColor">
+                    <p className="text-base md:text-lg text-aboutUsTextColor">
                         Check out the details below
                     </p>
                 </div>
@@ -25,14 +26,15 @@ const TermsAndCondition = () => {
                     height={119}
                     width={100}
                     alt="t&cRounded2"
-                    className="mt-12"
+                    className="mt-12 hidden lg:block"
                     src="/images/profileImages/Frame 691.svg"
                     priority
                 />
+                <div className="mt-44 md:mt-32 mr-[-70px] md:mr-[-40px] block lg:hidden h-32 w-32 rounded-full border-[10px] border-blueColor"></div>
             </div>
             <div className="w-full pb-52">
-                <div className="max-w-[1100px] 2xl:max-w-[2300px] mx-auto px-2 2xl:px-8 transition-all duration-300 pt-16">
-                    <div className="w-full rounded-[10px] border-2 border-termsanduseBorderColor py-10 px-20 flex flex-col gap-y-4 bg-profileBgColor items-center mb-12">
+                <div className="max-w-[1100px] 2xl:max-w-[2300px] mx-auto px-5 md:px-[50px] lg:px-2 2xl:px-8 transition-all duration-300 pt-16">
+                    <div className="w-full rounded-[10px] border-2 border-termsanduseBorderColor p-4 md:p-6 lg:py-10 lg:px-20 flex flex-col gap-y-4 bg-profileBgColor items-center mb-12 text-center">
                         <h1 className="text-textLightBlackColor font-bold">
                             Please read these Terms of Use carefully as they
                             apply to your use of the Times Course Finder (“

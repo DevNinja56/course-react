@@ -9,17 +9,17 @@ const ContactUs = () => {
         <>
             <div className="w-full flex items-center justify-center h-[200px] mt-[100px] mb-5 z-0">
                 <div className="flex flex-col justify-center items-center">
-                    <p className="text-blueColor text-[23px] font-bold">
+                    <p className="text-blueColor text-xl md:text-[23px] font-bold">
                         Reach Out
                     </p>
-                    <h1 className="text-mainTextColor text-[48px] font-bold">
+                    <h1 className="text-mainTextColor text-4xl md:text-[48px] font-bold">
                         Contact Us
                     </h1>
                 </div>
             </div>
             <div
                 className="max-w-[1100px] 2xl:max-w-[2300px] mx-auto
-transition-all duration-300 px-2 mb-16"
+transition-all duration-300 px-5 md:px-[50px] lg:px-2 2xl:px-8 mb-32 lg:mb-40"
             >
                 <Map
                     mapRoundImg="/images/Ellipse 424.svg"
@@ -29,7 +29,7 @@ transition-all duration-300 px-2 mb-16"
                 />
             </div>
             <div className="w-full 2xl:mb-[600px]">
-                <div className="max-w-[1100px] 2xl:max-w-[2300px] mx-auto px-2 2xl:px-8 transition-all duration-300">
+                <div className="max-w-[1100px] 2xl:max-w-[2300px] mx-auto px-5 md:px-[50px] lg:px-2 2xl:px-8 transition-all duration-300">
                     <div className="w-full custom-shadow rounded-[10px] p-11 mb-24">
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-[25px]">
                             <Card

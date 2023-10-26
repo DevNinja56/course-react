@@ -19,10 +19,10 @@ const RightCardsBox = () => {
         fetchCourses();
     }, [query]);
     return (
-        <div className="flex flex-col gap-y-7 w-[73%]">
+        <div className="flex flex-col gap-y-7 w-full lg:w-[73%]">
             <div className="flex flex-col gap-y-4">
                 <div className="w-full flex items-center justify-between">
-                    <h1 className="font-bold text-[23px] text-mainTextColor">
+                    <h1 className="font-bold text-lg md:text-[23px] text-mainTextColor">
                         {count} Results Found
                     </h1>
                     <SortBy />

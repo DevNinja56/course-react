@@ -16,6 +16,7 @@ import { BiLock } from 'react-icons/bi';
 import { MdOutlineMail } from 'react-icons/md';
 import { BiUser } from 'react-icons/bi';
 import { IoIosPhonePortrait } from 'react-icons/io';
+import { BsFillSkipBackwardBtnFill } from 'react-icons/bs';
 
 const SignUp = () => {
     const [isLoading, setIsLoading] = useState(false);
@@ -54,22 +55,22 @@ const SignUp = () => {
     };
 
     return (
-        <div className="w-full flex justify-center items-center py-16 lg:px-16 2xl:px-40 bg-loginBgColor min-h-[100vh]">
-            <div className="w-full lg:max-w-[1000px] 2xl:max-w-[2000px] mx-0 lg:mx-auto px-0 lg:px-2 transition-all duration-300">
-                <div className="relative w-full flex items-center justify-center">
+        <div className="w-full flex justify-center items-center py-0 md:py-8 px-0 lg:px-10 2xl:px-40 bg-loginBgColor min-h-[100vh]">
+            <div className="w-full px-0 lg:px-2 transition-all duration-300">
+                <div className="relative w-full flex items-center justify-center pt-20 pb-20 md:py-20">
                     <Image
                         height={610}
                         width={560}
                         alt="mainBgImg"
-                        className="w-[60%]"
                         src="/images/sign-up 1.svg"
+                        className="h-[750px] object-cover md:h-auto w-full md:w-auto"
                         priority
                     />
                     <Image
                         height={74}
                         width={74}
-                        alt="round-login"
-                        className="absolute left-0 lg:left-28 top-0 lg:top-24 w-[50px] md:w-[74px]"
+                        alt="logIn-Img"
+                        className="absolute right-12 md:left-12 lg:left-28 xl:left-60 top-16 md:top-24 w-[74px]"
                         src="/images/signUpuRound1.svg"
                         priority
                     />
@@ -77,7 +78,7 @@ const SignUp = () => {
                         height={200.78}
                         width={98}
                         alt="man"
-                        className="absolute left-28 bottom-36 w-[60px] md:w-[98px]"
+                        className="absolute left-10 lg:left-20 xl:left-64 bottom-60 w-[98px] hidden md:block"
                         src="/images/man-3.svg"
                         priority
                     />
@@ -85,7 +86,7 @@ const SignUp = () => {
                         height={48}
                         width={48}
                         alt="login-round-2"
-                        className="absolute right-44 bottom-[250px] w-[34px] md:w-[44px]"
+                        className="absolute left-12 md:left-auto md:right-24 lg:right-36 xl:right-80 bottom-4 md:bottom-72 h-20 w-20 md:h-[48px] md:w-[48px]"
                         src="/images/signInRound1.svg"
                         priority
                     />
@@ -93,7 +94,7 @@ const SignUp = () => {
                         height={123}
                         width={100}
                         alt="man-2"
-                        className="absolute right-16 top-40 w-[60px] md:w-[100px]"
+                        className="absolute right-6 lg:right-8 xl:right-52 bottom-4 md:top-60 h-24 w-24 md:h-[123px] md:w-[123px]"
                         src="/images/man-2.svg"
                         priority
                     />
@@ -101,17 +102,21 @@ const SignUp = () => {
                         height={66}
                         width={70}
                         alt="flower"
-                        className="absolute right-32 bottom-12 w-[50px] md:w-[70px]"
+                        className="absolute right-20 lg:right-32 xl:right-64 bottom-20 lg:bottom-20 w-[50px] md:w-[70px] hidden md:block"
                         src="/images/flower.svg"
                         priority
                     />
-                    <div className="absolute top-9 2xl:top-80 rounded-[10px] bg-white custom-shadow pt-10 pb-7 px-8 md:px-16 flex flex-col items-center min-w-[256px] md:w-[45%] 2xl:w-[50%] md:min-w-[456px]">
+                    <div className=" absolute top-40 md:top-9 2xl:top-80 rounded-[10px] bg-white custom-shadow pt-10 pb-7 px-4 md:px-12 flex flex-col items-center w-[90%] md:w-[53%] lg:w-[45%] xl:w-[35%] 2xl:w-[50%]">
+                        <Link href={ROUTES.SIGN_IN}>
+                            <BsFillSkipBackwardBtnFill className="absolute left-5 top-5 cursor-pointer text-blueColor h-6 w-6" />
+                        </Link>
                         <h1 className="font-medium text-2xl md:text-[36px] text-mainTextColor mb-3">
                             Welcome Back
                         </h1>
                         <Link href={ROUTES.SIGN_IN}>
-                            <p className="text-blueColor font-medium mb-4 md:mb-12 text-sm md:text-base">
-                                I do not have an account yet
+                            <p className="text-mainTextColor font-medium mb-4 md:mb-6 text-sm md:text-base">
+                                Have an account?{' '}
+                                <span className="text-blueColor">Sign In</span>{' '}
                             </p>
                         </Link>
                         <form

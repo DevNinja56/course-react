@@ -8,7 +8,7 @@ import Image from 'next/image';
 const Scholarship = () => {
     return (
         <>
-            <div className="w-full flex items-center justify-center mt-[100px] bg-profileBgColor py-20 relative mb-10">
+            <div className="w-full flex items-center justify-center mt-[100px] bg-profileBgColor py-24 md:py-20 relative mb-10">
                 <Image
                     height={193}
                     width={191}
@@ -17,12 +17,12 @@ const Scholarship = () => {
                     src="/images/Blogs/Frame 642.svg"
                     priority
                 />
-                <div className="flex flex-col gap-y-8 items-center z-10">
+                <div className="flex flex-col gap-y-5 md:gap-y-8 items-center z-10 px-5 md:px-[50px] lg:px-2">
                     <div className="flex flex-col justify-center items-center gap-y-1">
                         <p className="text-darkGrayColor text-xl font-bold">
                             Scholarship
                         </p>
-                        <h1 className="text-mainTextColor text-[26px] font-extrabold">
+                        <h1 className="text-mainTextColor text-2xl md:text-[26px] text-center font-extrabold">
                             Explore thousands of scholarships across the world
                         </h1>
                     </div>

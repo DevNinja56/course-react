@@ -14,7 +14,7 @@ const Card: React.FC<propsType> = ({ data }: propsType) => {
     const { fetchSearchedScholarshipRequest: fetchScholarship } =
         useSearchedScholarship();
     return (
-        <div className="border-2 border-scholarshipBorderColor rounded-[10px] px-5 py-4 flex flex-col gap-y-2 w-[100%] group cursor-pointer transition-all duration-300 onHoverShadow relative ">
+        <div className="border-2 border-scholarshipBorderColor rounded-[10px] px-5 py-4 flex flex-col gap-y-1 w-[100%] group cursor-pointer transition-all duration-300 onHoverShadow relative ">
             <FavoriteButton
                 isActive={!!data?.favoriteId?.[0]}
                 body={{ scholarship: data._id }}
@@ -24,20 +24,20 @@ const Card: React.FC<propsType> = ({ data }: propsType) => {
             <Link href={ROUTES.SCHOLARSHIP.replace(':id', data._id)}>
                 <>
                     <h1
-                        className="font-bold text-lg text-textLightBlackColor capitalize line-clamp-2 h-14  "
+                        className="font-bold text-lg text-textLightBlackColor capitalize line-clamp-2 h-14 "
                         title={data.name}
                     >
                         {data.name} ({data.type})
                     </h1>
-                    <div>
-                        <div className="py-3 gap-x-2 flex items-center w-full border-b border-scholarshipBorderColor">
+                    <div className="mb-4">
+                        <div className="py-3 gap-x-2 flex items-center w-full border-b border-scholarshipBorderColor h-14 ">
                             <MdLocationOn className="fill-[#626262] group-hover:fill-blueColor transition-all duration-300" />
 
                             <p className="text-sm text-darkGrayColor">
                                 {data.country?.name ?? 'No Country'}
                             </p>
                         </div>
-                        <div className="py-3 gap-x-2 flex items-center w-full border-b border-scholarshipBorderColor">
+                        <div className="py-3 gap-x-2 flex items-center w-full border-b border-scholarshipBorderColor h-14">
                             <svg
                                 width="20"
                                 height="20"
@@ -58,7 +58,7 @@ const Card: React.FC<propsType> = ({ data }: propsType) => {
                                 {data.degrees.map((item) => item.name).join()}
                             </p>
                         </div>
-                        <div className="py-3 gap-x-2 flex items-center w-full border-b border-scholarshipBorderColor">
+                        <div className="py-3 gap-x-2 flex items-center w-full border-b border-scholarshipBorderColor h-14">
                             <svg
                                 width="20"
                                 height="20"
@@ -133,7 +133,7 @@ const Card: React.FC<propsType> = ({ data }: propsType) => {
                                     .join()}
                             </p>
                         </div>
-                        <div className="py-3 gap-x-2 flex items-center w-full border-b border-scholarshipBorderColor">
+                        <div className="py-3 gap-x-2 flex items-center w-full border-b border-scholarshipBorderColor h-14">
                             <svg
                                 width="20"
                                 height="20"
@@ -154,7 +154,7 @@ const Card: React.FC<propsType> = ({ data }: propsType) => {
                             </p>
                         </div>
                     </div>
-                    <button className="py-[9px] lg:px-[50px] xl:px-[70px] text-blueColor border border-blueColor group-hover:bg-blueColor group-hover:text-white transition-all duration-300 rounded-[5px] mb-2">
+                    <button className="w-full lg:w-auto py-[9px] lg:px-[50px] xl:px-[70px] text-blueColor border border-blueColor group-hover:bg-blueColor group-hover:text-white transition-all duration-300 rounded-[5px] mb-2">
                         View Details
                     </button>
                 </>

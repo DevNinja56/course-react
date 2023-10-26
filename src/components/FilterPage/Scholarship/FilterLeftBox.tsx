@@ -26,7 +26,7 @@ const ScholarshipFilter = () => {
     };
 
     return (
-        <div className="rounded-[15px] w-[24%] py-4 pb-5 h-fit border-[3px] border-[#eaf2ff]  ">
+        <div className="rounded-[15px] w-[24%] py-4 pb-5 h-fit border-[3px] border-[#eaf2ff] hidden lg:block">
             <div>
                 <div className="flex justify-between items-center mb-8 px-4">
                     <h1 className="text-[23px] text-mainTextColor font-bold">

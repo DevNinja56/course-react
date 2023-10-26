@@ -4,6 +4,7 @@ import { useSearchedScholarship } from '@/hooks/filterScholarship';
 import { useFilterQuery } from '@/hooks/filterQuery';
 import LoaderSpinner from '../../LoaderSpinner';
 import PaginationBox from '../../Pagination';
+import SortBy from '../SortBy';
 
 const RightScholarshipCardBox = () => {
     const {
@@ -24,6 +25,7 @@ const RightScholarshipCardBox = () => {
                     <h1 className="font-bold text-xl md:text-[23px] text-mainTextColor">
                         {count ?? '0'} Results Found
                     </h1>
+                    <SortBy />
                 </div>
                 <hr className="border border-scholarshipBorderColor" />
             </div>

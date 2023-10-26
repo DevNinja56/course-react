@@ -11,9 +11,9 @@ const CategoriesSection = () => {
     });
 
     return (
-        <div className="max-w-[1100px] 2xl:max-w-[2300px] mx-auto px-2 2xl:px-8 transition-all duration-300 flex gap-x-8">
-            <div className="pt-16 w-[35%]">
-                <p className="text-blueColor text-[23px] font-bold">
+        <div className="max-w-[1100px] 2xl:max-w-[2300px] mx-auto px-[20px] md:px-[50px] lg:px-2 2xl:px-8 transition-all duration-300 flex flex-col gap-y-16 lg:flex-row gap-x-8">
+            <div className="pt-16 w-full lg:w-[35%]">
+                <p className="text-blueColor text-xl md:text-[23px] font-bold">
                     Top Categories
                 </p>
                 <h1 className="text-mainTextColor font-extrabold text-[35px] mb-2">
@@ -25,12 +25,12 @@ const CategoriesSection = () => {
                     maecenas justo sapien.
                 </p>
                 <Link href={ROUTES.FIELDS}>
-                    <button className="pt-4 pb-[17px] px-[48px] bg-blueColor rounded-[5px] font-semibold text-white">
+                    <button className="pt-4 pb-[17px] px-[48px] bg-blueColor rounded-[5px] font-semibold text-white z-10 sticky">
                         All Categories
                     </button>
                 </Link>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 z-10 w-[65%]">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-5 z-10 w-full lg:w-[65%]">
                 {data?.data?.map((category) => (
                     <Card
                         key={'category--list--' + category.name}

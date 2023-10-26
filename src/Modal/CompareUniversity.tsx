@@ -121,18 +121,17 @@ const CompareUniversityModal = () => {
 
     return (
         <div
-            className="bg-white modal relative border-[3px] border-[#CCCCCC] p-10 rounded-xl "
-            style={{ width: '450px' }}
+            className="bg-white modal relative border-[3px] border-[#CCCCCC] p-5 rounded-xl setWidthCompareModal"
         >
             <IoMdClose
                 className="absolute top-3 right-3 cursor-pointer"
                 onClick={hideModal}
             />
 
-            <h1 className="text-mainTextColor text-center font-bold text-[36px] mb-5">
+            <h1 className="text-mainTextColor text-center font-bold text-2xl md:text-[36px] mb-5">
                 Select a Course
             </h1>
-            <div className="flex flex-col gap-y-6 mb-7 w-full">
+            <div className="flex flex-col gap-y-4 mb-7 w-full">
                 <Select
                     isSearchable
                     name="country"

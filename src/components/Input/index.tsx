@@ -18,7 +18,7 @@ const InputBox = React.forwardRef<HTMLInputElement, propsType>(
         return (
             <label
                 htmlFor={'input-box--' + (id ?? name)}
-                className={`text-lg flex flex-col gap-y-1 ${
+                className={`text-sm md:text-lg flex flex-col gap-y-1 ${
                     error ? ' text-red-600 ' : 'text-darkGrayColor'
                 }`}
             >
@@ -41,13 +41,13 @@ const InputBox = React.forwardRef<HTMLInputElement, propsType>(
                         id={'input-box--' + (id ?? name)}
                     />
                     {Icon && (
-                        <span className="absolute top-0 left-0 h-[49px] w-[49px] grid place-items-center ">
-                            <Icon className="h-[25px] w-[25px]" />
+                        <span className="absolute top-[-4px] md:top-0 left-0 h-[49px] w-[49px] grid place-items-center ">
+                            <Icon className="h-4 w-4 md:h-[25px] md:w-[25px]" />
                         </span>
                     )}
                     {type === 'password' && (
                         <span
-                            className="absolute top-0 right-0 h-[49px] w-[49px] grid place-items-center cursor-pointer "
+                            className="absolute top-[-3px] md:top-0 right-0 h-[49px] w-[49px] grid place-items-center cursor-pointer "
                             onClick={() => setShow((prev) => !prev)}
                         >
                             {isShown ? <FaRegEyeSlash /> : <FaRegEye />}

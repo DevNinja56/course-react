@@ -1,5 +1,5 @@
-@import "./config";
-@import "./slider";
+@import './config';
+@import './slider';
 
 @tailwind base;
 @tailwind components;
@@ -45,4 +45,16 @@
 }
 .removeScrollBar::-webkit-scrollbar {
     display: none;
+}
+
+@media screen and (min-width: 250px) and (max-width: 490px) {
+    .setWidthCompareModal {
+        width: 280px;
+    }
+}
+
+@media screen and (min-width: 491px) and (max-width: 2500px) {
+    .setWidthCompareModal {
+        width: 450px;
+    }
 }

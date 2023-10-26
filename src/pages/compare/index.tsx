@@ -159,14 +159,14 @@ const Compare = () => {
         <>
             <HeadBox />
             <div className="w-full pb-32">
-                <div className="max-w-[1120px] 2xl:max-w-[2400px] mx-auto px-2 2xl:px-8 transition-all duration-300">
+                <div className="max-w-[1120px] 2xl:max-w-[2400px] mx-auto px-5 md:px-[50px] lg:px-2 2xl:px-8 transition-all duration-300">
                     {state.map(({ heading, data }) => (
                         <div
                             className="w-full rounded-xl custom-shadow border-2 border-profileBgColor mt-10 "
                             key={'compare--' + heading}
                         >
-                            <div className="w-full rounded-xl rounded-b-none bg-blueColor pl-[35px] py-4">
-                                <h1 className="text-white text-xl font-bold leading-6">
+                            <div className="w-full rounded-xl rounded-b-none bg-blueColor pl-3 md:pl-[35px] py-4">
+                                <h1 className="text-white text-base md:text-xl font-bold leading-6">
                                     {heading}
                                 </h1>
                             </div>
@@ -174,50 +174,50 @@ const Compare = () => {
                                 {data.map(
                                     ({ title, first, second, third }, i) => (
                                         <div
-                                            className="flex w-full justify-between gap-4 capitalize   "
+                                            className="flex w-full justify-between gap-2 md:gap-4 capitalize"
                                             key={'rows-content--' + title}
                                         >
                                             <div
-                                                className={`w-1/4 p-5 relative border-r border-profileBgColor flex items-center ${
+                                                className={`w-[50%] md:w-1/4 px-3 py-5 md:p-5 relative border-r border-profileBgColor flex items-center ${
                                                     i % 2 === 0
                                                         ? 'bg-lightBlue'
                                                         : 'bg-white'
                                                 }  `}
                                             >
-                                                <h1 className="font-bold text-mainTextColor">
+                                                <h1 className="font-bold text-sm md:text-base text-mainTextColor">
                                                     {title ?? '--'}
                                                 </h1>
                                             </div>
                                             <div
-                                                className={`w-1/4 p-5 relative border-x border-profileBgColor flex items-center ${
+                                                className={`w-[15%] md:w-1/4 px-3 py-5 md:p-5 relative border-x border-profileBgColor flex items-center ${
                                                     i % 2 === 0
                                                         ? 'bg-lightBlue'
                                                         : 'bg-white'
                                                 }  `}
                                             >
-                                                <h1 className="font-bold text-grayColor">
+                                                <h1 className="font-bold text-sm md:text-base text-grayColor">
                                                     {first ?? '--'}
                                                 </h1>
                                             </div>
                                             <div
-                                                className={`w-1/4 p-5 relative border-x border-profileBgColor flex items-center ${
+                                                className={`w-[15%] md:w-1/4 px-3 py-5 md:p-5 relative border-x border-profileBgColor flex items-center ${
                                                     i % 2 === 0
                                                         ? 'bg-lightBlue'
                                                         : 'bg-white'
                                                 }  `}
                                             >
-                                                <h1 className="font-bold text-grayColor">
+                                                <h1 className="font-bold text-sm md:text-base text-grayColor">
                                                     {second ?? '--'}
                                                 </h1>
                                             </div>
                                             <div
-                                                className={`w-1/4 p-5 relative border-x border-profileBgColor flex items-center ${
+                                                className={`w-[15%] md:w-1/4 px-3 py-5 md:p-5 relative border-x border-profileBgColor flex items-center ${
                                                     i % 2 === 0
                                                         ? 'bg-lightBlue'
                                                         : 'bg-white'
                                                 }  `}
                                             >
-                                                <h1 className="font-bold text-grayColor">
+                                                <h1 className="font-bold text-sm md:text-base text-grayColor">
                                                     {third ?? '--'}
                                                 </h1>
                                             </div>
@@ -230,10 +230,10 @@ const Compare = () => {
                 </div>
             </div>
             <div className="w-full pb-20 2xl:pb-[700px] flex flex-col items-center overflow-hidden">
-                <p className="text-[23px] font-bold text-blueColor mb-1">
+                <p className="text-xl md:text-[23px] font-bold text-blueColor mb-1">
                     Scholarships
                 </p>
-                <h1 className="text-textLightBlackColor text-[48px] font-extrabold mb-5 text-center">
+                <h1 className="text-textLightBlackColor text-3xl md:text-[48px] font-extrabold mb-5 text-center">
                     Scholarships you may be interested in
                 </h1>
                 <ScholarshipSlider />
