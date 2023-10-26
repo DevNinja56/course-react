@@ -4,6 +4,7 @@ import { useCompare } from '@/hooks/compare';
 import HeadBox from '@/components/compare/HeadBox';
 import { InstituteLogoImage } from '@/components/compare/InstituteLogo';
 import ScholarshipSlider from '@/components/Slider/ScholarshipSlider';
+import Button from '@/components/Button';
 
 const Compare = () => {
     const { first, second, third } = useCompare();
@@ -158,8 +159,16 @@ const Compare = () => {
     return (
         <>
             <HeadBox />
-            <div className="w-full pb-32">
-                <div className="max-w-[1120px] 2xl:max-w-[2400px] mx-auto px-2 2xl:px-8 transition-all duration-300">
+            <div className="w-full pb-32 print:pb-0  ">
+                <div className="max-w-[1120px] 2xl:max-w-[2400px] mx-auto px-2 2xl:px-8 transition-all duration-300 relative">
+                    <Button
+                        text="Print"
+                        onClick={() => {
+                            window.print();
+                        }}
+                        variant="outline"
+                        className=" max-w-[100px] absolute top-[-55px] right-2 print:hidden "
+                    />
                     {state.map(({ heading, data }) => (
                         <div
                             className="w-full rounded-xl custom-shadow border-2 border-profileBgColor mt-10 "
@@ -229,7 +238,7 @@ const Compare = () => {
                     ))}
                 </div>
             </div>
-            <div className="w-full pb-20 2xl:pb-[700px] flex flex-col items-center overflow-hidden">
+            <div className="w-full pb-20 2xl:pb-[700px] flex flex-col items-center overflow-hidden print:hidden">
                 <p className="text-[23px] font-bold text-blueColor mb-1">
                     Scholarships
                 </p>

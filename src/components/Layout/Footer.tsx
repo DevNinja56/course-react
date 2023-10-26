@@ -6,7 +6,7 @@ import Logo from '../Logo';
 
 const Footer = () => {
     return (
-        <footer className=" w-full flex justify-center flex-col">
+        <footer className=" w-full flex justify-center flex-col print:hidden">
             <div className="translate-y-20 transition-all duration-300 mx-auto object-cover px-5 md:px-[50px] lg:px-0 relative ">
                 <Image
                     height={256}

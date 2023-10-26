@@ -24,7 +24,7 @@ function ScholarshipSlider() {
     const { addQuery } = useFilterQuery();
 
     return (
-        <div className="w-full">
+        <div className="w-full print:hidden">
             {data && data?.length > 0 && (
                 <Swiper
                     effect={'coverflow'}
@@ -55,10 +55,11 @@ function ScholarshipSlider() {
                                 onClick={() => addQuery({ countries: [name] })}
                             >
                                 <Image
-                                    width={200}
-                                    height={150}
+                                    width={300}
+                                    height={350}
                                     src={logo}
                                     alt="slide_image"
+                                    className=" object-cover "
                                 />
                                 <h3 className=" absolute bottom-2 left-2 w-1/2 text-2xl font-bold text-white drop-shadow-md ">
                                     {title}

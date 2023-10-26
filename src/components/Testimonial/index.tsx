@@ -27,7 +27,7 @@ const Testimonial = () => {
 
     return (
         <div
-            className={`bg-white ${
+            className={`bg-white print:hidden ${
                 router.pathname === ROUTES.APPLY ||
                 router.pathname === ROUTES.FAQ
                     ? ''
