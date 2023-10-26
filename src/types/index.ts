@@ -30,6 +30,12 @@ export type signUpForm = {
     phone_number: string;
 };
 
+export type changePasswordForm = {
+    password: string;
+    new_password: string;
+    confirm_password: string;
+};
+
 export type scholarshipType = {
     name: string;
     image: string;

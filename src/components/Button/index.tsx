@@ -28,7 +28,7 @@ const Button: React.FC<Props> = ({
         <button
             type="submit"
             disabled={disabled}
-            className={`w-full pt-[14px] pb-[13px] rounded-[10px] disabled:cursor-not-allowed flex gap-2 justify-center items-center font-semibold mb-1 border ${
+            className={`w-full pt-[14px] pb-[13px] rounded-[10px] disabled:cursor-not-allowed flex gap-2 justify-center items-center font-semibold mb-1 border group ${
                 variant === 'outline'
                     ? 'bg-white border-blueColor text-blueColor hover:bg-blueColor hover:text-white  '
                     : 'bg-blueColor border-transparent text-white hover:bg-white hover:border-blueColor hover:text-blueColor    '
@@ -36,7 +36,9 @@ const Button: React.FC<Props> = ({
             {...props}
         >
             <>{text}</>
-            {isLoader && <LoaderSpinner />}
+            {isLoader && (
+                <LoaderSpinner className="group-hover:text-blueColor" />
+            )}
         </button>
     );
     return (

@@ -35,9 +35,11 @@ const InputBox = React.forwardRef<HTMLInputElement, propsType>(
                                 ? 'password'
                                 : 'text'
                         }
-                        className={`pt-[10px] pb-[9px] text-grayColor border border-grayColor rounded-[10px] w-full outline-none ${
-                            Icon ? 'pl-12' : 'pl-2.5'
-                        } ${className}`}
+                        className={`pt-[10px] pb-[9px] rounded-[10px] w-full outline-none ${
+                            error
+                                ? 'text-red-600 border border-red-600'
+                                : 'text-grayColor border border-grayColor'
+                        } ${Icon ? 'pl-12' : 'pl-2.5'} ${className}`}
                         id={'input-box--' + (id ?? name)}
                     />
                     {Icon && (
@@ -55,7 +57,7 @@ const InputBox = React.forwardRef<HTMLInputElement, propsType>(
                     )}
                 </div>
                 {error && (
-                    <span className="text-xs my-2 text-red-600 ">{error}</span>
+                    <span className="text-xs mt-1 text-red-600 ">{error}</span>
                 )}
             </label>
         );

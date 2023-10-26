@@ -32,7 +32,7 @@ const Testimonial = () => {
                 router.pathname === ROUTES.FAQ
                     ? ''
                     : 'pt-8'
-            } pb-28 md:pb-32 lg:pb-60 overflow-hidden`}
+            }  overflow-hidden`}
         >
             <div
                 className={`relative pb-0 ${
@@ -113,7 +113,7 @@ const Testimonial = () => {
                         width={245}
                         alt="testimonial-round-2"
                         className="absolute right-0 top-0"
-                        src="/images/Apply/testimonialCircle.svg"
+                        src="/images/Home/testimoalRoundImg.svg"
                     />
                 ) : router.pathname.includes(
                       ROUTES.COURSE.replace(':id', '')

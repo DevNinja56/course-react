@@ -1,17 +1,13 @@
 import { ROUTES } from '@/config/constant';
-import { useGetCountriesQuery } from '@/store/slices/allRequests';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
-import { useFilterQuery } from '@/hooks/filterQuery';
-import * as _ from 'lodash';
+import Logo from '../Logo';
 
 const Footer = () => {
-    const { data } = useGetCountriesQuery();
-    const { addQuery } = useFilterQuery();
     return (
-        <div className="bg-footerBgColor w-full flex justify-center flex-col">
-            <div className="mt-[-70px] lg:mt-[-110px] mb-10 lg:mb-20 2xl:mb-[150px] transition-all duration-300 mx-auto object-cover px-5 md:px-[50px] lg:px-0 relative">
+        <footer className=" w-full flex justify-center flex-col">
+            <div className="translate-y-20 transition-all duration-300 mx-auto object-cover px-5 md:px-[50px] lg:px-0 relative ">
                 <Image
                     height={256}
                     width={1160}
@@ -30,151 +26,118 @@ const Footer = () => {
                     </Link>
                 </div>
             </div>
-            <div className="w-full pb-10">
-                <div className="max-w-[1160px] 2xl:max-w-[2300px] mx-auto px-5 md:px-[50px] lg:px-2 flex justify-between lg:items-start flex-wrap">
-                    <div className="flex flex-col md:flex-row lg:flex-col items-start md:items-center lg:items-start md:justify-between w-full lg:w-[420px] mb-8">
-                        <div>
-                            <Image
-                                className="mb-4"
-                                height={50}
-                                width={220.01}
-                                alt="footer logo"
-                                src="/images/courseoptionslogo 1.svg"
-                            />
-                            <p className="px-2 lg:px-[14px] text-lightGrayColor mb-6 md:mb-0 lg:mb-12 md:w-[500px] lg:w-auto">
-                                Great lesson ideas and lesson plans for ESL
-                                teachers! Educators can customize lesson plans
-                                to best.
-                            </p>
-                        </div>
-                        <div className="flex gap-x-5 items-center px-2">
-                            <div className="h-10 w-10 rounded-[5px] bg-facebookBgColor flex items-center justify-center">
-                                <Image
-                                    height={19.83}
-                                    width={10.97}
-                                    alt="facebook logo"
-                                    src="/images/Facebook.svg"
-                                />
+            <div className="bg-footerBgColor pt-32  ">
+                <div className="w-full pb-10">
+                    <div className="max-w-[1160px] 2xl:max-w-[2300px] mx-auto px-5 md:px-[50px] lg:px-2 flex justify-between lg:items-start flex-wrap">
+                        <div className="flex flex-col md:flex-row lg:flex-col items-start md:items-center lg:items-start md:justify-between w-full lg:w-[420px] mb-8">
+                            <div className="px-2 lg:px-3">
+                                <div className="mb-5">
+                                    <Logo />
+                                </div>
+                                <p className="text-lightGrayColor mb-6 md:mb-0 lg:mb-12 md:w-[500px] lg:w-auto">
+                                    Great lesson ideas and lesson plans for ESL
+                                    teachers! Educators can customize lesson
+                                    plans to best.
+                                </p>
                             </div>
-                            <div className="h-10 w-10 rounded-[5px] bg-twitterBgColor flex items-center justify-center">
-                                <Image
-                                    height={16.04}
-                                    width={19.54}
-                                    alt="twitter logo"
-                                    src="/images/twitter.svg"
-                                />
-                            </div>
-                            <div className="h-10 w-10 rounded-[5px] bg-telegramBgColor flex items-center justify-center">
-                                <Image
-                                    height={16}
-                                    width={19}
-                                    alt="telegram logo"
-                                    src="/images/telegram.svg"
-                                />
+                            <div className="flex gap-x-5 items-center px-2">
+                                <div className="h-10 w-10 rounded-[5px] bg-facebookBgColor flex items-center justify-center">
+                                    <Image
+                                        height={19.83}
+                                        width={10.97}
+                                        alt="facebook logo"
+                                        src="/images/Facebook.svg"
+                                    />
+                                </div>
+                                <div className="h-10 w-10 rounded-[5px] bg-twitterBgColor flex items-center justify-center">
+                                    <Image
+                                        height={16.04}
+                                        width={19.54}
+                                        alt="twitter logo"
+                                        src="/images/twitter.svg"
+                                    />
+                                </div>
+                                <div className="h-10 w-10 rounded-[5px] bg-telegramBgColor flex items-center justify-center">
+                                    <Image
+                                        height={16}
+                                        width={19}
+                                        alt="telegram logo"
+                                        src="/images/telegram.svg"
+                                    />
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div className="flex flex-col w-full md:w-auto mb-8">
-                        <h1 className="pt-[15px] pb-4 text-textLightBlackColor text-lg font-extrabold">
-                            STUDY ABROAD
-                        </h1>
-                        <ul className="text-lightGrayColor">
-                            {_.shuffle(data)
-                                ?.slice(0, 6)
-                                .map((country) => (
-                                    <li
-                                        key={
-                                            'footer_country__list--' +
-                                            country.name
-                                        }
-                                        onClick={() =>
-                                            addQuery({
-                                                country: [country.name]
-                                            })
-                                        }
-                                        className="pt-[9px] pb-[10px]"
-                                    >
-                                        <Link href={ROUTES.FILTER_COURSE}>
-                                            {country.name}
-                                        </Link>
+
+                        <div className="flex flex-col w-full md:w-auto mb-8">
+                            <h1 className="pt-[15px] pb-4 text-textLightBlackColor text-lg font-extrabold">
+                                QUICK LINKS
+                            </h1>
+                            <ul className="text-lightGrayColor">
+                                <Link href={ROUTES.COUNTRY}>
+                                    <li className="pt-[9px] pb-[10px]">
+                                        Find Country
                                     </li>
-                                ))}
-                            <li className="pt-[9px] pb-[10px]">
-                                <Link href={ROUTES.COUNTRY}>View all</Link>
-                            </li>
-                        </ul>
-                    </div>
-                    <div className="flex flex-col w-full md:w-auto mb-8">
-                        <h1 className="pt-[15px] pb-4 text-textLightBlackColor text-lg font-extrabold">
-                            QUICK LINKS
-                        </h1>
-                        <ul className="text-lightGrayColor">
-                            <li className="pt-[9px] pb-[10px]">
-                                B2B - Promotional Campaign
-                            </li>
-                            <li className="pt-[9px] pb-[10px]">Agents CRM</li>
-                            <li className="pt-[9px] pb-[10px]">
-                                Find Consultants
-                            </li>
-                            <Link href={ROUTES.INSTITUTES}>
-                                <li className="pt-[9px] pb-[10px]">
-                                    Find Institutions
-                                </li>
-                            </Link>
-                            <Link href={ROUTES.FIELDS}>
-                                <li className="pt-[9px] pb-[10px]">
-                                    Find Courses
-                                </li>
-                            </Link>
-                            <Link href={ROUTES.COUNTRY}>
-                                <li className="pt-[9px] pb-[10px]">
-                                    Find Country
-                                </li>
-                            </Link>
-                        </ul>
-                    </div>
-                    <div className="flex flex-col w-full md:w-auto mb-8">
-                        <h1 className="pt-[15px] pb-4 text-textLightBlackColor text-lg font-extrabold">
-                            SUPPORT
-                        </h1>
-                        <ul className="text-lightGrayColor">
-                            <Link href={ROUTES.ABOUT_US}>
-                                <li className="pt-[9px] pb-[10px]">About Us</li>
-                            </Link>
-                            <Link href={ROUTES.CONTACT_US}>
-                                <li className="pt-[9px] pb-[10px]">
-                                    Contact Us
-                                </li>
-                            </Link>
-                            <Link href={ROUTES.FAQ}>
-                                <li className="pt-[9px] pb-[10px]">
-                                    FAQ&lsquo;s
-                                </li>
-                            </Link>
-                            <Link href={ROUTES.PRIVACY_POLICY}>
-                                <li className="pt-[9px] pb-[10px]">
-                                    Privacy Policy
-                                </li>
-                            </Link>
-                            <Link href={ROUTES.TERMS_CONDITION}>
-                                <li className="pt-[9px] pb-[10px]">
-                                    Terms and Condition
-                                </li>
-                            </Link>
-                            <Link href={ROUTES.BLOGS}>
-                                <li className="pt-[9px] pb-[10px]">Blogs</li>
-                            </Link>
-                            <li className="pt-[9px] pb-[10px]">Book a Demo</li>
-                        </ul>
+                                </Link>
+                                <Link href={ROUTES.FIELDS}>
+                                    <li className="pt-[9px] pb-[10px]">
+                                        Find Courses
+                                    </li>
+                                </Link>
+                                <Link href={ROUTES.INSTITUTES}>
+                                    <li className="pt-[9px] pb-[10px]">
+                                        Find Institutions
+                                    </li>
+                                </Link>
+                                <Link href={ROUTES.BLOGS}>
+                                    <li className="pt-[9px] pb-[10px]">
+                                        Blogs
+                                    </li>
+                                </Link>
+                            </ul>
+                        </div>
+                        <div className="flex flex-col w-full md:w-auto mb-8">
+                            <h1 className="pt-[15px] pb-4 text-textLightBlackColor text-lg font-extrabold">
+                                SUPPORT
+                            </h1>
+                            <ul className="text-lightGrayColor">
+                                <Link href={ROUTES.FAQ}>
+                                    <li className="pt-[9px] pb-[10px]">
+                                        FAQ&lsquo;s
+                                    </li>
+                                </Link>
+                                <Link href={ROUTES.ABOUT_US}>
+                                    <li className="pt-[9px] pb-[10px]">
+                                        About Us
+                                    </li>
+                                </Link>
+                                <Link href={ROUTES.CONTACT_US}>
+                                    <li className="pt-[9px] pb-[10px]">
+                                        Contact Us
+                                    </li>
+                                </Link>
+
+                                <Link href={ROUTES.PRIVACY_POLICY}>
+                                    <li className="pt-[9px] pb-[10px]">
+                                        Privacy Policy
+                                    </li>
+                                </Link>
+                                <Link href={ROUTES.TERMS_CONDITION}>
+                                    <li className="pt-[9px] pb-[10px]">
+                                        Terms and Condition
+                                    </li>
+                                </Link>
+                            </ul>
+                        </div>
                     </div>
                 </div>
+                <div className="border border-borderColor py-8 w-full flex justify-center items-center">
+                    <p className="text-lightGrayColor">
+                        Copyright ©{new Date().getFullYear()} Course Options
+                        All Rights Reserved
+                    </p>
+                </div>
             </div>
-            <div className="border border-borderColor py-8 w-full flex justify-center items-center">
-                <p className="text-lightGrayColor">
-                    Copyright © 2023 Education. All Rights Reserved
-                </p>
-            </div>
-        </div>
+        </footer>
     );
 };
 

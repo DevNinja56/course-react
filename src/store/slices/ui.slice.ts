@@ -5,7 +5,8 @@ export enum modalType {
     'reset_password',
     'compare_university',
     'update_user_info',
-    'login_confirmation'
+    'login_confirmation',
+    'change_password'
 }
 
 interface UiState {
