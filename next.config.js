@@ -2,7 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ['times-con.s3.us-east-2.amazonaws.com', "assets.timescoursefinder.com"]
+    domains: ['times-con.s3.us-east-2.amazonaws.com', "assets.timescoursefinder.com", 'picsum.photos']
   }
 
 }

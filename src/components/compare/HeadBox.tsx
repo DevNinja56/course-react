@@ -38,7 +38,7 @@ const HeadBox = () => {
                             }
                             className="py-[14px] px-2 text-sm md:text-base md:px-[73px] rounded-[5px] bg-blueColor text-white font-semibold showModalBtn w-[46%] md:w-[48%] lg:w-auto"
                         >
-                            Select Course1
+                            Select Course
                         </button>
                         <button
                             onClick={() =>
@@ -49,7 +49,7 @@ const HeadBox = () => {
                             }
                             className="py-[14px] px-2 text-sm md:text-base md:px-[73px] rounded-[5px] bg-blueColor text-white font-semibold showModalBtn w-[46%] md:w-[48%] lg:w-auto"
                         >
-                            Select Course2
+                            Select Course
                         </button>
                         <button
                             onClick={() =>
@@ -60,7 +60,7 @@ const HeadBox = () => {
                             }
                             className="py-[14px] px-2 text-sm md:text-base md:px-[73px] rounded-[5px] bg-blueColor text-white font-semibold showModalBtn w-[46%] md:w-[48%] lg:w-auto"
                         >
-                            Select Course3
+                            Select Course
                         </button>
                     </div>
                 </div>

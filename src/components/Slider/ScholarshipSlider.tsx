@@ -55,8 +55,8 @@ function ScholarshipSlider() {
                                 onClick={() => addQuery({ countries: [name] })}
                             >
                                 <Image
-                                    width={300}
-                                    height={350}
+                                    width={600}
+                                    height={650}
                                     src={logo}
                                     alt="slide_image"
                                     className=" object-cover "

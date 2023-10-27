@@ -4,7 +4,6 @@ import { useCompare } from '@/hooks/compare';
 import HeadBox from '@/components/compare/HeadBox';
 import { InstituteLogoImage } from '@/components/compare/InstituteLogo';
 import ScholarshipSlider from '@/components/Slider/ScholarshipSlider';
-import Button from '@/components/Button';
 
 const Compare = () => {
     const { first, second, third } = useCompare();
@@ -161,23 +160,25 @@ const Compare = () => {
             <HeadBox />
             <div className="w-full pb-32 print:pb-0  ">
                 <div className="max-w-[1120px] 2xl:max-w-[2400px] mx-auto px-2 2xl:px-8 transition-all duration-300 relative">
-                    <Button
-                        text="Print"
-                        onClick={() => {
-                            window.print();
-                        }}
-                        variant="outline"
-                        className=" max-w-[100px] absolute top-[-55px] right-2 print:hidden "
-                    />
-                    {state.map(({ heading, data }) => (
+                    {state.map(({ heading, data }, i) => (
                         <div
                             className="w-full rounded-xl custom-shadow border-2 border-profileBgColor mt-10 "
                             key={'compare--' + heading}
                         >
-                            <div className="w-full rounded-xl rounded-b-none bg-blueColor pl-3 md:pl-[35px] py-4">
+                            <div className="w-full rounded-xl rounded-b-none bg-blueColor pl-3 md:pl-[35px] py-4 relative ">
                                 <h1 className="text-white text-base md:text-xl font-bold leading-6">
                                     {heading}
                                 </h1>
+                                {i === 0 && (
+                                    <button
+                                        onClick={() => {
+                                            window.print();
+                                        }}
+                                        className="absolute top-[50%] translate-y-[-50%] right-3 bg-white px-2 py-1 rounded-md print:hidden "
+                                    >
+                                        Print
+                                    </button>
+                                )}
                             </div>
                             <div className="w-full">
                                 {data.map(

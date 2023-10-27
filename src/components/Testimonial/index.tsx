@@ -32,7 +32,7 @@ const Testimonial = () => {
                 router.pathname.includes(ROUTES.COURSE.replace(':id', ''))
                     ? ''
                     : 'pt-8'
-            } pb-28 md:pb-32 lg:pb-60 `}
+            } `}
         >
             <div
                 className={`relative pb-0  ${
