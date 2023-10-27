@@ -36,6 +36,16 @@ export type changePasswordForm = {
     confirm_password: string;
 };
 
+export type forgotForm = {
+    email: string;
+};
+
+export type resetForm = {
+    password: string;
+    c_password: string;
+    email?: string;
+};
+
 export type scholarshipType = {
     name: string;
     image: string;

@@ -16,7 +16,7 @@ import { BiLock } from 'react-icons/bi';
 import { MdOutlineMail } from 'react-icons/md';
 import { BiUser } from 'react-icons/bi';
 import { IoIosPhonePortrait } from 'react-icons/io';
-import { BsFillSkipBackwardBtnFill } from 'react-icons/bs';
+import { FaArrowLeft } from 'react-icons/fa6';
 
 const SignUp = () => {
     const [isLoading, setIsLoading] = useState(false);
@@ -108,7 +108,7 @@ const SignUp = () => {
                     />
                     <div className=" absolute top-40 md:top-9 2xl:top-80 rounded-[10px] bg-white custom-shadow pt-10 pb-7 px-4 md:px-12 flex flex-col items-center w-[90%] md:w-[53%] lg:w-[45%] xl:w-[35%] 2xl:w-[50%]">
                         <Link href={ROUTES.SIGN_IN}>
-                            <BsFillSkipBackwardBtnFill className="absolute left-5 top-5 cursor-pointer text-blueColor h-6 w-6" />
+                            <FaArrowLeft className="absolute left-5 top-5 cursor-pointer text-blueColor h-6 w-6" />
                         </Link>
                         <h1 className="font-medium text-2xl md:text-[36px] text-mainTextColor mb-3">
                             Welcome Back

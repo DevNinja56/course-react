@@ -1,14 +1,25 @@
-import IntrestingForYou from '@/components/Profile/IntrestingForYou';
 import ProfileComp from '@/components/Profile/ProfileComp';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 import React, { useState } from 'react';
+import Favorites from '@/components/Profile/Favorites/index';
+
+export const profileTabs = {
+    profile: 'Profile',
+    favorites: 'Favorite'
+};
 
 const Profile = () => {
-    const [activeComponent, setActiveComponent] = useState('profile');
+    const { query, isReady } = useRouter();
+    const activeTab = query['tab'] as string;
+    const [activeComponent, setActiveComponent] = useState(
+        isReady && activeTab ? activeTab : profileTabs.profile
+    );
 
-    const onProfileLink = (link: string) => {
-        setActiveComponent(link);
-    };
+    const tabs = [
+        { title: profileTabs.profile, Component: ProfileComp },
+        { title: profileTabs.favorites, Component: Favorites }
+    ];
 
     return (
         <>
@@ -21,7 +32,7 @@ const Profile = () => {
                     src="/images/profileImages/Ellipse 418.svg"
                 />
                 <h1 className="text-mainTextColor text-[28px] md:text-[40px] font-extrabold">
-                    Your Profile
+                    Your {activeComponent}
                 </h1>
                 <Image
                     height={119}
@@ -41,31 +52,25 @@ const Profile = () => {
             <div className="w-full pb-52 lg:pb-72">
                 <div className="w-full lg:max-w-[1100px] 2xl:max-w-[2300px] mx-auto px-0 lg:px-2 2xl:px-8 transition-all duration-300">
                     <div className="flex items-center lg:mb-16">
-                        <div
-                            onClick={() => onProfileLink('profile')}
-                            className={`py-[15px] md:py-[18px] lg:py-[8px] w-[50%] pl-[30px] md:px-[50px] lg:w-auto lg:px-[37px] font-bold text-xl md:text-[26px] lg:text-2xl ${
-                                activeComponent === 'profile'
-                                    ? 'bg-blueColor text-white'
-                                    : 'bg-white text-darkGrayColor'
-                            }`}
-                        >
-                            Profile
-                        </div>
-                        <div
-                            onClick={() => onProfileLink('intrestingForYou')}
-                            className={`py-[15px] md:py-[18px] lg:py-[8px] w-[50%] pl-[16px] md:pl-[30px] md:px-[50px] lg:w-auto lg:px-[37px] font-bold text-xl md:text-[26px] lg:text-2xl ${
-                                activeComponent === 'intrestingForYou'
-                                    ? 'bg-blueColor text-white'
-                                    : 'bg-white text-darkGrayColor'
-                            }`}
-                        >
-                            Interesting for you
-                        </div>
+                        {tabs.map(({ title }, i) => (
+                            <div
+                                key={'tabs-button-' + i + title}
+                                onClick={() => setActiveComponent(title)}
+                                className={`py-[15px] md:py-[18px] lg:py-[8px] w-[50%] pl-[30px] md:px-[50px] lg:w-auto lg:px-[37px] font-bold text-xl md:text-[26px] lg:text-2xl cursor-pointer ${
+                                    activeComponent === title
+                                        ? 'bg-blueColor text-white'
+                                        : 'bg-white text-darkGrayColor'
+                                }`}
+                            >
+                                {title}
+                            </div>
+                        ))}
                     </div>
-                    {activeComponent === 'profile' && <ProfileComp />}
-                    {activeComponent === 'intrestingForYou' && (
-                        <IntrestingForYou />
-                    )}
+                    {tabs.map(({ Component, title }, i) => (
+                        <React.Fragment key={'profile-tabs-list-' + i}>
+                            {activeComponent === title && <Component />}
+                        </React.Fragment>
+                    ))}
                 </div>
             </div>
         </>

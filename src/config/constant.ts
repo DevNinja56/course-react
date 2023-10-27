@@ -19,7 +19,7 @@ export const ROUTES = {
     FAQ: '/faq',
     PRIVACY_POLICY: '/privacyPolicy',
     TERMS_CONDITION: '/termsCondition',
-    FAVORITES: '/Favorites',
+    FAVORITES: '/profile?tab=Favorite',
     SUBSCRIPTIONS: '/subscriptions',
     SETTINGS: '/settings'
 };
