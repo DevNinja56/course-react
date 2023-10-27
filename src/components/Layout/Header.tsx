@@ -150,7 +150,7 @@ const Header = ({ onlyLogo }: { onlyLogo?: boolean }) => {
                         {showSideBar && (
                             <Sidebar setShowSideBar={setShowSideBar} />
                         )}
-                        <div className="flex items-center gap-x-3 md:gap-x-6">
+                        <div className="flex items-center gap-x-1 md:gap-x-6">
                             {isAuthenticated ? (
                                 <div
                                     className="flex items-center gap-x-3 relative select-none cursor-pointer "
@@ -195,7 +195,7 @@ const Header = ({ onlyLogo }: { onlyLogo?: boolean }) => {
                                         width={36}
                                         alt=""
                                         src="/images/User Circle.svg"
-                                        className="block md:hidden"
+                                        className="block md:hidden h-6 w-6 md:h-9 md:w-9"
                                         priority
                                     />
                                 </Link>
@@ -205,7 +205,7 @@ const Header = ({ onlyLogo }: { onlyLogo?: boolean }) => {
                                 height={46}
                                 alt="menu-icon"
                                 onClick={onShowSideBar}
-                                className="block lg:hidden"
+                                className="block lg:hidden h-8 w-8 md:h-11 md:w-11"
                                 src="/images/Menu.svg"
                                 priority
                             />
