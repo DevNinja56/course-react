@@ -15,7 +15,11 @@ const LoginConfirmation = () => {
             <h1 className="text-mainTextColor font-bold text-[36px] mb-5">
                 Please Login!
             </h1>
-            <Button text="Go to Login Page" link={ROUTES.SIGN_IN} />
+            <Button
+                text="Go to Login Page"
+                link={ROUTES.SIGN_IN}
+                onClick={hideModal}
+            />
         </div>
     );
 };

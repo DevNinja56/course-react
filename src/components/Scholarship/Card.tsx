@@ -1,40 +1,60 @@
 import { ROUTES } from '@/config/constant';
-import { filterScholarShipType } from '@/types';
+import {
+    countryType,
+    degreeType,
+    disciplineType,
+    instituteType
+} from '@/types';
 import Link from 'next/link';
 import React from 'react';
 import { MdLocationOn } from 'react-icons/md';
 import FavoriteButton from '../Button/FavoriteButton';
-import { useSearchedScholarship } from '@/hooks/filterScholarship';
 
 interface propsType {
-    data: filterScholarShipType;
+    id: string;
+    favoriteId?: string[];
+    refetch: () => void;
+    name: string;
+    type: string;
+    degrees: degreeType[];
+    institute: instituteType;
+    discipline: disciplineType[];
+    country: countryType;
 }
 
-const Card: React.FC<propsType> = ({ data }: propsType) => {
-    const { fetchSearchedScholarshipRequest: fetchScholarship } =
-        useSearchedScholarship();
+const Card: React.FC<propsType> = ({
+    id,
+    favoriteId,
+    refetch,
+    name,
+    type,
+    degrees,
+    institute,
+    discipline,
+    country
+}) => {
     return (
         <div className="border-2 border-scholarshipBorderColor rounded-[10px] px-5 py-4 flex flex-col gap-y-1 w-[100%] group cursor-pointer transition-all duration-300 onHoverShadow relative ">
             <FavoriteButton
-                isActive={!!data?.favoriteId?.[0]}
-                body={{ scholarship: data._id }}
-                refetch={fetchScholarship}
+                isActive={!!favoriteId?.[0]}
+                body={{ scholarship: id }}
+                refetch={refetch}
             />
 
-            <Link href={ROUTES.SCHOLARSHIP.replace(':id', data._id)}>
+            <Link href={ROUTES.SCHOLARSHIP.replace(':id', id)}>
                 <>
                     <h1
                         className="font-bold text-lg text-textLightBlackColor capitalize line-clamp-2 h-14 "
-                        title={data.name}
+                        title={name}
                     >
-                        {data.name} ({data.type})
+                        {name} ({type})
                     </h1>
                     <div className="mb-4">
                         <div className="py-3 gap-x-2 flex items-center w-full border-b border-scholarshipBorderColor h-14 ">
                             <MdLocationOn className="fill-[#626262] group-hover:fill-blueColor transition-all duration-300" />
 
                             <p className="text-sm text-darkGrayColor">
-                                {data.country?.name ?? 'No Country'}
+                                {country?.name ?? 'No Country'}
                             </p>
                         </div>
                         <div className="py-3 gap-x-2 flex items-center w-full border-b border-scholarshipBorderColor h-14">
@@ -55,7 +75,7 @@ const Card: React.FC<propsType> = ({ data }: propsType) => {
                                 />
                             </svg>
                             <p className="text-sm text-darkGrayColor">
-                                {data.degrees.map((item) => item.name).join()}
+                                {degrees.map((item) => item.name).join()}
                             </p>
                         </div>
                         <div className="py-3 gap-x-2 flex items-center w-full border-b border-scholarshipBorderColor h-14">
@@ -128,9 +148,7 @@ const Card: React.FC<propsType> = ({ data }: propsType) => {
                                 />
                             </svg>
                             <p className="text-sm text-darkGrayColor">
-                                {data.discipline
-                                    .map((item) => item.name)
-                                    .join()}
+                                {discipline.map((item) => item.name).join()}
                             </p>
                         </div>
                         <div className="py-3 gap-x-2 flex items-center w-full border-b border-scholarshipBorderColor h-14">
@@ -150,7 +168,7 @@ const Card: React.FC<propsType> = ({ data }: propsType) => {
                                 />
                             </svg>
                             <p className="text-sm text-darkGrayColor w-full">
-                                {data.institute.name ?? 'No institute'}
+                                {institute.name ?? 'No institute'}
                             </p>
                         </div>
                     </div>

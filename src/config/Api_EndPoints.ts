@@ -24,6 +24,7 @@ export const API_ENDPOINTS = {
     SCHOLARSHIP_SEARCH: '/scholarship/filter',
     FAVORITE: '/favorite',
     FAVORITE_DELETE: '/favorite/delete',
+    USER_FAVORITES: '/favorite/user?type=:type',
     SPECIALIZATION: '/specialization',
     INSTITUTE: '/institute',
     INSTITUTE_WITH_COUNTRY_ID: '/institute/country/:id',

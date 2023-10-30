@@ -62,6 +62,7 @@ export type scholarshipType = {
     createdAt: string;
     updatedAt: string;
     id: string;
+    _id: string;
 };
 
 export type filterScholarShipType = {
@@ -179,4 +180,15 @@ export type blogsType = {
     favoriteId: [];
     id: string;
     createdAt: string;
+};
+
+export type favoritesType = {
+    scholarship: scholarshipType;
+    institute: instituteType;
+    course: courseType;
+    blog: blogsType;
+    user: string;
+    createdAt: string;
+    updatedAt: string;
+    id: string;
 };

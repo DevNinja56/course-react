@@ -7,6 +7,7 @@ import {
     courseType,
     degreeType,
     disciplineType,
+    favoritesType,
     instituteType,
     scholarshipType,
     specializationType
@@ -92,6 +93,16 @@ export const stateQueryApi = createApi({
             }),
             transformResponse: (res: { data: scholarshipType }) =>
                 res.data! ?? res
+        }),
+        getUserFavorites: builder.query<
+            favoritesType[],
+            'course' | 'institute' | 'scholarship' | 'blog'
+        >({
+            query: (type) => ({
+                url: API_ENDPOINTS.USER_FAVORITES.replace(':type', type)
+            }),
+            transformResponse: (res: { data: favoritesType[] }) =>
+                res.data! ?? res
         })
     })
 });
@@ -106,5 +117,6 @@ export const {
     useGetSingleBlogQuery,
     useGetPaginatedDisciplineQuery,
     useGetCourseByIdQuery,
-    useGetScholarshipByIdQuery
+    useGetScholarshipByIdQuery,
+    useGetUserFavoritesQuery
 } = stateQueryApi;

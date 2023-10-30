@@ -3,11 +3,13 @@ import React, { useState } from 'react';
 import Institutes from './Institutes';
 import Scholarships from './Scholarships';
 import Courses from './Courses';
+import Blogs from './Blogs';
 
 export const favoritesTabs = {
     institutes: 'Institutes',
     scholarships: 'Scholarships',
-    courses: 'Courses'
+    courses: 'Courses',
+    blogs: 'Blogs'
 };
 
 const Favorites = () => {
@@ -15,7 +17,8 @@ const Favorites = () => {
     const tabs = [
         { title: favoritesTabs.institutes, Component: Institutes },
         { title: favoritesTabs.scholarships, Component: Scholarships },
-        { title: favoritesTabs.courses, Component: Courses }
+        { title: favoritesTabs.courses, Component: Courses },
+        { title: favoritesTabs.blogs, Component: Blogs }
     ];
 
     return (
