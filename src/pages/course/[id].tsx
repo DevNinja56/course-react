@@ -2,9 +2,11 @@ import Button from '@/components/Button';
 import FavoriteButton from '@/components/Button/FavoriteButton';
 import CounselingWork from '@/components/CounselingWork/CounselingWork';
 import ScreenLoader from '@/components/Loader/ScreenLoader';
+import Tabs from '@/components/Tabs';
 import Testimonial from '@/components/Testimonial';
 import { ROUTES } from '@/config/constant';
 import { useGetCourseByIdQuery } from '@/store/slices/allRequests';
+import { setCurrencyValue } from '@/utils/currencyValue';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -65,7 +67,7 @@ const CourseDetail = () => {
                                 <Image
                                     height={228}
                                     width={353.5}
-                                    alt="mainimg"
+                                    alt="minim"
                                     className="absolute top-0 left-0 w-full h-[228px] object-cover"
                                     src={
                                         course.institute?.image ??
@@ -82,7 +84,8 @@ const CourseDetail = () => {
                                     About
                                 </h1>
                                 <p className="text-[13px] text-grayColor mb-2">
-                                    {course.institute.description}
+                                    {course.institute.description.slice(0, 200)}
+                                    ...
                                 </p>
                                 <p className="text-[11px] text-grayColor mb-8">
                                     Visit the{' '}
@@ -120,11 +123,11 @@ const CourseDetail = () => {
                                                 priority
                                             />
                                             <p className="text-textLightBlackColor">
-                                                Duration
+                                                Course Name
                                             </p>
                                         </div>
                                         <p className="text-darkGrayColor">
-                                            {course.duration}
+                                            {course.degree.name}
                                         </p>
                                     </div>
                                     <div className="flex items-center justify-between">
@@ -141,7 +144,7 @@ const CourseDetail = () => {
                                             </p>
                                         </div>
                                         <p className="text-darkGrayColor">
-                                            {course.degree.name}
+                                            {course.degree.type}
                                         </p>
                                     </div>
                                     <div className="flex items-center justify-between">
@@ -158,7 +161,7 @@ const CourseDetail = () => {
                                             </p>
                                         </div>
                                         <p className="text-darkGrayColor">
-                                            {course.degree.type}
+                                            {course.specialization.name}
                                         </p>
                                     </div>
                                     <div className="flex items-center justify-between">
@@ -171,28 +174,11 @@ const CourseDetail = () => {
                                                 priority
                                             />
                                             <p className="text-textLightBlackColor">
-                                                Language
+                                                Course Length
                                             </p>
                                         </div>
                                         <p className="text-darkGrayColor">
-                                            {course.language.join()}
-                                        </p>
-                                    </div>
-                                    <div className="flex items-center justify-between">
-                                        <div className="flex items-center gap-x-2">
-                                            <Image
-                                                height={20}
-                                                width={20}
-                                                alt="target-icon"
-                                                src="/images/CourseDetail/target-05.svg"
-                                                priority
-                                            />
-                                            <p className="text-textLightBlackColor">
-                                                Format
-                                            </p>
-                                        </div>
-                                        <p className="text-darkGrayColor">
-                                            {course.format}
+                                            {course.duration + ' Years'}
                                         </p>
                                     </div>
                                     <div className="flex items-center justify-between">
@@ -205,7 +191,7 @@ const CourseDetail = () => {
                                                 priority
                                             />
                                             <p className="text-textLightBlackColor">
-                                                Delivery
+                                                Delivery Mode
                                             </p>
                                         </div>
                                         <p className="text-darkGrayColor">
@@ -222,11 +208,11 @@ const CourseDetail = () => {
                                                 priority
                                             />
                                             <p className="text-textLightBlackColor">
-                                                Apply date
+                                                Available Intakes
                                             </p>
                                         </div>
                                         <p className="text-darkGrayColor">
-                                            {course.applyDate}
+                                            {course.intakes.join()}
                                         </p>
                                     </div>
                                     <div className="flex items-center justify-between">
@@ -239,32 +225,13 @@ const CourseDetail = () => {
                                                 priority
                                             />
                                             <p className="text-textLightBlackColor">
-                                                Start date
+                                                Tuition Fee
                                             </p>
                                         </div>
-                                        <p className="text-darkGrayColor">
-                                            {new Date(
-                                                course.startDate
-                                            ).toDateString()}
-                                        </p>
-                                    </div>
-                                    <div className="flex items-center justify-between">
-                                        <div className="flex items-center gap-x-2">
-                                            <Image
-                                                height={20}
-                                                width={20}
-                                                alt="calender-icon"
-                                                src="/images/CourseDetail/Calendar.svg"
-                                                priority
-                                            />
-                                            <p className="text-textLightBlackColor">
-                                                End date
-                                            </p>
-                                        </div>
-                                        <p className="text-darkGrayColor">
-                                            {new Date(
-                                                course.endDate
-                                            ).toDateString()}
+                                        <p className="text-textLightBlackColor">
+                                            {setCurrencyValue(
+                                                course.tuitionFee
+                                            )}
                                         </p>
                                     </div>
                                 </div>
@@ -282,8 +249,98 @@ const CourseDetail = () => {
                     <div className="w-full bg-white h-auto lg:h-[140vh] xl:h-[160vh] pb-20 lg:pb-0 mb-10 lg:mb-0">
                         <div className="max-w-[1110px] 2xl:max-w-[2300px] mx-auto px-5 md:px-[50px] lg:px-2 2xl:px-8 transition-all duration-300 pt-16 pr-auto lg:pr-[350px] 2xl:pr-[700px]">
                             <div className="flex flex-col gap-y-6 mb-20">
+                                <div className="tabs-container capitalize">
+                                    <Tabs
+                                        data={[
+                                            {
+                                                title: 'Entry Requirements',
+                                                element: (
+                                                    <div>
+                                                        <h3 className="text-black text-lg font-semibold">
+                                                            Entry Requirements
+                                                        </h3>
+                                                        <div
+                                                            className="content"
+                                                            dangerouslySetInnerHTML={{
+                                                                __html: course.entryRequirements
+                                                            }}
+                                                        ></div>
+                                                    </div>
+                                                )
+                                            },
+                                            {
+                                                title: 'Language',
+                                                element: (
+                                                    <div>
+                                                        <h3 className="text-black text-lg font-semibold">
+                                                            Language
+                                                            Requirements
+                                                        </h3>
+                                                        <p>
+                                                            {course.language.join()}
+                                                        </p>
+                                                    </div>
+                                                )
+                                            },
+                                            {
+                                                title: 'Tuitions Fee',
+                                                element: (
+                                                    <div>
+                                                        <h3 className="text-black text-lg font-semibold">
+                                                            Tuitions Fee
+                                                        </h3>
+                                                        <p>
+                                                            {setCurrencyValue(
+                                                                course.tuitionFee
+                                                            )}
+                                                        </p>
+                                                    </div>
+                                                )
+                                            },
+                                            {
+                                                title: 'Scholarship',
+                                                element: (
+                                                    <div>
+                                                        <h3 className="text-black text-lg font-semibold">
+                                                            All Scholarship
+                                                        </h3>
+                                                        <ul>
+                                                            {course.degree.scholarship.map(
+                                                                ({ name }) => (
+                                                                    <li
+                                                                        key={
+                                                                            'scholarship-list--' +
+                                                                            name
+                                                                        }
+                                                                    >
+                                                                        {name}
+                                                                    </li>
+                                                                )
+                                                            )}
+                                                        </ul>
+                                                    </div>
+                                                )
+                                            },
+                                            {
+                                                title: 'Initial Deposit',
+                                                element: (
+                                                    <div>
+                                                        <h3 className="text-black text-lg font-semibold">
+                                                            Initial Deposit
+                                                        </h3>
+                                                        <p>
+                                                            {setCurrencyValue(
+                                                                course.initialDeposit
+                                                            )}
+                                                        </p>
+                                                    </div>
+                                                )
+                                            }
+                                        ]}
+                                    />
+                                </div>
                                 <h1 className="font-semibold text-lg md:text-xl text-textLightBlackColor">
-                                    Description
+                                    Course Description
                                 </h1>
                                 <div
                                     className="text-sm md:text-base"

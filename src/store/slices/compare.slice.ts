@@ -1,9 +1,9 @@
 import {
     countryType,
-    courseType,
     degreeType,
     disciplineType,
-    instituteType
+    instituteType,
+    singleCourseType
 } from '@/types';
 import { createSlice } from '@reduxjs/toolkit';
 
@@ -12,7 +12,7 @@ interface dataTypes {
     institute: instituteType;
     discipline: disciplineType;
     degreeLevel: degreeType;
-    course: courseType;
+    course: singleCourseType;
 }
 
 export interface compareInstituteInitialStateType {

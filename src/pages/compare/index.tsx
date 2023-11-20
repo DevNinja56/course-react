@@ -100,9 +100,9 @@ const Compare = () => {
                 },
                 {
                     title: 'Yearly fee',
-                    first: first?.course?.applicationFee,
-                    second: second?.course?.applicationFee,
-                    third: third?.course?.applicationFee
+                    first: first?.course.initialDeposit,
+                    second: second?.course.initialDeposit,
+                    third: third?.course.initialDeposit
                 },
                 {
                     title: 'Intake',

@@ -4,7 +4,7 @@ import { API_ENDPOINTS } from '@/config/Api_EndPoints';
 import {
     blogsType,
     countryType,
-    courseType,
+    singleCourseType,
     degreeType,
     disciplineType,
     favoritesType,
@@ -81,11 +81,12 @@ export const stateQueryApi = createApi({
                 data: PaginatedResponse<disciplineType[]>;
             }) => res.data! ?? res
         }),
-        getCourseById: builder.query<courseType, string>({
+        getCourseById: builder.query<singleCourseType, string>({
             query: (id) => ({
                 url: API_ENDPOINTS.COURSE_BY_ID.replace(':id', id)
             }),
-            transformResponse: (res: { data: courseType }) => res.data! ?? res
+            transformResponse: (res: { data: singleCourseType }) =>
+                res.data! ?? res
         }),
         getScholarshipById: builder.query<scholarshipType, string>({
             query: (id) => ({

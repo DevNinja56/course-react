@@ -5,6 +5,7 @@ import Link from 'next/link';
 import React from 'react';
 import FavoriteButton from '../../Button/FavoriteButton';
 import { useSearchedCourses } from '@/hooks/filterCourses';
+import { setCurrencyValue } from '@/utils/currencyValue';
 
 interface CardProps {
     course: courseType;
@@ -14,14 +15,16 @@ const CourseCard = ({ course }: CardProps) => {
     const { fetchSearchedCoursesRequest } = useSearchedCourses();
     const state = [
         { title: 'Institute', value: course?.institute?.name },
-        { title: 'Degree', value: course?.degree.name },
-        { title: 'Study in', value: course?.country.name },
-        { title: 'Course starts', value: course.startDate },
-        { title: 'Deadline', value: course.endDate }
+        { title: 'Level', value: course?.degree.type },
+        {
+            title: 'Tuition Fee',
+            value: setCurrencyValue(course.tuitionFee)
+        },
+        { title: 'intakes', value: course.intakes.join() }
     ];
 
     return (
-        <div className="border-2 border-scholarshipBorderColor rounded-[10px] p-3 flex flex-col gap-y-5 w-[100%] group cursor-pointer hover:border-blueColor custom-shadow relative">
+        <div className="border-2 border-scholarshipBorderColor rounded-[10px] p-3 flex flex-col gap-y-5 w-[100%] group cursor-pointer hover:border-blueColor custom-shadow relative capitalize">
             <FavoriteButton
                 isActive={!!course?.favoriteId?.[0]}
                 body={{ course: course._id }}
@@ -43,7 +46,7 @@ const CourseCard = ({ course }: CardProps) => {
                 </div>
                 <div>
                     <h1
-                        className="font-bold text-base  text-textLightBlackColor mb-4 group-hover:text-blueColor h-12 line-clamp-2 "
+                        className="font-bold text-base  text-textLightBlackColor mb-4 group-hover:text-blueColor max-h-12 line-clamp-2  "
                         title={course.name}
                     >
                         {course.name}

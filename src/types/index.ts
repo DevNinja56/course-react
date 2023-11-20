@@ -96,6 +96,7 @@ export type degreeType = {
     name: string;
     type: string;
     course: courseType[];
+    scholarship: scholarshipType[];
     createdAt: string;
     updatedAt: string;
     id: string;
@@ -143,26 +144,35 @@ export type specializationType = {
 
 export type courseType = {
     _id: string;
-    id: string;
     name: string;
     logo: string;
     degree: degreeType;
-    studyModel: string;
-    timeModel: string;
-    applicationFee: string;
-    specialization: specializationType;
-    duration: string;
+    duration: number;
     language: string[];
-    startDate: string;
-    endDate: string;
-    applyDate: string;
-    delivery: string;
-    description: string;
-    format: string;
+    specialization: specializationType;
     institute: instituteType;
-    discipline: disciplineType[];
+    intakes: string[];
+    tuitionFee: number;
     country: countryType;
+    discipline: disciplineType[];
     favoriteId?: string[];
+};
+export type singleCourseType = {
+    delivery: string;
+    intakes: string[];
+    name: string;
+    logo: string;
+    degree: degreeType;
+    duration: number;
+    tuitionFee: number;
+    initialDeposit: number;
+    language: string[];
+    specialization: specializationType;
+    description: string;
+    entryRequirements: string;
+    institute: instituteType;
+    favoriteId?: string[];
+    id: string;
 };
 
 export type contactUsForm = {
@@ -185,7 +195,7 @@ export type blogsType = {
 export type favoritesType = {
     scholarship: scholarshipType;
     institute: instituteType;
-    course: courseType;
+    course: singleCourseType;
     blog: blogsType;
     user: string;
     createdAt: string;

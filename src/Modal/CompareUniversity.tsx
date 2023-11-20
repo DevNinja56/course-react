@@ -9,10 +9,10 @@ import Button from '@/components/Button';
 import { useCompare } from '@/hooks/compare';
 import {
     countryType,
-    courseType,
     degreeType,
     disciplineType,
     instituteType,
+    singleCourseType,
     specializationType
 } from '@/types';
 
@@ -22,7 +22,7 @@ interface compareDataType {
     discipline: disciplineType | null;
     degreeLevel: degreeType | null;
     specialization: specializationType | null;
-    course: courseType | null;
+    course: singleCourseType | null;
 }
 
 interface dataType {
@@ -30,7 +30,7 @@ interface dataType {
     discipline: disciplineType[] | [];
     degreeLevel: degreeType[] | [];
     specialization: specializationType[] | [];
-    course: courseType[] | [];
+    course: singleCourseType[] | [];
 }
 
 const CompareUniversityModal = () => {
@@ -120,9 +120,7 @@ const CompareUniversityModal = () => {
         data.course.length < 1;
 
     return (
-        <div
-            className="bg-white modal relative border-[3px] border-[#CCCCCC] p-5 rounded-xl setWidthCompareModal"
-        >
+        <div className="bg-white modal relative border-[3px] border-[#CCCCCC] p-5 rounded-xl setWidthCompareModal">
             <IoMdClose
                 className="absolute top-3 right-3 cursor-pointer"
                 onClick={hideModal}
