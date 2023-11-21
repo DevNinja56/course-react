@@ -10,9 +10,9 @@ const InstituteFilter = () => {
     return (
         <div className="flex flex-col gap-y-3">
             <div className="flex justify-between items-center px-4 relative ">
-                <h1 className="text-lg text-darkGrayColor font-medium">
+                <h5 className="text-lg text-darkGrayColor font-medium">
                     Institute
-                </h1>
+                </h5>
                 <SearchBox
                     searchVal={setSearch}
                     value={search}

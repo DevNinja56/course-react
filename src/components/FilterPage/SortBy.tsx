@@ -9,8 +9,8 @@ import Image from 'next/image';
 export const sortState = {
     'A-Z': 1,
     'Z-A': -1,
-    'Duration-Up': 1,
-    'Duration-Down': -1
+    'tuitionFee-Up': 1,
+    'tuitionFee-Down': -1
 };
 
 const SortBy = () => {
@@ -21,14 +21,14 @@ const SortBy = () => {
         { name: 'A - Z', value: 'A-Z' },
         { name: 'Z - A', value: 'Z-A' },
         {
-            name: 'Duration',
-            value: 'Duration-Up',
+            name: 'Tuition Fee',
+            value: 'tuitionFee-Up',
             Left: LuArrowUpWideNarrow,
             Right: FaArrowUpLong
         },
         {
-            name: 'Duration',
-            value: 'Duration-Down',
+            name: 'Tuition Fee',
+            value: 'tuitionFee-Down',
             Left: LuArrowDownWideNarrow,
             Right: FaArrowDownLong
         }
@@ -37,12 +37,12 @@ const SortBy = () => {
     return (
         <div className="flex items-center gap-x-3 md:gap-x-4">
             <p className="text-grayColor hidden md:block">Sort by:</p>
-            <div className="relative group py-2 w-32 md:w-40">
-                <button className="py-2 px-2 md:px-4 w-full rounded-[5px] border-2 border-scholarshipBorderColor flex items-center gap-x-1 md:gap-x-[6px] text-sm text-darkGrayColor">
+            <div className="relative group py-2 w-32 md:w-40 ">
+                <button className="py-2 px-2 md:px-4 w-full rounded-[5px] border-2 border-scholarshipBorderColor flex items-center gap-x-1 md:gap-x-[6px] text-sm text-darkGrayColor capitalize">
                     {query?.['sortBy']?.[0] ?? 'Select Options'}
                     <FiChevronDown className="absolute text-lg right-2 md:right-3 top-[50%] translate-y-[-50%] " />
                 </button>
-                <div className="absolute top-12 left-0 w-full py-4 custom-shadow rounded-[10px] flex-col bg-white hidden group-hover:flex z-20">
+                <div className="absolute top-12 left-0 w-full py-4 custom-shadow rounded-[10px] flex-col bg-white hidden group-hover:flex z-20  ">
                     {state.map(({ name, value, Left, Right }, index) => (
                         <div
                             key={name + '--sortBy--' + index}

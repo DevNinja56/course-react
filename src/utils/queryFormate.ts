@@ -61,18 +61,28 @@ export const formateCourseQuery = (query: { [key: string]: any }) => {
             'institute.name': { $in: query.institute }
         });
     }
+    if (query.tuitionFee) {
+        const { min, max } = JSON.parse(query.tuitionFee[0]) as {
+            min: number;
+            max: number;
+        };
+
+        orConditions.push({
+            tuitionFee: { $gte: min, $lte: max }
+        });
+    }
 
     if (query.sortBy) {
         const value = query.sortBy as
             | 'A-Z'
             | 'Z-A'
-            | 'Duration-Up'
-            | 'Duration-Down';
+            | 'tuitionFee-Up'
+            | 'tuitionFee-Down';
 
         sort =
             value === ('A-Z' || 'Z-A')
                 ? { $sort: { name: sortState[value] } }
-                : { $sort: { duration: sortState[value] } };
+                : { $sort: { tuitionFee: sortState[value] } };
     }
 
     if (orConditions.length > 0) {

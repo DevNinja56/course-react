@@ -34,7 +34,11 @@ export const FilteredButton = ({
                     className="group flex flex-shrink-0 m-1 items-center border border-gray-300 bg-primary rounded-lg text-xs px-2.5 py-2 capitalize text-black cursor-pointer transition duration-200 ease-in-out hover:border-secondary"
                     onClick={onClick ? onClick : handleDeleteQuery}
                 >
-                    {itemValue}
+                    {itemKey === 'tuitionFee'
+                        ? `min:${JSON.parse(itemValue)['min']} & max:${
+                              JSON.parse(itemValue)['max']
+                          }`
+                        : itemValue}
                     {icon && (
                         <IoClose className="text-sm text-black hover:text-red-600 ms-2 flex-shrink-0 -me-0.5 mt-0.5 transition duration-200 ease-in-out group-hover:text-secondary" />
                     )}

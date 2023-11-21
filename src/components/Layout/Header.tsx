@@ -14,7 +14,7 @@ const Header = ({ onlyLogo }: { onlyLogo?: boolean }) => {
     const [showDropDown, setShowDropDown] = useState(false);
     const [showSideBar, setShowSideBar] = useState(false);
 
-    const { isAuthenticated } = useUserAuth();
+    const { isAuthenticated, user } = useUserAuth();
 
     const onShowSideBar = () => {
         setShowSideBar(!showSideBar);
@@ -160,11 +160,14 @@ const Header = ({ onlyLogo }: { onlyLogo?: boolean }) => {
                                         height={36}
                                         width={36}
                                         alt="profile-img"
-                                        src="/images/Image-36.svg"
+                                        src={
+                                            user.avatar ??
+                                            '/images/Image-36.svg'
+                                        }
                                         priority
                                     />
                                     <p className="text-lightGrayColor hidden lg:flex gap-x-1 text-[13px]">
-                                        Daniyal
+                                        {user.name}
                                         <Image
                                             height={12}
                                             width={12}

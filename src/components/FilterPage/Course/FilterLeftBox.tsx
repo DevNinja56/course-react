@@ -7,6 +7,7 @@ import { useSearchedCourses } from '@/hooks/filterCourses';
 import { FilteredButton } from '../FilteredButton';
 import SpecializationFilter from './SpecializationFilter';
 import InstituteFilter from './InstituteFilter';
+import FeeSlider from './FeeSlider';
 
 export const FilterRow = () => (
     <div className="px-4">
@@ -66,6 +67,8 @@ const CourseFilter = () => {
                 <SpecializationFilter />
                 <FilterRow />
                 <InstituteFilter />
+                <FilterRow />
+                <FeeSlider />
             </div>
         </div>
     );
