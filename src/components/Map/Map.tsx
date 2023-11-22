@@ -11,6 +11,7 @@ import { MdOutlineMail } from 'react-icons/md';
 import Button from '../Button';
 import { BiUser } from 'react-icons/bi';
 import { GiNotebook } from 'react-icons/gi';
+import { contactUsFormSchema } from '@/utils/formSchemas';
 
 interface MapProps {
     mapRoundImg: string;
@@ -31,9 +32,7 @@ const Map = ({
         handleSubmit: fromSubmit,
         formState: { errors },
         reset
-    } = useForm<contactUsForm>();
-
-    console.log(errors);
+    } = useForm<contactUsForm>({ resolver: contactUsFormSchema });
 
     const handleSubmit = (body: contactUsForm) => {
         setIsLoading(true);
@@ -131,16 +130,31 @@ const Map = ({
                             error={errors.email?.message}
                             icon={MdOutlineMail}
                         />
-                        <label className="text-lg text-textLightBlackColor flex flex-col gap-y-1">
+                        <label
+                            className={`text-lg  flex flex-col gap-y-1 ${
+                                errors.message?.message
+                                    ? 'text-red-600'
+                                    : 'text-textLightBlackColor'
+                            }`}
+                        >
                             Message
                             <textarea
                                 {...register('message', {
                                     required: true
                                 })}
-                                className="block p-2.5 w-full text-sm md:text-xl bg-gray-50 rounded-lg focus:ring-blue-500 focus:border-blue-500 resize-none outline-none text-grayColor border border-grayColor "
+                                className={`block p-2.5 w-full text-sm md:text-xl bg-gray-50 rounded-lg  resize-none outline-none  ${
+                                    errors.message?.message
+                                        ? 'text-red-600 border border-red-600'
+                                        : 'text-grayColor border border-grayColor focus:ring-blue-500 focus:border-blue-500'
+                                }`}
                                 placeholder="Write your message..."
                                 rows={5}
                             />
+                            {errors.message?.message && (
+                                <span className="text-xs mt-1 text-red-600 ">
+                                    {errors.message?.message}
+                                </span>
+                            )}
                         </label>
                     </div>
                     <Button

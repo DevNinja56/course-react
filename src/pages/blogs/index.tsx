@@ -43,15 +43,6 @@ const Blog = () => {
                             </p>
                         </div>
                     </div>
-                    <div className="relative">
-                        <input
-                            className="custom-shadow rounded-[10px] py-[17px] md:py-5 pl-5 md:pl-[25px] outline-none text-base text-mainTextColor w-[80vw] md:w-auto md:pr-[380px]"
-                            placeholder="Enter Your Email"
-                        />
-                        <button className="px-5 py-[7px] md:py-[11px] md:px-[39px] absolute right-3 top-[11px] bg-blueColor rounded-[5px] text-white text-sm">
-                            Subscribe
-                        </button>
-                    </div>
                 </div>
                 <Image
                     height={193}

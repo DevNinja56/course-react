@@ -142,13 +142,13 @@ const SignIn = () => {
                                 />
                             </div>
                             <div className="flex items-center gap-x-3 w-full mb-10">
-                                <input
+                                {/* <input
                                     type="checkbox"
                                     className="h-5 w-5 border border-grayColor"
                                 />
                                 <p className="text-lightGrayColor pt-[2px]">
                                     Remember me
-                                </p>
+                                </p> */}
                             </div>
                             <Button
                                 type="submit"

@@ -39,8 +39,13 @@ const Card = ({ discipline }: CardProps) => {
                     src={discipline.image}
                     priority
                 />
-                <div className="w-full bg-blueColor text-white py-3 font-bold text-lg flex items-center justify-center">
-                    {discipline.name}
+                <div
+                    className="w-full bg-blueColor text-white py-3 font-bold text-lg flex items-center justify-center "
+                    title={discipline.name}
+                >
+                    <span className="max-w-1/5 whitespace-nowrap truncate px-4">
+                        {discipline.name}
+                    </span>
                 </div>
             </Link>
             <div className="py-3">
@@ -92,7 +97,7 @@ const Card = ({ discipline }: CardProps) => {
                     </p>
                     <BiChevronRight className="text-2xl" />
                 </div>
-                <div
+                {/* <div
                     className="py-3 px-[15px] flex items-center justify-between hover:justify-start cursor-pointer gap-x-1 transition-all duration-300 hover:bg-profileBgColor text-mainTextColor hover:text-blueColor relative "
                     onClick={() =>
                         setOpen((prev) => ({
@@ -114,7 +119,7 @@ const Card = ({ discipline }: CardProps) => {
                         )}
                     </p>
                     <BiChevronRight className="text-2xl" />
-                </div>
+                </div> */}
             </div>
         </div>
     );

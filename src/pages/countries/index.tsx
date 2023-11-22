@@ -39,12 +39,12 @@ const Countries = () => {
             </div>
             <div className="w-full pb-4 lg:pb-20">
                 <div className="max-w-[1100px] 2xl:max-w-[2300px] mx-auto px-[50px] lg:px-2 2xl:px-8 transition-all duration-300 flex flex-col gap-y-10">
-                    <div className="w-full flex items-center justify-between">
+                    <div className="w-full flex items-center justify-center">
                         <h1 className="font-bold text-mainTextColor text-xl md:text-[29px]">
                             Click on one to get more information
                         </h1>
                     </div>
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-[24px] px-0 md:px-7 lg:px-0">
+                    <div className="flex gap-[24px] justify-center flex-wrap px-0 md:px-7 lg:px-0">
                         {isLoading ? (
                             <LoaderSpinner />
                         ) : (

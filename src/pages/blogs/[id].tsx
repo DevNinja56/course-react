@@ -1,4 +1,3 @@
-import Card from '@/components/Blog/Card';
 import ScreenLoader from '@/components/Loader/ScreenLoader';
 import { useGetSingleBlogQuery } from '@/store/slices/allRequests';
 import Image from 'next/image';
@@ -28,16 +27,6 @@ const BlogsDetail = () => {
                 <div className="w-full py-20 z-10">
                     <div className="max-w-[1100px] 2xl:max-w-[2300px] mx-auto px-5 md:px-[50px] lg:px-2 2xl:px-8 transition-all duration-300 flex flex-col lg:flex-row justify-between lg:items-center gap-y-8">
                         <div className="flex flex-col gap-y-4 transition-all duration-300 z-10">
-                            <div className="flex gap-3 ">
-                                {data?.tags.map((item) => (
-                                    <button
-                                        key={'single-blogs-tags--' + item}
-                                        className="py-[6px] px-3 rounded-[5px] border border-blueColor text-blueColor text-[14px] w-[95px] z-10 bg-white "
-                                    >
-                                        {item}
-                                    </button>
-                                ))}
-                            </div>
                             <h1
                                 style={{ lineHeight: '48px' }}
                                 className="text-[32px] md:text-[40px] font-black text-mainTextColor leading-10 w-auto md:w-[459px] lg:w-auto"
@@ -53,29 +42,26 @@ const BlogsDetail = () => {
                                     data?.createdAt ?? ''
                                 ).toLocaleTimeString()}
                             </p>
-                            <div className="flex items-center gap-x-3">
-                                <Image
-                                    height={50}
-                                    width={50}
-                                    alt="userImg"
-                                    src="/images/BlogsDetail/Ellipse 432.svg"
-                                    priority
-                                />
-                                <div className="flex flex-col">
-                                    <h1 className="font-bold text-mainTextColor">
-                                        Daniyal Samim
-                                    </h1>
-                                    <p className="text-darkGrayColor">
-                                        Web Developer
-                                    </p>
-                                </div>
+                            <div className="flex gap-3 ">
+                                {data?.tags.map((item) => (
+                                    <button
+                                        key={'single-blogs-tags--' + item}
+                                        className="py-[6px] px-3 rounded-[5px] border border-blueColor text-blueColor text-[14px] w-[95px] z-10 bg-white "
+                                    >
+                                        {item}
+                                    </button>
+                                ))}
                             </div>
                         </div>
                         <Image
                             height={307}
-                            width={554}
+                            width={450}
                             alt="post"
-                            src="/images/BlogsDetail/post-1 1.svg"
+                            className="max-w-2/5 aspect-[5/4] object-contain "
+                            src={
+                                data?.image ??
+                                '/images/BlogsDetail/post-1 1.svg'
+                            }
                             priority
                         />
                     </div>
@@ -85,14 +71,19 @@ const BlogsDetail = () => {
                     width={100}
                     alt="blogDetail-round2"
                     className="absolute top-56 md:top-12 lg:top-20 right-[-18px] h-[154px] w-[101px] md:h-[154px] md:w-[86px]"
-                    src="/images/BlogsDetail/Frame 691.svg"
+                    src={'/images/BlogsDetail/Frame 691.svg'}
                     priority
                 />
             </div>
             <div className="w-full pb-28">
                 <div className="max-w-[834px] 2xl:max-w-[1966px] mx-auto px-5 md:px-[50px] lg:px-2">
                     <div className="flex flex-col gap-y-[35px]">
-                        <div className="content">{data?.description}</div>
+                        <div
+                            className="content"
+                            dangerouslySetInnerHTML={{
+                                __html: data?.description ?? ''
+                            }}
+                        />
                         <div className="w-full flex justify-center items-center">
                             <div className="flex items-center gap-x-[25px]">
                                 <div className="flex items-center justify-center h-[38px] w-[38px] rounded-full border border-darkGrayColor hover:border-blueColor transition-all duration-300 group cursor-pointer">
@@ -166,7 +157,7 @@ const BlogsDetail = () => {
                     </div>
                 </div>
             </div>
-            <div className="w-full pb-52">
+            {/* <div className="w-full pb-52">
                 <div className="max-w-[1100px] 2xl:max-w-[2300px] mx-auto px-5 md:px-[50px] lg:px-2 2xl:px-8 transition-all duration-300">
                     <div className="transition-all duration-300 flex flex-col gap-y-[35px]">
                         <h1 className="font-black text-[32px] text-mainTextColor">
@@ -202,7 +193,7 @@ const BlogsDetail = () => {
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> */}
         </>
     );
 };

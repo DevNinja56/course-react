@@ -1,13 +1,12 @@
 export interface userType {
     name: string;
     email: string;
-    dob: null;
-    gender: null;
-    avatar: string | null;
-    documents: [];
-    timezone: null;
+    gender: string;
+    avatar: string;
     address: string;
-    password: string;
+    status: 'in-active' | 'active' | 'block';
+    role: 'user';
+    instituteLink: string;
     phone_number: string;
     createdAt: string;
     updatedAt: string;

@@ -35,7 +35,7 @@ const InputBox = React.forwardRef<HTMLInputElement, propsType>(
                                 ? 'password'
                                 : 'text'
                         }
-                        className={`pt-[10px] pb-[9px] rounded-[10px] w-full outline-none ${
+                        className={`pt-[10px] pb-[9px] rounded-[10px] w-full outline-none placeholder:text-sm ${
                             error
                                 ? 'text-red-600 border border-red-600'
                                 : 'text-grayColor border border-grayColor'

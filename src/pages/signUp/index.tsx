@@ -17,6 +17,7 @@ import { MdOutlineMail } from 'react-icons/md';
 import { BiUser } from 'react-icons/bi';
 import { IoIosPhonePortrait } from 'react-icons/io';
 import { FaArrowLeft } from 'react-icons/fa6';
+import { PhoneNumberValidate } from '@/utils/PhoneValidate';
 
 const SignUp = () => {
     const [isLoading, setIsLoading] = useState(false);
@@ -34,7 +35,10 @@ const SignUp = () => {
         fetchRequest({
             url: API_ENDPOINTS.AUTH.SIGNUP,
             type: 'post',
-            body
+            body: {
+                ...body,
+                phone_number: PhoneNumberValidate(body.phone_number)
+            }
         })
             .then((res) => {
                 updateUserDetails(res.data.user);
@@ -129,7 +133,7 @@ const SignUp = () => {
                                         required: true
                                     })}
                                     placeholder="Name"
-                                    title="Full Name..."
+                                    title="Full Name"
                                     error={errors.name?.message}
                                     icon={BiUser}
                                     autoComplete="off"
@@ -166,13 +170,13 @@ const SignUp = () => {
                                 />
                             </div>
                             <div className="flex items-center gap-x-3 w-full mb-8">
-                                <input
+                                {/* <input
                                     type="checkbox"
                                     className="h-5 w-5 border border-grayColor"
                                 />
                                 <p className="text-lightGrayColor pt-[2px]">
                                     I have read the Terms of Service
-                                </p>
+                                </p> */}
                             </div>
                             <Button
                                 type="submit"

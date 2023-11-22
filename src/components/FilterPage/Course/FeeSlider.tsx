@@ -9,7 +9,7 @@ interface sliderValue {
 }
 
 const FeeSlider = () => {
-    const [value, setValue] = useState<sliderValue>({ min: 100, max: 50000 });
+    const [value, setValue] = useState<sliderValue>({ min: 1000, max: 500000 });
     const { addQuery } = useFilterQuery();
 
     const handleChange = () => {
@@ -28,9 +28,9 @@ const FeeSlider = () => {
                 </div>
                 <RangeSlider
                     min={100}
-                    max={50000}
+                    max={500000}
                     value={value}
-                    step={100}
+                    step={1000}
                     onChange={setValue}
                 />
                 <button

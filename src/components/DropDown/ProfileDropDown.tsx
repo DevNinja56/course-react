@@ -4,9 +4,7 @@ import Link from 'next/link';
 import React from 'react';
 import { BiUser } from 'react-icons/bi';
 import { AiOutlineUnlock, AiOutlineHeart } from 'react-icons/ai';
-import { FiSettings } from 'react-icons/fi';
 import { IoMdLogOut } from 'react-icons/io';
-import { LiaShoppingCartSolid } from 'react-icons/lia';
 import { useUi } from '@/hooks/user-interface';
 import { modalType } from '@/store/slices/ui.slice';
 
@@ -20,12 +18,12 @@ const ProfileDropDown: React.FC<DropDownProps> = ({ showDropDown }) => {
     const allDropDowns = [
         { name: 'Profile', Icon: BiUser, to: ROUTES.PROFILE },
         { name: 'My Favorites', Icon: AiOutlineHeart, to: ROUTES.FAVORITES },
-        {
-            name: 'My Subscriptions',
-            Icon: LiaShoppingCartSolid,
-            to: ROUTES.SUBSCRIPTIONS
-        },
-        { name: 'Setting', Icon: FiSettings, to: ROUTES.SETTINGS },
+        // {
+        //     name: 'My Subscriptions',
+        //     Icon: LiaShoppingCartSolid,
+        //     to: ROUTES.SUBSCRIPTIONS
+        // },
+        // { name: 'Setting', Icon: FiSettings, to: ROUTES.SETTINGS },
         {
             name: 'Change Password',
             Icon: AiOutlineUnlock,
@@ -61,7 +59,7 @@ const ProfileDropDown: React.FC<DropDownProps> = ({ showDropDown }) => {
                         )
                     )}
 
-                    <hr className="w-full mb-2 border border-borderColor" />
+                    {/* <hr className="w-full mb-2 border border-borderColor" /> */}
                     <div className="w-full py-[9px] pl-[15px] hover:bg-profileBgColor text-lightGrayColor hover:text-darkTextBlueColor">
                         <p
                             className="flex items-center gap-x-2"

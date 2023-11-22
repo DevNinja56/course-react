@@ -4,6 +4,7 @@ import { useCompare } from '@/hooks/compare';
 import HeadBox from '@/components/compare/HeadBox';
 import { InstituteLogoImage } from '@/components/compare/InstituteLogo';
 import ScholarshipSlider from '@/components/Slider/ScholarshipSlider';
+import { FiPrinter } from 'react-icons/fi';
 
 const Compare = () => {
     const { first, second, third } = useCompare();
@@ -174,9 +175,9 @@ const Compare = () => {
                                         onClick={() => {
                                             window.print();
                                         }}
-                                        className="absolute top-[50%] translate-y-[-50%] right-3 bg-white px-2 py-1 rounded-md print:hidden "
+                                        className="absolute top-[50%] translate-y-[-50%] right-3 bg-white px-2 py-1 rounded-md print:hidden flex gap-1 justify-center items-center font-bold "
                                     >
-                                        Print
+                                        <FiPrinter /> Print
                                     </button>
                                 )}
                             </div>
