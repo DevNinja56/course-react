@@ -3,10 +3,10 @@ import React from 'react';
 import { IoWarningOutline } from 'react-icons/io5';
 
 const UnVerifiedUser = () => {
-    const { user } = useUserAuth();
+    const { user, isAuthenticated } = useUserAuth();
     return (
         <>
-            {user.status === 'in-active' && (
+            {isAuthenticated && user.status === 'in-active' && (
                 <div
                     id="bottom-banner"
                     tabIndex={-1}
