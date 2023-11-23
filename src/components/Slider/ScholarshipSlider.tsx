@@ -9,18 +9,16 @@ import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import Link from 'next/link';
 import { ROUTES } from '@/config/constant';
-import { useGetCountriesQuery } from '@/store/slices/allRequests';
+import { useGetScholarshipQuery } from '@/store/slices/allRequests';
 import { useFilterQuery } from '@/hooks/filterQuery';
 
 function ScholarshipSlider() {
-    const { data: countryList } = useGetCountriesQuery();
-    const data = countryList
-        ?.filter((country) => country.scholarship.length > 0)
-        .map((item) => ({
-            title: `${item.scholarship.length} Scholarships in ${item.name}`,
-            logo: item.logo,
-            name: item.name
-        }));
+    const { data: scholarshipList } = useGetScholarshipQuery();
+    const data = scholarshipList?.map((scholarship) => ({
+        title: `${scholarship.name} `,
+        logo: scholarship.image,
+        name: scholarship.name
+    }));
     const { addQuery } = useFilterQuery();
 
     return (
@@ -48,20 +46,21 @@ function ScholarshipSlider() {
                     {data?.map(({ title, logo, name }) => (
                         <SwiperSlide
                             key={'scholarship-slider--' + title}
-                            className="relative"
+                            className="relative border rounded-xl bg-white overflow-hidden"
                         >
                             <Link
                                 href={ROUTES.FILTER_SCHOLARSHIP}
                                 onClick={() => addQuery({ countries: [name] })}
+                                className="max-w-[400px]"
                             >
                                 <Image
-                                    width={600}
-                                    height={650}
+                                    width={500}
+                                    height={500}
                                     src={logo}
                                     alt="slide_image"
-                                    className=" object-cover "
+                                    className="object-contain p-3 w-auto max-w-full max-h-[calc(100%-50px)] "
                                 />
-                                <h3 className=" absolute bottom-2 left-2 w-1/2 text-2xl font-bold text-white drop-shadow-md ">
+                                <h3 className="bg-gradient-to-t from-blueColor absolute start-0 bottom-0 text-2xl font-bold text-center px-2 py-3 w-full ">
                                     {title}
                                 </h3>
                             </Link>

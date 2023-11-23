@@ -201,3 +201,12 @@ export type favoritesType = {
     updatedAt: string;
     id: string;
 };
+
+export type applyTypes = {
+    degree: degreeType;
+    course: singleCourseType;
+    scholarship: scholarshipType;
+    user: userType | null;
+    message: string;
+    userDetails: { name: string; phone_number: string; email: string } | null;
+};

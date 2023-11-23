@@ -7,18 +7,29 @@ interface propsType extends InputHTMLAttributes<HTMLInputElement> {
     title?: string;
     icon?: IconType;
     error?: string;
+    customInputClass?: string;
 }
 
 const InputBox = React.forwardRef<HTMLInputElement, propsType>(
     (
-        { id, className, icon: Icon, error, title, name, type, ...props },
+        {
+            id,
+            className,
+            icon: Icon,
+            error,
+            title,
+            name,
+            type,
+            customInputClass = null,
+            ...props
+        },
         ref
     ) => {
         const [isShown, setShow] = useState<boolean>(false);
         return (
             <label
                 htmlFor={'input-box--' + (id ?? name)}
-                className={`text-sm md:text-lg flex flex-col gap-y-1 ${
+                className={`text-sm md:text-lg flex flex-col gap-y-1 w-full ${
                     error ? ' text-red-600 ' : 'text-darkGrayColor'
                 }`}
             >
@@ -35,7 +46,10 @@ const InputBox = React.forwardRef<HTMLInputElement, propsType>(
                                 ? 'password'
                                 : 'text'
                         }
-                        className={`pt-[10px] pb-[9px] rounded-[10px] w-full outline-none placeholder:text-sm ${
+                        className={`${
+                            customInputClass ??
+                            'pt-[10px] pb-[9px] rounded-[10px] w-full outline-none placeholder:text-sm'
+                        } ${
                             error
                                 ? 'text-red-600 border border-red-600'
                                 : 'text-grayColor border border-grayColor'

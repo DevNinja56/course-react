@@ -1,41 +1,43 @@
-import Button from '@/components/Button';
-import InputBox from '@/components/Input';
 import { API_ENDPOINTS } from '@/config/Api_EndPoints';
 import { ROUTES } from '@/config/constant';
-import { resetForm } from '@/types';
 import { fetchRequest } from '@/utils/axios/fetch';
-import { resetFormSchema } from '@/utils/formSchemas';
 import Image from 'next/image';
-import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
-import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import jwtDecode from 'jwt-decode';
 import { GetServerSideProps } from 'next';
+import Button from '@/components/Button';
+import { useUserAuth } from '@/hooks/auth';
 
-const ResetPassword = ({ email, token }: { email: string; token: string }) => {
+const VerifyAccount = ({ email, token }: { email: string; token: string }) => {
     const [isLoading, setIsLoading] = useState(false);
-    const {
-        register,
-        handleSubmit: fromSubmit,
-        formState: { errors }
-    } = useForm<resetForm>({ resolver: resetFormSchema });
-    const { push } = useRouter();
+    const { replace } = useRouter();
+    const { updateUserDetails, loggedInUser } = useUserAuth();
 
-    const handleSubmit = (body: resetForm) => {
+    const handleClick = () => {
         setIsLoading(true);
-        fetchRequest({
-            url: API_ENDPOINTS.AUTH.RESET_PASSWORD,
-            type: 'post',
-            body: { password: body.password, email, token }
-        })
+
+        toast
+            .promise(
+                fetchRequest({
+                    url: API_ENDPOINTS.AUTH.VERIFY_ACCOUNT,
+                    type: 'post',
+                    body: { token, email }
+                }),
+                {
+                    loading: 'Please wait...',
+                    success: 'Account Verified Successfully',
+                    error: 'an error occurred'
+                }
+            )
             .then((res) => {
-                push(ROUTES.SIGN_IN);
-                toast.success(res.message);
-            })
-            .catch((err) => {
-                toast.error(err.response.data.message);
+                updateUserDetails(res.data.user);
+                loggedInUser({
+                    access: res.data.accessToken,
+                    refresh: res.data.refreshToken
+                });
+                replace(ROUTES.HOMEPAGE);
             })
             .finally(() => setIsLoading(false));
     };
@@ -86,59 +88,23 @@ const ResetPassword = ({ email, token }: { email: string; token: string }) => {
                     />
                     <div className=" absolute top-40 md:top-9 2xl:top-80 rounded-[10px] bg-white custom-shadow pt-10 pb-7 px-4 md:px-12 flex flex-col items-center w-[90%] md:w-[53%] lg:w-[45%] xl:w-[35%] 2xl:w-[50%] py-5 ">
                         <h1 className="font-medium text-2xl md:text-[36px] text-mainTextColor mb-3">
-                            Reset Password
+                            Verify your account
                         </h1>
 
-                        <form
-                            className="flex flex-col gap-4 w-full my-5 "
-                            onSubmit={fromSubmit(handleSubmit)}
-                        >
-                            <div className="flex flex-col gap-4">
-                                <InputBox
-                                    {...register('password', {
-                                        required: true
-                                    })}
-                                    type="password"
-                                    placeholder="Password"
-                                    className=""
-                                    autoComplete="password"
-                                    error={errors.password?.message}
-                                />
-                                <InputBox
-                                    {...register('c_password', {
-                                        required: true
-                                    })}
-                                    type="password"
-                                    placeholder="Confirm Password"
-                                    className=""
-                                    autoComplete="password"
-                                    error={errors.c_password?.message}
-                                />
-                            </div>
-                            <div className="w-full">
-                                <Button
-                                    type="submit"
-                                    text="Change Password"
-                                    className="w-4/5"
-                                    disabled={isLoading}
-                                />
-                                <p className="text-sm text-center mt-5 text-blueColor  ">
-                                    For Sign In{' '}
-                                    <Link
-                                        href={ROUTES.SIGN_IN}
-                                        className="text-mainColor ml-1 font-bold  "
-                                    >
-                                        Log in
-                                    </Link>
-                                </p>
-                            </div>
-                        </form>
+                        <Button
+                            text="Verify"
+                            onClick={handleClick}
+                            disabled={isLoading}
+                            isLoader={isLoading}
+                        />
                     </div>
                 </div>
             </div>
         </div>
     );
 };
+
+VerifyAccount.layout = { header: false, footer: false };
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
     const { query, res } = context;
@@ -164,6 +130,5 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
         }
     };
 };
-ResetPassword.layout = { header: false, footer: false, isPublic: true };
 
-export default ResetPassword;
+export default VerifyAccount;

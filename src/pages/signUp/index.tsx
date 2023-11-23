@@ -22,7 +22,7 @@ import { PhoneNumberValidate } from '@/utils/PhoneValidate';
 const SignUp = () => {
     const [isLoading, setIsLoading] = useState(false);
     const { updateUserDetails, loggedInUser } = useUserAuth();
-    const { push } = useRouter();
+    const { replace } = useRouter();
     const {
         register,
         handleSubmit: fromSubmit,
@@ -46,7 +46,7 @@ const SignUp = () => {
                     access: res.data.accessToken,
                     refresh: res.data.refreshToken
                 });
-                push(ROUTES.HOMEPAGE);
+                replace(ROUTES.HOMEPAGE);
                 toast.success(res.data.message);
             })
             .catch((err) => {

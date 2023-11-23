@@ -6,7 +6,8 @@ export const API_ENDPOINTS = {
         VERIFY_OTP: '/auth/otp-verify',
         LOG_OUT: '/auth/logout',
         FORGOT_PASSWORD: '/auth/forgotPassword',
-        RESET_PASSWORD: '/auth/reset-password'
+        RESET_PASSWORD: '/auth/reset-password',
+        VERIFY_ACCOUNT: '/auth/verify-account'
     },
     USER: {
         PROFILE_IMAGE: '/user/upload-avatar/:id',
@@ -19,6 +20,7 @@ export const API_ENDPOINTS = {
     DISCIPLINE_PAGINATED: '/discipline/paginated',
     SCHOLARSHIP: '/scholarship',
     SCHOLARSHIP_BY_ID: '/scholarship/:id',
+    COURSE_DEGREE_ID: '/course/degree',
     COURSE_SEARCH: '/course/filter',
     COURSE_BY_ID: '/course/:id',
     SCHOLARSHIP_SEARCH: '/scholarship/filter',
@@ -33,5 +35,6 @@ export const API_ENDPOINTS = {
     COURSES_WITH_DEGREE: '/course/compare/:degreeId/:instituteId',
     CONTACT: '/contact',
     BLOGS: '/blogs',
-    SINGLE_BLOG: '/blogs/:id'
+    SINGLE_BLOG: '/blogs/:id',
+    APPLY: '/apply'
 };

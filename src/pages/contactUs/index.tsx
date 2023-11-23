@@ -17,10 +17,7 @@ const ContactUs = () => {
                     </h1>
                 </div>
             </div>
-            <div
-                className="max-w-[1100px] 2xl:max-w-[2300px] mx-auto
-transition-all duration-300 px-5 md:px-[50px] lg:px-2 2xl:px-8 mb-32 lg:mb-40"
-            >
+            <div className="max-w-[1100px] 2xl:max-w-[2300px] mx-auto transition-all duration-300 px-5 md:px-[50px] lg:px-2 2xl:px-8 mb-32 lg:mb-40">
                 <Map
                     mapRoundImg="/images/Ellipse 424.svg"
                     mapRoundImg2="/images/Ellipse 426.svg"

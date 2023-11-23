@@ -1,0 +1,245 @@
+import React, { useState } from 'react';
+import InputBox from '../Input';
+import { useForm } from 'react-hook-form';
+import { fetchRequest } from '@/utils/axios/fetch';
+import { API_ENDPOINTS } from '@/config/Api_EndPoints';
+import toast from 'react-hot-toast';
+import Button from '../Button';
+import { useUserAuth } from '@/hooks/auth';
+import {
+    useGetCoursesByDegreeQuery,
+    useGetDegreesQuery,
+    useGetScholarshipQuery
+} from '@/store/slices/allRequests';
+import Select from 'react-select';
+
+interface formType {
+    name?: string;
+    email?: string;
+    phone_number?: string;
+    message: string;
+    degree: string;
+    course: string;
+    scholarship: string;
+}
+
+const ApplyOnline = () => {
+    const [isLoading, setIsLoading] = useState<boolean>(false);
+    const [isSubmit, setIsSubmit] = useState<boolean>(false);
+    const { isAuthenticated, user } = useUserAuth();
+    const [degreeId, setDegreeId] = useState<string>('');
+    const { data: degreeList, isLoading: degreeLoading } = useGetDegreesQuery();
+    const { data: courseList, isLoading: courseLoading } =
+        useGetCoursesByDegreeQuery({ degreeId });
+    const { data: scholarshipList, isLoading: scholarshipLoading } =
+        useGetScholarshipQuery();
+    const {
+        register,
+        handleSubmit: fromSubmit,
+        formState: { errors },
+        setValue,
+        reset
+    } = useForm<formType>();
+
+    const handleSubmit = ({ name, email, phone_number, ...body }: formType) => {
+        setIsLoading(true);
+
+        toast
+            .promise(
+                fetchRequest({
+                    url: API_ENDPOINTS.APPLY,
+                    type: 'post',
+                    body: {
+                        ...body,
+                        userDetails: !isAuthenticated
+                            ? { name, email, phone_number }
+                            : null,
+                        user: isAuthenticated ? user.id : null
+                    }
+                }),
+                {
+                    loading: 'Please wait...',
+                    success: (res) => {
+                        reset();
+                        setIsSubmit(true);
+                        return res.data.message;
+                    },
+                    error: 'An error occurred'
+                }
+            )
+            .finally(() => setIsLoading(false));
+    };
+
+    return (
+        <>
+            {isSubmit ? (
+                <div className="bg-blue-500 text-white p-4 rounded-md shadow-md">
+                    <p className="font-bold">Congrats!</p>
+                    <p>
+                        Your application has been received, and our team will be
+                        in touch with you soon.
+                    </p>
+                </div>
+            ) : (
+                <div className="w-full bg-white custom-shadow rounded-xl px-5 py-8 mb-24">
+                    <form onSubmit={fromSubmit(handleSubmit)}>
+                        {!isAuthenticated && (
+                            <div className="flex gap-3 justify-between">
+                                <InputBox
+                                    {...register('name', {
+                                        required: 'Name is required'
+                                    })}
+                                    placeholder="Name"
+                                    error={errors.name?.message}
+                                    autoComplete="off"
+                                    className="p-0"
+                                    customInputClass="px-2 py-[5px] text-[15px] w-full rounded-md outline-none placeholder:text-sm"
+                                />
+                                <InputBox
+                                    {...register('email', {
+                                        required: 'Email is required'
+                                    })}
+                                    placeholder="Email Address"
+                                    error={errors.email?.message}
+                                    customInputClass="px-2 py-[5px] text-[15px] w-full rounded-md outline-none placeholder:text-sm"
+                                />
+                                <InputBox
+                                    {...register('phone_number', {
+                                        required: 'Phone Number is required'
+                                    })}
+                                    type="tel"
+                                    placeholder="Phone Number"
+                                    error={errors.phone_number?.message}
+                                    customInputClass="px-2 py-[5px] text-[15px] w-full rounded-md outline-none placeholder:text-sm"
+                                />
+                            </div>
+                        )}
+                        <div className="flex gap-3 justify-between my-3">
+                            <div className="w-full">
+                                <Select
+                                    {...register('degree', {
+                                        required: 'Degree is required'
+                                    })}
+                                    options={degreeList?.map((degree) => ({
+                                        label: degree.name,
+                                        value: degree.id
+                                    }))}
+                                    placeholder="Select Degree"
+                                    isLoading={degreeLoading}
+                                    onChange={(e) => {
+                                        setDegreeId(e?.value ?? '');
+                                        setValue('degree', e?.value ?? '');
+                                    }}
+                                    styles={{
+                                        control: (base) => ({
+                                            ...base,
+                                            border: errors.degree?.message
+                                                ? '1px solid red'
+                                                : '1px solid #717070'
+                                        })
+                                    }}
+                                />
+                                {errors.degree?.message && (
+                                    <span className="text-xs mt-1 text-red-600 ">
+                                        {errors.degree?.message}
+                                    </span>
+                                )}
+                            </div>
+                            <div className="w-full">
+                                <Select
+                                    {...register('course', {
+                                        required: 'Course is required'
+                                    })}
+                                    options={courseList?.map((course) => ({
+                                        label: course.name,
+                                        value: course.id
+                                    }))}
+                                    isDisabled={!degreeId}
+                                    placeholder="Select Course"
+                                    isLoading={courseLoading}
+                                    onChange={(e) =>
+                                        setValue('course', e?.value ?? '')
+                                    }
+                                    styles={{
+                                        control: (base) => ({
+                                            ...base,
+                                            border: errors.course?.message
+                                                ? '1px solid red'
+                                                : '1px solid #717070'
+                                        })
+                                    }}
+                                />
+                                {errors.course?.message && (
+                                    <span className="text-xs mt-1 text-red-600 ">
+                                        {errors.course?.message}
+                                    </span>
+                                )}
+                            </div>
+                            <div className="w-full">
+                                <Select
+                                    {...register('scholarship', {
+                                        required: 'Scholarship is required'
+                                    })}
+                                    options={scholarshipList?.map(
+                                        (scholarship) => ({
+                                            label: scholarship.name,
+                                            value: scholarship.id
+                                        })
+                                    )}
+                                    placeholder="Select Scholarship"
+                                    isLoading={scholarshipLoading}
+                                    onChange={(e) =>
+                                        setValue('scholarship', e?.value ?? '')
+                                    }
+                                    styles={{
+                                        control: (base) => ({
+                                            ...base,
+                                            border: errors.scholarship?.message
+                                                ? '1px solid red'
+                                                : '1px solid #717070'
+                                        })
+                                    }}
+                                />
+                                {errors.scholarship?.message && (
+                                    <span className="text-xs mt-1 text-red-600 ">
+                                        {errors.scholarship?.message}
+                                    </span>
+                                )}
+                            </div>
+                        </div>
+                        <div className="message">
+                            <textarea
+                                {...register('message', {
+                                    required: 'Message is required',
+                                    min: 20
+                                })}
+                                className={`block p-2.5 w-full text-sm md:text-xl bg-gray-50 rounded-lg  resize-none outline-none  ${
+                                    errors.message?.message
+                                        ? 'text-red-600 border border-red-600'
+                                        : 'text-grayColor border border-grayColor focus:ring-blue-500 focus:border-blue-500'
+                                }`}
+                                placeholder="Write your message..."
+                                rows={5}
+                            />
+                            {errors.message?.message && (
+                                <span className="text-xs mt-1 text-red-600 ">
+                                    {errors.message?.message}
+                                </span>
+                            )}
+                        </div>
+                        <div className="mt-5 w-1/4  mx-auto">
+                            <Button
+                                type="submit"
+                                disabled={isLoading}
+                                isLoader={isLoading}
+                                text="Submit"
+                            />
+                        </div>
+                    </form>
+                </div>
+            )}
+        </>
+    );
+};
+
+export default ApplyOnline;

@@ -44,6 +44,16 @@ export const stateQueryApi = createApi({
             query: () => ({ url: API_ENDPOINTS.DEGREE }),
             transformResponse: (res: { data: degreeType[] }) => res.data! ?? res
         }),
+        getCoursesByDegree: builder.query<
+            singleCourseType[],
+            { degreeId: string }
+        >({
+            query: ({ degreeId }) => ({
+                url: `${API_ENDPOINTS.COURSE_DEGREE_ID}/${degreeId}`
+            }),
+            transformResponse: (res: { data: singleCourseType[] }) =>
+                res.data! ?? res
+        }),
         getDiscipline: builder.query<disciplineType[], void>({
             query: () => ({ url: API_ENDPOINTS.DISCIPLINE }),
             transformResponse: (res: { data: disciplineType[] }) =>
@@ -112,6 +122,7 @@ export const {
     useGetCountriesQuery,
     useGetDegreesQuery,
     useGetDisciplineQuery,
+    useGetCoursesByDegreeQuery,
     useGetScholarshipQuery,
     useGetSpecializationQuery,
     useGetInstituteQuery,

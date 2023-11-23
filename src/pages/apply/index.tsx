@@ -1,6 +1,5 @@
-import Card from '@/components/ContactUs/Card';
+import ApplyOnline from '@/components/Apply';
 import CounselingWork from '@/components/CounselingWork/CounselingWork';
-import Map from '@/components/Map/Map';
 import Testimonial from '@/components/Testimonial';
 import Image from 'next/image';
 import React from 'react';
@@ -40,8 +39,8 @@ const Apply = () => {
                 <div className="max-w-[1100px] 2xl:max-w-[2300px] mx-auto px-5 md:px-[50px] lg:px-2 2xl:px-8 transition-all duration-300 pt-16">
                     <div className="flex flex-col gap-y-8 mb-9">
                         <p className="text-darkGrayColor leading-6">
-                            Times Course Finder (TCF) has been created as a
-                            bridge between International Students and Global
+                            Course Options (CP) has been created as a bridge
+                            between International Students and Global
                             Universities. The whole process of finding the
                             availability of your course, its complete details
                             including fee, deadlines, and scholarships, can be
@@ -144,42 +143,13 @@ const Apply = () => {
                 <div className="max-w-[1100px] 2xl:max-w-[2300px] mx-auto px-5 md:px-[50px] lg:px-2 2xl:px-8 transition-all duration-300">
                     <div className="w-full flex flex-col items-center mb-12">
                         <p className="text-blueColor font-bold text-xl md:text-[23px]">
-                            Reach Out
+                            Fill the form
                         </p>
                         <h1 className="text-mainTextColor text-[32px] md:text-[48px] font-extrabold">
-                            Contact Us
+                            Apply Online
                         </h1>
                     </div>
-                    <div className="w-full bg-white custom-shadow rounded-[10px] p-11 mb-24">
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-[25px]">
-                            <Card
-                                img="/images/Apply/emailaddress.svg"
-                                title="Email"
-                                detail="contact@info.com"
-                            />
-                            <Card
-                                img="/images/Apply/phone.svg"
-                                title="Phone"
-                                detail="+1 44 598-5598"
-                            />
-                            <Card
-                                img="/images/Apply/location.svg"
-                                title="Location"
-                                detail="28, Baker Street, Los Angeles, CA"
-                            />
-                            <Card
-                                img="/images/Apply/chat.svg"
-                                title="Live Chat"
-                                detail="https://support.xyz.io"
-                            />
-                        </div>
-                    </div>
-                    <Map
-                        mapRoundImg="/images/Apply/mapRoundImg1.svg"
-                        mapRoundImg2="/images/Apply/mapRoundImg2.svg"
-                        mapRoundImg3="/images/Apply/mapRoundImg3.svg"
-                        mapRoundImg4="/images/Apply/mapRoundImg4.svg"
-                    />
+                    <ApplyOnline />
                 </div>
             </div>
             <CounselingWork />
