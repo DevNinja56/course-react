@@ -4,25 +4,17 @@ import CounselingWork from '@/components/CounselingWork/CounselingWork';
 import ScreenLoader from '@/components/Loader/ScreenLoader';
 import Tabs from '@/components/Tabs';
 import Testimonial from '@/components/Testimonial';
+import { API_ENDPOINTS } from '@/config/Api_EndPoints';
 import { ROUTES } from '@/config/constant';
-import { useGetCourseByIdQuery } from '@/store/slices/allRequests';
+import { singleCourseType } from '@/types';
 import { setCurrencyValue } from '@/utils/currencyValue';
+import { GetServerSideProps } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
-import React from 'react';
+import React, { useState } from 'react';
 
-const CourseDetail = () => {
-    const { query, isReady } = useRouter();
-    const {
-        data: course,
-        isLoading,
-        refetch
-    } = useGetCourseByIdQuery(query.id as string);
-
-    if (isLoading || !isReady) {
-        return <ScreenLoader />;
-    }
+const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
+    const [isFavorite, setFavorite] = useState(!!course?.favoriteId?.[0]);
     return (
         <>
             {!course ? (
@@ -52,9 +44,11 @@ const CourseDetail = () => {
                                             {course?.institute.sector}
                                         </button>
                                         <FavoriteButton
-                                            isActive={!!course?.favoriteId?.[0]}
+                                            isActive={isFavorite}
                                             body={{ course: course.id }}
-                                            refetch={refetch}
+                                            refetch={() =>
+                                                setFavorite((prev) => !prev)
+                                            }
                                             className="h-[46px] w-[46px] rounded-full flex items-center justify-center border-2 border-white bg-heartBgColor hover:bg-white group"
                                             iconClass={`text-3xl text-white group-hover:text-red-600`}
                                         />
@@ -522,6 +516,33 @@ const CourseDetail = () => {
             )}
         </>
     );
+};
+
+export const getServerSideProps: GetServerSideProps<{
+    data: { data: singleCourseType; status: number };
+}> = async (context) => {
+    const id = context.query?.id as string;
+    const token = context.req.cookies['access_token'];
+    let data = null;
+    try {
+        const res = await fetch(
+            `${
+                process.env.NEXT_PUBLIC_REST_API_ENDPOINT
+            }${API_ENDPOINTS.COURSE_BY_ID.replace(':id', id)}`,
+            {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${token}`
+                }
+            }
+        );
+        data = await res.json();
+    } catch (error) {
+        data = null;
+        console.log(error);
+    }
+    return { props: { data: data?.data ?? data! ?? null } };
 };
 
 export default CourseDetail;

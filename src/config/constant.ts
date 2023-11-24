@@ -20,6 +20,5 @@ export const ROUTES = {
     PRIVACY_POLICY: '/privacyPolicy',
     TERMS_CONDITION: '/termsCondition',
     FAVORITES: '/profile?tab=Favorite',
-    SUBSCRIPTIONS: '/subscriptions',
-    SETTINGS: '/settings'
+    APPLIES: '/profile?tab=Profile&tab2=myApplies'
 };

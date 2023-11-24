@@ -10,7 +10,8 @@ import {
     favoritesType,
     instituteType,
     scholarshipType,
-    specializationType
+    specializationType,
+    applyTypes
 } from '@/types';
 
 export interface PaginatedResponse<data> {
@@ -114,6 +115,10 @@ export const stateQueryApi = createApi({
             }),
             transformResponse: (res: { data: favoritesType[] }) =>
                 res.data! ?? res
+        }),
+        getUserApplies: builder.query<applyTypes[], void>({
+            query: () => ({ url: API_ENDPOINTS.APPLY_USER }),
+            transformResponse: (res: { data: applyTypes[] }) => res.data! ?? res
         })
     })
 });
@@ -130,5 +135,6 @@ export const {
     useGetPaginatedDisciplineQuery,
     useGetCourseByIdQuery,
     useGetScholarshipByIdQuery,
-    useGetUserFavoritesQuery
+    useGetUserFavoritesQuery,
+    useGetUserAppliesQuery
 } = stateQueryApi;

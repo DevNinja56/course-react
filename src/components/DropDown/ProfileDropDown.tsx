@@ -4,6 +4,7 @@ import Link from 'next/link';
 import React from 'react';
 import { BiUser } from 'react-icons/bi';
 import { AiOutlineUnlock, AiOutlineHeart } from 'react-icons/ai';
+import { SiSemanticscholar } from 'react-icons/si';
 import { IoMdLogOut } from 'react-icons/io';
 import { useUi } from '@/hooks/user-interface';
 import { modalType } from '@/store/slices/ui.slice';
@@ -18,12 +19,11 @@ const ProfileDropDown: React.FC<DropDownProps> = ({ showDropDown }) => {
     const allDropDowns = [
         { name: 'Profile', Icon: BiUser, to: ROUTES.PROFILE },
         { name: 'My Favorites', Icon: AiOutlineHeart, to: ROUTES.FAVORITES },
-        // {
-        //     name: 'My Subscriptions',
-        //     Icon: LiaShoppingCartSolid,
-        //     to: ROUTES.SUBSCRIPTIONS
-        // },
-        // { name: 'Setting', Icon: FiSettings, to: ROUTES.SETTINGS },
+        {
+            name: 'My Applies',
+            Icon: SiSemanticscholar,
+            to: ROUTES.APPLIES
+        },
         {
             name: 'Change Password',
             Icon: AiOutlineUnlock,

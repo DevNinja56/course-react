@@ -49,9 +49,9 @@ const Profile = () => {
                     src="/images/profileImages/tabletRoundImg.svg"
                 />
             </div>
-            <div className="w-full pb-52 lg:pb-72">
+            <div className="w-full pb-8 lg:pb-16">
                 <div className="w-full lg:max-w-[1100px] 2xl:max-w-[2300px] mx-auto px-0 lg:px-2 2xl:px-8 transition-all duration-300">
-                    <div className="flex items-center lg:mb-16">
+                    <div className="flex items-center lg:mb-8">
                         {tabs.map(({ title }, i) => (
                             <div
                                 key={'tabs-button-' + i + title}

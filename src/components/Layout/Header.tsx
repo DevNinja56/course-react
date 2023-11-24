@@ -27,13 +27,13 @@ const Header = ({ onlyLogo }: { onlyLogo?: boolean }) => {
     };
 
     return (
-        <header className="w-full fixed top-0 bg-white z-40 print:hidden">
+        <header className="w-full fixed top-0 bg-white z-40 print:static ">
             {!onlyLogo ? (
                 <>
                     <UnVerifiedUser />
                     <div className="max-w-[1100px] 2xl:max-w-[2300px] mx-auto py-6 flex justify-between items-center px-[20px] md:px-[50px] lg:px-2 2xl:px-8 transition-all duration-300">
                         <Logo />
-                        <div className="flex items-center gap-x-6">
+                        <div className="flex items-center gap-x-6 print:hidden">
                             <nav className="hidden lg:flex items-center gap-x-6">
                                 <Link href={ROUTES.FILTER_COURSE}>
                                     <div className="flex items-center px-[10px] gap-x-[10px]">

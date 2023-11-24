@@ -36,5 +36,6 @@ export const API_ENDPOINTS = {
     CONTACT: '/contact',
     BLOGS: '/blogs',
     SINGLE_BLOG: '/blogs/:id',
-    APPLY: '/apply'
+    APPLY: '/apply',
+    APPLY_USER: '/apply/user'
 };

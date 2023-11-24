@@ -12,6 +12,8 @@ import {
     useGetScholarshipQuery
 } from '@/store/slices/allRequests';
 import Select from 'react-select';
+import { ROUTES } from '@/config/constant';
+import Link from 'next/link';
 
 interface formType {
     name?: string;
@@ -25,7 +27,7 @@ interface formType {
 
 const ApplyOnline = () => {
     const [isLoading, setIsLoading] = useState<boolean>(false);
-    const [isSubmit, setIsSubmit] = useState<boolean>(false);
+    const [isSubmit, setIsSubmit] = useState<boolean>(true);
     const { isAuthenticated, user } = useUserAuth();
     const [degreeId, setDegreeId] = useState<string>('');
     const { data: degreeList, isLoading: degreeLoading } = useGetDegreesQuery();
@@ -59,10 +61,10 @@ const ApplyOnline = () => {
                 }),
                 {
                     loading: 'Please wait...',
-                    success: (res) => {
+                    success: () => {
                         reset();
                         setIsSubmit(true);
-                        return res.data.message;
+                        return 'Form submitted successfully';
                     },
                     error: 'An error occurred'
                 }
@@ -73,13 +75,23 @@ const ApplyOnline = () => {
     return (
         <>
             {isSubmit ? (
-                <div className="bg-blue-500 text-white p-4 rounded-md shadow-md">
-                    <p className="font-bold">Congrats!</p>
-                    <p>
-                        Your application has been received, and our team will be
-                        in touch with you soon.
-                    </p>
-                </div>
+                <>
+                    <div className="bg-blue-500 text-white p-4 rounded-md shadow-md">
+                        <p className="font-bold">Congrats!</p>
+                        <p>
+                            Your application has been received, and our team
+                            will be in touch with you soon.
+                        </p>
+                    </div>
+                    <div className="mt-5 flex justify-center">
+                        <Link
+                            href={ROUTES.APPLIES}
+                            className="border-2 border-blueColor text-blueColor px-5 py-2 rounded-md hover:text-white hover:bg-blueColor"
+                        >
+                            View My Applies
+                        </Link>
+                    </div>
+                </>
             ) : (
                 <div className="w-full bg-white custom-shadow rounded-xl px-5 py-8 mb-24">
                     <form onSubmit={fromSubmit(handleSubmit)}>

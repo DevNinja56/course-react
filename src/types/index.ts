@@ -209,4 +209,7 @@ export type applyTypes = {
     user: userType | null;
     message: string;
     userDetails: { name: string; phone_number: string; email: string } | null;
+    createdAt: string;
+    updatedAt: string;
+    id: string;
 };
