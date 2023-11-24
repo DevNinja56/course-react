@@ -27,7 +27,7 @@ interface formType {
 
 const ApplyOnline = () => {
     const [isLoading, setIsLoading] = useState<boolean>(false);
-    const [isSubmit, setIsSubmit] = useState<boolean>(true);
+    const [isSubmit, setIsSubmit] = useState<boolean>(false);
     const { isAuthenticated, user } = useUserAuth();
     const [degreeId, setDegreeId] = useState<string>('');
     const { data: degreeList, isLoading: degreeLoading } = useGetDegreesQuery();
