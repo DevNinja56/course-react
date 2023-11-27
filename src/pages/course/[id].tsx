@@ -6,6 +6,7 @@ import Tabs from '@/components/Tabs';
 import Testimonial from '@/components/Testimonial';
 import { API_ENDPOINTS } from '@/config/Api_EndPoints';
 import { ROUTES } from '@/config/constant';
+import { useApply } from '@/hooks/apply';
 import { singleCourseType } from '@/types';
 import { setCurrencyValue } from '@/utils/currencyValue';
 import { GetServerSideProps } from 'next';
@@ -15,6 +16,7 @@ import React, { useState } from 'react';
 
 const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
     const [isFavorite, setFavorite] = useState(!!course?.favoriteId?.[0]);
+    const { addCourseState, addDegreeState } = useApply();
     return (
         <>
             {!course ? (
@@ -93,7 +95,20 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                                     for more information
                                 </p>
                                 <div className="flex flex-col gap-3">
-                                    <Button text="Apply" link={ROUTES.APPLY} />
+                                    <Button
+                                        text="Apply"
+                                        link={ROUTES.APPLY}
+                                        onClick={() => {
+                                            addDegreeState({
+                                                label: course.degree.name,
+                                                value: course.degree.id
+                                            });
+                                            addCourseState({
+                                                label: course.name,
+                                                value: course.id
+                                            });
+                                        }}
+                                    />
 
                                     <Button
                                         text="Compare"
@@ -497,11 +512,21 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                                         </p>
                                     </div>
                                 </div>
-                                <Link href="/apply">
-                                    <button className="w-full pt-[19px] pb-[18px] rounded-[5px] text-white text-lg font-semibold bg-blueColor hover:bg-blue-600 mb-4">
-                                        Apply
-                                    </button>
-                                </Link>
+                                <button
+                                    className="w-full pt-[19px] pb-[18px] rounded-[5px] text-white text-lg font-semibold bg-blueColor hover:bg-blue-600 mb-4"
+                                    onClick={() => {
+                                        addDegreeState({
+                                            label: course.degree.name,
+                                            value: course.degree.id
+                                        });
+                                        addCourseState({
+                                            label: course.name,
+                                            value: course.id
+                                        });
+                                    }}
+                                >
+                                    <Link href={ROUTES.APPLY}>Apply</Link>
+                                </button>
                                 <Link href="/compare">
                                     <button className="w-full pt-[19px] pb-[18px] rounded-[5px] hover:text-white text-lg font-semibold bg-white hover:bg-blueColor border border-blueColor text-blueColor mb-2">
                                         Compare

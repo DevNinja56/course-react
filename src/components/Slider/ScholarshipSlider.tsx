@@ -10,16 +10,14 @@ import 'swiper/css/navigation';
 import Link from 'next/link';
 import { ROUTES } from '@/config/constant';
 import { useGetScholarshipQuery } from '@/store/slices/allRequests';
-import { useFilterQuery } from '@/hooks/filterQuery';
 
 function ScholarshipSlider() {
     const { data: scholarshipList } = useGetScholarshipQuery();
     const data = scholarshipList?.map((scholarship) => ({
         title: `${scholarship.name} `,
         logo: scholarship.image,
-        name: scholarship.name
+        id: scholarship.id
     }));
-    const { addQuery } = useFilterQuery();
 
     return (
         <div className="w-full print:hidden">
@@ -43,14 +41,13 @@ function ScholarshipSlider() {
                     modules={[EffectCoverflow, Pagination, Navigation]}
                     className="swiper_container"
                 >
-                    {data?.map(({ title, logo, name }) => (
+                    {data?.map(({ title, logo, id }) => (
                         <SwiperSlide
                             key={'scholarship-slider--' + title}
                             className="relative border rounded-xl bg-white overflow-hidden"
                         >
                             <Link
-                                href={ROUTES.FILTER_SCHOLARSHIP}
-                                onClick={() => addQuery({ countries: [name] })}
+                                href={ROUTES.SCHOLARSHIP.replace(':id', id)}
                                 className="max-w-[400px]"
                             >
                                 <Image

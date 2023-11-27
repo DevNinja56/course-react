@@ -27,9 +27,9 @@ const Header = ({ onlyLogo }: { onlyLogo?: boolean }) => {
     };
 
     return (
-        <header className="w-full fixed top-0 bg-white z-40 print:static ">
+        <header className={`w-full fixed top-0 z-40 print:static`}>
             {!onlyLogo ? (
-                <>
+                <div className="bg-white">
                     <UnVerifiedUser />
                     <div className="max-w-[1100px] 2xl:max-w-[2300px] mx-auto py-6 flex justify-between items-center px-[20px] md:px-[50px] lg:px-2 2xl:px-8 transition-all duration-300">
                         <Logo />
@@ -216,7 +216,7 @@ const Header = ({ onlyLogo }: { onlyLogo?: boolean }) => {
                             </div>
                         </div>
                     </div>
-                </>
+                </div>
             ) : (
                 <div className="max-w-[1100px] 2xl:max-w-[2300px] mx-auto py-6 flex justify-between items-center px-[20px] md:px-[50px] lg:px-2 2xl:px-8 transition-all duration-300">
                     <Logo />

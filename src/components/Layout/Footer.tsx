@@ -96,6 +96,11 @@ const Footer = () => {
                                         Find Institutions
                                     </li>
                                 </Link>
+                                <Link href={ROUTES.FILTER_SCHOLARSHIP}>
+                                    <li className="pt-[9px] pb-[10px]">
+                                        All Scholarships
+                                    </li>
+                                </Link>
                                 <Link href={ROUTES.BLOGS}>
                                     <li className="pt-[9px] pb-[10px]">
                                         Blogs

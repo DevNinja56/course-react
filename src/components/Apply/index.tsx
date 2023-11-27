@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import InputBox from '../Input';
 import { useForm } from 'react-hook-form';
 import { fetchRequest } from '@/utils/axios/fetch';
@@ -14,6 +14,7 @@ import {
 import Select from 'react-select';
 import { ROUTES } from '@/config/constant';
 import Link from 'next/link';
+import { useApply } from '@/hooks/apply';
 
 interface formType {
     name?: string;
@@ -28,11 +29,18 @@ interface formType {
 const ApplyOnline = () => {
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [isSubmit, setIsSubmit] = useState<boolean>(false);
+    const {
+        degree,
+        course,
+        scholarship,
+        addDegreeState,
+        addCourseState,
+        addScholarshipState
+    } = useApply();
     const { isAuthenticated, user } = useUserAuth();
-    const [degreeId, setDegreeId] = useState<string>('');
     const { data: degreeList, isLoading: degreeLoading } = useGetDegreesQuery();
     const { data: courseList, isLoading: courseLoading } =
-        useGetCoursesByDegreeQuery({ degreeId });
+        useGetCoursesByDegreeQuery({ degreeId: degree?.value ?? '' });
     const { data: scholarshipList, isLoading: scholarshipLoading } =
         useGetScholarshipQuery();
     const {
@@ -42,6 +50,12 @@ const ApplyOnline = () => {
         setValue,
         reset
     } = useForm<formType>();
+
+    useEffect(() => {
+        setValue('degree', degree?.value ?? '');
+        setValue('course', course?.value ?? '');
+        setValue('scholarship', scholarship?.value ?? '');
+    }, [degree, course, scholarship]);
 
     const handleSubmit = ({ name, email, phone_number, ...body }: formType) => {
         setIsLoading(true);
@@ -83,7 +97,7 @@ const ApplyOnline = () => {
                             will be in touch with you soon.
                         </p>
                     </div>
-                    <div className="mt-5 flex justify-center">
+                    <div className="my-5 flex justify-center">
                         <Link
                             href={ROUTES.APPLIES}
                             className="border-2 border-blueColor text-blueColor px-5 py-2 rounded-md hover:text-white hover:bg-blueColor"
@@ -139,9 +153,12 @@ const ApplyOnline = () => {
                                     placeholder="Select Degree"
                                     isLoading={degreeLoading}
                                     onChange={(e) => {
-                                        setDegreeId(e?.value ?? '');
-                                        setValue('degree', e?.value ?? '');
+                                        addDegreeState({
+                                            value: e?.value ?? '',
+                                            label: e?.label ?? ''
+                                        });
                                     }}
+                                    defaultValue={degree ?? null}
                                     styles={{
                                         control: (base) => ({
                                             ...base,
@@ -166,12 +183,16 @@ const ApplyOnline = () => {
                                         label: course.name,
                                         value: course.id
                                     }))}
-                                    isDisabled={!degreeId}
+                                    isDisabled={!degree}
                                     placeholder="Select Course"
                                     isLoading={courseLoading}
-                                    onChange={(e) =>
-                                        setValue('course', e?.value ?? '')
-                                    }
+                                    onChange={(e) => {
+                                        addCourseState({
+                                            value: e?.value ?? '',
+                                            label: e?.label ?? ''
+                                        });
+                                    }}
+                                    defaultValue={course ?? null}
                                     styles={{
                                         control: (base) => ({
                                             ...base,
@@ -200,9 +221,13 @@ const ApplyOnline = () => {
                                     )}
                                     placeholder="Select Scholarship"
                                     isLoading={scholarshipLoading}
-                                    onChange={(e) =>
-                                        setValue('scholarship', e?.value ?? '')
-                                    }
+                                    onChange={(e) => {
+                                        addScholarshipState({
+                                            value: e?.value ?? '',
+                                            label: e?.label ?? ''
+                                        });
+                                    }}
+                                    defaultValue={scholarship ?? null}
                                     styles={{
                                         control: (base) => ({
                                             ...base,

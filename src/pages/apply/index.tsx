@@ -35,8 +35,13 @@ const Apply = () => {
                 />
                 <div className="mt-44 md:mt-32 mr-[-70px] md:mr-[-40px] block lg:hidden h-32 w-32 rounded-full border-[10px] border-blueColor"></div>
             </div>
+            <div className="w-full mt-16">
+                <div className="max-w-[1100px] 2xl:max-w-[2300px] mx-auto px-5 md:px-[50px] lg:px-2 2xl:px-8 transition-all duration-300">
+                    <ApplyOnline />
+                </div>
+            </div>
             <div className="w-full pb-28">
-                <div className="max-w-[1100px] 2xl:max-w-[2300px] mx-auto px-5 md:px-[50px] lg:px-2 2xl:px-8 transition-all duration-300 pt-16">
+                <div className="max-w-[1100px] 2xl:max-w-[2300px] mx-auto px-5 md:px-[50px] lg:px-2 2xl:px-8 transition-all duration-300">
                     <div className="flex flex-col gap-y-8 mb-9">
                         <p className="text-darkGrayColor leading-6">
                             Course Options (CP) has been created as a bridge
@@ -139,19 +144,7 @@ const Apply = () => {
                     </p>
                 </div>
             </div>
-            <div className="w-full mb-40 2xl:mb-[600px]">
-                <div className="max-w-[1100px] 2xl:max-w-[2300px] mx-auto px-5 md:px-[50px] lg:px-2 2xl:px-8 transition-all duration-300">
-                    <div className="w-full flex flex-col items-center mb-12">
-                        <p className="text-blueColor font-bold text-xl md:text-[23px]">
-                            Fill the form
-                        </p>
-                        <h1 className="text-mainTextColor text-[32px] md:text-[48px] font-extrabold">
-                            Apply Online
-                        </h1>
-                    </div>
-                    <ApplyOnline />
-                </div>
-            </div>
+
             <CounselingWork />
             <Testimonial />
         </>

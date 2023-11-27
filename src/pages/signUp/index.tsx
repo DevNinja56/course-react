@@ -59,7 +59,7 @@ const SignUp = () => {
     };
 
     return (
-        <div className="w-full flex justify-center items-center py-0 md:py-8 px-0 lg:px-10 2xl:px-40 bg-loginBgColor min-h-[100vh]">
+        <div className="w-full flex justify-center items-center px-0 lg:px-10 2xl:px-40 bg-loginBgColor min-h-[100vh]">
             <div className="w-full px-0 lg:px-2 transition-all duration-300">
                 <div className="relative w-full flex items-center justify-center pt-20 pb-20 md:py-20">
                     <Image
@@ -110,7 +110,7 @@ const SignUp = () => {
                         src="/images/flower.svg"
                         priority
                     />
-                    <div className=" absolute top-40 md:top-9 2xl:top-80 rounded-[10px] bg-white custom-shadow pt-10 pb-7 px-4 md:px-12 flex flex-col items-center w-[90%] md:w-[53%] lg:w-[45%] xl:w-[35%] 2xl:w-[50%]">
+                    <div className=" absolute top-1/2 -translate-y-1/2  rounded-[10px] bg-white custom-shadow pt-10 pb-7 px-4 md:px-12 flex flex-col items-center w-[90%] md:w-[53%] lg:w-[45%] xl:w-[35%] 2xl:w-[50%]">
                         <Link href={ROUTES.SIGN_IN}>
                             <FaArrowLeft className="absolute left-5 top-5 cursor-pointer text-blueColor h-6 w-6" />
                         </Link>

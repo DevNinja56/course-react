@@ -3,26 +3,18 @@ import FavoriteButton from '@/components/Button/FavoriteButton';
 import CounselingWork from '@/components/CounselingWork/CounselingWork';
 import ScreenLoader from '@/components/Loader/ScreenLoader';
 import Testimonial from '@/components/Testimonial';
+import { API_ENDPOINTS } from '@/config/Api_EndPoints';
 import { ROUTES } from '@/config/constant';
-import { useGetScholarshipByIdQuery } from '@/store/slices/allRequests';
+import { useApply } from '@/hooks/apply';
+import { scholarshipType } from '@/types';
+import { GetServerSideProps } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
-import React from 'react';
+import React, { useState } from 'react';
 
-const CourseDetail = () => {
-    const { query, isReady } = useRouter();
-    const {
-        data: scholarship,
-        isLoading,
-        refetch
-    } = useGetScholarshipByIdQuery(query.id as string);
-
-    console.log(scholarship);
-
-    if (isLoading || !isReady) {
-        return <ScreenLoader />;
-    }
+const CourseDetail = ({ data: scholarship }: { data: scholarshipType }) => {
+    const [isFavorite, setFavorite] = useState(!!scholarship?.favoriteId?.[0]);
+    const { addScholarshipState } = useApply();
     return (
         <>
             {!scholarship ? (
@@ -53,13 +45,13 @@ const CourseDetail = () => {
                                             {scholarship?.institute.sector}
                                         </button>
                                         <FavoriteButton
-                                            isActive={
-                                                !!scholarship?.favoriteId?.[0]
-                                            }
+                                            isActive={isFavorite}
                                             body={{
                                                 scholarship: scholarship.id
                                             }}
-                                            refetch={refetch}
+                                            refetch={() =>
+                                                setFavorite((prev) => !prev)
+                                            }
                                             className="h-[46px] w-[46px] rounded-full flex items-center justify-center border-2 border-white bg-heartBgColor hover:bg-white group"
                                             iconClass={`text-3xl text-white group-hover:text-red-600`}
                                         />
@@ -89,7 +81,11 @@ const CourseDetail = () => {
                                     About
                                 </h1>
                                 <p className="text-[13px] text-grayColor mb-2">
-                                    {scholarship.institute.description}
+                                    {scholarship.institute.description.slice(
+                                        0,
+                                        200
+                                    )}
+                                    ...
                                 </p>
                                 <p className="text-[11px] text-grayColor mb-8">
                                     Visit the{' '}
@@ -104,7 +100,15 @@ const CourseDetail = () => {
                                     </Link>{' '}
                                     for more information
                                 </p>
-                                <div className="flex flex-col gap-3">
+                                <div
+                                    className="flex flex-col gap-3"
+                                    onClick={() =>
+                                        addScholarshipState({
+                                            value: scholarship.id,
+                                            label: scholarship.name
+                                        })
+                                    }
+                                >
                                     <Button text="Apply" link={ROUTES.APPLY} />
                                 </div>
                             </div>
@@ -113,6 +117,25 @@ const CourseDetail = () => {
                                     Key information
                                 </h1>
                                 <div className="flex flex-col gap-y-5 capitalize ">
+                                    <div className="flex items-center justify-between">
+                                        <div className="flex items-center gap-x-2">
+                                            <Image
+                                                height={20}
+                                                width={20}
+                                                alt="cup-icon"
+                                                src="/images/CourseDetail/Cup.svg"
+                                                priority
+                                            />
+                                            <p className="text-textLightBlackColor">
+                                                Level
+                                            </p>
+                                        </div>
+                                        <p className="text-darkGrayColor truncate px-5 max-w-[250px] text-right">
+                                            {scholarship.degrees
+                                                .map((degree) => degree.name)
+                                                .join('-')}
+                                        </p>
+                                    </div>
                                     <div className="flex items-center justify-between">
                                         <div className="flex items-center gap-x-2">
                                             <Image
@@ -130,25 +153,7 @@ const CourseDetail = () => {
                                             {scholarship.applicable}
                                         </p>
                                     </div>
-                                    <div className="flex items-center justify-between">
-                                        <div className="flex items-center gap-x-2">
-                                            <Image
-                                                height={20}
-                                                width={20}
-                                                alt="cup-icon"
-                                                src="/images/CourseDetail/Cup.svg"
-                                                priority
-                                            />
-                                            <p className="text-textLightBlackColor">
-                                                Level
-                                            </p>
-                                        </div>
-                                        <p className="text-darkGrayColor">
-                                            {scholarship.degrees
-                                                .map((degree) => degree.name)
-                                                .join()}
-                                        </p>
-                                    </div>
+
                                     <div className="flex items-center justify-between">
                                         <div className="flex items-center gap-x-2">
                                             <Image
@@ -403,6 +408,33 @@ const CourseDetail = () => {
             )}
         </>
     );
+};
+
+export const getServerSideProps: GetServerSideProps<{
+    data: { data: scholarshipType; status: number };
+}> = async (context) => {
+    const id = context.query?.id as string;
+    const token = context.req.cookies['access_token'];
+    let data = null;
+    try {
+        const res = await fetch(
+            `${
+                process.env.NEXT_PUBLIC_REST_API_ENDPOINT
+            }${API_ENDPOINTS.SCHOLARSHIP_BY_ID.replace(':id', id)}`,
+            {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${token}`
+                }
+            }
+        );
+        data = await res.json();
+    } catch (error) {
+        data = null;
+        console.log(error);
+    }
+    return { props: { data: data?.data ?? data! ?? null } };
 };
 
 export default CourseDetail;

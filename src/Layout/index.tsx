@@ -10,6 +10,8 @@ import { useRouter } from 'next/router';
 import { ROUTES } from '@/config/constant';
 import ModalWraper from '@/Modal';
 import NextNProgress from 'nextjs-progressbar';
+import UserActivation from '@/components/UserStatus/UserInActive';
+import UserBlock from '@/components/UserStatus/Block';
 
 export interface propsType {
     children: React.ReactElement;
@@ -26,7 +28,7 @@ const MainLayout = ({
     auth = false,
     isPublic = false
 }: propsType) => {
-    const { refetchUser, isAuthenticated, isLoading } = useUserAuth();
+    const { refetchUser, isAuthenticated, isLoading, user } = useUserAuth();
     const token = getCookie('access_token');
     const router = useRouter();
 
@@ -60,7 +62,13 @@ const MainLayout = ({
                     <Header onlyLogo />
                 )}
 
-                {children}
+                {user.status === 'active' ? (
+                    children
+                ) : user.status === 'in-active' ? (
+                    <UserActivation />
+                ) : (
+                    <UserBlock />
+                )}
             </div>
             {footer && <Footer />}
         </>
