@@ -62,12 +62,16 @@ const MainLayout = ({
                     <Header onlyLogo />
                 )}
 
-                {user.status === 'active' ? (
-                    children
-                ) : user.status === 'in-active' ? (
-                    <UserActivation />
+                {auth && isAuthenticated ? (
+                    user.status === 'active' ? (
+                        children
+                    ) : user.status === 'in-active' ? (
+                        <UserActivation />
+                    ) : (
+                        <UserBlock />
+                    )
                 ) : (
-                    <UserBlock />
+                    children
                 )}
             </div>
             {footer && <Footer />}
