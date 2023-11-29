@@ -16,7 +16,8 @@ import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { MdOutlineMail } from 'react-icons/md';
 import { BiLock } from 'react-icons/bi';
-import { FaArrowLeft } from 'react-icons/fa6';
+import { FaArrowLeft, FaFacebookF } from 'react-icons/fa6';
+import GoogleOAuthWraper from '@/components/Auth/GoogleOAuthWraper';
 
 const SignIn = () => {
     const { updateModal } = useUi();
@@ -141,14 +142,19 @@ const SignIn = () => {
                                     icon={BiLock}
                                 />
                             </div>
-                            <div className="flex items-center gap-x-3 w-full mb-10">
-                                {/* <input
-                                    type="checkbox"
-                                    className="h-5 w-5 border border-grayColor"
-                                />
-                                <p className="text-lightGrayColor pt-[2px]">
-                                    Remember me
-                                </p> */}
+                            <div className="flex justify-end mb-4">
+                                <button
+                                    type="button"
+                                    onClick={() =>
+                                        updateModal({
+                                            type: modalType.reset_password,
+                                            state: {}
+                                        })
+                                    }
+                                    className="w-full text-right rounded-10px text-darkGrayColor"
+                                >
+                                    Forgot password?
+                                </button>
                             </div>
                             <Button
                                 type="submit"
@@ -156,20 +162,24 @@ const SignIn = () => {
                                 isLoader={isLoading}
                                 text="Sign In"
                             />
+                        </form>
+                        <div className="w-full ">
+                            <div className="flex items-center w-full my-3 justify-center">
+                                <div className="w-16 h-px bg-gray-500 mr-4" />
+                                <span className="text-gray-500">OR</span>
+                                <div className="w-16 h-px bg-gray-500 ml-4" />
+                            </div>
+
+                            <GoogleOAuthWraper />
 
                             <button
                                 type="button"
-                                onClick={() =>
-                                    updateModal({
-                                        type: modalType.reset_password,
-                                        state: {}
-                                    })
-                                }
-                                className="w-full pt-[14px] rounded-10px text-darkGrayColor"
+                                className="flex justify-center items-center px-3 py-2 border-2 border-blueColor rounded-md text-white bg-blueColor gap-2 w-full my-2 hover:bg-white hover:text-blueColor hover:border-2"
                             >
-                                Forgot password?
+                                <FaFacebookF />
+                                Sign in with Facebook
                             </button>
-                        </form>
+                        </div>
                     </div>
                 </div>
             </div>
