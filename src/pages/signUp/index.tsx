@@ -117,7 +117,7 @@ const SignUp = () => {
                         src="/images/flower.svg"
                         priority
                     />
-                    <div className=" absolute top-1/2 -translate-y-1/2  rounded-[10px] bg-white custom-shadow pt-10 pb-7 px-4 md:px-12 flex flex-col items-center w-[90%] md:w-[53%] lg:w-[45%] xl:w-[35%] 2xl:w-[50%]">
+                    <div className=" absolute top-1/2 -translate-y-1/2  rounded-[10px] bg-white custom-shadow pt-10 pb-7 px-4 md:px-12 flex flex-col items-center w-[90%] md:w-[53%] lg:w-[45%] xl:w-[35%] 2xl:w-[50%]  ">
                         <Link href={ROUTES.SIGN_IN}>
                             <FaArrowLeft className="absolute left-5 top-5 cursor-pointer text-blueColor h-6 w-6" />
                         </Link>
@@ -130,85 +130,89 @@ const SignUp = () => {
                                 <span className="text-blueColor">Sign In</span>{' '}
                             </p>
                         </Link>
-                        <form
-                            onSubmit={fromSubmit(handleSubmit)}
-                            className="w-full"
-                        >
-                            <div className="flex flex-col w-full gap-y-5 mb-3">
-                                <InputBox
-                                    {...register('name', {
-                                        required: true
-                                    })}
-                                    placeholder="Name"
-                                    title="Full Name"
-                                    error={errors.name?.message}
-                                    icon={BiUser}
-                                    autoComplete="off"
-                                />
-                                <InputBox
-                                    {...register('email', {
-                                        required: true
-                                    })}
-                                    placeholder="Email Address..."
-                                    title="Email"
-                                    error={errors.email?.message}
-                                    icon={MdOutlineMail}
-                                />
-                                <InputBox
-                                    {...register('phone_number', {
-                                        required: true
-                                    })}
-                                    type="tel"
-                                    placeholder="Phone Number..."
-                                    title="Phone Number"
-                                    error={errors.phone_number?.message}
-                                    icon={IoIosPhonePortrait}
-                                />
+                        <div className="max-h-[calc(90vh-150px)] overflow-y-auto w-full">
+                            <form
+                                onSubmit={fromSubmit(handleSubmit)}
+                                className="w-full "
+                            >
+                                <div className="flex flex-col w-full gap-y-5 mb-3">
+                                    <InputBox
+                                        {...register('name', {
+                                            required: true
+                                        })}
+                                        placeholder="Name"
+                                        title="Full Name"
+                                        error={errors.name?.message}
+                                        icon={BiUser}
+                                        autoComplete="off"
+                                    />
+                                    <InputBox
+                                        {...register('email', {
+                                            required: true
+                                        })}
+                                        placeholder="Email Address..."
+                                        title="Email"
+                                        error={errors.email?.message}
+                                        icon={MdOutlineMail}
+                                    />
+                                    <InputBox
+                                        {...register('phone_number', {
+                                            required: true
+                                        })}
+                                        type="tel"
+                                        placeholder="Phone Number..."
+                                        title="Phone Number"
+                                        error={errors.phone_number?.message}
+                                        icon={IoIosPhonePortrait}
+                                    />
 
-                                <InputBox
-                                    {...register('password', {
-                                        required: true
-                                    })}
-                                    type="password"
-                                    placeholder="Password"
-                                    title="Password"
-                                    error={errors.password?.message}
-                                    icon={BiLock}
-                                />
-                            </div>
-                            <div className="flex items-center gap-x-3 w-full mb-8">
-                                {/* <input
+                                    <InputBox
+                                        {...register('password', {
+                                            required: true
+                                        })}
+                                        type="password"
+                                        placeholder="Password"
+                                        title="Password"
+                                        error={errors.password?.message}
+                                        icon={BiLock}
+                                    />
+                                </div>
+                                <div className="flex items-center gap-x-3 w-full mb-8">
+                                    {/* <input
                                     type="checkbox"
                                     className="h-5 w-5 border border-grayColor"
                                 />
                                 <p className="text-lightGrayColor pt-[2px]">
                                     I have read the Terms of Service
                                 </p> */}
-                            </div>
-                            <Button
-                                type="submit"
-                                disabled={isLoading}
-                                isLoader={isLoading}
-                                text="Sign Up"
-                            />
-                        </form>
-                        <GoogleOAuthProvider clientId={googleClientId}>
-                            <div className="w-full ">
-                                <div className="flex items-center w-full my-3 justify-center">
-                                    <div className="w-16 h-px bg-gray-500 mr-4" />
-                                    <span className="text-gray-500">OR</span>
-                                    <div className="w-16 h-px bg-gray-500 ml-4" />
                                 </div>
-                                <GoogleOAuthWraper isRegister />
-                                <button
-                                    type="button"
-                                    className="flex justify-center items-center px-3 py-2 border-2 border-blueColor rounded-md text-white bg-blueColor gap-2 w-full my-2 hover:bg-white hover:text-blueColor hover:border-2"
-                                >
-                                    <FaFacebookF />
-                                    Register with Facebook
-                                </button>
-                            </div>
-                        </GoogleOAuthProvider>
+                                <Button
+                                    type="submit"
+                                    disabled={isLoading}
+                                    isLoader={isLoading}
+                                    text="Sign Up"
+                                />
+                            </form>
+                            <GoogleOAuthProvider clientId={googleClientId}>
+                                <div className="w-full ">
+                                    <div className="flex items-center w-full my-3 justify-center">
+                                        <div className="w-16 h-px bg-gray-500 mr-4" />
+                                        <span className="text-gray-500">
+                                            OR
+                                        </span>
+                                        <div className="w-16 h-px bg-gray-500 ml-4" />
+                                    </div>
+                                    <GoogleOAuthWraper isRegister />
+                                    <button
+                                        type="button"
+                                        className="flex justify-center items-center px-3 py-2 border-2 border-blueColor rounded-md text-white bg-blueColor gap-2 w-full my-2 hover:bg-white hover:text-blueColor hover:border-2"
+                                    >
+                                        <FaFacebookF />
+                                        Register with Facebook
+                                    </button>
+                                </div>
+                            </GoogleOAuthProvider>
+                        </div>
                     </div>
                 </div>
             </div>
