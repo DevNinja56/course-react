@@ -2,6 +2,7 @@ export const API_ENDPOINTS = {
     AUTH: {
         SIGNUP: '/auth/signup',
         SIGNIN: '/auth/signin',
+        GOOGLE_SIGN_IN: '/auth/google-signin',
         GET_USER: '/auth/get-user',
         VERIFY_OTP: '/auth/otp-verify',
         LOG_OUT: '/auth/logout',

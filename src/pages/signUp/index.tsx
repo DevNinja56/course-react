@@ -16,8 +16,11 @@ import { BiLock } from 'react-icons/bi';
 import { MdOutlineMail } from 'react-icons/md';
 import { BiUser } from 'react-icons/bi';
 import { IoIosPhonePortrait } from 'react-icons/io';
-import { FaArrowLeft } from 'react-icons/fa6';
+import { FaArrowLeft, FaFacebookF } from 'react-icons/fa6';
 import { PhoneNumberValidate } from '@/utils/PhoneValidate';
+import { GoogleOAuthProvider } from '@react-oauth/google';
+import GoogleOAuthWraper from '@/components/Auth/GoogleSignInBtn';
+import getConfig from 'next/config';
 
 const SignUp = () => {
     const [isLoading, setIsLoading] = useState(false);
@@ -57,6 +60,10 @@ const SignUp = () => {
             })
             .finally(() => setIsLoading(false));
     };
+
+    const { publicRuntimeConfig } = getConfig();
+    const googleClientId =
+        publicRuntimeConfig?.NEXT_PUBLIC_GOOGLE_CLIENT_ID ?? '';
 
     return (
         <div className="w-full flex justify-center items-center px-0 lg:px-10 2xl:px-40 bg-loginBgColor min-h-[100vh]">
@@ -185,6 +192,23 @@ const SignUp = () => {
                                 text="Sign Up"
                             />
                         </form>
+                        <GoogleOAuthProvider clientId={googleClientId}>
+                            <div className="w-full ">
+                                <div className="flex items-center w-full my-3 justify-center">
+                                    <div className="w-16 h-px bg-gray-500 mr-4" />
+                                    <span className="text-gray-500">OR</span>
+                                    <div className="w-16 h-px bg-gray-500 ml-4" />
+                                </div>
+                                <GoogleOAuthWraper isRegister />
+                                <button
+                                    type="button"
+                                    className="flex justify-center items-center px-3 py-2 border-2 border-blueColor rounded-md text-white bg-blueColor gap-2 w-full my-2 hover:bg-white hover:text-blueColor hover:border-2"
+                                >
+                                    <FaFacebookF />
+                                    Register with Facebook
+                                </button>
+                            </div>
+                        </GoogleOAuthProvider>
                     </div>
                 </div>
             </div>
