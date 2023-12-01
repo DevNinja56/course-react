@@ -16,10 +16,13 @@ import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { MdOutlineMail } from 'react-icons/md';
 import { BiLock } from 'react-icons/bi';
-import { FaArrowLeft, FaFacebookF } from 'react-icons/fa6';
+import { FaArrowLeft } from 'react-icons/fa6';
 import GoogleOAuthWraper from '@/components/Auth/GoogleSignInBtn';
 import { GoogleOAuthProvider } from '@react-oauth/google';
-import getConfig from 'next/config';
+import dynamic from 'next/dynamic';
+const FacebookLoginBtn = dynamic(import('@/components/Auth/FacebookLoginBtn'), {
+    ssr: false
+});
 
 const SignIn = () => {
     const { updateModal } = useUi();
@@ -61,10 +64,6 @@ const SignIn = () => {
             })
             .finally(() => setIsLoading(false));
     };
-
-    const { publicRuntimeConfig } = getConfig();
-    const googleClientId =
-        publicRuntimeConfig?.NEXT_PUBLIC_GOOGLE_CLIENT_ID ?? '';
 
     return (
         <div className="w-full flex justify-center items-center px-0 lg:px-16 2xl:px-40 bg-loginBgColor min-h-[100vh]">
@@ -169,7 +168,11 @@ const SignIn = () => {
                                 text="Sign In"
                             />
                         </form>
-                        <GoogleOAuthProvider clientId={googleClientId}>
+                        <GoogleOAuthProvider
+                            clientId={
+                                process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID ?? ''
+                            }
+                        >
                             <div className="w-full ">
                                 <div className="flex items-center w-full my-3 justify-center">
                                     <div className="w-16 h-px bg-gray-500 mr-4" />
@@ -177,13 +180,7 @@ const SignIn = () => {
                                     <div className="w-16 h-px bg-gray-500 ml-4" />
                                 </div>
                                 <GoogleOAuthWraper />
-                                <button
-                                    type="button"
-                                    className="flex justify-center items-center px-3 py-2 border-2 border-blueColor rounded-md text-white bg-blueColor gap-2 w-full my-2 hover:bg-white hover:text-blueColor hover:border-2"
-                                >
-                                    <FaFacebookF />
-                                    Sign in with Facebook
-                                </button>
+                                <FacebookLoginBtn />
                             </div>
                         </GoogleOAuthProvider>
                     </div>

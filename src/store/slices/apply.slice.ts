@@ -9,13 +9,13 @@ export interface objectType {
 interface dataTypes {
     degree: objectType | null;
     course: objectType | null;
-    scholarship: objectType | null;
+    institute: objectType | null;
 }
 
 const initialState: dataTypes = {
     degree: null,
     course: null,
-    scholarship: null
+    institute: null
 };
 
 const apply = createSlice({
@@ -28,11 +28,11 @@ const apply = createSlice({
         addCourse(state, action) {
             state.course = action.payload;
         },
-        addScholarship(state, action) {
-            state.scholarship = action.payload;
+        addInstitute(state, action) {
+            state.institute = action.payload;
         }
     }
 });
 
-export const { addDegree, addCourse, addScholarship } = apply.actions;
+export const { addDegree, addCourse, addInstitute } = apply.actions;
 export default apply.reducer;

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useGoogleLogin } from '@react-oauth/google';
-import { FaGoogle } from 'react-icons/fa6';
+import { FcGoogle } from 'react-icons/fc';
 import { fetchRequest } from '@/utils/axios/fetch';
 import { API_ENDPOINTS } from '@/config/Api_EndPoints';
 import { useUserAuth } from '@/hooks/auth';
@@ -44,10 +44,10 @@ const GoogleOAuthWraper = ({ isRegister }: { isRegister?: boolean }) => {
         <>
             <button
                 type="button"
-                className="flex justify-center items-center px-3 py-2 border-2 border-blueColor rounded-md text-blueColor gap-2 w-full my-2 hover:bg-blueColor hover:text-white"
+                className="flex justify-center items-center px-3 py-2 border border-gray-300 rounded-md text-gray-500 gap-2 w-full my-2 hover:bg-gray-100 "
                 onClick={() => handleLogin()}
             >
-                <FaGoogle />
+                <FcGoogle />
                 {isRegister ? 'Register with Google' : 'Sign in with Google'}
                 {isLoading && <LoaderIcon />}
             </button>

@@ -3,10 +3,12 @@ import React, { useState } from 'react';
 import PersonalInfo from './PersonalInfo';
 import MyApplies from './MyApplies';
 import { useRouter } from 'next/router';
+import AcademicInformation from './AcademicInformation';
 
 export const favoritesTabs: { [key: string]: string } = {
     personalInfo: 'Personal Information',
-    myApplies: 'My Applies'
+    myApplies: 'My Applications',
+    academicInformation: 'Academic Information'
 };
 
 const ProfileComp = () => {
@@ -19,7 +21,11 @@ const ProfileComp = () => {
     );
     const tabs = [
         { title: favoritesTabs.personalInfo, Component: PersonalInfo },
-        { title: favoritesTabs.myApplies, Component: MyApplies }
+        { title: favoritesTabs.myApplies, Component: MyApplies },
+        {
+            title: favoritesTabs.academicInformation,
+            Component: AcademicInformation
+        }
     ];
 
     return (

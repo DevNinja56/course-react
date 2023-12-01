@@ -1,19 +1,34 @@
 export interface userType {
+    id: string;
     name: string;
     email: string;
     gender: string;
     avatar: string;
     address: string;
-    status: 'in-active' | 'active' | 'block';
-    role: 'user';
-    instituteLink: string;
-    phone_number: string;
+    fbUserId: string;
     createdAt: string;
     updatedAt: string;
-    sms_otp: string;
-    sms_otp_created_at: string;
-    sms_otp_expires_at: string;
-    id: string;
+    instituteLink: string;
+    phone_number: string;
+    role: 'user';
+    status: 'in-active' | 'active' | 'block';
+    registerWith: 'google' | 'facebook' | 'email';
+    documents: [];
+    academicInformation: academicInformation | null;
+}
+
+export interface academicInformation {
+    countryOfEducation: string;
+    highestLevelOfEducation: string;
+    languageTest: {
+        name: string;
+        score?: {
+            listening: string;
+            speaking: string;
+            writing: string;
+            reading: string;
+        } | null;
+    };
 }
 
 export type signInForm = {
@@ -205,7 +220,7 @@ export type favoritesType = {
 export type applyTypes = {
     degree: degreeType;
     course: singleCourseType;
-    scholarship: scholarshipType;
+    institute: instituteType;
     user: userType | null;
     message: string;
     userDetails: { name: string; phone_number: string; email: string } | null;

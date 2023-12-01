@@ -163,11 +163,21 @@ const Header = ({ onlyLogo }: { onlyLogo?: boolean }) => {
                                         className="flex items-center gap-x-3 relative select-none cursor-pointer "
                                         onClick={onShowDropDown}
                                     >
-                                        <span className="border rounded-full p-0.5 -mr-1">
-                                            <CiUser className="text-3xl   " />
-                                        </span>
-                                        <p className="text-textBlackColor font-semibold hidden lg:flex gap-x-1 ">
-                                            {user.name}
+                                        {user.avatar ? (
+                                            <Image
+                                                src={user.avatar}
+                                                className="border rounded-full p-0.5 -mr-1"
+                                                alt="Profile Photo"
+                                                width={40}
+                                                height={40}
+                                            />
+                                        ) : (
+                                            <span className="border rounded-full p-0.5 -mr-1">
+                                                <CiUser className="text-3xl   " />
+                                            </span>
+                                        )}
+                                        <p className="text-textBlackColor capitalize font-semibold hidden lg:flex gap-x-1 ">
+                                            {user.name?.toLocaleLowerCase()}
                                             <Image
                                                 height={16}
                                                 width={16}

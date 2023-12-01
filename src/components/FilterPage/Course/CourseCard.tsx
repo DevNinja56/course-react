@@ -46,7 +46,7 @@ const CourseCard = ({ course }: CardProps) => {
                 </div>
                 <div>
                     <h1
-                        className="font-bold text-base  text-textLightBlackColor mb-4 group-hover:text-blueColor max-h-12 line-clamp-2  "
+                        className="font-bold text-base  text-textLightBlackColor mb-4 group-hover:text-blueColor h-12 line-clamp-2  "
                         title={course.name}
                     >
                         {course.name}

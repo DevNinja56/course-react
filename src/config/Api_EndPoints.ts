@@ -3,12 +3,14 @@ export const API_ENDPOINTS = {
         SIGNUP: '/auth/signup',
         SIGNIN: '/auth/signin',
         GOOGLE_SIGN_IN: '/auth/google-signin',
+        FACEBOOK_SIGN_IN: '/auth/facebook-signin',
         GET_USER: '/auth/get-user',
         VERIFY_OTP: '/auth/otp-verify',
         LOG_OUT: '/auth/logout',
         FORGOT_PASSWORD: '/auth/forgotPassword',
         RESET_PASSWORD: '/auth/reset-password',
-        VERIFY_ACCOUNT: '/auth/verify-account'
+        VERIFY_ACCOUNT: '/auth/verify-account',
+        RESEND_EMAIL: '/auth/resend-email'
     },
     USER: {
         PROFILE_IMAGE: '/user/upload-avatar/:id',

@@ -5,7 +5,6 @@ import ScreenLoader from '@/components/Loader/ScreenLoader';
 import Testimonial from '@/components/Testimonial';
 import { API_ENDPOINTS } from '@/config/Api_EndPoints';
 import { ROUTES } from '@/config/constant';
-import { useApply } from '@/hooks/apply';
 import { scholarshipType } from '@/types';
 import { GetServerSideProps } from 'next';
 import Image from 'next/image';
@@ -14,7 +13,6 @@ import React, { useState } from 'react';
 
 const CourseDetail = ({ data: scholarship }: { data: scholarshipType }) => {
     const [isFavorite, setFavorite] = useState(!!scholarship?.favoriteId?.[0]);
-    const { addScholarshipState } = useApply();
     return (
         <>
             {!scholarship ? (
@@ -100,15 +98,7 @@ const CourseDetail = ({ data: scholarship }: { data: scholarshipType }) => {
                                     </Link>{' '}
                                     for more information
                                 </p>
-                                <div
-                                    className="flex flex-col gap-3"
-                                    onClick={() =>
-                                        addScholarshipState({
-                                            value: scholarship.id,
-                                            label: scholarship.name
-                                        })
-                                    }
-                                >
+                                <div className="flex flex-col gap-3">
                                     <Button text="Apply" link={ROUTES.APPLY} />
                                 </div>
                             </div>

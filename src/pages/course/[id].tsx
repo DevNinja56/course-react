@@ -16,7 +16,7 @@ import React, { useState } from 'react';
 
 const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
     const [isFavorite, setFavorite] = useState(!!course?.favoriteId?.[0]);
-    const { addCourseState, addDegreeState } = useApply();
+    const { addCourseState, addDegreeState, addInstituteState } = useApply();
     return (
         <>
             {!course ? (
@@ -39,12 +39,12 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                                 </h1>
                                 <div className="w-full flex justify-start lg:justify-end pr-0 lg:pr-[92px]">
                                     <div className="flex items-center gap-5">
-                                        <button className="rounded-[20px] pt-[9px] pb-2 px-4 border-2 border-white hover:border-purpleColor text-white hover:text-purpleColor bg-purpleColor hover:bg-white">
-                                            {course?.degree.name}
+                                        <button className="rounded-[20px] pt-[9px] pb-2 px-4 border-2 border-white hover:border-purpleColor text-white hover:text-purpleColor bg-purpleColor hover:bg-white capitalize">
+                                            {course?.degree.type}
                                         </button>
-                                        <button className="rounded-[20px] pt-[9px] pb-2 px-4 border-2 border-white hover:border-blueColor text-white hover:text-blueColor bg-blueColor hover:bg-white">
+                                        {/* <button className="rounded-[20px] pt-[9px] pb-2 px-4 border-2 border-white hover:border-blueColor text-white hover:text-blueColor bg-blueColor hover:bg-white">
                                             {course?.institute.sector}
-                                        </button>
+                                        </button> */}
                                         <FavoriteButton
                                             isActive={isFavorite}
                                             body={{ course: course.id }}
@@ -55,6 +55,17 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                                             iconClass={`text-3xl text-white group-hover:text-red-600`}
                                         />
                                     </div>
+                                </div>
+                                <div className="description">
+                                    <h1 className="font-semibold text-lg md:text-xl text-textLightBlackColor">
+                                        Course Description
+                                    </h1>
+                                    <div
+                                        className="text-sm md:text-base"
+                                        dangerouslySetInnerHTML={{
+                                            __html: course?.description ?? ''
+                                        }}
+                                    />
                                 </div>
                             </div>
                         </div>
@@ -99,6 +110,10 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                                         text="Apply"
                                         link={ROUTES.APPLY}
                                         onClick={() => {
+                                            addInstituteState({
+                                                label: course.institute.name,
+                                                value: course.institute.id
+                                            });
                                             addDegreeState({
                                                 label: course.degree.name,
                                                 value: course.degree.id
@@ -212,6 +227,23 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                                             <Image
                                                 height={20}
                                                 width={20}
+                                                alt="map-icon"
+                                                src="/images/CourseDetail/Map Point.svg"
+                                                priority
+                                            />
+                                            <p className="text-textLightBlackColor">
+                                                Campus
+                                            </p>
+                                        </div>
+                                        <p className="text-darkGrayColor">
+                                            {course.institute.campus}
+                                        </p>
+                                    </div>
+                                    <div className="flex items-center justify-between">
+                                        <div className="flex items-center gap-x-2">
+                                            <Image
+                                                height={20}
+                                                width={20}
                                                 alt="plain-icon"
                                                 src="/images/CourseDetail/Plain.svg"
                                                 priority
@@ -278,7 +310,7 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                                                 )
                                             },
                                             {
-                                                title: 'Language',
+                                                title: 'Language Requirements',
                                                 element: (
                                                     <div>
                                                         <h3 className="text-black text-lg font-semibold">
@@ -348,15 +380,6 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                                         ]}
                                     />
                                 </div>
-                                <h1 className="font-semibold text-lg md:text-xl text-textLightBlackColor">
-                                    Course Description
-                                </h1>
-                                <div
-                                    className="text-sm md:text-base"
-                                    dangerouslySetInnerHTML={{
-                                        __html: course?.description ?? ''
-                                    }}
-                                />
                             </div>
                             <div className="py-6 border-t-2 border-borderColor flex items-center justify-between w-full mb-20">
                                 <h1 className="text-lg md:text-xl font-semibold text-textLightBlackColor">
@@ -515,6 +538,10 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                                 <button
                                     className="w-full pt-[19px] pb-[18px] rounded-[5px] text-white text-lg font-semibold bg-blueColor hover:bg-blue-600 mb-4"
                                     onClick={() => {
+                                        addInstituteState({
+                                            label: course.institute.name,
+                                            value: course.institute.id
+                                        });
                                         addDegreeState({
                                             label: course.degree.name,
                                             value: course.degree.id

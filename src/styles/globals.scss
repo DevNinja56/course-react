@@ -6,6 +6,10 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+    scroll-behavior: smooth;
+}
+
 *,
 .primaryFont {
     font-family: $primaryFont !important;

@@ -9,7 +9,7 @@ import { useUserAuth } from '@/hooks/auth';
 import {
     useGetCoursesByDegreeQuery,
     useGetDegreesQuery,
-    useGetScholarshipQuery
+    useGetInstituteQuery
 } from '@/store/slices/allRequests';
 import Select from 'react-select';
 import { ROUTES } from '@/config/constant';
@@ -23,26 +23,34 @@ interface formType {
     message: string;
     degree: string;
     course: string;
-    scholarship: string;
+    institute: string;
 }
+
+const messageList = [
+    'I want to apply for this course.',
+    'I want to know more about this course.',
+    'I want to confirm the scholarship on this course.',
+    'Other Message'
+];
 
 const ApplyOnline = () => {
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [isSubmit, setIsSubmit] = useState<boolean>(false);
+    const [otherMessage, setMessage] = useState(false);
     const {
         degree,
         course,
-        scholarship,
+        institute,
         addDegreeState,
         addCourseState,
-        addScholarshipState
+        addInstituteState
     } = useApply();
     const { isAuthenticated, user } = useUserAuth();
     const { data: degreeList, isLoading: degreeLoading } = useGetDegreesQuery();
     const { data: courseList, isLoading: courseLoading } =
         useGetCoursesByDegreeQuery({ degreeId: degree?.value ?? '' });
-    const { data: scholarshipList, isLoading: scholarshipLoading } =
-        useGetScholarshipQuery();
+    const { data: instituteList, isLoading: instituteLoading } =
+        useGetInstituteQuery();
     const {
         register,
         handleSubmit: fromSubmit,
@@ -54,8 +62,8 @@ const ApplyOnline = () => {
     useEffect(() => {
         setValue('degree', degree?.value ?? '');
         setValue('course', course?.value ?? '');
-        setValue('scholarship', scholarship?.value ?? '');
-    }, [degree, course, scholarship]);
+        setValue('institute', institute?.value ?? '');
+    }, [degree, course, institute]);
 
     const handleSubmit = ({ name, email, phone_number, ...body }: formType) => {
         setIsLoading(true);
@@ -143,6 +151,41 @@ const ApplyOnline = () => {
                         <div className="flex gap-3 justify-between my-3">
                             <div className="w-full">
                                 <Select
+                                    {...register('institute', {
+                                        required: 'Institute is required'
+                                    })}
+                                    options={instituteList?.map(
+                                        (institute) => ({
+                                            label: institute.name,
+                                            value: institute.id
+                                        })
+                                    )}
+                                    placeholder="Select Institute"
+                                    isLoading={instituteLoading}
+                                    onChange={(e) => {
+                                        addInstituteState({
+                                            value: e?.value ?? '',
+                                            label: e?.label ?? ''
+                                        });
+                                    }}
+                                    defaultValue={institute ?? null}
+                                    styles={{
+                                        control: (base) => ({
+                                            ...base,
+                                            border: errors.institute?.message
+                                                ? '1px solid red'
+                                                : '1px solid #717070'
+                                        })
+                                    }}
+                                />
+                                {errors.institute?.message && (
+                                    <span className="text-xs mt-1 text-red-600 ">
+                                        {errors.institute?.message}
+                                    </span>
+                                )}
+                            </div>
+                            <div className="w-full">
+                                <Select
                                     {...register('degree', {
                                         required: 'Degree is required'
                                     })}
@@ -208,55 +251,36 @@ const ApplyOnline = () => {
                                     </span>
                                 )}
                             </div>
-                            <div className="w-full">
-                                <Select
-                                    {...register('scholarship', {
-                                        required: 'Scholarship is required'
-                                    })}
-                                    options={scholarshipList?.map(
-                                        (scholarship) => ({
-                                            label: scholarship.name,
-                                            value: scholarship.id
-                                        })
-                                    )}
-                                    placeholder="Select Scholarship"
-                                    isLoading={scholarshipLoading}
-                                    onChange={(e) => {
-                                        addScholarshipState({
-                                            value: e?.value ?? '',
-                                            label: e?.label ?? ''
-                                        });
-                                    }}
-                                    defaultValue={scholarship ?? null}
-                                    styles={{
-                                        control: (base) => ({
-                                            ...base,
-                                            border: errors.scholarship?.message
-                                                ? '1px solid red'
-                                                : '1px solid #717070'
-                                        })
-                                    }}
-                                />
-                                {errors.scholarship?.message && (
-                                    <span className="text-xs mt-1 text-red-600 ">
-                                        {errors.scholarship?.message}
-                                    </span>
-                                )}
-                            </div>
                         </div>
-                        <div className="message">
-                            <textarea
+                        <div className="w-full my-2">
+                            <Select
                                 {...register('message', {
-                                    required: 'Message is required',
-                                    min: 20
+                                    required: 'Message is required'
                                 })}
-                                className={`block p-2.5 w-full text-sm md:text-xl bg-gray-50 rounded-lg  resize-none outline-none  ${
-                                    errors.message?.message
-                                        ? 'text-red-600 border border-red-600'
-                                        : 'text-grayColor border border-grayColor focus:ring-blue-500 focus:border-blue-500'
-                                }`}
-                                placeholder="Write your message..."
-                                rows={5}
+                                options={messageList?.map((msg) => ({
+                                    label: msg,
+                                    value: msg
+                                }))}
+                                placeholder="Select Message"
+                                onChange={(e) => {
+                                    if (
+                                        e?.value ===
+                                        messageList[messageList.length - 1]
+                                    ) {
+                                        setMessage(true);
+                                        return;
+                                    }
+                                    setMessage(false);
+                                    setValue('message', e?.value ?? '');
+                                }}
+                                styles={{
+                                    control: (base) => ({
+                                        ...base,
+                                        border: errors.message?.message
+                                            ? '1px solid red'
+                                            : '1px solid #717070'
+                                    })
+                                }}
                             />
                             {errors.message?.message && (
                                 <span className="text-xs mt-1 text-red-600 ">
@@ -264,6 +288,28 @@ const ApplyOnline = () => {
                                 </span>
                             )}
                         </div>
+                        {otherMessage && (
+                            <div className="message">
+                                <textarea
+                                    {...register('message', {
+                                        required: 'Message is required',
+                                        min: 20
+                                    })}
+                                    className={`block p-2.5 w-full text-sm md:text-xl bg-gray-50 rounded-lg  resize-none outline-none  ${
+                                        errors.message?.message
+                                            ? 'text-red-600 border border-red-600'
+                                            : 'text-grayColor border border-grayColor focus:ring-blue-500 focus:border-blue-500'
+                                    }`}
+                                    placeholder="Write your message..."
+                                    rows={5}
+                                />
+                                {errors.message?.message && (
+                                    <span className="text-xs mt-1 text-red-600 ">
+                                        {errors.message?.message}
+                                    </span>
+                                )}
+                            </div>
+                        )}
                         <div className="mt-5 w-1/4  mx-auto">
                             <Button
                                 type="submit"

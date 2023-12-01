@@ -2,7 +2,7 @@ import { useAppDispatch, useAppSelector } from '@/hooks/store';
 import {
     addDegree,
     addCourse,
-    addScholarship,
+    addInstitute,
     objectType
 } from '@/store/slices/apply.slice';
 
@@ -12,13 +12,13 @@ export const useApply = () => {
 
     const addDegreeState = (state: objectType) => dispatch(addDegree(state));
     const addCourseState = (state: objectType) => dispatch(addCourse(state));
-    const addScholarshipState = (state: objectType) =>
-        dispatch(addScholarship(state));
+    const addInstituteState = (state: objectType) =>
+        dispatch(addInstitute(state));
 
     return {
         ...state,
         addDegreeState,
         addCourseState,
-        addScholarshipState
+        addInstituteState
     };
 };

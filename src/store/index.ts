@@ -8,6 +8,7 @@ import filterQuery from '@/store/slices/filterQuery';
 import compareInstitute from '@/store/slices/compare.slice';
 import blogs from '@/store/slices/blogsPaginated';
 import apply from '@/store/slices/apply.slice';
+import currency from '@/store/slices/currency.slice';
 
 export const store = configureStore({
     reducer: {
@@ -19,7 +20,8 @@ export const store = configureStore({
         blogs,
         filterQuery,
         compareInstitute,
-        apply
+        apply,
+        currency
     },
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware().concat(stateQueryApi.middleware)

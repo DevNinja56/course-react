@@ -23,7 +23,9 @@ const PersonalInfo = () => {
                 </button>
                 <div className="border-b border-personalInfoBorderColor pb-5 flex flex-col gap-y-2 text-mainTextColor">
                     <p>Name</p>
-                    <h1 className="text-xl font-semibold">{user.name}</h1>
+                    <h1 className="text-xl font-semibold capitalize">
+                        {user.name?.toLocaleLowerCase()}
+                    </h1>
                 </div>
                 <div className="border-b border-personalInfoBorderColor pb-5 flex flex-col gap-y-2 text-mainTextColor">
                     <p>Email</p>
