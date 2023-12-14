@@ -4,8 +4,11 @@ import EventCard from '@/components/Home/EventCard';
 import SearchBox from '@/components/Home/SearchBox';
 import ScholarshipSlider from '@/components/Slider/ScholarshipSlider';
 import CategoriesSection from '@/components/Home/CategoriesSection';
+import * as geoip from 'geoip-lite';
+import { NextPageContext } from 'next';
 
-const Home = () => {
+const Home = (props: unknown) => {
+    console.log(props);
     return (
         <>
             <div className="w-full flex items-center mt-16 md:mt-[100px] bg-white pt-0 pb-0 lg:pt-20 lg:pb-40 relative overflow-hidden lg:overflow-visible">
@@ -136,7 +139,7 @@ const Home = () => {
                 <Image
                     height={70}
                     width={70}
-                    alt="round-img-chooseus"
+                    alt="round-img-chooses"
                     className="absolute right-0 top-[-60px] block md:hidden"
                     src="/images/Home/mobile responsive roundImg.svg"
                     priority
@@ -144,7 +147,7 @@ const Home = () => {
                 <Image
                     height={70}
                     width={70}
-                    alt="round-img-chooseus"
+                    alt="round-img-chooses"
                     className="absolute right-4 lg:right-0 xl:right-6 top-10 lg:top-16 hidden md:block"
                     src="/images/Home/whychooseusroundimg2.svg"
                     priority
@@ -233,5 +236,21 @@ const Home = () => {
 };
 
 Home.layout = { auth: false };
+
+export async function getServerSideProps(ctx: NextPageContext) {
+    const { req } = ctx;
+    const clientIp =
+        (req?.headers['x-forwarded-for'] as string) ||
+        (req?.connection.remoteAddress as string);
+
+    const geo = geoip.lookup(clientIp);
+
+    return {
+        props: {
+            ip: clientIp ?? null,
+            geo: geo ?? null
+        }
+    };
+}
 
 export default Home;
