@@ -4,11 +4,10 @@ import EventCard from '@/components/Home/EventCard';
 import SearchBox from '@/components/Home/SearchBox';
 import ScholarshipSlider from '@/components/Slider/ScholarshipSlider';
 import CategoriesSection from '@/components/Home/CategoriesSection';
-import * as geoip from 'geoip-lite';
 import { NextPageContext } from 'next';
 
-const Home = (props: unknown) => {
-    console.log(props);
+const Home = ({ ip }: { ip: string }) => {
+    console.log(ip);
     return (
         <>
             <div className="w-full flex items-center mt-16 md:mt-[100px] bg-white pt-0 pb-0 lg:pt-20 lg:pb-40 relative overflow-hidden lg:overflow-visible">
@@ -239,16 +238,13 @@ Home.layout = { auth: false };
 
 export async function getServerSideProps(ctx: NextPageContext) {
     const { req } = ctx;
-    const clientIp =
+    const ip =
         (req?.headers['x-forwarded-for'] as string) ||
         (req?.connection.remoteAddress as string);
 
-    const geo = geoip.lookup(clientIp);
-
     return {
         props: {
-            ip: clientIp ?? null,
-            geo: geo ?? null
+            ip
         }
     };
 }
