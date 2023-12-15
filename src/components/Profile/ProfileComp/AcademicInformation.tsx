@@ -49,8 +49,7 @@ const AcademicInformation = () => {
                 <div className="border-b border-personalInfoBorderColor pb-5 flex flex-col gap-y-2 text-mainTextColor">
                     <p>English Language Test</p>
                     <h1 className="text-xl font-semibold">
-                        {languageTestName ??
-                            "I don't have any test, IELTS, PTE, TOFEL, Language CERT, Oxford (ELLT) => 4 Scores fields + Overall Score"}
+                        {languageTestName ?? "I don't have any test"}
                     </h1>
                     {languageTestScore && (
                         <div className="score">

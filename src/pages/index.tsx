@@ -4,10 +4,8 @@ import EventCard from '@/components/Home/EventCard';
 import SearchBox from '@/components/Home/SearchBox';
 import ScholarshipSlider from '@/components/Slider/ScholarshipSlider';
 import CategoriesSection from '@/components/Home/CategoriesSection';
-import { NextPageContext } from 'next';
 
-const Home = ({ ip }: { ip: string }) => {
-    console.log(ip);
+const Home = () => {
     return (
         <>
             <div className="w-full flex items-center mt-16 md:mt-[100px] bg-white pt-0 pb-0 lg:pt-20 lg:pb-40 relative overflow-hidden lg:overflow-visible">
@@ -234,19 +232,6 @@ const Home = ({ ip }: { ip: string }) => {
     );
 };
 
-Home.layout = { auth: false };
-
-export async function getServerSideProps(ctx: NextPageContext) {
-    const { req } = ctx;
-    const ip =
-        (req?.headers['x-forwarded-for'] as string) ||
-        (req?.connection.remoteAddress as string);
-
-    return {
-        props: {
-            ip
-        }
-    };
-}
+Home.layout = { auth: false, ip: null };
 
 export default Home;

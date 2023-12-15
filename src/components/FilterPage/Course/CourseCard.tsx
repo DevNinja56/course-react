@@ -24,7 +24,10 @@ const CourseCard = ({ course }: CardProps) => {
     ];
 
     return (
-        <div className="border-2 border-scholarshipBorderColor rounded-[10px] p-3 flex flex-col gap-y-5 w-[100%] group cursor-pointer hover:border-blueColor custom-shadow relative capitalize">
+        <div
+            className="border-2 border-scholarshipBorderColor rounded-[10px] p-3 flex flex-col gap-y-2 w-[100%] group cursor-pointer hover:border-blueColor custom-shadow relative capitalize"
+            title={course.name}
+        >
             <FavoriteButton
                 isActive={!!course?.favoriteId?.[0]}
                 body={{ course: course._id }}
@@ -46,12 +49,12 @@ const CourseCard = ({ course }: CardProps) => {
                 </div>
                 <div>
                     <h1
-                        className="font-bold text-base  text-textLightBlackColor mb-4 group-hover:text-blueColor h-12 line-clamp-2  "
+                        className="font-bold text-base  text-textLightBlackColor mb-2 group-hover:text-blueColor line-clamp-1  "
                         title={course.name}
                     >
                         {course.name}
                     </h1>
-                    <div className="flex flex-col gap-y-3 mb-5">
+                    <div className="flex flex-col gap-y-3 mb-2">
                         {state.map(({ title, value }) => (
                             <p
                                 className="text-sm text-darkGrayColor line-clamp-1 flex gap-1.5 whitespace-nowrap "
@@ -65,10 +68,19 @@ const CourseCard = ({ course }: CardProps) => {
                             </p>
                         ))}
                     </div>
-                    <button className="w-full py-[9px] rounded-[5px] text-blueColor border border-blueColor mb-3 group-hover:bg-blueColor group-hover:text-white">
-                        View Details
-                    </button>
                 </div>
+            </Link>
+            <Link
+                href={ROUTES.COURSE.replace(':id', course._id)}
+                className="w-full py-[9px] rounded-[5px] text-blueColor border border-blueColor hover:bg-blueColor hover:text-white text-center "
+            >
+                View Details
+            </Link>
+            <Link
+                href={ROUTES.COMPARE}
+                className="w-full py-[9px] rounded-[5px] text-white border border-blueColor bg-blueColor hover:bg-white hover:text-blueColor text-center"
+            >
+                Compare
             </Link>
         </div>
     );

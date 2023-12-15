@@ -5,7 +5,7 @@ import { Provider } from 'react-redux';
 import { store } from '@/store';
 import Head from 'next/head';
 
-export default function App({ Component, pageProps }: AppProps) {
+const MyApp = ({ Component, pageProps }: AppProps) => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const componentLayout = (Component as any).layout as propsType;
 
@@ -19,4 +19,6 @@ export default function App({ Component, pageProps }: AppProps) {
             </MainLayout>
         </Provider>
     );
-}
+};
+
+export default MyApp;

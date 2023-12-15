@@ -7,7 +7,8 @@ export enum modalType {
     'update_user_info',
     'update_academic_info',
     'login_confirmation',
-    'change_password'
+    'change_password',
+    'currency_converter'
 }
 
 interface UiState {

@@ -10,7 +10,7 @@ import toast from 'react-hot-toast';
 import { fetchRequest } from '@/utils/axios/fetch';
 import { API_ENDPOINTS } from '@/config/Api_EndPoints';
 import Select from 'react-select';
-import { country_list } from '@/utils/data/country';
+import { country_list_with_code } from '@/utils/data/country';
 
 export const levelOfEducationList = [
     'HSSE',
@@ -89,10 +89,13 @@ const UpdateUserAcademicInfo = () => {
                         {...register('countryOfEducation', {
                             required: 'Country is required'
                         })}
-                        options={country_list?.map((country) => ({
-                            label: country,
-                            value: country
-                        }))}
+                        options={Object.entries(country_list_with_code)?.map(
+                            // eslint-disable-next-line @typescript-eslint/no-unused-vars
+                            ([_, value]) => ({
+                                label: value,
+                                value
+                            })
+                        )}
                         placeholder="Select Country"
                         onChange={(e) => {
                             setValue('countryOfEducation', e?.value ?? '');

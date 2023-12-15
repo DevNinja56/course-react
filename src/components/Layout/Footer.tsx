@@ -4,7 +4,6 @@ import Link from 'next/link';
 import React from 'react';
 import Logo from '../Logo';
 import { useRouter } from 'next/router';
-import CurrencyConverter from '../MoneyConverter';
 
 const Footer = () => {
     const { pathname: path } = useRouter();
@@ -75,10 +74,6 @@ const Footer = () => {
                                     />
                                 </div>
                             </div>
-                        </div>
-
-                        <div className="">
-                            <CurrencyConverter />
                         </div>
 
                         <div className="flex flex-col w-full md:w-auto mb-8">

@@ -100,22 +100,22 @@ const Compare = () => {
                     third: third?.course?.duration
                 },
                 {
-                    title: 'Yearly fee',
+                    title: 'Initial Deposit',
                     first: first?.course.initialDeposit,
                     second: second?.course.initialDeposit,
                     third: third?.course.initialDeposit
                 },
                 {
-                    title: 'Intake',
-                    first: null,
-                    second: null,
-                    third: null
+                    title: 'Yearly fee',
+                    first: first?.course.tuitionFee,
+                    second: second?.course.tuitionFee,
+                    third: third?.course.tuitionFee
                 },
                 {
-                    title: 'Descriptions',
-                    first: first?.institute?.description,
-                    second: second?.institute?.description,
-                    third: third?.institute?.description
+                    title: 'Intake',
+                    first: first?.course.intakes.join(),
+                    second: second?.course.intakes.join(),
+                    third: third?.course.intakes.join()
                 }
             ]
         },
@@ -139,18 +139,6 @@ const Compare = () => {
                     first: first?.institute?.timesHigherRanking,
                     second: second?.institute?.timesHigherRanking,
                     third: third?.institute?.timesHigherRanking
-                },
-                {
-                    title: 'Shanghai Ranking (ARWU)',
-                    first: first?.institute?.shanghaiRanking,
-                    second: second?.institute?.shanghaiRanking,
-                    third: third?.institute?.shanghaiRanking
-                },
-                {
-                    title: 'TCF Index Ranking',
-                    first: first?.institute?.tcfIndexRanking,
-                    second: second?.institute?.tcfIndexRanking,
-                    third: third?.institute?.tcfIndexRanking
                 }
             ]
         }

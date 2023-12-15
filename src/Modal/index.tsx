@@ -11,6 +11,7 @@ const ChangePassword = dynamic(() => import('./ChangePassword'));
 const UpdateUserAcademicInfo = dynamic(
     () => import('./UpdateUserAcademicInfo')
 );
+import CurrencyConverter from './CurrencyConverter';
 
 const ModalWraper = () => {
     const { modal } = useUi();
@@ -22,7 +23,8 @@ const ModalWraper = () => {
         [modalType.update_user_info]: <UpdateUserInfo />,
         [modalType.update_academic_info]: <UpdateUserAcademicInfo />,
         [modalType.login_confirmation]: <LoginConfirmation />,
-        [modalType.change_password]: <ChangePassword />
+        [modalType.change_password]: <ChangePassword />,
+        [modalType.currency_converter]: <CurrencyConverter />
     };
 
     return (

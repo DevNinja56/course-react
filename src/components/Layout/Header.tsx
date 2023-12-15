@@ -10,6 +10,7 @@ import GlobalSearch from './GlobalSearch';
 import Logo from '../Logo';
 import { CiUser } from 'react-icons/ci';
 import UnVerifiedUser from '../Banner/UnVerifiedUser';
+import CurrencyConverter from '../MoneyConverter';
 
 const Header = ({ onlyLogo }: { onlyLogo?: boolean }) => {
     const router = useRouter();
@@ -223,6 +224,9 @@ const Header = ({ onlyLogo }: { onlyLogo?: boolean }) => {
                                     priority
                                 />
                                 <GlobalSearch />
+                            </div>
+                            <div className="">
+                                <CurrencyConverter />
                             </div>
                         </div>
                     </div>

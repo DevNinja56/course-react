@@ -8,6 +8,8 @@ import { FilteredButton } from '../FilteredButton';
 import SpecializationFilter from './SpecializationFilter';
 import InstituteFilter from './InstituteFilter';
 import FeeSlider from './FeeSlider';
+import LocationsFilter from './Locations';
+import IntakesFilter from './Intakes';
 
 export const FilterRow = () => (
     <div className="px-4">
@@ -60,13 +62,17 @@ const CourseFilter = () => {
             <div className="flex flex-col gap-y-6">
                 <CountriesFilter />
                 <FilterRow />
+                <LocationsFilter />
+                <FilterRow />
+                <InstituteFilter />
+                <FilterRow />
                 <DegreeLevelFilter />
                 <FilterRow />
                 <DisciplinesFilter />
                 <FilterRow />
                 <SpecializationFilter />
                 <FilterRow />
-                <InstituteFilter />
+                <IntakesFilter />
                 <FilterRow />
                 <FeeSlider />
             </div>

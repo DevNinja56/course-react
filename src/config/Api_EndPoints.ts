@@ -40,5 +40,8 @@ export const API_ENDPOINTS = {
     BLOGS: '/blogs',
     SINGLE_BLOG: '/blogs/:id',
     APPLY: '/apply',
-    APPLY_USER: '/apply/user'
+    APPLY_USER: '/apply/user',
+    GEO_IP: '/geoip',
+    FETCH_RATES:
+        'https://fxds-public-exchange-rates-api.oanda.com/cc-api/currencies?base=PKR&quote=${code}&data_type=general_currency_pair&start_date=${pDate}&end_date=${cDate}'
 };
