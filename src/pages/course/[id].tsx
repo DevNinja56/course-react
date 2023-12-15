@@ -7,16 +7,20 @@ import Testimonial from '@/components/Testimonial';
 import { API_ENDPOINTS } from '@/config/Api_EndPoints';
 import { ROUTES } from '@/config/constant';
 import { useApply } from '@/hooks/apply';
+import { useUi } from '@/hooks/user-interface';
+import { modalType } from '@/store/slices/ui.slice';
 import { singleCourseType } from '@/types';
 import { setCurrencyValue } from '@/utils/currencyValue';
 import { GetServerSideProps } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import React, { useState } from 'react';
+import { CiCalculator2 } from 'react-icons/ci';
 
 const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
     const [isFavorite, setFavorite] = useState(!!course?.favoriteId?.[0]);
     const { addCourseState, addDegreeState, addInstituteState } = useApply();
+    const { updateModal } = useUi();
     return (
         <>
             {!course ? (
@@ -42,9 +46,18 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                                         <button className="rounded-[20px] pt-[9px] pb-2 px-4 border-2 border-white hover:border-purpleColor text-white hover:text-purpleColor bg-purpleColor hover:bg-white capitalize">
                                             {course?.degree.type}
                                         </button>
-                                        {/* <button className="rounded-[20px] pt-[9px] pb-2 px-4 border-2 border-white hover:border-blueColor text-white hover:text-blueColor bg-blueColor hover:bg-white">
-                                            {course?.institute.sector}
-                                        </button> */}
+                                        <button
+                                            className="rounded-[20px] pt-[9px] pb-2 px-4 border-2 border-white hover:border-blueColor text-white hover:text-blueColor bg-blueColor hover:bg-white flex gap-2 items-center"
+                                            onClick={() =>
+                                                updateModal({
+                                                    type: modalType.bank_statement_calculator,
+                                                    state: course
+                                                })
+                                            }
+                                        >
+                                            <span>Bank Statement</span>
+                                            <CiCalculator2 />
+                                        </button>
                                         <FavoriteButton
                                             isActive={isFavorite}
                                             body={{ course: course.id }}

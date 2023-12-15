@@ -2,7 +2,7 @@ import { useCurrency } from '@/hooks/currency';
 import { useUi } from '@/hooks/user-interface';
 import { modalType } from '@/store/slices/ui.slice';
 import { countriesData } from '@/utils/data/country';
-import React, { useEffect } from 'react';
+import React, { memo, useEffect } from 'react';
 
 const CurrencyConverter = () => {
     const { updateModal } = useUi();
@@ -10,7 +10,7 @@ const CurrencyConverter = () => {
         useCurrency();
 
     useEffect(() => {
-        updateCountry(countriesData[ipCountry]);
+        ipCountry && updateCountry(countriesData[ipCountry]);
     }, [ipCountry]);
 
     useEffect(() => {
@@ -37,4 +37,4 @@ const CurrencyConverter = () => {
     );
 };
 
-export default CurrencyConverter;
+export default memo(CurrencyConverter);

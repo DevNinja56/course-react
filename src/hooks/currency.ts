@@ -34,6 +34,6 @@ export const useCurrency = () => {
         updateBaseCode,
         updateOldRates,
         updateCountry,
-        ipCountry: data?.country ?? 'PK'
+        ipCountry: data?.country ?? null
     };
 };

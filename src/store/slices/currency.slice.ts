@@ -21,6 +21,7 @@ interface dataTypes {
     rates: ratesType | unknown;
     isLoading: boolean;
     error: string | null;
+    isFetched: boolean;
 }
 
 const initialState: dataTypes = {
@@ -34,7 +35,8 @@ const initialState: dataTypes = {
     base_rate: 1,
     rates: {},
     isLoading: false,
-    error: null
+    error: null,
+    isFetched: true
 };
 
 const currency = createSlice({
@@ -69,6 +71,7 @@ const currency = createSlice({
                     state.base_rate = +rate.average_ask;
                     state.base_code = rate.quote_currency;
                     state.isLoading = false;
+                    state.isFetched = false;
                 }
             )
             .addCase(fetchLatestRate.rejected, (state, action) => {

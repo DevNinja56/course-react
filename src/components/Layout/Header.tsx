@@ -11,6 +11,7 @@ import Logo from '../Logo';
 import { CiUser } from 'react-icons/ci';
 import UnVerifiedUser from '../Banner/UnVerifiedUser';
 import CurrencyConverter from '../MoneyConverter';
+import { SiSemanticscholar } from 'react-icons/si';
 
 const Header = ({ onlyLogo }: { onlyLogo?: boolean }) => {
     const router = useRouter();
@@ -32,7 +33,7 @@ const Header = ({ onlyLogo }: { onlyLogo?: boolean }) => {
             {!onlyLogo ? (
                 <div className="bg-white">
                     <UnVerifiedUser />
-                    <div className="max-w-[1100px] 2xl:max-w-[2300px] mx-auto py-6 flex justify-between items-center px-[20px] md:px-[50px] lg:px-2 2xl:px-8 transition-all duration-300">
+                    <div className="container mx-auto py-6 flex justify-between items-center px-[20px] md:px-[50px] lg:px-2 2xl:px-8 transition-all duration-300">
                         <Logo />
                         <div className="flex items-center gap-x-6 print:hidden">
                             <nav className="hidden lg:flex items-center gap-x-6">
@@ -81,6 +82,28 @@ const Header = ({ onlyLogo }: { onlyLogo?: boolean }) => {
                                             }`}
                                         >
                                             Discover
+                                        </p>
+                                    </div>
+                                </Link>
+                                <Link href={ROUTES.FILTER_SCHOLARSHIP}>
+                                    <div className="flex items-center px-[10px] gap-x-[10px]">
+                                        <SiSemanticscholar
+                                            className={`font-semibold text-3xl ${
+                                                router.pathname ===
+                                                ROUTES.FILTER_SCHOLARSHIP
+                                                    ? 'text-blueColor'
+                                                    : 'text-textBlackColor'
+                                            }`}
+                                        />
+                                        <p
+                                            className={`font-semibold ${
+                                                router.pathname ===
+                                                ROUTES.FILTER_SCHOLARSHIP
+                                                    ? 'text-blueColor'
+                                                    : 'text-textBlackColor'
+                                            }`}
+                                        >
+                                            Scholarship
                                         </p>
                                     </div>
                                 </Link>
@@ -225,7 +248,7 @@ const Header = ({ onlyLogo }: { onlyLogo?: boolean }) => {
                                 />
                                 <GlobalSearch />
                             </div>
-                            <div className="">
+                            <div>
                                 <CurrencyConverter />
                             </div>
                         </div>
