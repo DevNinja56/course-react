@@ -1,5 +1,3 @@
-import CounselingWork from '@/components/CounselingWork/CounselingWork';
-import Testimonial from '@/components/Testimonial';
 import UniversitiesCards from '@/components/Universities/UniversitiesCard';
 import { useGetInstituteQuery } from '@/store/slices/allRequests';
 import Image from 'next/image';
@@ -49,8 +47,6 @@ const Universities = () => {
                     </div>
                 </div>
             </div>
-            <CounselingWork />
-            <Testimonial />
         </>
     );
 };

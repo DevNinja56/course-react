@@ -1,7 +1,6 @@
 import Card from '@/components/ContactUs/Card';
 import FAQ from '@/components/FAQ/FAQ';
 import Map from '@/components/Map/Map';
-import Testimonial from '@/components/Testimonial';
 import React from 'react';
 
 const ContactUs = () => {
@@ -54,7 +53,6 @@ const ContactUs = () => {
                 </div>
             </div>
             <FAQ />
-            <Testimonial />
         </>
     );
 };

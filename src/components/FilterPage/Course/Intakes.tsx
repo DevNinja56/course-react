@@ -15,13 +15,13 @@ const IntakesFilter = () => {
                     { name: 'apr,may,jun', id: '2', value: 2 },
                     { name: 'jul,aug,sep', id: '3', value: 3 },
                     { name: 'oct,nov,dec', id: '4', value: 4 }
-                ].map(({ name, id, value }) => (
+                ].map(({ name, id }) => (
                     <FilterCheckBox
                         key={'intakes--list--' + id}
                         id={name}
                         text={name}
                         name={'intakes'}
-                        value={value}
+                        value={name.split(',')}
                     />
                 ))}
             </div>

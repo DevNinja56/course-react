@@ -5,7 +5,7 @@ import LoaderSpinner from '../LoaderSpinner';
 interface propsTypes {
     disabled?: boolean;
     text: string;
-    link?: string;
+    link?: string | { pathname: string; query: { [key: string]: string } };
     to?: string;
     className?: string;
     color?: string;

@@ -1,6 +1,5 @@
 import Card from '@/components/Blog/Card';
 import PaginationBox from '@/components/Pagination';
-import Testimonial from '@/components/Testimonial';
 import { usePaginatedBlogs } from '@/hooks/blogsPaginated';
 import Image from 'next/image';
 import React, { useEffect } from 'react';
@@ -73,7 +72,6 @@ const Blog = () => {
                     />
                 </div>
             </div>
-            <Testimonial />
         </>
     );
 };

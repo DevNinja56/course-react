@@ -38,6 +38,12 @@ export const formateCourseQuery = (query: { [key: string]: any }) => {
         });
     }
 
+    if (query.location) {
+        orConditions.push({
+            'institute.location': { $in: query.location }
+        });
+    }
+
     if (query.degreeType) {
         orConditions.push({
             'degree.type': { $in: query.degreeType }
@@ -61,6 +67,15 @@ export const formateCourseQuery = (query: { [key: string]: any }) => {
             'institute.name': { $in: query.institute }
         });
     }
+
+    if (query.intakes) {
+        orConditions.push({
+            intakes: {
+                $in: query.intakes.map((item: string) => item.split(','))
+            }
+        });
+    }
+
     if (query.tuitionFee) {
         const { min, max } = JSON.parse(query.tuitionFee[0]) as {
             min: number;
@@ -86,7 +101,7 @@ export const formateCourseQuery = (query: { [key: string]: any }) => {
     }
 
     if (orConditions.length > 0) {
-        matches.$match.$or = orConditions;
+        matches.$match.$and = orConditions;
     }
 
     return query.sortBy ? [matches, sort] : [matches];

@@ -30,7 +30,7 @@ const LocationsFilter = () => {
                     .map((name) => (
                         <FilterCheckBox
                             key={'locations--list--' + name}
-                            id={name}
+                            id={'location-' + name}
                             text={name}
                             name={'location'}
                             value={name}

@@ -1,13 +1,37 @@
-import React from 'react';
-import Testimonial from '@/components/Testimonial';
+import React, { useEffect } from 'react';
 import { useCompare } from '@/hooks/compare';
 import HeadBox from '@/components/compare/HeadBox';
 import { InstituteLogoImage } from '@/components/compare/InstituteLogo';
 import ScholarshipSlider from '@/components/Slider/ScholarshipSlider';
 import { FiPrinter } from 'react-icons/fi';
+import { GetServerSideProps } from 'next';
+import { singleCourseType } from '@/types';
+import { API_ENDPOINTS } from '@/config/Api_EndPoints';
 
-const Compare = () => {
-    const { first, second, third } = useCompare();
+const Compare = ({ data }: { data?: singleCourseType }) => {
+    const { first, second, third, compareFirst, compareSecond, compareThird } =
+        useCompare();
+
+    useEffect(() => {
+        if (data) {
+            const compareData = {
+                country: data.institute.country,
+                institute: {
+                    ...data.institute,
+                    country: data.institute.country
+                },
+                discipline: null,
+                degreeLevel: data.degree,
+                specialization: data.specialization,
+                course: data
+            };
+            first === null
+                ? compareFirst(compareData)
+                : second === null
+                ? compareSecond(compareData)
+                : compareThird(compareData);
+        }
+    }, [data]);
 
     const state = [
         {
@@ -237,9 +261,36 @@ const Compare = () => {
                 </h1>
                 <ScholarshipSlider />
             </div>
-            <Testimonial />
         </>
     );
+};
+
+export const getServerSideProps: GetServerSideProps<{
+    data: { data: singleCourseType; status: number };
+}> = async (context) => {
+    let data = null;
+    const course_id = context.query?.course_id as string;
+    if (!course_id) return { props: { data } };
+    const token = context.req.cookies['access_token'];
+    try {
+        const res = await fetch(
+            `${
+                process.env.NEXT_PUBLIC_REST_API_ENDPOINT
+            }${API_ENDPOINTS.COURSE_BY_ID.replace(':id', course_id)}`,
+            {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${token}`
+                }
+            }
+        );
+        data = await res.json();
+    } catch (error) {
+        data = null;
+        console.log(error);
+    }
+    return { props: { data: data?.data ?? data! ?? null } };
 };
 
 export default Compare;

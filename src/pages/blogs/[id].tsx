@@ -6,8 +6,6 @@ import Image from 'next/image';
 import { format } from 'timeago.js';
 
 const BlogsDetail = ({ data }: { data: blogsType }) => {
-    console.log(data);
-
     return (
         <>
             <div className="w-full flex items-center mt-[100px] bg-white relative mb-0 lg:mb-10 overflow-hidden">

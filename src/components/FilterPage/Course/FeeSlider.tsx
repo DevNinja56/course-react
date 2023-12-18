@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import RangeSlider from '@/components/RangeSlider';
 import { useFilterQuery } from '@/hooks/filterQuery';
-import { setCurrencyValue } from '@/utils/currencyValue';
+import { getCurrencySymbol } from '@/utils/currencyValue';
 
 interface sliderValue {
     min: number;
@@ -22,17 +22,43 @@ const FeeSlider = () => {
                 Tuition Fee
             </h5>
             <div className="rangeSLiderWithMinMax flex flex-col gap-5 relative">
-                <div className="absolute top-1 right-0 w-full flex justify-between text-xs">
-                    <span className="min">{setCurrencyValue(value.min)}</span>
-                    <span className="max">{setCurrencyValue(value.max)}</span>
+                <div className="w-full  text-xs">
+                    <div className="w-full flex justify-between mt-2">
+                        <div className="flex items-center gap-1">
+                            <span>{getCurrencySymbol()}</span>
+                            <input
+                                value={value.min}
+                                className="min p-2 border rounded-md w-14"
+                                onChange={(e) =>
+                                    setValue({
+                                        ...value,
+                                        min: parseInt(e.target.value)
+                                    })
+                                }
+                            />
+                        </div>
+                        <div className="flex items-center gap-1">
+                            <span>{getCurrencySymbol()}</span>
+                            <input
+                                value={value.max}
+                                className="min p-2 border rounded-md w-14"
+                                onChange={(e) =>
+                                    setValue({
+                                        ...value,
+                                        max: parseInt(e.target.value)
+                                    })
+                                }
+                            />
+                        </div>
+                    </div>
+                    <RangeSlider
+                        min={100}
+                        max={500000}
+                        value={value}
+                        step={1000}
+                        onChange={setValue}
+                    />
                 </div>
-                <RangeSlider
-                    min={100}
-                    max={500000}
-                    value={value}
-                    step={1000}
-                    onChange={setValue}
-                />
                 <button
                     onClick={handleChange}
                     className="bg-blueColor text-white text-sm py-2 px-3 rounded-md"

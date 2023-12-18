@@ -1,8 +1,7 @@
 import Button from '@/components/Button';
 import FavoriteButton from '@/components/Button/FavoriteButton';
-import CounselingWork from '@/components/CounselingWork/CounselingWork';
 import ScreenLoader from '@/components/Loader/ScreenLoader';
-import Testimonial from '@/components/Testimonial';
+import Tabs from '@/components/Tabs';
 import { API_ENDPOINTS } from '@/config/Api_EndPoints';
 import { ROUTES } from '@/config/constant';
 import { scholarshipType } from '@/types';
@@ -215,6 +214,49 @@ const CourseDetail = ({ data: scholarship }: { data: scholarshipType }) => {
                     <div className="w-full bg-white h-auto lg:h-[140vh] xl:h-[120vh] pb-20 lg:pb-0 mb-10 lg:mb-0">
                         <div className="max-w-[1110px] 2xl:max-w-[2300px] mx-auto px-5 md:px-[50px] lg:px-2 2xl:px-8 transition-all duration-300 pt-16 pr-auto lg:pr-[350px] 2xl:pr-[700px]">
                             <div className="flex flex-col gap-y-6 mb-20">
+                                <div className="tabs-container capitalize">
+                                    <Tabs
+                                        data={[
+                                            {
+                                                title: 'Eligibility Criteria',
+                                                element: (
+                                                    <div>
+                                                        <h3 className="text-black text-lg font-semibold">
+                                                            Eligibility Criteria
+                                                        </h3>
+                                                        <div className="content">
+                                                            test
+                                                        </div>
+                                                    </div>
+                                                )
+                                            },
+                                            {
+                                                title: 'Application Status',
+                                                element: (
+                                                    <div>
+                                                        <h3 className="text-black text-lg font-semibold">
+                                                            Application Status
+                                                        </h3>
+                                                        <p>test</p>
+                                                    </div>
+                                                )
+                                            },
+                                            {
+                                                title: 'Amount',
+                                                element: (
+                                                    <div>
+                                                        <h3 className="text-black text-lg font-semibold">
+                                                            Amount
+                                                        </h3>
+                                                        <p>test</p>
+                                                    </div>
+                                                )
+                                            }
+                                        ]}
+                                    />
+                                </div>
+                            </div>
+                            <div className="flex flex-col gap-y-6 mb-20">
                                 <h1 className="font-semibold text-lg md:text-xl text-textLightBlackColor">
                                     Description
                                 </h1>
@@ -392,8 +434,6 @@ const CourseDetail = ({ data: scholarship }: { data: scholarshipType }) => {
                             </div>
                         </div>
                     </div>
-                    <CounselingWork />
-                    <Testimonial />
                 </>
             )}
         </>

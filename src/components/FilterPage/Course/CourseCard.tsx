@@ -77,7 +77,10 @@ const CourseCard = ({ course }: CardProps) => {
                 View Details
             </Link>
             <Link
-                href={ROUTES.COMPARE}
+                href={{
+                    pathname: ROUTES.COMPARE,
+                    query: { course_id: course._id }
+                }}
                 className="w-full py-[9px] rounded-[5px] text-white border border-blueColor bg-blueColor hover:bg-white hover:text-blueColor text-center"
             >
                 Compare

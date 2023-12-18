@@ -1,7 +1,5 @@
 import Card from '@/components/ContactUs/Card';
-import CounselingWork from '@/components/CounselingWork/CounselingWork';
 import FAQ from '@/components/FAQ/FAQ';
-import Testimonial from '@/components/Testimonial';
 import Image from 'next/image';
 import React from 'react';
 
@@ -47,8 +45,6 @@ const FAQs = () => {
                     </div>
                 </div>
             </div>
-            <CounselingWork />
-            <Testimonial />
         </>
     );
 };

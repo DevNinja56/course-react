@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import Card from '@/components/Fields/Card';
-import Testimonial from '@/components/Testimonial';
 import LoaderSpinner from '@/components/LoaderSpinner';
 import { useGetPaginatedDisciplineQuery } from '@/store/slices/allRequests';
-import CounselingWork from '@/components/CounselingWork/CounselingWork';
 import PaginationBox from '@/components/Pagination';
 
 const Fields = () => {
@@ -82,8 +80,6 @@ const Fields = () => {
                     </div>
                 )}
             </div>
-            <CounselingWork />
-            <Testimonial />
         </>
     );
 };

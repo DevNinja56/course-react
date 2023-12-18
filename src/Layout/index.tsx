@@ -12,6 +12,8 @@ import ModalWraper from '@/Modal';
 import NextNProgress from 'nextjs-progressbar';
 import UserActivation from '@/components/UserStatus/UserInActive';
 import UserBlock from '@/components/UserStatus/Block';
+import Testimonial from '@/components/Testimonial';
+import CounselingWork from '@/components/CounselingWork/CounselingWork';
 
 export interface propsType {
     children: React.ReactElement;
@@ -31,6 +33,32 @@ const MainLayout = ({
     const { refetchUser, isAuthenticated, isLoading, user } = useUserAuth();
     const token = getCookie('access_token');
     const router = useRouter();
+    const testimonialRoutes = [
+        ROUTES.HOMEPAGE,
+        ROUTES.COURSE.replace(':id', '[id]'),
+        ROUTES.SCHOLARSHIP.replace(':id', '[id]'),
+        ROUTES.ABOUT_US,
+        ROUTES.APPLY,
+        ROUTES.BLOGS,
+        ROUTES.COMPARE,
+        ROUTES.CONTACT_US,
+        ROUTES.COUNTRY,
+        ROUTES.FAQ,
+        ROUTES.FILTER_COURSE,
+        ROUTES.FILTER_SCHOLARSHIP,
+        ROUTES.INSTITUTES,
+        ROUTES.FIELDS
+    ];
+    const counselingRoutes = [
+        ROUTES.FIELDS,
+        ROUTES.ABOUT_US,
+        ROUTES.COURSE.replace(':id', '[id]'),
+        ROUTES.SCHOLARSHIP.replace(':id', '[id]'),
+        ROUTES.COUNTRY,
+        ROUTES.INSTITUTES,
+        ROUTES.FAQ,
+        ROUTES.APPLY
+    ];
 
     useEffect(() => {
         // If the route requires authentication but no token is available, redirect to sign-in
@@ -73,6 +101,10 @@ const MainLayout = ({
                 ) : (
                     children
                 )}
+                {counselingRoutes.includes(router.pathname) && (
+                    <CounselingWork />
+                )}
+                {testimonialRoutes.includes(router.pathname) && <Testimonial />}
             </div>
             {footer && <Footer />}
         </>
@@ -87,6 +119,7 @@ const MainLayout = ({
             ) : (
                 <Layout />
             )}
+
             <Toaster position="bottom-right" reverseOrder={false} />
             <ModalWraper />
             <NextNProgress color="#435FB5" />

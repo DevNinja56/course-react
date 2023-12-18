@@ -2,7 +2,6 @@ import CourseFilter from '@/components/FilterPage/Course/FilterLeftBox';
 import RightCardsBox from '@/components/FilterPage/Course/RightCardsBox';
 import SearchQueryBox from '@/components/FilterPage/SearchQueryBox';
 import ScholarshipSlider from '@/components/Slider/ScholarshipSlider';
-import Testimonial from '@/components/Testimonial';
 import Image from 'next/image';
 
 const FilterPage = () => {
@@ -51,7 +50,6 @@ const FilterPage = () => {
                 </h1>
                 <ScholarshipSlider />
             </div>
-            <Testimonial />
         </>
     );
 };

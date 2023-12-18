@@ -1,9 +1,7 @@
 import Button from '@/components/Button';
 import FavoriteButton from '@/components/Button/FavoriteButton';
-import CounselingWork from '@/components/CounselingWork/CounselingWork';
 import ScreenLoader from '@/components/Loader/ScreenLoader';
 import Tabs from '@/components/Tabs';
-import Testimonial from '@/components/Testimonial';
 import { API_ENDPOINTS } from '@/config/Api_EndPoints';
 import { ROUTES } from '@/config/constant';
 import { useApply } from '@/hooks/apply';
@@ -140,7 +138,10 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
 
                                     <Button
                                         text="Compare"
-                                        link={ROUTES.COMPARE}
+                                        link={{
+                                            pathname: ROUTES.COMPARE,
+                                            query: { course_id: course.id }
+                                        }}
                                         variant="outline"
                                     />
                                 </div>
@@ -160,7 +161,7 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                                                 priority
                                             />
                                             <p className="text-textLightBlackColor">
-                                                Course Name
+                                                Type
                                             </p>
                                         </div>
                                         <p className="text-darkGrayColor">
@@ -216,23 +217,6 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                                         </div>
                                         <p className="text-darkGrayColor">
                                             {course.duration + ' Years'}
-                                        </p>
-                                    </div>
-                                    <div className="flex items-center justify-between">
-                                        <div className="flex items-center gap-x-2">
-                                            <Image
-                                                height={20}
-                                                width={20}
-                                                alt="map-icon"
-                                                src="/images/CourseDetail/Map Point.svg"
-                                                priority
-                                            />
-                                            <p className="text-textLightBlackColor">
-                                                Delivery Mode
-                                            </p>
-                                        </div>
-                                        <p className="text-darkGrayColor">
-                                            {course.delivery}
                                         </p>
                                     </div>
                                     <div className="flex items-center justify-between">
@@ -316,7 +300,9 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                                                         <div
                                                             className="content"
                                                             dangerouslySetInnerHTML={{
-                                                                __html: course.entryRequirements
+                                                                __html:
+                                                                    course?.entryRequirements ??
+                                                                    'No Entry Requirements'
                                                             }}
                                                         ></div>
                                                     </div>
@@ -567,7 +553,12 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                                 >
                                     <Link href={ROUTES.APPLY}>Apply</Link>
                                 </button>
-                                <Link href="/compare">
+                                <Link
+                                    href={{
+                                        pathname: ROUTES.COMPARE,
+                                        query: { course_id: course.id }
+                                    }}
+                                >
                                     <button className="w-full pt-[19px] pb-[18px] rounded-[5px] hover:text-white text-lg font-semibold bg-white hover:bg-blueColor border border-blueColor text-blueColor mb-2">
                                         Compare
                                     </button>
@@ -575,8 +566,6 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                             </div>
                         </div>
                     </div>
-                    <CounselingWork />
-                    <Testimonial />
                 </>
             )}
         </>

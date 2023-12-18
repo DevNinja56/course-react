@@ -1,6 +1,4 @@
-import CounselingWork from '@/components/CounselingWork/CounselingWork';
 import Card from '@/components/Countries/Card';
-import Testimonial from '@/components/Testimonial';
 import { useGetCountriesQuery } from '@/store/slices/allRequests';
 import Image from 'next/image';
 import React from 'react';
@@ -58,8 +56,6 @@ const Countries = () => {
                     </div>
                 </div>
             </div>
-            <CounselingWork />
-            <Testimonial />
         </>
     );
 };

@@ -46,7 +46,7 @@ const CourseFilter = () => {
                             {Object.entries(query).map(([key, item], idx) =>
                                 item.map((val) => (
                                     <FilteredButton
-                                        key={idx}
+                                        key={'query--key--' + idx}
                                         itemKey={key}
                                         itemValue={val ?? 'button'}
                                     />

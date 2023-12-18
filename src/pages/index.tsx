@@ -1,5 +1,4 @@
 import Image from 'next/image';
-import Testimonial from '@/components/Testimonial';
 import EventCard from '@/components/Home/EventCard';
 import SearchBox from '@/components/Home/SearchBox';
 import ScholarshipSlider from '@/components/Slider/ScholarshipSlider';
@@ -227,7 +226,6 @@ const Home = () => {
                     </button>
                 </div>
             </div>
-            <Testimonial />
         </>
     );
 };

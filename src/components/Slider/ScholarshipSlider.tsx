@@ -28,7 +28,7 @@ function ScholarshipSlider() {
                     autoplay={true}
                     centeredSlides={true}
                     loop={true}
-                    slidesPerView={'auto'}
+                    slidesPerView={5}
                     coverflowEffect={{
                         rotate: 0,
                         stretch: 0,

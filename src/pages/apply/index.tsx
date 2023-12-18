@@ -1,6 +1,4 @@
 import ApplyOnline from '@/components/Apply';
-import CounselingWork from '@/components/CounselingWork/CounselingWork';
-import Testimonial from '@/components/Testimonial';
 import Image from 'next/image';
 import React from 'react';
 
@@ -144,9 +142,6 @@ const Apply = () => {
                     </p>
                 </div>
             </div>
-
-            <CounselingWork />
-            <Testimonial />
         </>
     );
 };

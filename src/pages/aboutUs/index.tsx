@@ -1,5 +1,3 @@
-import CounselingWork from '@/components/CounselingWork/CounselingWork';
-import Testimonial from '@/components/Testimonial';
 import Image from 'next/image';
 import React from 'react';
 
@@ -436,8 +434,6 @@ const AboutUs = () => {
                     priority
                 />
             </div>
-            <CounselingWork />
-            <Testimonial />
         </>
     );
 };
