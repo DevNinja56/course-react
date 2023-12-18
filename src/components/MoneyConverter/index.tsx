@@ -1,19 +1,14 @@
 import { useCurrency } from '@/hooks/currency';
 import { useUi } from '@/hooks/user-interface';
 import { modalType } from '@/store/slices/ui.slice';
-import { countriesData } from '@/utils/data/country';
 import React, { memo, useEffect } from 'react';
 
 const CurrencyConverter = () => {
     const { updateModal } = useUi();
-    const { country, fetchLatestRates, ipCountry, updateCountry } =
-        useCurrency();
+    const { country, fetchLatestRates, updateGeoIp, geoIp } = useCurrency();
 
     useEffect(() => {
-        ipCountry && updateCountry(countriesData[ipCountry]);
-    }, [ipCountry]);
-
-    useEffect(() => {
+        !geoIp && updateGeoIp();
         fetchLatestRates();
     }, [country.code]);
 

@@ -1,6 +1,9 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { fetchLatestRate } from '../actions/getCurrencyRate';
-import { countryDataType } from '@/types';
+import { countryDataType, geoIpType } from '@/types';
+import { fetchUserCountry } from '../actions/getUserIp';
+import { countriesData } from '@/utils/data/country';
 
 interface ratesType {
     base_currency: string;
@@ -22,6 +25,7 @@ interface dataTypes {
     isLoading: boolean;
     error: string | null;
     isFetched: boolean;
+    geoIp: geoIpType | null;
 }
 
 const initialState: dataTypes = {
@@ -36,7 +40,8 @@ const initialState: dataTypes = {
     rates: {},
     isLoading: false,
     error: null,
-    isFetched: true
+    isFetched: true,
+    geoIp: null
 };
 
 const currency = createSlice({
@@ -64,7 +69,6 @@ const currency = createSlice({
             })
             .addCase(
                 fetchLatestRate.fulfilled,
-                // eslint-disable-next-line @typescript-eslint/no-explicit-any
                 (state, action: PayloadAction<any>) => {
                     const rate = action.payload?.response?.[0] as ratesType;
                     state.rates = rate;
@@ -75,6 +79,21 @@ const currency = createSlice({
                 }
             )
             .addCase(fetchLatestRate.rejected, (state, action) => {
+                state.isLoading = false;
+                state.error = action?.error?.message ?? 'Something went wrong';
+            })
+            .addCase(fetchUserCountry.pending, (state) => {
+                state.isLoading = true;
+            })
+            .addCase(fetchUserCountry.fulfilled, (state, action: any) => {
+                state.geoIp = action.payload?.data;
+                const countryData =
+                    countriesData[action.payload?.data?.country];
+                state.country = countryData;
+                state.base_code = countryData.currencies;
+                state.isLoading = false;
+            })
+            .addCase(fetchUserCountry.rejected, (state, action) => {
                 state.isLoading = false;
                 state.error = action?.error?.message ?? 'Something went wrong';
             });

@@ -1,18 +1,19 @@
 import { useAppDispatch, useAppSelector } from './store';
 import { fetchLatestRate } from '@/store/actions/getCurrencyRate';
 import { countryDataType } from '@/types';
-import { useGetUserIpQuery } from '@/store/slices/allRequests';
+// import { useGetUserIpQuery } from '@/store/slices/allRequests';
 import {
     changeBaseCode,
     changeBaseRate,
     changeCountry,
     getLatestRates
 } from '@/store/slices/currency.slice';
+import { fetchUserCountry } from '@/store/actions/getUserIp';
 
 export const useCurrency = () => {
     const state = useAppSelector((state) => state.currency);
     const dispatch = useAppDispatch();
-    const { data } = useGetUserIpQuery();
+    // const { data } = useGetUserIpQuery();
     // const apiKey = 'a52202833727fb095d0858b7';
     // `https://v6.exchangerate-api.com/v6/${apiKey}/latest/${code}`
 
@@ -26,6 +27,7 @@ export const useCurrency = () => {
     const updateCountry = (val: countryDataType) => {
         dispatch(changeCountry(val));
     };
+    const updateGeoIp = () => dispatch(fetchUserCountry());
 
     return {
         ...state,
@@ -34,6 +36,6 @@ export const useCurrency = () => {
         updateBaseCode,
         updateOldRates,
         updateCountry,
-        ipCountry: data?.country ?? null
+        updateGeoIp
     };
 };
