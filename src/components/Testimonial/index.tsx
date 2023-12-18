@@ -123,7 +123,7 @@ const Testimonial = () => {
                     />
                 ) : router.pathname.includes(
                       ROUTES.COURSE.replace(':id', '')
-                  ) ? (
+                  ) || router.pathname === ROUTES.INSTITUTES_DETAIL ? (
                     <Image
                         height={174}
                         width={175}

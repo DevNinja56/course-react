@@ -16,7 +16,8 @@ const CounselingWork = () => {
                     : ''
             }`}
         >
-            {router.pathname === '/courseDetail' ? (
+            {router.pathname === '/courseDetail' ||
+            router.pathname === ROUTES.INSTITUTES_DETAIL ? (
                 <Image
                     height={217}
                     width={175}
@@ -242,7 +243,8 @@ const CounselingWork = () => {
                     </div>
                 </div>
             </div>
-            {router.pathname === '/courseDetail' ? (
+            {router.pathname === '/courseDetail' ||
+            router.pathname === ROUTES.INSTITUTES_DETAIL ? (
                 ''
             ) : (
                 <Image

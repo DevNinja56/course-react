@@ -19,6 +19,7 @@
     "@reduxjs/toolkit": "^1.9.7",
     "@types/lodash": "^4.14.199",
     "@types/swiper": "^6.0.0",
+    "axios": "^1.6.2",
     "cookies-next": "^4.0.0",
     "flag-icons": "^6.11.1",
     "framer-motion": "^10.16.4",
