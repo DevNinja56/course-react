@@ -14,11 +14,12 @@ export const ROUTES = {
     BLOGS: '/blogs',
     BLOGS_DETAIL: '/blogs/:id',
     INSTITUTES: '/institutes',
+    INSTITUTES_DETAIL:"/institutes/:id",
     ABOUT_US: '/aboutUs',
     CONTACT_US: '/contactUs',
     FAQ: '/faq',
     PRIVACY_POLICY: '/privacyPolicy',
     TERMS_CONDITION: '/termsCondition',
     FAVORITES: '/profile?tab=Favorite',
-    APPLIES: '/profile?tab=Profile&tab2=myApplies'
+    APPLIES: '/profile?tab=Profile&tab2=myApplies',
 };
