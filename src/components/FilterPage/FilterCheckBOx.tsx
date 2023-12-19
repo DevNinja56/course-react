@@ -1,3 +1,4 @@
+import ContentLoader from 'react-content-loader';
 import { useFilterQuery } from '@/hooks/filterQuery';
 import React, { InputHTMLAttributes } from 'react';
 
@@ -53,3 +54,21 @@ export const FilterCheckBox = React.forwardRef<HTMLInputElement, propsType>(
 );
 
 FilterCheckBox.displayName = 'Filter Checkbox';
+
+export const FilterCheckBoxLoader = ({ length = 5 }: { length?: number }) => (
+    <div className="flex flex-col gap-3 px-3">
+        {Array.from({ length }).map((_, i) => (
+            <ContentLoader
+                key={'filter--checkbox--' + i}
+                speed={2}
+                width={200}
+                height={20}
+                viewBox="0 0 200 20"
+                backgroundColor="#f3f3f3"
+                foregroundColor="#ecebeb"
+            >
+                <rect x="0" y="0" rx="2" ry="2" width="200" height="20" />
+            </ContentLoader>
+        ))}
+    </div>
+);

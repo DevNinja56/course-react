@@ -12,6 +12,7 @@ import { GetServerSideProps } from 'next';
 import { getSsrRequest } from '@/utils/ssrRequest';
 import { API_ENDPOINTS } from '@/config/Api_EndPoints';
 import { ROUTES } from '@/config/constant';
+import Link from 'next/link';
 
 const Institutes = ({ data: institute }: { data: instituteType }) => {
     const [showText, setShowText] = useState(false);
@@ -71,55 +72,47 @@ const Institutes = ({ data: institute }: { data: instituteType }) => {
                                         </p>
                                     </div>
                                 </div>
-                                <div className="h-10 w-10 flex items-center justify-center rounded-full shadow-md">
-                                    <FaGlobeAmericas className="h-7 w-7" />
-                                </div>
-                            </div>
-                            <div className="flex flex-col bg-white bg-opacity-10 gap-1">
-                                <h1
-                                    className={`flex flex-col gap-8 font-medium text-lightGrayColor ${
-                                        showText
-                                            ? 'h-auto overflow-auto'
-                                            : 'h-48 overflow-hidden'
-                                    }`}
+                                <Link
+                                    href={institute.instituteURL}
+                                    target="_blank"
+                                    className="h-10 w-10 flex items-center justify-center rounded-full shadow-md group"
+                                    title="institute website"
                                 >
-                                    The University of Portsmouth is the 25th
-                                    largest in the UK and dates back to the
-                                    opening of the Portsmouth and Gosport School
-                                    of Science & Art in 1870. After years as a
-                                    Polytechnic, it became a university in 1992
-                                    and currently has around 28,000 students.
-                                    More than 4,000 of these are international
-                                    students from 150 countries around the
-                                    world.
-                                    <span className="text-opacity-0 bg-white">
-                                        It offers a range of disciplines,
-                                        including Pharmacy, International
-                                        Relations, Mechanical Engineering,
-                                        Mathematics, Paleontology, Criminology,
-                                        Criminal Justice and Law. The University
-                                        of Portsmouth has been ranked as
-                                        world-leading or internationally
-                                        excellent for its research facilities.
-                                    </span>
-                                </h1>
-                                {showText ? (
-                                    ''
-                                ) : (
-                                    <h1
-                                        onClick={() => setShowText(true)}
-                                        className="text-xl text-blueColor font-semibold cursor-pointer"
-                                    >
-                                        Read more
-                                    </h1>
-                                )}
+                                    <FaGlobeAmericas className="h-7 w-7 group-hover:text-blueColor" />
+                                </Link>
+                            </div>
+                            <div className="flex bg-white bg-opacity-10 gap-1">
+                                <p
+                                    className={`flex flex-col gap-8 font-medium text-lightGrayColor `}
+                                >
+                                    {institute?.description.slice(
+                                        0,
+                                        showText
+                                            ? institute?.description.length
+                                            : 400
+                                    )}
+                                    {institute?.description.length > 400 &&
+                                        !showText && <>....</>}
+                                    {institute?.description.length > 400 && (
+                                        <button
+                                            onClick={() =>
+                                                setShowText((prev) => !prev)
+                                            }
+                                            className="text-xl text-blueColor font-semibold cursor-pointer"
+                                        >
+                                            {showText
+                                                ? 'Show Less'
+                                                : 'Show More'}
+                                        </button>
+                                    )}
+                                </p>
                             </div>
                             <ProgramSection />
                             <ScholarshipSection />
                         </div>
-                        <div className="w-1/3 flex flex-col gap-9">
-                            <UniversityFacts />
-                            <Ranking />
+                        <div className="w-1/3 flex flex-col gap-9 h-headerStickyHeight sticky top-[110px] no-scrollbar">
+                            <UniversityFacts data={institute} />
+                            <Ranking data={institute} />
                         </div>
                     </div>
                 </div>

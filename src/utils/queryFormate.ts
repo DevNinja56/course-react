@@ -169,7 +169,7 @@ export const formateScholarshipQuery = (query: { [key: string]: any }) => {
     }
 
     if (orConditions.length > 0) {
-        matches.$match.$or = orConditions;
+        matches.$match.$and = orConditions;
     }
 
     return query.sortBy ? [matches, sort] : [matches];

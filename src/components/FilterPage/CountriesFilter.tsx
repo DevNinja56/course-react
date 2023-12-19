@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { useGetCountriesQuery } from '@/store/slices/allRequests';
-import { FilterCheckBox } from './FilterCheckBOx';
+import { FilterCheckBox, FilterCheckBoxLoader } from './FilterCheckBOx';
 import SearchBox from './SearchBox';
 
 const CountriesFilter = () => {
-    const { data: countryList } = useGetCountriesQuery();
+    const { data: countryList, isLoading } = useGetCountriesQuery();
     const [search, setSearch] = useState<string>('');
 
     return (
@@ -21,21 +21,25 @@ const CountriesFilter = () => {
                 />
             </div>
             <div className="flex flex-col gap-y-1 max-h-[360px] overflow-hidden overflow-y-auto setScrollBar">
-                {countryList
-                    ?.filter((country) =>
-                        country.name
-                            .toLowerCase()
-                            .includes(search.toLowerCase())
-                    )
-                    .map((country, i) => (
-                        <FilterCheckBox
-                            key={'country--list--' + i}
-                            id={country.name}
-                            text={country.name}
-                            name={'countries'}
-                            value={country.name}
-                        />
-                    ))}
+                {isLoading ? (
+                    <FilterCheckBoxLoader />
+                ) : (
+                    countryList
+                        ?.filter((country) =>
+                            country.name
+                                .toLowerCase()
+                                .includes(search.toLowerCase())
+                        )
+                        .map((country, i) => (
+                            <FilterCheckBox
+                                key={'country--list--' + i}
+                                id={country.name}
+                                text={country.name}
+                                name={'countries'}
+                                value={country.name}
+                            />
+                        ))
+                )}
             </div>
         </div>
     );
