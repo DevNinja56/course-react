@@ -7,6 +7,7 @@ import { FiPrinter } from 'react-icons/fi';
 import { GetServerSideProps } from 'next';
 import { singleCourseType } from '@/types';
 import { API_ENDPOINTS } from '@/config/Api_EndPoints';
+import { getSsrRequest } from '@/utils/ssrRequest';
 
 const Compare = ({ data }: { data?: singleCourseType }) => {
     const { first, second, third, compareFirst, compareSecond, compareThird } =
@@ -271,26 +272,14 @@ export const getServerSideProps: GetServerSideProps<{
     let data = null;
     const course_id = context.query?.course_id as string;
     if (!course_id) return { props: { data } };
-    const token = context.req.cookies['access_token'];
+
     try {
-        const res = await fetch(
-            `${
-                process.env.NEXT_PUBLIC_REST_API_ENDPOINT
-            }${API_ENDPOINTS.COURSE_BY_ID.replace(':id', course_id)}`,
-            {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                    Authorization: `Bearer ${token}`
-                }
-            }
-        );
-        data = await res.json();
+        const id = `${API_ENDPOINTS.COURSE_BY_ID.replace(':id', course_id)}`;
+        data = await getSsrRequest(id, context);
+        return { props: { data } };
     } catch (error) {
-        data = null;
-        console.log(error);
+        return { props: { data } };
     }
-    return { props: { data: data?.data ?? data! ?? null } };
 };
 
 export default Compare;

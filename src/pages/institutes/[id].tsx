@@ -7,9 +7,15 @@ import Testimonial from '@/components/Testimonial';
 import Image from 'next/image';
 import React, { useState } from 'react';
 import { FaGlobeAmericas } from 'react-icons/fa';
+import { instituteType } from '@/types';
+import { GetServerSideProps } from 'next';
+import { getSsrRequest } from '@/utils/ssrRequest';
+import { API_ENDPOINTS } from '@/config/Api_EndPoints';
+import { ROUTES } from '@/config/constant';
 
-const Institutes = () => {
+const Institutes = ({ data: institute }: { data: instituteType }) => {
     const [showText, setShowText] = useState(false);
+    console.log({ institute });
 
     return (
         <>
@@ -50,15 +56,18 @@ const Institutes = () => {
                                         height={92}
                                         width={92}
                                         alt="institute"
-                                        src="/images/institute/university-of-portsmouth.svg"
+                                        src={
+                                            institute?.logo ??
+                                            '/images/institute/university-of-portsmouth.svg'
+                                        }
                                         priority
                                     />
                                     <div className="flex flex-col gap-4">
                                         <h1 className="font-extrabold text-3xl text-mainTextColor">
-                                            University of Portsmouth
+                                            {institute?.name}
                                         </h1>
                                         <p className="text-blueColor text-xl font-semibold">
-                                            United Kingdom
+                                            {institute?.country?.name}
                                         </p>
                                     </div>
                                 </div>
@@ -119,6 +128,27 @@ const Institutes = () => {
             <Testimonial />
         </>
     );
+};
+
+export const getServerSideProps: GetServerSideProps<{
+    data: { data: instituteType; status: number };
+}> = async (context) => {
+    let data = null;
+    try {
+        const id = `${API_ENDPOINTS.INSTITUTE_BY_ID.replace(
+            ':id',
+            context.query?.id as string
+        )}`;
+        data = await getSsrRequest(id, context);
+        return { props: { data } };
+    } catch (error) {
+        return {
+            redirect: {
+                permanent: false,
+                destination: ROUTES.INSTITUTES
+            }
+        };
+    }
 };
 
 export default Institutes;
