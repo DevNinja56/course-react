@@ -1,5 +1,6 @@
 import UniversitiesCards from '@/components/Universities/UniversitiesCard';
 import { useGetInstituteQuery } from '@/store/slices/allRequests';
+
 import Image from 'next/image';
 import React from 'react';
 

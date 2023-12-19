@@ -1,5 +1,8 @@
 import Image from 'next/image';
 import React from 'react';
+import { LuMapPin } from 'react-icons/lu';
+import { FaRegClock } from 'react-icons/fa';
+import { FaRegHourglass } from 'react-icons/fa';
 
 const Card = () => {
     return (
@@ -26,38 +29,19 @@ const Card = () => {
                 <div className="flex flex-col gap-3">
                     <div className="flex items-center justify-between gap-5 py-2 px-2 text-xs font-medium text-mainTextColor bg-profileBgColor">
                         <div className="flex flex-col items-center gap-1">
-                            <Image
-                                height={18}
-                                width={18}
-                                src="/images/institute/Map Point.svg"
-                                alt="map"
-                                priority
-                            />
+                            <LuMapPin className="h-4 w-4 text-blueColor" />
                             <p className="text-[0.600rem] xl:text-[0.700rem]">
                                 UK
                             </p>
                         </div>
                         <div className="flex flex-col items-center gap-1">
-                            <Image
-                                height={18}
-                                width={18}
-                                src="/images/institute/Clock Circle.svg"
-                                alt="map"
-                                priority
-                            />
+                            <FaRegClock className="h-4 w-4 text-blueColor" />
                             <p className="text-[0.600rem] xl:text-[0.700rem]">
                                 3 Jan 2024
                             </p>
                         </div>
                         <div className="flex flex-col items-center gap-1">
-                            <Image
-                                height={18}
-                                width={18}
-                                src="/images/institute/hourglass.png"
-                                alt="map"
-                                priority
-                                className="min-w-fit"
-                            />
+                            <FaRegHourglass className="h-4 w-4 text-blueColor" />
                             <p className="text-[0.600rem] xl:text-[0.700rem]">
                                 25 Mar 2024
                             </p>

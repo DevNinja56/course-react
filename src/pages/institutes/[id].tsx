@@ -6,9 +6,16 @@ import UniversityFacts from '@/components/Institute/UniversityFacts';
 import Testimonial from '@/components/Testimonial';
 import Image from 'next/image';
 import React, { useState } from 'react';
+import { FaGlobeAmericas } from 'react-icons/fa';
+import { instituteType } from '@/types';
+import { GetServerSideProps } from 'next';
+import { getSsrRequest } from '@/utils/ssrRequest';
+import { API_ENDPOINTS } from '@/config/Api_EndPoints';
+import { ROUTES } from '@/config/constant';
 
-const Institutes = () => {
+const Institutes = ({ data: institute }: { data: instituteType }) => {
     const [showText, setShowText] = useState(false);
+    console.log({ institute });
 
     return (
         <>
@@ -18,7 +25,7 @@ const Institutes = () => {
                     width={80}
                     alt="uni-round"
                     className="-left-5 top-1/3 absolute h-20 w-20"
-                    src="/images/institute/instituteRing.svg"
+                    src="/images/CourseDetail/Circle 3.svg"
                     priority
                 />
                 <div className="w-full mx-auto px-0 lg:px-2 2xl:px-8 transition-all duration-300 lg:max-w-[1100px] 2xl:max-w-[2300px] z-10">
@@ -35,7 +42,7 @@ const Institutes = () => {
                     width={274}
                     alt="uni-round-2"
                     className="top-24 md:top-5 absolute -right-10 h-60 w-60"
-                    src="/images/institute/instituteRing2.svg"
+                    src="/images/CourseDetail/Ciecle 4.svg"
                     priority
                 />
             </div>
@@ -49,26 +56,23 @@ const Institutes = () => {
                                         height={92}
                                         width={92}
                                         alt="institute"
-                                        src="/images/institute/university-of-portsmouth.svg"
+                                        src={
+                                            institute?.logo ??
+                                            '/images/institute/university-of-portsmouth.svg'
+                                        }
                                         priority
                                     />
                                     <div className="flex flex-col gap-4">
                                         <h1 className="font-extrabold text-3xl text-mainTextColor">
-                                            University of Portsmouth
+                                            {institute?.name}
                                         </h1>
                                         <p className="text-blueColor text-xl font-semibold">
-                                            United Kingdom
+                                            {institute?.country?.name}
                                         </p>
                                     </div>
                                 </div>
                                 <div className="h-10 w-10 flex items-center justify-center rounded-full shadow-md">
-                                    <Image
-                                        height={32}
-                                        width={32}
-                                        alt="globe"
-                                        src="/images/institute/globe.svg"
-                                        priority
-                                    />
+                                    <FaGlobeAmericas className="h-7 w-7" />
                                 </div>
                             </div>
                             <div className="flex flex-col bg-white bg-opacity-10 gap-1">
@@ -124,6 +128,27 @@ const Institutes = () => {
             <Testimonial />
         </>
     );
+};
+
+export const getServerSideProps: GetServerSideProps<{
+    data: { data: instituteType; status: number };
+}> = async (context) => {
+    let data = null;
+    try {
+        const id = `${API_ENDPOINTS.INSTITUTE_BY_ID.replace(
+            ':id',
+            context.query?.id as string
+        )}`;
+        data = await getSsrRequest(id, context);
+        return { props: { data } };
+    } catch (error) {
+        return {
+            redirect: {
+                permanent: false,
+                destination: ROUTES.INSTITUTES
+            }
+        };
+    }
 };
 
 export default Institutes;

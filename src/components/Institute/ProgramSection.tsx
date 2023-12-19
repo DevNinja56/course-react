@@ -1,7 +1,8 @@
 import React from 'react';
 import Card from './Card';
-import Image from 'next/image';
 import Button from '../Button';
+import { RiGraduationCapFill } from 'react-icons/ri';
+import { FaArrowRight } from 'react-icons/fa6';
 
 const ProgramSection = () => {
     return (
@@ -10,26 +11,14 @@ const ProgramSection = () => {
                 <div className="flex flex-col gap-9">
                     <div className="flex items-center justify-between">
                         <div className="flex items-center gap-3">
-                            <Image
-                                height={42}
-                                width={42}
-                                alt="graduation"
-                                src="/images/institute/Graduation Cap.svg"
-                                priority
-                            />
+                            <RiGraduationCapFill className="h-10 w-10" />
                             <h1 className="text-2xl font-extrabold text-mainTextColor">
                                 Programs
                             </h1>
                         </div>
-                        <h1 className="text-blueColor text-xl font-semibold flex items-center gap-1 cursor-pointer">
+                        <h1 className="text-blueColor text-xl font-semibold flex items-center gap-2 cursor-pointer">
                             Read More
-                            <Image
-                                height={24}
-                                width={24}
-                                alt=""
-                                src="/images/institute/Arrow Right.svg"
-                                priority
-                            />
+                            <FaArrowRight className="h-4 w-4" />
                         </h1>
                     </div>
                     <div className="flex items-center gap-5 w-auto">

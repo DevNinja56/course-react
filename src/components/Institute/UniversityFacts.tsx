@@ -1,5 +1,9 @@
 import React from 'react';
 import UniversityFactsCard from './UniversityFactsCard';
+import School from './icons/School';
+import { FaFlagCheckered } from 'react-icons/fa';
+import { FaMapMarkerAlt } from 'react-icons/fa';
+import { FaSchool } from 'react-icons/fa';
 
 const UniversityFacts = () => {
     return (
@@ -9,22 +13,22 @@ const UniversityFacts = () => {
             </h1>
             <div className="grid grid-cols-2 gap-3">
                 <UniversityFactsCard
-                    img="/images/institute/UniversityFactsSchool.svg"
+                    icon={<School fill="fill-black" className="h-10 w-10" />}
                     types="Type"
                     text="PUBLIC"
                 />
                 <UniversityFactsCard
-                    img="/images/institute/UniversityFactsFlag.svg"
+                    icon={<FaFlagCheckered className="h-9 w-9" />}
                     types="Established Year"
                     text="1870"
                 />
                 <UniversityFactsCard
-                    img="/images/institute/UniversityFactsLocation.svg"
+                    icon={<FaMapMarkerAlt className="h-9 w-9" />}
                     types="Location"
                     text="UK"
                 />
                 <UniversityFactsCard
-                    img="/images/institute/UniversityFactsSchool2.svg"
+                    icon={<FaSchool className="h-9 w-9" />}
                     types="Campus"
                     text="Main"
                 />
