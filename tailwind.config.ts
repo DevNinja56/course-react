@@ -40,6 +40,9 @@ const config: Config = {
                 pinkColor: '#F2277E',
                 siderBarBottom: '#D9D9D9',
                 filterBorderColor: '#cdd5e1'
+            },
+            height: {
+                headerStickyHeight: 'calc(100vh - 110px)'
             }
         }
     },

@@ -64,8 +64,21 @@ html {
     }
 }
 
-.shapedDiv{
+.shapedDiv {
     width: 100px;
     height: 100px;
     clip-path: polygon(100% 57%, 100% 99%, 49% 100%);
+}
+
+//hide scroll bar
+@layer utilities {
+    /* Hide scrollbar for Chrome, Safari and Opera */
+    .no-scrollbar::-webkit-scrollbar {
+        display: none;
+    }
+    /* Hide scrollbar for IE, Edge and Firefox */
+    .no-scrollbar {
+        -ms-overflow-style: none; /* IE and Edge */
+        scrollbar-width: none; /* Firefox */
+    }
 }

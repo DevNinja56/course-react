@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { FilterCheckBox } from '../FilterCheckBOx';
+import { FilterCheckBox, FilterCheckBoxLoader } from '../FilterCheckBOx';
 import { useGetDisciplineQuery } from '@/store/slices/allRequests';
 import SearchBox from '../SearchBox';
 
 const DisciplinesFilter = () => {
-    const { data: disciplineList } = useGetDisciplineQuery();
+    const { data: disciplineList, isLoading } = useGetDisciplineQuery();
     const [search, setSearch] = useState<string>('');
 
     return (
@@ -21,21 +21,25 @@ const DisciplinesFilter = () => {
                 />
             </div>
             <div className="flex flex-col gap-y-1 max-h-[360px] overflow-hidden overflow-y-auto setScrollBar">
-                {disciplineList
-                    ?.filter((discipline) =>
-                        discipline.name
-                            .toLowerCase()
-                            .includes(search.toLowerCase())
-                    )
-                    .map(({ name, id }) => (
-                        <FilterCheckBox
-                            key={'discipline--list--' + id}
-                            id={name}
-                            text={name}
-                            name={'discipline'}
-                            value={name}
-                        />
-                    ))}
+                {isLoading ? (
+                    <FilterCheckBoxLoader />
+                ) : (
+                    disciplineList
+                        ?.filter((discipline) =>
+                            discipline.name
+                                .toLowerCase()
+                                .includes(search.toLowerCase())
+                        )
+                        .map(({ name, id }) => (
+                            <FilterCheckBox
+                                key={'discipline--list--' + id}
+                                id={name}
+                                text={name}
+                                name={'discipline'}
+                                value={name}
+                            />
+                        ))
+                )}
             </div>
         </div>
     );

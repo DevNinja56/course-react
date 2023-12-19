@@ -1,10 +1,10 @@
 import { useGetInstituteQuery } from '@/store/slices/allRequests';
 import React, { useState } from 'react';
 import SearchBox from '../SearchBox';
-import { FilterCheckBox } from '../FilterCheckBOx';
+import { FilterCheckBox, FilterCheckBoxLoader } from '../FilterCheckBOx';
 
 const InstituteFilter = () => {
-    const { data: InstituteList } = useGetInstituteQuery();
+    const { data: InstituteList, isLoading } = useGetInstituteQuery();
     const [search, setSearch] = useState<string>('');
 
     return (
@@ -21,17 +21,23 @@ const InstituteFilter = () => {
                 />
             </div>
             <div className="flex flex-col gap-y-1 max-h-[360px] overflow-hidden overflow-y-auto setScrollBar">
-                {InstituteList?.filter((Institute) =>
-                    Institute.name.toLowerCase().includes(search.toLowerCase())
-                ).map(({ name, id }) => (
-                    <FilterCheckBox
-                        key={'Institute--list--' + id}
-                        id={name}
-                        text={name}
-                        name={'institute'}
-                        value={name}
-                    />
-                ))}
+                {isLoading ? (
+                    <FilterCheckBoxLoader />
+                ) : (
+                    InstituteList?.filter((Institute) =>
+                        Institute.name
+                            .toLowerCase()
+                            .includes(search.toLowerCase())
+                    ).map(({ name, id }) => (
+                        <FilterCheckBox
+                            key={'Institute--list--' + id}
+                            id={name}
+                            text={name}
+                            name={'institute'}
+                            value={name}
+                        />
+                    ))
+                )}
             </div>
         </div>
     );

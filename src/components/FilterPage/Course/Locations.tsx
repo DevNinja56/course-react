@@ -1,11 +1,11 @@
 import { useGetInstituteQuery } from '@/store/slices/allRequests';
 import React, { useState } from 'react';
 import SearchBox from '../SearchBox';
-import { FilterCheckBox } from '../FilterCheckBOx';
+import { FilterCheckBox, FilterCheckBoxLoader } from '../FilterCheckBOx';
 import _ from 'lodash';
 
 const LocationsFilter = () => {
-    const { data } = useGetInstituteQuery();
+    const { data, isLoading } = useGetInstituteQuery();
     const [search, setSearch] = useState<string>('');
     const locations = Object.keys(_.groupBy(data, 'location'));
 
@@ -23,19 +23,25 @@ const LocationsFilter = () => {
                 />
             </div>
             <div className="flex flex-col gap-y-1 max-h-[360px] overflow-hidden overflow-y-auto setScrollBar">
-                {locations
-                    ?.filter((location) =>
-                        location.toLowerCase().includes(search.toLowerCase())
-                    )
-                    .map((name) => (
-                        <FilterCheckBox
-                            key={'locations--list--' + name}
-                            id={'location-' + name}
-                            text={name}
-                            name={'location'}
-                            value={name}
-                        />
-                    ))}
+                {isLoading ? (
+                    <FilterCheckBoxLoader />
+                ) : (
+                    locations
+                        ?.filter((location) =>
+                            location
+                                .toLowerCase()
+                                .includes(search.toLowerCase())
+                        )
+                        .map((name) => (
+                            <FilterCheckBox
+                                key={'locations--list--' + name}
+                                id={'location-' + name}
+                                text={name}
+                                name={'location'}
+                                value={name}
+                            />
+                        ))
+                )}
             </div>
         </div>
     );

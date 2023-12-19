@@ -1,13 +1,11 @@
 import { useCurrency } from '@/hooks/currency';
 import { useUi } from '@/hooks/user-interface';
 import { modalType } from '@/store/slices/ui.slice';
-import { getCurrencySymbol } from '@/utils/currencyValue';
 import React, { memo, useEffect } from 'react';
 
 const CurrencyConverter = () => {
     const { updateModal } = useUi();
     const { country, fetchLatestRates, updateGeoIp, geoIp } = useCurrency();
-    const currentCurrency = getCurrencySymbol();
 
     useEffect(() => {
         !geoIp && updateGeoIp();
@@ -29,7 +27,6 @@ const CurrencyConverter = () => {
                 <div className="font-light">|</div>
                 <div className="w-8 flex justify-center">
                     {country?.currencies}
-                    {currentCurrency !== country?.currencies && currentCurrency}
                 </div>
             </button>
         </>
