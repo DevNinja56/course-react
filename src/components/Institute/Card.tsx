@@ -6,7 +6,7 @@ import { FaRegHourglass } from 'react-icons/fa';
 
 const Card = () => {
     return (
-        <div className="flex flex-col shadow-sm rounded-md hover:shadow-xl hover:-translate-y-2 transition-all duration-300 cursor-pointer">
+        <div className="flex flex-col shadow-bottom-shadow rounded-md hover:shadow-xl hover:-translate-y-2 transition-all duration-300 cursor-pointer">
             <div className="relative">
                 <Image
                     height={143}
@@ -17,8 +17,8 @@ const Card = () => {
                     priority
                 />
             </div>
-            <div className="py-4 px-2 flex flex-col gap-6">
-                <div className="flex flex-col gap-3">
+            <div className="py-3 px-2 flex flex-col gap-4">
+                <div className="flex flex-col gap-2">
                     <h1 className="font-bold text-mainTextColor text-xs xl:text-sm">
                         Clarendon Fund Scholarships at University of Oxford
                     </h1>
@@ -27,7 +27,7 @@ const Card = () => {
                     </p>
                 </div>
                 <div className="flex flex-col gap-3">
-                    <div className="flex items-center justify-between gap-5 py-2 px-2 text-xs font-medium text-mainTextColor bg-profileBgColor">
+                    <div className="flex items-center justify-between gap-5 py-2 px-2 text-xs font-medium text-mainTextColor bg-profileBgColor rounded-md">
                         <div className="flex flex-col items-center gap-1">
                             <LuMapPin className="h-4 w-4 text-blueColor" />
                             <p className="text-[0.600rem] xl:text-[0.700rem]">

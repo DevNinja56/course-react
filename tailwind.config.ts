@@ -40,7 +40,10 @@ const config: Config = {
                 pinkColor: '#F2277E',
                 siderBarBottom: '#D9D9D9',
                 filterBorderColor: '#cdd5e1'
-            }
+            },
+            boxShadow: {
+                'bottom-shadow': '0 2px 2px 0 rgba(190, 190, 190, 0.15)',
+            },
         }
     },
     plugins: []

@@ -1,6 +1,5 @@
 import React from 'react';
 import Card from './Card';
-import Button from '../Button';
 import { RiGraduationCapFill } from 'react-icons/ri';
 import { FaArrowRight } from 'react-icons/fa6';
 
@@ -23,13 +22,12 @@ const ProgramSection = () => {
                     </div>
                     <div className="flex items-center gap-5 w-auto">
                         <div>
-                            <Button
-                                className="py-3 px-7 rounded-3xl font-medium text-white bg-blueColor"
-                                text="Undergraduate"
-                            />
+                            <button className="py-3 px-7 rounded-3xl font-medium text-white bg-blueColor shadow-md hover:bg-white border border-blueColor hover:border-blueColor hover:text-blueColor transition-all duration-500">
+                                Undergraduate
+                            </button>
                         </div>
                         <div>
-                            <button className="py-3 px-7 rounded-3xl font-medium text-black bg-white shadow-md hover:bg-black hover:bg-opacity-5">
+                            <button className="py-3 px-7 rounded-3xl font-medium text-black bg-white shadow-md hover:bg-black hover:bg-opacity-5 transition-all duration-500">
                                 Postgraduate
                             </button>
                         </div>
