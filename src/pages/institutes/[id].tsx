@@ -11,9 +11,11 @@ import { instituteType } from '@/types';
 import { GetServerSideProps } from 'next';
 import { getSsrRequest } from '@/utils/ssrRequest';
 import { API_ENDPOINTS } from '@/config/Api_EndPoints';
+import { ROUTES } from '@/config/constant';
 
 const Institutes = ({ data: institute }: { data: instituteType }) => {
     const [showText, setShowText] = useState(false);
+    console.log({ institute });
 
     return (
         <>
@@ -131,12 +133,22 @@ const Institutes = ({ data: institute }: { data: instituteType }) => {
 export const getServerSideProps: GetServerSideProps<{
     data: { data: instituteType; status: number };
 }> = async (context) => {
-    const id = `${API_ENDPOINTS.INSTITUTE_BY_ID.replace(
-        ':id',
-        context.query?.id as string
-    )}`;
-    const data = await getSsrRequest(id, context);
-    return { props: { data: data ?? null } };
+    let data = null;
+    try {
+        const id = `${API_ENDPOINTS.INSTITUTE_BY_ID.replace(
+            ':id',
+            context.query?.id as string
+        )}`;
+        data = await getSsrRequest(id, context);
+        return { props: { data } };
+    } catch (error) {
+        return {
+            redirect: {
+                permanent: false,
+                destination: ROUTES.INSTITUTES
+            }
+        };
+    }
 };
 
 export default Institutes;

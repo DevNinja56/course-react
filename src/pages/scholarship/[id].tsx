@@ -5,6 +5,7 @@ import Tabs from '@/components/Tabs';
 import { API_ENDPOINTS } from '@/config/Api_EndPoints';
 import { ROUTES } from '@/config/constant';
 import { scholarshipType } from '@/types';
+import { getSsrRequest } from '@/utils/ssrRequest';
 import { GetServerSideProps } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -443,28 +444,22 @@ const CourseDetail = ({ data: scholarship }: { data: scholarshipType }) => {
 export const getServerSideProps: GetServerSideProps<{
     data: { data: scholarshipType; status: number };
 }> = async (context) => {
-    const id = context.query?.id as string;
-    const token = context.req.cookies['access_token'];
     let data = null;
     try {
-        const res = await fetch(
-            `${
-                process.env.NEXT_PUBLIC_REST_API_ENDPOINT
-            }${API_ENDPOINTS.SCHOLARSHIP_BY_ID.replace(':id', id)}`,
-            {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                    Authorization: `Bearer ${token}`
-                }
-            }
-        );
-        data = await res.json();
+        const id = `${API_ENDPOINTS.SCHOLARSHIP_BY_ID.replace(
+            ':id',
+            context.query?.id as string
+        )}`;
+        data = await getSsrRequest(id, context);
+        return { props: { data } };
     } catch (error) {
-        data = null;
-        console.log(error);
+        return {
+            redirect: {
+                permanent: false,
+                destination: ROUTES.FILTER_SCHOLARSHIP
+            }
+        };
     }
-    return { props: { data: data?.data ?? data! ?? null } };
 };
 
 export default CourseDetail;

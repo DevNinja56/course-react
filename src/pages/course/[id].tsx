@@ -9,6 +9,7 @@ import { useUi } from '@/hooks/user-interface';
 import { modalType } from '@/store/slices/ui.slice';
 import { singleCourseType } from '@/types';
 import { setCurrencyValue } from '@/utils/currencyValue';
+import { getSsrRequest } from '@/utils/ssrRequest';
 import { GetServerSideProps } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -575,28 +576,22 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
 export const getServerSideProps: GetServerSideProps<{
     data: { data: singleCourseType; status: number };
 }> = async (context) => {
-    const id = context.query?.id as string;
-    const token = context.req.cookies['access_token'];
     let data = null;
     try {
-        const res = await fetch(
-            `${
-                process.env.NEXT_PUBLIC_REST_API_ENDPOINT
-            }${API_ENDPOINTS.COURSE_BY_ID.replace(':id', id)}`,
-            {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                    Authorization: `Bearer ${token}`
-                }
-            }
-        );
-        data = await res.json();
+        const id = `${API_ENDPOINTS.COURSE_BY_ID.replace(
+            ':id',
+            context.query?.id as string
+        )}`;
+        data = await getSsrRequest(id, context);
+        return { props: { data } };
     } catch (error) {
-        data = null;
-        console.log(error);
+        return {
+            redirect: {
+                permanent: false,
+                destination: ROUTES.FILTER_COURSE
+            }
+        };
     }
-    return { props: { data: data?.data ?? data! ?? null } };
 };
 
 export default CourseDetail;

@@ -4,6 +4,8 @@ import { blogsType } from '@/types';
 import { GetServerSideProps } from 'next';
 import Image from 'next/image';
 import { format } from 'timeago.js';
+import { getSsrRequest } from '@/utils/ssrRequest';
+import { ROUTES } from '@/config/constant';
 
 const BlogsDetail = ({ data }: { data: blogsType }) => {
     return (
@@ -188,28 +190,22 @@ const BlogsDetail = ({ data }: { data: blogsType }) => {
 export const getServerSideProps: GetServerSideProps<{
     data: { data: blogsType; status: number };
 }> = async (context) => {
-    const id = context.query?.id as string;
-    const token = context.req.cookies['access_token'];
     let data = null;
     try {
-        const res = await fetch(
-            `${
-                process.env.NEXT_PUBLIC_REST_API_ENDPOINT
-            }${API_ENDPOINTS.SINGLE_BLOG.replace(':id', id)}`,
-            {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                    Authorization: `Bearer ${token}`
-                }
-            }
-        );
-        data = await res.json();
+        const id = `${API_ENDPOINTS.SINGLE_BLOG.replace(
+            ':id',
+            context.query?.id as string
+        )}`;
+        data = await getSsrRequest(id, context);
+        return { props: { data } };
     } catch (error) {
-        data = null;
-        console.log(error);
+        return {
+            redirect: {
+                permanent: false,
+                destination: ROUTES.BLOGS
+            }
+        };
     }
-    return { props: { data: data?.data ?? data! ?? null } };
 };
 
 export default BlogsDetail;

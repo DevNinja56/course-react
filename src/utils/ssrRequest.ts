@@ -1,5 +1,6 @@
 import { GetServerSidePropsContext, PreviewData } from 'next';
 import { ParsedUrlQuery } from 'querystring';
+import http from './axios';
 
 export const getSsrRequest = async (
     url: string,
@@ -8,20 +9,17 @@ export const getSsrRequest = async (
     const token = ctx.req.cookies['access_token'];
 
     try {
-        const res = await fetch(
+        const { data } = await http.get(
             `${process.env.NEXT_PUBLIC_REST_API_ENDPOINT}${url}`,
             {
-                method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
                     Authorization: `Bearer ${token}`
                 }
             }
         );
-        const { data } = await res.json();
         return data;
     } catch (error) {
-        console.log(url, error);
-        return null;
+        throw new Error("Can't get data from server");
     }
 };
