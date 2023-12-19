@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useEffect, useState } from 'react';
 import InputBox from '../Input';
 import { useForm } from 'react-hook-form';
@@ -170,7 +171,7 @@ const ApplyOnline = () => {
                                     }}
                                     defaultValue={institute ?? null}
                                     styles={{
-                                        control: (base) => ({
+                                        control: (base: any) => ({
                                             ...base,
                                             border: errors.institute?.message
                                                 ? '1px solid red'
@@ -203,7 +204,7 @@ const ApplyOnline = () => {
                                     }}
                                     defaultValue={degree ?? null}
                                     styles={{
-                                        control: (base) => ({
+                                        control: (base: any) => ({
                                             ...base,
                                             border: errors.degree?.message
                                                 ? '1px solid red'
@@ -237,7 +238,7 @@ const ApplyOnline = () => {
                                     }}
                                     defaultValue={course ?? null}
                                     styles={{
-                                        control: (base) => ({
+                                        control: (base: any) => ({
                                             ...base,
                                             border: errors.course?.message
                                                 ? '1px solid red'
@@ -274,7 +275,7 @@ const ApplyOnline = () => {
                                     setValue('message', e?.value ?? '');
                                 }}
                                 styles={{
-                                    control: (base) => ({
+                                    control: (base: any) => ({
                                         ...base,
                                         border: errors.message?.message
                                             ? '1px solid red'

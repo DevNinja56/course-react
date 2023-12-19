@@ -101,7 +101,7 @@ const UpdateUserAcademicInfo = () => {
                             setValue('countryOfEducation', e?.value ?? '');
                         }}
                         styles={{
-                            control: (base) => ({
+                            control: (base: any) => ({
                                 ...base,
                                 border: errors.countryOfEducation?.message
                                     ? '1px solid red'
@@ -129,7 +129,7 @@ const UpdateUserAcademicInfo = () => {
                             setValue('highestLevelOfEducation', e?.value ?? '');
                         }}
                         styles={{
-                            control: (base) => ({
+                            control: (base: any) => ({
                                 ...base,
                                 border: errors.highestLevelOfEducation?.message
                                     ? '1px solid red'
@@ -160,7 +160,7 @@ const UpdateUserAcademicInfo = () => {
                             setValue('languageTest.name', e?.value ?? '');
                         }}
                         styles={{
-                            control: (base) => ({
+                            control: (base: any) => ({
                                 ...base,
                                 border: errors?.languageTest?.name?.message
                                     ? '1px solid red'
