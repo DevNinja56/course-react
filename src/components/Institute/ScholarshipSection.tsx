@@ -1,32 +1,21 @@
 import React from 'react';
 import ScholarshipCard from './ScholarshipCard';
-import Image from 'next/image';
+import ScholarshipCap from './icons/ScholarshipCap';
+import { FaArrowRight } from 'react-icons/fa6';
 
 const ScholarshipSection = () => {
     return (
         <div className="flex flex-col gap-16">
             <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                    <Image
-                        height={42}
-                        width={42}
-                        alt="graduation"
-                        src="/images/institute/Scholarship.svg"
-                        priority
-                    />
+                    <ScholarshipCap />
                     <h1 className="text-2xl font-extrabold text-mainTextColor">
                         Scholarships
                     </h1>
                 </div>
-                <h1 className="text-blueColor text-xl font-semibold flex items-center gap-1 cursor-pointer">
+                <h1 className="text-blueColor text-xl font-semibold flex items-center gap-2 cursor-pointer">
                     Read More
-                    <Image
-                        height={24}
-                        width={24}
-                        alt=""
-                        src="/images/institute/Arrow Right.svg"
-                        priority
-                    />
+                    <FaArrowRight className="h-4 w-4" />
                 </h1>
             </div>
             <div className="grid grid-cols-2 gap-6">

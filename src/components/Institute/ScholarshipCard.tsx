@@ -1,6 +1,10 @@
 import React from 'react';
 import Tag from './Tag';
-import Image from 'next/image';
+import { FaMapMarkerAlt } from 'react-icons/fa';
+import Certificate from './icons/Certificate';
+import { RiGraduationCapFill } from 'react-icons/ri';
+import School from './icons/School';
+import { FaArrowRight } from 'react-icons/fa6';
 
 const ScholarshipCard = () => {
     return (
@@ -13,30 +17,37 @@ const ScholarshipCard = () => {
                     </h1>
                 </div>
                 <div className="flex items-center gap-2 flex-wrap w-full">
-                    <Tag img="/images/institute/location.svg" text="UK" />
                     <Tag
-                        img="/images/institute/Certificate.svg"
+                        icon={
+                            <FaMapMarkerAlt className="h-4 w-4 text-blueColor" />
+                        }
+                        text="UK"
+                    />
+                    <Tag
+                        icon={
+                            <Certificate className="h-4 w-4 text-blueColor" />
+                        }
                         text="Computer & IT"
                     />
                     <Tag
-                        img="/images/institute/Graduation.svg"
+                        icon={
+                            <RiGraduationCapFill className="h-4 w-4 text-blueColor" />
+                        }
                         text="Bachelors , Masters"
                     />
                     <Tag
-                        img="/images/institute/school.svg"
+                        icon={
+                            <School
+                                fill="fill-blueColor"
+                                className="h-4 w-4 text-blueColor"
+                            />
+                        }
                         text="University of sydney"
                     />
                 </div>
             </div>
             <div className="shapedDiv absolute bottom-0 right-0 flex items-center justify-center bg-gray-200 group-hover:bg-blue-600 transition-all duration-500">
-                <Image
-                    height={19}
-                    width={19}
-                    alt="arrow"
-                    src="/images/institute/Arrow Right White.svg"
-                    className="z-10 absolute bottom-1 right-1"
-                    priority
-                />
+                <FaArrowRight className="z-10 absolute bottom-2 right-1 h-4 w-4 text-white" />
             </div>
         </div>
     );
