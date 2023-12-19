@@ -6,6 +6,7 @@ import UniversityFacts from '@/components/Institute/UniversityFacts';
 import Testimonial from '@/components/Testimonial';
 import Image from 'next/image';
 import React, { useState } from 'react';
+import { FaGlobeAmericas } from 'react-icons/fa';
 
 const Institutes = () => {
     const [showText, setShowText] = useState(false);
@@ -18,7 +19,7 @@ const Institutes = () => {
                     width={80}
                     alt="uni-round"
                     className="-left-5 top-1/3 absolute h-20 w-20"
-                    src="/images/institute/instituteRing.svg"
+                    src="/images/CourseDetail/Circle 3.svg"
                     priority
                 />
                 <div className="w-full mx-auto px-0 lg:px-2 2xl:px-8 transition-all duration-300 lg:max-w-[1100px] 2xl:max-w-[2300px] z-10">
@@ -35,7 +36,7 @@ const Institutes = () => {
                     width={274}
                     alt="uni-round-2"
                     className="top-24 md:top-5 absolute -right-10 h-60 w-60"
-                    src="/images/institute/instituteRing2.svg"
+                    src="/images/CourseDetail/Ciecle 4.svg"
                     priority
                 />
             </div>
@@ -62,13 +63,7 @@ const Institutes = () => {
                                     </div>
                                 </div>
                                 <div className="h-10 w-10 flex items-center justify-center rounded-full shadow-md">
-                                    <Image
-                                        height={32}
-                                        width={32}
-                                        alt="globe"
-                                        src="/images/institute/globe.svg"
-                                        priority
-                                    />
+                                    <FaGlobeAmericas className="h-7 w-7" />
                                 </div>
                             </div>
                             <div className="flex flex-col bg-white bg-opacity-10 gap-1">

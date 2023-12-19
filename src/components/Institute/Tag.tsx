@@ -1,15 +1,14 @@
-import Image from 'next/image';
 import React from 'react';
 
 interface propTypes {
-    img: string;
     text: string;
+    icon: React.ReactElement;
 }
 
-const Tag = ({ img, text }: propTypes) => {
+const Tag = ({ icon, text }: propTypes) => {
     return (
         <div className="py-1 px-2 gap-1 flex items-center rounded-3xl bg-profileBgColor">
-            <Image height={20} width={20} alt="" src={img} priority />
+            {icon}
             <p className="text-xs text-blueColor">{text}</p>
         </div>
     );
