@@ -21,7 +21,7 @@ const UniversitiesCards = ({ institute, refetch }: propsType) => {
                 refetch={refetch}
             />
             <Link
-                href={ROUTES.FILTER_COURSE}
+                href={ROUTES.INSTITUTES_DETAIL.replace(':id', institute.id)}
                 onClick={() => addQuery({ institute: [institute.name] })}
             >
                 <Image
