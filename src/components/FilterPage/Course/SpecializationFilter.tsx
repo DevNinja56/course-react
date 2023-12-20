@@ -1,10 +1,10 @@
 import { useGetSpecializationQuery } from '@/store/slices/allRequests';
 import React, { useState } from 'react';
 import SearchBox from '../SearchBox';
-import { FilterCheckBox } from '../FilterCheckBOx';
+import { FilterCheckBox, FilterCheckBoxLoader } from '../FilterCheckBOx';
 
 const SpecializationFilter = () => {
-    const { data: specializationList } = useGetSpecializationQuery();
+    const { data: specializationList, isLoading } = useGetSpecializationQuery();
     const [search, setSearch] = useState<string>('');
 
     return (
@@ -21,21 +21,25 @@ const SpecializationFilter = () => {
                 />
             </div>
             <div className="flex flex-col gap-y-1 max-h-[360px] overflow-hidden overflow-y-auto setScrollBar">
-                {specializationList
-                    ?.filter((specialization) =>
-                        specialization.name
-                            .toLowerCase()
-                            .includes(search.toLowerCase())
-                    )
-                    .map(({ name, id }) => (
-                        <FilterCheckBox
-                            key={'specialization--list--' + id}
-                            id={name}
-                            text={name}
-                            name={'specialization'}
-                            value={name}
-                        />
-                    ))}
+                {isLoading ? (
+                    <FilterCheckBoxLoader />
+                ) : (
+                    specializationList
+                        ?.filter((specialization) =>
+                            specialization.name
+                                .toLowerCase()
+                                .includes(search.toLowerCase())
+                        )
+                        .map(({ name, id }) => (
+                            <FilterCheckBox
+                                key={'specialization--list--' + id}
+                                id={name}
+                                text={name}
+                                name={'specialization'}
+                                value={name}
+                            />
+                        ))
+                )}
             </div>
         </div>
     );
