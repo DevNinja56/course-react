@@ -72,6 +72,7 @@ const ChangePassword = () => {
                     error={errors.confirm_password?.message}
                 />
                 <Button
+                    className="pt-[14px] pb-[13px]"
                     text="Change Password"
                     type="submit"
                     disabled={isLoading}

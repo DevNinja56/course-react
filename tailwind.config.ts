@@ -41,6 +41,11 @@ const config: Config = {
                 siderBarBottom: '#D9D9D9',
                 filterBorderColor: '#cdd5e1'
             },
+            boxShadow: {
+                'bottom-shadow': '0 2px 2px 0 rgba(190, 190, 190, 0.15)',
+                'custom': '0 4px 4px 0 rgba(190, 190, 190, 0.25)',
+                'RequirementBox': '0px 4px 16.1px 0px rgba(190, 190, 190, 0.25)',
+            },
             height: {
                 headerStickyHeight: 'calc(100vh - 110px)'
             }

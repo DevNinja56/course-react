@@ -238,7 +238,7 @@ const UpdateUserAcademicInfo = () => {
                 <Button
                     text="Update"
                     type="submit"
-                    className="mt-5"
+                    className="mt-5 pt-[14px] pb-[13px]"
                     isLoader={isLoading}
                     disabled={isLoading}
                 />

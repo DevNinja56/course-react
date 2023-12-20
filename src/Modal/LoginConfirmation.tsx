@@ -16,6 +16,7 @@ const LoginConfirmation = () => {
                 Please Login!
             </h1>
             <Button
+                className="pt-[14px] pb-[13px]"
                 text="Go to Login Page"
                 link={ROUTES.SIGN_IN}
                 onClick={hideModal}

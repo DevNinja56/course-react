@@ -72,6 +72,7 @@ const ResetPassword = () => {
                         error={errors.email?.message}
                     />
                     <Button
+                        className="pt-[14px] pb-[13px]"
                         text="Reset"
                         type="submit"
                         disabled={isLoading}

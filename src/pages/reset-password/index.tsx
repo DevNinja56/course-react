@@ -119,7 +119,7 @@ const ResetPassword = ({ email, token }: { email: string; token: string }) => {
                                 <Button
                                     type="submit"
                                     text="Change Password"
-                                    className="w-4/5"
+                                    className="w-4/5 pt-[14px] pb-[13px]"
                                     disabled={isLoading}
                                 />
                                 <p className="text-sm text-center mt-5 text-blueColor  ">

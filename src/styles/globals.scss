@@ -62,13 +62,7 @@ html {
     .setWidthCompareModal {
         width: 450px;
     }
-}
 
-.shapedDiv {
-    width: 100px;
-    height: 100px;
-    clip-path: polygon(100% 57%, 100% 99%, 49% 100%);
-}
 
 //hide scroll bar
 @layer utilities {

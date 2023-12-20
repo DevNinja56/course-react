@@ -182,6 +182,7 @@ const SignUp = () => {
                                 </p> */}
                                 </div>
                                 <Button
+                                    className="pt-[14px] pb-[13px]"
                                     type="submit"
                                     disabled={isLoading}
                                     isLoader={isLoading}
