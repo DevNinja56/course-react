@@ -33,10 +33,10 @@ const Header = ({ onlyLogo }: { onlyLogo?: boolean }) => {
             {!onlyLogo ? (
                 <div className="bg-white">
                     <UnVerifiedUser />
-                    <div className="container mx-auto py-6 flex justify-between items-center px-[20px] md:px-[50px] lg:px-2 2xl:px-8 transition-all duration-300">
+                    <div className="w-full xl:container mx-auto py-6 flex justify-between items-center px-[20px] md:px-[50px] lg:px-2 2xl:px-8 transition-all duration-300">
                         <Logo />
                         <div className="flex items-center gap-x-6 print:hidden">
-                            <nav className="hidden lg:flex items-center gap-x-6">
+                            <nav className="hidden lg:flex items-center gap-x-6 lg:gap-x-2 xl:gap-x-6">
                                 <Link href={ROUTES.FILTER_COURSE}>
                                     <div className="flex items-center px-[10px] gap-x-[10px]">
                                         <svg
@@ -217,7 +217,7 @@ const Header = ({ onlyLogo }: { onlyLogo?: boolean }) => {
                                     </div>
                                 ) : (
                                     <Link href={ROUTES.SIGN_IN}>
-                                        <button className="py-2 lg:py-[13px] px-5 lg:px-[34px] gap-x-[6px] md:flex items-center rounded-[5px] bg-blueColor hover:bg-blue-600 text-white text-base font-medium hidden">
+                                        <button className="py-2 lg:py-[13px] px-5 lg:px-[34px] gap-x-[6px] md:flex justify-center items-center rounded-[5px] bg-blueColor hover:bg-blue-600 text-white text-base font-medium hidden">
                                             <Image
                                                 width={20}
                                                 height={20}

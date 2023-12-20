@@ -8,8 +8,7 @@ const CounselingWork = () => {
     return (
         <div
             className={`w-full relative pb-0 ${
-                router.pathname === '/apply' ||
-                router.pathname.includes(ROUTES.COURSE.replace(':id', ''))
+                router.pathname === '/apply'
                     ? 'bg-profileBgColor'
                     : router.pathname === '/courseDetail'
                     ? 'bg-lightColor'
@@ -17,7 +16,8 @@ const CounselingWork = () => {
             }`}
         >
             {router.pathname === '/courseDetail' ||
-            router.pathname === ROUTES.INSTITUTES_DETAIL ? (
+            router.pathname === ROUTES.INSTITUTES_DETAIL ||
+            router.pathname.includes(ROUTES.COURSE.replace(':id', '')) ? (
                 <Image
                     height={217}
                     width={175}
@@ -244,7 +244,8 @@ const CounselingWork = () => {
                 </div>
             </div>
             {router.pathname === '/courseDetail' ||
-            router.pathname === ROUTES.INSTITUTES_DETAIL ? (
+            router.pathname === ROUTES.INSTITUTES_DETAIL ||
+            router.pathname.includes(ROUTES.COURSE.replace(':id', '')) ? (
                 ''
             ) : (
                 <Image

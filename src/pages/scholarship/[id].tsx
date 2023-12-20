@@ -99,7 +99,11 @@ const CourseDetail = ({ data: scholarship }: { data: scholarshipType }) => {
                                     for more information
                                 </p>
                                 <div className="flex flex-col gap-3">
-                                    <Button text="Apply" link={ROUTES.APPLY} />
+                                    <Button
+                                        className="pt-[14px] pb-[13px]"
+                                        text="Apply"
+                                        link={ROUTES.APPLY}
+                                    />
                                 </div>
                             </div>
                             <div className="px-3 pt-5 mb-5">

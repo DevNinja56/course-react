@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
+import { AiFillHeart } from 'react-icons/ai';
 import LoaderSpinner from '../LoaderSpinner';
 import toast from 'react-hot-toast';
 import { fetchRequest } from '@/utils/axios/fetch';
@@ -64,9 +64,9 @@ const FavoriteButton: React.FC<propsType> = ({
         <button
             className={
                 className ??
-                `h-[36px] w-[36px]  rounded-full  cursor-pointer flex items-center justify-center group ${
+                `h-8 w-8  rounded-full  cursor-pointer flex items-center justify-center group ${
                     position ?? 'absolute top-4 right-4'
-                }  z-10 bg-black bg-opacity-40 ${extendClass}`
+                }  z-10 bg-[#717070] bg-opacity-[50%] ${extendClass}`
             }
             onClick={handleClick}
         >
@@ -74,11 +74,13 @@ const FavoriteButton: React.FC<propsType> = ({
                 <LoaderSpinner />
             ) : isActive ? (
                 <AiFillHeart
-                    className={`${iconClass ?? 'text-2xl'} text-white   `}
+                    className={`${
+                        iconClass ?? 'text-2xl'
+                    } text-red-500 h-5 w-5`}
                 />
             ) : (
-                <AiOutlineHeart
-                    className={`${iconClass ?? 'text-2xl'} text-white   `}
+                <AiFillHeart
+                    className={`${iconClass ?? 'text-2xl'} text-white h-5 w-5`}
                 />
             )}
         </button>

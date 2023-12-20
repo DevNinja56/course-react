@@ -302,6 +302,7 @@ const CompareUniversityModal = () => {
                 />
             </div>
             <Button
+                className="pt-[14px] pb-[13px]"
                 text="Send Message"
                 disabled={isDisabledButton}
                 onClick={() => {

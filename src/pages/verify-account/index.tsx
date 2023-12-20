@@ -92,6 +92,7 @@ const VerifyAccount = ({ email, token }: { email: string; token: string }) => {
                         </h1>
 
                         <Button
+                            className="pt-[14px] pb-[13px]"
                             text="Verify"
                             onClick={handleClick}
                             disabled={isLoading}
