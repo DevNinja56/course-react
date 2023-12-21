@@ -10,15 +10,15 @@ const Footer = () => {
     return (
         <footer className=" w-full flex justify-center flex-col print:hidden">
             {!path.includes(ROUTES.APPLY) && (
-                <div className="translate-y-20 transition-all duration-300 mx-auto object-cover px-5 md:px-[50px] lg:px-0 relative ">
-                    <Image
-                        height={256}
-                        width={1160}
-                        alt="footer img"
-                        className="rounded-[10px] object-cover h-[241px] 2xl:h-[400px] md:h-[138px] w-[1160px] lg:w-[1160px] lg:h-[256px] 2xl:w-[2300px]"
-                        src="/images/Frame 608.svg"
-                    />
-                    <div className="absolute top-[20%] lg:top-[30%] 2xl:top-0 left-0 z-10 w-full flex flex-col md:flex-row items-center font-black px-2 md:px-28 justify-between h-auto 2xl:h-[420px]">
+                <div className="translate-y-20 transition-all duration-300 object-cover px-5 md:px-[50px] lg:px-0 relative container mx-auto ">
+                    <div className="z-10 w-full flex flex-col md:flex-row items-center font-black justify-between relative p-8 md:p-12 lg:p-24 ">
+                        <Image
+                            height={256}
+                            width={1160}
+                            alt="footer img"
+                            className="rounded-lg object-cover  w-full h-full absolute top-0 left-0 z-[-1]"
+                            src="/images/Frame 608.svg"
+                        />
                         <h1 className="text-white text-[28px] md:text-[32px] lg:text-5xl leading-10 md:text-start text-center w-[300px] md:w-[313px] lg:w-[531px] mb-6 lg:mb-0">
                             Want to study at Online program ?
                         </h1>
@@ -36,7 +36,7 @@ const Footer = () => {
                 }`}
             >
                 <div className="w-full pb-10">
-                    <div className="max-w-[1160px] 2xl:max-w-[2300px] mx-auto px-5 md:px-[50px] lg:px-2 flex justify-between lg:items-start flex-wrap">
+                    <div className="container mx-auto px-5 md:px-[50px] lg:px-2 flex justify-between lg:items-start flex-wrap">
                         <div className="flex flex-col md:flex-row lg:flex-col items-start md:items-center lg:items-start md:justify-between w-full lg:w-[420px] mb-8">
                             <div className="px-2 lg:px-3">
                                 <div className="mb-5">

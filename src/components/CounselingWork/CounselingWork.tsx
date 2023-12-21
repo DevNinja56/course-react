@@ -62,7 +62,7 @@ const CounselingWork = () => {
                 />
             )}
             <div className="w-full py-28">
-                <div className="max-w-[1200px] 2xl:max-w-[2400px] mx-auto px-3 lg:px-2 2xl:px-8 transition-all duration-300 flex flex-col items-center gap-y-24">
+                <div className="container mx-auto px-3 lg:px-2 2xl:px-8 transition-all duration-300 flex flex-col items-center gap-y-24">
                     <div className="flex flex-col items-center gap-y-16">
                         <h1 className="font-bold text-[32px] md:text-[36px] text-mainTextColor z-10 text-center">
                             Learn More About Application Process
