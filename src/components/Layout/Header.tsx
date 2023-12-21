@@ -33,9 +33,9 @@ const Header = ({ onlyLogo }: { onlyLogo?: boolean }) => {
             {!onlyLogo ? (
                 <div className="bg-white">
                     <UnVerifiedUser />
-                    <div className="w-full xl:container mx-auto py-6 flex justify-between items-center px-[20px] md:px-[50px] lg:px-2 2xl:px-8 transition-all duration-300">
+                    <div className="w-full xl:container mx-auto py-6 flex justify-between items-center px-4 md:px-[50px] lg:px-2 2xl:px-8 transition-all duration-300">
                         <Logo />
-                        <div className="flex items-center gap-x-6 print:hidden">
+                        <div className="flex items-center gap-2 md:gap-x-6 print:hidden">
                             <nav className="hidden lg:flex items-center gap-x-6 lg:gap-x-2 xl:gap-x-6">
                                 <Link href={ROUTES.FILTER_COURSE}>
                                     <div className="flex items-center px-[10px] gap-x-[10px]">
@@ -232,7 +232,7 @@ const Header = ({ onlyLogo }: { onlyLogo?: boolean }) => {
                                             width={36}
                                             alt=""
                                             src="/images/User Circle.svg"
-                                            className="block md:hidden h-6 w-6 md:h-9 md:w-9"
+                                            className="block md:hidden h-5 w-5 md:h-9 md:w-9"
                                             priority
                                         />
                                     </Link>
@@ -242,7 +242,7 @@ const Header = ({ onlyLogo }: { onlyLogo?: boolean }) => {
                                     height={46}
                                     alt="menu-icon"
                                     onClick={onShowSideBar}
-                                    className="block lg:hidden h-8 w-8 md:h-11 md:w-11"
+                                    className="block lg:hidden h-5 w-5 md:h-11 md:w-11"
                                     src="/images/Menu.svg"
                                     priority
                                 />
@@ -255,7 +255,7 @@ const Header = ({ onlyLogo }: { onlyLogo?: boolean }) => {
                     </div>
                 </div>
             ) : (
-                <div className="max-w-[1100px] 2xl:max-w-[2300px] mx-auto py-6 flex justify-between items-center px-[20px] md:px-[50px] lg:px-2 2xl:px-8 transition-all duration-300">
+                <div className="max-w-[1100px] 2xl:max-w-[2300px] mx-auto py-6 flex justify-between items-center px-4 md:px-[50px] lg:px-2 2xl:px-8 transition-all duration-300">
                     <Logo />
                 </div>
             )}

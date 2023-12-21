@@ -47,12 +47,12 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                             src="/images/CourseDetail/Circle 3.svg"
                             priority
                         />
-                        <div className="w-full py-10 xl:py-20 flex justify-center xl:container px-[20px] md:px-[50px] lg:px-2 2xl:px-8">
+                        <div className="w-full py-10 xl:py-20 flex justify-center xl:container px-4 md:px-[50px] lg:px-2 2xl:px-8">
                             <Image
                                 height={375}
                                 width={1240}
                                 alt="courseDetail"
-                                src="/images/courseDetail/courseDetailMain.png"
+                                src="/images/CourseDetail/courseDetailMain.png"
                                 className="z-20 w-full"
                                 priority
                             />
@@ -66,7 +66,7 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                             priority
                         />
                     </div>
-                    <div className="flex items-center w-full xl:container px-[20px] md:px-[50px] lg:px-2 2xl:px-8 mx-auto transition-all duration-300 flex-col gap-6 mb-32">
+                    <div className="flex items-center w-full xl:container px-4 md:px-[50px] lg:px-2 2xl:px-8 mx-auto transition-all duration-300 flex-col gap-6 mb-32">
                         <div className="w-full flex flex-wrap gap-2 gap-y-8 justify-between">
                             <h1 className="text-mainTextColor text-2xl md:text-3xl font-bold">
                                 {course?.name}
@@ -104,7 +104,7 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                             </div>
                         </div>
                         <div className="flex flex-col lg:flex-row gap-0 xl:gap-16 w-full justify-between">
-                            <div className="bg-white h-auto w-full lg:w-[70%] xl:w-2/3">
+                            <div className="bg-white w-full lg:w-[70%] xl:w-2/3 h-headerStickyHeight sticky top-[110px] no-scrollbar">
                                 <div className=" transition-all duration-300">
                                     <div className="flex flex-col gap-y-6 mb-20">
                                         <div className="tabs-container capitalize">

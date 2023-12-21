@@ -5,7 +5,7 @@ interface propsType {
 }
 
 const Tabs: React.FC<propsType> = ({ data }) => {
-    const [activeIndex, setIndex] = useState<number>(1);
+    const [activeIndex, setIndex] = useState<number>(0);
     return (
         <>
             <div className="text-sm font-medium text-center text-gray-500 border-b-2 border-gray-300">

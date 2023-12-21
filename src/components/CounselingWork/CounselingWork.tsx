@@ -16,13 +16,19 @@ const CounselingWork = () => {
             }`}
         >
             {router.pathname === '/courseDetail' ||
-            router.pathname === ROUTES.INSTITUTES_DETAIL ||
+            router.pathname.includes(ROUTES.INSTITUTES.replace(':id', '')) ||
             router.pathname.includes(ROUTES.COURSE.replace(':id', '')) ? (
                 <Image
                     height={217}
                     width={175}
                     alt="circle"
-                    className="absolute left-0 top-0"
+                    className={`absolute left-0 top-0 ${
+                        router.pathname.includes(
+                            ROUTES.INSTITUTES.replace(':id', '')
+                        )
+                            ? '-left-3 h-24 w-24 lg:h-auto lg:w-auto'
+                            : ''
+                    }`}
                     src="/images/CourseDetail/circle 1.svg"
                     priority
                 />
@@ -244,7 +250,7 @@ const CounselingWork = () => {
                 </div>
             </div>
             {router.pathname === '/courseDetail' ||
-            router.pathname === ROUTES.INSTITUTES_DETAIL ||
+            router.pathname.includes(ROUTES.INSTITUTES.replace(':id', '')) ||
             router.pathname.includes(ROUTES.COURSE.replace(':id', '')) ? (
                 ''
             ) : (

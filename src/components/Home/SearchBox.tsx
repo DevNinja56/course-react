@@ -78,6 +78,7 @@ const SearchBox = () => {
                 </div>
                 <div className="w-full md:w-[230px] ml-0 lg:ml-5">
                     <Button
+                        className="pt-[14px] pb-[13px]"
                         text="Search"
                         disabled={
                             !value.degrees.length && !value.countries.length

@@ -56,7 +56,11 @@ const ResetPassword = () => {
                         Please Check your Mail, Rest Password Link Has been Sent
                         to your Email Address
                     </h2>
-                    <Button text="Close" onClick={hideModal} className="mt-5" />
+                    <Button
+                        text="Close"
+                        onClick={hideModal}
+                        className="mt-5 pt-[14px] pb-[13px]"
+                    />
                 </>
             ) : (
                 <form

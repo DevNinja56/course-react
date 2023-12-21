@@ -116,7 +116,7 @@ const Home = () => {
                     className="absolute right-4 lg:right-0 xl:right-28 top-[285px] lg:top-[230px] hidden md:block"
                     priority
                 />
-                <div className="max-w-[1100px] 2xl:max-w-[2300px] mx-auto px-[20px] md:px-[50px] lg:px-2 2xl:px-8 transition-all duration-300 flex flex-col items-center">
+                <div className="max-w-[1100px] 2xl:max-w-[2300px] mx-auto px-4 md:px-[50px] lg:px-2 2xl:px-8 transition-all duration-300 flex flex-col items-center">
                     <p className="font-bold text-xl md:text-[23px] text-blueColor mb-3">
                         Our Events
                     </p>

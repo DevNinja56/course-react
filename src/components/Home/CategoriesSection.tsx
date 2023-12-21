@@ -11,7 +11,7 @@ const CategoriesSection = () => {
     });
 
     return (
-        <div className="max-w-[1100px] 2xl:max-w-[2300px] mx-auto px-[20px] md:px-[50px] lg:px-2 2xl:px-8 transition-all duration-300 flex flex-col gap-y-16 lg:flex-row gap-x-8">
+        <div className="max-w-[1100px] 2xl:max-w-[2300px] mx-auto px-4 md:px-[50px] lg:px-2 2xl:px-8 transition-all duration-300 flex flex-col gap-y-16 lg:flex-row gap-x-8">
             <div className="pt-16 w-full lg:w-[35%]">
                 <p className="text-blueColor text-xl md:text-[23px] font-bold">
                     Top Categories

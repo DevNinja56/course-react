@@ -26,7 +26,7 @@ const GlobalSearch = () => {
                 />
             )}
             <button onClick={() => setValue('')}>
-                <FiSearch className="text-3xl cursor-pointer h-6 w-6 md:h-[36px] md:w-[36px] mt-1" />
+                <FiSearch className="text-3xl cursor-pointer h-5 w-5 md:h-[36px] md:w-[36px] mt-1" />
             </button>
 
             {value !== null && (

@@ -28,7 +28,7 @@ const CourseDetail = ({ data: scholarship }: { data: scholarshipType }) => {
                             src="/images/CourseDetail/Circle 3.svg"
                             priority
                         />
-                        <div className="max-w-[1100px] 2xl:max-w-[2300px] mx-auto px-[20px] md:px-[50px] lg:px-2 2xl:px-8 transition-all duration-300 flex flex-col">
+                        <div className="max-w-[1100px] 2xl:max-w-[2300px] mx-auto px-4 md:px-[50px] lg:px-2 2xl:px-8 transition-all duration-300 flex flex-col">
                             <div className="w-full flex flex-col gap-y-8 lg:w-[70%]">
                                 <h1 className="text-textLightBlackColor text-2xl md:text-[30px] font-semibold">
                                     {scholarship?.name}

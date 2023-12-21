@@ -12,24 +12,29 @@ const UniversityFacts = ({ data }: { data: instituteType }) => {
             <h1 className="text-xl font-bold text-mainTextColor">
                 University Facts
             </h1>
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-2 gap-3">
                 <UniversityFactsCard
-                    icon={<School fill="fill-black" className="h-10 w-10" />}
+                    icon={
+                        <School
+                            fill="fill-black"
+                            className="h-9 w-9 md:h-10 md:w-10"
+                        />
+                    }
                     types="Type"
                     text={data.sector}
                 />
                 <UniversityFactsCard
-                    icon={<FaFlagCheckered className="h-9 w-9" />}
+                    icon={<FaFlagCheckered className="h-7 w-7 md:h-9 md:w-9" />}
                     types="Established Year"
                     text={data.establishedYear + ''}
                 />
                 <UniversityFactsCard
-                    icon={<FaMapMarkerAlt className="h-9 w-9" />}
+                    icon={<FaMapMarkerAlt className="h-7 w-7 md:h-9 md:w-9" />}
                     types="Location"
                     text={data.location}
                 />
                 <UniversityFactsCard
-                    icon={<FaSchool className="h-9 w-9" />}
+                    icon={<FaSchool className="h-7 w-7 md:h-9 md:w-9" />}
                     types="Campus"
                     text={data.campus}
                 />

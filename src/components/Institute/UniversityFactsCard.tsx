@@ -16,7 +16,7 @@ const UniversityFactsCard = ({
             {icon}
             <div className="flex flex-col gap-1">
                 <p className="text-xs text-grayColor">{types}</p>
-                <h1 className="text-mainTextColor text-sm font-semibold">
+                <h1 className="text-mainTextColor text-xs md:text-sm font-semibold">
                     {text}
                 </h1>
             </div>

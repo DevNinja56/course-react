@@ -22,36 +22,36 @@ const Card = () => {
                     <h1 className="font-bold text-mainTextColor text-xs xl:text-sm">
                         Clarendon Fund Scholarships at University of Oxford
                     </h1>
-                    <p className="font-medium text-[0.670rem] xl:text-[0.700rem] text-gray-400">
+                    <p className="font-medium text-[0.75rem] md:text-[0.670rem] xl:text-[0.700rem] text-gray-400">
                         Oxford University Press Masters/PhD Degrees
                     </p>
                 </div>
                 <div className="flex flex-col gap-3">
-                    <div className="flex items-center justify-between gap-5 py-2 px-2 text-xs font-medium text-mainTextColor bg-profileBgColor rounded-md">
+                    <div className="flex items-center flex-wrap gap-3 justify-between md:gap-5 py-2 px-2 text-xs font-medium text-mainTextColor bg-profileBgColor rounded-md">
                         <div className="flex flex-col items-center gap-1">
-                            <LuMapPin className="h-4 w-4 text-blueColor" />
-                            <p className="text-[0.600rem] xl:text-[0.700rem]">
+                            <LuMapPin className="h-3 w-3 md:h-4 md:w-4 text-blueColor" />
+                            <p className="text-[0.625rem] md:text-[0.600rem] xl:text-[0.700rem]">
                                 UK
                             </p>
                         </div>
                         <div className="flex flex-col items-center gap-1">
-                            <FaRegClock className="h-4 w-4 text-blueColor" />
-                            <p className="text-[0.600rem] xl:text-[0.700rem]">
+                            <FaRegClock className="h-3 w-3 md:h-4 md:w-4 text-blueColor" />
+                            <p className="text-[0.625rem] md:text-[0.600rem] xl:text-[0.700rem]">
                                 3 Jan 2024
                             </p>
                         </div>
                         <div className="flex flex-col items-center gap-1">
-                            <FaRegHourglass className="h-4 w-4 text-blueColor" />
-                            <p className="text-[0.600rem] xl:text-[0.700rem]">
+                            <FaRegHourglass className="h-3 w-3 md:h-4 md:w-4 text-blueColor" />
+                            <p className="text-[0.625rem] md:text-[0.600rem] xl:text-[0.700rem]">
                                 25 Mar 2024
                             </p>
                         </div>
                     </div>
-                    <div className="flex items-center gap-2 justify-between">
-                        <button className="py-2 px-4 bg-blueColor border-white hover:bg-white border hover:border-blueColor hover:text-blueColor transition-all duration-500 text-white font-medium rounded-md text-[0.640rem] xl:text-[0.740rem]">
+                    <div className="flex flex-col md:flex-row items-center gap-2 justify-between">
+                        <button className="py-2 px-3 xl:px-4 bg-blueColor border-white hover:bg-white border hover:border-blueColor hover:text-blueColor transition-all duration-500 text-white font-medium rounded-md text-[0.640rem] xl:text-[0.740rem] w-full">
                             View Details
                         </button>
-                        <button className="py-2 px-4 bg-profileBgColor hover:bg-blueColor hover:text-white transition-all duration-500 text-blueColor font-medium rounded-md text-[0.640rem] xl:text-[0.740rem]">
+                        <button className="py-2 px-3 xl:px-4 bg-profileBgColor hover:bg-blueColor hover:text-white transition-all duration-500 text-blueColor font-medium rounded-md text-[0.640rem] xl:text-[0.740rem] w-full">
                             Compare
                         </button>
                     </div>

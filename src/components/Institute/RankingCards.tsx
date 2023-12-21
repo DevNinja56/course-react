@@ -9,7 +9,7 @@ interface RankingProps {
 
 const RankingCards = ({ img, text, className }: RankingProps) => {
     return (
-        <div className="py-5 px-6 border-b border-gray-300 flex w-full items-center justify-between">
+        <div className="py-5 px-4 md:px-6 border-b border-gray-300 flex w-full items-center justify-between">
             <Image
                 height={25}
                 width={93}
