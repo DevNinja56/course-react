@@ -36,7 +36,7 @@ const FilterPage = () => {
                 />
             </div>
             <div className="w-full pb-28">
-                <div className="max-w-[1200px] 2xl:max-w-[2400px] mx-auto px-5 md:px-[50px] lg:px-2 2xl:px-8 transition-all duration-300 flex justify-between">
+                <div className="container mx-auto px-5 md:px-[50px] lg:px-2 2xl:px-8 transition-all duration-300 flex justify-between">
                     <CourseFilter />
                     <RightCardsBox />
                 </div>

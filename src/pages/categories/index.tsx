@@ -56,7 +56,7 @@ const Fields = () => {
                 />
             </div>
             <div className="w-full pb-4 md:pb-20">
-                <div className="max-w-[1150px] 2xl:max-w-[2350px] mx-auto px-[80px] lg:px-2 2xl:px-8 transition-all duration-300 flex justify-between">
+                <div className="container mx-auto px-[80px] lg:px-2 2xl:px-8 transition-all duration-300 flex justify-between">
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-[30px] w-full place-items-center">
                         {isLoading ? (
                             <LoaderSpinner />

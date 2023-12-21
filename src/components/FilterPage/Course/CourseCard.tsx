@@ -31,10 +31,10 @@ const CourseCard = ({ course }: CardProps) => {
                 />
                 <Image
                     height={174}
-                    width={282}
+                    width={200}
                     alt="card"
                     src={`${logo ?? '/images/FilterPage/Rectangle 3634.svg'}`}
-                    className="h-[200px] w-full"
+                    className="h-[200px] w-auto mx-auto object-scale-down"
                     priority
                 />
             </div>

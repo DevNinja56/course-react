@@ -25,7 +25,7 @@ const Home = () => {
                     src="/images/Home/homeRound2.svg"
                     priority
                 />
-                <div className="flex flex-col lg:flex-row justify-between z-10 w-full">
+                <div className="flex flex-col lg:flex-row justify-between z-10 w-full ">
                     <div className="flex flex-col px-6 md:px-12 lg:px-0 lg:pl-4 xl:pl-36 lg:pr-40 xl:pr-12 pt-16 lg:pt-32">
                         <div className="pr-0 lg:pr-60 mb-5">
                             <h1 className="text-mainTextColor text-[32px] md:text-[45px] font-black mb-2">
@@ -90,13 +90,15 @@ const Home = () => {
                 />
                 <CategoriesSection />
             </div>
-            <div className="w-full pb-20 2xl:pb-[700px] flex flex-col items-center overflow-hidden bg-white">
-                <p className="text-xl md:text-[23px] font-bold text-blueColor mb-1">
-                    Scholarships
-                </p>
-                <h1 className="text-textLightBlackColor text-[32px] md:text-[48px] font-extrabold mb-5 text-center">
-                    Scholarships you may be interested in
-                </h1>
+            <div className="w-full py-8 md:py-12 lg:py-16">
+                <div className="container mx-auto flex flex-col items-center overflow-hidden">
+                    <h1 className="text-xl md:text-2xl font-bold text-blueColor mb-1">
+                        Scholarships
+                    </h1>
+                    <h4 className="text-textLightBlackColor text-[32px] md:text-[48px] font-extrabold mb-5 text-center">
+                        Scholarships you may be interested in
+                    </h4>
+                </div>
                 <ScholarshipSlider />
             </div>
             <div className="w-full pb-32 relative bg-white">
@@ -116,7 +118,7 @@ const Home = () => {
                     className="absolute right-4 lg:right-0 xl:right-28 top-[285px] lg:top-[230px] hidden md:block"
                     priority
                 />
-                <div className="max-w-[1100px] 2xl:max-w-[2300px] mx-auto px-4 md:px-[50px] lg:px-2 2xl:px-8 transition-all duration-300 flex flex-col items-center">
+                <div className="container mx-auto px-4 md:px-[50px] lg:px-2 2xl:px-8 transition-all duration-300 flex flex-col items-center">
                     <p className="font-bold text-xl md:text-[23px] text-blueColor mb-3">
                         Our Events
                     </p>
@@ -131,7 +133,7 @@ const Home = () => {
                     </div>
                 </div>
             </div>
-            <div className="bg-profileBgColor py-[35px] px-9 flex flex-col lg:flex-row items-center justify-between gap-10 md:gap-0 xl:gap-5 relative">
+            <div className="bg-profileBgColor py-[35px] px-9  gap-10 md:gap-0 xl:gap-5 relative ">
                 <Image
                     height={70}
                     width={70}
@@ -148,82 +150,84 @@ const Home = () => {
                     src="/images/Home/whychooseusroundimg2.svg"
                     priority
                 />
-                <Image
-                    height={750.41}
-                    width={600}
-                    className="w-full lg:w-[600px] hidden md:block"
-                    alt="main"
-                    src="/images/Home/why choose us mainImg.svg"
-                    priority
-                />
-                <Image
-                    height={750.41}
-                    width={600}
-                    className="w-full lg:w-[600px] block md:hidden"
-                    alt="main"
-                    src="/images/Home/mobileWhyChooseUsImg.svg"
-                    priority
-                />
-                <div className="flex flex-col px-0 md:px-20 lg:pr-0 xl:pr-16 z-10">
-                    <h1 className="text-mainTextColor text-3xl md:text-[40px] font-extrabold mb-5">
-                        Why Choose Us?
-                    </h1>
-                    <p className="text-darkGrayColor mb-10 text-[15px]">
-                        There are many variations of passages of Lorem Ipsum
-                        available, but the majority have suffered alteration in
-                        some form. There are many variations of passages of
-                        Lorem Ipsum available.
-                    </p>
-                    <div className="flex flex-col gap-y-5 mb-12">
-                        <div className="flex items-center gap-3">
-                            <div className="bg-purpleColor flex items-center justify-center h-[32px] min-w-[32px] rounded-full">
-                                <Image
-                                    height={18}
-                                    width={18}
-                                    alt="check"
-                                    src="/images/Home/check.svg"
-                                    priority
-                                />
+                <div className="container mx-auto flex flex-col lg:flex-row items-center justify-between">
+                    <Image
+                        height={750.41}
+                        width={600}
+                        className="w-full lg:w-[600px] hidden md:block"
+                        alt="main"
+                        src="/images/Home/why choose us mainImg.svg"
+                        priority
+                    />
+                    <Image
+                        height={750.41}
+                        width={600}
+                        className="w-full lg:w-[600px] block md:hidden"
+                        alt="main"
+                        src="/images/Home/mobileWhyChooseUsImg.svg"
+                        priority
+                    />
+                    <div className="flex flex-col px-0 md:px-20 lg:pr-0 xl:pr-16 z-10 ">
+                        <h1 className="text-mainTextColor text-3xl md:text-[40px] font-extrabold mb-5">
+                            Why Choose Us?
+                        </h1>
+                        <p className="text-darkGrayColor mb-10 text-[15px]">
+                            There are many variations of passages of Lorem Ipsum
+                            available, but the majority have suffered alteration
+                            in some form. There are many variations of passages
+                            of Lorem Ipsum available.
+                        </p>
+                        <div className="flex flex-col gap-y-5 mb-12">
+                            <div className="flex items-center gap-3">
+                                <div className="bg-purpleColor flex items-center justify-center h-[32px] min-w-[32px] rounded-full">
+                                    <Image
+                                        height={18}
+                                        width={18}
+                                        alt="check"
+                                        src="/images/Home/check.svg"
+                                        priority
+                                    />
+                                </div>
+                                <p className="font-medium text-darkGrayColor">
+                                    There are many variations of passages of
+                                    Lorem Ipsum.
+                                </p>
                             </div>
-                            <p className="font-medium text-darkGrayColor">
-                                There are many variations of passages of Lorem
-                                Ipsum.
-                            </p>
-                        </div>
-                        <div className="flex items-center gap-3">
-                            <div className="bg-pinkColor flex items-center justify-center h-[32px] min-w-[32px] rounded-full">
-                                <Image
-                                    height={18}
-                                    width={18}
-                                    alt="check"
-                                    src="/images/Home/check.svg"
-                                    priority
-                                />
+                            <div className="flex items-center gap-3">
+                                <div className="bg-pinkColor flex items-center justify-center h-[32px] min-w-[32px] rounded-full">
+                                    <Image
+                                        height={18}
+                                        width={18}
+                                        alt="check"
+                                        src="/images/Home/check.svg"
+                                        priority
+                                    />
+                                </div>
+                                <p className="font-medium text-darkGrayColor">
+                                    There are many variations of passages of
+                                    Lorem Ipsum.
+                                </p>
                             </div>
-                            <p className="font-medium text-darkGrayColor">
-                                There are many variations of passages of Lorem
-                                Ipsum.
-                            </p>
-                        </div>
-                        <div className="flex items-center gap-3">
-                            <div className="bg-blueColor flex items-center justify-center h-[32px] min-w-[32px] rounded-full">
-                                <Image
-                                    height={18}
-                                    width={18}
-                                    alt="check"
-                                    src="/images/Home/check.svg"
-                                    priority
-                                />
+                            <div className="flex items-center gap-3">
+                                <div className="bg-blueColor flex items-center justify-center h-[32px] min-w-[32px] rounded-full">
+                                    <Image
+                                        height={18}
+                                        width={18}
+                                        alt="check"
+                                        src="/images/Home/check.svg"
+                                        priority
+                                    />
+                                </div>
+                                <p className="font-medium text-darkGrayColor">
+                                    There are many variations of passages of
+                                    Lorem Ipsum.
+                                </p>
                             </div>
-                            <p className="font-medium text-darkGrayColor">
-                                There are many variations of passages of Lorem
-                                Ipsum.
-                            </p>
                         </div>
+                        <button className="py-[17px] px-[48px] rounded-[5px] bg-blueColor text-white font-semibold text-lg hover:bg-blue-600 w-fit">
+                            More Details
+                        </button>
                     </div>
-                    <button className="py-[17px] px-[48px] rounded-[5px] bg-blueColor text-white font-semibold text-lg hover:bg-blue-600 w-fit">
-                        More Details
-                    </button>
                 </div>
             </div>
         </>
