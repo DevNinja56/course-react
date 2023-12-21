@@ -125,6 +125,9 @@ const Testimonial = () => {
                       ROUTES.COURSE.replace(':id', '')
                   ) ||
                   router.pathname.includes(
+                      ROUTES.SCHOLARSHIP.replace(':id', '')
+                  ) ||
+                  router.pathname.includes(
                       ROUTES.INSTITUTES.replace(':id', '')
                   ) ? (
                     <Image

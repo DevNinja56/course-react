@@ -104,7 +104,7 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                             </div>
                         </div>
                         <div className="flex flex-col lg:flex-row gap-0 xl:gap-16 w-full justify-between">
-                            <div className="bg-white w-full lg:w-[70%] xl:w-2/3 h-headerStickyHeight sticky top-[110px] no-scrollbar">
+                            <div className="w-full lg:w-[70%] xl:w-2/3 h-auto lg:h-headerStickyHeight static lg:sticky top-[110px] no-scrollbar">
                                 <div className=" transition-all duration-300">
                                     <div className="flex flex-col gap-y-6 mb-20">
                                         <div className="tabs-container capitalize">

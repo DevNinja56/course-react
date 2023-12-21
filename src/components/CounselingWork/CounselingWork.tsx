@@ -17,7 +17,8 @@ const CounselingWork = () => {
         >
             {router.pathname === '/courseDetail' ||
             router.pathname.includes(ROUTES.INSTITUTES.replace(':id', '')) ||
-            router.pathname.includes(ROUTES.COURSE.replace(':id', '')) ? (
+            router.pathname.includes(ROUTES.COURSE.replace(':id', '')) ||
+            router.pathname.includes(ROUTES.SCHOLARSHIP.replace(':id', '')) ? (
                 <Image
                     height={217}
                     width={175}
@@ -42,6 +43,9 @@ const CounselingWork = () => {
                         router.pathname === '/apply' ||
                         router.pathname.includes(
                             ROUTES.COURSE.replace(':id', '')
+                        ) ||
+                        router.pathname.includes(
+                            ROUTES.SCHOLARSHIP.replace(':id', '')
                         )
                             ? `${
                                   router.pathname === ROUTES.APPLY ||
@@ -251,7 +255,8 @@ const CounselingWork = () => {
             </div>
             {router.pathname === '/courseDetail' ||
             router.pathname.includes(ROUTES.INSTITUTES.replace(':id', '')) ||
-            router.pathname.includes(ROUTES.COURSE.replace(':id', '')) ? (
+            router.pathname.includes(ROUTES.COURSE.replace(':id', '')) ||
+            router.pathname.includes(ROUTES.SCHOLARSHIP.replace(':id', '')) ? (
                 ''
             ) : (
                 <Image
