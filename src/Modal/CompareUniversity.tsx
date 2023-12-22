@@ -77,36 +77,36 @@ const CompareUniversityModal = () => {
                               course: []
                           }
                         : field === 'discipline'
-                        ? {
-                              institute: prev.institute,
-                              discipline: data,
-                              degreeLevel: [],
-                              specialization: [],
-                              course: []
-                          }
-                        : field === 'degreeLevel'
-                        ? {
-                              institute: prev.institute,
-                              discipline: prev.discipline,
-                              degreeLevel: data,
-                              specialization: [],
-                              course: []
-                          }
-                        : field === 'specialization'
-                        ? {
-                              institute: prev.institute,
-                              discipline: prev.discipline,
-                              degreeLevel: prev.degreeLevel,
-                              specialization: data,
-                              course: []
-                          }
-                        : {
-                              institute: prev.institute,
-                              discipline: prev.discipline,
-                              degreeLevel: prev.degreeLevel,
-                              specialization: prev.specialization,
-                              course: data
-                          }
+                          ? {
+                                institute: prev.institute,
+                                discipline: data,
+                                degreeLevel: [],
+                                specialization: [],
+                                course: []
+                            }
+                          : field === 'degreeLevel'
+                            ? {
+                                  institute: prev.institute,
+                                  discipline: prev.discipline,
+                                  degreeLevel: data,
+                                  specialization: [],
+                                  course: []
+                              }
+                            : field === 'specialization'
+                              ? {
+                                    institute: prev.institute,
+                                    discipline: prev.discipline,
+                                    degreeLevel: prev.degreeLevel,
+                                    specialization: data,
+                                    course: []
+                                }
+                              : {
+                                    institute: prev.institute,
+                                    discipline: prev.discipline,
+                                    degreeLevel: prev.degreeLevel,
+                                    specialization: prev.specialization,
+                                    course: data
+                                }
                 );
             })
             .finally(() => setIsLoading(false));
@@ -303,17 +303,17 @@ const CompareUniversityModal = () => {
             </div>
             <Button
                 className="pt-[14px] pb-[13px]"
-                text="Send Message"
+                text="Compare"
                 disabled={isDisabledButton}
                 onClick={() => {
                     !isDisabledButton &&
                         (index === 'first'
                             ? compareFirst(compareData)
                             : index === 'second'
-                            ? compareSecond(compareData)
-                            : index === 'third'
-                            ? compareThird(compareData)
-                            : null);
+                              ? compareSecond(compareData)
+                              : index === 'third'
+                                ? compareThird(compareData)
+                                : null);
                     hideModal();
                 }}
             />

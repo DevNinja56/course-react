@@ -21,10 +21,12 @@ const CurrencyConverter = () => {
                 item.name ===
                     (code ? name.split(currencies + ' - ')[1].trim() : name)
         )[0];
-        updateCountry({
+        const country = {
             ...filterObject,
             currencies: filterObject.currencies.split(',')[0]
-        });
+        };
+        updateCountry(country);
+        localStorage.setItem('isChangedCurrency', JSON.stringify(country));
     };
 
     return (

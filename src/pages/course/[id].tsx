@@ -18,9 +18,7 @@ import React, { useState } from 'react';
 import { CiCalculator2 } from 'react-icons/ci';
 import { IoShareSocialSharp } from 'react-icons/io5';
 import { IoDocumentText } from 'react-icons/io5';
-import { FaBook } from 'react-icons/fa';
-import { GiTrophy } from 'react-icons/gi';
-import { GiOpenBook } from 'react-icons/gi';
+import { GiOpenBook, GiTrophy } from 'react-icons/gi';
 import { GoClockFill } from 'react-icons/go';
 import { FaMoneyBillWave } from 'react-icons/fa';
 import { IoLocation } from 'react-icons/io5';
@@ -356,17 +354,7 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                                                 </p>
                                             </div>
                                         </div>
-                                        <div className="flex items-center gap-4 pl-5 border-b-2 border-gray-200 border-opacity-50 py-4">
-                                            <FaBook className="h-9 w-9 text-blueColor" />
-                                            <div className="flex flex-col gap-[6px]">
-                                                <p className="font-bold text-xl text-mainTextColor">
-                                                    Course Name
-                                                </p>
-                                                <p className="text-lightGrayColor text-xl">
-                                                    {course.degree.name}
-                                                </p>
-                                            </div>
-                                        </div>
+
                                         <div className="flex items-center gap-4 pl-5 border-b-2 border-gray-200 border-opacity-50 py-4">
                                             <GiTrophy className="h-9 w-9 text-blueColor" />
                                             <div className="flex flex-col gap-[6px]">

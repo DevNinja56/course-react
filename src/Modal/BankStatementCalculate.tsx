@@ -21,7 +21,7 @@ const BankStatementCalculate = () => {
     const visaFee = isLiveAustralia
         ? total - initialDeposit - oshc
         : tuitionFee - initialDeposit + livingCost;
-    const currency = isLiveAustralia ? 'AED' : 'GBP';
+    const currency = isLiveAustralia ? 'AUD' : 'GBP';
 
     const data = [
         {
