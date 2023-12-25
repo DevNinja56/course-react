@@ -14,6 +14,7 @@ import UserActivation from '@/components/UserStatus/UserInActive';
 import UserBlock from '@/components/UserStatus/Block';
 import Testimonial from '@/components/Testimonial';
 import CounselingWork from '@/components/CounselingWork/CounselingWork';
+import ChatBoot from '@/components/ChatBoot';
 
 export interface propsType {
     children: React.ReactElement;
@@ -103,6 +104,7 @@ const MainLayout = ({
                 ) : (
                     children
                 )}
+                <ChatBoot />
                 {counselingRoutes.includes(router.pathname) && (
                     <CounselingWork />
                 )}
@@ -121,6 +123,7 @@ const MainLayout = ({
             ) : (
                 <Layout />
             )}
+            {/* <TawkMessengerReact propertyId="property_id" widgetId="1hig23p0k" /> */}
 
             <Toaster position="bottom-right" reverseOrder={false} />
             <ModalWraper />
