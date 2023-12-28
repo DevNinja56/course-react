@@ -140,7 +140,9 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                                                                         className="content text-base"
                                                                         dangerouslySetInnerHTML={{
                                                                             __html:
-                                                                                course?.entryRequirements ??
+                                                                                course
+                                                                                    .countryDetails
+                                                                                    .entryRequirement ??
                                                                                 'No Entry Requirements'
                                                                         }}
                                                                     ></div>
@@ -158,7 +160,11 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                                                                         Requirements
                                                                     </h3>
                                                                     <p>
-                                                                        {course.language.join()}
+                                                                        {
+                                                                            course
+                                                                                .countryDetails
+                                                                                .languageRequirement
+                                                                        }
                                                                     </p>
                                                                 </div>
                                                             </div>
@@ -218,7 +224,9 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                                                                 </h3>
                                                                 <p>
                                                                     {setCurrencyValue(
-                                                                        course.initialDeposit
+                                                                        course
+                                                                            .countryDetails
+                                                                            .initialDeposit
                                                                     )}
                                                                 </p>
                                                             </div>

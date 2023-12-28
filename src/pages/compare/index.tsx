@@ -29,8 +29,8 @@ const Compare = ({ data }: { data?: singleCourseType }) => {
             first === null
                 ? compareFirst(compareData)
                 : second === null
-                ? compareSecond(compareData)
-                : compareThird(compareData);
+                  ? compareSecond(compareData)
+                  : compareThird(compareData);
         }
     }, [data]);
 
@@ -126,9 +126,9 @@ const Compare = ({ data }: { data?: singleCourseType }) => {
                 },
                 {
                     title: 'Initial Deposit',
-                    first: first?.course.initialDeposit,
-                    second: second?.course.initialDeposit,
-                    third: third?.course.initialDeposit
+                    first: first?.course.countryDetails.initialDeposit,
+                    second: second?.course.countryDetails.initialDeposit,
+                    third: third?.course.countryDetails.initialDeposit
                 },
                 {
                     title: 'Yearly fee',

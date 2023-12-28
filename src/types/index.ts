@@ -162,13 +162,19 @@ export type courseType = {
     logo: string;
     degree: degreeType;
     duration: number;
-    language: string[];
+    // language: string[];
     specialization: specializationType;
     institute: instituteType;
     intakes: string[];
     tuitionFee: number;
     country: countryType;
     discipline: disciplineType[];
+    countryDetails: {
+        country: string;
+        entryRequirement: string;
+        languageRequirement: string;
+        initialDeposit: number;
+    };
     favoriteId?: string[];
 };
 export type singleCourseType = {
@@ -179,12 +185,18 @@ export type singleCourseType = {
     degree: degreeType;
     duration: number;
     tuitionFee: number;
-    initialDeposit: number;
-    language: string[];
+    // initialDeposit: number;
+    // language: string[];
+    // entryRequirements: string;
     specialization: specializationType;
     description: string;
-    entryRequirements: string;
     institute: instituteType;
+    countryDetails: {
+        country: string;
+        entryRequirement: string;
+        languageRequirement: string;
+        initialDeposit: number;
+    };
     favoriteId?: string[];
     id: string;
 };

@@ -9,7 +9,12 @@ const BankStatementCalculate = () => {
         modalState: singleCourseType;
         hideModal: () => void;
     };
-    const { initialDeposit, tuitionFee, duration, institute } = course;
+    const {
+        tuitionFee,
+        duration,
+        institute,
+        countryDetails: { initialDeposit }
+    } = course;
     const isLiveAustralia = institute.country.name
         .toLowerCase()
         .includes('australia');
