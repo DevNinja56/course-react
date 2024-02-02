@@ -9,7 +9,7 @@ import { API_ENDPOINTS } from '@/config/Api_EndPoints';
 import InputBox from '@/components/Input';
 import Select from 'react-select';
 import { CSSObject } from '@emotion/styled';
-import Image from 'next/image';
+
 interface formType {
     first_name?: string;
     last_name?: string;
