@@ -13,6 +13,8 @@ const UpdateUserAcademicInfo = dynamic(
 );
 import CurrencyConverter from './CurrencyConverter';
 import BankStatementCalculate from './BankStatementCalculate';
+import UserDetail from './UserDetail';
+import CancelApplication from './CancelApplication';
 
 const ModalWraper = () => {
     const { modal } = useUi();
@@ -26,7 +28,9 @@ const ModalWraper = () => {
         [modalType.login_confirmation]: <LoginConfirmation />,
         [modalType.change_password]: <ChangePassword />,
         [modalType.currency_converter]: <CurrencyConverter />,
-        [modalType.bank_statement_calculator]: <BankStatementCalculate />
+        [modalType.bank_statement_calculator]: <BankStatementCalculate />,
+        [modalType.user_detail]: <UserDetail />,
+        [modalType.cancel_application]: <CancelApplication />
     };
 
     return (

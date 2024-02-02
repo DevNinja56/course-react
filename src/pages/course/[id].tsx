@@ -5,7 +5,6 @@ import Tabs from '@/components/Tabs';
 import RequirementBox from '@/components/course/RequirementBox';
 import { API_ENDPOINTS } from '@/config/Api_EndPoints';
 import { ROUTES } from '@/config/constant';
-import { useApply } from '@/hooks/apply';
 import { useUi } from '@/hooks/user-interface';
 import { modalType } from '@/store/slices/ui.slice';
 import { singleCourseType } from '@/types';
@@ -28,8 +27,14 @@ import CourseTag from '@/components/course/CourseTag';
 
 const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
     const [isFavorite, setFavorite] = useState(!!course?.favoriteId?.[0]);
-    const { addCourseState, addDegreeState, addInstituteState } = useApply();
     const { updateModal } = useUi();
+
+    const openUserDetailModal = (courseId: string) => {
+        updateModal({
+            type: modalType.user_detail,
+            state: { courseId }
+        });
+    };
     return (
         <>
             {!course ? (
@@ -313,24 +318,29 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                                             <Button
                                                 className="py-5 rounded-md text-lg font-semibold"
                                                 text="Start Application"
-                                                link={ROUTES.APPLY}
-                                                onClick={() => {
-                                                    addInstituteState({
-                                                        label: course.institute
-                                                            .name,
-                                                        value: course.institute
-                                                            .id
-                                                    });
-                                                    addDegreeState({
-                                                        label: course.degree
-                                                            .name,
-                                                        value: course.degree.id
-                                                    });
-                                                    addCourseState({
-                                                        label: course.name,
-                                                        value: course.id
-                                                    });
-                                                }}
+                                                // link={ROUTES.APPLY}
+                                                // onClick={() => {
+                                                //     addInstituteState({
+                                                //         label: course.institute
+                                                //             .name,
+                                                //         value: course.institute
+                                                //             .id
+                                                //     });
+                                                //     addDegreeState({
+                                                //         label: course.degree
+                                                //             .name,
+                                                //         value: course.degree.id
+                                                //     });
+                                                //     addCourseState({
+                                                //         label: course.name,
+                                                //         value: course.id
+                                                //     });
+                                                // }}
+                                                onClick={() =>
+                                                    openUserDetailModal(
+                                                        course.id
+                                                    )
+                                                }
                                             />
 
                                             <Button

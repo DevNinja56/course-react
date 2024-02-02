@@ -235,6 +235,7 @@ export type applyTypes = {
     institute: instituteType;
     user: userType | null;
     message: string;
+    status: string;
     userDetails: { name: string; phone_number: string; email: string } | null;
     createdAt: string;
     updatedAt: string;

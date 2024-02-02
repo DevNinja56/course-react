@@ -39,12 +39,15 @@ const config: Config = {
                 loginBgColor: '#fbfcff',
                 pinkColor: '#F2277E',
                 siderBarBottom: '#D9D9D9',
-                filterBorderColor: '#cdd5e1'
+                filterBorderColor: '#cdd5e1',
+                redColor:"#FF0404"
             },
             boxShadow: {
+                
                 'bottom-shadow': '0 2px 2px 0 rgba(190, 190, 190, 0.15)',
                 custom: '0 4px 4px 0 rgba(190, 190, 190, 0.25)',
-                RequirementBox: '0px 4px 16.1px 0px rgba(190, 190, 190, 0.25)'
+                RequirementBox: '0px 4px 16.1px 0px rgba(190, 190, 190, 0.25)',
+                progressBarShadow:"0px 11px 25.8px 0px rgba(190, 190, 190, 0.15);"
             },
             height: {
                 headerStickyHeight: 'calc(100vh - 110px)'
