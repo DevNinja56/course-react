@@ -3,6 +3,7 @@ import RequirementBox from '@/components/course/RequirementBox';
 import { useUi } from '@/hooks/user-interface';
 import { useGetUserAppliesQuery } from '@/store/slices/allRequests';
 import { modalType } from '@/store/slices/ui.slice';
+import Image from 'next/image';
 import { useRouter } from 'next/router';
 import React from 'react';
 
@@ -32,9 +33,10 @@ const UserApplicationDetails = () => {
                     </p>
                 </div>
                 <div className="flex items-center gap-3">
-                    <img
+                    <Image
+                        width={20}
                         className="w-8 h-8 rounded-[5px]"
-                        src={selectedCourse?.course.institute.logo}
+                        src={selectedCourse?.course?.institute?.logo ?? ''}
                         alt=""
                     />
                     <div className="flex flex-col ">
@@ -94,7 +96,7 @@ const UserApplicationDetails = () => {
                     }
                     className=" flex items-center justify-center mx-auto my-24 text-redColor border border-redColor py-4 px-9 rounded-md"
                 >
-                    Cancel application
+                    Cancel Application
                 </button>
             </div>
         </>

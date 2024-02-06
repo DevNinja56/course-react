@@ -9,13 +9,14 @@ import { API_ENDPOINTS } from '@/config/Api_EndPoints';
 import InputBox from '@/components/Input';
 import Select from 'react-select';
 import { CSSObject } from '@emotion/styled';
+import Image from 'next/image';
 
 interface formType {
     first_name?: string;
     last_name?: string;
     email?: string;
     phone_number?: string;
-    date_of_birth: string;
+    dob: string;
     nationality: string;
     country_of_residence: string;
     city_of_residence: string;
@@ -23,6 +24,7 @@ interface formType {
     campus: string;
     course: string;
     message: string;
+    permission: boolean;
 }
 
 const intakeOptions = [
@@ -44,13 +46,14 @@ const UserDetail = () => {
     const { modalState } = useUi();
     const [otherMessage, setMessage] = useState(false);
     const { courseId } = modalState as { courseId: string };
-
     const { isAuthenticated, user } = useUserAuth();
+
     const {
         register,
         handleSubmit: fromSubmit,
         formState: { errors, isValid },
         setValue,
+        getValues,
         reset
     } = useForm<formType>();
 
@@ -63,6 +66,11 @@ const UserDetail = () => {
             setFirstStep('second');
         }
     };
+    const nationality = getValues('nationality');
+    const country = getValues('country_of_residence');
+    const city = getValues('city_of_residence');
+    const intake = getValues('intake');
+    const message = getValues('message');
 
     const onClickBack = () => {
         if (!isAuthenticated && firstStep === 'second') {
@@ -73,7 +81,7 @@ const UserDetail = () => {
     const handleSubmit = ({
         first_name,
         last_name,
-        date_of_birth,
+        dob,
         nationality,
         country_of_residence,
         city_of_residence,
@@ -93,7 +101,7 @@ const UserDetail = () => {
                         ? {
                               first_name,
                               last_name,
-                              date_of_birth,
+                              dob,
                               nationality,
                               country_of_residence,
                               city_of_residence,
@@ -121,7 +129,12 @@ const UserDetail = () => {
                 <div className="p-7 bg-white rounded-3xl">
                     <div className="flex items-center gap-2">
                         <div className="bg-blueColor p-2 rounded-full">
-                            <img src="/images/userLogo.png" alt="" />
+                            <Image
+                                width={30}
+                                height={30}
+                                src="/images/userLogo.png"
+                                alt=""
+                            />
                         </div>
                         <h2 className="text-3xl font-bold">Basic Details</h2>
                     </div>
@@ -178,17 +191,16 @@ const UserDetail = () => {
                                 </label>
 
                                 <InputBox
-                                    {...register('date_of_birth', {
+                                    {...register('dob', {
                                         required: 'Date of Birth is required'
                                     })}
+                                    type="dob"
+                                    name="dob"
                                     placeholder="DD/MM/YYYY"
-                                    error={
-                                        errors.date_of_birth &&
-                                        errors.date_of_birth.message
-                                    }
+                                    error={errors.dob && errors.dob.message}
                                     autoComplete="off"
                                     className="p-0"
-                                    customInputClass="border py-2 pl-2 pr-20 rounded-md w-full text-sm"
+                                    customInputClass="border py-2 pl-2 pr-2 rounded-md w-full text-sm"
                                 />
                             </div>
                             <div className="flex flex-col gap-1">
@@ -210,19 +222,27 @@ const UserDetail = () => {
                                     onChange={(e) => {
                                         setValue('nationality', e?.value ?? '');
                                     }}
+                                    defaultValue={
+                                        nationality
+                                            ? {
+                                                  label: nationality,
+                                                  value: nationality
+                                              }
+                                            : undefined
+                                    }
                                     styles={{
                                         control: (base: CSSObject) => ({
                                             ...base,
                                             padding: '0px',
                                             borderRadius: '6px',
-                                            border:
-                                                errors.nationality &&
-                                                errors.nationality?.message
-                                                    ? '1px solid red'
-                                                    : '1px solid #717070'
+                                            fontSize: '14px',
+                                            border: errors.nationality
+                                                ? '1px solid red'
+                                                : '1px solid #717070'
                                         })
                                     }}
                                 />
+
                                 {errors.nationality?.message && (
                                     <span className="text-xs  text-red-600 ">
                                         {errors.nationality?.message}
@@ -250,11 +270,18 @@ const UserDetail = () => {
                                             e?.value ?? ''
                                         );
                                     }}
+                                    defaultValue={
+                                        country
+                                            ? { label: country, value: country }
+                                            : undefined
+                                    }
                                     styles={{
                                         control: (base: CSSObject) => ({
                                             ...base,
                                             padding: '0px',
                                             borderRadius: '6px',
+                                            fontSize: '14px',
+
                                             border:
                                                 errors.country_of_residence &&
                                                 errors.country_of_residence
@@ -289,6 +316,11 @@ const UserDetail = () => {
                                             e?.value ?? ''
                                         );
                                     }}
+                                    defaultValue={
+                                        city
+                                            ? { label: city, value: city }
+                                            : undefined
+                                    }
                                     styles={{
                                         control: (base: CSSObject) => ({
                                             ...base,
@@ -319,17 +351,16 @@ const UserDetail = () => {
                                 {...register('phone_number', {
                                     required: 'Phone Number is required'
                                 })}
-                                placeholder="+92 300 1234567"
+                                type="tel"
+                                placeholder="Phone Number"
                                 error={errors.phone_number?.message}
-                                autoComplete="off"
-                                className="p-0"
                                 customInputClass="border py-2 pl-2 pr-20 rounded-md w-[97%] text-sm"
                             />
                         </div>
                         <div className="flex items-end justify-end">
                             <button
                                 onClick={onClickNext}
-                                className=" flex items-center gap-2 px-7 py-3 rounded-md text-lg font-semibold bg-blueColor text-white"
+                                className=" flex items-center gap-2 px-7 py-3 rounded-md text-lg font-semibold bg-blueColor text-white  hover:bg-blue-600"
                             >
                                 Continue
                                 <span>
@@ -357,7 +388,12 @@ const UserDetail = () => {
                 <div className="p-7 bg-white rounded-3xl">
                     <div className="flex items-center gap-2">
                         <div className="bg-blueColor p-2 rounded-full">
-                            <img src="/images/userLogo.png" alt="" />
+                            <Image
+                                width={30}
+                                height={30}
+                                src="/images/userLogo.png"
+                                alt=""
+                            />
                         </div>
                         <h2 className="text-3xl font-bold">Choose Intake</h2>
                     </div>
@@ -389,12 +425,19 @@ const UserDetail = () => {
                                             ...base,
                                             padding: '0px',
                                             borderRadius: '6px',
+                                            fontSize: '14px',
                                             border: errors.intake?.message
                                                 ? '1px solid red'
                                                 : '1px solid #717070'
                                         })
                                     }}
+                                    defaultValue={
+                                        intake
+                                            ? { label: intake, value: intake }
+                                            : undefined
+                                    }
                                 />
+
                                 {errors.intake?.message && (
                                     <span className="text-xs  text-red-600 ">
                                         {errors.intake?.message}
@@ -426,11 +469,20 @@ const UserDetail = () => {
                                         setMessage(false);
                                         setValue('message', e?.value ?? '');
                                     }}
+                                    defaultValue={
+                                        message
+                                            ? {
+                                                  label: message,
+                                                  value: message
+                                              }
+                                            : undefined
+                                    }
                                     styles={{
                                         control: (base: CSSObject) => ({
                                             ...base,
                                             padding: '0px',
                                             borderRadius: '6px',
+                                            fontSize: '14px',
                                             border: errors.message?.message
                                                 ? '1px solid red'
                                                 : '1px solid #717070'
@@ -468,21 +520,32 @@ const UserDetail = () => {
                         </div>
 
                         <div className="flex items-center gap-2">
-                            <input type="checkbox" />
+                            <input
+                                type="checkbox"
+                                {...register('permission', {
+                                    required:
+                                        'You must give permission to proceed'
+                                })}
+                            />
                             <p className="text-base text-darkGrayColor">
                                 I hereby give permission to Course Option to
                                 represent me and my application with
                                 institutions
                             </p>
                         </div>
+                        {errors.permission && (
+                            <span className="text-xs text-red-600">
+                                {errors.permission.message}
+                            </span>
+                        )}
 
                         <div className="flex items-end justify-between pt-9">
                             <button
                                 onClick={onClickBack}
-                                className={`flex items-center gap-2 px-7 py-3 rounded-md text-lg font-semibold ${
+                                className={`flex items-center gap-2 px-7 py-3 rounded-md text-lg font-semibold  hover:bg-blue-400 hover:text-wh ${
                                     isAuthenticated && firstStep === 'second'
                                         ? 'hidden'
-                                        : 'bg-[#D5E4FF]  text-blueColor'
+                                        : 'bg-[#D5E4FF]  text-blueColor '
                                 }`}
                                 disabled={
                                     isAuthenticated && firstStep === 'second'
@@ -490,9 +553,9 @@ const UserDetail = () => {
                                         : undefined
                                 }
                             >
-                                back
+                                Back
                             </button>
-                            <button className="flex items-center gap-2 px-7 py-3 rounded-md text-lg font-semibold bg-blueColor text-white">
+                            <button className="flex items-center gap-2 px-7 py-3 rounded-md text-lg font-semibold bg-blueColor text-white  hover:bg-blue-600">
                                 Continue
                                 <span>
                                     <svg
