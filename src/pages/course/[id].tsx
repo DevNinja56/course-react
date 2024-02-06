@@ -14,7 +14,7 @@ import { getSsrRequest } from '@/utils/ssrRequest';
 import { GetServerSideProps } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
-import React, { useState } from 'react';
+import React from 'react';
 import { CiCalculator2 } from 'react-icons/ci';
 import { IoShareSocialSharp } from 'react-icons/io5';
 import { IoDocumentText } from 'react-icons/io5';
@@ -27,7 +27,6 @@ import { BiSolidCalendar } from 'react-icons/bi';
 import CourseTag from '@/components/course/CourseTag';
 
 const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
-    const [isFavorite, setFavorite] = useState(!!course?.favoriteId?.[0]);
     const { addCourseState, addDegreeState, addInstituteState } = useApply();
     const { updateModal } = useUi();
     return (
@@ -87,11 +86,8 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                                         <CiCalculator2 />
                                     </button>
                                     <FavoriteButton
-                                        isActive={isFavorite}
+                                        isActive={!!course?.favoriteId?.[0]}
                                         body={{ course: course.id }}
-                                        refetch={() =>
-                                            setFavorite((prev) => !prev)
-                                        }
                                         className="h-[46px] w-[46px] rounded-full flex items-center justify-center border-2 border-white bg-heartBgColor hover:bg-white group"
                                         iconClass={`text-3xl text-white group-hover:text-red-600`}
                                     />
@@ -141,8 +137,8 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                                                                         dangerouslySetInnerHTML={{
                                                                             __html:
                                                                                 course
-                                                                                    .countryDetails
-                                                                                    .entryRequirement ??
+                                                                                    .entryRequirements?.[0]
+                                                                                    .requirement ??
                                                                                 'No Entry Requirements'
                                                                         }}
                                                                     ></div>
@@ -162,8 +158,8 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                                                                     <p>
                                                                         {
                                                                             course
-                                                                                .countryDetails
-                                                                                .languageRequirement
+                                                                                .language?.[0]
+                                                                                .language
                                                                         }
                                                                     </p>
                                                                 </div>
@@ -225,8 +221,8 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                                                                 <p>
                                                                     {setCurrencyValue(
                                                                         course
-                                                                            .countryDetails
-                                                                            .initialDeposit
+                                                                            .initialDeposit?.[0]
+                                                                            .amount
                                                                     )}
                                                                 </p>
                                                             </div>
@@ -248,22 +244,36 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                                             Visit university website
                                         </Link>
                                     </div>
-                                    <div className="flex flex-col gap-5 w-full">
-                                        <div className="flex items-center gap-2">
-                                            <IoDocumentText className="h-8 w-8" />
-                                            <h1 className="font-bold text-2xl text-mainTextColor">
-                                                Requirements
-                                            </h1>
+                                    {course.documentsRequirement && (
+                                        <div className="flex flex-col gap-5 w-full">
+                                            <div className="flex items-center gap-2">
+                                                <IoDocumentText className="h-8 w-8" />
+                                                <h1 className="font-bold text-2xl text-mainTextColor">
+                                                    Requirements
+                                                </h1>
+                                            </div>
+                                            <p className="text-xl font-medium text-lightGrayColor">
+                                                Listed below are the documents
+                                                required to apply for this
+                                                course.
+                                            </p>
+                                            <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-7">
+                                                {course.documentsRequirement?.map(
+                                                    ({ title, url }, i) => (
+                                                        <RequirementBox
+                                                            key={
+                                                                'docs requirement--' +
+                                                                i +
+                                                                title
+                                                            }
+                                                            text={title}
+                                                            url={url}
+                                                        />
+                                                    )
+                                                )}
+                                            </div>
                                         </div>
-                                        <p className="text-xl font-medium text-lightGrayColor">
-                                            Listed below are the documents
-                                            required to apply for this course.
-                                        </p>
-                                        <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-7">
-                                            <RequirementBox text="Passport" />
-                                            <RequirementBox text="Undergraduate Graduation Certificate" />
-                                        </div>
-                                    </div>
+                                    )}
                                 </div>
                             </div>
                             <div className="flex flex-col gap-11 w-full lg:w-[28%] xl:w-[30%]">

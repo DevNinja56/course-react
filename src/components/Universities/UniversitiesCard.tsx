@@ -8,17 +8,15 @@ import { instituteType } from '@/types';
 
 interface propsType {
     institute: instituteType;
-    refetch: () => void;
 }
 
-const UniversitiesCards = ({ institute, refetch }: propsType) => {
+const UniversitiesCards = ({ institute }: propsType) => {
     const { addQuery } = useFilterQuery();
     return (
         <div className="custom-shadow w-[80%] md:w-[35%] lg:w-[31%] rounded-[10px] bg-white relative overflow-hidden group z-10 ">
             <FavoriteButton
                 isActive={!!institute?.favoriteId?.[0]}
                 body={{ institute: institute.id }}
-                refetch={refetch}
             />
             <Link
                 href={ROUTES.INSTITUTES_DETAIL.replace(':id', institute.id)}

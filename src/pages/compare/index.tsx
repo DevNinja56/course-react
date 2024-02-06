@@ -126,9 +126,9 @@ const Compare = ({ data }: { data?: singleCourseType }) => {
                 },
                 {
                     title: 'Initial Deposit',
-                    first: first?.course.countryDetails.initialDeposit,
-                    second: second?.course.countryDetails.initialDeposit,
-                    third: third?.course.countryDetails.initialDeposit
+                    first: first?.course.initialDeposit[0].amount,
+                    second: second?.course.initialDeposit[0].amount,
+                    third: third?.course.initialDeposit[0].amount
                 },
                 {
                     title: 'Yearly fee',

@@ -7,7 +7,6 @@ interface propsType {
     id: string;
     image: string;
     title: string;
-    refetch: () => void;
     link: string;
     onClick?: () => void;
     type: 'course' | 'institute' | 'scholarship' | 'blog';
@@ -17,7 +16,6 @@ const FavCard: React.FC<propsType> = ({
     id,
     image,
     title,
-    refetch,
     link,
     onClick,
     type
@@ -29,7 +27,6 @@ const FavCard: React.FC<propsType> = ({
                 body={{
                     [type]: id
                 }}
-                refetch={refetch}
             />
             <Link href={link} onClick={onClick}>
                 <div className="img">

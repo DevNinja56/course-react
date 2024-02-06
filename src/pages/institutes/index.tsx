@@ -5,7 +5,7 @@ import Image from 'next/image';
 import React from 'react';
 
 const Universities = () => {
-    const { data, refetch } = useGetInstituteQuery();
+    const { data } = useGetInstituteQuery();
 
     return (
         <>
@@ -42,7 +42,6 @@ const Universities = () => {
                             <UniversitiesCards
                                 key={'institute_list__' + item.id}
                                 institute={item}
-                                refetch={refetch}
                             />
                         ))}
                     </div>

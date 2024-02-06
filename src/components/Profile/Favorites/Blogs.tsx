@@ -25,7 +25,6 @@ const Blogs = () => {
                             title={blog.title}
                             image={blog.image}
                             type="blog"
-                            refetch={refetch}
                             link={ROUTES.BLOGS_DETAIL.replace(':id', blog.id)}
                         />
                     ))

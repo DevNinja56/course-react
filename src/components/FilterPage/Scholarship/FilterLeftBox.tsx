@@ -9,6 +9,7 @@ import { useFilterQuery } from '@/hooks/filterQuery';
 import { useSearchedCourses } from '@/hooks/filterCourses';
 import { FilteredButton } from '../FilteredButton';
 import InstituteFilter from '../Course/InstituteFilter';
+import RegionsFilter from '../RegionsFilter';
 
 export const FilterRow = () => (
     <div className="px-4">
@@ -59,6 +60,8 @@ const ScholarshipFilter = () => {
                 )}
             </div>
             <div className="flex flex-col gap-y-6">
+                <RegionsFilter />
+                <FilterRow />
                 <CountriesFilter />
                 <FilterRow />
                 <InstituteFilter />

@@ -4,7 +4,6 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 import FavoriteButton from '../../Button/FavoriteButton';
-import { useSearchedCourses } from '@/hooks/filterCourses';
 import { getCurrencySymbol, setCurrencyValue } from '@/utils/currencyValue';
 import { LuMapPin } from 'react-icons/lu';
 import { CiCalendarDate } from 'react-icons/ci';
@@ -14,31 +13,31 @@ interface CardProps {
 }
 
 const CourseCard = ({ course }: CardProps) => {
-    const { fetchSearchedCoursesRequest } = useSearchedCourses();
     const { country, institute, degree, logo, _id, name, tuitionFee, intakes } =
         course;
 
     return (
         <div
-            className="flex flex-col shadow-custom rounded-md hover:shadow-xl hover:-translate-y-2 transition-all duration-300 cursor-pointer"
+            className="flex flex-col shadow-custom rounded-md hover:shadow-xl hover:-translate-y-2 transition-all duration-300 cursor-pointer relative"
             title={name}
         >
-            <div className="relative">
-                <FavoriteButton
-                    isActive={!!course?.favoriteId?.[0]}
-                    body={{ course: _id }}
-                    refetch={fetchSearchedCoursesRequest}
-                />
-                <Image
-                    height={174}
-                    width={200}
-                    alt="card"
-                    src={`${logo ?? '/images/FilterPage/Rectangle 3634.svg'}`}
-                    className="h-[200px] w-auto mx-auto object-scale-down"
-                    priority
-                />
-            </div>
+            <FavoriteButton
+                isActive={!!course?.favoriteId?.[0]}
+                body={{ course: _id }}
+            />
             <Link href={ROUTES.COURSE.replace(':id', _id)}>
+                <div className="relative">
+                    <Image
+                        height={174}
+                        width={200}
+                        alt="card"
+                        src={`${
+                            logo ?? '/images/FilterPage/Rectangle 3634.svg'
+                        }`}
+                        className="h-[200px] w-auto mx-auto object-scale-down"
+                        priority
+                    />
+                </div>
                 <div className="pt-3 pb-6 px-3 flex flex-col gap-7">
                     <div className="flex flex-col gap-2">
                         <h1

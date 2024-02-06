@@ -13,8 +13,9 @@ const BankStatementCalculate = () => {
         tuitionFee,
         duration,
         institute,
-        countryDetails: { initialDeposit }
+        initialDeposit: listOfInitialDeposit
     } = course;
+    const [{ amount: initialDeposit }] = listOfInitialDeposit;
     const isLiveAustralia = institute.country.name
         .toLowerCase()
         .includes('australia');

@@ -38,7 +38,6 @@ const RightScholarshipCardBox = () => {
                             key={'scholarship__key__' + scholarship._id + i}
                             id={scholarship._id}
                             favoriteId={scholarship.favoriteId}
-                            refetch={fetchScholarship}
                             name={scholarship.name}
                             type={scholarship.type}
                             degrees={scholarship.degrees}

@@ -9,10 +9,9 @@ import { getSsrRequest } from '@/utils/ssrRequest';
 import { GetServerSideProps } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
-import React, { useState } from 'react';
+import React from 'react';
 
 const CourseDetail = ({ data: scholarship }: { data: scholarshipType }) => {
-    const [isFavorite, setFavorite] = useState(!!scholarship?.favoriteId?.[0]);
     return (
         <>
             {!scholarship ? (
@@ -43,13 +42,12 @@ const CourseDetail = ({ data: scholarship }: { data: scholarshipType }) => {
                                             {scholarship?.institute.sector}
                                         </button>
                                         <FavoriteButton
-                                            isActive={isFavorite}
+                                            isActive={
+                                                !!scholarship?.favoriteId?.[0]
+                                            }
                                             body={{
                                                 scholarship: scholarship.id
                                             }}
-                                            refetch={() =>
-                                                setFavorite((prev) => !prev)
-                                            }
                                             className="h-[46px] w-[46px] rounded-full flex items-center justify-center border-2 border-white bg-heartBgColor hover:bg-white group"
                                             iconClass={`text-3xl text-white group-hover:text-red-600`}
                                         />
