@@ -17,7 +17,9 @@ const CurrencyConverter = () => {
             updateCountry(JSON.parse(isChanged));
         } else {
             setIsChangedCurrency(true);
-            !!geoIp && updateGeoIp();
+            !geoIp && updateGeoIp();
+
+            console.log(geoIp);
         }
 
         fetchLatestRates();
