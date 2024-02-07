@@ -95,6 +95,27 @@ export type filterScholarShipType = {
     favoriteId?: string[];
 };
 
+export type scholarshipFiltersType = {
+    regions: {
+        region: string;
+    }[];
+    countries: {
+        country: string;
+    }[];
+    institutes: {
+        institute: string;
+    }[];
+    degrees: {
+        degree: degreeType;
+    }[];
+    disciplines: {
+        discipline: string;
+    }[];
+    scholarship_types: {
+        type: string;
+    }[];
+};
+
 export type countryType = {
     id: string;
     name: string;
@@ -162,7 +183,6 @@ export type courseType = {
     logo: string;
     degree: degreeType;
     duration: number;
-    // language: string[];
     specialization: specializationType;
     institute: instituteType;
     intakes: string[];
@@ -177,6 +197,34 @@ export type courseType = {
     };
     favoriteId?: string[];
 };
+
+export type filterCourseType = {
+    intakes: {
+        intakes: string[];
+    }[];
+    specializations: {
+        specialization: string;
+    }[];
+    regions: {
+        region: string;
+    }[];
+    countries: {
+        country: string;
+    }[];
+    locations: {
+        location: string;
+    }[];
+    institutes: {
+        institute: string;
+    }[];
+    degrees: {
+        degree: degreeType;
+    }[];
+    disciplines: {
+        discipline: string;
+    }[];
+};
+
 export type singleCourseType = {
     favoriteId: string[];
     name: string;

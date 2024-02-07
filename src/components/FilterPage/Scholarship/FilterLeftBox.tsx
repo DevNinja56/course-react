@@ -6,10 +6,10 @@ import ScholarshipTypeFilter from './ScholarshipTypeFilter';
 // import ScholarshipMonthFilter from './ScholarshipMonthFilter';
 // import ScholarshipYearFilter from './ScholarshipYearFilter';
 import { useFilterQuery } from '@/hooks/filterQuery';
-import { useSearchedCourses } from '@/hooks/filterCourses';
 import { FilteredButton } from '../FilteredButton';
 import InstituteFilter from '../Course/InstituteFilter';
 import RegionsFilter from '../RegionsFilter';
+import { useSearchedScholarship } from '@/hooks/filterScholarship';
 
 export const FilterRow = () => (
     <div className="px-4">
@@ -19,7 +19,11 @@ export const FilterRow = () => (
 
 const ScholarshipFilter = () => {
     const { clearALlQuery, query } = useFilterQuery();
-    const { fetchSearchedCoursesRequest: refetch } = useSearchedCourses();
+    const {
+        fetchSearchedScholarshipRequest: refetch,
+        filters,
+        isLoading
+    } = useSearchedScholarship();
 
     const handleClearQuery = () => {
         clearALlQuery();
@@ -60,12 +64,21 @@ const ScholarshipFilter = () => {
                 )}
             </div>
             <div className="flex flex-col gap-y-6">
-                <RegionsFilter />
+                <RegionsFilter data={filters.regions} isLoading={isLoading} />
                 <FilterRow />
-                <CountriesFilter />
+                <CountriesFilter
+                    data={filters.countries}
+                    isLoading={isLoading}
+                />
                 <FilterRow />
-                <InstituteFilter />
-                <DisciplinesFilter />
+                <InstituteFilter
+                    data={filters.institutes}
+                    isLoading={isLoading}
+                />
+                <DisciplinesFilter
+                    data={filters.disciplines}
+                    isLoading={isLoading}
+                />
                 <FilterRow />
                 <DegreeLevelFilter />
                 <FilterRow />
