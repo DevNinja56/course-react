@@ -99,7 +99,18 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                                         className="h-8 w-8 md:h-10 md:w-10 rounded-full flex items-center justify-center border-2 border-white bg-heartBgColor hover:bg-white group"
                                         iconClass={`text-3xl text-white group-hover:text-red-600`}
                                     />
-                                    <div className="h-8 w-8 rounded-full bg-white shadow-lg lg:flex items-center justify-center hidden">
+                                    <div
+                                        onClick={() =>
+                                            updateModal({
+                                                type: modalType.share_modal,
+                                                state: {
+                                                    name: 'course',
+                                                    id: course.id
+                                                }
+                                            })
+                                        }
+                                        className="h-8 w-8 rounded-full bg-white shadow-lg lg:flex items-center justify-center hidden cursor-pointer"
+                                    >
                                         <IoShareSocialSharp className="text-gray-400 h-4 w-4" />
                                     </div>
                                 </div>
