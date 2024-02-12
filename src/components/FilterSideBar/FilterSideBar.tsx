@@ -19,7 +19,11 @@ const FilterSideBar = ({ setFilterSideBar }: ModalProps) => {
         setFilterSideBar(false);
     };
     const { clearALlQuery, query } = useFilterQuery();
-    const { fetchSearchedCoursesRequest: refetch } = useSearchedCourses();
+    const {
+        fetchSearchedCoursesRequest: refetch,
+        filters,
+        isLoading
+    } = useSearchedCourses();
 
     const handleClearQuery = () => {
         clearALlQuery();
@@ -78,15 +82,30 @@ const FilterSideBar = ({ setFilterSideBar }: ModalProps) => {
                             </div>
                         )}
                         <div className="flex flex-col gap-y-6">
-                            <CountriesFilter />
+                            <CountriesFilter
+                                data={filters.countries}
+                                isLoading={isLoading}
+                            />
                             <FilterRow />
-                            <DegreeLevelFilter />
+                            <DegreeLevelFilter
+                                data={filters.degrees}
+                                isLoading={isLoading}
+                            />
                             <FilterRow />
-                            <DisciplinesFilter />
+                            <DisciplinesFilter
+                                data={filters.disciplines}
+                                isLoading={isLoading}
+                            />
                             <FilterRow />
-                            <SpecializationFilter />
+                            <SpecializationFilter
+                                data={filters.specializations}
+                                isLoading={isLoading}
+                            />
                             <FilterRow />
-                            <InstituteFilter />
+                            <InstituteFilter
+                                data={filters.institutes}
+                                isLoading={isLoading}
+                            />
                         </div>
                     </div>
                 </div>

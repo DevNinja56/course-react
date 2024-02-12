@@ -20,7 +20,11 @@ export const FilterRow = () => (
 
 const CourseFilter = () => {
     const { clearALlQuery, query } = useFilterQuery();
-    const { fetchSearchedCoursesRequest: refetch } = useSearchedCourses();
+    const {
+        fetchSearchedCoursesRequest: refetch,
+        filters,
+        isLoading
+    } = useSearchedCourses();
 
     const handleClearQuery = () => {
         clearALlQuery();
@@ -61,21 +65,39 @@ const CourseFilter = () => {
                 )}
             </div>
             <div className="flex flex-col gap-y-6">
-                <RegionsFilter />
+                <RegionsFilter data={filters.regions} isLoading={isLoading} />
                 <FilterRow />
-                <CountriesFilter />
+                <CountriesFilter
+                    data={filters.countries}
+                    isLoading={isLoading}
+                />
                 <FilterRow />
-                <LocationsFilter />
+                <LocationsFilter
+                    data={filters.locations}
+                    isLoading={isLoading}
+                />
                 <FilterRow />
-                <InstituteFilter />
+                <InstituteFilter
+                    data={filters.institutes}
+                    isLoading={isLoading}
+                />
                 <FilterRow />
-                <DegreeLevelFilter />
+                <DegreeLevelFilter
+                    data={filters.degrees}
+                    isLoading={isLoading}
+                />
                 <FilterRow />
-                <DisciplinesFilter />
+                <DisciplinesFilter
+                    data={filters.disciplines}
+                    isLoading={isLoading}
+                />
                 <FilterRow />
-                <SpecializationFilter />
+                <SpecializationFilter
+                    data={filters.specializations}
+                    isLoading={isLoading}
+                />
                 <FilterRow />
-                <IntakesFilter />
+                <IntakesFilter data={filters.intakes} isLoading={isLoading} />
                 <FilterRow />
                 <FeeSlider />
             </div>
