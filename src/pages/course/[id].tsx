@@ -40,17 +40,25 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                             height={60}
                             width={60}
                             alt="course-round"
-                            className="top-1/3 absolute -left-5 h-16 w-16 lg:h-24 lg:w-24 hidden md:block z-10"
+                            className="top-1/3 absolute -left-3 md:-left-5 h-8 w-8 md:h-16 md:w-16 lg:h-24 lg:w-24 z-10"
                             src="/images/CourseDetail/Circle 3.svg"
                             priority
                         />
-                        <div className="w-full py-10 xl:py-20 flex justify-center xl:container px-4 md:px-[50px] lg:px-2 2xl:px-8">
+                        <div className="w-full py-5 pb-10 md:py-10 xl:py-20 flex justify-center xl:container px-4 md:px-[50px] lg:px-2 2xl:px-8">
                             <Image
                                 height={375}
                                 width={1240}
                                 alt="courseDetail"
                                 src="/images/CourseDetail/courseDetailMain.png"
-                                className="z-20 w-full"
+                                className="z-20 h-full w-full lg:block hidden"
+                                priority
+                            />
+                            <Image
+                                height={375}
+                                width={1240}
+                                alt="courseDetail"
+                                src="/images/CourseDetail/courseDetailMainTablet.png"
+                                className="z-20 h-full w-full lg:hidden block"
                                 priority
                             />
                         </div>
@@ -58,23 +66,23 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                             height={273}
                             width={274}
                             alt="courseDetail-round"
-                            className="absolute right-[-40px] md:right-0 lg:-right-20 top-[-20px] md:top-auto md:translate-y-8 lg:translate-y-0 md:bottom-8 lg:-top-16 h-28 w-28 md:h-32 md:w-32 lg:h-80 lg:w-80"
+                            className="absolute right-[-40px] lg:-right-20 -top-7 md:-top-16 md:-right-8 md:translate-y-8 lg:translate-y-0 md:bottom-8 lg:-top-16 h-20 w-20 md:h-32 md:w-32 lg:h-80 lg:w-80"
                             src="/images/CourseDetail/Ciecle 4.svg"
                             priority
                         />
                     </div>
                     <div className="flex items-center w-full xl:container px-4 md:px-[50px] lg:px-2 2xl:px-8 mx-auto transition-all duration-300 flex-col gap-6 mb-32">
-                        <div className="w-full flex flex-wrap gap-2 gap-y-8 justify-between">
-                            <h1 className="text-mainTextColor text-2xl md:text-3xl font-bold">
+                        <div className="w-full flex flex-wrap gap-2 gap-y-4 md:gap-y-8 justify-between">
+                            <h1 className="text-mainTextColor text-xl md:text-3xl font-bold">
                                 {course?.name}
                             </h1>
                             <div className="flex pr-0">
-                                <div className="flex flex-wrap items-center gap-2 md:gap-5">
-                                    <button className="rounded-[20px] pt-[9px] pb-2 px-4 border-2 border-white hover:border-purpleColor text-white hover:text-purpleColor bg-purpleColor hover:bg-white capitalize">
+                                <div className="flex flex-wrap items-center gap-1 md:gap-2 lg:gap-3">
+                                    <button className="rounded-[20px] py-2 px-3 md:px-4 text-xs md:text-sm border-2 border-white hover:border-purpleColor text-white hover:text-purpleColor bg-purpleColor hover:bg-white capitalize">
                                         {course?.degree.type}
                                     </button>
                                     <button
-                                        className="rounded-[20px] py-2 px-4 border-2 border-white hover:border-blueColor text-white hover:text-blueColor bg-blueColor hover:bg-white flex gap-2 items-center"
+                                        className="rounded-[20px] py-2 px-3 md:px-4 text-xs md:text-sm border-2 border-white hover:border-blueColor text-white hover:text-blueColor bg-blueColor hover:bg-white flex gap-2 items-center"
                                         onClick={() =>
                                             updateModal({
                                                 type: modalType.bank_statement_calculator,
@@ -88,32 +96,32 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                                     <FavoriteButton
                                         isActive={!!course?.favoriteId?.[0]}
                                         body={{ course: course.id }}
-                                        className="h-[46px] w-[46px] rounded-full flex items-center justify-center border-2 border-white bg-heartBgColor hover:bg-white group"
+                                        className="h-8 w-8 md:h-10 md:w-10 rounded-full flex items-center justify-center border-2 border-white bg-heartBgColor hover:bg-white group"
                                         iconClass={`text-3xl text-white group-hover:text-red-600`}
                                     />
-                                    <div className="h-10 w-10 rounded-full bg-white shadow-lg flex items-center justify-center">
-                                        <IoShareSocialSharp className="text-gray-400 h-6 w-6" />
+                                    <div className="h-8 w-8 rounded-full bg-white shadow-lg lg:flex items-center justify-center hidden">
+                                        <IoShareSocialSharp className="text-gray-400 h-4 w-4" />
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div className="flex flex-col lg:flex-row gap-0 xl:gap-16 w-full justify-between">
-                            <div className="bg-white w-full lg:w-[70%] xl:w-2/3 h-headerStickyHeight sticky top-[110px] no-scrollbar">
+                            <div className="bg-white w-full lg:w-[70%] xl:w-2/3 h-headerStickyHeight static lg:sticky top-[110px] no-scrollbar mb-48 md:mb-48 lg:mb-96">
                                 <div className=" transition-all duration-300">
-                                    <div className="flex flex-col gap-y-6 mb-20">
+                                    <div className="flex flex-col gap-y-6 mb-16 md:mb-20">
                                         <div className="tabs-container capitalize">
                                             <Tabs
                                                 data={[
                                                     {
                                                         title: 'Overview',
                                                         element: (
-                                                            <div className="description w-full flex flex-col gap-4">
-                                                                <h1 className="text-black text-2xl font-bold">
+                                                            <div className="description w-full flex flex-col gap-3 md:gap-4 items-start">
+                                                                <h1 className="text-black text-lg md:text-2xl font-bold">
                                                                     Course
                                                                     Description
                                                                 </h1>
                                                                 <div
-                                                                    className="text-base"
+                                                                    className="text-sm md:text-base"
                                                                     dangerouslySetInnerHTML={{
                                                                         __html:
                                                                             course?.description ??
@@ -127,13 +135,13 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                                                         title: 'Entry Requirements',
                                                         element: (
                                                             <div className="flex flex-col gap-8">
-                                                                <div className="flex flex-col gap-4">
-                                                                    <h3 className="text-black text-2xl font-bold">
+                                                                <div className="flex flex-col gap-4 items-start">
+                                                                    <h3 className="text-black text-lg md:text-2xl font-bold">
                                                                         Entry
                                                                         Requirements
                                                                     </h3>
                                                                     <div
-                                                                        className="content text-base"
+                                                                        className="content text-sm md:text-base"
                                                                         dangerouslySetInnerHTML={{
                                                                             __html:
                                                                                 course
@@ -150,12 +158,12 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                                                         title: 'Language Requirements',
                                                         element: (
                                                             <div className="flex flex-col gap-8">
-                                                                <div className="flex flex-col gap-4">
-                                                                    <h3 className="text-black text-2xl font-bold">
+                                                                <div className="flex flex-col gap-4  items-start">
+                                                                    <h3 className="text-black text-lg md:text-2xl font-bold">
                                                                         Language
                                                                         Requirements
                                                                     </h3>
-                                                                    <p>
+                                                                    <p className="text-sm md:text-base">
                                                                         {
                                                                             course
                                                                                 .language?.[0]
@@ -169,11 +177,11 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                                                     {
                                                         title: 'Tuitions Fee',
                                                         element: (
-                                                            <div className="flex flex-col gap-4">
-                                                                <h3 className="text-black text-2xl font-bold">
+                                                            <div className="flex flex-col gap-4 items-start">
+                                                                <h3 className="text-black text-lg md:text-2xl font-bold">
                                                                     Tuitions Fee
                                                                 </h3>
-                                                                <p>
+                                                                <p className="text-sm md:text-base">
                                                                     {setCurrencyValue(
                                                                         course.tuitionFee
                                                                     )}
@@ -184,17 +192,18 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                                                     {
                                                         title: 'Scholarship',
                                                         element: (
-                                                            <div className="flex flex-col gap-4">
-                                                                <h3 className="text-black text-2xl font-bold">
+                                                            <div className="flex flex-col gap-4 items-start">
+                                                                <h3 className="text-black text-lg md:text-2xl font-bold">
                                                                     All
                                                                     Scholarship
                                                                 </h3>
-                                                                <ul>
+                                                                <ul className="w-full flex flex-col items-start gap-2">
                                                                     {course.degree.scholarship.map(
                                                                         ({
                                                                             name
                                                                         }) => (
                                                                             <li
+                                                                                className="text-sm md:text-base"
                                                                                 key={
                                                                                     'scholarship-list--' +
                                                                                     name
@@ -213,12 +222,12 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                                                     {
                                                         title: 'Initial Deposit',
                                                         element: (
-                                                            <div className="flex flex-col gap-4">
-                                                                <h3 className="text-black text-2xl font-bold">
+                                                            <div className="flex flex-col gap-4 items-start">
+                                                                <h3 className="text-black text-lg md:text-2xl font-bold">
                                                                     Initial
                                                                     Deposit
                                                                 </h3>
-                                                                <p>
+                                                                <p className="text-sm md:text-base">
                                                                     {setCurrencyValue(
                                                                         course
                                                                             .initialDeposit?.[0]
@@ -232,14 +241,14 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                                             />
                                         </div>
                                     </div>
-                                    <div className="py-6 border-t-2 border-borderColor flex items-center justify-between w-full mb-20">
-                                        <h1 className="text-lg md:text-xl font-semibold text-textLightBlackColor">
+                                    <div className="py-6 border-t-2 border-borderColor flex items-center justify-between w-full mb-8 md:mb-20">
+                                        <h1 className="text-base md:text-xl font-semibold text-textLightBlackColor">
                                             Get more details
                                         </h1>
                                         <Link
                                             href={course.institute.instituteURL}
                                             target="_blank"
-                                            className="text-blueColor text-sm md:text-base"
+                                            className="text-blueColor text-xs md:text-base"
                                         >
                                             Visit university website
                                         </Link>
@@ -247,12 +256,12 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                                     {course.documentsRequirement && (
                                         <div className="flex flex-col gap-5 w-full">
                                             <div className="flex items-center gap-2">
-                                                <IoDocumentText className="h-8 w-8" />
-                                                <h1 className="font-bold text-2xl text-mainTextColor">
+                                                <IoDocumentText className="h-7 w-7 md:h-8 md:w-8" />
+                                                <h1 className="font-bold text-lg md:text-2xl text-mainTextColor">
                                                     Requirements
                                                 </h1>
                                             </div>
-                                            <p className="text-xl font-medium text-lightGrayColor">
+                                            <p className="text-sm md:text-xl font-medium text-lightGrayColor">
                                                 Listed below are the documents
                                                 required to apply for this
                                                 course.
@@ -294,7 +303,7 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                                             {course.institute.name}
                                         </h1>
                                     </div>
-                                    <div className="pt-5 px-3">
+                                    <div className="pt-5 px-1 xl:px-3">
                                         <h1 className="text-mainTextColor text-xl font-bold mb-2">
                                             About
                                         </h1>
@@ -321,7 +330,7 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                                         </p>
                                         <div className="flex flex-col gap-3">
                                             <Button
-                                                className="py-5 rounded-md text-lg font-semibold"
+                                                className="py-3 rounded-md text-sm font-semibold"
                                                 text="Start Application"
                                                 link={ROUTES.APPLY}
                                                 onClick={() => {
@@ -344,7 +353,7 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                                             />
 
                                             <Button
-                                                className="py-5 rounded-md text-lg font-semibold"
+                                                className="py-3 rounded-md text-sm font-semibold"
                                                 text="Compare"
                                                 link={{
                                                     pathname: ROUTES.COMPARE,
@@ -360,12 +369,12 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                                 <div className="bg-white rounded-[10px] w-full z-10 shadow-RequirementBox mt-4 py-3">
                                     <div className="flex flex-col capitalize">
                                         <div className="flex items-center gap-4 pl-5 border-b-2 border-gray-200 border-opacity-50 py-4">
-                                            <FaMoneyBillWave className="h-9 w-9 text-blueColor" />
-                                            <div className="flex flex-col gap-[6px]">
-                                                <p className="font-bold text-xl text-mainTextColor">
+                                            <FaMoneyBillWave className="h-8 w-8 text-blueColor" />
+                                            <div className="flex flex-col gap-1">
+                                                <p className="font-bold text-base text-mainTextColor">
                                                     Tuition Fee
                                                 </p>
-                                                <p className="text-lightGrayColor text-xl">
+                                                <p className="text-lightGrayColor text-base">
                                                     {setCurrencyValue(
                                                         course.tuitionFee
                                                     )}
@@ -374,60 +383,97 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                                         </div>
 
                                         <div className="flex items-center gap-4 pl-5 border-b-2 border-gray-200 border-opacity-50 py-4">
-                                            <GiTrophy className="h-9 w-9 text-blueColor" />
+                                            <GiTrophy className="h-8 w-8 text-blueColor" />
                                             <div className="flex flex-col gap-[6px]">
-                                                <p className="font-bold text-xl text-mainTextColor">
+                                                <p className="font-bold text-base text-mainTextColor">
                                                     Level
                                                 </p>
-                                                <p className="text-lightGrayColor text-xl">
+                                                <p className="text-lightGrayColor text-base">
                                                     {course.degree.type}
                                                 </p>
                                             </div>
                                         </div>
                                         <div className="flex items-center gap-4 pl-5 border-b-2 border-gray-200 border-opacity-50 py-4">
-                                            <GiOpenBook className="h-9 w-9 text-blueColor" />
+                                            <GiOpenBook className="h-8 w-8 text-blueColor" />
                                             <div className="flex flex-col gap-[6px]">
-                                                <p className="font-bold text-xl text-mainTextColor">
+                                                <p className="font-bold text-base text-mainTextColor">
                                                     Discipline
                                                 </p>
-                                                <p className="text-lightGrayColor text-xl">
+                                                <p className="text-lightGrayColor text-base">
                                                     {course.specialization.name}
                                                 </p>
                                             </div>
                                         </div>
                                         <div className="flex items-center gap-4 pl-5 border-b-2 border-gray-200 border-opacity-50 py-4">
-                                            <GoClockFill className="h-9 w-9 text-blueColor" />
+                                            <GoClockFill className="h-8 w-8 text-blueColor" />
                                             <div className="flex flex-col gap-[6px]">
-                                                <p className="font-bold text-xl text-mainTextColor">
+                                                <p className="font-bold text-base text-mainTextColor">
                                                     Duration
                                                 </p>
-                                                <p className="text-lightGrayColor text-xl">
+                                                <p className="text-lightGrayColor text-base">
                                                     {course.duration + ' Years'}
                                                 </p>
                                             </div>
                                         </div>
                                         <div className="flex items-center gap-4 pl-5 border-b-2 border-gray-200 border-opacity-50 py-4">
-                                            <IoLocation className="h-9 w-9 text-blueColor" />
+                                            <IoLocation className="h-8 w-8 text-blueColor" />
                                             <div className="flex flex-col gap-[6px]">
-                                                <p className="font-bold text-xl text-mainTextColor">
+                                                <p className="font-bold text-base text-mainTextColor">
                                                     Campus
                                                 </p>
-                                                <p className="text-lightGrayColor text-xl">
+                                                <p className="text-lightGrayColor text-base">
                                                     {course.institute.campus}
                                                 </p>
                                             </div>
                                         </div>
                                         <div className="flex items-center gap-4 pl-5 border-opacity-50 py-4">
-                                            <FaCalendar className="h-9 w-9 text-blueColor" />
+                                            <FaCalendar className="h-8 w-8 text-blueColor" />
                                             <div className="flex flex-col gap-[6px]">
-                                                <p className="font-bold text-xl text-mainTextColor">
+                                                <p className="font-bold text-base text-mainTextColor">
                                                     Available Intakes
                                                 </p>
-                                                <p className="text-lightGrayColor text-xl">
+                                                <p className="text-lightGrayColor text-base">
                                                     {course.intakes.join()}
                                                 </p>
                                             </div>
                                         </div>
+                                    </div>
+                                </div>
+                                <div className="flex flex-col md:flex-row items-center w-full gap-3 md:gap-5 lg:hidden">
+                                    <div className="w-full">
+                                        <Button
+                                            className="py-4 rounded-md text-sm md:text-base font-semibold w-full"
+                                            text="Start Application"
+                                            link={ROUTES.APPLY}
+                                            onClick={() => {
+                                                addInstituteState({
+                                                    label: course.institute
+                                                        .name,
+                                                    value: course.institute.id
+                                                });
+                                                addDegreeState({
+                                                    label: course.degree.name,
+                                                    value: course.degree.id
+                                                });
+                                                addCourseState({
+                                                    label: course.name,
+                                                    value: course.id
+                                                });
+                                            }}
+                                        />
+                                    </div>
+                                    <div className="w-full">
+                                        <Button
+                                            className="py-4 rounded-md text-base font-semibold w-full"
+                                            text="Compare"
+                                            link={{
+                                                pathname: ROUTES.COMPARE,
+                                                query: {
+                                                    course_id: course.id
+                                                }
+                                            }}
+                                            variant="outline"
+                                        />
                                     </div>
                                 </div>
                                 <CourseTag
