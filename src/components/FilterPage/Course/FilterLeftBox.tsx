@@ -82,16 +82,22 @@ const CourseFilter = () => {
                     isLoading={isLoading}
                 />
                 <FilterRow />
-                <DegreeLevelFilter />
+                <DegreeLevelFilter
+                    data={filters.degrees}
+                    isLoading={isLoading}
+                />
                 <FilterRow />
                 <DisciplinesFilter
                     data={filters.disciplines}
                     isLoading={isLoading}
                 />
                 <FilterRow />
-                <SpecializationFilter />
+                <SpecializationFilter
+                    data={filters.specializations}
+                    isLoading={isLoading}
+                />
                 <FilterRow />
-                <IntakesFilter />
+                <IntakesFilter data={filters.intakes} isLoading={isLoading} />
                 <FilterRow />
                 <FeeSlider />
             </div>

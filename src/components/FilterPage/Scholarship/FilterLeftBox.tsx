@@ -80,7 +80,10 @@ const ScholarshipFilter = () => {
                     isLoading={isLoading}
                 />
                 <FilterRow />
-                <DegreeLevelFilter />
+                <DegreeLevelFilter
+                    data={filters.degrees}
+                    isLoading={isLoading}
+                />
                 <FilterRow />
                 <ScholarshipTypeFilter />
             </div>

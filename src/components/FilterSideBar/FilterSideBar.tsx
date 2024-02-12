@@ -87,14 +87,20 @@ const FilterSideBar = ({ setFilterSideBar }: ModalProps) => {
                                 isLoading={isLoading}
                             />
                             <FilterRow />
-                            <DegreeLevelFilter />
+                            <DegreeLevelFilter
+                                data={filters.degrees}
+                                isLoading={isLoading}
+                            />
                             <FilterRow />
                             <DisciplinesFilter
                                 data={filters.disciplines}
                                 isLoading={isLoading}
                             />
                             <FilterRow />
-                            <SpecializationFilter />
+                            <SpecializationFilter
+                                data={filters.specializations}
+                                isLoading={isLoading}
+                            />
                             <FilterRow />
                             <InstituteFilter
                                 data={filters.institutes}

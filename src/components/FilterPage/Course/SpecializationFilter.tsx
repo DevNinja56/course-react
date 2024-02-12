@@ -1,10 +1,18 @@
-import { useGetSpecializationQuery } from '@/store/slices/allRequests';
 import React, { useState } from 'react';
 import SearchBox from '../SearchBox';
 import { FilterCheckBox, FilterCheckBoxLoader } from '../FilterCheckBOx';
 
-const SpecializationFilter = () => {
-    const { data: specializationList, isLoading } = useGetSpecializationQuery();
+interface propsType {
+    data: {
+        specialization: string;
+    }[];
+    isLoading: boolean;
+}
+
+const SpecializationFilter: React.FC<propsType> = ({
+    data: specializationList,
+    isLoading
+}) => {
     const [search, setSearch] = useState<string>('');
 
     return (
@@ -25,14 +33,12 @@ const SpecializationFilter = () => {
                     <FilterCheckBoxLoader />
                 ) : (
                     specializationList
-                        ?.filter((specialization) =>
-                            specialization.name
-                                .toLowerCase()
-                                .includes(search.toLowerCase())
+                        ?.filter(({ specialization: name }) =>
+                            name.toLowerCase().includes(search.toLowerCase())
                         )
-                        .map(({ name, id }) => (
+                        .map(({ specialization: name }, i) => (
                             <FilterCheckBox
-                                key={'specialization--list--' + id}
+                                key={'specialization--list--' + i + name}
                                 id={name}
                                 text={name}
                                 name={'specialization'}
