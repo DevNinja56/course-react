@@ -5,14 +5,14 @@ module.exports = {
             script: 'node_modules/next/dist/bin/next',
             args: 'start',
             instances: 1,
-            autorestart: true,
+            autorestart: false,
             exec_mode: 'fork',
-            watch: true,
-            max_memory_restart: '300M',
+            watch: false,
+            max_memory_restart: '500M',
             out_file: './out.log',
             error_file: './error.log',
             merge_logs: true,
-            ignore_watch: ['node_modules', 'upload', 'out.log', 'error.log']
+            ignore_watch: ['node_modules', 'out.log', 'error.log']
         }
     ]
 };
