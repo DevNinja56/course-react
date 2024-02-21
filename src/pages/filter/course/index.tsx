@@ -7,7 +7,7 @@ import Image from 'next/image';
 const FilterPage = () => {
     return (
         <>
-            <div className="w-full flex items-center justify-center mt-[100px] bg-profileBgColor py-24 md:py-20 relative mb-10">
+            <div className="w-full flex items-center justify-center mt-[100px] bg-profileBgColor py-24 md:py-20 relative ">
                 <Image
                     height={193}
                     width={191}
@@ -35,7 +35,7 @@ const FilterPage = () => {
                     src="/images/Blogs/Frame 643.svg"
                 />
             </div>
-            <div className="w-full pb-28">
+            <div className="w-full pb-28 pt-10 bg-mainBackgroundColor bg-opacity-5">
                 <div className="container mx-auto px-5 md:px-[50px] lg:px-2 2xl:px-8 transition-all duration-300 flex justify-between">
                     <CourseFilter />
                     <RightCardsBox />

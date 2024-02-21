@@ -18,7 +18,7 @@ const CourseCard = ({ course }: CardProps) => {
 
     return (
         <div
-            className="flex flex-col shadow-custom rounded-md hover:shadow-xl hover:-translate-y-2 transition-all duration-300 cursor-pointer relative"
+            className="flex flex-col shadow-custom rounded-md hover:shadow-xl hover:-translate-y-2 transition-all duration-300 cursor-pointer relative bg-white"
             title={name}
         >
             <FavoriteButton
