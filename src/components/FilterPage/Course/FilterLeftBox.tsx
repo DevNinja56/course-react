@@ -10,6 +10,7 @@ import InstituteFilter from './InstituteFilter';
 import FeeSlider from './FeeSlider';
 import LocationsFilter from './Locations';
 import IntakesFilter from './Intakes';
+import RegionsFilter from '../RegionsFilter';
 
 export const FilterRow = () => (
     <div className="px-4">
@@ -19,7 +20,11 @@ export const FilterRow = () => (
 
 const CourseFilter = () => {
     const { clearALlQuery, query } = useFilterQuery();
-    const { fetchSearchedCoursesRequest: refetch } = useSearchedCourses();
+    const {
+        fetchSearchedCoursesRequest: refetch,
+        filters,
+        isLoading
+    } = useSearchedCourses();
 
     const handleClearQuery = () => {
         clearALlQuery();
@@ -60,19 +65,39 @@ const CourseFilter = () => {
                 )}
             </div>
             <div className="flex flex-col gap-y-6">
-                <CountriesFilter />
+                <RegionsFilter data={filters.regions} isLoading={isLoading} />
                 <FilterRow />
-                <LocationsFilter />
+                <CountriesFilter
+                    data={filters.countries}
+                    isLoading={isLoading}
+                />
                 <FilterRow />
-                <InstituteFilter />
+                <LocationsFilter
+                    data={filters.locations}
+                    isLoading={isLoading}
+                />
                 <FilterRow />
-                <DegreeLevelFilter />
+                <InstituteFilter
+                    data={filters.institutes}
+                    isLoading={isLoading}
+                />
                 <FilterRow />
-                <DisciplinesFilter />
+                <DegreeLevelFilter
+                    data={filters.degrees}
+                    isLoading={isLoading}
+                />
                 <FilterRow />
-                <SpecializationFilter />
+                <DisciplinesFilter
+                    data={filters.disciplines}
+                    isLoading={isLoading}
+                />
                 <FilterRow />
-                <IntakesFilter />
+                <SpecializationFilter
+                    data={filters.specializations}
+                    isLoading={isLoading}
+                />
+                <FilterRow />
+                <IntakesFilter data={filters.intakes} isLoading={isLoading} />
                 <FilterRow />
                 <FeeSlider />
             </div>

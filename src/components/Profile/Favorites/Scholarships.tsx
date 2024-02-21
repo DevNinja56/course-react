@@ -27,7 +27,6 @@ const Scholarships = () => {
                             id={scholarship.id}
                             title={scholarship.name}
                             image={'/images/Scholarships/scholarship.jpg'}
-                            refetch={refetch}
                             type="scholarship"
                             link={ROUTES.FILTER_COURSE}
                             onClick={() =>

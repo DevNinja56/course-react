@@ -26,7 +26,7 @@ const UserApplicationDetails = () => {
                     </p>
 
                     <p className=" text-sm md:text-base relative before:block before:content-[''] before:w-2 before:h-2 before:bg-black before:rounded-full before:absolute before:-left-6 before:top-[50%] before:-translate-y-1/2">
-                        {selectedCourse?.course.delivery}
+                        {selectedCourse?.course.specialization.name}
                     </p>
                     <p className="text-sm md:text-base relative before:block before:content-[''] before:w-2 before:h-2 before:bg-black before:rounded-full before:absolute before:-left-6 before:top-[50%] before:-translate-y-1/2">
                         January 2025
@@ -59,7 +59,7 @@ const UserApplicationDetails = () => {
                     <p className="text-2xl font-semibold uppercase text-darkGrayColor py-3">
                         Identity
                     </p>
-                    <RequirementBox text="Passport" />
+                    <RequirementBox url="" text="Passport" />
                 </div>
                 <div className="w-full">
                     <p className="text-[26px] font-bold text-mainTextColor pt-12 pb-3">
@@ -69,9 +69,9 @@ const UserApplicationDetails = () => {
                         UNDERGRADUATE
                     </p>
                     <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-7">
-                        <RequirementBox text="Semester Marksheets" />
-                        <RequirementBox text="Consolidated Marksheets" />
-                        <RequirementBox text="Provisional Certificate" />
+                        <RequirementBox text="Semester Marksheets" url="" />
+                        <RequirementBox text="Consolidated Marksheets" url="" />
+                        <RequirementBox text="Provisional Certificate" url="" />
                     </div>
                 </div>
                 <div className="w-full">
@@ -80,10 +80,10 @@ const UserApplicationDetails = () => {
                     </p>
 
                     <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-7">
-                        <RequirementBox text="Experience Letter" />
-                        <RequirementBox text="CV/Resume" />
-                        <RequirementBox text="Personal Statement" />
-                        <RequirementBox text="Letter of Reference" />
+                        <RequirementBox text="Experience Letter" url="" />
+                        <RequirementBox text="CV/Resume" url="" />
+                        <RequirementBox text="Personal Statement" url="" />
+                        <RequirementBox text="Letter of Reference" url="" />
                     </div>
                 </div>
 

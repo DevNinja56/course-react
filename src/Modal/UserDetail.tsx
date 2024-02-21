@@ -8,7 +8,6 @@ import { fetchRequest } from '@/utils/axios/fetch';
 import { API_ENDPOINTS } from '@/config/Api_EndPoints';
 import InputBox from '@/components/Input';
 import Select from 'react-select';
-import { CSSObject } from '@emotion/styled';
 import Image from 'next/image';
 
 interface formType {
@@ -231,7 +230,9 @@ const UserDetail = () => {
                                             : undefined
                                     }
                                     styles={{
-                                        control: (base: CSSObject) => ({
+                                        control: (base: {
+                                            [key: string]: unknown;
+                                        }) => ({
                                             ...base,
                                             padding: '0px',
                                             borderRadius: '6px',
@@ -276,7 +277,9 @@ const UserDetail = () => {
                                             : undefined
                                     }
                                     styles={{
-                                        control: (base: CSSObject) => ({
+                                        control: (base: {
+                                            [key: string]: unknown;
+                                        }) => ({
                                             ...base,
                                             padding: '0px',
                                             borderRadius: '6px',
@@ -322,7 +325,9 @@ const UserDetail = () => {
                                             : undefined
                                     }
                                     styles={{
-                                        control: (base: CSSObject) => ({
+                                        control: (base: {
+                                            [key: string]: unknown;
+                                        }) => ({
                                             ...base,
                                             padding: '0px',
                                             borderRadius: '6px',
@@ -421,7 +426,9 @@ const UserDetail = () => {
                                         setValue('intake', e?.value ?? '');
                                     }}
                                     styles={{
-                                        control: (base: CSSObject) => ({
+                                        control: (base: {
+                                            [key: string]: unknown;
+                                        }) => ({
                                             ...base,
                                             padding: '0px',
                                             borderRadius: '6px',
@@ -478,7 +485,9 @@ const UserDetail = () => {
                                             : undefined
                                     }
                                     styles={{
-                                        control: (base: CSSObject) => ({
+                                        control: (base: {
+                                            [key: string]: unknown;
+                                        }) => ({
                                             ...base,
                                             padding: '0px',
                                             borderRadius: '6px',

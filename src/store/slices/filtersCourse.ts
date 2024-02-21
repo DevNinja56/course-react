@@ -1,9 +1,10 @@
-import { courseType } from '@/types';
+import { courseType, filterCourseType } from '@/types';
 import { createSlice } from '@reduxjs/toolkit';
 import { fetchPaginatedCourses } from '../actions/getFilteredCourse';
 
 export interface getAllCourseTypes {
     data: courseType[];
+    filters: filterCourseType;
     paginatorInfo: {
         count: number;
         page: number;
@@ -16,6 +17,16 @@ export interface getAllCourseTypes {
 
 const initialState: getAllCourseTypes = {
     data: [],
+    filters: {
+        regions: [],
+        countries: [],
+        institutes: [],
+        disciplines: [],
+        specializations: [],
+        intakes: [],
+        degrees: [],
+        locations: []
+    },
     paginatorInfo: {
         count: 0,
         page: 1,
@@ -46,8 +57,9 @@ const courses = createSlice({
                 state.isLoading = true;
             })
             .addCase(fetchPaginatedCourses.fulfilled, (state, action) => {
-                const { data, ...pagination } = action.payload;
+                const { data, filters, ...pagination } = action.payload;
                 state.data = data;
+                state.filters = filters;
                 state.paginatorInfo = pagination;
                 state.error = null;
                 state.isLoading = false;

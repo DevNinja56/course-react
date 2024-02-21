@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { AiFillHeart } from 'react-icons/ai';
-import LoaderSpinner from '../LoaderSpinner';
 import toast from 'react-hot-toast';
 import { fetchRequest } from '@/utils/axios/fetch';
 import { useUserAuth } from '@/hooks/auth';
@@ -12,22 +11,22 @@ interface propsType {
     isActive?: boolean;
     className?: string;
     extendClass?: string;
+    body: { [key: string]: string };
     iconClass?: string;
     position?: string;
-    body: { [key: string]: string };
-    refetch?: () => void;
+    callback?: () => void;
 }
 
 const FavoriteButton: React.FC<propsType> = ({
-    isActive = false,
+    isActive: isFav = false,
     className,
     extendClass,
     body,
-    refetch,
     iconClass,
-    position
+    position,
+    callback
 }) => {
-    const [isLoading, setLoading] = useState(false);
+    const [isActive, setIsActive] = useState(isFav);
     const { isAuthenticated } = useUserAuth();
     const { updateModal } = useUi();
 
@@ -37,27 +36,22 @@ const FavoriteButton: React.FC<propsType> = ({
             updateModal({ type: modalType.login_confirmation, state: {} });
             return;
         }
+        setIsActive((prev) => !prev);
 
-        setLoading(true);
-        toast
-            .promise(
-                fetchRequest({
-                    url: isActive
-                        ? API_ENDPOINTS.FAVORITE_DELETE
-                        : API_ENDPOINTS.FAVORITE,
-                    type: 'post',
-                    body
-                }),
-                {
-                    loading: 'loading...',
-                    success: (res) => {
-                        refetch?.();
-                        return res.message;
-                    },
-                    error: (err) => err.response.data.message
-                }
-            )
-            .finally(() => setLoading(false));
+        fetchRequest({
+            url: isActive
+                ? API_ENDPOINTS.FAVORITE_DELETE
+                : API_ENDPOINTS.FAVORITE,
+            type: 'post',
+            body
+        })
+            .catch((err) => {
+                setIsActive((prev) => !prev);
+                toast.error(err.response.data.message);
+            })
+            .then(() => {
+                callback?.();
+            });
     };
 
     return (
@@ -70,9 +64,7 @@ const FavoriteButton: React.FC<propsType> = ({
             }
             onClick={handleClick}
         >
-            {isLoading ? (
-                <LoaderSpinner />
-            ) : isActive ? (
+            {isActive ? (
                 <AiFillHeart
                     className={`${
                         iconClass ?? 'text-2xl'

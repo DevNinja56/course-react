@@ -25,7 +25,6 @@ const Courses = () => {
                             title={course.name}
                             image={course.logo}
                             type="course"
-                            refetch={refetch}
                             link={ROUTES.COURSE.replace(':id', course.id)}
                         />
                     ))

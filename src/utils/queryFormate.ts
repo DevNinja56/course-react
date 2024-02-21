@@ -26,6 +26,12 @@ export const formateCourseQuery = (query: { [key: string]: any }) => {
         );
     }
 
+    if (query.region) {
+        orConditions.push({
+            region: { $in: query.region }
+        });
+    }
+
     if (query.degrees) {
         orConditions.push({
             'degree.name': { $in: query.degrees }

@@ -26,7 +26,6 @@ const Institutes = () => {
                             id={institute.id}
                             title={institute.name}
                             image={institute.logo}
-                            refetch={refetch}
                             link={ROUTES.FILTER_COURSE}
                             type="institute"
                             onClick={() =>

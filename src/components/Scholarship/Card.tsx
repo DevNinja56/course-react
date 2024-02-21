@@ -18,7 +18,6 @@ import Tag from '../Institute/Tag';
 interface propsType {
     id: string;
     favoriteId?: string[];
-    refetch: () => void;
     name: string;
     type: string;
     degrees: degreeType[];
@@ -30,7 +29,6 @@ interface propsType {
 const Card: React.FC<propsType> = ({
     id,
     favoriteId,
-    refetch,
     name,
     type,
     degrees,
@@ -43,7 +41,6 @@ const Card: React.FC<propsType> = ({
             <FavoriteButton
                 isActive={!!favoriteId?.[0]}
                 body={{ scholarship: id }}
-                refetch={refetch}
             />
             <Link href={ROUTES.SCHOLARSHIP.replace(':id', id)}>
                 <div className="flex flex-col gap-5 w-full px-3 z-10">
