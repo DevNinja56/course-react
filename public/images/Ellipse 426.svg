@@ -4,8 +4,8 @@
 <circle cx="42" cy="42" r="34.5" stroke="#3EC68C" stroke-width="15"/>
 </g>
 <defs>
-<filter id="filter0_b_96_8719" x="-11" y="-11" width="106" height="106" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<filter id="filter0_b_96_8719" x="-11" y="-11" width="106" height="106" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
+<feFlood floodOpacity="0" result="BackgroundImageFix"/>
 <feGaussianBlur in="BackgroundImageFix" stdDeviation="5.5"/>
 <feComposite in2="SourceAlpha" operator="in" result="effect1_backgroundBlur_96_8719"/>
 <feBlend mode="normal" in="SourceGraphic" in2="effect1_backgroundBlur_96_8719" result="shape"/>

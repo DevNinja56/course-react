@@ -1,10 +1,16 @@
 import React, { useState } from 'react';
-import { useGetCountriesQuery } from '@/store/slices/allRequests';
+// import { useGetCountriesQuery } from '@/store/slices/allRequests';
 import { FilterCheckBox, FilterCheckBoxLoader } from './FilterCheckBOx';
 import SearchBox from './SearchBox';
 
-const CountriesFilter = () => {
-    const { data: countryList, isLoading } = useGetCountriesQuery();
+interface propsType {
+    data: {
+        country: string;
+    }[];
+    isLoading: boolean;
+}
+
+const CountriesFilter: React.FC<propsType> = ({ data, isLoading }) => {
     const [search, setSearch] = useState<string>('');
 
     return (
@@ -24,19 +30,21 @@ const CountriesFilter = () => {
                 {isLoading ? (
                     <FilterCheckBoxLoader />
                 ) : (
-                    countryList
-                        ?.filter((country) =>
-                            country.name
-                                .toLowerCase()
-                                .includes(search.toLowerCase())
+                    data
+                        ?.filter(
+                            ({ country: name }) =>
+                                !!name &&
+                                name
+                                    .toLowerCase()
+                                    .includes(search.toLowerCase())
                         )
-                        .map((country, i) => (
+                        .map(({ country: name }, i) => (
                             <FilterCheckBox
                                 key={'country--list--' + i}
-                                id={country.name}
-                                text={country.name}
+                                id={name}
+                                text={name}
                                 name={'countries'}
-                                value={country.name}
+                                value={name}
                             />
                         ))
                 )}

@@ -95,6 +95,27 @@ export type filterScholarShipType = {
     favoriteId?: string[];
 };
 
+export type scholarshipFiltersType = {
+    regions: {
+        region: string;
+    }[];
+    countries: {
+        country: string;
+    }[];
+    institutes: {
+        institute: string;
+    }[];
+    degrees: {
+        degree: degreeType;
+    }[];
+    disciplines: {
+        discipline: string;
+    }[];
+    scholarship_types: {
+        type: string;
+    }[];
+};
+
 export type countryType = {
     id: string;
     name: string;
@@ -162,7 +183,6 @@ export type courseType = {
     logo: string;
     degree: degreeType;
     duration: number;
-    // language: string[];
     specialization: specializationType;
     institute: instituteType;
     intakes: string[];
@@ -177,6 +197,34 @@ export type courseType = {
     };
     favoriteId?: string[];
 };
+
+export type filterCourseType = {
+    intakes: {
+        intakes: string[];
+    }[];
+    specializations: {
+        specialization: string;
+    }[];
+    regions: {
+        region: string;
+    }[];
+    countries: {
+        country: string;
+    }[];
+    locations: {
+        location: string;
+    }[];
+    institutes: {
+        institute: string;
+    }[];
+    degrees: {
+        degree: degreeType;
+    }[];
+    disciplines: {
+        discipline: string;
+    }[];
+};
+
 export type singleCourseType = {
     favoriteId: string[];
     name: string;
@@ -246,18 +294,6 @@ export type favoritesType = {
     id: string;
 };
 
-export type applyTypes = {
-    degree: degreeType;
-    course: singleCourseType;
-    institute: instituteType;
-    user: userType | null;
-    message: string;
-    userDetails: { name: string; phone_number: string; email: string } | null;
-    createdAt: string;
-    updatedAt: string;
-    id: string;
-};
-
 export type geoIpType = {
     range: [number, number];
     country: string;
@@ -276,3 +312,95 @@ export type countryDataType = {
     languages: string;
     code: string;
 };
+
+export interface userDocuments {
+    identity: {
+        passport: {
+            url: string[];
+            given_name: string;
+            sur_name: string;
+            number: string;
+            date_of_issue: string;
+            date_of_expiry: string;
+        };
+    };
+    academic_certificates: {
+        semester_mark_sheets: {
+            url: string;
+        };
+        consolidated_mark_sheets: {
+            url: string[];
+            given_name: string;
+            sur_name: string;
+            number: string;
+            date_of_issue: string;
+            date_of_expiry: string;
+        };
+        provisional_certificate: {
+            url: string;
+        };
+    };
+    professional_records: {
+        experience_letter: {
+            url: string;
+        };
+        resume: {
+            url: string;
+        };
+        personal_statement: {
+            url: string;
+        };
+        letter_of_reference: {
+            url: string;
+        };
+    };
+}
+
+interface applicationStatusSingle {
+    create_at: Date;
+    message: string;
+    message_type: string;
+    document: string;
+}
+
+export enum statusEnum {
+    'initiated' = 'initiated',
+    'submitDocuments' = 'submitDocuments',
+    'apply' = 'apply',
+    'offer' = 'offer',
+    'visa' = 'visa',
+    'enroll' = 'enroll'
+}
+
+export interface applicationStatus {
+    active: statusEnum;
+    initiated: applicationStatusSingle;
+    submitDocuments: applicationStatusSingle | null;
+    apply: applicationStatusSingle | null;
+    offer: applicationStatusSingle | null;
+    visa: applicationStatusSingle | null;
+    enroll: applicationStatusSingle | null;
+}
+
+export interface applyTypes {
+    id: string;
+    intake: string;
+    course: singleCourseType;
+    user: userType;
+    status: applicationStatus;
+    documents: userDocuments;
+    councillor: councillorType;
+    createdAt: string;
+    updatedAt: string;
+}
+
+export interface councillorType {
+    profile_image: string;
+    title: string;
+    bio: string;
+    phone_number: string;
+    email: string;
+    createdAt: string;
+    updatedAt: string;
+    id: string;
+}

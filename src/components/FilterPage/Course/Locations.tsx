@@ -1,13 +1,16 @@
-import { useGetInstituteQuery } from '@/store/slices/allRequests';
 import React, { useState } from 'react';
 import SearchBox from '../SearchBox';
 import { FilterCheckBox, FilterCheckBoxLoader } from '../FilterCheckBOx';
-import _ from 'lodash';
 
-const LocationsFilter = () => {
-    const { data, isLoading } = useGetInstituteQuery();
+interface propsType {
+    data: {
+        location: string;
+    }[];
+    isLoading: boolean;
+}
+
+const LocationsFilter: React.FC<propsType> = ({ data, isLoading }) => {
     const [search, setSearch] = useState<string>('');
-    const locations = Object.keys(_.groupBy(data, 'location'));
 
     return (
         <div className="flex flex-col gap-y-3">
@@ -26,13 +29,15 @@ const LocationsFilter = () => {
                 {isLoading ? (
                     <FilterCheckBoxLoader />
                 ) : (
-                    locations
-                        ?.filter((location) =>
-                            location
-                                .toLowerCase()
-                                .includes(search.toLowerCase())
+                    data
+                        ?.filter(
+                            ({ location }) =>
+                                !!location &&
+                                location
+                                    .toLowerCase()
+                                    .includes(search.toLowerCase())
                         )
-                        .map((name) => (
+                        .map(({ location: name }) => (
                             <FilterCheckBox
                                 key={'locations--list--' + name}
                                 id={'location-' + name}
