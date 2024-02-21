@@ -29,8 +29,8 @@ const Compare = ({ data }: { data?: singleCourseType }) => {
             first === null
                 ? compareFirst(compareData)
                 : second === null
-                  ? compareSecond(compareData)
-                  : compareThird(compareData);
+                ? compareSecond(compareData)
+                : compareThird(compareData);
         }
     }, [data]);
 
@@ -253,11 +253,11 @@ const Compare = ({ data }: { data?: singleCourseType }) => {
                     ))}
                 </div>
             </div>
-            <div className="w-full pb-20 2xl:pb-[700px] flex flex-col items-center overflow-hidden print:hidden">
+            <div className="w-full pb-40 flex flex-col items-center overflow-hidden print:hidden">
                 <p className="text-[23px] font-bold text-blueColor mb-1">
                     Scholarships
                 </p>
-                <h1 className="text-textLightBlackColor text-3xl md:text-[48px] font-extrabold mb-5 text-center">
+                <h1 className="text-textLightBlackColor text-3xl md:text-[48px] font-extrabold mb-10 text-center">
                     Scholarships you may be interested in
                 </h1>
                 <ScholarshipSlider />

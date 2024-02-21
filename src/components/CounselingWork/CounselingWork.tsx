@@ -8,21 +8,29 @@ const CounselingWork = () => {
     return (
         <div
             className={`w-full relative pb-0 ${
-                router.pathname === '/apply'
-                    ? 'bg-profileBgColor'
+                router.pathname === '/apply' ||
+                router.pathname.includes(ROUTES.COURSE.replace(':id', '')) ||
+                router.pathname.includes(ROUTES.SCHOLARSHIP.replace(':id', ''))
+                    ? router.pathname.includes(
+                          ROUTES.COURSE.replace(':id', '')
+                      ) ||
+                      router.pathname.includes(
+                          ROUTES.SCHOLARSHIP.replace(':id', '')
+                      )
+                        ? 'bg-profileBgColor md:bg-white'
+                        : `bg-profileBgColor`
                     : router.pathname === '/courseDetail'
                     ? 'bg-lightColor'
                     : ''
             }`}
         >
             {router.pathname === '/courseDetail' ||
-            router.pathname.includes(ROUTES.INSTITUTES.replace(':id', '')) ||
-            router.pathname.includes(ROUTES.COURSE.replace(':id', '')) ? (
+            router.pathname.includes(ROUTES.INSTITUTES.replace(':id', '')) ? (
                 <Image
                     height={217}
                     width={175}
                     alt="circle"
-                    className={`absolute left-0 top-0 ${
+                    className={`absolute left-0 top-0 h-28 w-28 md:h-40 md:w-40 -translate-x-4 ${
                         router.pathname.includes(
                             ROUTES.INSTITUTES.replace(':id', '')
                         )
@@ -42,6 +50,9 @@ const CounselingWork = () => {
                         router.pathname === '/apply' ||
                         router.pathname.includes(
                             ROUTES.COURSE.replace(':id', '')
+                        ) ||
+                        router.pathname.includes(
+                            ROUTES.SCHOLARSHIP.replace(':id', '')
                         )
                             ? `${
                                   router.pathname === ROUTES.APPLY ||
@@ -57,7 +68,7 @@ const CounselingWork = () => {
                     priority
                 />
             )}
-            <div className="w-full py-28">
+            <div className={`w-full py-28`}>
                 <div className="container mx-auto px-3 lg:px-2 2xl:px-8 transition-all duration-300 flex flex-col items-center gap-y-24">
                     <div className="flex flex-col items-center gap-y-16">
                         <h1 className="font-bold text-[32px] md:text-[36px] text-mainTextColor z-10 text-center">
@@ -250,15 +261,23 @@ const CounselingWork = () => {
                 </div>
             </div>
             {router.pathname === '/courseDetail' ||
-            router.pathname.includes(ROUTES.INSTITUTES.replace(':id', '')) ||
-            router.pathname.includes(ROUTES.COURSE.replace(':id', '')) ? (
+            router.pathname.includes(ROUTES.INSTITUTES.replace(':id', '')) ? (
                 ''
             ) : (
                 <Image
                     height={314}
                     width={192}
                     alt="counselling-work"
-                    className={`absolute left-0 h-[130px] bottom-[1190px] md:bottom-44 w-[130px] md:h-[206px] md:w-[206px] lg:h-[314px] lg:w-[192px]`}
+                    className={`absolute left-0 h-[130px] bottom-[1190px] md:bottom-44 w-[130px] md:h-[206px] md:w-[206px] lg:h-[314px] lg:w-[192px] ${
+                        router.pathname.includes(
+                            ROUTES.COURSE.replace(':id', '')
+                        ) ||
+                        router.pathname.includes(
+                            ROUTES.SCHOLARSHIP.replace(':id', '')
+                        )
+                            ? 'block translate-y-10 md:hidden'
+                            : ''
+                    }`}
                     src="/images/Fields/Ellipse 427.svg"
                     priority
                 />
