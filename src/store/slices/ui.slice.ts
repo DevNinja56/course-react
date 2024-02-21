@@ -11,7 +11,8 @@ export enum modalType {
     'currency_converter',
     'bank_statement_calculator',
     'user_detail',
-    cancel_application
+    'cancel_application',
+    'share_modal'
 }
 
 interface UiState {

@@ -41,11 +41,11 @@ const FilterPage = () => {
                     <RightCardsBox />
                 </div>
             </div>
-            <div className="w-full pb-20 2xl:pb-[700px] flex flex-col items-center overflow-hidden">
+            <div className="w-full pb-40 flex flex-col items-center overflow-hidden">
                 <p className="text-xl md:text-[23px] font-bold text-blueColor mb-1">
                     Scholarships
                 </p>
-                <h1 className="text-textLightBlackColor text-3xl md:text-[48px] font-extrabold mb-5 text-center">
+                <h1 className="text-textLightBlackColor text-3xl md:text-[48px] font-extrabold mb-10 text-center">
                     Scholarships you may be interested in
                 </h1>
                 <ScholarshipSlider />
