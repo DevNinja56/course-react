@@ -1,3 +1,4 @@
+import ScreenLoader from '@/components/Loader/ScreenLoader';
 import UniversitiesCards from '@/components/Universities/UniversitiesCard';
 import { useGetInstituteQuery } from '@/store/slices/allRequests';
 
@@ -38,12 +39,16 @@ const Universities = () => {
             <div className="w-full pb-8 md:pb-20">
                 <div className="max-w-[1100px] 2xl:max-w-[2300px] mx-auto px-2 2xl:px-8 transition-all duration-300 flex justify-between">
                     <div className="flex flex-wrap gap-[30px] items-center justify-center w-full">
-                        {data?.map((item) => (
-                            <UniversitiesCards
-                                key={'institute_list__' + item.id}
-                                institute={item}
-                            />
-                        ))}
+                        {data && data.length > 0 ? (
+                            data?.map((item) => (
+                                <UniversitiesCards
+                                    key={'institute_list__' + item.id}
+                                    institute={item}
+                                />
+                            ))
+                        ) : (
+                            <ScreenLoader />
+                        )}
                     </div>
                 </div>
             </div>

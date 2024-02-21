@@ -30,22 +30,22 @@ const ShareModal = () => {
             />
             <div className="flex items-center gap-3">
                 <FacebookShareButton
-                    url={`https://course-react-three.vercel.app/${typedModalState.name}/${typedModalState.id}`}
+                    url={`${window.location.origin}/${typedModalState.name}/${typedModalState.id}`}
                 >
                     <FacebookIcon size={32} round />
                 </FacebookShareButton>
                 <WhatsappShareButton
-                    url={`https://course-react-three.vercel.app/${typedModalState.name}/${typedModalState.id}`}
+                    url={`${window.location.origin}/${typedModalState.name}/${typedModalState.id}`}
                 >
                     <WhatsappIcon size={32} round />
                 </WhatsappShareButton>
                 <LinkedinShareButton
-                    url={`https://course-react-three.vercel.app/${typedModalState.name}/${typedModalState.id}`}
+                    url={`${window.location.origin}/${typedModalState.name}/${typedModalState.id}`}
                 >
                     <LinkedinIcon size={32} round />
                 </LinkedinShareButton>
                 <TwitterShareButton
-                    url={`https://course-react-three.vercel.app/${typedModalState.name}/${typedModalState.id}`}
+                    url={`${window.location.origin}/${typedModalState.name}/${typedModalState.id}`}
                 >
                     <TwitterIcon size={32} round />
                 </TwitterShareButton>
