@@ -49,6 +49,8 @@ const MyApplies = () => {
                             <div className="flex justify-between items-center">
                                 <div className="flex gap-2">
                                     <Image
+                                        width={100}
+                                        height={100}
                                         alt=""
                                         className="w-8 h-8 rounded-[5px]"
                                         src={

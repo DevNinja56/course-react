@@ -7,74 +7,74 @@
 @tailwind utilities;
 
 html {
-    scroll-behavior: smooth;
+  scroll-behavior: smooth;
 }
 
 *,
 .primaryFont {
-    font-family: $primaryFont !important;
+  font-family: $primaryFont !important;
 }
 
 .custom-shadow {
-    box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.103);
+  box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.103);
 }
 .onHoverShadow:hover {
-    box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.103);
+  box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.103);
 }
 .setScrollBar::-webkit-scrollbar {
-    width: 3px;
+  width: 3px;
 }
 .setScrollBar::-webkit-scrollbar-track {
-    background-color: #e7e7e7;
+  background-color: #e7e7e7;
 }
 .setScrollBar::-webkit-scrollbar-thumb {
-    background-color: #717070;
-    border-radius: 5px;
+  background-color: #717070;
+  border-radius: 5px;
 }
 .backgroundBlack {
-    background-color: #00000059;
+  background-color: #00000059;
 }
 .swiper-wrapper {
-    width: 100%;
-    display: flex;
-    align-items: center;
+  width: 100%;
+  display: flex;
+  align-items: center;
 }
 .swiper-slide {
-    height: 349.34px !important;
-    width: 354.35px !important;
-    transition: 0.2s;
-    &.active {
-        height: 403px !important;
-        width: 408.68px !important;
-    }
+  height: 349.34px !important;
+  width: 354.35px !important;
+  transition: 0.2s;
+  &.active {
+    height: 403px !important;
+    width: 408.68px !important;
+  }
 }
 .removeScrollBar::-webkit-scrollbar {
-    display: none;
+  display: none;
 }
 
 @media screen and (min-width: 250px) and (max-width: 490px) {
-    .setWidthCompareModal {
-        width: 280px;
-    }
+  .setWidthCompareModal {
+    width: 280px;
+  }
 }
 
 @media screen and (min-width: 491px) and (max-width: 2500px) {
-    .setWidthCompareModal {
-        width: 450px;
-    }
+  .setWidthCompareModal {
+    width: 450px;
+  }
 
-    //hide scroll bar
-    @layer utilities {
-        /* Hide scrollbar for Chrome, Safari and Opera */
-        .no-scrollbar::-webkit-scrollbar {
-            display: none;
-        }
-        /* Hide scrollbar for IE, Edge and Firefox */
-        .no-scrollbar {
-            -ms-overflow-style: none; /* IE and Edge */
-            scrollbar-width: none; /* Firefox */
-        }
+  //hide scroll bar
+  @layer utilities {
+    /* Hide scrollbar for Chrome, Safari and Opera */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
     }
+    /* Hide scrollbar for IE, Edge and Firefox */
+    .no-scrollbar {
+      -ms-overflow-style: none; /* IE and Edge */
+      scrollbar-width: none; /* Firefox */
+    }
+  }
 }
 //step progressbar
 // .multi-steps > li.is-active ~ li:before, .multi-steps > li.is-active:before {
@@ -82,83 +82,106 @@ html {
 //     font-family: inherit;
 //     font-weight: 700;
 //   }
-  .multi-steps > li.is-active ~ li:after, .multi-steps > li.is-active:after {
-    background-color: #ccc;
- 
+.multi-steps > li.is-active ~ li:after,
+.multi-steps > li.is-active:after {
+  background-color: #ccc;
+}
+
+.multi-steps {
+  display: table;
+  table-layout: fixed;
+  width: 100%;
+}
+.multi-steps > li {
+  // counter-increment: stepNum;
+  text-align: center;
+  display: table-cell;
+  position: relative;
+  color: #000;
+  font-size: 16px;
+  font-weight: 700;
+}
+.multi-steps > li:before {
+  content: "";
+  content: "✓;";
+  content: "𐀃";
+  content: "𐀄";
+  content: "";
+  display: block;
+  margin: 0 auto 4px;
+  background-color: #fff;
+  width: 26px;
+  height: 26px;
+  line-height: 32px;
+  text-align: center;
+  font-weight: bold;
+  border-width: 2px;
+  border-style: solid;
+  border-color: #38ec55;
+  background-color: #38ec55;
+  border-radius: 50%;
+  margin-bottom: 15px;
+  z-index: 11;
+  position: relative;
+}
+.multi-steps > li:after {
+  content: "";
+  height: 2px;
+  width: 100%;
+  background-color: #2c79ff;
+  position: absolute;
+  top: 13px;
+  left: 50%;
+}
+.multi-steps > li:last-child:after {
+  display: none;
+}
+.multi-steps > li.is-active:before {
+  background-color: #fff;
+  border-color: #2c79ff;
+  background-color: #2c79ff;
+  margin-bottom: 15px;
+}
+.multi-steps > li.is-active ~ li {
+  color: #000;
+  font-size: 16px;
+  font-weight: 700;
+}
+.multi-steps > li.is-active ~ li:before {
+  background-color: #ededed;
+  border-color: #ededed;
+  margin-bottom: 15px;
+  position: relative;
+  z-index: 11;
+}
+//select input
+.css-1g04qtg-control {
+  padding: 16px !important;
+  border-radius: 10px !important;
+}
+
+.customScroll {
+  &::-webkit-scrollbar {
+    width: 10px;
+    border-radius: 3px;
   }
-  
-  .multi-steps {
-    display: table;
-    table-layout: fixed;
-    width: 100%;
+
+  /* Track */
+  &::-webkit-scrollbar-track {
+    background: rgba(150, 178, 224, 0.35);
+    visibility: hidden;
   }
-  .multi-steps > li {
-    // counter-increment: stepNum;
-    text-align: center;
-    display: table-cell;
-    position: relative;
-    color: #000;
-    font-size: 16px;
-    font-weight: 700;
+  &:hover {
+    &::-webkit-scrollbar-track {
+      visibility: visible;
+    }
   }
-  .multi-steps > li:before {
-    content: "";
-    content: "✓;";
-    content: "𐀃";
-    content: "𐀄";
-    content: "";
-    display: block;
-    margin: 0 auto 4px;
-    background-color: #fff;
-    width: 26px;
-    height: 26px;
-    line-height: 32px;
-    text-align: center;
-    font-weight: bold;
-    border-width: 2px;
-    border-style: solid;
-    border-color: #38EC55;
-    background-color: #38EC55;
-    border-radius: 50%;
-    margin-bottom: 15px;
-    z-index: 11;
-    position: relative;
+
+  &::-webkit-scrollbar-thumb {
+    background: rgba(136, 136, 136, 0.2);
   }
-  .multi-steps > li:after {
-    content: "";
-    height: 2px;
-    width: 100%;
-    background-color: #2C79FF;
-    position: absolute;
-    top: 13px;
-    left: 50%;
-    
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: rgba(136, 136, 136, 0.6);
   }
-  .multi-steps > li:last-child:after {
-    display: none;
-  }
-  .multi-steps > li.is-active:before {
-    background-color: #fff;
-    border-color: #2C79FF;
-    background-color: #2C79FF;
-    margin-bottom: 15px;
-  }
-  .multi-steps > li.is-active ~ li {
-    color: #000;
-    font-size: 16px;
-    font-weight: 700;
-  }
-  .multi-steps > li.is-active ~ li:before {
-    background-color: #ededed;
-    border-color: #ededed;
-    margin-bottom: 15px;
-    position: relative;
-    z-index: 11;
-  
-    
-  }
- //select input
- .css-1g04qtg-control{
-padding: 16px !important;
-border-radius: 10px !important;
- }
+}
