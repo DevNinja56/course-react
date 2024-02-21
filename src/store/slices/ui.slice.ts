@@ -10,6 +10,8 @@ export enum modalType {
     'change_password',
     'currency_converter',
     'bank_statement_calculator',
+    'user_detail',
+    'cancel_application',
     'share_modal'
 }
 

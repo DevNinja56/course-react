@@ -172,36 +172,6 @@ const CourseDetail = ({ data: scholarship }: { data: scholarshipType }) => {
                                             Visit university website
                                         </Link>
                                     </div>
-                                    {/* {scholarship.documentsRequirement && (
-                                        <div className="flex flex-col gap-5 w-full">
-                                            <div className="flex items-center gap-2">
-                                                <IoDocumentText className="h-7 w-7 md:h-8 md:w-8" />
-                                                <h1 className="font-bold text-lg md:text-2xl text-mainTextColor">
-                                                    Requirements
-                                                </h1>
-                                            </div>
-                                            <p className="text-sm md:text-xl font-medium text-lightGrayColor">
-                                                Listed below are the documents
-                                                required to apply for this
-                                                course.
-                                            </p>
-                                            <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-7">
-                                                {course.documentsRequirement?.map(
-                                                    ({ title, url }, i) => (
-                                                        <RequirementBox
-                                                            key={
-                                                                'docs requirement--' +
-                                                                i +
-                                                                title
-                                                            }
-                                                            text={title}
-                                                            url={url}
-                                                        />
-                                                    )
-                                                )}
-                                            </div>
-                                        </div>
-                                    )} */}
                                 </div>
                             </div>
                             <div className="flex flex-col gap-11 w-full lg:w-[28%] xl:w-[30%]">
