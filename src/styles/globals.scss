@@ -1,6 +1,6 @@
-@import "./config";
-@import "./slider";
-@import "./rangle-slider";
+@import './config';
+@import './slider';
+@import './rangle-slider';
 
 @tailwind base;
 @tailwind components;
@@ -33,20 +33,6 @@ html {
 }
 .backgroundBlack {
     background-color: #00000059;
-}
-.swiper-wrapper {
-    width: 100%;
-    display: flex;
-    align-items: center;
-}
-.swiper-slide {
-    height: 349.34px !important;
-    width: 354.35px !important;
-    transition: 0.2s;
-    &.active {
-        height: 403px !important;
-        width: 408.68px !important;
-    }
 }
 .removeScrollBar::-webkit-scrollbar {
     display: none;
