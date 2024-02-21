@@ -44,18 +44,18 @@ const BankStatementCalculate = () => {
         },
         ...(isLiveAustralia
             ? [
-                //   {
-                //       name: 'Traveling Cost',
-                //       value: setCurrencyValue(travelingCost, currency)
-                //   },
-                //   {
-                //       name: 'OSHC',
-                //       value: setCurrencyValue(oshc, currency)
-                //   },
-                //   {
-                //       name: 'Statement Requirement by University',
-                //       value: setCurrencyValue(total, currency)
-                //   },
+                  {
+                      name: 'Traveling Cost',
+                      value: setCurrencyValue(travelingCost, currency)
+                  },
+                  {
+                      name: 'OSHC',
+                      value: setCurrencyValue(oshc, currency)
+                  },
+                  {
+                      name: 'Statement Requirement by University',
+                      value: setCurrencyValue(total, currency)
+                  },
                   {
                       name: 'Statement Requirement for Visa',
                       value: setCurrencyValue(visaFee, currency)
@@ -70,18 +70,18 @@ const BankStatementCalculate = () => {
     ];
 
     return (
-        <div className="bg-white px-[50px] py-[60px] w-[572px] rounded-md ">
+        <div className="bg-white px-[40px] py-[30px] w-[572px] rounded-md ">
             <button className="absolute top-10 right-10 bg-blueColor text-white rounded-full w-[30px] h-[30px] px-1 text-[22px]">
                 <IoMdClose onClick={hideModal} />
             </button>
-            <span className="font-bold text-[32px] block text-center">
+            <span className="font-bold text-[28px] block text-center">
                 Bank Statement Calculator
             </span>
-            <p className='font-medium text-lg text-darkGrayColor text-center'>
+            <p className="font-medium text-lg text-darkGrayColor text-center">
                 Lorem Ipsum is simply dummy text of the printing and type
                 setting industry.{' '}
             </p>
-            <div className="mt-8 overflow-hidden rounded">
+            <div className="mt-4 overflow-hidden rounded">
                 <table className="border table w-full">
                     <tbody className="text-center">
                         {data.map(({ name, value }) => (
@@ -89,8 +89,12 @@ const BankStatementCalculate = () => {
                                 key={'statement--' + name}
                                 className="odd:bg-blueColor odd:bg-opacity-10 even:bg-gray-50 border-b overflow-hidden rounded "
                             >
-                                <th className="w-3/4 py-4 pl-5 text-left text-lg font-bold text-mainTextColor">{name}</th>
-                                <td className="w-1/4 pr-5 font-medium text-lg text-lightGrayColor">{value}</td>
+                                <th className="w-3/4 py-3 pl-5 text-left text-lg font-bold text-mainTextColor">
+                                    {name}
+                                </th>
+                                <td className="w-1/4 pr-5 font-medium text-lg text-lightGrayColor">
+                                    {value}
+                                </td>
                             </tr>
                         ))}
                     </tbody>
