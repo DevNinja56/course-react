@@ -44,18 +44,18 @@ const BankStatementCalculate = () => {
         },
         ...(isLiveAustralia
             ? [
-                  {
-                      name: 'Traveling Cost',
-                      value: setCurrencyValue(travelingCost, currency)
-                  },
-                  {
-                      name: 'OSHC',
-                      value: setCurrencyValue(oshc, currency)
-                  },
-                  {
-                      name: 'Statement Requirement by University',
-                      value: setCurrencyValue(total, currency)
-                  },
+                //   {
+                //       name: 'Traveling Cost',
+                //       value: setCurrencyValue(travelingCost, currency)
+                //   },
+                //   {
+                //       name: 'OSHC',
+                //       value: setCurrencyValue(oshc, currency)
+                //   },
+                //   {
+                //       name: 'Statement Requirement by University',
+                //       value: setCurrencyValue(total, currency)
+                //   },
                   {
                       name: 'Statement Requirement for Visa',
                       value: setCurrencyValue(visaFee, currency)
@@ -70,23 +70,27 @@ const BankStatementCalculate = () => {
     ];
 
     return (
-        <div className="bg-white p-5 w-[450px] rounded-md ">
-            <button className="absolute top-4 right-4 bg-red-600 text-white rounded-full p-0.5">
+        <div className="bg-white px-[50px] py-[60px] w-[572px] rounded-md ">
+            <button className="absolute top-10 right-10 bg-blueColor text-white rounded-full w-[30px] h-[30px] px-1 text-[22px]">
                 <IoMdClose onClick={hideModal} />
             </button>
-            <h3 className="font-bold text-2xl text-center">
+            <span className="font-bold text-[32px] block text-center">
                 Bank Statement Calculator
-            </h3>
-            <div className="my-8">
-                <table className="border table w-full ">
+            </span>
+            <p className='font-medium text-lg text-darkGrayColor text-center'>
+                Lorem Ipsum is simply dummy text of the printing and type
+                setting industry.{' '}
+            </p>
+            <div className="mt-8 overflow-hidden rounded">
+                <table className="border table w-full">
                     <tbody className="text-center">
                         {data.map(({ name, value }) => (
                             <tr
                                 key={'statement--' + name}
-                                className="odd:bg-white even:bg-gray-50 border-b "
+                                className="odd:bg-blueColor odd:bg-opacity-10 even:bg-gray-50 border-b overflow-hidden rounded "
                             >
-                                <th className="w-3/4 p-2">{name}</th>
-                                <td className="w-1/4">{value}</td>
+                                <th className="w-3/4 py-4 pl-5 text-left text-lg font-bold text-mainTextColor">{name}</th>
+                                <td className="w-1/4 pr-5 font-medium text-lg text-lightGrayColor">{value}</td>
                             </tr>
                         ))}
                     </tbody>
