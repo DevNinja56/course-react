@@ -1,15 +1,11 @@
 import ApplicationStatusBox from '@/components/Profile/Application/ApplicationStatusBox';
-import Apply from '@/components/Profile/Application/Apply';
-import Enroll from '@/components/Profile/Application/Enroll';
-import Offer from '@/components/Profile/Application/Offer';
 import SubmitDocument from '@/components/Profile/Application/SubmitDocument';
 import SuccessfullyEnrolled from '@/components/Profile/Application/SuccessfullyEnrolled';
-import Visa from '@/components/Profile/Application/Visa';
 import YourCounsellorBox from '@/components/Profile/Application/YourCounsellorBox';
 import { useUi } from '@/hooks/user-interface';
 import { useGetUserAppliesQuery } from '@/store/slices/allRequests';
 import { modalType } from '@/store/slices/ui.slice';
-import { applyTypes, statusEnum } from '@/types';
+import { statusEnum } from '@/types';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import React from 'react';
@@ -28,44 +24,34 @@ const UserApplicationDetails = () => {
     const isError = activeStatusField?.message_type === 'error';
     const isGeneral = activeStatusField?.message_type === 'general';
 
-    const getStatusTextAndComponent = (
-        activeStatus: string,
-        selectedCourse: applyTypes
-    ) => {
+    const getStatusText = (activeStatus: string) => {
         let statusText = '';
-        let statusComponent = null;
 
         switch (activeStatus) {
             case statusEnum.submitDocuments:
                 statusText = 'Submit Documents';
-                statusComponent = <SubmitDocument />;
                 break;
             case statusEnum.apply:
                 statusText = 'Documents Submitted';
-                statusComponent = <Apply selectedCourse={selectedCourse} />;
                 break;
             case statusEnum.offer:
                 statusText = 'Offer Letter';
-                statusComponent = <Offer selectedCourse={selectedCourse} />;
                 break;
             case statusEnum.visa:
                 statusText = 'Visa Detail';
-                statusComponent = <Visa selectedCourse={selectedCourse} />;
                 break;
             case statusEnum.enroll:
                 statusText = 'Enrollment Detail';
-                statusComponent = <Enroll selectedCourse={selectedCourse} />;
                 break;
             default:
                 break;
         }
 
-        return { statusText, statusComponent };
+        return { statusText };
     };
 
-    const { statusText, statusComponent } = getStatusTextAndComponent(
-        selectedCourse?.status?.active as string,
-        selectedCourse as applyTypes
+    const { statusText } = getStatusText(
+        selectedCourse?.status?.active as string
     );
 
     return (
@@ -93,10 +79,9 @@ const UserApplicationDetails = () => {
                         <ApplicationStatusBox selectedCourse={selectedCourse} />
                     </div>
                     <div className="max-w-[1240px] mx-auto p-8 py-16">
-                        <div className="pb-5">
-                            {selectedCourse?.status?.enroll && (
-                                <SuccessfullyEnrolled />
-                            )}
+                        <div className="pb-12">
+                            {selectedCourse?.status?.active ===
+                                statusEnum.enroll && <SuccessfullyEnrolled />}
                         </div>
                         {isError ? (
                             <div className="flex flex-col gap-2 mb-7 md:mb-10 lg:mb-16">
@@ -122,7 +107,24 @@ const UserApplicationDetails = () => {
                         ) : (
                             ''
                         )}
-                        {statusComponent}
+                        {selectedCourse?.status?.active ===
+                        statusEnum.submitDocuments ? (
+                            <SubmitDocument />
+                        ) : (
+                            <div className="h-full w-full">
+                                {activeStatusField?.document !== null && (
+                                    <embed
+                                        id="frPDF"
+                                        height="100%"
+                                        width="100%"
+                                        className="min-h-[100vh]"
+                                        src={`${
+                                            activeStatusField?.document as string
+                                        }#toolbar=0&view=Fit#fullscreen`}
+                                    ></embed>
+                                )}
+                            </div>
+                        )}
                         <button
                             onClick={() =>
                                 updateModal({
