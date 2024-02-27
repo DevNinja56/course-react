@@ -105,7 +105,7 @@ const FileSubmitted = () => {
                         <span className="text-blueColor">Submitted</span>
                     </div>
                 </div>
-                <div className='md:hidden lg:block sm:hidden'>
+                <div className="md:hidden lg:block sm:hidden">
                     <Button
                         type="submit"
                         text="Save"
@@ -115,7 +115,7 @@ const FileSubmitted = () => {
                 </div>
             </div>
 
-            <div className="flex w-full lg:flex-row md:flex-col sm:flex-col">
+            <div className="flex w-full h-[600px] lg:flex-row md:flex-col sm:flex-col">
                 <div className="w-1/4 flex flex-col md:hidden sm:hidden lg:block">
                     <div className="w-full bg-BgColorPassport bg-opacity-5 p-8">
                         <div className="w-full bg-BgCardPassport p-4">
@@ -144,10 +144,10 @@ const FileSubmitted = () => {
                     <div className="w-full bg-BgCardPassport md:pl-36 sm:pl-4 lg:pl-0">
                         {uploadFiles && <PDFViewer pdfUrl={uploadFiles} />}
                     </div>
-                    <div className="md:flex sm:flex lg:hidden justify-between w-[65%] mx-auto mt-4">
+                    <div className="md:flex sm:flex lg:hidden justify-between w-[85%] mx-auto mt-4">
                         <label
                             htmlFor="fileUpload"
-                            className=" text-center py-1.5 px-4 font-semibold cursor-pointer bg-blueColor border-transparent text-white hover:bg-white hover:border-2 hover:border-blueColor hover:text-blueColor"
+                            className="text-center py-[19px] px-[127px]  font-semibold cursor-pointer bg-blueColor border-transparent text-white hover:bg-white hover:border-2 hover:border-blueColor hover:text-blueColor"
                         >
                             {' '}
                             {isLoading ? 'Loading...' : '+ ADD'}
@@ -160,11 +160,11 @@ const FileSubmitted = () => {
                             id="fileUpload"
                             onChange={handleFileChange}
                         />
-                        <div className=''>
+                        <div className="">
                             <Button
                                 type="submit"
                                 text="Save"
-                                className="rounded-none py-2 px-4"
+                                className="rounded-none py-[19px] px-[127px] "
                                 onClick={handleSubmit(onSubmit)}
                             />
                         </div>

@@ -162,10 +162,10 @@ const ConSolid_MarkSheet = () => {
                     <div className="w-full bg-BgCardPassport sm:pl-4 md:pl-36 lg:pl-0">
                         {uploadFiles && <PDFViewer pdfUrl={uploadFiles} />}
                     </div>
-                    <div className="md:flex sm:flex lg:hidden justify-between w-[65%] mx-auto mt-4">
+                    <div className="md:flex sm:flex lg:hidden justify-between w-[85%] mx-auto mt-4">
                         <label
                             htmlFor="fileUpload"
-                            className=" text-center py-1.5 px-4 font-semibold cursor-pointer bg-blueColor border-transparent text-white hover:bg-white hover:border-2 hover:border-blueColor hover:text-blueColor"
+                            className=" text-center py-[19px] px-[127px] font-semibold cursor-pointer bg-blueColor border-transparent text-white hover:bg-white hover:border-2 hover:border-blueColor hover:text-blueColor"
                         >
                             {' '}
                             {isLoading ? 'Loading...' : '+ ADD'}
@@ -182,7 +182,7 @@ const ConSolid_MarkSheet = () => {
                             <Button
                                 type="submit"
                                 text="Save"
-                                className="rounded-none py-2 px-4"
+                                className="rounded py-[19px] px-[127px]"
                                 onClick={handleSubmit(onSubmit)}
                             />
                         </div>
