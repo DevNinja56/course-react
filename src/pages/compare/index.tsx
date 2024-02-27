@@ -188,7 +188,7 @@ const Compare = ({ data }: { data?: singleCourseType }) => {
                                         onClick={() => {
                                             window.print();
                                         }}
-                                        className="absolute top-[50%] translate-y-[-50%] right-3 bg-white px-2 py-1 rounded-md print:hidden flex gap-1 justify-center items-center font-bold "
+                                        className="absolute top-[50%] translate-y-[-50%] right-3 bg-white px-2 py-1 rounded-md print:hidden flex gap-1 justify-center items-center font-bold hover:bg-opacity-80"
                                     >
                                         <FiPrinter /> Print
                                     </button>

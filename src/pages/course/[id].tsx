@@ -114,9 +114,9 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                                                 }
                                             })
                                         }
-                                        className="h-8 w-8 rounded-full bg-white shadow-lg lg:flex items-center justify-center hidden cursor-pointer"
+                                        className="h-8 w-8 rounded-full bg-white shadow-lg lg:flex items-center justify-center hidden cursor-pointer group hover:bg-blue-500"
                                     >
-                                        <IoShareSocialSharp className="text-gray-400 h-4 w-4" />
+                                        <IoShareSocialSharp className="text-gray-400 group-hover:text-white h-4 w-4" />
                                     </div>
                                 </div>
                             </div>

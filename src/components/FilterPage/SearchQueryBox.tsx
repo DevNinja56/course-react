@@ -28,7 +28,7 @@ const SearchQueryBox = () => {
                 />
             </div>
             <button
-                className="py-[11px] px-[39px] absolute right-3 top-[11px] bg-blueColor rounded-[5px] text-white text-sm"
+                className="py-[11px] px-[39px] absolute right-3 top-[11px] bg-blueColor rounded-[5px] text-white text-sm hover:bg-opacity-50"
                 type="submit"
             >
                 Search

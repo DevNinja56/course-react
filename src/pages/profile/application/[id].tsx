@@ -97,7 +97,7 @@ const UserApplicationDetails = () => {
                             state: {}
                         })
                     }
-                    className=" flex items-center justify-center mx-auto my-24 text-redColor border border-redColor py-4 px-9 rounded-md"
+                    className=" flex items-center justify-center mx-auto my-24 text-redColor border border-redColor py-4 px-9 rounded-md hover:bg-red-500 hover:text-white"
                 >
                     Cancel Application
                 </button>
