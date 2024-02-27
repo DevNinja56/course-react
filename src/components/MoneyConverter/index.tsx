@@ -18,8 +18,6 @@ const CurrencyConverter = () => {
         } else {
             setIsChangedCurrency(true);
             !geoIp && updateGeoIp();
-
-            console.log(geoIp);
         }
 
         fetchLatestRates();

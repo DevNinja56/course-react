@@ -15,10 +15,10 @@ const Ranking = ({ data }: { data: instituteType }) => {
                     img="/images/institute/qs-world-university-rankings 1.svg"
                     text={data.qsWorldRanking + 'th'}
                 />
-                <RankingCards
+                {/* <RankingCards
                     img="/images/institute/Shanghai_Academic_Ranking_of_World_Universities_–_Logo 1.svg"
                     text={data.shanghaiRanking + 'th'}
-                />
+                /> */}
                 <RankingCards
                     img="/images/institute/Shanghai_Academic_Ranking_of_World_Universities_–_Logo 2.svg"
                     text={data.timesHigherRanking + 'th'}

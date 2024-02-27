@@ -22,8 +22,8 @@ import { GoClockFill } from 'react-icons/go';
 import { FaMoneyBillWave } from 'react-icons/fa';
 import { IoLocation } from 'react-icons/io5';
 import { FaCalendar } from 'react-icons/fa';
-import { BiSolidCalendar } from 'react-icons/bi';
-import CourseTag from '@/components/course/CourseTag';
+// import { BiSolidCalendar } from 'react-icons/bi';
+// import CourseTag from '@/components/course/CourseTag';
 
 const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
     const { updateModal } = useUi();
@@ -479,18 +479,18 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                                         />
                                     </div>
                                 </div>
-                                <CourseTag
+                                {/* <CourseTag
                                     icon={
                                         <BiSolidCalendar className="h-7 w-7" />
                                     }
                                     text="Upcoming Intakes"
-                                    tagName="September 2024"
+                                    tagName={course.intakes.join(' , ')}
                                 />
                                 <CourseTag
                                     icon={<GiOpenBook className="h-7 w-7" />}
                                     text="Mode of Study"
                                     tagName="Full Time"
-                                />
+                                /> */}
                             </div>
                         </div>
                     </div>
