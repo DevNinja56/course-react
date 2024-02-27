@@ -45,7 +45,7 @@ const CourseCard = ({ course }: CardProps) => {
                         >
                             {name} <br /> at {institute.name}
                         </h1>
-                        <p className="font-medium text-[0.670rem] xl:text-[0.700rem] text-gray-400">
+                        <p className="font-medium text-[0.670rem] xl:text-[0.700rem] text-gray-400 capitalize">
                             {degree.type}
                         </p>
                     </div>
