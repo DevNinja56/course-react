@@ -12,6 +12,7 @@ const RequirementBox = ({ text, url }: propTypes) => {
             <p className="font-medium text-lightGrayColor">{text}</p>
             <a
                 href={url}
+                target="_blank"
                 rel="noreferrer noopener"
                 download={true}
                 title={`Download ${text} file`}
