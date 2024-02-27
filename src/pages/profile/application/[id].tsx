@@ -1,13 +1,15 @@
-import StepsProgressBar from '@/components/StepsProgressBar';
-import RequirementBox from '@/components/course/RequirementBox';
-import { ROUTES } from '@/config/constant';
+import React from 'react';
+import ApplicationStatusBox from '@/components/Profile/Application/ApplicationStatusBox';
+import SubmitDocument from '@/components/Profile/Application/SubmitDocument';
+import SuccessfullyEnrolled from '@/components/Profile/Application/SuccessfullyEnrolled';
+import YourCounsellorBox from '@/components/Profile/Application/YourCounsellorBox';
 import { useUi } from '@/hooks/user-interface';
 import { useGetUserAppliesQuery } from '@/store/slices/allRequests';
 import { modalType } from '@/store/slices/ui.slice';
+import { statusEnum } from '@/types';
 import Image from 'next/image';
-import Link from 'next/link';
 import { useRouter } from 'next/router';
-import React from 'react';
+import { MdError } from 'react-icons/md';
 
 const UserApplicationDetails = () => {
     const { updateModal } = useUi();
@@ -16,103 +18,131 @@ const UserApplicationDetails = () => {
     const { data } = useGetUserAppliesQuery();
     const selectedCourse = data?.find((course) => course.id === id);
 
+    const activeStatusField =
+        selectedCourse?.status[selectedCourse?.status?.active];
+
+    const isError = activeStatusField?.message_type === 'error';
+    const isGeneral = activeStatusField?.message_type === 'general';
+
+    const getStatusText = (activeStatus: string) => {
+        let statusText = '';
+
+        switch (activeStatus) {
+            case statusEnum.submitDocuments:
+                statusText = 'Submit Documents';
+                break;
+            case statusEnum.apply:
+                statusText = 'Documents Submitted';
+                break;
+            case statusEnum.offer:
+                statusText = 'Offer Letter';
+                break;
+            case statusEnum.visa:
+                statusText = 'Visa Detail';
+                break;
+            case statusEnum.enroll:
+                statusText = 'Enrollment Detail';
+                break;
+            default:
+                break;
+        }
+
+        return { statusText };
+    };
+
+    const { statusText } = getStatusText(
+        selectedCourse?.status?.active as string
+    );
+
     return (
-        <>
+        <div className="w-full relative overflow-hidden">
+            <Image
+                height={60}
+                width={60}
+                alt="course-round"
+                className="top-40 absolute -left-3 md:-left-5 h-8 w-8 md:h-16 md:w-16 lg:h-24 lg:w-24 z-10"
+                src="/images/CourseDetail/Circle 3.svg"
+                priority
+            />
+            <Image
+                height={273}
+                width={274}
+                alt="courseDetail-round"
+                className="absolute right-[-40px] lg:-right-20 -top-7 md:-top-16 md:-right-8 md:translate-y-8 lg:translate-y-0 md:bottom-8 lg:-top-16 h-20 w-20 md:h-32 md:w-32 lg:h-60 lg:w-60 z-10"
+                src="/images/CourseDetail/Ciecle 4.svg"
+                priority
+            />
             {selectedCourse && (
-                <div className="w-[92%] max-w-[1240px] mx-auto p-8 rounded-[30px] shadow-progressBarShadow ">
-                    <h1 className="text-2xl font-bold text-mainTextColor gap-6">
-                        {selectedCourse?.course.name}
-                    </h1>
-                    <div className="py-3 flex items-center text-lg font-medium text-darkGrayColor gap-10 ">
-                        <p className="text-sm md:text-base">
-                            {selectedCourse?.course.degree.type}
-                        </p>
-
-                        <p className=" text-sm md:text-base relative before:block before:content-[''] before:w-2 before:h-2 before:bg-black before:rounded-full before:absolute before:-left-6 before:top-[50%] before:-translate-y-1/2">
-                            {selectedCourse?.course.specialization.name}
-                        </p>
-                        <p className="text-sm md:text-base relative before:block before:content-[''] before:w-2 before:h-2 before:bg-black before:rounded-full before:absolute before:-left-6 before:top-[50%] before:-translate-y-1/2">
-                            January 2025
-                        </p>
+                <div className="z-20 relative">
+                    <div className="flex flex-col-reverse lg:flex-row items-center gap-5 w-[92%] max-w-[1240px] mx-auto justify-between pt-4 md:pt-8 lg:pt-12">
+                        <YourCounsellorBox selectedCourse={selectedCourse} />
+                        <ApplicationStatusBox selectedCourse={selectedCourse} />
                     </div>
-                    <div className="flex items-center gap-3">
-                        <Image
-                            width={20}
-                            height={20}
-                            className="w-8 h-8 rounded-[5px]"
-                            src={selectedCourse?.course?.institute?.logo ?? ''}
-                            alt=""
-                        />
-                        <div className="flex flex-col ">
-                            <span className="text-base font-bold text-mainTextColor">
-                                {selectedCourse?.course?.institute?.name}
-                            </span>
-                            <span className="text-darkGrayColor text-base">
-                                {selectedCourse?.course?.institute?.campus}
-                            </span>
+                    <div className="max-w-[1240px] mx-auto p-8 py-16">
+                        <div className="pb-12">
+                            {selectedCourse?.status?.active ===
+                                statusEnum.enroll && <SuccessfullyEnrolled />}
                         </div>
+                        {isError ? (
+                            <div className="flex flex-col gap-2 mb-7 md:mb-10 lg:mb-16">
+                                <h1 className="flex items-center gap-2 font-bold text-lg md:text-[26px]">
+                                    Documents Required
+                                    <MdError className="text-redColor" />
+                                </h1>
+                                <div className="py-2 px-4 rounded-md bg-redColor bg-opacity-10">
+                                    <p className="text-base md:text-lg text-redColor">
+                                        {activeStatusField?.message}
+                                    </p>
+                                </div>
+                            </div>
+                        ) : isGeneral ? (
+                            <div className="flex flex-col gap-2 mb-7 md:mb-10 lg:mb-16">
+                                <h1 className="flex items-center gap-2 font-bold text-lg md:text-[26px]">
+                                    {statusText}
+                                </h1>
+                                <p className="text-base md:text-lg text-textLightBlackColor">
+                                    {activeStatusField?.message}
+                                </p>
+                            </div>
+                        ) : (
+                            ''
+                        )}
+                        {selectedCourse?.status?.active ===
+                        statusEnum.submitDocuments ? (
+                            <SubmitDocument />
+                        ) : (
+                            <div className="h-full w-full">
+                                {activeStatusField?.document !== null && (
+                                    <embed
+                                        id="frPDF"
+                                        height="100%"
+                                        width="100%"
+                                        className="min-h-[100vh]"
+                                        src={`${
+                                            activeStatusField?.document as string
+                                        }#toolbar=0&view=Fit#fullscreen`}
+                                    ></embed>
+                                )}
+                            </div>
+                        )}
+                        {selectedCourse?.status?.active ===
+                            statusEnum.submitDocuments && (
+                            <button
+                                onClick={() =>
+                                    updateModal({
+                                        type: modalType.cancel_application,
+                                        state: {}
+                                    })
+                                }
+                                className=" flex items-center justify-center mx-auto text-redColor border border-redColor py-4 px-9 rounded-md mt-10"
+                            >
+                                Cancel Application
+                            </button>
+                        )}
                     </div>
-
-                    <StepsProgressBar status={selectedCourse.status} />
                 </div>
             )}
-            <div className="max-w-[1240px] mx-auto p-8">
-                <div className="w-full md:w-1/2 py-16 ">
-                    <p className="text-[26px] font-bold text-mainTextColor">
-                        Submit Documents
-                    </p>
-                    <p className="text-2xl font-semibold uppercase text-darkGrayColor py-3">
-                        Identity
-                    </p>
-                    <Link href={`${ROUTES.FILE_SUBMIT}?id=${id}`}>
-                        <RequirementBox url="" text="Passport" />
-                    </Link>
-                </div>
-                <div className="w-full">
-                    <p className="text-[26px] font-bold text-mainTextColor pt-12 pb-3">
-                        Academic Certificates
-                    </p>
-                    <p className="text-2xl font-semibold uppercase text-darkGrayColor py-3">
-                        UNDERGRADUATE
-                    </p>
-                    <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-7">
-                        <RequirementBox text="Semester Marksheets" url="" />
-                        <Link href={`${ROUTES.CONSOLID_MARKSHEET}?id=${id}`}>
-                            {' '}
-                            <RequirementBox
-                                text="Consolidated Marksheets"
-                                url=""
-                            />
-                        </Link>
-                        <RequirementBox text="Provisional Certificate" url="" />
-                    </div>
-                </div>
-                <div className="w-full">
-                    <p className="text-[26px] font-bold text-mainTextColor pt-12 pb-7">
-                        Professional Records
-                    </p>
-
-                    <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-7">
-                        <RequirementBox text="Experience Letter" url="" />
-                        <RequirementBox text="CV/Resume" url="" />
-                        <RequirementBox text="Personal Statement" url="" />
-                        <RequirementBox text="Letter of Reference" url="" />
-                    </div>
-                </div>
-
-                <button
-                    onClick={() =>
-                        updateModal({
-                            type: modalType.cancel_application,
-                            state: {}
-                        })
-                    }
-                    className=" flex items-center justify-center mx-auto my-24 text-redColor border border-redColor py-4 px-9 rounded-md"
-                >
-                    Cancel Application
-                </button>
-            </div>
-        </>
+        </div>
     );
 };
 UserApplicationDetails.layout = { auth: true };
