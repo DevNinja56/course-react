@@ -13,6 +13,7 @@ import Certificate from '../Institute/icons/Certificate';
 import { RiGraduationCapFill } from 'react-icons/ri';
 import School from '../Institute/icons/School';
 import Tag from '../Institute/Tag';
+import Image from 'next/image';
 
 interface propsType {
     id: string;
@@ -44,7 +45,7 @@ const Card: React.FC<propsType> = ({
             <Link href={ROUTES.SCHOLARSHIP.replace(':id', id)}>
                 <div className="flex flex-col gap-5 w-full z-10">
                     <div className="w-full">
-                        <img
+                        <Image
                             src="/images/Scholarships/scholarship (1) 1.png"
                             alt="image"
                             className="mx-auto"

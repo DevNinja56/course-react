@@ -1,9 +1,11 @@
 import StepsProgressBar from '@/components/StepsProgressBar';
 import RequirementBox from '@/components/course/RequirementBox';
+import { ROUTES } from '@/config/constant';
 import { useUi } from '@/hooks/user-interface';
 import { useGetUserAppliesQuery } from '@/store/slices/allRequests';
 import { modalType } from '@/store/slices/ui.slice';
 import Image from 'next/image';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React from 'react';
 
@@ -62,7 +64,9 @@ const UserApplicationDetails = () => {
                     <p className="text-2xl font-semibold uppercase text-darkGrayColor py-3">
                         Identity
                     </p>
-                    <RequirementBox url="" text="Passport" />
+                    <Link href={`${ROUTES.FILE_SUBMIT}?id=${id}`}>
+                        <RequirementBox url="" text="Passport" />
+                    </Link>
                 </div>
                 <div className="w-full">
                     <p className="text-[26px] font-bold text-mainTextColor pt-12 pb-3">
@@ -73,7 +77,13 @@ const UserApplicationDetails = () => {
                     </p>
                     <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-7">
                         <RequirementBox text="Semester Marksheets" url="" />
-                        <RequirementBox text="Consolidated Marksheets" url="" />
+                        <Link href={`${ROUTES.CONSOLID_MARKSHEET}?id=${id}`}>
+                            {' '}
+                            <RequirementBox
+                                text="Consolidated Marksheets"
+                                url=""
+                            />
+                        </Link>
                         <RequirementBox text="Provisional Certificate" url="" />
                     </div>
                 </div>
