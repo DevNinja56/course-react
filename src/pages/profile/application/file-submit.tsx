@@ -84,7 +84,7 @@ const FileSubmitted = () => {
                 }
             );
             toast.success('Documents Updates Successfully');
-            console.log(response)
+            console.log(response);
         } catch (error) {
             toast.error('Error updating data');
         }
@@ -105,7 +105,7 @@ const FileSubmitted = () => {
                         <span className="text-blueColor">Submitted</span>
                     </div>
                 </div>
-                <div>
+                <div className='md:hidden lg:block sm:hidden'>
                     <Button
                         type="submit"
                         text="Save"
@@ -115,8 +115,8 @@ const FileSubmitted = () => {
                 </div>
             </div>
 
-            <div className="flex w-full">
-                <div className="w-1/4 flex flex-col ">
+            <div className="flex w-full lg:flex-row md:flex-col sm:flex-col">
+                <div className="w-1/4 flex flex-col md:hidden sm:hidden lg:block">
                     <div className="w-full bg-BgColorPassport bg-opacity-5 p-8">
                         <div className="w-full bg-BgCardPassport p-4">
                             {uploadFiles && (
@@ -126,7 +126,7 @@ const FileSubmitted = () => {
                     </div>
                     <label
                         htmlFor="fileUpload"
-                        className=" text-center py-4 font-semibold text-3xl cursor-pointer bg-blueColor border-transparent text-white hover:bg-white hover:border-2 hover:border-blueColor hover:text-blueColor"
+                        className=" px-12 ml-12 text-center py-4 font-semibold text-3xl cursor-pointer bg-blueColor border-transparent text-white hover:bg-white hover:border-2 hover:border-blueColor hover:text-blueColor"
                     >
                         {' '}
                         {isLoading ? 'Loading...' : '+ ADD'}
@@ -140,14 +140,39 @@ const FileSubmitted = () => {
                         onChange={handleFileChange}
                     />
                 </div>
-                <div className="w-2/4 py-8 px-16">
-                    <div className="w-full bg-BgCardPassport ">
+                <div className="lg:w-2/4 md:w-full sm:w-full py-8 px-16">
+                    <div className="w-full bg-BgCardPassport md:pl-36 sm:pl-4 lg:pl-0">
                         {uploadFiles && <PDFViewer pdfUrl={uploadFiles} />}
+                    </div>
+                    <div className="md:flex sm:flex lg:hidden justify-between w-[65%] mx-auto mt-4">
+                        <label
+                            htmlFor="fileUpload"
+                            className=" text-center py-1.5 px-4 font-semibold cursor-pointer bg-blueColor border-transparent text-white hover:bg-white hover:border-2 hover:border-blueColor hover:text-blueColor"
+                        >
+                            {' '}
+                            {isLoading ? 'Loading...' : '+ ADD'}
+                        </label>
+                        <input
+                            type="file"
+                            accept=".pdf, image/*"
+                            className="hidden"
+                            multiple
+                            id="fileUpload"
+                            onChange={handleFileChange}
+                        />
+                        <div className=''>
+                            <Button
+                                type="submit"
+                                text="Save"
+                                className="rounded-none py-2 px-4"
+                                onClick={handleSubmit(onSubmit)}
+                            />
+                        </div>
                     </div>
                 </div>
 
                 {uploadFiles && (
-                    <div className="w-1/4 p-8 bg-blueColor bg-opacity-5">
+                    <div className=" lg:w-1/4 sm:w-full md:w-full p-8 bg-blueColor bg-opacity-5">
                         <span className="font-bold text-xl">
                             Fill in your details
                         </span>
