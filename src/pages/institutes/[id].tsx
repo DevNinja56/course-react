@@ -14,7 +14,6 @@ import Link from 'next/link';
 
 const Institutes = ({ data: institute }: { data: instituteType }) => {
     const [showText, setShowText] = useState(false);
-    console.log({ institute });
 
     return (
         <>
@@ -32,8 +31,11 @@ const Institutes = ({ data: institute }: { data: instituteType }) => {
                         height={549}
                         width={1240}
                         alt="institute"
-                        src="/images/institute/instituteMain.png"
-                        className="w-full"
+                        src={
+                            institute?.image ??
+                            '/images/institute/instituteMain.png'
+                        }
+                        className="w-full rounded-xl"
                         priority
                     />
                 </div>
