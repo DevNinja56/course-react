@@ -10,11 +10,8 @@ interface propTypes {
 
 const YourCounsellorBox = ({ selectedCourse }: propTypes) => {
     return (
-        <div className="bg-white rounded-3xl w-full lg:w-2/5 xl:w-1/2 shadow-progressBarShadow flex flex-col md:flex-row justify-center md:justify-start lg:flex-col items-center gap-3 md:gap-10 lg:gap-3 py-7 md:py-3 px-8">
+        <div className="bg-white rounded-3xl w-full lg:w-2/5 xl:w-1/2 shadow-progressBarShadow flex flex-col md:flex-row justify-center md:justify-start lg:flex-col items-center gap-3 md:gap-10 lg:gap-3 py-7 md:py-7 px-8">
             <div className="flex flex-col gap-2 items-center w-full md:w-auto">
-                <h1 className="text-lightGrayColor text-sm font-bold w-full md:w-auto">
-                    {selectedCourse?.councillor?.title}
-                </h1>
                 <div className="flex flex-col gap-2 items-center">
                     <Image
                         height={122}
@@ -24,13 +21,10 @@ const YourCounsellorBox = ({ selectedCourse }: propTypes) => {
                         className="rounded-full h-16 w-16"
                         priority
                     />
-                    <div className="flex flex-col gap-1">
+                    <div className="flex flex-col gap-1 items-center">
                         <h1 className="text-xl font-semibold text-textBlackColor">
-                            Saqib Shah
+                            {selectedCourse?.councillor?.title}
                         </h1>
-                        <h2 className="text-sm text-lightGrayColor font-semibold">
-                            Senior Counsellor
-                        </h2>
                     </div>
                 </div>
             </div>

@@ -125,17 +125,20 @@ const UserApplicationDetails = () => {
                                 )}
                             </div>
                         )}
-                        <button
-                            onClick={() =>
-                                updateModal({
-                                    type: modalType.cancel_application,
-                                    state: {}
-                                })
-                            }
-                            className=" flex items-center justify-center mx-auto text-redColor border border-redColor py-4 px-9 rounded-md mt-10"
-                        >
-                            Cancel Application
-                        </button>
+                        {selectedCourse?.status?.active ===
+                            statusEnum.submitDocuments && (
+                            <button
+                                onClick={() =>
+                                    updateModal({
+                                        type: modalType.cancel_application,
+                                        state: {}
+                                    })
+                                }
+                                className=" flex items-center justify-center mx-auto text-redColor border border-redColor py-4 px-9 rounded-md mt-10"
+                            >
+                                Cancel Application
+                            </button>
+                        )}
                     </div>
                 </div>
             )}
