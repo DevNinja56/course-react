@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import { ROUTES } from '@/config/constant';
 import {
     countryType,
