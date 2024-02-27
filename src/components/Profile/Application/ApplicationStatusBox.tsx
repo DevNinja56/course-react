@@ -33,7 +33,7 @@ const ApplicationStatusBox = ({ selectedCourse }: propTypes) => {
                             height={20}
                             className="w-8 h-8 rounded-[5px]"
                             src={selectedCourse?.course?.institute?.logo ?? ''}
-                            alt=""
+                            alt="selectedCourseLogo"
                         />
                         <div className="flex flex-col ">
                             <span className="text-xs md:text-base font-bold text-mainTextColor">

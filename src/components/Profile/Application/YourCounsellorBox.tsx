@@ -17,7 +17,7 @@ const YourCounsellorBox = ({ selectedCourse }: propTypes) => {
                         height={122}
                         width={122}
                         alt="userImg"
-                        src={'https://picsum.photos/200/300'}
+                        src={selectedCourse?.councillor?.profile_image}
                         className="rounded-full h-16 w-16"
                         priority
                     />
