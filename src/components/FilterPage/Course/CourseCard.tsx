@@ -1,6 +1,6 @@
+/* eslint-disable @next/next/no-img-element */
 import { ROUTES } from '@/config/constant';
 import { courseType } from '@/types';
-import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 import FavoriteButton from '../../Button/FavoriteButton';
@@ -27,15 +27,14 @@ const CourseCard = ({ course }: CardProps) => {
             />
             <Link href={ROUTES.COURSE.replace(':id', _id)}>
                 <div className="relative">
-                    <Image
+                    <img
                         height={174}
                         width={200}
                         alt="card"
                         src={`${
                             logo ?? '/images/FilterPage/Rectangle 3634.svg'
                         }`}
-                        className="h-[200px] w-auto mx-auto object-scale-down"
-                        priority
+                        className="h-[200px] w-full object-cover  "
                     />
                 </div>
                 <div className="pt-3 pb-6 px-3 flex flex-col gap-7">
