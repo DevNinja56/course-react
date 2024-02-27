@@ -12,6 +12,7 @@ import { BASE_URL } from '@/utils/axios';
 import { getToken } from '@/utils/axios/token';
 import { useRouter } from 'next/router';
 import toast from 'react-hot-toast';
+import { fetchRequest } from '@/utils/axios/fetch';
 
 interface formType {
     number: string;
@@ -60,34 +61,35 @@ const FileSubmitted = () => {
     };
 
     const onSubmit = async (data: formType) => {
-        try {
-            const response = await axios.patch(
-                `${BASE_URL}${API_ENDPOINTS.APPLY_DOCUMENTS}/${id}`,
-                {
-                    documents: {
-                        identity: {
-                            passport: {
-                                url: [uploadFiles],
-                                given_name: data.given_name,
-                                sur_name: data.sur_name,
-                                number: data.number,
-                                date_of_expiry: data.date_of_expiry,
-                                date_of_issue: data.date_of_issue
+        toast
+            .promise(
+                fetchRequest({
+                    url: `${BASE_URL}${API_ENDPOINTS.APPLY_DOCUMENTS}/${id}`,
+                    type: 'patch',
+                    body: {
+                        documents: {
+                            identity: {
+                                passport: {
+                                    url: [uploadFiles],
+                                    given_name: data.given_name,
+                                    sur_name: data.sur_name,
+                                    number: data.number,
+                                    date_of_expiry: data.date_of_expiry,
+                                    date_of_issue: data.date_of_issue
+                                }
                             }
                         }
                     }
-                },
+                }),
                 {
-                    headers: {
-                        Authorization: `Bearer ${token}`
-                    }
+                    loading: 'Please wait...',
+                    success: () => {
+                        return 'Form submitted successfully';
+                    },
+                    error: 'An error occurred'
                 }
-            );
-            toast.success('Documents Updates Successfully');
-            console.log(response);
-        } catch (error) {
-            toast.error('Error updating data');
-        }
+            )
+            .finally(() => setIsLoading(false));
     };
 
     return (

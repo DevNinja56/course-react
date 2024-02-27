@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import InputBox from '@/components/Input';
 import { BiMessageRoundedError } from 'react-icons/bi';
 import { useForm } from 'react-hook-form';
+import { fetchRequest } from '@/utils/axios/fetch';
 import Button from '@/components/Button/index';
 import PDFViewer from '@/components/PDFViewer';
 import PDFSmallViewer from '@/components/PDFViewer/PDFSmallViewer';
@@ -71,33 +72,62 @@ const ConSolid_MarkSheet = () => {
     };
 
     const onSubmit = async (data: formType) => {
-        try {
-            const response = await axios.patch(
-                `${BASE_URL}${API_ENDPOINTS.APPLY_DOCUMENTS}/${id}`,
-                {
-                    documents: {
-                        academic_certificates: {
-                            consolidated_mark_sheets: {
-                                url: [uploadFiles],
-                                startDate: data.startDate,
-                                completeDate: data.completeDate,
-                                institution: data.institution,
-                                country: data.country
+        toast
+            .promise(
+                fetchRequest({
+                    url: `${BASE_URL}${API_ENDPOINTS.APPLY_DOCUMENTS}/${id}`,
+                    type: 'patch',
+                    body: {
+                        documents: {
+                            academic_certificates: {
+                                consolidated_mark_sheets: {
+                                    url: [uploadFiles],
+                                    startDate: data.startDate,
+                                    completeDate: data.completeDate,
+                                    institution: data.institution,
+                                    country: data.country
+                                }
                             }
                         }
                     }
-                },
+                }),
                 {
-                    headers: {
-                        Authorization: `Bearer ${token}`
-                    }
+                    loading: 'Please wait...',
+                    success: () => {
+                        return 'Form submitted successfully';
+                    },
+                    error: 'An error occurred'
                 }
-            );
-            toast.success('Documents Updates Successfully');
-            console.log(response);
-        } catch (error) {
-            toast.error('Error updating data');
-        }
+            )
+            .finally(() => setIsLoading(false));
+
+        // try {
+        //     const response = await axios.patch(
+        //         `${BASE_URL}${API_ENDPOINTS.APPLY_DOCUMENTS}/${id}`,
+        //         {
+        //             documents: {
+        //                 academic_certificates: {
+        //                     consolidated_mark_sheets: {
+        //                         url: [uploadFiles],
+        //                         startDate: data.startDate,
+        //                         completeDate: data.completeDate,
+        //                         institution: data.institution,
+        //                         country: data.country
+        //                     }
+        //                 }
+        //             }
+        //         },
+        //         {
+        //             headers: {
+        //                 Authorization: `Bearer ${token}`
+        //             }
+        //         }
+        //     );
+        //     toast.success('Documents Updates Successfully');
+        //     console.log(response);
+        // } catch (error) {
+        //     toast.error('Error updating data');
+        // }
     };
 
     const handleCountryChange = (selectedOptions: selectType) => {
