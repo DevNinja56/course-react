@@ -11,7 +11,7 @@ const ApplicationStatusBox = ({ selectedCourse }: propTypes) => {
     return (
         <>
             {selectedCourse && (
-                <div className="py-8 px-2 md:px-4 xl:p-8 rounded-[30px] shadow-progressBarShadow w-full h-full bg-white">
+                <div className="py-8 px-2 md:px-4 xl:p-8 rounded-[30px] shadow-progressBarShadow w-full h-auto bg-white">
                     <h1 className="text-sm md:text-2xl font-bold text-mainTextColor gap-6">
                         {selectedCourse?.course.name}
                     </h1>

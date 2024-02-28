@@ -74,7 +74,7 @@ const UserApplicationDetails = () => {
             />
             {selectedCourse && (
                 <div className="z-20 relative">
-                    <div className="flex flex-col-reverse lg:flex-row items-center gap-5 w-[92%] max-w-[1240px] mx-auto justify-between pt-4 md:pt-8 lg:pt-12">
+                    <div className="flex flex-col-reverse lg:flex-row gap-5 w-[92%] max-w-[1240px] mx-auto justify-between pt-4 md:pt-8 lg:pt-12 h-auto">
                         <YourCounsellorBox selectedCourse={selectedCourse} />
                         <ApplicationStatusBox selectedCourse={selectedCourse} />
                     </div>
