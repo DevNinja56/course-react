@@ -8,7 +8,7 @@ interface propTypes {
 
 const RequirementBox = ({ text, url }: propTypes) => {
     return (
-        <div className="px-6 py-5 flex items-center justify-between w-full bg-white shadow-RequirementBox rounded-lg">
+        <div className="px-6 py-5 flex items-center justify-between w-full bg-white shadow-RequirementBox rounded-lg cursor-pointer">
             <p className="font-medium text-lightGrayColor">{text}</p>
             <a
                 href={url}
