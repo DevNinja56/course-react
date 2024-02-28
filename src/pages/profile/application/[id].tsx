@@ -1,3 +1,4 @@
+import React from 'react';
 import ApplicationStatusBox from '@/components/Profile/Application/ApplicationStatusBox';
 import SubmitDocument from '@/components/Profile/Application/SubmitDocument';
 import SuccessfullyEnrolled from '@/components/Profile/Application/SuccessfullyEnrolled';
@@ -8,7 +9,6 @@ import { modalType } from '@/store/slices/ui.slice';
 import { statusEnum } from '@/types';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import React from 'react';
 import { MdError } from 'react-icons/md';
 
 const UserApplicationDetails = () => {

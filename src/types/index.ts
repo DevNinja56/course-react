@@ -404,3 +404,4 @@ export interface councillorType {
     updatedAt: string;
     id: string;
 }
+
