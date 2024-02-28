@@ -28,14 +28,14 @@ const Institutes = ({ data: institute }: { data: instituteType }) => {
                 />
                 <div className="w-full xl:container mx-auto px-4 md:px-[50px] lg:px-2 2xl:px-8 transition-all duration-300 z-10 flex justify-center">
                     <Image
-                        height={549}
+                        height={375}
                         width={1240}
                         alt="institute"
                         src={
                             institute?.image ??
                             '/images/institute/instituteMain.png'
                         }
-                        className="w-full rounded-xl"
+                        className="w-full rounded-xl max-h-[375px] object-contain"
                         priority
                     />
                 </div>
