@@ -128,7 +128,7 @@ const ApplyOnline = () => {
                                     error={errors.name?.message}
                                     autoComplete="off"
                                     className="p-0"
-                                    customInputClass="px-2 py-[5px] text-[15px] w-full rounded-md outline-none placeholder:text-sm"
+                                    customInputClass="px-2 py-[5px] text-[15px] w-full rounded-md outline-none placeholder:text-md"
                                 />
                                 <InputBox
                                     {...register('email', {
@@ -136,7 +136,7 @@ const ApplyOnline = () => {
                                     })}
                                     placeholder="Email Address"
                                     error={errors.email?.message}
-                                    customInputClass="px-2 py-[5px] text-[15px] w-full rounded-md outline-none placeholder:text-sm"
+                                    customInputClass="px-2 py-[5px] text-[15px] w-full rounded-md outline-none placeholder:text-md"
                                 />
                                 <InputBox
                                     {...register('phone_number', {
@@ -145,7 +145,7 @@ const ApplyOnline = () => {
                                     type="tel"
                                     placeholder="Phone Number"
                                     error={errors.phone_number?.message}
-                                    customInputClass="px-2 py-[5px] text-[15px] w-full rounded-md outline-none placeholder:text-sm"
+                                    customInputClass="px-2 py-[5px] text-[15px] w-full rounded-md outline-none placeholder:text-md"
                                 />
                             </div>
                         )}
@@ -311,8 +311,9 @@ const ApplyOnline = () => {
                                 )}
                             </div>
                         )}
-                        <div className="mt-5 w-1/4  mx-auto">
+                        <div className="mt-5 w-1/4  mx-auto ">
                             <Button
+                                className="py-2"
                                 type="submit"
                                 disabled={isLoading}
                                 isLoader={isLoading}
