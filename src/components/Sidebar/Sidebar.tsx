@@ -1,8 +1,9 @@
 import { ROUTES } from '@/config/constant';
+import { useFilterQuery } from '@/hooks/filterQuery';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import React from 'react';
+import React, { useState } from 'react';
 
 interface modalProps {
     setShowSideBar: (show: boolean) => void;
@@ -10,6 +11,16 @@ interface modalProps {
 
 const Sidebar = ({ setShowSideBar }: modalProps) => {
     const router = useRouter();
+    const [value, setValue] = useState<string | null>(null);
+    const { addQuery } = useFilterQuery();
+
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        if (value) {
+            addQuery({ searchFilter: [value] });
+            router.push(ROUTES.FILTER_COURSE);
+        }
+    };
 
     const onHideSideBar = () => {
         setShowSideBar(false);
@@ -40,20 +51,28 @@ const Sidebar = ({ setShowSideBar }: modalProps) => {
                             />
                         </div>
                     </div>
-                    <div className="relative flex items-center justify-between border-b border-siderBarBottom pb-2 mb-10">
+                    <form
+                        onSubmit={handleSubmit}
+                        className="relative flex items-center justify-between border-b border-siderBarBottom pb-2 mb-10"
+                    >
                         <input
+                            type="search"
+                            id="default-search"
                             className="h-[38px] w-full text-sm text-textLightBlackColor outline-none"
                             placeholder="What are you searching for?"
+                            onChange={(e) => setValue(e.target.value)}
+                            required
                         />
-                        <Image
-                            width={24}
-                            height={24}
-                            alt="Logo"
-                            src="/images/search.svg"
-                            className="absolute right-0"
-                            priority
-                        />
-                    </div>
+                        <button type="submit" className="absolute right-0">
+                            <Image
+                                width={24}
+                                height={24}
+                                alt="Logo"
+                                src="/images/search.svg"
+                                priority
+                            />
+                        </button>
+                    </form>
                     <div className="flex flex-col gap-y-11">
                         <Link href={ROUTES.FILTER_COURSE}>
                             <div className="flex items-center gap-x-[10px]">
