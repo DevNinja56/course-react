@@ -18,7 +18,7 @@ const ProfileDropDown: React.FC<DropDownProps> = ({ showDropDown }) => {
     const { updateModal } = useUi();
     const allDropDowns = [
         { name: 'Profile', Icon: BiUser, to: ROUTES.PROFILE },
-        { name: 'My Favorites', Icon: AiOutlineHeart, to: ROUTES.FAVORITES },
+        { name: 'My Favourites', Icon: AiOutlineHeart, to: ROUTES.FAVORITES },
         {
             name: 'My Applies',
             Icon: SiSemanticscholar,
