@@ -55,11 +55,11 @@ const SignIn = () => {
             .catch((err) => {
                 setError('email', {
                     type: 'custom',
-                    message: err.response.data.message
+                    message: err.response?.data?.message
                 });
                 setError('password', {
                     type: 'custom',
-                    message: err.response.data.message
+                    message: err.response?.data?.message
                 });
             })
             .finally(() => setIsLoading(false));

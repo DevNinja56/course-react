@@ -41,7 +41,9 @@ const config: Config = {
                 pinkColor: '#F2277E',
                 siderBarBottom: '#D9D9D9',
                 filterBorderColor: '#cdd5e1',
-                redColor: '#FF0404'
+                redColor: '#FF0404',
+                BgColorPassport: "#EDF4FF",
+                BgCardPassport: "#F6FAFF",
             },
             boxShadow: {
                 'bottom-shadow': '0 2px 2px 0 rgba(190, 190, 190, 0.15)',
