@@ -22,4 +22,7 @@ export const ROUTES = {
     TERMS_CONDITION: '/termsCondition',
     FAVORITES: '/profile?tab=Favorite',
     APPLIES: '/profile?tab=Profile&tab2=myApplies',
+    APPLIES_DETAIL: '/profile/application/:id',
+    FILE_SUBMIT: '/profile/application/file-submit',
+    CONSOLID_MARKSHEET : '/profile/application/consolid-marksheet',
 };

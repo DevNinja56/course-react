@@ -7,7 +7,7 @@ import Image from 'next/image';
 const FilterPage = () => {
     return (
         <>
-            <div className="w-full flex items-center justify-center mt-[100px] bg-profileBgColor py-24 md:py-20 relative mb-10">
+            <div className="w-full flex items-center justify-center mt-[100px] bg-profileBgColor py-24 md:py-20 relative ">
                 <Image
                     height={193}
                     width={191}
@@ -35,17 +35,17 @@ const FilterPage = () => {
                     src="/images/Blogs/Frame 643.svg"
                 />
             </div>
-            <div className="w-full pb-28">
+            <div className="w-full pb-28 pt-10 bg-mainBackgroundColor bg-opacity-5">
                 <div className="container mx-auto px-5 md:px-[50px] lg:px-2 2xl:px-8 transition-all duration-300 flex justify-between">
                     <CourseFilter />
                     <RightCardsBox />
                 </div>
             </div>
-            <div className="w-full pb-20 2xl:pb-[700px] flex flex-col items-center overflow-hidden">
+            <div className="w-full pb-40 flex flex-col items-center overflow-hidden">
                 <p className="text-xl md:text-[23px] font-bold text-blueColor mb-1">
                     Scholarships
                 </p>
-                <h1 className="text-textLightBlackColor text-3xl md:text-[48px] font-extrabold mb-5 text-center">
+                <h1 className="text-textLightBlackColor text-3xl md:text-[48px] font-extrabold mb-10 text-center">
                     Scholarships you may be interested in
                 </h1>
                 <ScholarshipSlider />
