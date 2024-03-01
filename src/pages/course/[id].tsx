@@ -217,22 +217,33 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                                                                     Scholarship
                                                                 </h3>
                                                                 <ul className="w-full flex flex-col items-start gap-2">
-                                                                    {course.degree.scholarship.map(
-                                                                        ({
-                                                                            name
-                                                                        }) => (
-                                                                            <li
-                                                                                className="text-sm md:text-base"
-                                                                                key={
-                                                                                    'scholarship-list--' +
-                                                                                    name
-                                                                                }
-                                                                            >
-                                                                                {
-                                                                                    name
-                                                                                }
-                                                                            </li>
+                                                                    {course
+                                                                        .degree
+                                                                        .scholarship
+                                                                        .length >
+                                                                    0 ? (
+                                                                        course.degree.scholarship.map(
+                                                                            ({
+                                                                                name
+                                                                            }) => (
+                                                                                <li
+                                                                                    className="text-sm md:text-base"
+                                                                                    key={
+                                                                                        'scholarship-list--' +
+                                                                                        name
+                                                                                    }
+                                                                                >
+                                                                                    {
+                                                                                        name
+                                                                                    }
+                                                                                </li>
+                                                                            )
                                                                         )
+                                                                    ) : (
+                                                                        <li className="text-sm md:text-base">
+                                                                            No
+                                                                            scholarships
+                                                                        </li>
                                                                     )}
                                                                 </ul>
                                                             </div>
