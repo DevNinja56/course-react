@@ -11,7 +11,8 @@ const nextConfig = {
             'images.unsplash.com',
             'media.istockphoto.com',
             'assets.jigsaw24.com',
-            'd31cuupyjbe4e1.cloudfront.net'
+            'd31cuupyjbe4e1.cloudfront.net',
+            'seekvectorlogo.com'
         ]
     }
 };
