@@ -7,7 +7,7 @@ module.exports = {
             instances: 1,
             autorestart: true,
             exec_mode: 'fork',
-            watch: false,
+            watch: true,
             max_memory_restart: '500M',
             out_file: './out.log',
             error_file: './error.log',

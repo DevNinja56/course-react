@@ -49,7 +49,7 @@ const MainLayout = ({
         ROUTES.FILTER_COURSE,
         ROUTES.FILTER_SCHOLARSHIP,
         ROUTES.INSTITUTES,
-        ROUTES.FIELDS
+        ROUTES.FIELDS,
     ];
     const counselingRoutes = [
         ROUTES.FIELDS,
@@ -60,7 +60,7 @@ const MainLayout = ({
         ROUTES.COUNTRY,
         ROUTES.INSTITUTES,
         ROUTES.FAQ,
-        ROUTES.APPLY
+        ROUTES.APPLY,
     ];
 
     useEffect(() => {

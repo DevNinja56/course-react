@@ -27,8 +27,7 @@ const ResetPassword = () => {
             type: 'post',
             body
         })
-            .then((res) => {
-                console.log(res);
+            .then(() => {
                 setIsSendMail(true);
             })
             .catch((err) => {

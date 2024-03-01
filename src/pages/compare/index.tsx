@@ -154,12 +154,6 @@ const Compare = ({ data }: { data?: singleCourseType }) => {
                     third: third?.institute?.qsWorldRanking
                 },
                 {
-                    title: 'US News Global Universities Rankings',
-                    first: first?.institute?.usNewsRanking,
-                    second: second?.institute?.usNewsRanking,
-                    third: third?.institute?.usNewsRanking
-                },
-                {
                     title: 'Times Higher Education Ranking.',
                     first: first?.institute?.timesHigherRanking,
                     second: second?.institute?.timesHigherRanking,
@@ -253,11 +247,11 @@ const Compare = ({ data }: { data?: singleCourseType }) => {
                     ))}
                 </div>
             </div>
-            <div className="w-full pb-20 2xl:pb-[700px] flex flex-col items-center overflow-hidden print:hidden">
+            <div className="w-full pb-40 flex flex-col items-center overflow-hidden print:hidden">
                 <p className="text-[23px] font-bold text-blueColor mb-1">
                     Scholarships
                 </p>
-                <h1 className="text-textLightBlackColor text-3xl md:text-[48px] font-extrabold mb-5 text-center">
+                <h1 className="text-textLightBlackColor text-3xl md:text-[48px] font-extrabold mb-10 text-center">
                     Scholarships you may be interested in
                 </h1>
                 <ScholarshipSlider />

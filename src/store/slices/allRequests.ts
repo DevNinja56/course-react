@@ -12,7 +12,8 @@ import {
     scholarshipType,
     specializationType,
     applyTypes,
-    geoIpType
+    geoIpType,
+    courseType
 } from '@/types';
 
 export interface PaginatedResponse<data> {
@@ -124,6 +125,19 @@ export const stateQueryApi = createApi({
         getUserIp: builder.query<geoIpType, void>({
             query: () => ({ url: API_ENDPOINTS.GEO_IP }),
             transformResponse: (res: { data: geoIpType }) => res.data! ?? res
+        }),
+        getCourseByFilter: builder.query<
+            PaginatedResponse<courseType[]>,
+            { limit: number; page: number; body: object[] }
+        >({
+            query: ({ limit, page, body }) => ({
+                url: `${API_ENDPOINTS.COURSE_SEARCH}?limit=${limit}&page=${page}`,
+                method: 'POST',
+                body: { pipeline: [...body] }
+            }),
+            transformResponse: (res: {
+                data: PaginatedResponse<courseType[]>;
+            }) => res.data! ?? res
         })
     })
 });
@@ -142,5 +156,6 @@ export const {
     useGetScholarshipByIdQuery,
     useGetUserFavoritesQuery,
     useGetUserAppliesQuery,
-    useGetUserIpQuery
+    useGetUserIpQuery,
+    useGetCourseByFilterQuery
 } = stateQueryApi;

@@ -139,6 +139,12 @@ export const formateScholarshipQuery = (query: { [key: string]: any }) => {
         );
     }
 
+    if (query.region) {
+        orConditions.push({
+            region: { $in: query.region }
+        });
+    }
+
     if (query.countries) {
         orConditions.push({
             'country.name': { $in: query.countries }
