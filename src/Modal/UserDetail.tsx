@@ -42,7 +42,7 @@ const messageList = [
 ];
 
 const UserDetail = () => {
-    const { modalState } = useUi();
+    const { modalState, hideModal } = useUi();
     const [otherMessage, setMessage] = useState(false);
     const { courseId } = modalState as { courseId: string };
     const { isAuthenticated, user } = useUserAuth();
@@ -114,7 +114,7 @@ const UserDetail = () => {
                 loading: 'Please wait...',
                 success: () => {
                     reset();
-
+                    hideModal();
                     return 'Form submitted successfully';
                 },
                 error: 'An error occurred'
