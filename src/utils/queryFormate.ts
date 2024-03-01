@@ -77,7 +77,8 @@ export const formateCourseQuery = (query: { [key: string]: any }) => {
     if (query.intakes) {
         orConditions.push({
             intakes: {
-                $in: query.intakes.map((item: string) => item.split(','))
+                $regex: `${query.intakes?.map((set:string)=>set.replaceAll(",","|"))?.join('|')?.toLowerCase()}`,
+                $options: 'i'
             }
         });
     }
@@ -107,7 +108,7 @@ export const formateCourseQuery = (query: { [key: string]: any }) => {
     }
 
     if (orConditions.length > 0) {
-        matches.$match.$and = orConditions;
+        matches.$match.$or = orConditions;
     }
 
     return query.sortBy ? [matches, sort] : [matches];
