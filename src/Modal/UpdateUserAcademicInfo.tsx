@@ -31,6 +31,7 @@ export const languageTestList = [
 
 const UpdateUserAcademicInfo = () => {
     const { hideModal } = useUi();
+    const { academicInformation } = useUserAuth()?.user ?? {};
     const { user, refetchUser } = useUserAuth();
     const [isLoading, setIsLoading] = useState(false);
     const [score, setScore] = useState(false);
@@ -42,6 +43,8 @@ const UpdateUserAcademicInfo = () => {
     } = useForm<academicInformation>();
 
     const handleSubmit = (body: academicInformation) => {
+        console.log("academicInformation",academicInformation)
+        console.log("body",body)
         setIsLoading(true);
         toast
             .promise(
@@ -87,7 +90,7 @@ const UpdateUserAcademicInfo = () => {
                 <div className="w-full">
                     <Select
                         {...register('countryOfEducation', {
-                            required: 'Country is required'
+                            required: false
                         })}
                         options={Object.entries(country_list_with_code)?.map(
                             // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -100,7 +103,9 @@ const UpdateUserAcademicInfo = () => {
                         onChange={(e) => {
                             setValue('countryOfEducation', e?.value ?? '');
                         }}
-                        defaultInputValue='demo'
+                        defaultInputValue={
+                            academicInformation?.countryOfEducation
+                        }
                         styles={{
                             control: (base: any) => ({
                                 ...base,
@@ -119,7 +124,7 @@ const UpdateUserAcademicInfo = () => {
                 <div className="w-full">
                     <Select
                         {...register('highestLevelOfEducation', {
-                            required: 'Level of education is required'
+                            required: false
                         })}
                         options={levelOfEducationList?.map((level) => ({
                             label: level,
@@ -129,6 +134,9 @@ const UpdateUserAcademicInfo = () => {
                         onChange={(e) => {
                             setValue('highestLevelOfEducation', e?.value ?? '');
                         }}
+                        defaultInputValue={
+                            academicInformation?.highestLevelOfEducation
+                        }
                         styles={{
                             control: (base: any) => ({
                                 ...base,
@@ -147,7 +155,7 @@ const UpdateUserAcademicInfo = () => {
                 <div className="w-full">
                     <Select
                         {...register('languageTest.name', {
-                            required: 'Language Test is required'
+                            required: false
                         })}
                         options={languageTestList?.map((test) => ({
                             label: test,
@@ -160,6 +168,9 @@ const UpdateUserAcademicInfo = () => {
                                 : setScore(false);
                             setValue('languageTest.name', e?.value ?? '');
                         }}
+                        defaultInputValue={
+                            academicInformation?.languageTest?.name
+                        }
                         styles={{
                             control: (base: any) => ({
                                 ...base,

@@ -242,7 +242,7 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                                                                     ) : (
                                                                         <li className="text-sm md:text-base">
                                                                             No
-                                                                            scholarships
+                                                                            scholarships available
                                                                         </li>
                                                                     )}
                                                                 </ul>
