@@ -100,6 +100,7 @@ const UpdateUserAcademicInfo = () => {
                         onChange={(e) => {
                             setValue('countryOfEducation', e?.value ?? '');
                         }}
+                        defaultInputValue='demo'
                         styles={{
                             control: (base: any) => ({
                                 ...base,
