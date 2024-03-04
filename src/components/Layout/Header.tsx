@@ -213,6 +213,7 @@ const Header = ({ onlyLogo }: { onlyLogo?: boolean }) => {
                                         </p>
                                         <ProfileDropDown
                                             showDropDown={showDropDown}
+                                            setShowDropDown={setShowDropDown}
                                         />
                                     </div>
                                 ) : (

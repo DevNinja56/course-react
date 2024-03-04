@@ -1,7 +1,7 @@
 import { ROUTES } from '@/config/constant';
 import { useUserAuth } from '@/hooks/auth';
 import Link from 'next/link';
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { BiUser } from 'react-icons/bi';
 import { AiOutlineUnlock, AiOutlineHeart } from 'react-icons/ai';
 import { SiSemanticscholar } from 'react-icons/si';
@@ -11,11 +11,33 @@ import { modalType } from '@/store/slices/ui.slice';
 
 interface DropDownProps {
     showDropDown: boolean;
+    setShowDropDown: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const ProfileDropDown: React.FC<DropDownProps> = ({ showDropDown }) => {
+const ProfileDropDown: React.FC<DropDownProps> = ({
+    showDropDown,
+    setShowDropDown
+}) => {
     const { logoutUser } = useUserAuth();
     const { updateModal } = useUi();
+    const dropDownRef = useRef<HTMLDivElement>(null);
+
+    const handleClickOutside = (event: MouseEvent) => {
+        if (
+            dropDownRef.current &&
+            !dropDownRef.current.contains(event.target as Node)
+        ) {
+            setShowDropDown(false);
+        }
+    };
+
+    useEffect(() => {
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, []);
+
     const allDropDowns = [
         { name: 'Profile', Icon: BiUser, to: ROUTES.PROFILE },
         { name: 'My Favourites', Icon: AiOutlineHeart, to: ROUTES.FAVORITES },
@@ -34,7 +56,10 @@ const ProfileDropDown: React.FC<DropDownProps> = ({ showDropDown }) => {
     return (
         <>
             {showDropDown ? (
-                <div className="w-[220px] py-2 custom-shadow absolute top-[55px] right-[-8px] bg-white cursor-pointer showDropDown">
+                <div
+                    ref={dropDownRef}
+                    className="w-[220px] py-2 custom-shadow absolute top-[55px] right-[-8px] bg-white cursor-pointer showDropDown"
+                >
                     {allDropDowns.map(({ name, Icon, callFun, to = '' }) =>
                         callFun ? (
                             <button
