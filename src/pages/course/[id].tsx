@@ -54,8 +54,11 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                                 height={375}
                                 width={1240}
                                 alt="courseDetail"
-                                src="/images/CourseDetail/courseDetailMain.png"
-                                className="z-20 h-full w-full lg:block hidden"
+                                src={
+                                    course?.image ??
+                                    '/images/CourseDetail/courseDetailMain.png'
+                                }
+                                className="z-20 h-full w-full lg:block hidden max-h-[375px] object-contain"
                                 priority
                             />
                             <Image

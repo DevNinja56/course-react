@@ -162,11 +162,8 @@ export type instituteType = {
     scholarship: scholarshipType[];
     discipline: disciplineType[];
     course: courseType[];
-    qsWorldRanking: number;
-    usNewsRanking: number;
-    timesHigherRanking: number;
-    shanghaiRanking: number;
-    tcfIndexRanking: number;
+    qsWorldRanking: string;
+    timesHigherRanking: string;
     favoriteId: [string];
     id: string;
 };
@@ -229,12 +226,13 @@ export type singleCourseType = {
     favoriteId: string[];
     name: string;
     logo: string;
+    image: string;
     degree: degreeType;
     duration: number;
     intakes: string[];
     tuitionFee: number;
     specialization: specializationType;
-    discipline: string;
+    discipline: disciplineType;
     description: string;
     language: [
         {
@@ -404,4 +402,3 @@ export interface councillorType {
     updatedAt: string;
     id: string;
 }
-

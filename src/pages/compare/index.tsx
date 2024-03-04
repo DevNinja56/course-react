@@ -29,8 +29,8 @@ const Compare = ({ data }: { data?: singleCourseType }) => {
             first === null
                 ? compareFirst(compareData)
                 : second === null
-                ? compareSecond(compareData)
-                : compareThird(compareData);
+                  ? compareSecond(compareData)
+                  : compareThird(compareData);
         }
     }, [data]);
 
@@ -152,12 +152,6 @@ const Compare = ({ data }: { data?: singleCourseType }) => {
                     first: first?.institute?.qsWorldRanking,
                     second: second?.institute?.qsWorldRanking,
                     third: third?.institute?.qsWorldRanking
-                },
-                {
-                    title: 'US News Global Universities Rankings',
-                    first: first?.institute?.usNewsRanking,
-                    second: second?.institute?.usNewsRanking,
-                    third: third?.institute?.usNewsRanking
                 },
                 {
                     title: 'Times Higher Education Ranking.',

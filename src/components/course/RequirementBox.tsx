@@ -15,6 +15,7 @@ const RequirementBox = ({ text, url }: propTypes) => {
                 target="_blank"
                 rel="noreferrer noopener"
                 download={true}
+                target="_blank"
                 title={`Download ${text} file`}
                 className="h-12 w-12 rounded-md bg-profileBgColor flex items-center justify-center min-w-[48px]"
             >
