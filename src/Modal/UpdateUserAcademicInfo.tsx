@@ -43,8 +43,21 @@ const UpdateUserAcademicInfo = () => {
     } = useForm<academicInformation>();
 
     const handleSubmit = (body: academicInformation) => {
-        console.log("academicInformation",academicInformation)
-        console.log("body",body)
+        if (!body.countryOfEducation) {
+            const newValue = academicInformation?.countryOfEducation ?? '';
+            body.countryOfEducation = newValue;
+        }
+
+        if (!body.highestLevelOfEducation) {
+            const newValue = academicInformation?.highestLevelOfEducation ?? '';
+            body.highestLevelOfEducation = newValue;
+        }
+
+        if (!body.languageTest?.name) {
+            const newValue = academicInformation?.languageTest.name ?? '';
+            body.languageTest.name = newValue;
+        }
+
         setIsLoading(true);
         toast
             .promise(
@@ -187,7 +200,7 @@ const UpdateUserAcademicInfo = () => {
                     )}
                 </div>
 
-                {score && (
+                {score && academicInformation?.languageTest && (
                     <div className="flex gap-2">
                         <input
                             {...register('languageTest.score.speaking', {
@@ -201,6 +214,10 @@ const UpdateUserAcademicInfo = () => {
                                     ? 'border-red-600'
                                     : 'border-grayColor'
                             }`}
+                            defaultValue={
+                                academicInformation?.languageTest?.score
+                                    ?.speaking
+                            }
                             type="number"
                         />
                         <input
@@ -215,6 +232,10 @@ const UpdateUserAcademicInfo = () => {
                                     ? 'border-red-600'
                                     : 'border-grayColor'
                             }`}
+                            defaultValue={
+                                academicInformation?.languageTest?.score
+                                    ?.listening
+                            }
                             type="number"
                         />
                         <input
@@ -229,6 +250,10 @@ const UpdateUserAcademicInfo = () => {
                                     ? 'border-red-600'
                                     : 'border-grayColor'
                             }`}
+                            defaultValue={
+                                academicInformation?.languageTest?.score
+                                    ?.writing
+                            }
                             type="number"
                         />
                         <input
@@ -243,6 +268,10 @@ const UpdateUserAcademicInfo = () => {
                                     ? 'border-red-600'
                                     : 'border-grayColor'
                             }`}
+                            defaultValue={
+                                academicInformation?.languageTest?.score
+                                    ?.reading
+                            }
                             type="number"
                         />
                     </div>
