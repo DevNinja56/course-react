@@ -42,7 +42,7 @@ const FilterPage = () => {
                 </div>
             </div>
             <div className="w-full pb-40 flex flex-col items-center overflow-hidden">
-                <p className="text-xl md:text-[23px] font-bold text-blueColor mb-1">
+                <p className="text-xl md:text-[23px] font-bold text-blueColor mb-2">
                     Scholarships
                 </p>
                 <h1 className="text-textLightBlackColor text-3xl md:text-[48px] font-extrabold mb-10 text-center">
