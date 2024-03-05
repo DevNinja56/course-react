@@ -115,7 +115,7 @@ const CompareUniversityModal = () => {
     const isDisabledButton =
         !country ||
         data.institute.length < 1 ||
-        data.discipline.length < 1 ||
+        data.discipline?.length < 1 ||
         data.degreeLevel.length < 1 ||
         data.course.length < 1;
 
@@ -193,7 +193,7 @@ const CompareUniversityModal = () => {
                     name="discipline"
                     isClearable={false}
                     isLoading={isLoading}
-                    isDisabled={data?.discipline.length < 1}
+                    isDisabled={data?.discipline?.length < 1}
                     placeholder="Select Discipline"
                     options={data?.discipline?.map(({ name, id }) => ({
                         label: name,

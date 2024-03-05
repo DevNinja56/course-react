@@ -11,7 +11,8 @@ const nextConfig = {
             'seekvectorlogo.com',
             'course-options-assets.s3.ap-south-1.amazonaws.com',
             "studentconnect.org",
-            'assets.jigsaw24.com'
+            'assets.jigsaw24.com',
+            'images.unsplash.com'
         ]
     }
 };
