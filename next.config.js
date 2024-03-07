@@ -13,7 +13,10 @@ const nextConfig = {
             'assets.jigsaw24.com',
             'd31cuupyjbe4e1.cloudfront.net',
             'seekvectorlogo.com',
-            'course-options-assets.s3.ap-south-1.amazonaws.com'
+            'course-options-assets.s3.ap-south-1.amazonaws.com',
+            "studentconnect.org",
+            'assets.jigsaw24.com',
+            'images.unsplash.com'
         ]
     }
 };

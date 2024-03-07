@@ -115,7 +115,7 @@ const CompareUniversityModal = () => {
     const isDisabledButton =
         !country ||
         data.institute.length < 1 ||
-        data.discipline.length < 1 ||
+        data.discipline?.length < 1 ||
         data.degreeLevel.length < 1 ||
         data.course.length < 1;
 
