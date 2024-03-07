@@ -11,6 +11,8 @@ import Button from '@/components/Button';
 import { useUserAuth } from '@/hooks/auth';
 
 const VerifyAccount = ({ email, token }: { email: string; token: string }) => {
+    const { user } = useUserAuth();
+    console.log(user, 'email verify');
     const [isLoading, setIsLoading] = useState(false);
     const { replace } = useRouter();
     const { updateUserDetails, loggedInUser } = useUserAuth();
@@ -74,7 +76,7 @@ const VerifyAccount = ({ email, token }: { email: string; token: string }) => {
                         height={48}
                         width={48}
                         alt="logIn-Img"
-                        className="absolute left-12 md:left-auto md:right-20 lg:right-28 xl:right-72 bottom-4 md:top-28 h-20 w-20 md:h-[48px] md:w-[48px]"
+                        className="absolute left-12 md:left-auto md:right-20 lg:right-28 xl:right-52 bottom-4 md:top-28 h-20 w-20 md:h-[48px] md:w-[48px]"
                         src="/images/signUpuRound1.svg"
                         priority
                     />
@@ -86,11 +88,30 @@ const VerifyAccount = ({ email, token }: { email: string; token: string }) => {
                         src="/images/man-2.svg"
                         priority
                     />
-                    <div className=" absolute top-40 md:top-9 2xl:top-80 rounded-[10px] bg-white custom-shadow pt-10 pb-7 px-4 md:px-12 flex flex-col items-center w-[90%] md:w-[53%] lg:w-[45%] xl:w-[35%] 2xl:w-[50%] py-5 ">
+                    <div className=" absolute top-40 md:top-28 2xl:top-80 rounded-[10px] bg-white custom-shadow pt-5 pb-7 px-4 md:px-12 flex flex-col items-center w-[90%] md:w-[53%] lg:w-[45%] xl:w-[44%] 2xl:w-[50%] ">
+                        <div>
+                            <Image
+                                height={123}
+                                width={100}
+                                alt="Email icon"
+                                className=""
+                                src="/images/Verify-email.png"
+                                priority
+                            />
+                        </div>
                         <h1 className="font-medium text-2xl md:text-[36px] text-mainTextColor mb-3">
                             Verify your account
                         </h1>
-
+                        <p className="text-md font-medium text-center text-mainTextColor mb-2">
+                            Sharing to start using{' '}
+                            <span className="text-blueColor font-semibold">
+                                course options
+                            </span>{' '}
+                            we need to verify to email ID
+                            <span className="text-sm ml-3 text-blueColor">
+                                {user.email}
+                            </span>
+                        </p>
                         <Button
                             className="pt-[14px] pb-[13px]"
                             text="Verify"

@@ -532,7 +532,7 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                                                     Available Intakes
                                                 </p>
                                                 <p className="text-lightGrayColor text-base">
-                                                    {course.intakes.join(' / ')}
+                                                    {course.intakes.join(' ')}
                                                 </p>
                                             </div>
                                         </div>
