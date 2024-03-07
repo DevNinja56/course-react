@@ -10,7 +10,6 @@ import InputBox from '../Input';
 import { MdOutlineMail } from 'react-icons/md';
 import Button from '../Button';
 import { BiUser } from 'react-icons/bi';
-import { GiNotebook } from 'react-icons/gi';
 import { contactUsFormSchema } from '@/utils/formSchemas';
 
 interface MapProps {
