@@ -61,7 +61,7 @@ const FeeSlider = () => {
                 </div>
                 <button
                     onClick={handleChange}
-                    className="bg-blueColor text-white text-sm py-2 px-3 rounded-md"
+                    className="bg-blueColor text-white text-sm py-2 px-3 rounded-md hover:bg-opacity-50"
                 >
                     Search
                 </button>

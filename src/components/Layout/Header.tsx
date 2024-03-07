@@ -181,7 +181,7 @@ const Header = ({ onlyLogo }: { onlyLogo?: boolean }) => {
                             {showSideBar && (
                                 <Sidebar setShowSideBar={setShowSideBar} />
                             )}
-                            <div className="flex items-center gap-x-1 md:gap-x-6">
+                            <div className="flex items-center gap-x-2 md:gap-x-6">
                                 {isAuthenticated ? (
                                     <div
                                         className="flex items-center gap-x-3 relative select-none cursor-pointer "
@@ -197,7 +197,7 @@ const Header = ({ onlyLogo }: { onlyLogo?: boolean }) => {
                                             />
                                         ) : (
                                             <span className="border rounded-full p-0.5 -mr-1">
-                                                <CiUser className="text-3xl   " />
+                                                <CiUser className="text-md md:text-3xl" />
                                             </span>
                                         )}
                                         <p className="text-textBlackColor capitalize font-semibold hidden lg:flex gap-x-1 ">
@@ -213,6 +213,7 @@ const Header = ({ onlyLogo }: { onlyLogo?: boolean }) => {
                                         </p>
                                         <ProfileDropDown
                                             showDropDown={showDropDown}
+                                            setShowDropDown={setShowDropDown}
                                         />
                                     </div>
                                 ) : (
@@ -246,7 +247,9 @@ const Header = ({ onlyLogo }: { onlyLogo?: boolean }) => {
                                     src="/images/Menu.svg"
                                     priority
                                 />
-                                <GlobalSearch />
+                                <div className="hidden lg:block">
+                                    <GlobalSearch />
+                                </div>
                             </div>
                             <div>
                                 <CurrencyConverter />

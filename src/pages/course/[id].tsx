@@ -120,15 +120,15 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                                                 }
                                             })
                                         }
-                                        className="h-8 w-8 rounded-full bg-white shadow-lg lg:flex items-center justify-center hidden cursor-pointer"
+                                        className="h-8 w-8 rounded-full bg-white shadow-lg lg:flex items-center justify-center hidden cursor-pointer group hover:bg-blue-500"
                                     >
-                                        <IoShareSocialSharp className="text-gray-400 h-4 w-4" />
+                                        <IoShareSocialSharp className="text-gray-400 group-hover:text-white h-4 w-4" />
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div className="flex flex-col lg:flex-row gap-0 xl:gap-16 w-full justify-between">
-                            <div className="bg-white w-full lg:w-[70%] xl:w-2/3 h-headerStickyHeight static lg:sticky top-[110px] no-scrollbar mb-48 md:mb-48 lg:mb-96">
+                        <div className="flex flex-col lg:flex-row gap-0 xl:gap-16 w-full justify-between mb-0 lg:mb-28">
+                            <div className="w-full lg:w-[70%] xl:w-2/3 h-headerStickyHeight static lg:sticky top-[110px] no-scrollbar mb-96 lg:mb-96">
                                 <div className=" transition-all duration-300">
                                     <div className="flex flex-col gap-y-6 mb-16 md:mb-20">
                                         <div className="tabs-container capitalize">

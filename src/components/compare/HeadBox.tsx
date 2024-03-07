@@ -36,7 +36,7 @@ const HeadBox = () => {
                                     state: { index: 'first' }
                                 })
                             }
-                            className="py-[14px] px-2 text-sm md:text-base md:px-[73px] rounded-[5px] bg-blueColor text-white font-semibold showModalBtn w-[46%] md:w-[48%] lg:w-auto"
+                            className="py-[14px] px-2 text-sm md:text-base md:px-[73px] rounded-[5px] bg-blueColor text-white font-semibold showModalBtn w-[46%] md:w-[48%] lg:w-auto hover:bg-opacity-50"
                         >
                             Select Course
                         </button>
@@ -47,7 +47,7 @@ const HeadBox = () => {
                                     state: { index: 'second' }
                                 })
                             }
-                            className="py-[14px] px-2 text-sm md:text-base md:px-[73px] rounded-[5px] bg-blueColor text-white font-semibold showModalBtn w-[46%] md:w-[48%] lg:w-auto"
+                            className="py-[14px] px-2 text-sm md:text-base md:px-[73px] rounded-[5px] bg-blueColor text-white font-semibold showModalBtn w-[46%] md:w-[48%] lg:w-auto hover:bg-opacity-50"
                         >
                             Select Course
                         </button>
@@ -58,7 +58,7 @@ const HeadBox = () => {
                                     state: { index: 'third' }
                                 })
                             }
-                            className="py-[14px] px-2 text-sm md:text-base md:px-[73px] rounded-[5px] bg-blueColor text-white font-semibold showModalBtn w-[46%] md:w-[48%] lg:w-auto"
+                            className="py-[14px] px-2 text-sm md:text-base md:px-[73px] rounded-[5px] bg-blueColor text-white font-semibold showModalBtn w-[46%] md:w-[48%] lg:w-auto hover:bg-opacity-50"
                         >
                             Select Course
                         </button>

@@ -14,15 +14,15 @@ export const ROUTES = {
     BLOGS: '/blogs',
     BLOGS_DETAIL: '/blogs/:id',
     INSTITUTES: '/institutes',
-    INSTITUTES_DETAIL:"/institutes/:id",
+    INSTITUTES_DETAIL: '/institutes/:id',
     ABOUT_US: '/aboutUs',
     CONTACT_US: '/contactUs',
     FAQ: '/faq',
     PRIVACY_POLICY: '/privacyPolicy',
     TERMS_CONDITION: '/termsCondition',
-    FAVORITES: '/profile?tab=Favorite',
+    FAVORITES: '/profile?tab=Favourite',
     APPLIES: '/profile?tab=Profile&tab2=myApplies',
     APPLIES_DETAIL: '/profile/application/:id',
     FILE_SUBMIT: '/profile/application/file-submit',
-    CONSOLID_MARKSHEET : '/profile/application/consolid-marksheet',
+    CONSOLID_MARKSHEET: '/profile/application/consolid-marksheet'
 };
