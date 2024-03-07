@@ -105,8 +105,8 @@ const Map = ({
                                 {...register('name', {
                                     required: true
                                 })}
-                                placeholder="Your Name..."
-                                title="First Name"
+                                placeholder="Your Full Name..."
+                                title="Full Name"
                                 error={errors.name?.message}
                                 icon={BiUser}
                             />
@@ -114,8 +114,8 @@ const Map = ({
                                 {...register('subject', {
                                     required: true
                                 })}
-                                placeholder="Your Last Name..."
-                                title=" Last Name"
+                                placeholder="Subject"
+                                title="subject"
                                 error={errors.subject?.message}
                                 icon={BiUser}
                             />
