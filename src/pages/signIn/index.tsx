@@ -26,9 +26,9 @@ const FacebookLoginBtn = dynamic(import('@/components/Auth/FacebookLoginBtn'), {
 
 const SignIn = () => {
     const { updateModal } = useUi();
+    const router = useRouter();
     const [isLoading, setIsLoading] = useState(false);
     const { updateUserDetails, loggedInUser } = useUserAuth();
-    const { push } = useRouter();
     const {
         register,
         handleSubmit: fromSubmit,
@@ -49,7 +49,7 @@ const SignIn = () => {
                     access: res.data.accessToken,
                     refresh: res.data.refreshToken
                 });
-                push(ROUTES.HOMEPAGE);
+                router.back();
                 toast.success('User Logged In Success');
             })
             .catch((err) => {

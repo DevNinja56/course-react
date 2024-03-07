@@ -10,7 +10,6 @@ import InputBox from '../Input';
 import { MdOutlineMail } from 'react-icons/md';
 import Button from '../Button';
 import { BiUser } from 'react-icons/bi';
-import { GiNotebook } from 'react-icons/gi';
 import { contactUsFormSchema } from '@/utils/formSchemas';
 
 interface MapProps {
@@ -58,10 +57,10 @@ const Map = ({
     return (
         <div className="bg-white relative w-full">
             <Image
-                height={124}
-                width={124}
+                height={240}
+                width={240}
                 alt="map-round-img"
-                className="absolute left-[-20px] md:left-0 lg:left-[-20px] 2xl:left-0 top-[-10px] lg:top-[-28px] 2xl:top-0 z-10 h-16 w-16 lg:h-[124px] lg:w-[124px]"
+                className="absolute left-[-20px] md:left-0 lg:left-[-80px] 2xl:left-0 top-[-10px] lg:top-[-70px] 2xl:top-0 z-10 h-16 w-16 lg:h-[240px] lg:w-[240px] backdrop-blur"
                 src={`${mapRoundImg}`}
                 priority
             />
@@ -78,7 +77,7 @@ const Map = ({
                 width={1160}
                 alt="map"
                 className="absolute top-0 left-0 w-full h-[841px] object-cover hidden lg:block"
-                src="/images/Apply/Map.svg"
+                src="/images/Apply/map.png"
                 priority
             />
             <Image
@@ -86,18 +85,18 @@ const Map = ({
                 width={1160}
                 alt="map"
                 className="absolute top-0 left-0 w-full h-[820px] md:h-[851px] object-cover block lg:hidden"
-                src="/images/Apply/TabletMobile.svg"
+                src="/images/Apply/TabletMobile2.png"
                 priority
             />
-            <div className="relative w-full flex justify-center md:justify-end px-8 md:pr-20 2xl:pr-40 py-[71px]">
+            <div className="relative w-full flex justify-center md:justify-end px-8 md:pr-20 2xl:pr-40 py-[71px] mb-28">
                 <form
                     onSubmit={fromSubmit(handleSubmit)}
-                    className="bg-white rounded-[10px] px-4 md:px-11 py-7 z-10 mt-0 2xl:mt-[10%] w-full md:w-auto"
+                    className="bg-white rounded-[10px] px-4 md:px-11 py-7 z-10 mt-0 2xl:mt-[10%] w-full md:w-auto lg:w-7/12 border-4 border-gray-300"
                 >
-                    <h1 className="font-bold text-3xl md:text-[32px] text-mainTextColor">
+                    <h1 className="font-bold text-3xl md:text-[32px] text-mainTextColor mb-2">
                         Contact Us
                     </h1>
-                    <p className="font-medium text-lg md:text-xl md:text-[23px] mb-4 text-darkGrayColor">
+                    <p className="font-medium text-lg md:text-xl md:text-[23px] mb-4 text-darkGrayColor lg:text-2xl">
                         Fill out the form below to reach us
                     </p>
                     <div className="flex flex-col gap-y-4 mb-8">
@@ -106,8 +105,8 @@ const Map = ({
                                 {...register('name', {
                                     required: true
                                 })}
-                                placeholder="Your Name..."
-                                title="Name"
+                                placeholder="Your Full Name..."
+                                title="Full Name"
                                 error={errors.name?.message}
                                 icon={BiUser}
                             />
@@ -115,10 +114,10 @@ const Map = ({
                                 {...register('subject', {
                                     required: true
                                 })}
-                                placeholder="Subject..."
-                                title="Subject"
+                                placeholder="Subject"
+                                title="subject"
                                 error={errors.subject?.message}
-                                icon={GiNotebook}
+                                icon={BiUser}
                             />
                         </div>
                         <InputBox
@@ -142,7 +141,7 @@ const Map = ({
                                 {...register('message', {
                                     required: true
                                 })}
-                                className={`block p-2.5 w-full text-sm md:text-xl bg-gray-50 rounded-lg  resize-none outline-none  ${
+                                className={`block p-2.5 w-full text-sm md:text-xl lg:text-sm bg-gray-50 rounded-lg  resize-none outline-none  ${
                                     errors.message?.message
                                         ? 'text-red-600 border border-red-600'
                                         : 'text-grayColor border border-grayColor focus:ring-blue-500 focus:border-blue-500'

@@ -27,12 +27,12 @@ interface formType {
 }
 
 const intakeOptions = [
-    'january 2025',
-    'july 2025',
-    'january 2026',
-    'july 2026',
-    'january 2027',
-    'july 2027'
+    'January 2025',
+    'July 2025',
+    'January 2026',
+    'July 2026',
+    'January 2027',
+    'July 2027'
 ];
 const messageList = [
     'I want to apply for this course.',
@@ -42,7 +42,7 @@ const messageList = [
 ];
 
 const UserDetail = () => {
-    const { modalState } = useUi();
+    const { modalState, hideModal } = useUi();
     const [otherMessage, setMessage] = useState(false);
     const { courseId } = modalState as { courseId: string };
     const { isAuthenticated, user } = useUserAuth();
@@ -114,7 +114,7 @@ const UserDetail = () => {
                 loading: 'Please wait...',
                 success: () => {
                     reset();
-
+                    hideModal();
                     return 'Form submitted successfully';
                 },
                 error: 'An error occurred'
