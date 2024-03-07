@@ -61,22 +61,23 @@ export type resetForm = {
 };
 
 export type scholarshipType = {
-    name: string;
     image: string;
+    name: string;
     description: string;
+    amount: string;
     type: string;
     intakeYear: string;
     applicable: string;
     startDate: string;
     endDate: string;
-    degrees: degreeType[];
     institute: instituteType;
     country: countryType;
-    favoriteId: [string];
+    favoriteId: string[];
     createdAt: string;
     updatedAt: string;
+    degrees: degreeType[];
+    region: string;
     id: string;
-    _id: string;
 };
 
 export type filterScholarShipType = {
@@ -162,11 +163,8 @@ export type instituteType = {
     scholarship: scholarshipType[];
     discipline: disciplineType[];
     course: courseType[];
-    qsWorldRanking: number;
-    usNewsRanking: number;
-    timesHigherRanking: number;
-    shanghaiRanking: number;
-    tcfIndexRanking: number;
+    qsWorldRanking: string;
+    timesHigherRanking: string;
     favoriteId: [string];
     id: string;
 };
@@ -225,27 +223,42 @@ export type filterCourseType = {
     }[];
 };
 
+export type courseLanguageRequirement = {
+    ielts: { s: string; l: string; r: string; w: string };
+    pte: { s: string; l: string; r: string; w: string };
+};
+
 export type singleCourseType = {
+    id: string;
+    monthDuration: string[];
+    delivery: string;
+    availableCampuses: string[];
+    feeCurrency: string;
+    scholarship: scholarshipType;
     favoriteId: string[];
     name: string;
     logo: string;
+    image: string;
     degree: degreeType;
-    duration: number;
     intakes: string[];
     tuitionFee: number;
-    specialization: specializationType;
-    discipline: string;
+    specialization: specializationType[];
+    discipline: disciplineType;
     description: string;
+    institute: instituteType;
+    region: string;
+    createdAt: string;
+    updatedAt: string;
     language: [
         {
-            language: string;
+            language: courseLanguageRequirement;
             country: string;
             default: boolean;
         }
     ];
     initialDeposit: [
         {
-            amount: number;
+            amount: string;
             country: string;
             default: boolean;
         }
@@ -261,9 +274,6 @@ export type singleCourseType = {
         title: string;
         url: string;
     }[];
-    institute: instituteType;
-    region: string;
-    id: string;
 };
 
 export type contactUsForm = {
@@ -404,4 +414,3 @@ export interface councillorType {
     updatedAt: string;
     id: string;
 }
-
