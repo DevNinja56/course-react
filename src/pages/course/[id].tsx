@@ -29,6 +29,7 @@ import { calculateInitialDeposit } from '@/utils/get-initial-deposit';
 
 const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
     const { updateModal } = useUi();
+    console.log("calculateInitialDeposit",calculateInitialDeposit)
 
     const openUserDetailModal = (courseId: string) => {
         updateModal({
@@ -287,7 +288,34 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                                                                     Scholarship
                                                                 </h3>
                                                                 <ul className="w-full flex flex-col items-start gap-2">
-                                                                    {`${course?.scholarship.amount} ${course?.scholarship.name}`}
+                                                                    {course
+                                                                        .degree
+                                                                        .scholarship
+                                                                        .length >
+                                                                    0 ? (
+                                                                        course.degree.scholarship.map(
+                                                                            ({
+                                                                                name
+                                                                            }) => (
+                                                                                <li
+                                                                                    className="text-sm md:text-base"
+                                                                                    key={
+                                                                                        'scholarship-list--' +
+                                                                                        name
+                                                                                    }
+                                                                                >
+                                                                                    {
+                                                                                        name
+                                                                                    }
+                                                                                </li>
+                                                                            )
+                                                                        )
+                                                                    ) : (
+                                                                        <li className="text-sm md:text-base">
+                                                                            No
+                                                                            scholarships available
+                                                                        </li>
+                                                                    )}
                                                                 </ul>
                                                             </div>
                                                         )
@@ -301,14 +329,14 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                                                                     Deposit
                                                                 </h3>
                                                                 <p className="text-sm md:text-base">
-                                                                    {calculateInitialDeposit(
+                                                                 {calculateInitialDeposit(
                                                                         course
                                                                             .initialDeposit?.[0]
                                                                             .amount,
                                                                         course.tuitionFee,
                                                                         course
-                                                                            .scholarship
-                                                                            .amount
+                                                                            ?.scholarship
+                                                                            ?.amount
                                                                     )}
                                                                 </p>
                                                             </div>
@@ -464,7 +492,7 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                                                     Discipline
                                                 </p>
                                                 <p className="text-lightGrayColor text-base">
-                                                    {course.discipline.name}
+                                                    {course?.discipline?.name}
                                                 </p>
                                             </div>
                                         </div>
@@ -504,7 +532,7 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                                                     Available Intakes
                                                 </p>
                                                 <p className="text-lightGrayColor text-base">
-                                                    {course.intakes.join(' / ')}
+                                                    {course.intakes.join(' ')}
                                                 </p>
                                             </div>
                                         </div>

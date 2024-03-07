@@ -3,6 +3,7 @@ import {
     addDegree,
     addCourse,
     addInstitute,
+    addIntakes,
     objectType
 } from '@/store/slices/apply.slice';
 
@@ -14,11 +15,14 @@ export const useApply = () => {
     const addCourseState = (state: objectType) => dispatch(addCourse(state));
     const addInstituteState = (state: objectType) =>
         dispatch(addInstitute(state));
+    const addIntakesState = (state: objectType) =>
+        dispatch(addIntakes(state));
 
     return {
         ...state,
         addDegreeState,
         addCourseState,
-        addInstituteState
+        addInstituteState,
+        addIntakesState
     };
 };

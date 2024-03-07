@@ -16,10 +16,7 @@ const SearchQueryBox = () => {
     return (
         <form onSubmit={handleSubmit} className="relative w-full">
             <div className="relative">
-                <CgSearch
-                    alt="search"
-                    className="text-3xl absolute top-[50%] translate-y-[-50%] left-3 "
-                />
+                <CgSearch className="text-3xl absolute top-[50%] translate-y-[-50%] left-3 " />
                 <input
                     className="custom-shadow rounded-[10px] py-5 pl-[52px] outline-none text-base text-mainTextColor w-full lg:pr-[520px]"
                     value={value}
