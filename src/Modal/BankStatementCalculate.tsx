@@ -14,7 +14,8 @@ const BankStatementCalculate = () => {
         duration,
         institute,
         initialDeposit: listOfInitialDeposit
-    } = course;
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } = course as any;
     const [{ amount: initialDeposit }] = listOfInitialDeposit;
     const isLiveAustralia = institute.country.name
         .toLowerCase()

@@ -280,6 +280,36 @@ const CompareUniversityModal = () => {
                 />
                 <Select
                     isSearchable
+                    name="discipline"
+                    isClearable={false}
+                    isLoading={isLoading}
+                    isDisabled={data?.discipline.length < 1}
+                    placeholder="Select Discipline"
+                    options={data?.discipline?.map(({ name, id }) => ({
+                        label: name,
+                        value: id
+                    }))}
+                    onChange={(e) => {
+                        fetchAndSetData(
+                            API_ENDPOINTS.DEGREE_LEVELS_WITH_DISCIPLINE_ID.replace(
+                                ':id',
+                                e?.value ?? ''
+                            ),
+                            'degreeLevel'
+                        );
+                        setCompareData({
+                            ...compareData,
+                            discipline: data?.discipline
+                                ? data?.discipline?.filter(
+                                      ({ id }) => id === e?.value ?? ''
+                                  )[0]
+                                : null
+                        });
+                    }}
+                />
+
+                <Select
+                    isSearchable
                     name="course"
                     isClearable={false}
                     isLoading={isLoading}

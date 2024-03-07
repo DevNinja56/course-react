@@ -42,7 +42,10 @@ const MyApplies = () => {
                                     {apply.course.degree.type}
                                 </p>
                                 <p className="relative text-[13px] font-medium text-darkGrayColor before:block before:content-['•'] before:absolute before:-left-6 before:top-[50%] before:-translate-y-1/2">
-                                    {apply.course.specialization.name}
+                                    {apply.course.specialization
+                                        ?.map((s) => s.name)
+                                        ?.join(' , ') ??
+                                        'No Specialization Found'}
                                 </p>
                             </div>
 
