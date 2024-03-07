@@ -12,7 +12,8 @@ const nextConfig = {
             'media.istockphoto.com',
             'assets.jigsaw24.com',
             'd31cuupyjbe4e1.cloudfront.net',
-            'seekvectorlogo.com'
+            'seekvectorlogo.com',
+            'course-options-assets.s3.ap-south-1.amazonaws.com'
         ]
     }
 };
