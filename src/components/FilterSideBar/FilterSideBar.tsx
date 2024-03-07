@@ -5,9 +5,11 @@ import { FilterRow } from '../FilterPage/Course/FilterLeftBox';
 import DegreeLevelFilter from '../FilterPage/Course/DegreeLevelFilter';
 import DisciplinesFilter from '../FilterPage/Course/DisciplinesFilter';
 import SpecializationFilter from '../FilterPage/Course/SpecializationFilter';
+import IntakesFilter from '../FilterPage/Course/Intakes';
 import InstituteFilter from '../FilterPage/Course/InstituteFilter';
 import { useFilterQuery } from '@/hooks/filterQuery';
 import { useSearchedCourses } from '@/hooks/filterCourses';
+import LocationsFilter from '../FilterPage/Course/Locations';
 import { FilteredButton } from '../FilterPage/FilteredButton';
 
 interface ModalProps {
@@ -29,6 +31,7 @@ const FilterSideBar = ({ setFilterSideBar }: ModalProps) => {
         clearALlQuery();
         refetch();
     };
+
     return (
         <div className="w-full flex lg:hidden">
             <div className="backgroundBlack fixed top-0 left-0 h-[100vh] w-full z-40 flex items-center justify-end">
@@ -102,8 +105,18 @@ const FilterSideBar = ({ setFilterSideBar }: ModalProps) => {
                                 isLoading={isLoading}
                             />
                             <FilterRow />
+                            <LocationsFilter
+                                data={filters.locations}
+                                isLoading={isLoading}
+                            />
+                            <FilterRow />
                             <InstituteFilter
                                 data={filters.institutes}
+                                isLoading={isLoading}
+                            />
+                            <FilterRow />
+                            <IntakesFilter
+                                data={filters.intakes}
                                 isLoading={isLoading}
                             />
                         </div>

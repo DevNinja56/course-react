@@ -24,6 +24,7 @@ interface dataTypes {
     degree: objectType | null;
     course: objectType | null;
     institute: objectType | null;
+    intakes: objectType | null;
     files: FileType;
 }
 
@@ -31,6 +32,7 @@ const initialState: dataTypes = {
     degree: null,
     course: null,
     institute: null,
+    intakes: null,
     files: { passportFile: [], conSolidFile: [] }
 };
 
@@ -47,34 +49,21 @@ const apply = createSlice({
         addInstitute(state, action) {
             state.institute = action.payload;
         },
+        addIntakes(state, action) {
+            state.intakes = action.payload;
+        },
         addFiles: (
             state,
             action: PayloadAction<{
                 type: 'passport' | 'conSolid';
-                filesArray: File[];
+                filesArray: any[];
             }>
         ) => {
             state.files = produce(state.files, (draft) => {
                 if (action.payload.type === 'passport') {
-                    draft.passportFile.push(
-                        ...action.payload.filesArray.map((file) => ({
-                            lastModified: file.lastModified,
-                            lastModifiedDate: new Date(file.lastModified),
-                            name: file.name,
-                            size: file.size,
-                            type: file.type
-                        }))
-                    );
+                    draft.passportFile.push(...action.payload.filesArray);
                 } else if (action.payload.type === 'conSolid') {
-                    draft.conSolidFile.push(
-                        ...action.payload.filesArray.map((file) => ({
-                            lastModified: file.lastModified,
-                            lastModifiedDate: new Date(file.lastModified),
-                            name: file.name,
-                            size: file.size,
-                            type: file.type
-                        }))
-                    );
+                    draft.conSolidFile.push(...action.payload.filesArray);
                 } else {
                     console.log('Invalid file type:', action.payload.type);
                 }
@@ -97,6 +86,6 @@ const apply = createSlice({
     }
 });
 
-export const { addDegree, addCourse, addInstitute, addFiles, removeFile } =
+export const { addDegree, addCourse, addInstitute, addIntakes, addFiles, removeFile } =
     apply.actions;
 export default apply.reducer;

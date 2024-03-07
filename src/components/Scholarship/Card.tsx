@@ -50,6 +50,8 @@ const Card: React.FC<propsType> = ({
                             src="/images/Scholarships/scholarship (1) 1.png"
                             alt="image"
                             className="mx-auto"
+                            width={100}
+                            height={100}
                         />
                     </div>
                     <div className="flex items-center w-full justify-between gap-2 pb-2 px-4 text-center">

@@ -7,10 +7,16 @@ const nextConfig = {
             'assets.timescoursefinder.com',
             'picsum.photos',
             'lh3.googleusercontent.com',
+            'encrypted-tbn0.gstatic.com',
+            'images.unsplash.com',
+            'media.istockphoto.com',
+            'assets.jigsaw24.com',
             'd31cuupyjbe4e1.cloudfront.net',
             'seekvectorlogo.com',
             'course-options-assets.s3.ap-south-1.amazonaws.com',
-            'courseoptions.com'
+            "studentconnect.org",
+            'assets.jigsaw24.com',
+            'images.unsplash.com'
         ]
     }
 };

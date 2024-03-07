@@ -16,7 +16,9 @@ const PDFSmallViewer = ({
     };
 
     const handleFileRemoval = (index: number) => {
+        console.log("index",index)
         dispatch(removeFile({ type: 'passport', index }));
+        dispatch(removeFile({ type: 'conSolid', index }));
     };
 
     return (
@@ -26,11 +28,11 @@ const PDFSmallViewer = ({
                 return (
                     <div key={index} className="mb-6 relative">
                         <embed
-                            src={`${fileUrl}?page=1&toolbar=0&view=Fit#fullscreen`}
+                            src={`${fileUrl}#toolbar=0&view=Fit&page=0#fullscreen`}
                             width="290"
-                            height="450"
+                            height="380"
                         />
-                        <button className='absolute w-[290px] h-[450px] top-0'  onClick={() => handleClick(fileUrl)}></button>
+                        <button className='absolute w-[290px] h-[380] top-0'  onClick={() => handleClick(fileUrl)}></button>
                         <div className="text-3xl mx-28">
                             <RiDeleteBin6Line
                                 className="text-red-600"

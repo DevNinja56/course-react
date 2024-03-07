@@ -28,7 +28,7 @@ interface formType {
 interface FileDetails {
     apply: {
         files: {
-            passportFile: File[]
+            passportFile: File[];
         };
     };
 }
@@ -77,6 +77,7 @@ const FileSubmitted = () => {
     };
 
     const onSubmit = async (data: formType) => {
+        setIsLoading(true)
         const uploadResponse = await uploadFilesToApi(Files.passportFile);
         toast
             .promise(
@@ -131,7 +132,7 @@ const FileSubmitted = () => {
                 <div className="md:hidden lg:block sm:hidden">
                     <Button
                         type="submit"
-                        text="Save"
+                        text={isLoading ? 'Loading...' : 'save'}
                         className="rounded-none py-2 px-4"
                         onClick={handleSubmit(onSubmit)}
                     />

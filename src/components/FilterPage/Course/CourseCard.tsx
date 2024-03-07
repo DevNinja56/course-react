@@ -18,7 +18,7 @@ const CourseCard = ({ course }: CardProps) => {
 
     return (
         <div
-            className="flex flex-col shadow-custom rounded-md hover:shadow-xl hover:-translate-y-2 transition-all duration-300 cursor-pointer relative bg-white"
+            className=" rounded-[10px] flex flex-col shadow-custom hover:shadow-xl hover:-translate-y-2 transition-all duration-300 cursor-pointer relative bg-white"
             title={name}
         >
             <FavoriteButton
@@ -34,7 +34,7 @@ const CourseCard = ({ course }: CardProps) => {
                         src={`${
                             logo ?? '/images/FilterPage/Rectangle 3634.svg'
                         }`}
-                        className="h-[200px] w-full object-cover  "
+                        className="h-[200px] w-full object-cover rounded-tl-[10px] rounded-tr-[10px] "
                     />
                 </div>
                 <div className="pt-3 pb-6 px-3 flex flex-col gap-7">
