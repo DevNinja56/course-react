@@ -8,6 +8,7 @@ import { GetServerSideProps } from 'next';
 import { singleCourseType } from '@/types';
 import { API_ENDPOINTS } from '@/config/Api_EndPoints';
 import { getSsrRequest } from '@/utils/ssrRequest';
+import { calculateInitialDeposit } from '@/utils/get-initial-deposit';
 
 const Compare = ({ data }: { data?: singleCourseType }) => {
     const { first, second, third, compareFirst, compareSecond, compareThird } =
@@ -114,21 +115,45 @@ const Compare = ({ data }: { data?: singleCourseType }) => {
                 },
                 {
                     title: 'Specialization',
-                    first: first?.course?.specialization?.name,
-                    second: second?.course?.specialization?.name,
-                    third: third?.course?.specialization?.name
+                    first: first?.course?.specialization
+                        ?.map((s) => s.name)
+                        ?.join(' , '),
+                    second: second?.course?.specialization
+                        ?.map((s) => s.name)
+                        ?.join(' , '),
+                    third: third?.course?.specialization
+                        ?.map((s) => s.name)
+                        ?.join(' , ')
                 },
                 {
                     title: 'Duration',
-                    first: first?.course?.duration,
-                    second: second?.course?.duration,
-                    third: third?.course?.duration
+                    first: first?.course?.monthDuration,
+                    second: second?.course?.monthDuration,
+                    third: third?.course?.monthDuration
                 },
                 {
                     title: 'Initial Deposit',
-                    first: first?.course.initialDeposit[0].amount,
-                    second: second?.course.initialDeposit[0].amount,
-                    third: third?.course.initialDeposit[0].amount
+                    first: first
+                        ? calculateInitialDeposit(
+                              first?.course.initialDeposit[0].amount,
+                              first?.course.tuitionFee,
+                              first?.course.scholarship.amount
+                          )
+                        : null,
+                    second: second
+                        ? calculateInitialDeposit(
+                              second?.course.initialDeposit[0].amount,
+                              second?.course.tuitionFee,
+                              second?.course.scholarship.amount
+                          )
+                        : null,
+                    third: third
+                        ? calculateInitialDeposit(
+                              third?.course.initialDeposit[0].amount,
+                              third?.course.tuitionFee,
+                              third?.course.scholarship.amount
+                          )
+                        : null
                 },
                 {
                     title: 'Yearly fee',
@@ -138,9 +163,9 @@ const Compare = ({ data }: { data?: singleCourseType }) => {
                 },
                 {
                     title: 'Intake',
-                    first: first?.course.intakes.join(),
-                    second: second?.course.intakes.join(),
-                    third: third?.course.intakes.join()
+                    first: first?.course.intakes.join(' , '),
+                    second: second?.course.intakes.join(' , '),
+                    third: third?.course.intakes.join(' , ')
                 }
             ]
         },
