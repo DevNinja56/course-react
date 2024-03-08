@@ -9,6 +9,7 @@ import { singleCourseType } from '@/types';
 import { API_ENDPOINTS } from '@/config/Api_EndPoints';
 import { getSsrRequest } from '@/utils/ssrRequest';
 import { calculateInitialDeposit } from '@/utils/get-initial-deposit';
+import CurrencyFormat from 'react-currency-format';
 
 const Compare = ({ data }: { data?: singleCourseType }) => {
     const { first, second, third, compareFirst, compareSecond, compareThird } =
@@ -133,37 +134,61 @@ const Compare = ({ data }: { data?: singleCourseType }) => {
                 },
                 {
                     title: 'Initial Deposit',
-                    first: first
-                        ? calculateInitialDeposit(
-                              first?.course.initialDeposit[0].amount,
-                              first?.course.tuitionFee,
-                              first?.course.scholarship.amount
-                          )
-                        : null,
-                    second: second
-                        ? calculateInitialDeposit(
-                              second?.course.initialDeposit[0].amount,
-                              second?.course.tuitionFee,
-                              second?.course.scholarship.amount
-                          )
-                        : null,
-                    third: third
-                        ? calculateInitialDeposit(
-                              third?.course.initialDeposit[0].amount,
-                              third?.course.tuitionFee,
-                              third?.course.scholarship.amount
-                          )
-                        : null
+                    first: first ? (
+                        <CurrencyFormat
+                            value={calculateInitialDeposit(
+                                first?.course.initialDeposit[0].amount,
+                                first?.course.tuitionFee,
+                                first?.course.scholarship.amount
+                            )}
+                            displayType={'text'}
+                            thousandSeparator={true}
+                        />
+                    ) : null,
+                    second: second ? (
+                        <CurrencyFormat
+                            value={calculateInitialDeposit(
+                                second?.course.initialDeposit[0].amount,
+                                second?.course.tuitionFee,
+                                second?.course.scholarship.amount
+                            )}
+                            displayType={'text'}
+                            thousandSeparator={true}
+                        />
+                    ) : null,
+                    third: third ? (
+                        <CurrencyFormat
+                            value={calculateInitialDeposit(
+                                third?.course.initialDeposit[0].amount,
+                                third?.course.tuitionFee,
+                                third?.course.scholarship.amount
+                            )}
+                            displayType={'text'}
+                            thousandSeparator={true}
+                        />
+                    ) : null
                 },
                 {
                     title: 'Yearly fee',
-                    first: first?.course.tuitionFee,
+                    first: (
+                        <CurrencyFormat
+                            value={first?.course.tuitionFee}
+                            displayType={'text'}
+                            thousandSeparator={true}
+                        />
+                    ),
                     second: second?.course.tuitionFee,
                     third: third?.course.tuitionFee
                 },
                 {
                     title: 'Intake',
-                    first: first?.course.intakes.join(' , '),
+                    first: (
+                        <CurrencyFormat
+                            value={first?.course.intakes.join(' , ')}
+                            displayType={'text'}
+                            thousandSeparator={true}
+                        />
+                    ),
                     second: second?.course.intakes.join(' , '),
                     third: third?.course.intakes.join(' , ')
                 }
