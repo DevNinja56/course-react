@@ -25,6 +25,8 @@ export interface PaginatedResponse<data> {
     nextPage: number | null;
 }
 
+type ApplyId = string | string[] |undefined;
+
 export const stateQueryApi = createApi({
     reducerPath: 'stateQuery',
     baseQuery: fetchBaseQuery({
@@ -138,7 +140,14 @@ export const stateQueryApi = createApi({
             transformResponse: (res: {
                 data: PaginatedResponse<courseType[]>;
             }) => res.data! ?? res
-        })
+        }),
+        getApplyById: builder.query<applyTypes, ApplyId>({
+            query: (id:string) => ({
+                url: API_ENDPOINTS.GET_APPLY_BY_ID.replace(':id', id)
+            }),
+            transformResponse: (res: { data: applyTypes }) =>
+                res.data! ?? res
+        }),
     })
 });
 
@@ -157,5 +166,6 @@ export const {
     useGetUserFavoritesQuery,
     useGetUserAppliesQuery,
     useGetUserIpQuery,
-    useGetCourseByFilterQuery
+    useGetCourseByFilterQuery,
+    useGetApplyByIdQuery
 } = stateQueryApi;

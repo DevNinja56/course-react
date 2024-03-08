@@ -363,6 +363,9 @@ export interface userDocuments {
         letter_of_reference: {
             url: string;
         };
+        provisional_certificate: {
+            url: string;
+        };
     };
 }
 

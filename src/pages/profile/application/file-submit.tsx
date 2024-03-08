@@ -16,6 +16,7 @@ import { fetchRequest } from '@/utils/axios/fetch';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { addFiles } from '@/store/slices/apply.slice';
+import { useGetApplyByIdQuery } from '@/store/slices/allRequests';
 
 interface formType {
     number: string;
@@ -34,6 +35,7 @@ interface FileDetails {
 }
 
 const FileSubmitted = () => {
+
     const Files = useSelector((state: FileDetails) => state.apply.files);
     const dispatch = useDispatch();
     const {
@@ -44,6 +46,7 @@ const FileSubmitted = () => {
     const token = getToken();
     const router = useRouter();
     const { id } = router.query;
+    const { data: GetApply } = useGetApplyByIdQuery(id);
     const [isLoading, setIsLoading] = useState(false);
     const [fullFile, setFullFile] = useState('');
 
@@ -85,8 +88,13 @@ const FileSubmitted = () => {
                     url: `${BASE_URL}${API_ENDPOINTS.APPLY_DOCUMENTS}/${id}`,
                     type: 'patch',
                     body: {
+                        ...GetApply,
+                        course: GetApply?.course.id,
+                        user: GetApply?.user.id,
                         documents: {
+                            ...GetApply?.documents,
                             identity: {
+                                ...GetApply?.documents.identity,
                                 passport: {
                                     url: uploadResponse,
                                     given_name: data.given_name,

@@ -41,6 +41,7 @@ export const API_ENDPOINTS = {
     BLOGS: '/blogs',
     SINGLE_BLOG: '/blogs/:id',
     APPLY: '/apply',
+    GET_APPLY_BY_ID: '/apply/:id',
     APPLY_USER: '/apply/user',
     GEO_IP: '/geoip',
     FETCH_RATES:
