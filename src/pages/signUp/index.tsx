@@ -61,9 +61,9 @@ const SignUp = () => {
     };
 
     return (
-        <div className="w-full flex justify-center items-center px-0 lg:px-10 2xl:px-40 bg-loginBgColor min-h-[100vh]">
+        <div className="w-full flex justify-center items-center px-0 lg:px-5 2xl:px-40 bg-loginBgColor min-h-[100vh]">
             <div className="w-full px-0 lg:px-2 transition-all duration-300">
-                <div className="relative w-full flex items-center justify-center pt-20 pb-20 md:py-20">
+                <div className="relative w-full flex items-center justify-center pt-20 pb-20 md:pt-40 md:pb-20">
                     <Image
                         height={610}
                         width={560}

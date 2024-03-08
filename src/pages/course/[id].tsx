@@ -8,7 +8,6 @@ import { ROUTES } from '@/config/constant';
 import { useUi } from '@/hooks/user-interface';
 import { modalType } from '@/store/slices/ui.slice';
 import { singleCourseType } from '@/types';
-import { setCurrencyValue } from '@/utils/currencyValue';
 import { getSsrRequest } from '@/utils/ssrRequest';
 import { GetServerSideProps } from 'next';
 import Image from 'next/image';
@@ -23,12 +22,15 @@ import { FaMoneyBillWave } from 'react-icons/fa';
 import { IoLocation } from 'react-icons/io5';
 import { FaCalendar } from 'react-icons/fa';
 import { getMonths } from '@/utils/get-months';
-import { calculateInitialDeposit } from '@/utils/get-initial-deposit';
+import { useCurrency } from '@/hooks/currency';
+import { useCalculate } from '@/hooks/initial-deposit-calculate';
 // import { BiSolidCalendar } from 'react-icons/bi';
 // import CourseTag from '@/components/course/CourseTag';
 
 const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
     const { updateModal } = useUi();
+    const { setCurrencyValue } = useCurrency();
+    const { initialDeposit } = useCalculate();
 
     const openUserDetailModal = (courseId: string) => {
         updateModal({
@@ -36,6 +38,7 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
             state: { courseId }
         });
     };
+
     return (
         <>
             {!course ? (
@@ -119,15 +122,15 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                                                 }
                                             })
                                         }
-                                        className="h-8 w-8 rounded-full bg-white shadow-lg lg:flex items-center justify-center hidden cursor-pointer"
+                                        className="h-8 w-8 rounded-full bg-white shadow-lg lg:flex items-center justify-center hidden cursor-pointer group hover:bg-blue-500"
                                     >
-                                        <IoShareSocialSharp className="text-gray-400 h-4 w-4" />
+                                        <IoShareSocialSharp className="text-gray-400 group-hover:text-white h-4 w-4" />
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div className="flex flex-col lg:flex-row gap-0 xl:gap-16 w-full justify-between">
-                            <div className="bg-white w-full lg:w-[70%] xl:w-2/3 h-headerStickyHeight static lg:sticky top-[110px] no-scrollbar mb-48 md:mb-48 lg:mb-96">
+                        <div className="flex flex-col lg:flex-row gap-0 xl:gap-16 w-full justify-between mb-0 lg:mb-28">
+                            <div className="w-full lg:w-[70%] xl:w-2/3 h-courseStickyHeight static lg:sticky top-[110px] no-scrollbar mb-96 lg:mb-96">
                                 <div className=" transition-all duration-300">
                                     <div className="flex flex-col gap-y-6 mb-16 md:mb-20">
                                         <div className="tabs-container capitalize">
@@ -288,11 +291,10 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                                                                 </h3>
                                                                 <ul className="w-full flex flex-col items-start gap-2">
                                                                     {course
-                                                                        .degree
                                                                         .scholarship
                                                                         .length >
                                                                     0 ? (
-                                                                        course.degree.scholarship.map(
+                                                                        course.scholarship.map(
                                                                             ({
                                                                                 name
                                                                             }) => (
@@ -312,7 +314,8 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                                                                     ) : (
                                                                         <li className="text-sm md:text-base">
                                                                             No
-                                                                            scholarships available
+                                                                            scholarships
+                                                                            available
                                                                         </li>
                                                                     )}
                                                                 </ul>
@@ -327,14 +330,15 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                                                                     Initial
                                                                     Deposit
                                                                 </h3>
+
                                                                 <p className="text-sm md:text-base">
-                                                                 {calculateInitialDeposit(
+                                                                    {initialDeposit(
                                                                         course
                                                                             .initialDeposit?.[0]
                                                                             .amount,
                                                                         course.tuitionFee,
                                                                         course
-                                                                            ?.scholarship
+                                                                            ?.scholarship[0]
                                                                             ?.amount
                                                                     )}
                                                                 </p>
@@ -531,7 +535,7 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                                                     Available Intakes
                                                 </p>
                                                 <p className="text-lightGrayColor text-base">
-                                                    {course.intakes.join(' / ')}
+                                                    {course.intakes.join(' ')}
                                                 </p>
                                             </div>
                                         </div>

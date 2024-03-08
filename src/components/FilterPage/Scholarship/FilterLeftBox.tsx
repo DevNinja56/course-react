@@ -1,10 +1,10 @@
 import React from 'react';
 import DegreeLevelFilter from '../Course/DegreeLevelFilter';
 import CountriesFilter from '../CountriesFilter';
-import DisciplinesFilter from '../Course/DisciplinesFilter';
 import ScholarshipTypeFilter from './ScholarshipTypeFilter';
 // import ScholarshipMonthFilter from './ScholarshipMonthFilter';
 // import ScholarshipYearFilter from './ScholarshipYearFilter';
+// import DisciplinesFilter from '../Course/DisciplinesFilter';
 import { useFilterQuery } from '@/hooks/filterQuery';
 import { FilteredButton } from '../FilteredButton';
 import InstituteFilter from '../Course/InstituteFilter';
@@ -75,10 +75,10 @@ const ScholarshipFilter = () => {
                     data={filters.institutes}
                     isLoading={isLoading}
                 />
-                <DisciplinesFilter
+                {/* <DisciplinesFilter
                     data={filters.disciplines}
                     isLoading={isLoading}
-                />
+                /> */}
                 <FilterRow />
                 <DegreeLevelFilter
                     data={filters.degrees}

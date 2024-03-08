@@ -7,16 +7,16 @@ const ContactUs = () => {
     return (
         <>
             <div className="w-full flex items-center justify-center h-[200px] mt-[100px] mb-5 z-0">
-                <div className="flex flex-col justify-center items-center">
+                <div className="flex flex-col justify-center items-center gap-4">
                     <p className="text-blueColor text-xl md:text-[23px] font-bold">
                         Reach Out
                     </p>
-                    <h1 className="text-mainTextColor text-4xl md:text-[48px] font-bold">
+                    <h1 className="text-mainTextColor text-3xl md:text-[48px] font-bold lg:font-extrabold">
                         Contact Us
                     </h1>
                 </div>
             </div>
-            <div className="max-w-[1100px] 2xl:max-w-[2300px] mx-auto transition-all duration-300 px-5 md:px-[50px] lg:px-2 2xl:px-8 mb-32 lg:mb-40">
+            <div className="max-w-[1100px] 2xl:max-w-[2300px] mx-auto transition-all duration-300 px-5 md:px-[50px] lg:px-2 2xl:px-8 mb-32 lg:mb-52">
                 <Map
                     mapRoundImg="/images/Ellipse 424.svg"
                     mapRoundImg2="/images/Ellipse 426.svg"

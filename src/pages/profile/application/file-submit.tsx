@@ -35,7 +35,6 @@ interface FileDetails {
 }
 
 const FileSubmitted = () => {
-
     const Files = useSelector((state: FileDetails) => state.apply.files);
     const dispatch = useDispatch();
     const {
