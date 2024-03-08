@@ -33,7 +33,7 @@ const ProfileComp = () => {
             <div className="flex flex-col w-full lg:w-[26.5%]">
                 {tabs.map(({ title }, i) => (
                     <div
-                        key={'favorites--tabs' + i}
+                        key={'favourites--tabs' + i}
                         className="flex flex-col gap-y-6"
                         onClick={() => setActive(title)}
                     >

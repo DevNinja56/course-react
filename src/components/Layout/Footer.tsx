@@ -23,7 +23,7 @@ const Footer = () => {
                             Want to study at Online program ?
                         </h1>
                         <Link href="/apply">
-                            <button className="bg-white py-[13px] md:py-4 lg:py-[21px] px-[84px] md:px-8 lg:px-[51px] rounded-[5px] text-mainTextColor">
+                            <button className="bg-white py-[13px] md:py-4 lg:py-[21px] px-[84px] md:px-8 lg:px-[51px] rounded-[5px] text-mainTextColor hover:bg-opacity-50 hover:text-white">
                                 Apply Now
                             </button>
                         </Link>

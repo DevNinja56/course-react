@@ -38,7 +38,7 @@ const CancelApplication = () => {
                 <button className="flex items-center gap-2 px-7 py-3 rounded-md text-lg font-semibold bg-[#D5E4FF]  text-blueColor">
                     Back
                 </button>
-                <button className="flex items-center gap-2 px-9 py-3 rounded-md text-lg font-semibold bg-redColor  text-white">
+                <button className="flex items-center gap-2 px-9 py-3 rounded-md text-lg font-semibold bg-redColor text-white border border-red-500 hover:bg-white hover:text-red-500">
                     Cancel Application
                 </button>
             </div>

@@ -33,16 +33,16 @@ const MyApplies = () => {
                                         apply.id
                                     )}
                                 >
-                                    {apply.course.name}
+                                    {apply?.course?.name}
                                 </Link>
                             </p>
 
                             <div className="flex items-center gap-6">
                                 <p className=" text-[13px] font-medium text-darkGrayColor ">
-                                    {apply.course.degree.type}
+                                    {apply?.course?.degree?.type}
                                 </p>
                                 <p className="relative text-[13px] font-medium text-darkGrayColor before:block before:content-['•'] before:absolute before:-left-6 before:top-[50%] before:-translate-y-1/2">
-                                    {apply.course.specialization
+                                    {apply?.course?.specialization
                                         ?.map((s) => s.name)
                                         ?.join(' , ') ??
                                         'No Specialization Found'}
@@ -66,7 +66,7 @@ const MyApplies = () => {
                                         </p>
                                         <p className="text-sm font-normal text-darkGrayColor ">
                                             campus:{' '}
-                                            {apply.course.institute.campus}
+                                            {apply?.course?.institute?.campus}
                                         </p>
                                     </div>
                                 </div>

@@ -1,9 +1,23 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { produce } from 'immer';
 
 export interface objectType {
     label: string;
     value: string;
+}
+
+interface FileDetails {
+    lastModified: number;
+    lastModifiedDate: Date;
+    name: string;
+    size: number;
+    type: string;
+}
+
+interface FileType {
+    passportFile: FileDetails[];
+    conSolidFile: FileDetails[];
 }
 
 interface dataTypes {
@@ -11,6 +25,7 @@ interface dataTypes {
     course: objectType | null;
     institute: objectType | null;
     intakes: objectType | null;
+    files: FileType;
 }
 
 const initialState: dataTypes = {
@@ -18,6 +33,7 @@ const initialState: dataTypes = {
     course: null,
     institute: null,
     intakes: null,
+    files: { passportFile: [], conSolidFile: [] }
 };
 
 const apply = createSlice({
@@ -35,9 +51,41 @@ const apply = createSlice({
         },
         addIntakes(state, action) {
             state.intakes = action.payload;
+        },
+        addFiles: (
+            state,
+            action: PayloadAction<{
+                type: 'passport' | 'conSolid';
+                filesArray: any[];
+            }>
+        ) => {
+            state.files = produce(state.files, (draft) => {
+                if (action.payload.type === 'passport') {
+                    draft.passportFile.push(...action.payload.filesArray);
+                } else if (action.payload.type === 'conSolid') {
+                    draft.conSolidFile.push(...action.payload.filesArray);
+                } else {
+                    console.log('Invalid file type:', action.payload.type);
+                }
+            });
+        },
+        removeFile(
+            state,
+            action: PayloadAction<{
+                type: 'passport' | 'conSolid';
+                index: number;
+            }>
+        ) {
+            const { type, index } = action.payload;
+            if (type === 'passport') {
+                state.files.passportFile.splice(index, 1);
+            } else if (type === 'conSolid') {
+                state.files.conSolidFile.splice(index, 1);
+            }
         }
     }
 });
 
-export const { addDegree, addCourse, addInstitute, addIntakes } = apply.actions;
+export const { addDegree, addCourse, addInstitute, addIntakes, addFiles, removeFile } =
+    apply.actions;
 export default apply.reducer;
