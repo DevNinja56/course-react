@@ -29,7 +29,6 @@ import { calculateInitialDeposit } from '@/utils/get-initial-deposit';
 
 const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
     const { updateModal } = useUi();
-    console.log("calculateInitialDeposit",calculateInitialDeposit)
 
     const openUserDetailModal = (courseId: string) => {
         updateModal({
