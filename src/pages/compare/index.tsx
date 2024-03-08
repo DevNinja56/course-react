@@ -178,7 +178,7 @@ const Compare = ({ data }: { data?: singleCourseType }) => {
                         />
                     ),
                     second: second?.course.tuitionFee,
-                    third: third?.course.tuitionFee
+                    third: third?.course.tuitionFee 
                 },
                 {
                     title: 'Intake',
