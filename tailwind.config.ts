@@ -53,10 +53,12 @@ const config: Config = {
                     '0px 11px 25.8px 0px rgba(190, 190, 190, 0.15);'
             },
             height: {
-                headerStickyHeight: 'calc(100vh - 410px)'
+                headerStickyHeight: 'calc(100vh - 110px)',
+                courseStickyHeight: 'calc(100vh - 410px)'
             },
             maxHeight: {
-                headerStickyHeight: 'calc(100vh - 410px)'
+                headerStickyHeight: 'calc(100vh - 110px)',
+                courseStickyHeight: 'calc(100vh - 410px)'
             }
         }
     },
