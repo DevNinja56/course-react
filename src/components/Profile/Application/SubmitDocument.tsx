@@ -24,7 +24,6 @@ const SubmitDocument = () => {
     const handleFileChangeConSolid = (event: React.ChangeEvent<HTMLInputElement>) => {
         const uploadedFiles = event.target.files;
         const filesArray = uploadedFiles ? [...uploadedFiles] : [];
-        console.log("filesArray",filesArray)
         dispatch(addFiles({ type: 'conSolid', filesArray }));
         router.push({
             pathname: `${ROUTES.CONSOLID_MARKSHEET}`,
