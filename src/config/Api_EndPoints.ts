@@ -34,7 +34,7 @@ export const API_ENDPOINTS = {
     INSTITUTE: '/institute',
     INSTITUTE_BY_ID: '/institute/:id',
     INSTITUTE_WITH_COUNTRY_ID: '/institute/country/:id',
-    DISCIPLINES_WITH_INSTITUTE_ID: '/institute/disciplines/:id',
+    DEGREE_WITH_INSTITUTE_ID: '/institute/degrees/:id',
     DEGREE_LEVELS_WITH_DISCIPLINE_ID: '/discipline/degree-levels/:id',
     COURSES_WITH_DEGREE: '/course/compare/:degreeId/:instituteId',
     CONTACT: '/contact',

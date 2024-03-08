@@ -8,7 +8,6 @@ import { ROUTES } from '@/config/constant';
 import { useUi } from '@/hooks/user-interface';
 import { modalType } from '@/store/slices/ui.slice';
 import { singleCourseType } from '@/types';
-import { setCurrencyValue } from '@/utils/currencyValue';
 import { getSsrRequest } from '@/utils/ssrRequest';
 import { GetServerSideProps } from 'next';
 import Image from 'next/image';
@@ -23,13 +22,15 @@ import { FaMoneyBillWave } from 'react-icons/fa';
 import { IoLocation } from 'react-icons/io5';
 import { FaCalendar } from 'react-icons/fa';
 import { getMonths } from '@/utils/get-months';
-import { calculateInitialDeposit } from '@/utils/get-initial-deposit';
+import { useCurrency } from '@/hooks/currency';
+import { useCalculate } from '@/hooks/initial-deposit-calculate';
 // import { BiSolidCalendar } from 'react-icons/bi';
 // import CourseTag from '@/components/course/CourseTag';
 
 const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
     const { updateModal } = useUi();
-    console.log("calculateInitialDeposit",calculateInitialDeposit)
+    const { setCurrencyValue } = useCurrency();
+    const { initialDeposit } = useCalculate();
 
     const openUserDetailModal = (courseId: string) => {
         updateModal({
@@ -313,7 +314,8 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                                                                     ) : (
                                                                         <li className="text-sm md:text-base">
                                                                             No
-                                                                            scholarships available
+                                                                            scholarships
+                                                                            available
                                                                         </li>
                                                                     )}
                                                                 </ul>
@@ -329,7 +331,7 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                                                                     Deposit
                                                                 </h3>
                                                                 <p className="text-sm md:text-base">
-                                                                 {calculateInitialDeposit(
+                                                                    {initialDeposit(
                                                                         course
                                                                             .initialDeposit?.[0]
                                                                             .amount,

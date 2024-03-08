@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import RangeSlider from '@/components/RangeSlider';
 import { useFilterQuery } from '@/hooks/filterQuery';
-import { getCurrencySymbol } from '@/utils/currencyValue';
+import { useCurrency } from '@/hooks/currency';
 
 interface sliderValue {
     min: number;
@@ -11,6 +11,7 @@ interface sliderValue {
 const FeeSlider = () => {
     const [value, setValue] = useState<sliderValue>({ min: 1000, max: 500000 });
     const { addQuery } = useFilterQuery();
+    const { getCurrencySymbol } = useCurrency();
 
     const handleChange = () => {
         addQuery({ tuitionFee: [JSON.stringify(value)] });
