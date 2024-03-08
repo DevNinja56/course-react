@@ -147,21 +147,21 @@ const Compare = ({ data }: { data?: singleCourseType }) => {
                         ? initialDeposit(
                               first?.course.initialDeposit[0].amount,
                               first?.course.tuitionFee,
-                              first?.course.scholarship.amount
+                              first?.course.scholarship[0].amount ?? 0
                           )
                         : null,
                     second: second
                         ? initialDeposit(
                               second?.course.initialDeposit[0].amount,
                               second?.course.tuitionFee,
-                              second?.course.scholarship.amount
+                              second?.course.scholarship[0].amount ?? 0
                           )
                         : null,
                     third: third
                         ? initialDeposit(
                               third?.course.initialDeposit[0].amount,
                               third?.course.tuitionFee,
-                              third?.course.scholarship.amount
+                              third?.course.scholarship[0].amount ?? 0
                           )
                         : null
                 },

@@ -38,6 +38,7 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
             state: { courseId }
         });
     };
+
     return (
         <>
             {!course ? (
@@ -290,11 +291,10 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                                                                 </h3>
                                                                 <ul className="w-full flex flex-col items-start gap-2">
                                                                     {course
-                                                                        .degree
                                                                         .scholarship
                                                                         .length >
                                                                     0 ? (
-                                                                        course.degree.scholarship.map(
+                                                                        course.scholarship.map(
                                                                             ({
                                                                                 name
                                                                             }) => (
@@ -330,6 +330,7 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                                                                     Initial
                                                                     Deposit
                                                                 </h3>
+
                                                                 <p className="text-sm md:text-base">
                                                                     {initialDeposit(
                                                                         course
@@ -337,7 +338,7 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                                                                             .amount,
                                                                         course.tuitionFee,
                                                                         course
-                                                                            ?.scholarship
+                                                                            ?.scholarship[0]
                                                                             ?.amount
                                                                     )}
                                                                 </p>

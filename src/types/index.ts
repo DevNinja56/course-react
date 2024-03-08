@@ -132,8 +132,6 @@ export type countryType = {
 export type degreeType = {
     name: string;
     type: string;
-    course: courseType[];
-    scholarship: scholarshipType[];
     createdAt: string;
     updatedAt: string;
     id: string;
@@ -234,7 +232,6 @@ export type singleCourseType = {
     delivery: string;
     availableCampuses: string[];
     feeCurrency: string;
-    scholarship: scholarshipType;
     favoriteId: string[];
     name: string;
     logo: string;
@@ -249,6 +246,7 @@ export type singleCourseType = {
     region: string;
     createdAt: string;
     updatedAt: string;
+    scholarship: scholarshipType[];
     language: [
         {
             language: courseLanguageRequirement;
