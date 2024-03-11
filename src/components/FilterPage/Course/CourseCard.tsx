@@ -4,9 +4,9 @@ import { courseType } from '@/types';
 import Link from 'next/link';
 import React from 'react';
 import FavoriteButton from '../../Button/FavoriteButton';
-import { getCurrencySymbol, setCurrencyValue } from '@/utils/currencyValue';
 import { LuMapPin } from 'react-icons/lu';
 import { CiCalendarDate } from 'react-icons/ci';
+import { useCurrency } from '@/hooks/currency';
 
 interface CardProps {
     course: courseType;
@@ -16,9 +16,11 @@ const CourseCard = ({ course }: CardProps) => {
     const { country, institute, degree, logo, _id, name, tuitionFee, intakes } =
         course;
 
+    const { getCurrencySymbol, setCurrencyValue } = useCurrency();
+
     return (
         <div
-            className="flex flex-col shadow-custom rounded-md hover:shadow-xl hover:-translate-y-2 transition-all duration-300 cursor-pointer relative bg-white"
+            className="flex flex-col shadow-custom rounded-xl hover:shadow-xl hover:-translate-y-2 transition-all duration-300 cursor-pointer relative bg-white"
             title={name}
         >
             <FavoriteButton
@@ -34,7 +36,7 @@ const CourseCard = ({ course }: CardProps) => {
                         src={`${
                             logo ?? '/images/FilterPage/Rectangle 3634.svg'
                         }`}
-                        className="h-[200px] w-full object-cover  "
+                        className="h-[200px] w-full object-cover rounded-xl"
                     />
                 </div>
                 <div className="pt-3 pb-6 px-3 flex flex-col gap-7">
@@ -45,7 +47,7 @@ const CourseCard = ({ course }: CardProps) => {
                         >
                             {name} <br /> at {institute.name}
                         </h1>
-                        <p className="font-medium text-[0.670rem] xl:text-[0.700rem] text-gray-400">
+                        <p className="font-medium text-[0.670rem] xl:text-[0.700rem] text-gray-400 capitalize">
                             {degree.type}
                         </p>
                     </div>

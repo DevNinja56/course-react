@@ -6,7 +6,7 @@ import Favorites from '@/components/Profile/Favorites/index';
 
 export const profileTabs = {
     profile: 'Profile',
-    favorites: 'Favorite'
+    favorites: 'Favourite'
 };
 
 const Profile = () => {

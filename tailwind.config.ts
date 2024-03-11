@@ -42,8 +42,8 @@ const config: Config = {
                 siderBarBottom: '#D9D9D9',
                 filterBorderColor: '#cdd5e1',
                 redColor: '#FF0404',
-                BgColorPassport: "#EDF4FF",
-                BgCardPassport: "#F6FAFF",
+                BgColorPassport: '#EDF4FF',
+                BgCardPassport: '#F6FAFF'
             },
             boxShadow: {
                 'bottom-shadow': '0 2px 2px 0 rgba(190, 190, 190, 0.15)',
@@ -53,10 +53,12 @@ const config: Config = {
                     '0px 11px 25.8px 0px rgba(190, 190, 190, 0.15);'
             },
             height: {
-                headerStickyHeight: 'calc(100vh - 110px)'
+                headerStickyHeight: 'calc(100vh - 110px)',
+                courseStickyHeight: 'calc(100vh - 410px)'
             },
             maxHeight: {
-                headerStickyHeight: 'calc(100vh - 110px)'
+                headerStickyHeight: 'calc(100vh - 110px)',
+                courseStickyHeight: 'calc(100vh - 410px)'
             }
         }
     },

@@ -1,6 +1,6 @@
+import { useCurrency } from '@/hooks/currency';
 import { useUi } from '@/hooks/user-interface';
 import { singleCourseType } from '@/types';
-import { setCurrencyValue } from '@/utils/currencyValue';
 import React from 'react';
 import { IoMdClose } from 'react-icons/io';
 
@@ -14,8 +14,10 @@ const BankStatementCalculate = () => {
         duration,
         institute,
         initialDeposit: listOfInitialDeposit
-    } = course;
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } = course as any;
     const [{ amount: initialDeposit }] = listOfInitialDeposit;
+    const { setCurrencyValue } = useCurrency();
     const isLiveAustralia = institute.country.name
         .toLowerCase()
         .includes('australia');

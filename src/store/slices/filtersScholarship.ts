@@ -22,7 +22,7 @@ const initialState: getAllScholarshipTypes = {
         countries: [],
         institutes: [],
         degrees: [],
-        disciplines: [],
+        // disciplines: [],
         scholarship_types: []
     },
     paginatorInfo: {

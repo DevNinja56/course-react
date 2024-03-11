@@ -25,7 +25,7 @@ const CategoriesSection = () => {
                     maecenas justo sapien.
                 </p>
                 <Link href={ROUTES.FIELDS}>
-                    <button className="pt-4 pb-[17px] px-[48px] bg-blueColor rounded-[5px] font-semibold text-white z-10 sticky">
+                    <button className="pt-4 pb-[17px] px-[48px] bg-blueColor rounded-[5px] font-semibold text-white z-10 sticky hover:bg-opacity-50">
                         All Categories
                     </button>
                 </Link>

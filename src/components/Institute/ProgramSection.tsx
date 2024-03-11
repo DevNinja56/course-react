@@ -31,9 +31,9 @@ const ProgramSection = () => {
                                 <RiGraduationCapFill className="h-10 w-10" />
                                 Programs
                             </h1>
-                            <h1 className="text-blueColor text-sm md:text-xl font-semibold flex items-center gap-3 cursor-pointer">
+                            <h1 className="text-blueColor text-sm md:text-xl font-semibold flex items-center gap-3 cursor-pointer group hover:text-opacity-50 transition-all duration-300">
                                 Read More
-                                <FaArrowRight className="h-4 w-4" />
+                                <FaArrowRight className="h-4 w-4 group-hover:translate-x-2 transition-all duration-300" />
                             </h1>
                         </div>
                         <div className="flex items-center gap-5 w-auto">
@@ -44,7 +44,7 @@ const ProgramSection = () => {
                                     }
                                     className={`py-3 px-5 md:px-7 text-sm md:text-base rounded-3xl font-medium hover:bg-black hover:bg-opacity-5 transition-all duration-500 ${
                                         selectedProgram === 'postgraduate'
-                                            ? 'text-white bg-blueColor shadow-md'
+                                            ? 'text-white bg-blueColor shadow-md shadow-md hover:bg-opacity-50'
                                             : 'text-black bg-white shadow-md hover:bg-black hover:bg-opacity-5'
                                     }`}
                                 >
@@ -58,7 +58,7 @@ const ProgramSection = () => {
                                     }
                                     className={`py-3 px-5 md:px-7 text-sm md:text-base rounded-3xl font-medium ${
                                         selectedProgram === 'undergraduate'
-                                            ? 'text-white bg-blueColor shadow-md'
+                                            ? 'text-white bg-blueColor shadow-md shadow-md hover:bg-opacity-50'
                                             : 'text-black bg-white shadow-md hover:bg-black hover:bg-opacity-5'
                                     }  transition-all duration-500`}
                                 >

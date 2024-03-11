@@ -16,7 +16,7 @@ const Apply = () => {
                 />
                 <div className="mt-[-180px] md:mt-[-120px] ml-[-60px] md:ml-[-40px] block lg:hidden h-32 w-32 rounded-full border-[10px] border-blueColor"></div>
                 <div className="flex flex-col items-center">
-                    <h1 className="text-mainTextColor text-2xl md:text-[32px] font-extrabold">
+                    <h1 className="text-mainTextColor text-2xl md:text-[32px] font-extrabold pb-2">
                         Apply Now{' '}
                     </h1>
                     <p className="text-base md:text-lg text-aboutUsTextColor">

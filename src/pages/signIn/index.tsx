@@ -26,9 +26,9 @@ const FacebookLoginBtn = dynamic(import('@/components/Auth/FacebookLoginBtn'), {
 
 const SignIn = () => {
     const { updateModal } = useUi();
+    const router = useRouter();
     const [isLoading, setIsLoading] = useState(false);
     const { updateUserDetails, loggedInUser } = useUserAuth();
-    const { push } = useRouter();
     const {
         register,
         handleSubmit: fromSubmit,
@@ -49,7 +49,7 @@ const SignIn = () => {
                     access: res.data.accessToken,
                     refresh: res.data.refreshToken
                 });
-                push(ROUTES.HOMEPAGE);
+                router.back();
                 toast.success('User Logged In Success');
             })
             .catch((err) => {
@@ -66,9 +66,9 @@ const SignIn = () => {
     };
 
     return (
-        <div className="w-full flex justify-center items-center px-0 lg:px-16 2xl:px-40 bg-loginBgColor min-h-[100vh]">
+        <div className="w-full flex justify-center items-center px-0 lg:px-5 2xl:px-40 bg-loginBgColor min-h-[100vh]">
             <div className="w-full px-0 lg:px-2 transition-all duration-300">
-                <div className="relative w-full flex items-center justify-center pt-20 pb-20 md:py-0">
+                <div className="relative w-full flex items-center justify-center pt-20 pb-20 md:pt-32">
                     <Image
                         height={610}
                         width={560}
