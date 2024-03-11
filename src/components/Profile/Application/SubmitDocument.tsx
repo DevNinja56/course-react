@@ -17,7 +17,7 @@ const SubmitDocument = () => {
     const dispatch = useDispatch();
     const token = getToken();
     const { id } = router.query;
-    const { data: GetApply } = useGetApplyByIdQuery(id);
+    const { data: GetApply, refetch: fetchApply } = useGetApplyByIdQuery(id);
 
     const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const uploadedFiles = event.target.files;
@@ -94,6 +94,7 @@ const SubmitDocument = () => {
             {
                 loading: 'Please wait...',
                 success: () => {
+                    fetchApply();
                     return 'Form submitted successfully';
                 },
                 error: 'An error occurred'
@@ -128,6 +129,7 @@ const SubmitDocument = () => {
             {
                 loading: 'Please wait...',
                 success: () => {
+                    fetchApply();
                     return 'Form submitted successfully';
                 },
                 error: 'An error occurred'
@@ -162,6 +164,7 @@ const SubmitDocument = () => {
             {
                 loading: 'Please wait...',
                 success: () => {
+                    fetchApply();
                     return 'Form submitted successfully';
                 },
                 error: 'An error occurred'
@@ -196,6 +199,7 @@ const SubmitDocument = () => {
             {
                 loading: 'Please wait...',
                 success: () => {
+                    fetchApply();
                     return 'Form submitted successfully';
                 },
                 error: 'An error occurred'
@@ -230,6 +234,7 @@ const SubmitDocument = () => {
             {
                 loading: 'Please wait...',
                 success: () => {
+                    fetchApply();
                     return 'Form submitted successfully';
                 },
                 error: 'An error occurred'
@@ -264,6 +269,7 @@ const SubmitDocument = () => {
             {
                 loading: 'Please wait...',
                 success: () => {
+                    fetchApply();
                     return 'Form submitted successfully';
                 },
                 error: 'An error occurred'
@@ -304,7 +310,7 @@ const SubmitDocument = () => {
                             text="Semester Marksheets"
                             url={
                                 GetApply?.documents?.academic_certificates
-                                    ?.consolidated_mark_sheets?.url[0]
+                                    ?.semester_mark_sheets?.url[0]
                             }
                         />
                     </label>
@@ -334,7 +340,7 @@ const SubmitDocument = () => {
                         <RequirementBox
                             text="Provisional Certificate"
                             url={
-                                GetApply?.documents?.professional_records
+                                GetApply?.documents?.academic_certificates
                                     ?.provisional_certificate?.url
                             }
                         />

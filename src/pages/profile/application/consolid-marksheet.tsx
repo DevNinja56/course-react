@@ -104,9 +104,9 @@ const ConSolid_MarkSheet = () => {
                             academic_certificates: {
                                 consolidated_mark_sheets: {
                                     url: uploadResponse,
-                                    startDate: data.startDate,
-                                    completeDate: data.completeDate,
-                                    institution: data.institution,
+                                    date_of_start: data.startDate,
+                                    date_of_completion: data.completeDate,
+                                    institute: data.institution,
                                     country: data.country
                                 }
                             }
