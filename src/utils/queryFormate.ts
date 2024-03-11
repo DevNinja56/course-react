@@ -9,14 +9,12 @@ export const formateCourseQuery = (query: { [key: string]: any }) => {
     const orConditions = [];
 
     if (query.searchFilter) {
-        orConditions.push(
-            {
-                region: {
-                    $regex: query.searchFilter[0],
-                    $options: 'i'
-                }
+        orConditions.push({
+            region: {
+                $regex: query.searchFilter[0],
+                $options: 'i'
             }
-        );
+        });
     }
 
     if (query.region) {
@@ -119,20 +117,12 @@ export const formateScholarshipQuery = (query: { [key: string]: any }) => {
     const orConditions = [];
 
     if (query.searchFilter) {
-        orConditions.push(
-            {
-                name: {
-                    $regex: query.searchFilter[0],
-                    $options: 'i'
-                }
-            },
-            {
-                'instituteId.name': {
-                    $regex: query.searchFilter[0],
-                    $options: 'i'
-                }
+        orConditions.push({
+            region: {
+                $regex: query.searchFilter[0],
+                $options: 'i'
             }
-        );
+        });
     }
 
     if (query.region) {
