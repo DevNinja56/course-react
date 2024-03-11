@@ -15,12 +15,6 @@ export const formateCourseQuery = (query: { [key: string]: any }) => {
                     $regex: query.searchFilter[0],
                     $options: 'i'
                 }
-            },
-            {
-                'institute.id': {
-                    $regex: query.searchFilter[0],
-                    $options: 'i'
-                }
             }
         );
     }
