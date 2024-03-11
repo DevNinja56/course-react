@@ -6,10 +6,13 @@ export const useCalculate = () => {
     function initialDeposit(
         initialDeposit: string,
         tuitionFee: number,
-        scholarship: string
+        scholarship: string = '0%',
+        isNumber = false
     ): string | number {
         if (!isNaN(+initialDeposit)) {
-            return setCurrencyValue(+initialDeposit);
+            return isNumber
+                ? +initialDeposit
+                : setCurrencyValue(+initialDeposit);
         }
 
         const matches = initialDeposit.match(/^\{([1-9][0-9]?|100)%,(N|G)\}$/);
@@ -18,18 +21,25 @@ export const useCalculate = () => {
             const option = matches[2];
 
             if (option === 'G') {
-                return setCurrencyValue(tuitionFee * (percentage / 100) ?? 0);
+                return isNumber
+                    ? tuitionFee * (percentage / 100) ?? 0
+                    : setCurrencyValue(tuitionFee * (percentage / 100) ?? 0);
             } else if (option === 'N') {
-                return setCurrencyValue(
-                    Math.floor(
-                        tuitionFee * (percentage / 100) -
-                            tuitionFee * (parseInt(scholarship) / 100)
-                    ) ?? 0
-                );
+                return isNumber
+                    ? Math.floor(
+                          tuitionFee * (percentage / 100) -
+                              tuitionFee * (parseInt(scholarship) / 100)
+                      ) ?? 0
+                    : setCurrencyValue(
+                          Math.floor(
+                              tuitionFee * (percentage / 100) -
+                                  tuitionFee * (parseInt(scholarship) / 100)
+                          ) ?? 0
+                      );
             }
         }
 
-        return initialDeposit;
+        return isNumber ? 0 : initialDeposit;
     }
 
     return { initialDeposit };
