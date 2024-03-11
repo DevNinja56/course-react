@@ -27,7 +27,7 @@ const FavoriteButton: React.FC<propsType> = ({
     callback
 }) => {
     const [isActive, setIsActive] = useState(isFav);
-    const { isAuthenticated } = useUserAuth();
+    const { isAuthenticated, user } = useUserAuth();
     const { updateModal } = useUi();
 
     const handleClick = () => {
@@ -36,22 +36,27 @@ const FavoriteButton: React.FC<propsType> = ({
             updateModal({ type: modalType.login_confirmation, state: {} });
             return;
         }
-        setIsActive((prev) => !prev);
 
-        fetchRequest({
-            url: isActive
-                ? API_ENDPOINTS.FAVORITE_DELETE
-                : API_ENDPOINTS.FAVORITE,
-            type: 'post',
-            body
-        })
-            .catch((err) => {
-                setIsActive((prev) => !prev);
-                toast.error(err.response.data.message);
+        if (user.status == 'active') {
+            setIsActive((prev) => !prev);
+
+            fetchRequest({
+                url: isActive
+                    ? API_ENDPOINTS.FAVORITE_DELETE
+                    : API_ENDPOINTS.FAVORITE,
+                type: 'post',
+                body
             })
-            .then(() => {
-                callback?.();
-            });
+                .catch((err) => {
+                    setIsActive((prev) => !prev);
+                    toast.error(err?.response?.data?.message);
+                })
+                .then(() => {
+                    callback?.();
+                });
+        } else {
+            toast.error('Your are not an active user..');
+        }
     };
 
     return (

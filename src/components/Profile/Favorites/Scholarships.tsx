@@ -23,9 +23,9 @@ const Scholarships = () => {
                 ) : (
                     data?.map(({ scholarship }) => (
                         <FavCard
-                            key={'scholarship-institute--' + scholarship.id}
-                            id={scholarship.id}
-                            title={scholarship.name}
+                            key={'scholarship-institute--' + scholarship?.id}
+                            id={scholarship?.id}
+                            title={scholarship?.name}
                             image={'/images/Scholarships/scholarship.jpg'}
                             type="scholarship"
                             link={ROUTES.FILTER_COURSE}
