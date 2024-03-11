@@ -2,7 +2,6 @@ import Button from '@/components/Button';
 import FavoriteButton from '@/components/Button/FavoriteButton';
 import ScreenLoader from '@/components/Loader/ScreenLoader';
 import Tabs from '@/components/Tabs';
-import CourseTag from '@/components/course/CourseTag';
 import { API_ENDPOINTS } from '@/config/Api_EndPoints';
 import { ROUTES } from '@/config/constant';
 import { useUi } from '@/hooks/user-interface';
@@ -13,10 +12,8 @@ import { GetServerSideProps } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
-import { BiSolidCalendar } from 'react-icons/bi';
-import { CiCalculator2 } from 'react-icons/ci';
 import { FaCalendar, FaMoneyBillWave } from 'react-icons/fa6';
-import { GiOpenBook, GiTrophy } from 'react-icons/gi';
+import { GiTrophy } from 'react-icons/gi';
 import { GoClockFill } from 'react-icons/go';
 import { IoShareSocialSharp } from 'react-icons/io5';
 
@@ -67,7 +64,7 @@ const CourseDetail = ({ data: scholarship }: { data: scholarshipType }) => {
                     <div className="flex items-center w-full xl:container px-4 md:px-[50px] lg:px-2 2xl:px-8 mx-auto transition-all duration-300 flex-col gap-6 mb-32">
                         <div className="w-full flex flex-wrap gap-2 gap-y-4 md:gap-y-8 justify-between">
                             <h1 className="text-mainTextColor text-xl md:text-3xl font-bold">
-                                {scholarship?.name}
+                                {`${scholarship?.name} - ${scholarship?.amount}`}
                             </h1>
                             <div className="flex pr-0">
                                 <div className="flex flex-wrap items-center gap-1 md:gap-2 lg:gap-3">
@@ -75,15 +72,14 @@ const CourseDetail = ({ data: scholarship }: { data: scholarshipType }) => {
                                         {scholarship?.type}
                                     </button>
                                     <button className="rounded-[20px] py-2 px-3 md:px-4 text-xs md:text-sm border-2 border-white hover:border-blueColor text-white hover:text-blueColor bg-blueColor hover:bg-white flex gap-2 items-center">
-                                        {scholarship?.institute.sector}
-                                        <CiCalculator2 />
+                                        {scholarship?.institute?.sector}
                                     </button>
                                     <FavoriteButton
                                         isActive={
                                             !!scholarship?.favoriteId?.[0]
                                         }
                                         body={{
-                                            scholarship: scholarship.id
+                                            scholarship: scholarship._id
                                         }}
                                         className="h-8 w-8 md:h-10 md:w-10 rounded-full flex items-center justify-center border-2 border-white bg-heartBgColor hover:bg-white group"
                                         iconClass={`text-3xl text-white group-hover:text-red-600`}
@@ -94,7 +90,7 @@ const CourseDetail = ({ data: scholarship }: { data: scholarshipType }) => {
                                                 type: modalType.share_modal,
                                                 state: {
                                                     name: 'scholarship',
-                                                    id: scholarship.id
+                                                    id: scholarship._id
                                                 }
                                             })
                                         }
@@ -106,7 +102,7 @@ const CourseDetail = ({ data: scholarship }: { data: scholarshipType }) => {
                             </div>
                         </div>
                         <div className="flex flex-col lg:flex-row gap-0 xl:gap-16 w-full justify-between">
-                            <div className="bg-white w-full lg:w-[70%] xl:w-2/3 h-courseStickyHeight static lg:sticky top-[110px] no-scrollbar mb-0 md:mb-0 lg:mb-96">
+                            <div className="w-full lg:w-[70%] xl:w-2/3 h-courseStickyHeight static lg:sticky top-[110px] no-scrollbar mb-0 md:mb-0 lg:mb-96">
                                 <div className=" transition-all duration-300">
                                     <div className="flex flex-col gap-y-6 mb-16 md:mb-20">
                                         <div className="tabs-container capitalize">
@@ -121,22 +117,37 @@ const CourseDetail = ({ data: scholarship }: { data: scholarshipType }) => {
                                                                     Criteria
                                                                 </h3>
                                                                 <div className="content text-sm md:text-base">
-                                                                    test
+                                                                    {
+                                                                        scholarship.type
+                                                                    }
                                                                 </div>
                                                             </div>
                                                         )
                                                     },
                                                     {
-                                                        title: 'Application Status',
+                                                        title: 'Degrees Offered',
                                                         element: (
                                                             <div className="flex flex-col gap-8">
                                                                 <h3 className="text-black text-lg md:text-2xl font-bold">
-                                                                    Application
-                                                                    Status
+                                                                    Degree List
                                                                 </h3>
-                                                                <p className="text-sm md:text-base">
-                                                                    test
-                                                                </p>
+                                                                {scholarship?.degree?.map(
+                                                                    (
+                                                                        degree
+                                                                    ) => (
+                                                                        <p
+                                                                            className="text-sm md:text-base"
+                                                                            key={
+                                                                                'scholarship-degree--' +
+                                                                                degree.id
+                                                                            }
+                                                                        >
+                                                                            {
+                                                                                degree.name
+                                                                            }
+                                                                        </p>
+                                                                    )
+                                                                )}
                                                             </div>
                                                         )
                                                     },
@@ -148,7 +159,9 @@ const CourseDetail = ({ data: scholarship }: { data: scholarshipType }) => {
                                                                     Amount
                                                                 </h3>
                                                                 <p className="text-sm md:text-base">
-                                                                    test
+                                                                    {
+                                                                        scholarship.amount
+                                                                    }
                                                                 </p>
                                                             </div>
                                                         )
@@ -163,8 +176,8 @@ const CourseDetail = ({ data: scholarship }: { data: scholarshipType }) => {
                                         </h1>
                                         <Link
                                             href={
-                                                scholarship.institute
-                                                    .instituteURL
+                                                scholarship?.institute
+                                                    ?.instituteURL
                                             }
                                             target="_blank"
                                             className="text-blueColor text-xs md:text-base"
@@ -188,7 +201,7 @@ const CourseDetail = ({ data: scholarship }: { data: scholarshipType }) => {
                                             }
                                             priority
                                         />
-                                        <h1 className="text-center font-bold text-2xl text-white z-10">
+                                        <h1 className="absolute w-full bottom-0 left-0 py-2 px-5 bg-gradient-to-t from-blueColor text-center font-bold text-2xl text-white z-10  ">
                                             {scholarship.institute.name}
                                         </h1>
                                     </div>
@@ -197,7 +210,7 @@ const CourseDetail = ({ data: scholarship }: { data: scholarshipType }) => {
                                             About
                                         </h1>
                                         <p className="text-[13px] text-lightGrayColor mb-2">
-                                            {scholarship.institute.description.slice(
+                                            {scholarship.institute?.description.slice(
                                                 0,
                                                 200
                                             )}
@@ -208,7 +221,7 @@ const CourseDetail = ({ data: scholarship }: { data: scholarshipType }) => {
                                             <Link
                                                 href={
                                                     scholarship.institute
-                                                        .instituteURL
+                                                        ?.instituteURL
                                                 }
                                                 target="_blank"
                                                 className="text-blueColor font-bold"
@@ -224,18 +237,18 @@ const CourseDetail = ({ data: scholarship }: { data: scholarshipType }) => {
                                                 link={ROUTES.APPLY}
                                             />
 
-                                            <Button
+                                            {/* <Button
                                                 className="py-3 rounded-md text-sm font-semibold"
                                                 text="Compare"
                                                 link={{
                                                     pathname: ROUTES.COMPARE,
                                                     query: {
                                                         scholarship_id:
-                                                            scholarship.id
+                                                            scholarship._id
                                                     }
                                                 }}
                                                 variant="outline"
-                                            />
+                                            /> */}
                                         </div>
                                     </div>
                                 </div>
@@ -260,12 +273,13 @@ const CourseDetail = ({ data: scholarship }: { data: scholarshipType }) => {
                                                     Level
                                                 </p>
                                                 <p className="text-lightGrayColor text-base">
-                                                    {scholarship.degrees
-                                                        .map(
+                                                    {scholarship?.degree
+                                                        ?.map(
                                                             (degree) =>
-                                                                degree.name
+                                                                degree.type
                                                         )
-                                                        .join('-')}
+                                                        ?.join('-') ??
+                                                        'No Level Found'}
                                                 </p>
                                             </div>
                                         </div>
@@ -316,7 +330,7 @@ const CourseDetail = ({ data: scholarship }: { data: scholarshipType }) => {
                                             link={ROUTES.APPLY}
                                         />
                                     </div>
-                                    <div className="w-full">
+                                    {/* <div className="w-full">
                                         <Button
                                             className="py-4 rounded-md text-base font-semibold w-full"
                                             text="Compare"
@@ -324,14 +338,14 @@ const CourseDetail = ({ data: scholarship }: { data: scholarshipType }) => {
                                                 pathname: ROUTES.COMPARE,
                                                 query: {
                                                     scholarship_id:
-                                                        scholarship.id
+                                                        scholarship._id
                                                 }
                                             }}
                                             variant="outline"
                                         />
-                                    </div>
+                                    </div> */}
                                 </div>
-                                <CourseTag
+                                {/* <CourseTag
                                     icon={
                                         <BiSolidCalendar className="h-7 w-7" />
                                     }
@@ -342,7 +356,7 @@ const CourseDetail = ({ data: scholarship }: { data: scholarshipType }) => {
                                     icon={<GiOpenBook className="h-7 w-7" />}
                                     text="Mode of Study"
                                     tagName="Full Time"
-                                />
+                                /> */}
                             </div>
                         </div>
                     </div>
@@ -361,6 +375,7 @@ export const getServerSideProps: GetServerSideProps<{
             ':id',
             context.query?.id as string
         )}`;
+        console.log({ id });
         data = await getSsrRequest(id, context);
         return { props: { data } };
     } catch (error) {

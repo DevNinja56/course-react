@@ -61,23 +61,23 @@ export type resetForm = {
 };
 
 export type scholarshipType = {
-    image: string;
+    _id: string;
+    id: string;
     name: string;
-    description: string;
+    image: string;
     amount: string;
+    description: string;
     type: string;
     intakeYear: string;
     applicable: string;
     startDate: string;
     endDate: string;
     institute: instituteType;
-    country: countryType;
-    favoriteId: string[];
+    degree: degreeType[];
+    course: courseType | null;
     createdAt: string;
     updatedAt: string;
-    degrees: degreeType[];
-    region: string;
-    id: string;
+    favoriteId: userType[];
 };
 
 export type filterScholarShipType = {
@@ -91,7 +91,7 @@ export type filterScholarShipType = {
     startDate: string;
     endDate: string;
     institute: instituteType;
-    degree: degreeType;
+    degree: degreeType | degreeType[];
     region: string;
     country: countryType;
     favoriteId: userType[];
@@ -159,7 +159,7 @@ export type instituteType = {
     location: string;
     campus: string[];
     country: countryType;
-    degrees: scholarshipType[];
+    degrees: degreeType[];
     course: courseType[];
     qsWorldRanking: string;
     timesHigherRanking: string;
