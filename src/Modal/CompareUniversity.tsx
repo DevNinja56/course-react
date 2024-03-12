@@ -319,14 +319,16 @@ const CompareUniversityModal = () => {
                     //     label: name,
                     //     value: id
                     // }))}
-                    options={
-                        data?.course
-                            ?.filter(course => course.specialization?.[0].id === compareData?.specialization?.id)
-                            .map(({ name, id }) => ({
-                                label: name,
-                                value: id
-                            }))
-                    }
+                    options={data?.course
+                        ?.filter(
+                            (course) =>
+                                course.specialization?.[0].id ===
+                                compareData?.specialization?.id
+                        )
+                        .map(({ name, id }) => ({
+                            label: name,
+                            value: id
+                        }))}
                     onChange={(e) => {
                         setCompareData({
                             ...compareData,
