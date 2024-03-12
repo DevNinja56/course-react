@@ -14,9 +14,12 @@ const nextConfig = {
             'd31cuupyjbe4e1.cloudfront.net',
             'seekvectorlogo.com',
             'course-options-assets.s3.ap-south-1.amazonaws.com',
-            "studentconnect.org",
+            'studentconnect.org',
             'assets.jigsaw24.com',
-            'images.unsplash.com'
+            'images.unsplash.com',
+            'logowik.com',
+            'accessable.s3.eu-west-2.amazonaws.com',
+            'img.favpng.com'
         ]
     }
 };

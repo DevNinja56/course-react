@@ -35,7 +35,7 @@ const Card = ({ discipline }: CardProps) => {
                     height={165}
                     width={276}
                     alt="main-img"
-                    className="rounded-[10px] rounded-b-none w-full"
+                    className="rounded-[10px] rounded-b-none w-full h-40"
                     src={discipline.image}
                     priority
                 />
@@ -50,7 +50,7 @@ const Card = ({ discipline }: CardProps) => {
             </Link>
             <div className="py-3">
                 <div
-                    className="py-3 px-[15px] flex items-center justify-between hover:justify-start cursor-pointer gap-x-1 transition-all duration-300 hover:bg-profileBgColor text-mainTextColor hover:text-blueColor  relative "
+                    className="py-3 px-[15px] flex items-center justify-between hover:justify-start cursor-pointer gap-x-1 transition-all duration-300 hover:bg-profileBgColor text-mainTextColor hover:text-blueColor relative"
                     onClick={() =>
                         setOpen((prev) => ({
                             ...prev,
@@ -74,7 +74,7 @@ const Card = ({ discipline }: CardProps) => {
                     <BiChevronRight className="text-2xl" />
                 </div>
                 <div
-                    className="py-3 px-[15px] flex items-center justify-between hover:justify-start cursor-pointer gap-x-1 transition-all duration-300 hover:bg-profileBgColor text-mainTextColor hover:text-blueColor relative "
+                    className="py-3 px-[15px] flex items-center justify-between hover:justify-start cursor-pointer gap-x-1 transition-all duration-300 hover:bg-profileBgColor text-mainTextColor hover:text-blueColor relative"
                     onClick={() =>
                         setOpen((prev) => ({
                             ...prev,

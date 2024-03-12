@@ -8,7 +8,9 @@ interface propTypes {
 
 const Tag = ({ icon, text, className }: propTypes) => {
     return (
-        <div className={`w-[50%] h-20 py-5 px-2 flex flex-col gap-1.5 items-center border-t-2 border-borderColor ${className}`}>
+        <div
+            className={`w-full h-20 py-5 px-2 flex flex-col gap-1.5 items-center border border-borderColor ${className}`}
+        >
             {icon}
             <p className="text-xs text-blueColor text-center">{text}</p>
         </div>
