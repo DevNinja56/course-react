@@ -215,10 +215,10 @@ const FileSubmitted = () => {
                         </span>
                     </p>
                     <form
-                        className="flex flex-col gap-2 pt-1 "
+                        className="flex flex-col pt-1 "
                         onSubmit={handleSubmit(onSubmit)}
                     >
-                        <label className="font-bold text-gray-600">
+                        <label className="font-bold text-gray-600 pt-2">
                             Passport Number
                         </label>
                         <InputBox
@@ -231,7 +231,7 @@ const FileSubmitted = () => {
                             className="p-0 border-blueColor"
                             customInputClass="px-2 py-[10px] text-[15px] w-full rounded-md outline-none placeholder:text-sm"
                         />
-                        <label className="font-bold text-gray-600">
+                        <label className="font-bold text-gray-600  pt-2">
                             Surname
                         </label>
                         <InputBox
@@ -244,7 +244,7 @@ const FileSubmitted = () => {
                             className="p-0"
                             customInputClass="px-2 py-[10px] text-[15px] w-full rounded-md outline-none placeholder:text-sm"
                         />
-                        <label className="font-bold text-gray-600">
+                        <label className="font-bold text-gray-600 pt-2">
                             Given Name
                         </label>
                         <InputBox
@@ -257,7 +257,7 @@ const FileSubmitted = () => {
                             className="p-0"
                             customInputClass="px-2 py-[10px] text-[15px] w-full rounded-md outline-none placeholder:text-sm"
                         />
-                        <label className="font-bold text-gray-600">
+                        <label className="font-bold text-gray-600 pt-2">
                             Date Of Issue
                         </label>
                         <InputBox
@@ -271,7 +271,7 @@ const FileSubmitted = () => {
                             className="p-0"
                             customInputClass="px-2 py-[10px] text-[15px] w-full rounded-md outline-none placeholder:text-sm"
                         />
-                        <label className="font-bold text-gray-600">
+                        <label className="font-bold text-gray-600 pt-2">
                             Date Of Expiry
                         </label>
                         <InputBox
