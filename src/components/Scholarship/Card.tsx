@@ -52,9 +52,13 @@ const Card: React.FC<propsType> = ({ scholarship }) => {
                         />
                         <Tag
                             icon={
-                                <RiGraduationCapFill className="h-5 w-5 text-blueColor" />
+                                <RiGraduationCapFill className="min-h-5 min-w-5 text-blueColor" />
                             }
-                            text={degree?.name ?? 'No degree'}
+                            text={
+                                Array.isArray(degree)
+                                    ? degree?.map((d) => d.name).join(', ')
+                                    : degree?.name ?? 'No degree'
+                            }
                         />
                         <Tag
                             className="border-r-2"
