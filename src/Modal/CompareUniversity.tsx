@@ -230,6 +230,8 @@ const CompareUniversityModal = () => {
                     }))}
                     onChange={(e) => {
                         fetchAndSetData(
+                            // `${API_ENDPOINTS.COURSE_DEGREE_ID}/${e?.value}`,
+                            // 'degreeLevel'
                             API_ENDPOINTS.SPECIALIZATION.replace(
                                 ':id',
                                 e?.value ?? ''
