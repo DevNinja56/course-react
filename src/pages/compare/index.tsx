@@ -8,11 +8,15 @@ import { GetServerSideProps } from 'next';
 import { singleCourseType } from '@/types';
 import { API_ENDPOINTS } from '@/config/Api_EndPoints';
 import { getSsrRequest } from '@/utils/ssrRequest';
-import { calculateInitialDeposit } from '@/utils/get-initial-deposit';
+import { getMonths } from '@/utils/get-months';
+import { useCurrency } from '@/hooks/currency';
+import { useCalculate } from '@/hooks/initial-deposit-calculate';
 
 const Compare = ({ data }: { data?: singleCourseType }) => {
     const { first, second, third, compareFirst, compareSecond, compareThird } =
         useCompare();
+    const { setCurrencyValue } = useCurrency();
+    const { initialDeposit } = useCalculate();
 
     useEffect(() => {
         if (data) {
@@ -92,9 +96,9 @@ const Compare = ({ data }: { data?: singleCourseType }) => {
                 },
                 {
                     title: 'Campus',
-                    first: first?.institute?.campus,
-                    second: second?.institute?.campus,
-                    third: third?.institute?.campus
+                    first: first?.institute?.campus.join(' | '),
+                    second: second?.institute?.campus.join(' | '),
+                    third: third?.institute?.campus.join(' | ')
                 }
             ]
         },
@@ -127,45 +131,52 @@ const Compare = ({ data }: { data?: singleCourseType }) => {
                 },
                 {
                     title: 'Duration',
-                    first: first?.course?.monthDuration,
-                    second: second?.course?.monthDuration,
-                    third: third?.course?.monthDuration
-                },
-                {
-                    title: 'Initial Deposit',
-                    first: first
-                        ? calculateInitialDeposit(
-                              first?.course.initialDeposit[0].amount,
-                              first?.course.tuitionFee,
-                              first?.course.scholarship.amount
-                          )
-                        : null,
-                    second: second
-                        ? calculateInitialDeposit(
-                              second?.course.initialDeposit[0].amount,
-                              second?.course.tuitionFee,
-                              second?.course.scholarship.amount
-                          )
-                        : null,
-                    third: third
-                        ? calculateInitialDeposit(
-                              third?.course.initialDeposit[0].amount,
-                              third?.course.tuitionFee,
-                              third?.course.scholarship.amount
-                          )
-                        : null
-                },
-                {
-                    title: 'Yearly fee',
-                    first: first?.course.tuitionFee,
-                    second: second?.course.tuitionFee,
-                    third: third?.course.tuitionFee
+                    first: getMonths(first?.course?.monthDuration ?? []),
+                    second: getMonths(second?.course?.monthDuration ?? []),
+                    third: getMonths(third?.course?.monthDuration ?? [])
                 },
                 {
                     title: 'Intake',
                     first: first?.course.intakes.join(' , '),
                     second: second?.course.intakes.join(' , '),
                     third: third?.course.intakes.join(' , ')
+                },
+                {
+                    title: 'Initial Deposit',
+                    first: first
+                        ? initialDeposit(
+                              first?.course.initialDeposit[0].amount,
+                              first?.course.tuitionFee,
+                              first?.course.scholarship[0].amount ?? 0
+                          )
+                        : null,
+                    second: second
+                        ? initialDeposit(
+                              second?.course.initialDeposit[0].amount,
+                              second?.course.tuitionFee,
+                              second?.course.scholarship[0].amount ?? 0
+                          )
+                        : null,
+                    third: third
+                        ? initialDeposit(
+                              third?.course.initialDeposit[0].amount,
+                              third?.course.tuitionFee,
+                              third?.course.scholarship[0].amount ?? 0
+                          )
+                        : null
+                },
+                {
+                    title: 'Yearly fee',
+                    first: first?.course.tuitionFee
+                        ? setCurrencyValue(first?.course.tuitionFee ?? 0)
+                        : null,
+
+                    second: second?.course.tuitionFee
+                        ? setCurrencyValue(second?.course.tuitionFee ?? 0)
+                        : null,
+                    third: third?.course.tuitionFee
+                        ? setCurrencyValue(third?.course.tuitionFee ?? 0)
+                        : null
                 }
             ]
         },

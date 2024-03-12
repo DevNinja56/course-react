@@ -1,55 +1,37 @@
-/* eslint-disable @next/next/no-img-element */
 import { ROUTES } from '@/config/constant';
-import {
-    countryType,
-    degreeType,
-    disciplineType,
-    instituteType
-} from '@/types';
+import { filterScholarShipType } from '@/types';
 import Link from 'next/link';
 import React from 'react';
 import FavoriteButton from '../Button/FavoriteButton';
 import { FaMapMarkerAlt } from 'react-icons/fa';
-import Certificate from '../Institute/icons/Certificate';
 import { RiGraduationCapFill } from 'react-icons/ri';
 import School from '../Institute/icons/School';
 import Tag from '../Institute/Tag';
 import Image from 'next/image';
+import { MdOutlinePriceChange } from 'react-icons/md';
+// import Certificate from '../Institute/icons/Certificate';
 
 interface propsType {
-    id: string;
-    favoriteId?: string[];
-    name: string;
-    type: string;
-    degrees: degreeType[];
-    institute: instituteType;
-    discipline: disciplineType[];
-    country: countryType;
+    scholarship: filterScholarShipType;
 }
 
-const Card: React.FC<propsType> = ({
-    id,
-    favoriteId,
-    name,
-    type,
-    degrees,
-    institute,
-    discipline,
-    country
-}) => {
+const Card: React.FC<propsType> = ({ scholarship }) => {
+    const { name, type, degree, institute, country, amount } = scholarship;
     return (
-        <div className="relative pt-7 shadow-md rounded-lg group hover:-translate-y-2 transition-all duration-500 cursor-pointer flex flex-col border border-gray-100 min-h-[203px]">
+        <div className="relative pt-7 shadow-md rounded-lg group hover:-translate-y-2 transition-all duration-500 cursor-pointer flex flex-col border border-gray-100 capitalize ">
             <FavoriteButton
-                isActive={!!favoriteId?.[0]}
-                body={{ scholarship: id }}
+                isActive={!!scholarship?.favoriteId?.[0]}
+                body={{ scholarship: scholarship?._id }}
             />
-            <Link href={ROUTES.SCHOLARSHIP.replace(':id', id)}>
+            <Link href={ROUTES.SCHOLARSHIP.replace(':id', scholarship?._id)}>
                 <div className="flex flex-col gap-5 w-full z-10">
                     <div className="w-full">
                         <Image
                             src="/images/Scholarships/scholarship (1) 1.png"
                             alt="image"
                             className="mx-auto"
+                            width={100}
+                            height={100}
                         />
                     </div>
                     <div className="flex items-center w-full justify-between gap-2 pb-2 px-4 text-center">
@@ -70,16 +52,20 @@ const Card: React.FC<propsType> = ({
                         />
                         <Tag
                             icon={
-                                <RiGraduationCapFill className="h-5 w-5 text-blueColor" />
+                                <RiGraduationCapFill className="min-h-5 min-w-5 text-blueColor" />
                             }
-                            text={degrees.map((item) => item.name).join()}
+                            text={
+                                Array.isArray(degree)
+                                    ? degree?.map((d) => d.name).join(', ')
+                                    : degree?.name ?? 'No degree'
+                            }
                         />
                         <Tag
                             className="border-r-2"
                             icon={
-                                <Certificate className="h-5 w-5 text-blueColor" />
+                                <MdOutlinePriceChange className="h-5 w-5 text-blueColor" />
                             }
-                            text={discipline.map((item) => item.name).join()}
+                            text={amount}
                         />
                         <Tag
                             icon={

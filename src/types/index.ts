@@ -61,23 +61,23 @@ export type resetForm = {
 };
 
 export type scholarshipType = {
-    image: string;
+    _id: string;
+    id: string;
     name: string;
-    description: string;
+    image: string;
     amount: string;
+    description: string;
     type: string;
     intakeYear: string;
     applicable: string;
     startDate: string;
     endDate: string;
     institute: instituteType;
-    country: countryType;
-    favoriteId: string[];
+    degree: degreeType[];
+    course: courseType | null;
     createdAt: string;
     updatedAt: string;
-    degrees: degreeType[];
-    region: string;
-    id: string;
+    favoriteId: userType[];
 };
 
 export type filterScholarShipType = {
@@ -85,15 +85,16 @@ export type filterScholarShipType = {
     name: string;
     image: string;
     type: string;
+    amount: string;
     intakeYear: string;
     applicable: string;
     startDate: string;
     endDate: string;
-    degrees: degreeType[];
     institute: instituteType;
+    degree: degreeType | degreeType[];
+    region: string;
     country: countryType;
-    discipline: disciplineType[];
-    favoriteId?: string[];
+    favoriteId: userType[];
 };
 
 export type scholarshipFiltersType = {
@@ -109,9 +110,9 @@ export type scholarshipFiltersType = {
     degrees: {
         degree: degreeType;
     }[];
-    disciplines: {
-        discipline: string;
-    }[];
+    // disciplines: {
+    //     discipline: string;
+    // }[];
     scholarship_types: {
         type: string;
     }[];
@@ -131,8 +132,6 @@ export type countryType = {
 export type degreeType = {
     name: string;
     type: string;
-    course: courseType[];
-    scholarship: scholarshipType[];
     createdAt: string;
     updatedAt: string;
     id: string;
@@ -158,10 +157,9 @@ export type instituteType = {
     sector: string;
     establishedYear: number;
     location: string;
-    campus: string;
+    campus: string[];
     country: countryType;
-    scholarship: scholarshipType[];
-    discipline: disciplineType[];
+    degrees: degreeType[];
     course: courseType[];
     qsWorldRanking: string;
     timesHigherRanking: string;
@@ -234,7 +232,6 @@ export type singleCourseType = {
     delivery: string;
     availableCampuses: string[];
     feeCurrency: string;
-    scholarship: scholarshipType;
     favoriteId: string[];
     name: string;
     logo: string;
@@ -249,6 +246,7 @@ export type singleCourseType = {
     region: string;
     createdAt: string;
     updatedAt: string;
+    scholarship: scholarshipType[];
     language: [
         {
             language: courseLanguageRequirement;

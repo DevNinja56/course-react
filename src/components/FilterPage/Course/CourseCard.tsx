@@ -4,9 +4,9 @@ import { courseType } from '@/types';
 import Link from 'next/link';
 import React from 'react';
 import FavoriteButton from '../../Button/FavoriteButton';
-import { getCurrencySymbol, setCurrencyValue } from '@/utils/currencyValue';
 import { LuMapPin } from 'react-icons/lu';
 import { CiCalendarDate } from 'react-icons/ci';
+import { useCurrency } from '@/hooks/currency';
 
 interface CardProps {
     course: courseType;
@@ -15,6 +15,8 @@ interface CardProps {
 const CourseCard = ({ course }: CardProps) => {
     const { country, institute, degree, logo, _id, name, tuitionFee, intakes } =
         course;
+
+    const { getCurrencySymbol, setCurrencyValue } = useCurrency();
 
     return (
         <div
