@@ -29,7 +29,7 @@ import { useCalculate } from '@/hooks/initial-deposit-calculate';
 
 const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
     const { updateModal } = useUi();
-    const { setCurrencyValue } = useCurrency();
+    const { setCurrencyValue, getSingleRate } = useCurrency();
     const { initialDeposit } = useCalculate();
 
     const openUserDetailModal = (courseId: string) => {
@@ -38,6 +38,8 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
             state: { courseId }
         });
     };
+
+    const rate = getSingleRate(course.feeCurrency);
 
     return (
         <>
@@ -275,7 +277,10 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                                                                 </h3>
                                                                 <p className="text-sm md:text-base">
                                                                     {setCurrencyValue(
-                                                                        course.tuitionFee
+                                                                        course.tuitionFee *
+                                                                            (rate?.base_rate
+                                                                                ? +rate?.base_rate
+                                                                                : 1)
                                                                     )}
                                                                 </p>
                                                             </div>
@@ -471,7 +476,10 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                                                 </p>
                                                 <p className="text-lightGrayColor text-base">
                                                     {setCurrencyValue(
-                                                        course.tuitionFee
+                                                        course.tuitionFee *
+                                                            (rate?.base_rate
+                                                                ? +rate?.base_rate
+                                                                : 1)
                                                     )}
                                                 </p>
                                             </div>
