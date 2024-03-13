@@ -44,7 +44,7 @@ const ProgramSection = () => {
                                     }
                                     className={`py-3 px-5 md:px-7 text-sm md:text-base rounded-3xl font-medium hover:bg-black hover:bg-opacity-5 transition-all duration-500 ${
                                         selectedProgram === 'postgraduate'
-                                            ? 'text-white bg-blueColor shadow-md shadow-md hover:bg-opacity-50'
+                                            ? 'text-white bg-blueColor shadow-md hover:bg-opacity-50'
                                             : 'text-black bg-white shadow-md hover:bg-black hover:bg-opacity-5'
                                     }`}
                                 >
@@ -58,7 +58,7 @@ const ProgramSection = () => {
                                     }
                                     className={`py-3 px-5 md:px-7 text-sm md:text-base rounded-3xl font-medium ${
                                         selectedProgram === 'undergraduate'
-                                            ? 'text-white bg-blueColor shadow-md shadow-md hover:bg-opacity-50'
+                                            ? 'text-white bg-blueColor shadow-md hover:bg-opacity-50'
                                             : 'text-black bg-white shadow-md hover:bg-black hover:bg-opacity-5'
                                     }  transition-all duration-500`}
                                 >
@@ -67,7 +67,7 @@ const ProgramSection = () => {
                             </div>
                         </div>
                         {data && (
-                            <div className="grid grid-cols-2 md:grid-cols-3 gap-2 gap-y-4 md:gap-4">
+                            <div className="grid grid-cols-1 md:grid-cols-3 gap-2 gap-y-4 md:gap-4">
                                 {data?.data.map((item, i) => (
                                     <CourseCard
                                         key={'institute-course-card--' + i}
