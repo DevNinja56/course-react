@@ -16,6 +16,7 @@ import { fetchRequest } from '@/utils/axios/fetch';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { addFiles } from '@/store/slices/apply.slice';
+import { useGetApplyByIdQuery } from '@/store/slices/allRequests';
 
 interface formType {
     number: string;
@@ -44,6 +45,7 @@ const FileSubmitted = () => {
     const token = getToken();
     const router = useRouter();
     const { id } = router.query;
+    const { data: GetApply } = useGetApplyByIdQuery(id);
     const [isLoading, setIsLoading] = useState(false);
     const [fullFile, setFullFile] = useState('');
 
@@ -77,7 +79,7 @@ const FileSubmitted = () => {
     };
 
     const onSubmit = async (data: formType) => {
-        setIsLoading(true)
+        setIsLoading(true);
         const uploadResponse = await uploadFilesToApi(Files.passportFile);
         toast
             .promise(
@@ -85,7 +87,11 @@ const FileSubmitted = () => {
                     url: `${BASE_URL}${API_ENDPOINTS.APPLY_DOCUMENTS}/${id}`,
                     type: 'patch',
                     body: {
+                        ...GetApply,
+                        course: GetApply?.course.id,
+                        user: GetApply?.user.id,
                         documents: {
+                            ...GetApply?.documents,
                             identity: {
                                 passport: {
                                     url: uploadResponse,
@@ -201,7 +207,7 @@ const FileSubmitted = () => {
                     <span className="font-bold text-xl">
                         Fill in your details
                     </span>
-                    <p className="p-4 bg-white flex gap-2 items-center rounded-md mt-4">
+                    <p className="p-2 bg-white flex gap-2 items-center rounded-md mt-4">
                         <BiMessageRoundedError className="text-[4rem] text-blueColor" />
                         <span className="text-[15px] font-medium text-blueColor">
                             Add your details and get personalised tips to
@@ -209,9 +215,12 @@ const FileSubmitted = () => {
                         </span>
                     </p>
                     <form
-                        className="flex flex-col gap-4 pt-4 "
+                        className="flex flex-col pt-1 "
                         onSubmit={handleSubmit(onSubmit)}
                     >
+                        <label className="font-bold text-gray-600 pt-2">
+                            Passport Number
+                        </label>
                         <InputBox
                             {...register('number', {
                                 required: 'Passport is required'
@@ -222,6 +231,9 @@ const FileSubmitted = () => {
                             className="p-0 border-blueColor"
                             customInputClass="px-2 py-[10px] text-[15px] w-full rounded-md outline-none placeholder:text-sm"
                         />
+                        <label className="font-bold text-gray-600  pt-2">
+                            Surname
+                        </label>
                         <InputBox
                             {...register('sur_name', {
                                 required: 'Surname is required'
@@ -232,6 +244,9 @@ const FileSubmitted = () => {
                             className="p-0"
                             customInputClass="px-2 py-[10px] text-[15px] w-full rounded-md outline-none placeholder:text-sm"
                         />
+                        <label className="font-bold text-gray-600 pt-2">
+                            Given Name
+                        </label>
                         <InputBox
                             {...register('given_name', {
                                 required: 'Given Name is required'
@@ -242,6 +257,9 @@ const FileSubmitted = () => {
                             className="p-0"
                             customInputClass="px-2 py-[10px] text-[15px] w-full rounded-md outline-none placeholder:text-sm"
                         />
+                        <label className="font-bold text-gray-600 pt-2">
+                            Date Of Issue
+                        </label>
                         <InputBox
                             {...register('date_of_issue', {
                                 required: 'Date Of Issue is required'
@@ -253,6 +271,9 @@ const FileSubmitted = () => {
                             className="p-0"
                             customInputClass="px-2 py-[10px] text-[15px] w-full rounded-md outline-none placeholder:text-sm"
                         />
+                        <label className="font-bold text-gray-600 pt-2">
+                            Date Of Expiry
+                        </label>
                         <InputBox
                             {...register('date_of_expiry', {
                                 required: 'Date Of Expiry is required'

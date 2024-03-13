@@ -77,7 +77,7 @@ const ApplyOnline = () => {
         if (foundCourse) {
             setCourseIntakes(foundCourse?.intakes);
         }
-    }, [degree, course, institute]);
+    }, [degree, course, institute, intakes]);
 
     const handleSubmit = ({ name, email, phone_number, ...body }: formType) => {
         setIsLoading(true);

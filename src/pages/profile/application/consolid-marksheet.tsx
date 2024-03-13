@@ -18,6 +18,7 @@ import toast from 'react-hot-toast';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { addFiles } from '@/store/slices/apply.slice';
+import { useGetApplyByIdQuery } from '@/store/slices/allRequests';
 
 interface formType {
     startDate: string;
@@ -49,6 +50,7 @@ const ConSolid_MarkSheet = () => {
     const dispatch = useDispatch();
     const router = useRouter();
     const { id } = router.query;
+    const { data: GetApply } = useGetApplyByIdQuery(id);
     const token = getToken();
     const [isLoading, setIsLoading] = useState(false);
     const [fullFile, setFullFile] = useState('');
@@ -94,13 +96,17 @@ const ConSolid_MarkSheet = () => {
                     url: `${BASE_URL}${API_ENDPOINTS.APPLY_DOCUMENTS}/${id}`,
                     type: 'patch',
                     body: {
+                        ...GetApply,
+                        course: GetApply?.course.id,
+                        user: GetApply?.user.id,
                         documents: {
+                            ...GetApply?.documents,
                             academic_certificates: {
                                 consolidated_mark_sheets: {
                                     url: uploadResponse,
-                                    startDate: data.startDate,
-                                    completeDate: data.completeDate,
-                                    institution: data.institution,
+                                    date_of_start: data.startDate,
+                                    date_of_completion: data.completeDate,
+                                    institute: data.institution,
                                     country: data.country
                                 }
                             }
