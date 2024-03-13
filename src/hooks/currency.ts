@@ -1,5 +1,8 @@
 import { useAppDispatch, useAppSelector } from './store';
-import { fetchLatestRate } from '@/store/actions/getCurrencyRate';
+import {
+    fetchAllLatestRate,
+    fetchLatestRate
+} from '@/store/actions/getCurrencyRate';
 import { countryDataType } from '@/types';
 import {
     changeBaseCode,
@@ -18,6 +21,7 @@ export const useCurrency = () => {
     // `https://v6.exchangerate-api.com/v6/${apiKey}/latest/${code}`
 
     const fetchLatest = () => dispatch(fetchLatestRate());
+    const fetchAllLatest = () => dispatch(fetchAllLatestRate());
 
     const updateOldRates = (rates: { [key: string]: number }) =>
         dispatch(getLatestRates(rates));
@@ -57,6 +61,7 @@ export const useCurrency = () => {
     return {
         ...state,
         fetchLatestRates: fetchLatest,
+        fetchAllLatestRates: fetchAllLatest,
         updateBaseRate,
         updateBaseCode,
         updateOldRates,

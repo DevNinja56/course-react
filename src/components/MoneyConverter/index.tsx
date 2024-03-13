@@ -5,8 +5,14 @@ import React, { memo, useEffect, useState } from 'react';
 
 const CurrencyConverter = () => {
     const { updateModal } = useUi();
-    const { country, fetchLatestRates, updateGeoIp, geoIp, updateCountry } =
-        useCurrency();
+    const {
+        country,
+        fetchLatestRates,
+        updateGeoIp,
+        geoIp,
+        updateCountry,
+        fetchAllLatestRates
+    } = useCurrency();
     const [isChangedCurrency, setIsChangedCurrency] = useState(false);
 
     useEffect(() => {
@@ -21,6 +27,7 @@ const CurrencyConverter = () => {
         }
 
         fetchLatestRates();
+        fetchAllLatestRates();
     }, [country.code]);
 
     return (
