@@ -21,7 +21,7 @@ const SearchQueryBox = () => {
                     className="custom-shadow rounded-[10px] py-5 pl-[52px] outline-none text-base text-mainTextColor w-full lg:pr-[520px]"
                     value={value}
                     onChange={({ target }) => setValue(target.value)}
-                    placeholder="Type here"
+                    placeholder="Search by Institute name"
                 />
             </div>
             <button

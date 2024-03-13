@@ -10,7 +10,7 @@ export const formateCourseQuery = (query: { [key: string]: any }) => {
 
     if (query.searchFilter) {
         orConditions.push({
-            region: {
+            'institute.name': {
                 $regex: query.searchFilter[0],
                 $options: 'i'
             }
@@ -118,7 +118,7 @@ export const formateScholarshipQuery = (query: { [key: string]: any }) => {
 
     if (query.searchFilter) {
         orConditions.push({
-            region: {
+            'institute.name': {
                 $regex: query.searchFilter[0],
                 $options: 'i'
             }
