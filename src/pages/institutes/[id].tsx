@@ -35,7 +35,7 @@ const Institutes = ({ data: institute }: { data: instituteType }) => {
                             institute?.image ??
                             '/images/institute/instituteMain.png'
                         }
-                        className="w-full rounded-xl max-h-[375px] object-contain"
+                        className="w-full rounded-xl max-h-[375px]"
                         priority
                     />
                 </div>
@@ -58,7 +58,7 @@ const Institutes = ({ data: institute }: { data: instituteType }) => {
                                         height={92}
                                         width={92}
                                         alt="institute"
-                                        className="h-10 w-8 md:h-auto md:w-auto"
+                                        className="h-10 w-8 md:h-24 md:w-32"
                                         src={
                                             institute?.logo ??
                                             '/images/institute/university-of-portsmouth.svg'
@@ -116,7 +116,7 @@ const Institutes = ({ data: institute }: { data: instituteType }) => {
                             <ProgramSection />
                             <ScholarshipSection />
                         </div>
-                        <div className="w-1/3 hidden lg:flex flex-col gap-9 h-courseStickyHeight sticky top-[110px] no-scrollbar">
+                        <div className="w-1/3 hidden lg:flex flex-col gap-9 h-instituteStickyHeight sticky top-[110px] no-scrollbar">
                             <UniversityFacts data={institute} />
                             <Ranking data={institute} />
                         </div>

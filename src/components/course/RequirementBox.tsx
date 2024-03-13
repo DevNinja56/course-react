@@ -1,9 +1,10 @@
 import React from 'react';
-import { IoMdArrowForward } from 'react-icons/io';
+import { MdOutlineAddCircle } from 'react-icons/md';
+import { FaFileCircleCheck } from "react-icons/fa6";
 
 interface propTypes {
     text: string;
-    url: string;
+    url: string | undefined;
 }
 
 const RequirementBox = ({ text, url }: propTypes) => {
@@ -18,7 +19,11 @@ const RequirementBox = ({ text, url }: propTypes) => {
                 title={`Download ${text} file`}
                 className="h-12 w-12 rounded-md bg-profileBgColor flex items-center justify-center min-w-[48px]"
             >
-                <IoMdArrowForward className="text-blueColor h-8 w-8" />
+                {url ? (
+                    <FaFileCircleCheck className="text-blueColor h-8 w-8" />
+                ) : (
+                    <MdOutlineAddCircle className="text-blueColor h-8 w-8" />
+                )}
             </a>
         </div>
     );

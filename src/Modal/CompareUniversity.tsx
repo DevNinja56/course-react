@@ -77,36 +77,36 @@ const CompareUniversityModal = () => {
                               course: []
                           }
                         : // : field === 'discipline'
-                          //   ? {
-                          //         institute: prev.institute,
-                          //         discipline: data,
-                          //         degreeLevel: [],
-                          //         specialization: [],
-                          //         course: []
-                          //     }
-                          field === 'degreeLevel'
-                          ? {
-                                institute: prev.institute,
-                                //   discipline: prev.discipline,
-                                degreeLevel: data,
-                                specialization: [],
-                                course: []
-                            }
-                          : field === 'specialization'
-                            ? {
-                                  institute: prev.institute,
-                                  // discipline: prev.discipline,
-                                  degreeLevel: prev.degreeLevel,
-                                  specialization: data,
-                                  course: []
-                              }
-                            : {
-                                  institute: prev.institute,
-                                  // discipline: prev.discipline,
-                                  degreeLevel: prev.degreeLevel,
-                                  specialization: prev.specialization,
-                                  course: data
-                              }
+                        //   ? {
+                        //         institute: prev.institute,
+                        //         discipline: data,
+                        //         degreeLevel: [],
+                        //         specialization: [],
+                        //         course: []
+                        //     }
+                        field === 'degreeLevel'
+                        ? {
+                              institute: prev.institute,
+                              //   discipline: prev.discipline,
+                              degreeLevel: data,
+                              specialization: [],
+                              course: []
+                          }
+                        : field === 'specialization'
+                        ? {
+                              institute: prev.institute,
+                              // discipline: prev.discipline,
+                              degreeLevel: prev.degreeLevel,
+                              specialization: data,
+                              course: []
+                          }
+                        : {
+                              institute: prev.institute,
+                              // discipline: prev.discipline,
+                              degreeLevel: prev.degreeLevel,
+                              specialization: prev.specialization,
+                              course: data
+                          }
                 );
             })
             .finally(() => setIsLoading(false));
@@ -187,6 +187,35 @@ const CompareUniversityModal = () => {
                         });
                     }}
                 />
+                {/* <Select
+                    isSearchable
+                    name="discipline"
+                    isClearable={false}
+                    isLoading={isLoading}
+                    isDisabled={data?.discipline?.length < 1}
+                    placeholder="Select Discipline"
+                    options={data?.discipline?.map(({ name, id }) => ({
+                        label: name,
+                        value: id
+                    }))}
+                    onChange={(e) => {
+                        fetchAndSetData(
+                            API_ENDPOINTS.DEGREE_LEVELS_WITH_DISCIPLINE_ID.replace(
+                                ':id',
+                                e?.value ?? ''
+                            ),
+                            'degreeLevel'
+                        );
+                        setCompareData({
+                            ...compareData,
+                            discipline: data?.discipline
+                                ? data?.discipline?.filter(
+                                      ({ id }) => id === e?.value ?? ''
+                                  )[0]
+                                : null
+                        });
+                    }}
+                /> */}
                 {/* <Select
                     isSearchable
                     name="discipline"
@@ -350,10 +379,10 @@ const CompareUniversityModal = () => {
                         (index === 'first'
                             ? compareFirst(compareData)
                             : index === 'second'
-                              ? compareSecond(compareData)
-                              : index === 'third'
-                                ? compareThird(compareData)
-                                : null);
+                            ? compareSecond(compareData)
+                            : index === 'third'
+                            ? compareThird(compareData)
+                            : null);
                     hideModal();
                 }}
             />

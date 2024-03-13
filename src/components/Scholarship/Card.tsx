@@ -42,7 +42,7 @@ const Card: React.FC<propsType> = ({ scholarship }) => {
                             {name} ({type})
                         </h1>
                     </div>
-                    <div className="flex items-center flex-wrap w-full">
+                    <div className="grid grid-cols-2 w-full">
                         <Tag
                             className="border-r-2"
                             icon={

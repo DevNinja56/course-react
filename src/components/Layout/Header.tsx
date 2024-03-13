@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import ProfileDropDown from '../DropDown/ProfileDropDown';
 import Link from 'next/link';
 import Sidebar from '../Sidebar/Sidebar';
@@ -28,6 +28,8 @@ const Header = ({ onlyLogo }: { onlyLogo?: boolean }) => {
     const onShowDropDown = () => {
         setShowDropDown(!showDropDown);
     };
+
+    const dropDownRef = useRef<HTMLDivElement>(null);
 
     return (
         <header className={`w-full fixed top-0 z-40 print:static`}>
@@ -186,6 +188,7 @@ const Header = ({ onlyLogo }: { onlyLogo?: boolean }) => {
                             <div className="flex items-center gap-x-2 md:gap-x-6">
                                 {isAuthenticated ? (
                                     <div
+                                        ref={dropDownRef}
                                         className="flex items-center gap-x-3 relative select-none cursor-pointer "
                                         onClick={onShowDropDown}
                                     >
@@ -216,6 +219,7 @@ const Header = ({ onlyLogo }: { onlyLogo?: boolean }) => {
                                         <ProfileDropDown
                                             showDropDown={showDropDown}
                                             setShowDropDown={setShowDropDown}
+                                            dropDownRef={dropDownRef}
                                         />
                                     </div>
                                 ) : (

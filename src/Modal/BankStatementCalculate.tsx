@@ -33,7 +33,7 @@ const BankStatementCalculate = () => {
     let initialDepositValue = calculateDeposit(
         initialDeposit,
         tuitionFee,
-        scholarship.amount,
+        scholarship?.amount,
         true
     );
 

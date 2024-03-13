@@ -7,13 +7,13 @@ import CategoriesSection from '@/components/Home/CategoriesSection';
 const Home = () => {
     return (
         <>
-            <div className="w-full flex items-center mt-16 md:mt-[100px] bg-white pt-0 pb-0 lg:pt-20 lg:pb-40 relative overflow-hidden lg:overflow-visible xl:container 2xl:justify-center mx-auto">
+            <div className="w-full flex items-center mt-16 md:mt-[100px] bg-white pt-0 pb-0 lg:pt-20 lg:pb-40 relative overflow-hidden lg:overflow-visible 2xl:justify-center mx-auto">
                 <div className="h-10 w-10 md:h-28 md:w-28 rounded-full border-[10px] md:border-[20px] border-blueColor absolute top-[360px] md:top-20 right-2 md:right-[-50px] block lg:hidden"></div>
                 <Image
                     height={104}
                     width={104}
                     alt="home-round"
-                    className="absolute bottom-0 lg:top-64 left-0 hidden md:block w-24 h-24 lg:h-[104px] lg:w-[104px]"
+                    className="absolute bottom-0 top-64 lg:top-24 xl:top-64 -left-2 hidden md:block w-24 h-24 lg:h-[90px] lg:w-[90px]"
                     src="/images/Home/homeRound1.svg"
                     priority
                 />
@@ -25,10 +25,10 @@ const Home = () => {
                     src="/images/Home/homeRound2.svg"
                     priority
                 />
-                <div className="flex flex-col lg:flex-row justify-between z-10 w-full">
+                <div className="flex flex-col lg:flex-row justify-between z-10 w-full pl-0 xl:pl-16">
                     <div className="flex flex-col px-6 md:px-12 lg:px-0 lg:pl-4 lg:pr-40 xl:pr-12 pt-16 lg:pt-32">
                         <div className="pr-0 lg:pr-60 mb-5">
-                            <h1 className="text-mainTextColor text-[32px] md:text-[45px] font-black mb-2">
+                            <h1 className="text-mainTextColor text-[32px] md:text-[40px] xl:text-[45px] font-black mb-2">
                                 World&lsquo;s Largest Course Search Platform
                             </h1>
                             <p className="text-aboutUsTextColor text-base leading-6 aboutUsTextColor mb-5 font-normal">

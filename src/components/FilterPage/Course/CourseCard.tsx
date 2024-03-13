@@ -39,7 +39,7 @@ const CourseCard = ({ course }: CardProps) => {
                         className="h-[200px] w-full object-cover rounded-xl"
                     />
                 </div>
-                <div className="pt-3 pb-6 px-3 flex flex-col gap-7">
+                <div className="pt-3 pb-3 px-3 flex flex-col gap-7">
                     <div className="flex flex-col gap-2">
                         <h1
                             title={name}
