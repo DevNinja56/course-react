@@ -10,6 +10,7 @@ import GlobalSearch from './GlobalSearch';
 import Logo from '../Logo';
 import { CiUser } from 'react-icons/ci';
 import UnVerifiedUser from '../Banner/UnVerifiedUser';
+import UnActiveUser from '../Banner/UnActiveUser';
 import CurrencyConverter from '../MoneyConverter';
 import { SiSemanticscholar } from 'react-icons/si';
 
@@ -32,6 +33,7 @@ const Header = ({ onlyLogo }: { onlyLogo?: boolean }) => {
 
     return (
         <header className={`w-full fixed top-0 z-40 print:static`}>
+            {user.status == 'block' && <UnActiveUser />}
             {!onlyLogo ? (
                 <div className="bg-white">
                     <UnVerifiedUser />

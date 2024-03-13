@@ -6,24 +6,15 @@ export const formateCourseQuery = (query: { [key: string]: any }) => {
         $match: {}
     };
     let sort: any;
-
     const orConditions = [];
 
     if (query.searchFilter) {
-        orConditions.push(
-            {
-                name: {
-                    $regex: query.searchFilter[0],
-                    $options: 'i'
-                }
-            },
-            {
-                'instituteId.name': {
-                    $regex: query.searchFilter[0],
-                    $options: 'i'
-                }
+        orConditions.push({
+            'institute.name': {
+                $regex: query.searchFilter[0],
+                $options: 'i'
             }
-        );
+        });
     }
 
     if (query.region) {
@@ -77,7 +68,10 @@ export const formateCourseQuery = (query: { [key: string]: any }) => {
     if (query.intakes) {
         orConditions.push({
             intakes: {
-                $regex: `${query.intakes?.map((set:string)=>set.replaceAll(",","|"))?.join('|')?.toLowerCase()}`,
+                $regex: `${query.intakes
+                    ?.map((set: string) => set.replaceAll(',', '|'))
+                    ?.join('|')
+                    ?.toLowerCase()}`,
                 $options: 'i'
             }
         });
@@ -123,20 +117,12 @@ export const formateScholarshipQuery = (query: { [key: string]: any }) => {
     const orConditions = [];
 
     if (query.searchFilter) {
-        orConditions.push(
-            {
-                name: {
-                    $regex: query.searchFilter[0],
-                    $options: 'i'
-                }
-            },
-            {
-                'instituteId.name': {
-                    $regex: query.searchFilter[0],
-                    $options: 'i'
-                }
+        orConditions.push({
+            'institute.name': {
+                $regex: query.searchFilter[0],
+                $options: 'i'
             }
-        );
+        });
     }
 
     if (query.region) {

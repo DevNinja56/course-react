@@ -10,13 +10,16 @@ import { API_ENDPOINTS } from '@/config/Api_EndPoints';
 import { getSsrRequest } from '@/utils/ssrRequest';
 import { getMonths } from '@/utils/get-months';
 import { useCurrency } from '@/hooks/currency';
+import { useUserAuth } from '@/hooks/auth';
 import { useCalculate } from '@/hooks/initial-deposit-calculate';
+import toast from 'react-hot-toast';
 
 const Compare = ({ data }: { data?: singleCourseType }) => {
     const { first, second, third, compareFirst, compareSecond, compareThird } =
         useCompare();
     const { setCurrencyValue } = useCurrency();
     const { initialDeposit } = useCalculate();
+    const { user } = useUserAuth();
 
     useEffect(() => {
         if (data) {
@@ -147,21 +150,21 @@ const Compare = ({ data }: { data?: singleCourseType }) => {
                         ? initialDeposit(
                               first?.course.initialDeposit[0].amount,
                               first?.course.tuitionFee,
-                              first?.course.scholarship[0].amount ?? 0
+                              first?.course.scholarship?.[0]?.amount ?? 0
                           )
                         : null,
                     second: second
                         ? initialDeposit(
                               second?.course.initialDeposit[0].amount,
                               second?.course.tuitionFee,
-                              second?.course.scholarship[0].amount ?? 0
+                              second?.course.scholarship?.[0]?.amount ?? 0
                           )
                         : null,
                     third: third
                         ? initialDeposit(
                               third?.course.initialDeposit[0].amount,
                               third?.course.tuitionFee,
-                              third?.course.scholarship[0].amount ?? 0
+                              third?.course.scholarship?.[0].amount ?? 0
                           )
                         : null
                 },
@@ -216,7 +219,13 @@ const Compare = ({ data }: { data?: singleCourseType }) => {
                                 {i === 0 && (
                                     <button
                                         onClick={() => {
-                                            window.print();
+                                            if(user.status === 'active') {
+                                                window.print();
+                                            }
+                                            else{
+                                                toast.error("You are not an active user.")
+                                            }
+                                          
                                         }}
                                         className="absolute top-[50%] translate-y-[-50%] right-3 bg-white px-2 py-1 rounded-md print:hidden flex gap-1 justify-center items-center font-bold hover:bg-opacity-80"
                                     >
