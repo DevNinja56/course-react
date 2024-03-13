@@ -20,7 +20,7 @@ interface ratesType {
     low_ask: string;
 }
 
-interface allCurrencyRates {
+export interface allCurrencyRates {
     currency: string;
     calculation: string;
     base_rate: string;

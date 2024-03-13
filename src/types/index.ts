@@ -183,6 +183,7 @@ export type courseType = {
     institute: instituteType;
     intakes: string[];
     tuitionFee: number;
+    feeCurrency: string;
     country: countryType;
     discipline: disciplineType[];
     countryDetails: {

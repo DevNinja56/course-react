@@ -1,24 +1,21 @@
 import { useAppDispatch, useAppSelector } from './store';
+import { fetchUserCountry } from '@/store/actions/getUserIp';
 import {
     fetchAllLatestRate,
     fetchLatestRate
 } from '@/store/actions/getCurrencyRate';
 import { countryDataType } from '@/types';
 import {
+    allCurrencyRates,
     changeBaseCode,
     changeBaseRate,
     changeCountry,
     getLatestRates
 } from '@/store/slices/currency.slice';
-import { fetchUserCountry } from '@/store/actions/getUserIp';
 
 export const useCurrency = () => {
     const state = useAppSelector((state) => state.currency);
     const dispatch = useAppDispatch();
-
-    // const { data } = useGetUserIpQuery();
-    // const apiKey = 'a52202833727fb095d0858b7';
-    // `https://v6.exchangerate-api.com/v6/${apiKey}/latest/${code}`
 
     const fetchLatest = () => dispatch(fetchLatestRate());
     const fetchAllLatest = () => dispatch(fetchAllLatestRate());
@@ -58,6 +55,12 @@ export const useCurrency = () => {
             .trim();
     }
 
+    function getSingleRate(code?: string): allCurrencyRates | undefined {
+        return state.rate_list.find(
+            (rate) => rate.code === code ?? state.base_code
+        );
+    }
+
     return {
         ...state,
         fetchLatestRates: fetchLatest,
@@ -68,6 +71,7 @@ export const useCurrency = () => {
         updateCountry,
         updateGeoIp,
         setCurrencyValue,
-        getCurrencySymbol
+        getCurrencySymbol,
+        getSingleRate
     };
 };

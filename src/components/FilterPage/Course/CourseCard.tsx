@@ -13,10 +13,21 @@ interface CardProps {
 }
 
 const CourseCard = ({ course }: CardProps) => {
-    const { country, institute, degree, logo, _id, name, tuitionFee, intakes } =
-        course;
+    const {
+        country,
+        institute,
+        degree,
+        logo,
+        _id,
+        name,
+        tuitionFee,
+        intakes,
+        feeCurrency
+    } = course;
 
-    const { getCurrencySymbol, setCurrencyValue } = useCurrency();
+    const { getCurrencySymbol, setCurrencyValue, getSingleRate } =
+        useCurrency();
+    const rate = getSingleRate(feeCurrency);
 
     return (
         <div
@@ -68,7 +79,12 @@ const CourseCard = ({ course }: CardProps) => {
                                     {getCurrencySymbol()}
                                 </span>
                                 <p className="text-[0.600rem] xl:text-[0.700rem]">
-                                    {setCurrencyValue(tuitionFee)}
+                                    {setCurrencyValue(
+                                        tuitionFee *
+                                            (rate?.base_rate
+                                                ? +rate?.base_rate
+                                                : 1)
+                                    )}
                                 </p>
                             </div>
                             <div className="flex flex-col items-center gap-1">
