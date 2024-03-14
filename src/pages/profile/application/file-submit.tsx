@@ -45,9 +45,49 @@ const FileSubmitted = () => {
     const token = getToken();
     const router = useRouter();
     const { id } = router.query;
-    const { data: GetApply } = useGetApplyByIdQuery(id);
+    const { data: getApply } = useGetApplyByIdQuery(id);
     const [isLoading, setIsLoading] = useState(false);
     const [fullFile, setFullFile] = useState('');
+
+    const consolidated_mark_sheets = {
+        url: [
+            getApply?.documents?.academic_certificates?.consolidated_mark_sheets
+                ?.url
+        ],
+        country:
+            getApply?.documents?.academic_certificates?.consolidated_mark_sheets
+                ?.country,
+        institute:
+            getApply?.documents?.academic_certificates?.consolidated_mark_sheets
+                ?.institute,
+        date_of_start:
+            getApply?.documents?.academic_certificates?.consolidated_mark_sheets
+                ?.date_of_start,
+        date_of_completion:
+            getApply?.documents?.academic_certificates?.consolidated_mark_sheets
+                ?.date_of_completion
+    };
+
+    const semester_mark_sheets = {
+        url: getApply?.documents?.academic_certificates?.semester_mark_sheets
+            ?.url
+    };
+
+    const professional_records = {
+        experience_letter: {
+            url: getApply?.documents?.professional_records?.experience_letter?.url
+        },
+        resume: {
+            url: getApply?.documents?.professional_records?.resume?.url
+        },
+        personal_statement: {
+            url: getApply?.documents?.professional_records?.personal_statement?.url
+        },
+        letter_of_reference: {
+            url: getApply?.documents?.professional_records?.letter_of_reference
+                ?.url
+        }
+    };
 
     const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
         const uploadedFiles = e.target.files;
@@ -87,11 +127,52 @@ const FileSubmitted = () => {
                     url: `${BASE_URL}${API_ENDPOINTS.APPLY_DOCUMENTS}/${id}`,
                     type: 'patch',
                     body: {
-                        ...GetApply,
-                        course: GetApply?.course.id,
-                        user: GetApply?.user.id,
+                        ...getApply,
+                        course: getApply?.course.id,
+                        user: getApply?.user.id,
                         documents: {
-                            ...GetApply?.documents,
+                            academic_certificates: {
+                                ...(semester_mark_sheets.url
+                                    ? {
+                                          semester_mark_sheets:
+                                              semester_mark_sheets.url
+                                      }
+                                    : {}),
+                                ...(consolidated_mark_sheets.institute
+                                    ? {
+                                          institute:
+                                              consolidated_mark_sheets.institute
+                                      }
+                                    : {}),
+                                ...(consolidated_mark_sheets.country
+                                    ? {
+                                          country:
+                                              consolidated_mark_sheets.country
+                                      }
+                                    : {})
+                            },
+                            professional_records: {
+                                ...(professional_records.experience_letter.url
+                                    ? {
+                                          url: professional_records.experience_letter.url
+                                      }
+                                    : {}),
+                                ...(professional_records.resume.url
+                                    ? {
+                                          url: professional_records.resume.url
+                                      }
+                                    : {}),
+                                ...(professional_records.personal_statement.url
+                                    ? {
+                                          url: professional_records.personal_statement.url
+                                      }
+                                    : {}),
+                                ...(professional_records.letter_of_reference.url
+                                    ? {
+                                          url: professional_records.letter_of_reference.url
+                                      }
+                                    : {})
+                            },
                             identity: {
                                 passport: {
                                     url: uploadResponse,

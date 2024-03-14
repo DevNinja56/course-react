@@ -34,7 +34,7 @@ interface selectType {
 interface FileDetails {
     apply: {
         files: {
-            conSolidFile: File[]
+            conSolidFile: File[];
         };
     };
 }
@@ -50,10 +50,39 @@ const ConSolid_MarkSheet = () => {
     const dispatch = useDispatch();
     const router = useRouter();
     const { id } = router.query;
-    const { data: GetApply } = useGetApplyByIdQuery(id);
+    const { data: getApply } = useGetApplyByIdQuery(id);
     const token = getToken();
     const [isLoading, setIsLoading] = useState(false);
     const [fullFile, setFullFile] = useState('');
+
+    const identity = {
+        passport: {
+            url: [getApply?.documents.identity.passport?.url],
+            given_name: getApply?.documents.identity.passport.given_name,
+            sur_name: getApply?.documents.identity.passport.sur_name,
+            number: getApply?.documents.identity.passport.number,
+            date_of_issue: getApply?.documents.identity.passport.date_of_issue,
+            date_of_expiry: getApply?.documents.identity.passport.date_of_expiry
+        }
+    };
+
+    const professional_records = {
+        experience_letter: {
+            url: getApply?.documents.professional_records?.experience_letter
+                ?.url
+        },
+        resume: {
+            url: getApply?.documents.professional_records?.resume?.url
+        },
+        personal_statement: {
+            url: getApply?.documents.professional_records?.personal_statement
+                ?.url
+        },
+        letter_of_reference: {
+            url: getApply?.documents.professional_records?.letter_of_reference
+                ?.url
+        }
+    };
 
     const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
         const uploadedFiles = e.target.files;
@@ -96,11 +125,15 @@ const ConSolid_MarkSheet = () => {
                     url: `${BASE_URL}${API_ENDPOINTS.APPLY_DOCUMENTS}/${id}`,
                     type: 'patch',
                     body: {
-                        ...GetApply,
-                        course: GetApply?.course.id,
-                        user: GetApply?.user.id,
+                        ...getApply,
+                        course: getApply?.course.id,
+                        user: getApply?.user.id,
                         documents: {
-                            ...GetApply?.documents,
+                            ...(identity.passport
+                                ? {
+                                      passport: identity.passport
+                                  }
+                                : {}),
                             academic_certificates: {
                                 consolidated_mark_sheets: {
                                     url: uploadResponse,
@@ -109,6 +142,31 @@ const ConSolid_MarkSheet = () => {
                                     institute: data.institution,
                                     country: data.country
                                 }
+                            },
+                            professional_records: {
+                                ...(professional_records.experience_letter.url
+                                    ? {
+                                          url: professional_records
+                                              .experience_letter.url
+                                      }
+                                    : {}),
+                                ...(professional_records.resume.url
+                                    ? {
+                                          url: professional_records.resume.url
+                                      }
+                                    : {}),
+                                ...(professional_records.personal_statement.url
+                                    ? {
+                                          url: professional_records
+                                              .personal_statement.url
+                                      }
+                                    : {}),
+                                ...(professional_records.letter_of_reference.url
+                                    ? {
+                                          url: professional_records
+                                              .letter_of_reference.url
+                                      }
+                                    : {})
                             }
                         }
                     }
