@@ -17,7 +17,65 @@ const SubmitDocument = () => {
     const dispatch = useDispatch();
     const token = getToken();
     const { id } = router.query;
-    const { data: GetApply, refetch: fetchApply } = useGetApplyByIdQuery(id);
+    const { data: getApply, refetch: fetchApply } = useGetApplyByIdQuery(id);
+
+    const identity = {
+        passport: {
+            url: [getApply?.documents.identity.passport?.url],
+            given_name: getApply?.documents.identity.passport.given_name,
+            sur_name: getApply?.documents.identity.passport.sur_name,
+            number: getApply?.documents.identity.passport.number,
+            date_of_issue: getApply?.documents.identity.passport.date_of_issue,
+            date_of_expiry: getApply?.documents.identity.passport.date_of_expiry
+        }
+    };
+
+    const consolidated_mark_sheets = {
+        url: [
+            getApply?.documents.academic_certificates.consolidated_mark_sheets
+                ?.url
+        ],
+        country:
+            getApply?.documents.academic_certificates.consolidated_mark_sheets
+                .country,
+        institute:
+            getApply?.documents.academic_certificates.consolidated_mark_sheets
+                .institute,
+        date_of_start:
+            getApply?.documents.academic_certificates.consolidated_mark_sheets
+                .date_of_start,
+        date_of_completion:
+            getApply?.documents.academic_certificates.consolidated_mark_sheets
+                .date_of_completion
+    };
+
+    const semester_mark_sheets = {
+        url: getApply?.documents?.academic_certificates?.semester_mark_sheets
+            ?.url
+    };
+
+    const provisional_certificate = {
+        url: getApply?.documents?.academic_certificates?.provisional_certificate
+            ?.url
+    };
+
+    const professional_records = {
+        experience_letter: {
+            url: getApply?.documents.professional_records?.experience_letter
+                ?.url
+        },
+        resume: {
+            url: getApply?.documents.professional_records?.resume?.url
+        },
+        personal_statement: {
+            url: getApply?.documents.professional_records?.personal_statement
+                ?.url
+        },
+        letter_of_reference: {
+            url: getApply?.documents.professional_records?.letter_of_reference
+                ?.url
+        }
+    };
 
     const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const uploadedFiles = event.target.files;
@@ -79,15 +137,56 @@ const SubmitDocument = () => {
                 url: `${BASE_URL}${API_ENDPOINTS.APPLY_DOCUMENTS}/${id}`,
                 type: 'patch',
                 body: {
-                    ...GetApply,
-                    course: GetApply?.course.id,
-                    user: GetApply?.user.id,
+                    ...getApply,
+                    course: getApply?.course.id,
+                    user: getApply?.user.id,
                     documents: {
-                        ...GetApply?.documents,
+                        ...(identity.passport
+                            ? {
+                                  passport: identity.passport
+                              }
+                            : {}),
                         academic_certificates: {
-                            ...GetApply?.documents?.academic_certificates,
+                            ...(consolidated_mark_sheets.country
+                                ? {
+                                      country: consolidated_mark_sheets.country
+                                  }
+                                : {}),
+                            ...(consolidated_mark_sheets.institute
+                                ? {
+                                      institute:
+                                          consolidated_mark_sheets.institute
+                                  }
+                                : {}),
+                            ...(provisional_certificate.url
+                                ? {
+                                      url: provisional_certificate.url
+                                  }
+                                : {}),
                             semester_mark_sheets: { url: response?.[0] }
-                        }
+                        },
+                        professional_records: {
+                                ...(professional_records.experience_letter.url
+                                    ? {
+                                          url: professional_records.experience_letter.url
+                                      }
+                                    : {}),
+                                ...(professional_records.resume.url
+                                    ? {
+                                          url: professional_records.resume.url
+                                      }
+                                    : {}),
+                                ...(professional_records.personal_statement.url
+                                    ? {
+                                          url: professional_records.personal_statement.url
+                                      }
+                                    : {}),
+                                ...(professional_records.letter_of_reference.url
+                                    ? {
+                                          url: professional_records.letter_of_reference.url
+                                      }
+                                    : {})
+                            }
                     }
                 }
             }),
@@ -114,13 +213,27 @@ const SubmitDocument = () => {
                 url: `${BASE_URL}${API_ENDPOINTS.APPLY_DOCUMENTS}/${id}`,
                 type: 'patch',
                 body: {
-                    ...GetApply,
-                    course: GetApply?.course.id,
-                    user: GetApply?.user.id,
+                    ...getApply,
+                    course: getApply?.course.id,
+                    user: getApply?.user.id,
                     documents: {
-                        ...GetApply?.documents,
+                        ...(identity.passport
+                            ? {
+                                  passport: identity.passport
+                              }
+                            : {}),
                         academic_certificates: {
-                            ...GetApply?.documents?.academic_certificates,
+                            ...(consolidated_mark_sheets.country
+                                ? {
+                                      country: consolidated_mark_sheets.country
+                                  }
+                                : {}),
+                            ...(consolidated_mark_sheets.institute
+                                ? {
+                                      institute:
+                                          consolidated_mark_sheets.institute
+                                  }
+                                : {}),
                             provisional_certificate: { url: response?.[0] }
                         }
                     }
@@ -149,13 +262,35 @@ const SubmitDocument = () => {
                 url: `${BASE_URL}${API_ENDPOINTS.APPLY_DOCUMENTS}/${id}`,
                 type: 'patch',
                 body: {
-                    ...GetApply,
-                    course: GetApply?.course.id,
-                    user: GetApply?.user.id,
+                    ...getApply,
+                    course: getApply?.course.id,
+                    user: getApply?.user.id,
                     documents: {
-                        ...GetApply?.documents,
+                        ...(identity.passport
+                            ? {
+                                  passport: identity.passport
+                              }
+                            : {}),
+                        academic_certificates: {
+                            ...(semester_mark_sheets.url
+                                ? {
+                                      url: semester_mark_sheets.url
+                                  }
+                                : {}),
+                            ...(consolidated_mark_sheets.country
+                                ? {
+                                      country: consolidated_mark_sheets.country
+                                  }
+                                : {}),
+                            ...(consolidated_mark_sheets.institute
+                                ? {
+                                      institute:
+                                          consolidated_mark_sheets.institute
+                                  }
+                                : {})
+                        },
                         professional_records: {
-                            ...GetApply?.documents?.professional_records,
+                            ...getApply?.documents?.professional_records,
                             experience_letter: { url: response?.[0] }
                         }
                     }
@@ -184,13 +319,35 @@ const SubmitDocument = () => {
                 url: `${BASE_URL}${API_ENDPOINTS.APPLY_DOCUMENTS}/${id}`,
                 type: 'patch',
                 body: {
-                    ...GetApply,
-                    course: GetApply?.course.id,
-                    user: GetApply?.user.id,
+                    ...getApply,
+                    course: getApply?.course.id,
+                    user: getApply?.user.id,
                     documents: {
-                        ...GetApply?.documents,
+                        ...(identity.passport
+                            ? {
+                                  passport: identity.passport
+                              }
+                            : {}),
+                        academic_certificates: {
+                            ...(semester_mark_sheets.url
+                                ? {
+                                      url: semester_mark_sheets.url
+                                  }
+                                : {}),
+                            ...(consolidated_mark_sheets.country
+                                ? {
+                                      country: consolidated_mark_sheets.country
+                                  }
+                                : {}),
+                            ...(consolidated_mark_sheets.institute
+                                ? {
+                                      institute:
+                                          consolidated_mark_sheets.institute
+                                  }
+                                : {})
+                        },
                         professional_records: {
-                            ...GetApply?.documents?.professional_records,
+                            ...getApply?.documents?.professional_records,
                             letter_of_reference: { url: response?.[0] }
                         }
                     }
@@ -219,13 +376,35 @@ const SubmitDocument = () => {
                 url: `${BASE_URL}${API_ENDPOINTS.APPLY_DOCUMENTS}/${id}`,
                 type: 'patch',
                 body: {
-                    ...GetApply,
-                    course: GetApply?.course.id,
-                    user: GetApply?.user.id,
+                    ...getApply,
+                    course: getApply?.course.id,
+                    user: getApply?.user.id,
                     documents: {
-                        ...GetApply?.documents,
+                        ...(identity.passport
+                            ? {
+                                  passport: identity.passport
+                              }
+                            : {}),
+                        academic_certificates: {
+                            ...(semester_mark_sheets.url
+                                ? {
+                                      url: semester_mark_sheets.url
+                                  }
+                                : {}),
+                            ...(consolidated_mark_sheets.country
+                                ? {
+                                      country: consolidated_mark_sheets.country
+                                  }
+                                : {}),
+                            ...(consolidated_mark_sheets.institute
+                                ? {
+                                      institute:
+                                          consolidated_mark_sheets.institute
+                                  }
+                                : {})
+                        },
                         professional_records: {
-                            ...GetApply?.documents?.professional_records,
+                            ...getApply?.documents?.professional_records,
                             personal_statement: { url: response?.[0] }
                         }
                     }
@@ -254,13 +433,35 @@ const SubmitDocument = () => {
                 url: `${BASE_URL}${API_ENDPOINTS.APPLY_DOCUMENTS}/${id}`,
                 type: 'patch',
                 body: {
-                    ...GetApply,
-                    course: GetApply?.course.id,
-                    user: GetApply?.user.id,
+                    ...getApply,
+                    course: getApply?.course.id,
+                    user: getApply?.user.id,
                     documents: {
-                        ...GetApply?.documents,
+                        ...(identity.passport
+                            ? {
+                                  passport: identity.passport
+                              }
+                            : {}),
+                        academic_certificates: {
+                            ...(semester_mark_sheets.url
+                                ? {
+                                      url: semester_mark_sheets.url
+                                  }
+                                : {}),
+                            ...(consolidated_mark_sheets.country
+                                ? {
+                                      country: consolidated_mark_sheets.country
+                                  }
+                                : {}),
+                            ...(consolidated_mark_sheets.institute
+                                ? {
+                                      institute:
+                                          consolidated_mark_sheets.institute
+                                  }
+                                : {})
+                        },
                         professional_records: {
-                            ...GetApply?.documents?.professional_records,
+                            ...getApply?.documents?.professional_records,
                             resume: { url: response?.[0] }
                         }
                     }
@@ -285,7 +486,7 @@ const SubmitDocument = () => {
                 </p>
                 <label htmlFor="fileUpload">
                     <RequirementBox
-                        url={GetApply?.documents?.identity?.passport?.url[0]}
+                        url={getApply?.documents?.identity?.passport?.url[0]}
                         text="Passport"
                     />
                 </label>
@@ -305,26 +506,11 @@ const SubmitDocument = () => {
                     UNDERGRADUATE
                 </p>
                 <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-7">
-                    <label htmlFor="semesterMarkSheets">
-                        <RequirementBox
-                            text="Semester Marksheets"
-                            url={
-                                GetApply?.documents?.academic_certificates
-                                    ?.semester_mark_sheets?.url[0]
-                            }
-                        />
-                    </label>
-                    <input
-                        type="file"
-                        className="hidden"
-                        id="semesterMarkSheets"
-                        onChange={handleMarkSheetUpload}
-                    />
                     <label htmlFor="fileUploadConSolid">
                         <RequirementBox
                             text="Consolidated Marksheets"
                             url={
-                                GetApply?.documents?.academic_certificates
+                                getApply?.documents?.academic_certificates
                                     ?.consolidated_mark_sheets?.url[0]
                             }
                         />
@@ -336,11 +522,26 @@ const SubmitDocument = () => {
                         id="fileUploadConSolid"
                         onChange={handleFileChangeConSolid}
                     />
+                    <label htmlFor="semesterMarkSheets">
+                        <RequirementBox
+                            text="Semester Marksheets"
+                            url={
+                                getApply?.documents?.academic_certificates
+                                    ?.semester_mark_sheets?.url[0]
+                            }
+                        />
+                    </label>
+                    <input
+                        type="file"
+                        className="hidden"
+                        id="semesterMarkSheets"
+                        onChange={handleMarkSheetUpload}
+                    />
                     <label htmlFor="provisionalCertificate">
                         <RequirementBox
                             text="Provisional Certificate"
                             url={
-                                GetApply?.documents?.academic_certificates
+                                getApply?.documents?.academic_certificates
                                     ?.provisional_certificate?.url
                             }
                         />
@@ -362,7 +563,7 @@ const SubmitDocument = () => {
                         <RequirementBox
                             text="Experience Letter"
                             url={
-                                GetApply?.documents?.professional_records
+                                getApply?.documents?.professional_records
                                     ?.experience_letter?.url
                             }
                         />
@@ -377,7 +578,7 @@ const SubmitDocument = () => {
                         <RequirementBox
                             text="CV/Resume"
                             url={
-                                GetApply?.documents?.professional_records
+                                getApply?.documents?.professional_records
                                     ?.resume?.url
                             }
                         />
@@ -392,7 +593,7 @@ const SubmitDocument = () => {
                         <RequirementBox
                             text="Personal Statement"
                             url={
-                                GetApply?.documents?.professional_records
+                                getApply?.documents?.professional_records
                                     ?.personal_statement?.url
                             }
                         />
@@ -407,7 +608,7 @@ const SubmitDocument = () => {
                         <RequirementBox
                             text="Letter of Reference"
                             url={
-                                GetApply?.documents?.professional_records
+                                getApply?.documents?.professional_records
                                     ?.letter_of_reference?.url
                             }
                         />

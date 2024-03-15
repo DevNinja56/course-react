@@ -342,8 +342,10 @@ export interface userDocuments {
             given_name: string;
             sur_name: string;
             number: string;
-            date_of_issue: string;
-            date_of_expiry: string;
+            country: string,
+            institute: string,
+            date_of_start: string;
+            date_of_completion: string;
         };
         provisional_certificate: {
             url: string;
