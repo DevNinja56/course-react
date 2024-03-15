@@ -338,13 +338,20 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
 
                                                                 <p className="text-sm md:text-base">
                                                                     {initialDeposit(
-                                                                        course
-                                                                            .initialDeposit?.[0]
-                                                                            .amount,
-                                                                        course.tuitionFee,
-                                                                        course
-                                                                            ?.scholarship[0]
-                                                                            ?.amount
+                                                                        {
+                                                                            initialDeposit:
+                                                                                course
+                                                                                    .initialDeposit?.[0]
+                                                                                    .amount,
+                                                                            tuitionFee:
+                                                                                course.tuitionFee,
+                                                                            scholarship:
+                                                                                course
+                                                                                    ?.scholarship[0]
+                                                                                    ?.amount,
+                                                                            currency_code:
+                                                                                course.feeCurrency
+                                                                        }
                                                                     )}
                                                                 </p>
                                                             </div>

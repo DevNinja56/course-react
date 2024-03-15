@@ -11,6 +11,7 @@ const BankStatementCalculate = () => {
         hideModal: () => void;
     };
     const { initialDeposit: calculateDeposit } = useCalculate();
+    const { getSingleRate } = useCurrency();
 
     const {
         tuitionFee,
@@ -30,12 +31,12 @@ const BankStatementCalculate = () => {
     const oshc = 700 * +duration;
     const total = tuitionFee + livingCost + travelingCost + oshc;
 
-    let initialDepositValue = calculateDeposit(
+    let initialDepositValue = calculateDeposit({
         initialDeposit,
         tuitionFee,
-        scholarship?.amount,
-        true
-    );
+        scholarship: scholarship?.amount,
+        isNumber: true
+    });
 
     initialDepositValue =
         typeof initialDepositValue === 'number' ? initialDepositValue : 0;
@@ -44,49 +45,58 @@ const BankStatementCalculate = () => {
         ? total - initialDepositValue - oshc
         : tuitionFee - initialDepositValue + livingCost;
     const currency = isLiveAustralia ? 'AUD' : 'GBP';
+    const { base_rate } = getSingleRate(currency) ?? { base_rate: 1 };
+    const scholarshipAmount =
+        tuitionFee * (parseInt(scholarship?.amount ?? '0') / 100);
 
     const data = [
         {
             name: 'Annual Tuition Fee',
-            value: setCurrencyValue(tuitionFee, currency)
+            value: setCurrencyValue(tuitionFee * +base_rate)
         },
+        scholarship
+            ? {
+                  name: `Scholarship Amount - ${scholarship?.type}`,
+                  value: setCurrencyValue(scholarshipAmount * +base_rate)
+              }
+            : {},
         {
             name: 'Initial Deposit',
-            value: setCurrencyValue(initialDepositValue, currency)
+            value: setCurrencyValue(initialDepositValue * +base_rate)
         },
         {
             name: 'Living Cost',
-            value: setCurrencyValue(livingCost, currency)
+            value: setCurrencyValue(livingCost * +base_rate)
         },
         ...(isLiveAustralia
             ? [
                   {
                       name: 'Traveling Cost',
-                      value: setCurrencyValue(travelingCost, currency)
+                      value: setCurrencyValue(travelingCost * +base_rate)
                   },
                   {
                       name: 'OSHC',
-                      value: setCurrencyValue(oshc, currency)
+                      value: setCurrencyValue(oshc * +base_rate)
                   },
                   {
                       name: 'Statement Requirement by University',
-                      value: setCurrencyValue(total, currency)
+                      value: setCurrencyValue(total * +base_rate)
                   },
                   {
                       name: 'Statement Requirement for Visa',
-                      value: setCurrencyValue(visaFee, currency)
+                      value: setCurrencyValue(visaFee * +base_rate)
                   }
               ]
             : [
                   {
                       name: 'Statement Requirement for Visa',
-                      value: setCurrencyValue(visaFee, currency)
+                      value: setCurrencyValue(visaFee * +base_rate)
                   }
               ])
     ];
 
     return (
-        <div className="bg-white px-[40px] py-[30px] w-[572px] rounded-md ">
+        <div className="bg-white px-[40px] py-[30px] w-[572px] rounded-md capitalize ">
             <button className="absolute top-10 right-10 bg-blueColor text-white rounded-full w-[30px] h-[30px] px-1 text-[22px]">
                 <IoMdClose onClick={hideModal} />
             </button>
