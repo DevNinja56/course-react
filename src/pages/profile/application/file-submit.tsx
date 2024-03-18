@@ -73,20 +73,9 @@ const FileSubmitted = () => {
             ?.url
     };
 
-    const professional_records = {
-        experience_letter: {
-            url: getApply?.documents?.professional_records?.experience_letter?.url
-        },
-        resume: {
-            url: getApply?.documents?.professional_records?.resume?.url
-        },
-        personal_statement: {
-            url: getApply?.documents?.professional_records?.personal_statement?.url
-        },
-        letter_of_reference: {
-            url: getApply?.documents?.professional_records?.letter_of_reference
-                ?.url
-        }
+    const provisional_certificate = {
+        url: getApply?.documents?.academic_certificates?.provisional_certificate
+            ?.url
     };
 
     const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -134,44 +123,57 @@ const FileSubmitted = () => {
                             academic_certificates: {
                                 ...(semester_mark_sheets.url
                                     ? {
-                                          semester_mark_sheets:
-                                              semester_mark_sheets.url
+                                          semester_mark_sheets: {
+                                              url: semester_mark_sheets.url
+                                          }
                                       }
                                     : {}),
-                                ...(consolidated_mark_sheets.institute
+                                ...(provisional_certificate.url
                                     ? {
-                                          institute:
-                                              consolidated_mark_sheets.institute
+                                          provisional_certificate: {
+                                              url: provisional_certificate.url
+                                          }
                                       }
                                     : {}),
-                                ...(consolidated_mark_sheets.country
+                                ...(consolidated_mark_sheets?.url
                                     ? {
-                                          country:
-                                              consolidated_mark_sheets.country
+                                          consolidated_mark_sheets: {
+                                              ...(consolidated_mark_sheets.url
+                                                  ? {
+                                                        url: consolidated_mark_sheets
+                                                            .url?.[0]
+                                                    }
+                                                  : {}),
+                                              ...(consolidated_mark_sheets.institute
+                                                  ? {
+                                                        institute:
+                                                            consolidated_mark_sheets.institute
+                                                    }
+                                                  : {}),
+                                              ...(consolidated_mark_sheets.country
+                                                  ? {
+                                                        country:
+                                                            consolidated_mark_sheets.country
+                                                    }
+                                                  : {}),
+                                              ...(consolidated_mark_sheets.date_of_completion
+                                                  ? {
+                                                        date_of_completion:
+                                                            consolidated_mark_sheets.date_of_completion
+                                                    }
+                                                  : {}),
+                                              ...(consolidated_mark_sheets.date_of_start
+                                                  ? {
+                                                        date_of_start:
+                                                            consolidated_mark_sheets.date_of_start
+                                                    }
+                                                  : {})
+                                          }
                                       }
                                     : {})
                             },
                             professional_records: {
-                                ...(professional_records.experience_letter.url
-                                    ? {
-                                          url: professional_records.experience_letter.url
-                                      }
-                                    : {}),
-                                ...(professional_records.resume.url
-                                    ? {
-                                          url: professional_records.resume.url
-                                      }
-                                    : {}),
-                                ...(professional_records.personal_statement.url
-                                    ? {
-                                          url: professional_records.personal_statement.url
-                                      }
-                                    : {}),
-                                ...(professional_records.letter_of_reference.url
-                                    ? {
-                                          url: professional_records.letter_of_reference.url
-                                      }
-                                    : {})
+                                ...getApply?.documents?.professional_records
                             },
                             identity: {
                                 passport: {

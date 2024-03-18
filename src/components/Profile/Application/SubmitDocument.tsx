@@ -21,32 +21,34 @@ const SubmitDocument = () => {
 
     const identity = {
         passport: {
-            url: [getApply?.documents.identity.passport?.url],
-            given_name: getApply?.documents.identity.passport.given_name,
-            sur_name: getApply?.documents.identity.passport.sur_name,
-            number: getApply?.documents.identity.passport.number,
-            date_of_issue: getApply?.documents.identity.passport.date_of_issue,
-            date_of_expiry: getApply?.documents.identity.passport.date_of_expiry
+            url: getApply?.documents?.identity?.passport?.url,
+            given_name: getApply?.documents?.identity?.passport?.given_name,
+            sur_name: getApply?.documents?.identity?.passport?.sur_name,
+            number: getApply?.documents?.identity?.passport?.number,
+            date_of_issue:
+                getApply?.documents?.identity?.passport?.date_of_issue,
+            date_of_expiry:
+                getApply?.documents?.identity?.passport?.date_of_expiry
         }
     };
 
     const consolidated_mark_sheets = {
         url: [
-            getApply?.documents.academic_certificates.consolidated_mark_sheets
+            getApply?.documents?.academic_certificates?.consolidated_mark_sheets
                 ?.url
         ],
         country:
-            getApply?.documents.academic_certificates.consolidated_mark_sheets
-                .country,
+            getApply?.documents?.academic_certificates?.consolidated_mark_sheets
+                ?.country,
         institute:
-            getApply?.documents.academic_certificates.consolidated_mark_sheets
-                .institute,
+            getApply?.documents?.academic_certificates?.consolidated_mark_sheets
+                ?.institute,
         date_of_start:
-            getApply?.documents.academic_certificates.consolidated_mark_sheets
-                .date_of_start,
+            getApply?.documents?.academic_certificates?.consolidated_mark_sheets
+                ?.date_of_start,
         date_of_completion:
-            getApply?.documents.academic_certificates.consolidated_mark_sheets
-                .date_of_completion
+            getApply?.documents?.academic_certificates?.consolidated_mark_sheets
+                ?.date_of_completion
     };
 
     const semester_mark_sheets = {
@@ -57,24 +59,6 @@ const SubmitDocument = () => {
     const provisional_certificate = {
         url: getApply?.documents?.academic_certificates?.provisional_certificate
             ?.url
-    };
-
-    const professional_records = {
-        experience_letter: {
-            url: getApply?.documents.professional_records?.experience_letter
-                ?.url
-        },
-        resume: {
-            url: getApply?.documents.professional_records?.resume?.url
-        },
-        personal_statement: {
-            url: getApply?.documents.professional_records?.personal_statement
-                ?.url
-        },
-        letter_of_reference: {
-            url: getApply?.documents.professional_records?.letter_of_reference
-                ?.url
-        }
     };
 
     const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -143,50 +127,60 @@ const SubmitDocument = () => {
                     documents: {
                         ...(identity.passport
                             ? {
-                                  passport: identity.passport
+                                  identity: {
+                                      passport: identity.passport
+                                  }
                               }
                             : {}),
                         academic_certificates: {
-                            ...(consolidated_mark_sheets.country
+                            ...(consolidated_mark_sheets?.url
                                 ? {
-                                      country: consolidated_mark_sheets.country
-                                  }
-                                : {}),
-                            ...(consolidated_mark_sheets.institute
-                                ? {
-                                      institute:
-                                          consolidated_mark_sheets.institute
+                                      consolidated_mark_sheets: {
+                                          ...(consolidated_mark_sheets.url
+                                              ? {
+                                                    url: consolidated_mark_sheets
+                                                        .url?.[0]
+                                                }
+                                              : {}),
+                                          ...(consolidated_mark_sheets.institute
+                                              ? {
+                                                    institute:
+                                                        consolidated_mark_sheets.institute
+                                                }
+                                              : {}),
+                                          ...(consolidated_mark_sheets.country
+                                              ? {
+                                                    country:
+                                                        consolidated_mark_sheets.country
+                                                }
+                                              : {}),
+                                          ...(consolidated_mark_sheets.date_of_completion
+                                              ? {
+                                                    date_of_completion:
+                                                        consolidated_mark_sheets.date_of_completion
+                                                }
+                                              : {}),
+                                          ...(consolidated_mark_sheets.date_of_start
+                                              ? {
+                                                    date_of_start:
+                                                        consolidated_mark_sheets.date_of_start
+                                                }
+                                              : {})
+                                      }
                                   }
                                 : {}),
                             ...(provisional_certificate.url
                                 ? {
-                                      url: provisional_certificate.url
+                                      provisional_certificate: {
+                                          url: provisional_certificate.url
+                                      }
                                   }
                                 : {}),
                             semester_mark_sheets: { url: response?.[0] }
                         },
                         professional_records: {
-                                ...(professional_records.experience_letter.url
-                                    ? {
-                                          url: professional_records.experience_letter.url
-                                      }
-                                    : {}),
-                                ...(professional_records.resume.url
-                                    ? {
-                                          url: professional_records.resume.url
-                                      }
-                                    : {}),
-                                ...(professional_records.personal_statement.url
-                                    ? {
-                                          url: professional_records.personal_statement.url
-                                      }
-                                    : {}),
-                                ...(professional_records.letter_of_reference.url
-                                    ? {
-                                          url: professional_records.letter_of_reference.url
-                                      }
-                                    : {})
-                            }
+                            ...getApply?.documents?.professional_records
+                        }
                     }
                 }
             }),
@@ -219,22 +213,57 @@ const SubmitDocument = () => {
                     documents: {
                         ...(identity.passport
                             ? {
-                                  passport: identity.passport
+                                  identity: { passport: identity.passport }
                               }
                             : {}),
                         academic_certificates: {
-                            ...(consolidated_mark_sheets.country
+                            ...(consolidated_mark_sheets?.url
                                 ? {
-                                      country: consolidated_mark_sheets.country
+                                      consolidated_mark_sheets: {
+                                          ...(consolidated_mark_sheets.url
+                                              ? {
+                                                    url: consolidated_mark_sheets
+                                                        .url?.[0]
+                                                }
+                                              : {}),
+                                          ...(consolidated_mark_sheets.institute
+                                              ? {
+                                                    institute:
+                                                        consolidated_mark_sheets.institute
+                                                }
+                                              : {}),
+                                          ...(consolidated_mark_sheets.country
+                                              ? {
+                                                    country:
+                                                        consolidated_mark_sheets.country
+                                                }
+                                              : {}),
+                                          ...(consolidated_mark_sheets.date_of_completion
+                                              ? {
+                                                    date_of_completion:
+                                                        consolidated_mark_sheets.date_of_completion
+                                                }
+                                              : {}),
+                                          ...(consolidated_mark_sheets.date_of_start
+                                              ? {
+                                                    date_of_start:
+                                                        consolidated_mark_sheets.date_of_start
+                                                }
+                                              : {})
+                                      }
                                   }
                                 : {}),
-                            ...(consolidated_mark_sheets.institute
+                            ...(semester_mark_sheets.url
                                 ? {
-                                      institute:
-                                          consolidated_mark_sheets.institute
+                                      semester_mark_sheets: {
+                                          url: semester_mark_sheets.url
+                                      }
                                   }
                                 : {}),
                             provisional_certificate: { url: response?.[0] }
+                        },
+                        professional_records: {
+                            ...getApply?.documents?.professional_records
                         }
                     }
                 }
@@ -268,24 +297,60 @@ const SubmitDocument = () => {
                     documents: {
                         ...(identity.passport
                             ? {
-                                  passport: identity.passport
+                                  identity: {
+                                      passport: identity.passport
+                                  }
                               }
                             : {}),
                         academic_certificates: {
                             ...(semester_mark_sheets.url
                                 ? {
-                                      url: semester_mark_sheets.url
+                                      semester_mark_sheets: {
+                                          url: semester_mark_sheets.url
+                                      }
                                   }
                                 : {}),
-                            ...(consolidated_mark_sheets.country
+                            ...(provisional_certificate.url
                                 ? {
-                                      country: consolidated_mark_sheets.country
+                                      provisional_certificate: {
+                                          url: provisional_certificate.url
+                                      }
                                   }
                                 : {}),
-                            ...(consolidated_mark_sheets.institute
+                            ...(consolidated_mark_sheets?.url
                                 ? {
-                                      institute:
-                                          consolidated_mark_sheets.institute
+                                      consolidated_mark_sheets: {
+                                          ...(consolidated_mark_sheets.url
+                                              ? {
+                                                    url: consolidated_mark_sheets
+                                                        .url?.[0]
+                                                }
+                                              : {}),
+                                          ...(consolidated_mark_sheets.institute
+                                              ? {
+                                                    institute:
+                                                        consolidated_mark_sheets.institute
+                                                }
+                                              : {}),
+                                          ...(consolidated_mark_sheets.country
+                                              ? {
+                                                    country:
+                                                        consolidated_mark_sheets.country
+                                                }
+                                              : {}),
+                                          ...(consolidated_mark_sheets.date_of_completion
+                                              ? {
+                                                    date_of_completion:
+                                                        consolidated_mark_sheets.date_of_completion
+                                                }
+                                              : {}),
+                                          ...(consolidated_mark_sheets.date_of_start
+                                              ? {
+                                                    date_of_start:
+                                                        consolidated_mark_sheets.date_of_start
+                                                }
+                                              : {})
+                                      }
                                   }
                                 : {})
                         },
@@ -325,24 +390,60 @@ const SubmitDocument = () => {
                     documents: {
                         ...(identity.passport
                             ? {
-                                  passport: identity.passport
+                                  identity: {
+                                      passport: identity.passport
+                                  }
                               }
                             : {}),
                         academic_certificates: {
                             ...(semester_mark_sheets.url
                                 ? {
-                                      url: semester_mark_sheets.url
+                                      semester_mark_sheets: {
+                                          url: semester_mark_sheets.url
+                                      }
                                   }
                                 : {}),
-                            ...(consolidated_mark_sheets.country
+                            ...(provisional_certificate.url
                                 ? {
-                                      country: consolidated_mark_sheets.country
+                                      provisional_certificate: {
+                                          url: provisional_certificate.url
+                                      }
                                   }
                                 : {}),
-                            ...(consolidated_mark_sheets.institute
+                            ...(consolidated_mark_sheets?.url
                                 ? {
-                                      institute:
-                                          consolidated_mark_sheets.institute
+                                      consolidated_mark_sheets: {
+                                          ...(consolidated_mark_sheets.url
+                                              ? {
+                                                    url: consolidated_mark_sheets
+                                                        .url?.[0]
+                                                }
+                                              : {}),
+                                          ...(consolidated_mark_sheets.institute
+                                              ? {
+                                                    institute:
+                                                        consolidated_mark_sheets.institute
+                                                }
+                                              : {}),
+                                          ...(consolidated_mark_sheets.country
+                                              ? {
+                                                    country:
+                                                        consolidated_mark_sheets.country
+                                                }
+                                              : {}),
+                                          ...(consolidated_mark_sheets.date_of_completion
+                                              ? {
+                                                    date_of_completion:
+                                                        consolidated_mark_sheets.date_of_completion
+                                                }
+                                              : {}),
+                                          ...(consolidated_mark_sheets.date_of_start
+                                              ? {
+                                                    date_of_start:
+                                                        consolidated_mark_sheets.date_of_start
+                                                }
+                                              : {})
+                                      }
                                   }
                                 : {})
                         },
@@ -382,24 +483,60 @@ const SubmitDocument = () => {
                     documents: {
                         ...(identity.passport
                             ? {
-                                  passport: identity.passport
+                                identity : {
+                                    passport: identity.passport
+                                }     
                               }
                             : {}),
                         academic_certificates: {
                             ...(semester_mark_sheets.url
                                 ? {
-                                      url: semester_mark_sheets.url
+                                    semester_mark_sheets : {
+                                        url: semester_mark_sheets.url
+                                    }    
                                   }
                                 : {}),
-                            ...(consolidated_mark_sheets.country
+                            ...(provisional_certificate.url
                                 ? {
-                                      country: consolidated_mark_sheets.country
+                                      provisional_certificate: {
+                                          url: provisional_certificate.url
+                                      }
                                   }
                                 : {}),
-                            ...(consolidated_mark_sheets.institute
+                            ...(consolidated_mark_sheets?.url
                                 ? {
-                                      institute:
-                                          consolidated_mark_sheets.institute
+                                      consolidated_mark_sheets: {
+                                          ...(consolidated_mark_sheets.url
+                                              ? {
+                                                    url: consolidated_mark_sheets
+                                                        .url?.[0]
+                                                }
+                                              : {}),
+                                          ...(consolidated_mark_sheets.institute
+                                              ? {
+                                                    institute:
+                                                        consolidated_mark_sheets.institute
+                                                }
+                                              : {}),
+                                          ...(consolidated_mark_sheets.country
+                                              ? {
+                                                    country:
+                                                        consolidated_mark_sheets.country
+                                                }
+                                              : {}),
+                                          ...(consolidated_mark_sheets.date_of_completion
+                                              ? {
+                                                    date_of_completion:
+                                                        consolidated_mark_sheets.date_of_completion
+                                                }
+                                              : {}),
+                                          ...(consolidated_mark_sheets.date_of_start
+                                              ? {
+                                                    date_of_start:
+                                                        consolidated_mark_sheets.date_of_start
+                                                }
+                                              : {})
+                                      }
                                   }
                                 : {})
                         },
@@ -439,24 +576,60 @@ const SubmitDocument = () => {
                     documents: {
                         ...(identity.passport
                             ? {
-                                  passport: identity.passport
+                                  identity: {
+                                      passport: identity.passport
+                                  }
                               }
                             : {}),
                         academic_certificates: {
                             ...(semester_mark_sheets.url
                                 ? {
-                                      url: semester_mark_sheets.url
+                                      semester_mark_sheets: {
+                                          url: semester_mark_sheets.url
+                                      }
                                   }
                                 : {}),
-                            ...(consolidated_mark_sheets.country
+                            ...(provisional_certificate.url
                                 ? {
-                                      country: consolidated_mark_sheets.country
+                                      provisional_certificate: {
+                                          url: provisional_certificate.url
+                                      }
                                   }
                                 : {}),
-                            ...(consolidated_mark_sheets.institute
+                            ...(consolidated_mark_sheets?.url
                                 ? {
-                                      institute:
-                                          consolidated_mark_sheets.institute
+                                      consolidated_mark_sheets: {
+                                          ...(consolidated_mark_sheets.url
+                                              ? {
+                                                    url: consolidated_mark_sheets
+                                                        .url?.[0]
+                                                }
+                                              : {}),
+                                          ...(consolidated_mark_sheets.institute
+                                              ? {
+                                                    institute:
+                                                        consolidated_mark_sheets.institute
+                                                }
+                                              : {}),
+                                          ...(consolidated_mark_sheets.country
+                                              ? {
+                                                    country:
+                                                        consolidated_mark_sheets.country
+                                                }
+                                              : {}),
+                                          ...(consolidated_mark_sheets.date_of_completion
+                                              ? {
+                                                    date_of_completion:
+                                                        consolidated_mark_sheets.date_of_completion
+                                                }
+                                              : {}),
+                                          ...(consolidated_mark_sheets.date_of_start
+                                              ? {
+                                                    date_of_start:
+                                                        consolidated_mark_sheets.date_of_start
+                                                }
+                                              : {})
+                                      }
                                   }
                                 : {})
                         },
