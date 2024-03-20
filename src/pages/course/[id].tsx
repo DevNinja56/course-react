@@ -132,278 +132,280 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                             </div>
                         </div>
                         <div className="flex flex-col lg:flex-row gap-0 xl:gap-16 w-full justify-between mb-0 lg:mb-28">
-                            <div className="w-full lg:w-[70%] xl:w-2/3 h-courseStickyHeight static lg:sticky top-[110px] no-scrollbar mb-96 lg:mb-96">
-                                <div className=" transition-all duration-300">
-                                    <div className="flex flex-col gap-y-6 mb-16 md:mb-20">
-                                        <div className="tabs-container capitalize">
-                                            <Tabs
-                                                data={[
-                                                    {
-                                                        title: 'Overview',
-                                                        element: (
-                                                            <div className="description w-full flex flex-col gap-3 md:gap-4 items-start">
-                                                                <h1 className="text-black text-lg md:text-2xl font-bold">
-                                                                    Course
-                                                                    Description
-                                                                </h1>
-                                                                <div
-                                                                    className="text-sm md:text-base"
-                                                                    dangerouslySetInnerHTML={{
-                                                                        __html:
-                                                                            course?.description ??
-                                                                            ''
-                                                                    }}
-                                                                />
-                                                            </div>
-                                                        )
-                                                    },
-                                                    {
-                                                        title: 'Entry Requirements',
-                                                        element: (
-                                                            <div className="flex flex-col gap-8">
-                                                                <div className="flex flex-col gap-4 items-start">
-                                                                    <h3 className="text-black text-lg md:text-2xl font-bold">
-                                                                        Entry
-                                                                        Requirements
-                                                                    </h3>
+                            <div className="flex flex-col w-full lg:w-[70%] xl:w-2/3">
+                                <div className="w-full h-courseStickyHeight static lg:sticky top-[110px] no-scrollbar mb-5 lg:mb-[450px] xl:mb-96 overflow-y-scroll">
+                                    <div className="transition-all duration-300">
+                                        <div className="flex flex-col gap-y-6 mb-16 md:mb-20">
+                                            <div className="tabs-container capitalize">
+                                                <Tabs
+                                                    data={[
+                                                        {
+                                                            title: 'Overview',
+                                                            element: (
+                                                                <div className="description w-full flex flex-col gap-3 md:gap-4 items-start">
+                                                                    <h1 className="text-black text-lg md:text-2xl font-bold">
+                                                                        Course
+                                                                        Description
+                                                                    </h1>
                                                                     <div
-                                                                        className="content text-sm md:text-base"
+                                                                        className="text-sm md:text-base"
                                                                         dangerouslySetInnerHTML={{
                                                                             __html:
-                                                                                course
-                                                                                    .entryRequirements?.[0]
-                                                                                    .requirement ??
-                                                                                'No Entry Requirements'
+                                                                                course?.description ??
+                                                                                ''
                                                                         }}
-                                                                    ></div>
+                                                                    />
                                                                 </div>
-                                                            </div>
-                                                        )
-                                                    },
-                                                    {
-                                                        title: 'Language Requirements',
-                                                        element: (
-                                                            <div className="flex flex-col gap-8">
-                                                                <div className="flex flex-col gap-4  items-start">
-                                                                    <h3 className="text-black text-lg md:text-2xl font-bold">
-                                                                        Language
-                                                                        Requirements
-                                                                    </h3>
-                                                                    <div className="flex gap-4">
-                                                                        <div className="flex flex-col gap-4 items-center w-full uppercase  ">
-                                                                            <table className="border-separate border border-slate-500">
-                                                                                <tbody>
-                                                                                    <tr>
-                                                                                        <th className="px-4 py-2 text-center border border-slate-600">
-                                                                                            Type
-                                                                                        </th>
-                                                                                        <th className="px-4 py-2 text-center border border-slate-600">
-                                                                                            speaking
-                                                                                        </th>
-                                                                                        <th className="px-4 py-2 text-center border border-slate-600">
-                                                                                            listening
-                                                                                        </th>
-                                                                                        <th className="px-4 py-2 text-center border border-slate-600">
-                                                                                            reading
-                                                                                        </th>
-                                                                                        <th className="px-4 py-2 text-center border border-slate-600">
-                                                                                            writing
-                                                                                        </th>
-                                                                                    </tr>
-                                                                                    {Object.entries(
-                                                                                        course
-                                                                                            .language[0]
-                                                                                            ?.language
-                                                                                    ).map(
-                                                                                        (
-                                                                                            [
-                                                                                                key,
-                                                                                                value
-                                                                                            ],
-                                                                                            i
-                                                                                        ) => (
-                                                                                            <tr
-                                                                                                key={
-                                                                                                    'language-table--' +
-                                                                                                    i
-                                                                                                }
-                                                                                            >
-                                                                                                <td className="px-4 py-2 text-center border border-slate-600">
-                                                                                                    {
-                                                                                                        key
+                                                            )
+                                                        },
+                                                        {
+                                                            title: 'Entry Requirements',
+                                                            element: (
+                                                                <div className="flex flex-col gap-8">
+                                                                    <div className="flex flex-col gap-4 items-start">
+                                                                        <h3 className="text-black text-lg md:text-2xl font-bold">
+                                                                            Entry
+                                                                            Requirements
+                                                                        </h3>
+                                                                        <div
+                                                                            className="content text-sm md:text-base"
+                                                                            dangerouslySetInnerHTML={{
+                                                                                __html:
+                                                                                    course
+                                                                                        .entryRequirements?.[0]
+                                                                                        .requirement ??
+                                                                                    'No Entry Requirements'
+                                                                            }}
+                                                                        ></div>
+                                                                    </div>
+                                                                </div>
+                                                            )
+                                                        },
+                                                        {
+                                                            title: 'Language Requirements',
+                                                            element: (
+                                                                <div className="flex flex-col gap-8">
+                                                                    <div className="flex flex-col gap-4  items-start">
+                                                                        <h3 className="text-black text-lg md:text-2xl font-bold">
+                                                                            Language
+                                                                            Requirements
+                                                                        </h3>
+                                                                        <div className="flex gap-4">
+                                                                            <div className="flex flex-col gap-4 items-center w-full uppercase  ">
+                                                                                <table className="border-separate border border-slate-500">
+                                                                                    <tbody>
+                                                                                        <tr>
+                                                                                            <th className="px-4 py-2 text-center border border-slate-600">
+                                                                                                Type
+                                                                                            </th>
+                                                                                            <th className="px-4 py-2 text-center border border-slate-600">
+                                                                                                speaking
+                                                                                            </th>
+                                                                                            <th className="px-4 py-2 text-center border border-slate-600">
+                                                                                                listening
+                                                                                            </th>
+                                                                                            <th className="px-4 py-2 text-center border border-slate-600">
+                                                                                                reading
+                                                                                            </th>
+                                                                                            <th className="px-4 py-2 text-center border border-slate-600">
+                                                                                                writing
+                                                                                            </th>
+                                                                                        </tr>
+                                                                                        {Object.entries(
+                                                                                            course
+                                                                                                .language[0]
+                                                                                                ?.language
+                                                                                        ).map(
+                                                                                            (
+                                                                                                [
+                                                                                                    key,
+                                                                                                    value
+                                                                                                ],
+                                                                                                i
+                                                                                            ) => (
+                                                                                                <tr
+                                                                                                    key={
+                                                                                                        'language-table--' +
+                                                                                                        i
                                                                                                     }
-                                                                                                </td>
-                                                                                                <td className="px-4 py-2 text-center border border-slate-600">
-                                                                                                    {
-                                                                                                        value.s
-                                                                                                    }{' '}
-                                                                                                    %
-                                                                                                </td>
-                                                                                                <td className="px-4 py-2 text-center border border-slate-600">
-                                                                                                    {
-                                                                                                        value.l
-                                                                                                    }{' '}
-                                                                                                    %
-                                                                                                </td>
-                                                                                                <td className="px-4 py-2 text-center border border-slate-600">
-                                                                                                    {
-                                                                                                        value.r
-                                                                                                    }{' '}
-                                                                                                    %
-                                                                                                </td>
-                                                                                                <td className="px-4 py-2 text-center border border-slate-600">
-                                                                                                    {
-                                                                                                        value.w
-                                                                                                    }{' '}
-                                                                                                    %
-                                                                                                </td>
-                                                                                            </tr>
-                                                                                        )
-                                                                                    )}
-                                                                                </tbody>
-                                                                            </table>
+                                                                                                >
+                                                                                                    <td className="px-4 py-2 text-center border border-slate-600">
+                                                                                                        {
+                                                                                                            key
+                                                                                                        }
+                                                                                                    </td>
+                                                                                                    <td className="px-4 py-2 text-center border border-slate-600">
+                                                                                                        {
+                                                                                                            value.s
+                                                                                                        }{' '}
+                                                                                                        %
+                                                                                                    </td>
+                                                                                                    <td className="px-4 py-2 text-center border border-slate-600">
+                                                                                                        {
+                                                                                                            value.l
+                                                                                                        }{' '}
+                                                                                                        %
+                                                                                                    </td>
+                                                                                                    <td className="px-4 py-2 text-center border border-slate-600">
+                                                                                                        {
+                                                                                                            value.r
+                                                                                                        }{' '}
+                                                                                                        %
+                                                                                                    </td>
+                                                                                                    <td className="px-4 py-2 text-center border border-slate-600">
+                                                                                                        {
+                                                                                                            value.w
+                                                                                                        }{' '}
+                                                                                                        %
+                                                                                                    </td>
+                                                                                                </tr>
+                                                                                            )
+                                                                                        )}
+                                                                                    </tbody>
+                                                                                </table>
+                                                                            </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                            </div>
-                                                        )
-                                                    },
-                                                    {
-                                                        title: 'Tuitions Fee',
-                                                        element: (
-                                                            <div className="flex flex-col gap-4 items-start">
-                                                                <h3 className="text-black text-lg md:text-2xl font-bold">
-                                                                    Tuitions Fee
-                                                                </h3>
-                                                                <p className="text-sm md:text-base">
-                                                                    {setCurrencyValue(
-                                                                        course.tuitionFee *
-                                                                            (rate?.base_rate
-                                                                                ? +rate?.base_rate
-                                                                                : 1)
-                                                                    )}
-                                                                </p>
-                                                            </div>
-                                                        )
-                                                    },
-                                                    {
-                                                        title: 'Scholarship',
-                                                        element: (
-                                                            <div className="flex flex-col gap-4 items-start">
-                                                                <h3 className="text-black text-lg md:text-2xl font-bold">
-                                                                    Course
-                                                                    Scholarship
-                                                                </h3>
-                                                                <ul className="w-full flex flex-col items-start gap-2">
-                                                                    {course
-                                                                        .scholarship
-                                                                        .length >
-                                                                    0 ? (
-                                                                        course.scholarship.map(
-                                                                            ({
-                                                                                name
-                                                                            }) => (
-                                                                                <li
-                                                                                    className="text-sm md:text-base"
-                                                                                    key={
-                                                                                        'scholarship-list--' +
-                                                                                        name
-                                                                                    }
-                                                                                >
-                                                                                    {
-                                                                                        name
-                                                                                    }
-                                                                                </li>
+                                                            )
+                                                        },
+                                                        {
+                                                            title: 'Tuitions Fee',
+                                                            element: (
+                                                                <div className="flex flex-col gap-4 items-start">
+                                                                    <h3 className="text-black text-lg md:text-2xl font-bold">
+                                                                        Tuitions
+                                                                        Fee
+                                                                    </h3>
+                                                                    <p className="text-sm md:text-base">
+                                                                        {setCurrencyValue(
+                                                                            course.tuitionFee *
+                                                                                (rate?.base_rate
+                                                                                    ? +rate?.base_rate
+                                                                                    : 1)
+                                                                        )}
+                                                                    </p>
+                                                                </div>
+                                                            )
+                                                        },
+                                                        {
+                                                            title: 'Scholarship',
+                                                            element: (
+                                                                <div className="flex flex-col gap-4 items-start">
+                                                                    <h3 className="text-black text-lg md:text-2xl font-bold">
+                                                                        Course
+                                                                        Scholarship
+                                                                    </h3>
+                                                                    <ul className="w-full flex flex-col items-start gap-2">
+                                                                        {course
+                                                                            .scholarship
+                                                                            .length >
+                                                                        0 ? (
+                                                                            course.scholarship.map(
+                                                                                ({
+                                                                                    name
+                                                                                }) => (
+                                                                                    <li
+                                                                                        className="text-sm md:text-base"
+                                                                                        key={
+                                                                                            'scholarship-list--' +
+                                                                                            name
+                                                                                        }
+                                                                                    >
+                                                                                        {
+                                                                                            name
+                                                                                        }
+                                                                                    </li>
+                                                                                )
                                                                             )
-                                                                        )
-                                                                    ) : (
-                                                                        <li className="text-sm md:text-base">
-                                                                            No
-                                                                            scholarships
-                                                                            available
-                                                                        </li>
-                                                                    )}
-                                                                </ul>
-                                                            </div>
-                                                        )
-                                                    },
-                                                    {
-                                                        title: 'Initial Deposit',
-                                                        element: (
-                                                            <div className="flex flex-col gap-4 items-start">
-                                                                <h3 className="text-black text-lg md:text-2xl font-bold">
-                                                                    Initial
-                                                                    Deposit
-                                                                </h3>
+                                                                        ) : (
+                                                                            <li className="text-sm md:text-base">
+                                                                                No
+                                                                                scholarships
+                                                                                available
+                                                                            </li>
+                                                                        )}
+                                                                    </ul>
+                                                                </div>
+                                                            )
+                                                        },
+                                                        {
+                                                            title: 'Initial Deposit',
+                                                            element: (
+                                                                <div className="flex flex-col gap-4 items-start">
+                                                                    <h3 className="text-black text-lg md:text-2xl font-bold">
+                                                                        Initial
+                                                                        Deposit
+                                                                    </h3>
 
-                                                                <p className="text-sm md:text-base">
-                                                                    {initialDeposit(
-                                                                        {
-                                                                            initialDeposit:
-                                                                                course
-                                                                                    .initialDeposit?.[0]
-                                                                                    .amount,
-                                                                            tuitionFee:
-                                                                                course.tuitionFee,
-                                                                            scholarship:
-                                                                                course
-                                                                                    ?.scholarship[0]
-                                                                                    ?.amount,
-                                                                            currency_code:
-                                                                                course.feeCurrency
-                                                                        }
-                                                                    )}
-                                                                </p>
-                                                            </div>
-                                                        )
-                                                    }
-                                                ]}
-                                            />
-                                        </div>
-                                    </div>
-                                    <div className="py-6 border-t-2 border-borderColor flex items-center justify-between w-full mb-8 md:mb-20">
-                                        <h1 className="text-base md:text-xl font-semibold text-textLightBlackColor">
-                                            Get more details
-                                        </h1>
-                                        <Link
-                                            href={course.institute.instituteURL}
-                                            target="_blank"
-                                            className="text-blueColor text-xs md:text-base"
-                                        >
-                                            Visit university website
-                                        </Link>
-                                    </div>
-                                    {course.documentsRequirement && (
-                                        <div className="flex flex-col gap-5 w-full">
-                                            <div className="flex items-center gap-2">
-                                                <IoDocumentText className="h-7 w-7 md:h-8 md:w-8" />
-                                                <h1 className="font-bold text-lg md:text-2xl text-mainTextColor">
-                                                    Requirements
-                                                </h1>
-                                            </div>
-                                            <p className="text-sm md:text-xl font-medium text-lightGrayColor">
-                                                Listed below are the documents
-                                                required to apply for this
-                                                course.
-                                            </p>
-                                            <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-7">
-                                                {course.documentsRequirement?.map(
-                                                    ({ title, url }, i) => (
-                                                        <RequirementBox
-                                                            key={
-                                                                'docs requirement--' +
-                                                                i +
-                                                                title
-                                                            }
-                                                            text={title}
-                                                            url={url}
-                                                        />
-                                                    )
-                                                )}
+                                                                    <p className="text-sm md:text-base">
+                                                                        {initialDeposit(
+                                                                            {
+                                                                                initialDeposit:
+                                                                                    course
+                                                                                        .initialDeposit?.[0]
+                                                                                        .amount,
+                                                                                tuitionFee:
+                                                                                    course.tuitionFee,
+                                                                                scholarship:
+                                                                                    course
+                                                                                        ?.scholarship[0]
+                                                                                        ?.amount,
+                                                                                currency_code:
+                                                                                    course.feeCurrency
+                                                                            }
+                                                                        )}
+                                                                    </p>
+                                                                </div>
+                                                            )
+                                                        }
+                                                    ]}
+                                                />
                                             </div>
                                         </div>
-                                    )}
+                                    </div>
                                 </div>
+                                <div className="py-6 border-t-2 border-borderColor flex items-center justify-between w-full mb-8 md:mb-20">
+                                    <h1 className="text-base md:text-xl font-semibold text-textLightBlackColor">
+                                        Get more details
+                                    </h1>
+                                    <Link
+                                        href={course.institute.instituteURL}
+                                        target="_blank"
+                                        className="text-blueColor text-xs md:text-base"
+                                    >
+                                        Visit university website
+                                    </Link>
+                                </div>
+                                {course.documentsRequirement && (
+                                    <div className="flex flex-col gap-5 w-full">
+                                        <div className="flex items-center gap-2">
+                                            <IoDocumentText className="h-7 w-7 md:h-8 md:w-8" />
+                                            <h1 className="font-bold text-lg md:text-2xl text-mainTextColor">
+                                                Requirements
+                                            </h1>
+                                        </div>
+                                        <p className="text-sm md:text-xl font-medium text-lightGrayColor">
+                                            Listed below are the documents
+                                            required to apply for this course.
+                                        </p>
+                                        <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-7">
+                                            {course.documentsRequirement?.map(
+                                                ({ title, url }, i) => (
+                                                    <RequirementBox
+                                                        key={
+                                                            'docs requirement--' +
+                                                            i +
+                                                            title
+                                                        }
+                                                        text={title}
+                                                        url={url}
+                                                    />
+                                                )
+                                            )}
+                                        </div>
+                                    </div>
+                                )}
                             </div>
                             <div className="flex flex-col gap-11 w-full lg:w-[28%] xl:w-[30%]">
                                 <div className="bg-white rounded-[10px] px-4 py-6 w-full z-10 shadow-RequirementBox mt-4 hidden lg:block">

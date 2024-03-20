@@ -24,6 +24,7 @@ export const API_ENDPOINTS = {
     SCHOLARSHIP: '/scholarship',
     SCHOLARSHIP_BY_ID: '/scholarship/:id',
     COURSE_DEGREE_ID: '/course/degree',
+    COURSE_INSTITUTE_ID: '/course/institute',
     COURSE_SEARCH: '/course/filter',
     COURSE_BY_ID: '/course/:id',
     SCHOLARSHIP_SEARCH: '/scholarship/filter',
