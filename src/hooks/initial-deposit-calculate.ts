@@ -1,18 +1,31 @@
 import { useCurrency } from '@/hooks/currency';
 
-export const useCalculate = () => {
-    const { setCurrencyValue } = useCurrency();
+interface initialDepositType {
+    initialDeposit: string;
+    tuitionFee: number;
+    scholarship: string;
+    isNumber?: boolean;
+    currency_code?: string;
+}
 
-    function initialDeposit(
-        initialDeposit: string,
-        tuitionFee: number,
-        scholarship: string = '0%',
-        isNumber = false
-    ): string | number {
+export const useCalculate = () => {
+    const { setCurrencyValue, getSingleRate } = useCurrency();
+    const { base_code } = useCurrency();
+
+    function initialDeposit({
+        initialDeposit,
+        tuitionFee,
+        scholarship,
+        isNumber = false,
+        currency_code
+    }: initialDepositType): string | number {
+        const { base_rate } = getSingleRate(currency_code ?? base_code) ?? {
+            base_rate: 1
+        };
         if (!isNaN(+initialDeposit)) {
             return isNumber
-                ? +initialDeposit
-                : setCurrencyValue(+initialDeposit);
+                ? +initialDeposit * +base_rate
+                : setCurrencyValue(+initialDeposit * +base_rate);
         }
 
         const matches = initialDeposit.match(/^\{([1-9][0-9]?|100)%,(N|G)\}$/);
@@ -22,18 +35,23 @@ export const useCalculate = () => {
 
             if (option === 'G') {
                 return isNumber
-                    ? tuitionFee * (percentage / 100) ?? 0
-                    : setCurrencyValue(tuitionFee * (percentage / 100) ?? 0);
+                    ? (tuitionFee * (percentage / 100) ?? 0) * +base_rate
+                    : setCurrencyValue(
+                          (tuitionFee * (percentage / 100) ?? 0) * +base_rate
+                      );
             } else if (option === 'N') {
                 return isNumber
                     ? Math.floor(
                           tuitionFee * (percentage / 100) -
-                              tuitionFee * (parseInt(scholarship) / 100)
+                              tuitionFee *
+                                  (parseInt(scholarship) / 100) *
+                                  +base_rate
                       ) ?? 0
                     : setCurrencyValue(
                           Math.floor(
-                              tuitionFee * (percentage / 100) -
-                                  tuitionFee * (parseInt(scholarship) / 100)
+                              (tuitionFee * (percentage / 100) -
+                                  tuitionFee * (parseInt(scholarship) / 100)) *
+                                  +base_rate
                           ) ?? 0
                       );
             }

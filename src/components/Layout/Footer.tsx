@@ -4,9 +4,12 @@ import Link from 'next/link';
 import React from 'react';
 import Logo from '../Logo';
 import { useRouter } from 'next/router';
+import { useUi } from '@/hooks/user-interface';
+import { modalType } from '@/store/slices/ui.slice';
 
 const Footer = () => {
     const { pathname: path } = useRouter();
+    const { updateModal } = useUi();
     return (
         <footer className=" w-full flex justify-center flex-col print:hidden">
             {!path.includes(ROUTES.APPLY) && (
@@ -22,11 +25,17 @@ const Footer = () => {
                         <h1 className="text-white text-[28px] md:text-[32px] lg:text-5xl leading-10 md:text-start text-center w-[300px] md:w-[313px] lg:w-[531px] mb-6 lg:mb-0">
                             Want to study at Online program ?
                         </h1>
-                        <Link href="/apply">
-                            <button className="bg-white py-[13px] md:py-4 lg:py-[21px] px-[84px] md:px-8 lg:px-[51px] rounded-[5px] text-mainTextColor hover:bg-opacity-50 hover:text-white">
-                                Apply Now
-                            </button>
-                        </Link>
+                        <button
+                            onClick={() =>
+                                updateModal({
+                                    type: modalType.user_detail,
+                                    state: ''
+                                })
+                            }
+                            className="bg-white py-[13px] md:py-4 lg:py-[21px] px-[84px] md:px-8 lg:px-[51px] rounded-[5px] text-mainTextColor hover:bg-opacity-50 hover:text-white"
+                        >
+                            Apply Now
+                        </button>
                     </div>
                 </div>
             )}

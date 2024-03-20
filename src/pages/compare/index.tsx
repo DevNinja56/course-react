@@ -147,25 +147,31 @@ const Compare = ({ data }: { data?: singleCourseType }) => {
                 {
                     title: 'Initial Deposit',
                     first: first
-                        ? initialDeposit(
-                              first?.course.initialDeposit[0].amount,
-                              first?.course.tuitionFee,
-                              first?.course.scholarship?.[0]?.amount ?? 0
-                          )
+                        ? initialDeposit({
+                              initialDeposit:
+                                  first?.course.initialDeposit[0].amount,
+                              tuitionFee: first?.course.tuitionFee,
+                              scholarship:
+                                  first?.course.scholarship?.[0]?.amount ?? 0
+                          })
                         : null,
                     second: second
-                        ? initialDeposit(
-                              second?.course.initialDeposit[0].amount,
-                              second?.course.tuitionFee,
-                              second?.course.scholarship?.[0]?.amount ?? 0
-                          )
+                        ? initialDeposit({
+                              initialDeposit:
+                                  second?.course.initialDeposit[0].amount,
+                              tuitionFee: second?.course.tuitionFee,
+                              scholarship:
+                                  second?.course.scholarship?.[0]?.amount ?? 0
+                          })
                         : null,
                     third: third
-                        ? initialDeposit(
-                              third?.course.initialDeposit[0].amount,
-                              third?.course.tuitionFee,
-                              third?.course.scholarship?.[0].amount ?? 0
-                          )
+                        ? initialDeposit({
+                              initialDeposit:
+                                  third?.course.initialDeposit[0].amount,
+                              tuitionFee: third?.course.tuitionFee,
+                              scholarship:
+                                  third?.course.scholarship?.[0].amount ?? 0
+                          })
                         : null
                 },
                 {
@@ -219,13 +225,13 @@ const Compare = ({ data }: { data?: singleCourseType }) => {
                                 {i === 0 && (
                                     <button
                                         onClick={() => {
-                                            if(user.status === 'active') {
+                                            if (user.status === 'active') {
                                                 window.print();
+                                            } else {
+                                                toast.error(
+                                                    'You are not an active user.'
+                                                );
                                             }
-                                            else{
-                                                toast.error("You are not an active user.")
-                                            }
-                                          
                                         }}
                                         className="absolute top-[50%] translate-y-[-50%] right-3 bg-white px-2 py-1 rounded-md print:hidden flex gap-1 justify-center items-center font-bold hover:bg-opacity-80"
                                     >
