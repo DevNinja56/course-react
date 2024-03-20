@@ -169,7 +169,7 @@ const UserDetail = () => {
                 <div className="rounded-[10px] bg-white custom-shadow p-7 flex flex-col items-center relative min-w-0 md:min-w-[500px]">
                     <CiCircleRemove
                         onClick={hideModal}
-                        className="text-blueColor absolute top-4 right-4 text-2xl cursor-pointer"
+                        className="text-red-500 absolute top-4 right-4 text-3xl cursor-pointer"
                     />
                     <Link href={ROUTES.HOMEPAGE}>
                         <FaArrowLeft className="absolute left-5 top-5 cursor-pointer text-blueColor h-6 w-6" />
@@ -241,7 +241,7 @@ const UserDetail = () => {
                 <div className="p-7 bg-white rounded-3xl relative">
                     <CiCircleRemove
                         onClick={hideModal}
-                        className="text-blueColor absolute top-4 right-4 text-2xl cursor-pointer"
+                        className="text-red-500 absolute top-4 right-4 text-3xl cursor-pointer"
                     />
                     <div className="flex items-center gap-2">
                         <div className="bg-blueColor p-2 rounded-full">
@@ -461,11 +461,10 @@ const UserDetail = () => {
                                     )}
                                 </div>
                             )}
-                            <div className="w-full my-2">
+                            <div className="w-full flex flex-col gap-1 mb-1">
                                 <label className="text-sm font-semibold text-grayColor">
                                     Message
                                 </label>
-
                                 <Select
                                     {...register('message', {
                                         required: 'Message is required'
@@ -558,7 +557,7 @@ const UserDetail = () => {
                             </span>
                         )}
 
-                        <div className="flex items-end justify-between pt-9">
+                        <div className="flex items-end justify-end pt-5">
                             <button
                                 onClick={onClickBack}
                                 className={`flex items-center gap-2 px-7 py-3 rounded-md text-lg font-semibold  hover:bg-blue-400 hover:text-wh ${
@@ -574,25 +573,8 @@ const UserDetail = () => {
                             >
                                 Back
                             </button>
-                            <button className="flex items-center gap-2 px-7 py-3 rounded-md text-lg font-semibold bg-blueColor text-white  hover:bg-blue-600">
+                            <button className="flex items-center gap-2 px-4 py-2 rounded-md text-base font-semibold bg-blueColor text-white  hover:bg-blue-600">
                                 Continue
-                                <span>
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        width="20"
-                                        height="20"
-                                        viewBox="0 0 20 20"
-                                        fill="none"
-                                    >
-                                        <path
-                                            d="M7.5 15L12.5 10L7.5 5"
-                                            stroke="white"
-                                            stroke-width="2"
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                        />
-                                    </svg>
-                                </span>
                             </button>
                         </div>
                     </form>
