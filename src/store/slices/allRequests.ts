@@ -25,7 +25,7 @@ export interface PaginatedResponse<data> {
     nextPage: number | null;
 }
 
-type ApplyId = string | string[] |undefined;
+type ApplyId = string | string[] | undefined;
 
 export const stateQueryApi = createApi({
     reducerPath: 'stateQuery',
@@ -58,6 +58,17 @@ export const stateQueryApi = createApi({
             }),
             transformResponse: (res: { data: singleCourseType[] }) =>
                 res.data! ?? res
+        }),
+        getCoursesByInstitute: builder.query<
+            PaginatedResponse<singleCourseType[]>,
+            { limit: number; page: number; instituteId: string }
+        >({
+            query: ({ limit, page, instituteId }) => ({
+                url: `${API_ENDPOINTS.COURSE_INSTITUTE_ID}?limit=${limit}&page=${page}&instituteId=${instituteId}`
+            }),
+            transformResponse: (res: {
+                data: PaginatedResponse<singleCourseType[]>;
+            }) => res.data! ?? res
         }),
         getDiscipline: builder.query<disciplineType[], void>({
             query: () => ({ url: API_ENDPOINTS.DISCIPLINE }),
@@ -142,12 +153,11 @@ export const stateQueryApi = createApi({
             }) => res.data! ?? res
         }),
         getApplyById: builder.query<applyTypes, ApplyId>({
-            query: (id:string) => ({
+            query: (id: string) => ({
                 url: API_ENDPOINTS.GET_APPLY_BY_ID.replace(':id', id)
             }),
-            transformResponse: (res: { data: applyTypes }) =>
-                res.data! ?? res
-        }),
+            transformResponse: (res: { data: applyTypes }) => res.data! ?? res
+        })
     })
 });
 
@@ -167,5 +177,6 @@ export const {
     useGetUserAppliesQuery,
     useGetUserIpQuery,
     useGetCourseByFilterQuery,
-    useGetApplyByIdQuery
+    useGetApplyByIdQuery,
+    useGetCoursesByInstituteQuery
 } = stateQueryApi;

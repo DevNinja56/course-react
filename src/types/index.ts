@@ -160,7 +160,7 @@ export type instituteType = {
     campus: string[];
     country: countryType;
     degrees: degreeType[];
-    course: courseType[];
+    courses: courseType[];
     qsWorldRanking: string;
     timesHigherRanking: string;
     favoriteId: [string];
@@ -342,8 +342,8 @@ export interface userDocuments {
             given_name: string;
             sur_name: string;
             number: string;
-            country: string,
-            institute: string,
+            country: string;
+            institute: string;
             date_of_start: string;
             date_of_completion: string;
         };
