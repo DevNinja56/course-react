@@ -57,31 +57,22 @@ const ConSolid_MarkSheet = () => {
 
     const identity = {
         passport: {
-            url: [getApply?.documents.identity.passport?.url],
-            given_name: getApply?.documents.identity.passport.given_name,
-            sur_name: getApply?.documents.identity.passport.sur_name,
-            number: getApply?.documents.identity.passport.number,
-            date_of_issue: getApply?.documents.identity.passport.date_of_issue,
-            date_of_expiry: getApply?.documents.identity.passport.date_of_expiry
+            url: [getApply?.documents?.identity?.passport?.url],
+            given_name: getApply?.documents?.identity?.passport?.given_name,
+            sur_name: getApply?.documents?.identity?.passport?.sur_name,
+            number: getApply?.documents?.identity?.passport?.number,
+            date_of_issue: getApply?.documents?.identity?.passport?.date_of_issue,
+            date_of_expiry: getApply?.documents?.identity?.passport?.date_of_expiry
         }
     };
+    const semester_mark_sheets = {
+        url: getApply?.documents?.academic_certificates?.semester_mark_sheets
+            ?.url
+    };
 
-    const professional_records = {
-        experience_letter: {
-            url: getApply?.documents.professional_records?.experience_letter
-                ?.url
-        },
-        resume: {
-            url: getApply?.documents.professional_records?.resume?.url
-        },
-        personal_statement: {
-            url: getApply?.documents.professional_records?.personal_statement
-                ?.url
-        },
-        letter_of_reference: {
-            url: getApply?.documents.professional_records?.letter_of_reference
-                ?.url
-        }
+    const provisional_certificate = {
+        url: getApply?.documents?.academic_certificates?.provisional_certificate
+            ?.url
     };
 
     const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -129,9 +120,18 @@ const ConSolid_MarkSheet = () => {
                         course: getApply?.course.id,
                         user: getApply?.user.id,
                         documents: {
-                            ...(identity.passport
+                            ...(identity.passport.url?.[0]
                                 ? {
-                                      passport: identity.passport
+                                      identity: {
+                                          passport: {
+                                            url: identity.passport.url[0],
+                                            given_name: identity.passport.given_name,
+                                            sur_name: identity.passport.sur_name,
+                                            number: identity.passport.number,
+                                            date_of_issue: identity.passport.date_of_issue,
+                                            date_of_expiry: identity.passport.date_of_expiry
+                                          }
+                                      }
                                   }
                                 : {}),
                             academic_certificates: {
@@ -141,32 +141,24 @@ const ConSolid_MarkSheet = () => {
                                     date_of_completion: data.completeDate,
                                     institute: data.institution,
                                     country: data.country
-                                }
-                            },
-                            professional_records: {
-                                ...(professional_records.experience_letter.url
+                                },
+                                ...(semester_mark_sheets.url
                                     ? {
-                                          url: professional_records
-                                              .experience_letter.url
+                                          semester_mark_sheets: {
+                                              url: semester_mark_sheets.url
+                                          }
                                       }
                                     : {}),
-                                ...(professional_records.resume.url
+                                ...(provisional_certificate.url
                                     ? {
-                                          url: professional_records.resume.url
-                                      }
-                                    : {}),
-                                ...(professional_records.personal_statement.url
-                                    ? {
-                                          url: professional_records
-                                              .personal_statement.url
-                                      }
-                                    : {}),
-                                ...(professional_records.letter_of_reference.url
-                                    ? {
-                                          url: professional_records
-                                              .letter_of_reference.url
+                                          provisional_certificate: {
+                                              url: provisional_certificate.url
+                                          }
                                       }
                                     : {})
+                            },
+                            professional_records: {
+                                ...getApply?.documents?.professional_records
                             }
                         }
                     }
