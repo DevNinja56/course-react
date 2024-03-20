@@ -135,7 +135,7 @@ const FileSubmitted = () => {
                                           }
                                       }
                                     : {}),
-                                ...(consolidated_mark_sheets?.url
+                                ...(consolidated_mark_sheets?.url?.[0]
                                     ? {
                                           consolidated_mark_sheets: {
                                               ...(consolidated_mark_sheets.url

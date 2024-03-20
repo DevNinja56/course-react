@@ -120,7 +120,7 @@ const ConSolid_MarkSheet = () => {
                         course: getApply?.course.id,
                         user: getApply?.user.id,
                         documents: {
-                            ...(identity.passport.url
+                            ...(identity.passport.url?.[0]
                                 ? {
                                       identity: {
                                           passport: {

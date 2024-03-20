@@ -21,7 +21,7 @@ const SubmitDocument = () => {
 
     const identity = {
         passport: {
-            url: getApply?.documents?.identity?.passport?.url,
+            url: [getApply?.documents?.identity?.passport?.url],
             given_name: getApply?.documents?.identity?.passport?.given_name,
             sur_name: getApply?.documents?.identity?.passport?.sur_name,
             number: getApply?.documents?.identity?.passport?.number,
@@ -125,15 +125,25 @@ const SubmitDocument = () => {
                     course: getApply?.course.id,
                     user: getApply?.user.id,
                     documents: {
-                        ...(identity.passport
+                        ...(identity.passport.url[0]
                             ? {
                                   identity: {
-                                      passport: identity.passport
+                                      passport: {
+                                          url: identity.passport.url[0],
+                                          given_name:
+                                              identity.passport.given_name,
+                                          sur_name: identity.passport.sur_name,
+                                          number: identity.passport.number,
+                                          date_of_issue:
+                                              identity.passport.date_of_issue,
+                                          date_of_expiry:
+                                              identity.passport.date_of_expiry
+                                      }
                                   }
                               }
                             : {}),
                         academic_certificates: {
-                            ...(consolidated_mark_sheets?.url
+                            ...(consolidated_mark_sheets?.url[0]
                                 ? {
                                       consolidated_mark_sheets: {
                                           ...(consolidated_mark_sheets.url
@@ -211,13 +221,25 @@ const SubmitDocument = () => {
                     course: getApply?.course.id,
                     user: getApply?.user.id,
                     documents: {
-                        ...(identity.passport
+                        ...(identity.passport.url[0]
                             ? {
-                                  identity: { passport: identity.passport }
+                                  identity: {
+                                      passport: {
+                                          url: identity.passport.url[0],
+                                          given_name:
+                                              identity.passport.given_name,
+                                          sur_name: identity.passport.sur_name,
+                                          number: identity.passport.number,
+                                          date_of_issue:
+                                              identity.passport.date_of_issue,
+                                          date_of_expiry:
+                                              identity.passport.date_of_expiry
+                                      }
+                                  }
                               }
                             : {}),
                         academic_certificates: {
-                            ...(consolidated_mark_sheets?.url
+                            ...(consolidated_mark_sheets?.url[0]
                                 ? {
                                       consolidated_mark_sheets: {
                                           ...(consolidated_mark_sheets.url
@@ -295,10 +317,20 @@ const SubmitDocument = () => {
                     course: getApply?.course.id,
                     user: getApply?.user.id,
                     documents: {
-                        ...(identity.passport
+                        ...(identity.passport.url[0]
                             ? {
                                   identity: {
-                                      passport: identity.passport
+                                      passport: {
+                                          url: identity.passport.url[0],
+                                          given_name:
+                                              identity.passport.given_name,
+                                          sur_name: identity.passport.sur_name,
+                                          number: identity.passport.number,
+                                          date_of_issue:
+                                              identity.passport.date_of_issue,
+                                          date_of_expiry:
+                                              identity.passport.date_of_expiry
+                                      }
                                   }
                               }
                             : {}),
@@ -317,7 +349,7 @@ const SubmitDocument = () => {
                                       }
                                   }
                                 : {}),
-                            ...(consolidated_mark_sheets?.url
+                            ...(consolidated_mark_sheets?.url[0]
                                 ? {
                                       consolidated_mark_sheets: {
                                           ...(consolidated_mark_sheets.url
@@ -388,10 +420,20 @@ const SubmitDocument = () => {
                     course: getApply?.course.id,
                     user: getApply?.user.id,
                     documents: {
-                        ...(identity.passport
+                        ...(identity.passport.url[0]
                             ? {
                                   identity: {
-                                      passport: identity.passport
+                                      passport: {
+                                          url: identity.passport.url[0],
+                                          given_name:
+                                              identity.passport.given_name,
+                                          sur_name: identity.passport.sur_name,
+                                          number: identity.passport.number,
+                                          date_of_issue:
+                                              identity.passport.date_of_issue,
+                                          date_of_expiry:
+                                              identity.passport.date_of_expiry
+                                      }
                                   }
                               }
                             : {}),
@@ -410,7 +452,7 @@ const SubmitDocument = () => {
                                       }
                                   }
                                 : {}),
-                            ...(consolidated_mark_sheets?.url
+                            ...(consolidated_mark_sheets?.url[0]
                                 ? {
                                       consolidated_mark_sheets: {
                                           ...(consolidated_mark_sheets.url
@@ -481,19 +523,29 @@ const SubmitDocument = () => {
                     course: getApply?.course.id,
                     user: getApply?.user.id,
                     documents: {
-                        ...(identity.passport
+                        ...(identity.passport.url[0]
                             ? {
-                                identity : {
-                                    passport: identity.passport
-                                }     
+                                  identity: {
+                                      passport: {
+                                          url: identity.passport.url[0],
+                                          given_name:
+                                              identity.passport.given_name,
+                                          sur_name: identity.passport.sur_name,
+                                          number: identity.passport.number,
+                                          date_of_issue:
+                                              identity.passport.date_of_issue,
+                                          date_of_expiry:
+                                              identity.passport.date_of_expiry
+                                      }
+                                  }
                               }
                             : {}),
                         academic_certificates: {
                             ...(semester_mark_sheets.url
                                 ? {
-                                    semester_mark_sheets : {
-                                        url: semester_mark_sheets.url
-                                    }    
+                                      semester_mark_sheets: {
+                                          url: semester_mark_sheets.url
+                                      }
                                   }
                                 : {}),
                             ...(provisional_certificate.url
@@ -503,7 +555,7 @@ const SubmitDocument = () => {
                                       }
                                   }
                                 : {}),
-                            ...(consolidated_mark_sheets?.url
+                            ...(consolidated_mark_sheets?.url[0]
                                 ? {
                                       consolidated_mark_sheets: {
                                           ...(consolidated_mark_sheets.url
@@ -574,10 +626,20 @@ const SubmitDocument = () => {
                     course: getApply?.course.id,
                     user: getApply?.user.id,
                     documents: {
-                        ...(identity.passport
+                        ...(identity.passport.url[0]
                             ? {
                                   identity: {
-                                      passport: identity.passport
+                                      passport: {
+                                          url: identity.passport.url[0],
+                                          given_name:
+                                              identity.passport.given_name,
+                                          sur_name: identity.passport.sur_name,
+                                          number: identity.passport.number,
+                                          date_of_issue:
+                                              identity.passport.date_of_issue,
+                                          date_of_expiry:
+                                              identity.passport.date_of_expiry
+                                      }
                                   }
                               }
                             : {}),
@@ -596,7 +658,7 @@ const SubmitDocument = () => {
                                       }
                                   }
                                 : {}),
-                            ...(consolidated_mark_sheets?.url
+                            ...(consolidated_mark_sheets?.url[0]
                                 ? {
                                       consolidated_mark_sheets: {
                                           ...(consolidated_mark_sheets.url
