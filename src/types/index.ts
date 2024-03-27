@@ -223,8 +223,8 @@ export type filterCourseType = {
 };
 
 export type courseLanguageRequirement = {
-    ielts: { s: string; l: string; r: string; w: string };
-    pte: { s: string; l: string; r: string; w: string };
+    ielts: { s: string; l: string; r: string; w: string;oa: string };
+    pte: { s: string; l: string; r: string; w: string; oa: string };
 };
 
 export type singleCourseType = {

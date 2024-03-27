@@ -24,6 +24,7 @@ import { FaCalendar } from 'react-icons/fa';
 import { getMonths } from '@/utils/get-months';
 import { useCurrency } from '@/hooks/currency';
 import { useCalculate } from '@/hooks/initial-deposit-calculate';
+import LanguageRequirements from '@/components/course/LanguageRequirements';
 // import { BiSolidCalendar } from 'react-icons/bi';
 // import CourseTag from '@/components/course/CourseTag';
 
@@ -191,79 +192,11 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                                                                             Requirements
                                                                         </h3>
                                                                         <div className="flex gap-4">
-                                                                            <div className="flex flex-col gap-4 items-center w-full uppercase  ">
-                                                                                <table className="border-separate border border-slate-500">
-                                                                                    <tbody>
-                                                                                        <tr>
-                                                                                            <th className="px-4 py-2 text-center border border-slate-600">
-                                                                                                Type
-                                                                                            </th>
-                                                                                            <th className="px-4 py-2 text-center border border-slate-600">
-                                                                                                speaking
-                                                                                            </th>
-                                                                                            <th className="px-4 py-2 text-center border border-slate-600">
-                                                                                                listening
-                                                                                            </th>
-                                                                                            <th className="px-4 py-2 text-center border border-slate-600">
-                                                                                                reading
-                                                                                            </th>
-                                                                                            <th className="px-4 py-2 text-center border border-slate-600">
-                                                                                                writing
-                                                                                            </th>
-                                                                                        </tr>
-                                                                                        {Object.entries(
-                                                                                            course
-                                                                                                .language[0]
-                                                                                                ?.language
-                                                                                        ).map(
-                                                                                            (
-                                                                                                [
-                                                                                                    key,
-                                                                                                    value
-                                                                                                ],
-                                                                                                i
-                                                                                            ) => (
-                                                                                                <tr
-                                                                                                    key={
-                                                                                                        'language-table--' +
-                                                                                                        i
-                                                                                                    }
-                                                                                                >
-                                                                                                    <td className="px-4 py-2 text-center border border-slate-600">
-                                                                                                        {
-                                                                                                            key
-                                                                                                        }
-                                                                                                    </td>
-                                                                                                    <td className="px-4 py-2 text-center border border-slate-600">
-                                                                                                        {
-                                                                                                            value.s
-                                                                                                        }{' '}
-                                                                                                        %
-                                                                                                    </td>
-                                                                                                    <td className="px-4 py-2 text-center border border-slate-600">
-                                                                                                        {
-                                                                                                            value.l
-                                                                                                        }{' '}
-                                                                                                        %
-                                                                                                    </td>
-                                                                                                    <td className="px-4 py-2 text-center border border-slate-600">
-                                                                                                        {
-                                                                                                            value.r
-                                                                                                        }{' '}
-                                                                                                        %
-                                                                                                    </td>
-                                                                                                    <td className="px-4 py-2 text-center border border-slate-600">
-                                                                                                        {
-                                                                                                            value.w
-                                                                                                        }{' '}
-                                                                                                        %
-                                                                                                    </td>
-                                                                                                </tr>
-                                                                                            )
-                                                                                        )}
-                                                                                    </tbody>
-                                                                                </table>
-                                                                            </div>
+                                                                            <LanguageRequirements
+                                                                                language={
+                                                                                    course
+                                                                                        .language[0].language
+                                                                                } />
                                                                         </div>
                                                                     </div>
                                                                 </div>
