@@ -9,7 +9,7 @@ import { modalType } from '@/store/slices/ui.slice';
 import { scholarshipType } from '@/types';
 import { getSsrRequest } from '@/utils/ssrRequest';
 import { GetServerSideProps } from 'next';
-import Image from 'next/image';
+// import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 import { FaCalendar, FaMoneyBillWave } from 'react-icons/fa6';
@@ -26,39 +26,39 @@ const CourseDetail = ({ data: scholarship }: { data: scholarshipType }) => {
             ) : (
                 <>
                     <div className="w-full flex justify-center overflow-hidden mt-[100px] relative">
-                        <Image
+                        <img
                             height={60}
                             width={60}
                             alt="course-round"
                             className="top-1/3 absolute -left-3 md:-left-5 h-8 w-8 md:h-16 md:w-16 lg:h-24 lg:w-24 z-10"
                             src="/images/CourseDetail/Circle 3.svg"
-                            priority
+                            // priority
                         />
                         <div className="w-full py-5 pb-10 md:py-10 xl:py-20 flex justify-center xl:container px-4 md:px-[50px] lg:px-2 2xl:px-8">
-                            <Image
+                            <img
                                 height={375}
                                 width={1240}
                                 alt="courseDetail"
                                 src="/images/CourseDetail/courseDetailMain.png"
                                 className="z-20 h-full w-full lg:block hidden"
-                                priority
+                                // priority
                             />
-                            <Image
+                            <img
                                 height={375}
                                 width={1240}
                                 alt="courseDetail"
                                 src="/images/CourseDetail/courseDetailMainTablet.png"
                                 className="z-20 h-full w-full lg:hidden block"
-                                priority
+                                // priority
                             />
                         </div>
-                        <Image
+                        <img
                             height={273}
                             width={274}
                             alt="courseDetail-round"
                             className="absolute right-[-40px] lg:-right-20 -top-7 md:-top-16 md:-right-8 md:translate-y-8 lg:translate-y-0 md:bottom-8 lg:-top-16 h-20 w-20 md:h-32 md:w-32 lg:h-80 lg:w-80"
                             src="/images/CourseDetail/Ciecle 4.svg"
-                            priority
+                            // priority
                         />
                     </div>
                     <div className="flex items-center w-full xl:container px-4 md:px-[50px] lg:px-2 2xl:px-8 mx-auto transition-all duration-300 flex-col gap-6 mb-32">
@@ -190,7 +190,7 @@ const CourseDetail = ({ data: scholarship }: { data: scholarshipType }) => {
                             <div className="flex flex-col gap-11 w-full lg:w-[28%] xl:w-[30%]">
                                 <div className="bg-white rounded-[10px] px-4 py-6 w-full z-10 shadow-RequirementBox mt-4 hidden lg:block">
                                     <div className="relative flex justify-center items-end w-full h-[228px] pb-3">
-                                        <Image
+                                        <img
                                             height={228}
                                             width={353.5}
                                             alt="minim"
@@ -199,7 +199,7 @@ const CourseDetail = ({ data: scholarship }: { data: scholarshipType }) => {
                                                 scholarship.institute?.image ??
                                                 '/images/CourseDetail/Rectangle 1697.svg'
                                             }
-                                            priority
+                                            // priority
                                         />
                                         <h1 className="absolute w-full bottom-0 left-0 py-2 px-5 bg-gradient-to-t from-blueColor text-center font-bold text-2xl text-white z-10  ">
                                             {scholarship.institute.name}

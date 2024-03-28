@@ -1,7 +1,7 @@
 import { ROUTES } from '@/config/constant';
 import { useFilterQuery } from '@/hooks/filterQuery';
 import { disciplineType } from '@/types';
-import Image from 'next/image';
+// import Image from 'next/image';
 import Link from 'next/link';
 import React, { useState } from 'react';
 import { BiChevronRight } from 'react-icons/bi';
@@ -31,13 +31,13 @@ const Card = ({ discipline }: CardProps) => {
             onClick={() => addQuery({ discipline: [discipline.name] })}
         >
             <Link href={ROUTES.FILTER_COURSE} className="flex flex-col">
-                <Image
+                <img
                     height={165}
                     width={276}
                     alt="main-img"
                     className="rounded-[10px] rounded-b-none w-full h-40"
                     src={discipline.image}
-                    priority
+                    // priority
                 />
                 <div
                     className="w-full bg-blueColor text-white py-3 font-bold text-lg flex items-center justify-center "

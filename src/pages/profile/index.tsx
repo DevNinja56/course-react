@@ -1,5 +1,5 @@
 import ProfileComp from '@/components/Profile/ProfileComp';
-import Image from 'next/image';
+// import Image from 'next/image';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import Favorites from '@/components/Profile/Favorites/index';
@@ -24,7 +24,7 @@ const Profile = () => {
     return (
         <>
             <div className="w-full flex items-center justify-between h-[176px] mt-[100px] bg-profileBgColor overflow-hidden">
-                <Image
+                <img
                     height={106}
                     width={109}
                     alt="profile-round-img"
@@ -34,14 +34,14 @@ const Profile = () => {
                 <h1 className="text-mainTextColor text-[28px] md:text-[40px] font-extrabold">
                     Your {activeComponent}
                 </h1>
-                <Image
+                <img
                     height={119}
                     width={100}
                     alt="profile-round-img"
                     className="mt-[100px] lg:mt-[56px] h-[93px] w-[95px] md:h-[119px] md:w-[100px] block md:hidden lg:block mr-[-7px] md:ml-0"
                     src="/images/profileImages/Frame 691.svg"
                 />
-                <Image
+                <img
                     height={106}
                     width={109}
                     alt="profile-round-img"

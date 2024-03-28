@@ -5,19 +5,19 @@ import Certificate from './icons/Certificate';
 import { RiGraduationCapFill } from 'react-icons/ri';
 import School from './icons/School';
 import { FaArrowRight } from 'react-icons/fa6';
-import Image from 'next/image';
+// import Image from 'next/image';
 
 const ScholarshipCard = () => {
     return (
         <div className="relative pt-7 shadow-md rounded-lg group hover:-translate-y-2 transition-all duration-500 cursor-pointer flex flex-col border border-gray-100">
             <div className="flex flex-col gap-5 w-full z-10">
                 <div className="flex flex-col items-center w-full justify-center gap-2">
-                    <Image
+                    <img
                         height={90}
                         width={90}
                         alt="scholarship"
                         src="/images/institute/scholarship (1) 1.svg"
-                        priority
+                        // priority
                     />
                     <h1 className="font-bold text-base text-mainTextColor flex flex-col items-center">
                         20% Off On First 100 Student <span>(Entrance)</span>

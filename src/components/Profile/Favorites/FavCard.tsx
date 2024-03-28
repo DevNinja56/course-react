@@ -1,5 +1,5 @@
 import FavoriteButton from '@/components/Button/FavoriteButton';
-import Image from 'next/image';
+// import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 
@@ -30,7 +30,7 @@ const FavCard: React.FC<propsType> = ({
             />
             <Link href={link} onClick={onClick}>
                 <div className="img">
-                    <Image src={image} width={300} height={300} alt={title} />
+                    <img src={image} width={300} height={300} alt={title} />
                 </div>
                 <div className="group-hover:text-blueColor capitalize mt-5">
                     {title}

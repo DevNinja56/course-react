@@ -7,7 +7,7 @@ import { fetchRequest } from '@/utils/axios/fetch';
 import { API_ENDPOINTS } from '@/config/Api_EndPoints';
 import InputBox from '@/components/Input';
 import Select, { SingleValue } from 'react-select';
-import Image from 'next/image';
+// import Image from 'next/image';
 import { CiCircleRemove } from 'react-icons/ci';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import GoogleOAuthWraper from '@/components/Auth/GoogleSignInBtn';
@@ -245,7 +245,7 @@ const UserDetail = () => {
                     />
                     <div className="flex items-center gap-2">
                         <div className="bg-blueColor p-2 rounded-full">
-                            <Image
+                            <img
                                 width={30}
                                 height={30}
                                 src="/images/userLogo.png"

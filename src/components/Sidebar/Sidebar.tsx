@@ -2,7 +2,7 @@ import { ROUTES } from '@/config/constant';
 import { useFilterQuery } from '@/hooks/filterQuery';
 import { useUi } from '@/hooks/user-interface';
 import { modalType } from '@/store/slices/ui.slice';
-import Image from 'next/image';
+// import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
@@ -34,23 +34,23 @@ const Sidebar = ({ setShowSideBar }: modalProps) => {
             <div className="backgroundBlack fixed top-0 left-0 h-[100vh] w-full z-40 flex items-center justify-end">
                 <div className="bg-white h-[100%] w-[481px] px-[34px]">
                     <div className="flex w-full items-center justify-between border-b border-siderBarBottom py-4 mb-8">
-                        <Image
+                        <img
                             width={187.68}
                             height={46}
                             alt="Logo"
                             src="/images/courseoptionslogo 1.svg"
-                            priority
+                            // priority
                         />
                         <div
                             onClick={onHideSideBar}
                             className="h-[38.33px] w-[38.33px] bg-blueColor flex items-center justify-center rounded-full"
                         >
-                            <Image
+                            <img
                                 width={9.58}
                                 height={9.58}
                                 alt="Logo"
                                 src="/images/cross.svg"
-                                priority
+                                // priority
                             />
                         </div>
                     </div>
@@ -67,12 +67,12 @@ const Sidebar = ({ setShowSideBar }: modalProps) => {
                             required
                         />
                         <button type="submit" className="absolute right-0">
-                            <Image
+                            <img
                                 width={24}
                                 height={24}
                                 alt="Logo"
                                 src="/images/search.svg"
-                                priority
+                                // priority
                             />
                         </button>
                     </form>

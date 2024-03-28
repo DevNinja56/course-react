@@ -1,4 +1,4 @@
-import Image from 'next/image';
+// import Image from 'next/image';
 import { useRouter } from 'next/router';
 import React, { useRef, useState } from 'react';
 import ProfileDropDown from '../DropDown/ProfileDropDown';
@@ -200,7 +200,7 @@ const Header = ({ onlyLogo }: { onlyLogo?: boolean }) => {
                                         onClick={onShowDropDown}
                                     >
                                         {user.avatar ? (
-                                            <Image
+                                            <img
                                                 src={user.avatar}
                                                 className="border rounded-full p-0.5 -mr-1"
                                                 alt="Profile Photo"
@@ -214,13 +214,13 @@ const Header = ({ onlyLogo }: { onlyLogo?: boolean }) => {
                                         )}
                                         <p className="text-textBlackColor capitalize font-semibold hidden lg:flex gap-x-1 ">
                                             {user.name?.toLocaleLowerCase()}
-                                            <Image
+                                            <img
                                                 height={16}
                                                 width={16}
                                                 alt="down-arrow"
                                                 className="cursor-pointer"
                                                 src="/images/chevron-down.svg"
-                                                priority
+                                                // priority
                                             />
                                         </p>
                                         <ProfileDropDown
@@ -232,33 +232,33 @@ const Header = ({ onlyLogo }: { onlyLogo?: boolean }) => {
                                 ) : (
                                     <Link href={ROUTES.SIGN_IN}>
                                         <button className="py-2 lg:py-[13px] px-5 lg:px-[34px] gap-x-[6px] md:flex justify-center items-center rounded-[5px] bg-blueColor hover:bg-blue-600 text-white text-base font-medium hidden">
-                                            <Image
+                                            <img
                                                 width={20}
                                                 height={20}
                                                 alt="user-icon"
                                                 src="/images/Profile.svg"
-                                                priority
+                                                // priority
                                             />
                                             Login
                                         </button>
-                                        <Image
+                                        <img
                                             height={36}
                                             width={36}
                                             alt=""
                                             src="/images/User Circle.svg"
                                             className="block md:hidden h-5 w-5 md:h-9 md:w-9"
-                                            priority
+                                            // priority
                                         />
                                     </Link>
                                 )}
-                                <Image
+                                <img
                                     width={46}
                                     height={46}
                                     alt="menu-icon"
                                     onClick={onShowSideBar}
                                     className="block lg:hidden h-5 w-5 md:h-11 md:w-11"
                                     src="/images/Menu.svg"
-                                    priority
+                                    // priority
                                 />
                                 <div className="hidden lg:block">
                                     <GlobalSearch />

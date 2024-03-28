@@ -1,4 +1,4 @@
-import Image from 'next/image';
+// import Image from 'next/image';
 import React, { useState } from 'react';
 import Institutes from './Institutes';
 import Scholarships from './Scholarships';
@@ -40,7 +40,7 @@ const Favorites = () => {
                             <p className="text-base md:text-xl font-semibold">
                                 {title}
                             </p>
-                            <Image
+                            <img
                                 height={20}
                                 width={20}
                                 alt="img-arrow-down"
@@ -48,7 +48,7 @@ const Favorites = () => {
                                 className={`lg:hidden ${
                                     title === active ? 'rotate-[-180deg]' : ''
                                 }`}
-                                priority
+                                // priority
                             />
                         </div>
                     </div>

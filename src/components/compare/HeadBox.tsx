@@ -1,19 +1,19 @@
 import React from 'react';
 import { useUi } from '@/hooks/user-interface';
 import { modalType } from '@/store/slices/ui.slice';
-import Image from 'next/image';
+// import Image from 'next/image';
 
 const HeadBox = () => {
     const { updateModal } = useUi();
     return (
         <div className="w-full px-5 md:px-[50px] lg:px-2 2xl:px-8 flex items-center justify-center mt-[100px] bg-profileBgColor py-20 relative mb-16 print:py-5 print:mt-0">
-            <Image
+            <img
                 height={193}
                 width={191}
                 alt="compareRound"
                 className="absolute top-0 left-0 h-20 w-20 lg:h-[193px] lg:w-[193px] print:hidden"
                 src="/images/Blogs/Frame 642.svg"
-                priority
+                // priority
             />
             <div className="flex flex-col gap-y-8 md:gap-y-12 items-center z-10 w-full md:w-auto">
                 <div className="flex flex-col justify-center items-center gap-y-1">
@@ -65,13 +65,13 @@ const HeadBox = () => {
                     </div>
                 </div>
             </div>
-            <Image
+            <img
                 height={193}
                 width={191}
                 alt="compare-round-2"
                 className="absolute bottom-0 right-0 h-16 w-16 lg:h-[193px] lg:w-[193px] print:hidden"
                 src="/images/Blogs/Frame 643.svg"
-                priority
+                // priority
             />
         </div>
     );

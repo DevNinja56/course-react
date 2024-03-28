@@ -1,6 +1,6 @@
 import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import Image from 'next/image';
+// import Image from 'next/image';
 import { EffectCoverflow, Pagination, Navigation } from 'swiper';
 
 import 'swiper/css';
@@ -50,7 +50,7 @@ function ScholarshipSlider() {
                                 href={ROUTES.SCHOLARSHIP.replace(':id', id)}
                                 className="max-w-[400px]"
                             >
-                                <Image
+                                <img
                                     width={500}
                                     height={500}
                                     src={

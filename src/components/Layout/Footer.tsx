@@ -1,5 +1,5 @@
 import { ROUTES } from '@/config/constant';
-import Image from 'next/image';
+// import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 import Logo from '../Logo';
@@ -15,7 +15,7 @@ const Footer = () => {
             {!path.includes(ROUTES.APPLY) && (
                 <div className="translate-y-20 transition-all duration-300 object-cover px-5 md:px-[50px] lg:px-0 relative container mx-auto ">
                     <div className="z-10 w-full flex flex-col md:flex-row items-center font-black justify-between relative p-8 md:p-12 lg:p-24 ">
-                        <Image
+                        <img
                             height={256}
                             width={1160}
                             alt="footer img"
@@ -59,7 +59,7 @@ const Footer = () => {
                             </div>
                             <div className="flex gap-x-5 items-center px-2">
                                 <div className="h-10 w-10 rounded-[5px] bg-facebookBgColor flex items-center justify-center">
-                                    <Image
+                                    <img
                                         height={19.83}
                                         width={10.97}
                                         alt="facebook logo"
@@ -67,7 +67,7 @@ const Footer = () => {
                                     />
                                 </div>
                                 <div className="h-10 w-10 rounded-[5px] bg-twitterBgColor flex items-center justify-center">
-                                    <Image
+                                    <img
                                         height={16.04}
                                         width={19.54}
                                         alt="twitter logo"
@@ -75,7 +75,7 @@ const Footer = () => {
                                     />
                                 </div>
                                 <div className="h-10 w-10 rounded-[5px] bg-telegramBgColor flex items-center justify-center">
-                                    <Image
+                                    <img
                                         height={16}
                                         width={19}
                                         alt="telegram logo"

@@ -1,6 +1,6 @@
 import StepsProgressBar from '@/components/StepsProgressBar';
 import { applyTypes } from '@/types';
-import Image from 'next/image';
+// import Image from 'next/image';
 import React from 'react';
 
 interface propTypes {
@@ -30,7 +30,7 @@ const ApplicationStatusBox = ({ selectedCourse }: propTypes) => {
                         </p>
                     </div>
                     <div className="flex items-center gap-3">
-                        <Image
+                        <img
                             width={20}
                             height={20}
                             className="w-8 h-8 rounded-[5px]"

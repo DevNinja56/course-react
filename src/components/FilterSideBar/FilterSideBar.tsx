@@ -1,4 +1,4 @@
-import Image from 'next/image';
+// import Image from 'next/image';
 import React from 'react';
 import CountriesFilter from '../FilterPage/CountriesFilter';
 import { FilterRow } from '../FilterPage/Course/FilterLeftBox';
@@ -44,12 +44,12 @@ const FilterSideBar = ({ setFilterSideBar }: ModalProps) => {
                             onClick={onHideSideBar}
                             className="h-[38.33px] w-[38.33px] bg-blueColor flex items-center justify-center rounded-full"
                         >
-                            <Image
+                            <img
                                 width={9.58}
                                 height={9.58}
                                 alt="Logo"
                                 src="/images/cross.svg"
-                                priority
+                                // priority
                             />
                         </div>
                     </div>

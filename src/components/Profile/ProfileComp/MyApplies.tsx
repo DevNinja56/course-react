@@ -3,7 +3,7 @@ import { useGetUserAppliesQuery } from '@/store/slices/allRequests';
 import Link from 'next/link';
 import { ROUTES } from '@/config/constant';
 import { LoaderIcon } from 'react-hot-toast';
-import Image from 'next/image';
+// import Image from 'next/image';
 
 const MyApplies = () => {
     const { data, isLoading, refetch } = useGetUserAppliesQuery();
@@ -51,7 +51,7 @@ const MyApplies = () => {
 
                             <div className="flex justify-between items-center">
                                 <div className="flex gap-2">
-                                    <Image
+                                    <img
                                         width={100}
                                         height={100}
                                         alt=""

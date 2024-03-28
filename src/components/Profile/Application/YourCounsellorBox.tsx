@@ -1,6 +1,6 @@
 import Button from '@/components/Button';
 import { applyTypes } from '@/types';
-import Image from 'next/image';
+// import Image from 'next/image';
 import React from 'react';
 import { IoCallOutline, IoMailOutline } from 'react-icons/io5';
 
@@ -13,7 +13,7 @@ const YourCounsellorBox = ({ selectedCourse }: propTypes) => {
         <div className="bg-white rounded-3xl w-full lg:w-2/5 xl:w-1/2 shadow-progressBarShadow flex flex-col md:flex-row justify-center md:justify-start lg:flex-col items-center gap-3 md:gap-7 lg:gap-3 py-7 px-5 lg:px-8">
             <div className="flex flex-col gap-2 items-center w-full md:w-auto">
                 <div className="flex flex-col gap-2 items-center">
-                    <Image
+                    <img
                         height={122}
                         width={122}
                         alt="userImg"
@@ -23,7 +23,7 @@ const YourCounsellorBox = ({ selectedCourse }: propTypes) => {
                                 : '/images/anonymous-user-circle.avif'
                         }
                         className="rounded-full h-16 w-16"
-                        priority
+                        // priority
                     />
                     <div className="flex flex-col gap-1 items-center">
                         <h1 className="text-xl md:text-base lg:text-xl font-semibold text-textBlackColor min-w-fit">

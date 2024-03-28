@@ -1,4 +1,4 @@
-import Image from 'next/image';
+// import Image from 'next/image';
 import { useRouter } from 'next/router';
 import React from 'react';
 import Card from './Card';
@@ -45,13 +45,13 @@ const Testimonial = () => {
                         : 'overflow-hidden'
                 }`}
             >
-                <Image
+                <img
                     height={96}
                     width={96}
                     alt="testimonial-round"
                     className="absolute bottom-12 left-8 hidden md:block"
                     src="/images/Blogs/Ellipse 426.svg"
-                    priority
+                    // priority
                 />
                 <div className="flex flex-col lg:flex-row justify-between items-start container mx-auto lg:px-2 2xl:px-8 transition-all duration-300 py-5 md:py-12 lg:py-20 gap-x-16 gap-y-5 lg:gap-y-0">
                     <div className="flex flex-col gap-y-2 z-10 relative">
@@ -71,13 +71,13 @@ const Testimonial = () => {
                             eros. Aliquam quis dui ut diam lobortis dignissim ut
                             aliquet ex
                         </p>
-                        <Image
+                        <img
                             height={290}
                             width={290}
                             alt="message"
                             className="absolute bottom-[-150px] left-0 w-[218px] h-[218px] lg:h-[290px] lg:w-[290px] hidden md:block"
                             src="/images/Messages.svg"
-                            priority
+                            // priority
                         />
                     </div>
                     <div className="w-full mt-[150px] relative">
@@ -88,14 +88,14 @@ const Testimonial = () => {
                 router.pathname === ROUTES.COUNTRY ||
                 router.pathname === ROUTES.ABOUT_US ? (
                     <>
-                        <Image
+                        <img
                             height={94}
                             width={94}
                             alt="testimonial-round-2"
                             className="absolute right-20 top-9 hidden md:block"
                             src="/images/Universities/Ellipse 422.svg"
                         />
-                        <Image
+                        <img
                             height={228}
                             width={228}
                             alt="testimonial-round-2"
@@ -105,7 +105,7 @@ const Testimonial = () => {
                     </>
                 ) : router.pathname === ROUTES.HOMEPAGE ||
                   router.pathname === ROUTES.CONTACT_US ? (
-                    <Image
+                    <img
                         height={280}
                         width={280}
                         alt="testimonial-round-2"
@@ -114,7 +114,7 @@ const Testimonial = () => {
                     />
                 ) : router.pathname === ROUTES.APPLY ||
                   router.pathname === ROUTES.FAQ ? (
-                    <Image
+                    <img
                         height={289}
                         width={245}
                         src="/images/Apply/testimonalCircle.svg"
@@ -127,7 +127,7 @@ const Testimonial = () => {
                   router.pathname.includes(
                       ROUTES.INSTITUTES.replace(':id', '')
                   ) ? (
-                    <Image
+                    <img
                         height={174}
                         width={175}
                         alt="testimonial-round-2"
@@ -135,7 +135,7 @@ const Testimonial = () => {
                         src="/images/CourseDetail/Circle 2.svg"
                     />
                 ) : (
-                    <Image
+                    <img
                         height={228}
                         width={228}
                         alt="testimonial-round-2"

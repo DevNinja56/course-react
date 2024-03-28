@@ -7,7 +7,7 @@ import { FaMapMarkerAlt } from 'react-icons/fa';
 import { RiGraduationCapFill } from 'react-icons/ri';
 import School from '../Institute/icons/School';
 import Tag from '../Institute/Tag';
-import Image from 'next/image';
+// import Image from 'next/image';
 import { MdOutlinePriceChange } from 'react-icons/md';
 // import Certificate from '../Institute/icons/Certificate';
 
@@ -26,7 +26,7 @@ const Card: React.FC<propsType> = ({ scholarship }) => {
             <Link href={ROUTES.SCHOLARSHIP.replace(':id', scholarship?._id)}>
                 <div className="flex flex-col gap-5 w-full z-10">
                     <div className="w-full">
-                        <Image
+                        <img
                             src="/images/Scholarships/scholarship (1) 1.png"
                             alt="image"
                             className="mx-auto"
