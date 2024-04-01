@@ -39,7 +39,9 @@ export const useCurrency = () => {
         }
         return new Intl.NumberFormat('en-US', {
             style: 'currency',
-            currency: type ?? base_code
+            currency: type ?? base_code,
+            minimumFractionDigits: 0,
+            maximumFractionDigits: 0
         }).format(value * (rate ?? base_rate));
     };
 

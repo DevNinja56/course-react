@@ -195,8 +195,10 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                                                                             <LanguageRequirements
                                                                                 language={
                                                                                     course
-                                                                                        .language[0].language
-                                                                                } />
+                                                                                        .language[0]
+                                                                                        .language
+                                                                                }
+                                                                            />
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -229,26 +231,44 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                                                                         Course
                                                                         Scholarship
                                                                     </h3>
-                                                                    <ul className="w-full flex flex-col items-start gap-2">
+                                                                    <ul className="w-full flex gap-3 flex-wrap items-start">
                                                                         {course
                                                                             .scholarship
                                                                             .length >
                                                                         0 ? (
                                                                             course.scholarship.map(
                                                                                 ({
-                                                                                    name
+                                                                                    name,
+                                                                                    id
                                                                                 }) => (
-                                                                                    <li
-                                                                                        className="text-sm md:text-base"
+                                                                                    <Link
+                                                                                        href={ROUTES.SCHOLARSHIP.replace(
+                                                                                            ':id',
+                                                                                            id
+                                                                                        )}
+                                                                                        className="text-sm md:text-base border-2 p-3 rounded-md border-blueColor text-blueColor hover:bg-blueColor hover:text-white transition-all duration-300 text-center"
                                                                                         key={
                                                                                             'scholarship-list--' +
                                                                                             name
                                                                                         }
                                                                                     >
+                                                                                        <div className="">
+                                                                                            <img
+                                                                                                src="/images/Scholarships/scholarship (1) 1.png"
+                                                                                                alt="image"
+                                                                                                className="mx-auto"
+                                                                                                width={
+                                                                                                    100
+                                                                                                }
+                                                                                                height={
+                                                                                                    100
+                                                                                                }
+                                                                                            />
+                                                                                        </div>
                                                                                         {
                                                                                             name
                                                                                         }
-                                                                                    </li>
+                                                                                    </Link>
                                                                                 )
                                                                             )
                                                                         ) : (

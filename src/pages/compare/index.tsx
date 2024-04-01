@@ -10,16 +10,13 @@ import { API_ENDPOINTS } from '@/config/Api_EndPoints';
 import { getSsrRequest } from '@/utils/ssrRequest';
 import { getMonths } from '@/utils/get-months';
 import { useCurrency } from '@/hooks/currency';
-import { useUserAuth } from '@/hooks/auth';
 import { useCalculate } from '@/hooks/initial-deposit-calculate';
-import toast from 'react-hot-toast';
 
 const Compare = ({ data }: { data?: singleCourseType }) => {
     const { first, second, third, compareFirst, compareSecond, compareThird } =
         useCompare();
-    const { setCurrencyValue } = useCurrency();
+    const { setCurrencyValue, getSingleRate } = useCurrency();
     const { initialDeposit } = useCalculate();
-    const { user } = useUserAuth();
 
     useEffect(() => {
         if (data) {
@@ -41,6 +38,40 @@ const Compare = ({ data }: { data?: singleCourseType }) => {
                   : compareThird(compareData);
         }
     }, [data]);
+
+    const getInitialDepositIntoCurrency = ({
+        depositAmount,
+        tuitionFee,
+        scholarshipAmount,
+        feeCurrency
+    }: {
+        depositAmount: string;
+        tuitionFee: number;
+        scholarshipAmount: string;
+        feeCurrency: string;
+    }) => {
+        const initialDepositAmount = initialDeposit({
+            initialDeposit: depositAmount,
+            tuitionFee: tuitionFee,
+            scholarship: scholarshipAmount ?? 0,
+            isNumber: true
+        });
+        const rate = getSingleRate(feeCurrency);
+
+        return setCurrencyValue(
+            +initialDepositAmount * (rate?.base_rate ? +rate?.base_rate : 1)
+        );
+    };
+
+    const getTuitionFeeIntoCurrency = (
+        tuitionFee: number,
+        feeCurrency: string
+    ) => {
+        const rate = getSingleRate(feeCurrency);
+        return setCurrencyValue(
+            tuitionFee * (rate?.base_rate ? +rate?.base_rate : 1)
+        );
+    };
 
     const state = [
         {
@@ -121,6 +152,12 @@ const Compare = ({ data }: { data?: singleCourseType }) => {
                     third: third?.course?.name
                 },
                 {
+                    title: 'Discipline',
+                    first: first?.course?.discipline.name,
+                    second: second?.course?.discipline.name,
+                    third: third?.course?.discipline.name
+                },
+                {
                     title: 'Specialization',
                     first: first?.course?.specialization
                         ?.map((s) => s.name)
@@ -147,45 +184,63 @@ const Compare = ({ data }: { data?: singleCourseType }) => {
                 {
                     title: 'Initial Deposit',
                     first: first
-                        ? initialDeposit({
-                              initialDeposit:
+                        ? getInitialDepositIntoCurrency({
+                              depositAmount:
                                   first?.course.initialDeposit[0].amount,
                               tuitionFee: first?.course.tuitionFee,
-                              scholarship:
-                                  first?.course.scholarship?.[0]?.amount ?? 0
+                              scholarshipAmount:
+                                  first?.course.scholarship?.[0]?.amount ?? 0,
+                              feeCurrency: first?.course.feeCurrency
                           })
                         : null,
                     second: second
-                        ? initialDeposit({
-                              initialDeposit:
+                        ? getInitialDepositIntoCurrency({
+                              depositAmount:
                                   second?.course.initialDeposit[0].amount,
                               tuitionFee: second?.course.tuitionFee,
-                              scholarship:
-                                  second?.course.scholarship?.[0]?.amount ?? 0
+                              scholarshipAmount:
+                                  second?.course.scholarship?.[0]?.amount ?? 0,
+                              feeCurrency: second?.course.feeCurrency
                           })
                         : null,
                     third: third
-                        ? initialDeposit({
-                              initialDeposit:
+                        ? getInitialDepositIntoCurrency({
+                              depositAmount:
                                   third?.course.initialDeposit[0].amount,
                               tuitionFee: third?.course.tuitionFee,
-                              scholarship:
-                                  third?.course.scholarship?.[0].amount ?? 0
+                              scholarshipAmount:
+                                  third?.course.scholarship?.[0]?.amount ?? 0,
+                              feeCurrency: third?.course.feeCurrency
                           })
                         : null
                 },
                 {
                     title: 'Yearly fee',
-                    first: first?.course.tuitionFee
-                        ? setCurrencyValue(first?.course.tuitionFee ?? 0)
+                    first: first
+                        ? getTuitionFeeIntoCurrency(
+                              first.course.tuitionFee,
+                              first.course.feeCurrency
+                          )
                         : null,
 
-                    second: second?.course.tuitionFee
-                        ? setCurrencyValue(second?.course.tuitionFee ?? 0)
+                    second: second
+                        ? getTuitionFeeIntoCurrency(
+                              second.course.tuitionFee,
+                              second.course.feeCurrency
+                          )
                         : null,
-                    third: third?.course.tuitionFee
-                        ? setCurrencyValue(third?.course.tuitionFee ?? 0)
+                    third: third
+                        ? getTuitionFeeIntoCurrency(
+                              third.course.tuitionFee,
+                              third.course.feeCurrency
+                          )
                         : null
+                },
+                {
+                    title: "On available campus",
+                    first: first?.course?.availableCampuses.join(' | '),
+                    second: second?.course?.availableCampuses.join(' | '),
+                    third: third?.course?.availableCampuses.join(' | ')
                 }
             ]
         },
@@ -224,15 +279,7 @@ const Compare = ({ data }: { data?: singleCourseType }) => {
                                 </h1>
                                 {i === 0 && (
                                     <button
-                                        onClick={() => {
-                                            if (user.status === 'active') {
-                                                window.print();
-                                            } else {
-                                                toast.error(
-                                                    'You are not an active user.'
-                                                );
-                                            }
-                                        }}
+                                        onClick={() => window?.print()}
                                         className="absolute top-[50%] translate-y-[-50%] right-3 bg-white px-2 py-1 rounded-md print:hidden flex gap-1 justify-center items-center font-bold hover:bg-opacity-80"
                                     >
                                         <FiPrinter /> Print
