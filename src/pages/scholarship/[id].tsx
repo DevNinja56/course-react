@@ -109,6 +109,25 @@ const CourseDetail = ({ data: scholarship }: { data: scholarshipType }) => {
                                             <Tabs
                                                 data={[
                                                     {
+                                                        title: 'Overview',
+                                                        element: (
+                                                            <div className="description w-full flex flex-col gap-3 md:gap-4 items-start">
+                                                                <h1 className="text-black text-lg md:text-2xl font-bold">
+                                                                    scholarship
+                                                                    Description
+                                                                </h1>
+                                                                <div
+                                                                    className="text-sm md:text-base"
+                                                                    dangerouslySetInnerHTML={{
+                                                                        __html:
+                                                                        scholarship?.description ??
+                                                                            ''
+                                                                    }}
+                                                                />
+                                                            </div>
+                                                        )
+                                                    },
+                                                    {
                                                         title: 'Eligibility Criteria',
                                                         element: (
                                                             <div className="flex flex-col gap-8 items-start">
@@ -374,8 +393,7 @@ export const getServerSideProps: GetServerSideProps<{
         const id = `${API_ENDPOINTS.SCHOLARSHIP_BY_ID.replace(
             ':id',
             context.query?.id as string
-        )}`;
-        console.log({ id });
+        )}`; 
         data = await getSsrRequest(id, context);
         return { props: { data } };
     } catch (error) {

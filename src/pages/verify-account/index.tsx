@@ -11,8 +11,7 @@ import Button from '@/components/Button';
 import { useUserAuth } from '@/hooks/auth';
 
 const VerifyAccount = ({ email, token }: { email: string; token: string }) => {
-    const { user } = useUserAuth();
-    console.log(user, 'email verify');
+    const { user } = useUserAuth(); 
     const [isLoading, setIsLoading] = useState(false);
     const { replace } = useRouter();
     const { updateUserDetails, loggedInUser } = useUserAuth();
