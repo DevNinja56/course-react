@@ -1,4 +1,4 @@
-import Image from 'next/image';
+// import Image from 'next/image';
 import React from 'react';
 
 interface RankingProps {
@@ -10,13 +10,13 @@ interface RankingProps {
 const RankingCards = ({ img, text, className }: RankingProps) => {
     return (
         <div className="py-5 px-4 md:px-6 border-b border-gray-300 flex w-full items-center justify-between">
-            <Image
+            <img
                 height={25}
                 width={93}
                 alt="Ranking"
                 src={img}
                 className={className}
-                priority
+                // priority
             />
             <h1 className="font-bold text-mainTextColor text-xl">{text}</h1>
         </div>

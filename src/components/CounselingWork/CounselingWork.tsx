@@ -1,5 +1,5 @@
 import { ROUTES } from '@/config/constant';
-import Image from 'next/image';
+// import Image from 'next/image';
 import { useRouter } from 'next/router';
 import React from 'react';
 
@@ -26,7 +26,7 @@ const CounselingWork = () => {
         >
             {router.pathname === '/courseDetail' ||
             router.pathname.includes(ROUTES.INSTITUTES.replace(':id', '')) ? (
-                <Image
+                <img
                     height={217}
                     width={175}
                     alt="circle"
@@ -38,10 +38,10 @@ const CounselingWork = () => {
                             : ''
                     }`}
                     src="/images/CourseDetail/circle 1.svg"
-                    priority
+                    // priority
                 />
             ) : (
-                <Image
+                <img
                     height={314}
                     width={237}
                     alt="circle"
@@ -65,7 +65,7 @@ const CounselingWork = () => {
                             : ''
                     }`}
                     src="/images/Fields/Applicatio circle img.svg"
-                    priority
+                    // priority
                 />
             )}
             <div className={`w-full py-28`}>
@@ -76,60 +76,60 @@ const CounselingWork = () => {
                         </h1>
                         <div className="flex flex-wrap justify-center w-full gap-[30px] z-10">
                             <div className="custom-shadow rounded-[10px] py-7 flex flex-col gap-y-5 items-center bg-white px-1 w-[90%] md:w-[29%] lg:w-[17%]">
-                                <Image
+                                <img
                                     height={64}
                                     width={64}
                                     alt="statements"
                                     src="/images/Fields/Documents.svg"
-                                    priority
+                                    // priority
                                 />
                                 <h1 className="text-[17px] w-[200px] md:w-[200px] lg:w-auto lg:text-base xl:text-xl font-medium text-mainTextColor text-center px-5">
                                     Statement of purpose
                                 </h1>
                             </div>
                             <div className="custom-shadow rounded-[10px] py-7 flex flex-col gap-y-5 items-center bg-white px-1 w-[90%] md:w-[29%] lg:w-[17%]">
-                                <Image
+                                <img
                                     height={64}
                                     width={64}
                                     alt="statements"
                                     src="/images/Fields/Letter Opened.svg"
-                                    priority
+                                    // priority
                                 />
                                 <h1 className="text-[17px] w-[200px] md:w-[200px] lg:w-auto lg:text-base xl:text-xl font-medium text-mainTextColor text-center px-5">
                                     Letter of Recommendation
                                 </h1>
                             </div>
                             <div className="custom-shadow rounded-[10px] py-7 flex flex-col gap-y-5 items-center bg-white px-1 w-[90%] md:w-[29%] lg:w-[17%]">
-                                <Image
+                                <img
                                     height={64}
                                     width={64}
                                     alt="statements"
                                     src="/images/Fields/Documents Minimalistic.svg"
-                                    priority
+                                    // priority
                                 />
                                 <h1 className="text-[17px] w-[200px] md:w-[200px] lg:w-auto lg:text-base xl:text-xl font-medium text-mainTextColor text-center px-5">
                                     Student Visa Application
                                 </h1>
                             </div>
                             <div className="custom-shadow rounded-[10px] py-7 flex flex-col gap-y-5 items-center bg-white px-1 w-[90%] md:w-[29%] lg:w-[17%]">
-                                <Image
+                                <img
                                     height={64}
                                     width={64}
                                     alt="statements"
                                     src="/images/Fields/Document Add.svg"
-                                    priority
+                                    // priority
                                 />
                                 <h1 className="text-[17px] w-[200px] md:w-[200px] lg:w-auto lg:text-base xl:text-xl font-medium text-mainTextColor text-center px-5">
                                     Admission Essay Writing
                                 </h1>
                             </div>
                             <div className="custom-shadow rounded-[10px] py-7 flex flex-col gap-y-5 items-center bg-white px-1 w-[90%] md:w-[29%] lg:w-[17%]">
-                                <Image
+                                <img
                                     height={64}
                                     width={64}
                                     alt="statements"
                                     src="/images/Fields/User Id.svg"
-                                    priority
+                                    // priority
                                 />
                                 <h1 className="text-[17px] w-[200px] md:w-[200px] lg:w-auto lg:text-base xl:text-xl font-medium text-mainTextColor text-center px-5">
                                     Student Curriculum Vitae
@@ -155,12 +155,12 @@ const CounselingWork = () => {
                                     style={{ border: '3px dotted #717070' }}
                                     className="h-[140px] w-[140px] md:h-[160px] md:w-[160px] rounded-full flex items-center justify-center bg-white z-10"
                                 >
-                                    <Image
+                                    <img
                                         height={85.06}
                                         width={77.66}
                                         alt="counselling-work"
                                         src="/images/Fields/Counselling Img 1.svg"
-                                        priority
+                                        // priority
                                     />
                                 </div>
                                 <h1 className="font-bold text-xl text-darkGrayColor text-center">
@@ -173,12 +173,12 @@ const CounselingWork = () => {
                                     style={{ border: '3px dotted #717070' }}
                                     className="h-[140px] w-[140px] md:h-[160px] md:w-[160px] rounded-full flex items-center justify-center bg-white z-10"
                                 >
-                                    <Image
+                                    <img
                                         height={91.91}
                                         width={92.91}
                                         alt="counselling-work"
                                         src="/images/Fields/Counselling Img 2.svg"
-                                        priority
+                                        // priority
                                     />
                                 </div>
                                 <h1 className="font-bold text-xl text-darkGrayColor text-center">
@@ -191,12 +191,12 @@ const CounselingWork = () => {
                                     style={{ border: '3px dotted #717070' }}
                                     className="h-[140px] w-[140px] md:h-[160px] md:w-[160px] rounded-full flex items-center justify-center bg-white z-10"
                                 >
-                                    <Image
+                                    <img
                                         height={89.94}
                                         width={88.52}
                                         alt="counselling-work"
                                         src="/images/Fields/Counselling Img 3.svg"
-                                        priority
+                                        // priority
                                     />
                                 </div>
                                 <h1 className="font-bold text-xl text-darkGrayColor text-center">
@@ -209,12 +209,12 @@ const CounselingWork = () => {
                                     style={{ border: '3px dotted #717070' }}
                                     className="h-[140px] w-[140px] md:h-[160px] md:w-[160px] rounded-full flex items-center justify-center bg-white z-10"
                                 >
-                                    <Image
+                                    <img
                                         height={90.03}
                                         width={67.52}
                                         alt="counselling-work"
                                         src="/images/Fields/Counselling Img 4.svg"
-                                        priority
+                                        // priority
                                     />
                                 </div>
                                 <h1 className="font-bold text-xl text-darkGrayColor text-center">
@@ -227,12 +227,12 @@ const CounselingWork = () => {
                                     style={{ border: '3px dotted #717070' }}
                                     className="h-[140px] w-[140px] md:h-[160px] md:w-[160px] rounded-full flex items-center justify-center bg-white z-10"
                                 >
-                                    <Image
+                                    <img
                                         height={90.6}
                                         width={89.95}
                                         alt="counselling-work"
                                         src="/images/Fields/Counselling Img 5.svg"
-                                        priority
+                                        // priority
                                     />
                                 </div>
                                 <h1 className="font-bold text-xl text-darkGrayColor text-center w-[114px] lg:w-auto">
@@ -244,12 +244,12 @@ const CounselingWork = () => {
                                     style={{ border: '3px dotted #717070' }}
                                     className="h-[140px] w-[140px] md:h-[160px] md:w-[160px] rounded-full flex items-center justify-center bg-white z-10"
                                 >
-                                    <Image
+                                    <img
                                         height={90.18}
                                         width={84.67}
                                         alt="counselling-work"
                                         src="/images/Fields/Counselling Img 6.svg"
-                                        priority
+                                        // priority
                                     />
                                 </div>
                                 <h1 className="font-bold text-xl text-darkGrayColor text-center">
@@ -264,7 +264,7 @@ const CounselingWork = () => {
             router.pathname.includes(ROUTES.INSTITUTES.replace(':id', '')) ? (
                 ''
             ) : (
-                <Image
+                <img
                     height={314}
                     width={192}
                     alt="counselling-work"
@@ -279,7 +279,7 @@ const CounselingWork = () => {
                             : ''
                     }`}
                     src="/images/Fields/Ellipse 427.svg"
-                    priority
+                    // priority
                 />
             )}
         </div>

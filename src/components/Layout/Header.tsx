@@ -1,6 +1,6 @@
-import Image from 'next/image';
+// import Image from 'next/image';
 import { useRouter } from 'next/router';
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import ProfileDropDown from '../DropDown/ProfileDropDown';
 import Link from 'next/link';
 import Sidebar from '../Sidebar/Sidebar';
@@ -10,8 +10,11 @@ import GlobalSearch from './GlobalSearch';
 import Logo from '../Logo';
 import { CiUser } from 'react-icons/ci';
 import UnVerifiedUser from '../Banner/UnVerifiedUser';
+import UnActiveUser from '../Banner/UnActiveUser';
 import CurrencyConverter from '../MoneyConverter';
 import { SiSemanticscholar } from 'react-icons/si';
+import { modalType } from '@/store/slices/ui.slice';
+import { useUi } from '@/hooks/user-interface';
 
 const Header = ({ onlyLogo }: { onlyLogo?: boolean }) => {
     const router = useRouter();
@@ -19,6 +22,7 @@ const Header = ({ onlyLogo }: { onlyLogo?: boolean }) => {
     const [showSideBar, setShowSideBar] = useState(false);
 
     const { isAuthenticated, user } = useUserAuth();
+    const { updateModal } = useUi();
 
     const onShowSideBar = () => {
         setShowSideBar(!showSideBar);
@@ -28,8 +32,11 @@ const Header = ({ onlyLogo }: { onlyLogo?: boolean }) => {
         setShowDropDown(!showDropDown);
     };
 
+    const dropDownRef = useRef<HTMLDivElement>(null);
+
     return (
         <header className={`w-full fixed top-0 z-40 print:static`}>
+            {user.status == 'block' && <UnActiveUser />}
             {!onlyLogo ? (
                 <div className="bg-white">
                     <UnVerifiedUser />
@@ -138,57 +145,62 @@ const Header = ({ onlyLogo }: { onlyLogo?: boolean }) => {
                                         </p>
                                     </div>
                                 </Link>
-                                <Link href={ROUTES.APPLY}>
-                                    <div className="flex items-center px-[10px] gap-x-[10px]">
-                                        <svg
-                                            width="32"
-                                            height="33"
-                                            viewBox="0 0 32 33"
-                                            fill="none"
-                                            xmlns="http://www.w3.org/2000/svg"
-                                        >
-                                            <path
-                                                d="M25.2836 17.2285H24.666C24.3052 14.796 22.2857 12.8755 19.7569 12.5806C20.829 11.5847 21.4977 10.1839 21.4977 8.63477C21.4977 5.61929 18.9649 3.16602 15.8518 3.16602C12.7388 3.16602 10.2061 5.61929 10.2061 8.63477C10.2061 10.184 10.8747 11.5847 11.9469 12.5806C9.41807 12.8755 7.39859 14.796 7.03774 17.2285H6.42014C4.94648 17.2285 3.81705 18.4948 4.02466 19.9026L5.3747 29.1607C5.4309 29.5461 5.77147 29.8327 6.17335 29.8327H25.5304C25.9323 29.8327 26.2729 29.5461 26.3291 29.1607L27.679 19.9037C27.8872 18.4918 26.7545 17.2285 25.2836 17.2285ZM11.8191 8.63477C11.8191 6.48086 13.6282 4.72852 15.8518 4.72852C18.0755 4.72852 19.8845 6.48086 19.8845 8.63477C19.8845 10.7887 18.0755 12.541 15.8518 12.541C13.6282 12.541 11.8191 10.7887 11.8191 8.63477ZM12.6257 14.1035H19.078C21.0255 14.1035 22.655 15.4477 23.0297 17.2285H8.674C9.04873 15.4477 10.6782 14.1035 12.6257 14.1035ZM26.0819 19.684L24.8297 28.2702H6.87396L5.62173 19.6827C5.55214 19.2116 5.92788 18.791 6.42014 18.791C6.64308 18.791 25.1903 18.791 25.2836 18.791C25.7753 18.791 26.1517 19.2105 26.0819 19.684Z"
-                                                className={`font-semibold ${
-                                                    router.pathname ===
-                                                    ROUTES.APPLY
-                                                        ? 'fill-blueColor'
-                                                        : 'fill-textBlackColor'
-                                                }`}
-                                            />
-                                            <path
-                                                d="M15.852 22.4258C14.2182 22.4258 12.8889 23.4226 12.8889 24.648C12.8889 25.8734 14.2182 26.8702 15.852 26.8702C17.4857 26.8702 18.8148 25.8734 18.8148 24.648C18.8148 23.4226 17.4857 22.4258 15.852 22.4258ZM15.852 25.3888C15.3074 25.3888 14.8642 25.0565 14.8642 24.648C14.8642 24.2395 15.3074 23.9072 15.852 23.9072C16.3966 23.9072 16.8396 24.2395 16.8396 24.648C16.8396 25.0565 16.3966 25.3888 15.852 25.3888Z"
-                                                className={`font-semibold ${
-                                                    router.pathname ===
-                                                    ROUTES.APPLY
-                                                        ? 'fill-blueColor'
-                                                        : 'fill-textBlackColor'
-                                                }`}
-                                            />
-                                        </svg>
-                                        <p
+                                <div
+                                    onClick={() =>
+                                        updateModal({
+                                            type: modalType.user_detail,
+                                            state: ''
+                                        })
+                                    }
+                                    className="flex items-center px-[10px] gap-x-[10px] cursor-pointer"
+                                >
+                                    <svg
+                                        width="32"
+                                        height="33"
+                                        viewBox="0 0 32 33"
+                                        fill="none"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                    >
+                                        <path
+                                            d="M25.2836 17.2285H24.666C24.3052 14.796 22.2857 12.8755 19.7569 12.5806C20.829 11.5847 21.4977 10.1839 21.4977 8.63477C21.4977 5.61929 18.9649 3.16602 15.8518 3.16602C12.7388 3.16602 10.2061 5.61929 10.2061 8.63477C10.2061 10.184 10.8747 11.5847 11.9469 12.5806C9.41807 12.8755 7.39859 14.796 7.03774 17.2285H6.42014C4.94648 17.2285 3.81705 18.4948 4.02466 19.9026L5.3747 29.1607C5.4309 29.5461 5.77147 29.8327 6.17335 29.8327H25.5304C25.9323 29.8327 26.2729 29.5461 26.3291 29.1607L27.679 19.9037C27.8872 18.4918 26.7545 17.2285 25.2836 17.2285ZM11.8191 8.63477C11.8191 6.48086 13.6282 4.72852 15.8518 4.72852C18.0755 4.72852 19.8845 6.48086 19.8845 8.63477C19.8845 10.7887 18.0755 12.541 15.8518 12.541C13.6282 12.541 11.8191 10.7887 11.8191 8.63477ZM12.6257 14.1035H19.078C21.0255 14.1035 22.655 15.4477 23.0297 17.2285H8.674C9.04873 15.4477 10.6782 14.1035 12.6257 14.1035ZM26.0819 19.684L24.8297 28.2702H6.87396L5.62173 19.6827C5.55214 19.2116 5.92788 18.791 6.42014 18.791C6.64308 18.791 25.1903 18.791 25.2836 18.791C25.7753 18.791 26.1517 19.2105 26.0819 19.684Z"
                                             className={`font-semibold ${
                                                 router.pathname === ROUTES.APPLY
-                                                    ? 'text-blueColor'
-                                                    : 'text-textBlackColor'
+                                                    ? 'fill-blueColor'
+                                                    : 'fill-textBlackColor'
                                             }`}
-                                        >
-                                            Apply
-                                        </p>
-                                    </div>
-                                </Link>
+                                        />
+                                        <path
+                                            d="M15.852 22.4258C14.2182 22.4258 12.8889 23.4226 12.8889 24.648C12.8889 25.8734 14.2182 26.8702 15.852 26.8702C17.4857 26.8702 18.8148 25.8734 18.8148 24.648C18.8148 23.4226 17.4857 22.4258 15.852 22.4258ZM15.852 25.3888C15.3074 25.3888 14.8642 25.0565 14.8642 24.648C14.8642 24.2395 15.3074 23.9072 15.852 23.9072C16.3966 23.9072 16.8396 24.2395 16.8396 24.648C16.8396 25.0565 16.3966 25.3888 15.852 25.3888Z"
+                                            className={`font-semibold ${
+                                                router.pathname === ROUTES.APPLY
+                                                    ? 'fill-blueColor'
+                                                    : 'fill-textBlackColor'
+                                            }`}
+                                        />
+                                    </svg>
+                                    <p
+                                        className={`font-semibold ${
+                                            router.pathname === ROUTES.APPLY
+                                                ? 'text-blueColor'
+                                                : 'text-textBlackColor'
+                                        }`}
+                                    >
+                                        Apply
+                                    </p>
+                                </div>
                             </nav>
                             {showSideBar && (
                                 <Sidebar setShowSideBar={setShowSideBar} />
                             )}
-                            <div className="flex items-center gap-x-1 md:gap-x-6">
+                            <div className="flex items-center gap-x-2 md:gap-x-6">
                                 {isAuthenticated ? (
                                     <div
+                                        ref={dropDownRef}
                                         className="flex items-center gap-x-3 relative select-none cursor-pointer "
                                         onClick={onShowDropDown}
                                     >
                                         {user.avatar ? (
-                                            <Image
+                                            <img
                                                 src={user.avatar}
                                                 className="border rounded-full p-0.5 -mr-1"
                                                 alt="Profile Photo"
@@ -197,56 +209,60 @@ const Header = ({ onlyLogo }: { onlyLogo?: boolean }) => {
                                             />
                                         ) : (
                                             <span className="border rounded-full p-0.5 -mr-1">
-                                                <CiUser className="text-3xl   " />
+                                                <CiUser className="text-md md:text-3xl" />
                                             </span>
                                         )}
                                         <p className="text-textBlackColor capitalize font-semibold hidden lg:flex gap-x-1 ">
                                             {user.name?.toLocaleLowerCase()}
-                                            <Image
+                                            <img
                                                 height={16}
                                                 width={16}
                                                 alt="down-arrow"
                                                 className="cursor-pointer"
                                                 src="/images/chevron-down.svg"
-                                                priority
+                                                // priority
                                             />
                                         </p>
                                         <ProfileDropDown
                                             showDropDown={showDropDown}
+                                            setShowDropDown={setShowDropDown}
+                                            dropDownRef={dropDownRef}
                                         />
                                     </div>
                                 ) : (
                                     <Link href={ROUTES.SIGN_IN}>
                                         <button className="py-2 lg:py-[13px] px-5 lg:px-[34px] gap-x-[6px] md:flex justify-center items-center rounded-[5px] bg-blueColor hover:bg-blue-600 text-white text-base font-medium hidden">
-                                            <Image
+                                            <img
                                                 width={20}
                                                 height={20}
                                                 alt="user-icon"
                                                 src="/images/Profile.svg"
-                                                priority
+                                                // priority
                                             />
                                             Login
                                         </button>
-                                        <Image
+                                        <img
                                             height={36}
                                             width={36}
                                             alt=""
                                             src="/images/User Circle.svg"
                                             className="block md:hidden h-5 w-5 md:h-9 md:w-9"
-                                            priority
+                                            // priority
                                         />
                                     </Link>
                                 )}
-                                <Image
+                                <img
                                     width={46}
                                     height={46}
                                     alt="menu-icon"
                                     onClick={onShowSideBar}
                                     className="block lg:hidden h-5 w-5 md:h-11 md:w-11"
                                     src="/images/Menu.svg"
-                                    priority
+                                    // priority
                                 />
-                                <GlobalSearch />
+                                <div className="hidden lg:block">
+                                    <GlobalSearch />
+                                </div>
                             </div>
                             <div>
                                 <CurrencyConverter />

@@ -1,4 +1,4 @@
-import Image from 'next/image';
+// import Image from 'next/image';
 import React, { useState } from 'react';
 import Institutes from './Institutes';
 import Scholarships from './Scholarships';
@@ -26,7 +26,7 @@ const Favorites = () => {
             <div className="flex flex-col w-full lg:w-[26.5%]">
                 {tabs.map(({ title }, i) => (
                     <div
-                        key={'favorites--tabs' + i}
+                        key={'favourites--tabs' + i}
                         className="flex flex-col gap-y-6"
                         onClick={() => setActive(title)}
                     >
@@ -40,7 +40,7 @@ const Favorites = () => {
                             <p className="text-base md:text-xl font-semibold">
                                 {title}
                             </p>
-                            <Image
+                            <img
                                 height={20}
                                 width={20}
                                 alt="img-arrow-down"
@@ -48,7 +48,7 @@ const Favorites = () => {
                                 className={`lg:hidden ${
                                     title === active ? 'rotate-[-180deg]' : ''
                                 }`}
-                                priority
+                                // priority
                             />
                         </div>
                     </div>
@@ -56,7 +56,7 @@ const Favorites = () => {
             </div>
             <div className="lg:flex flex-col gap-y-3 w-[67%] hidden">
                 {tabs.map(({ Component, title }, i) => (
-                    <React.Fragment key={'favorites-tabs-list-' + i}>
+                    <React.Fragment key={'favourites-tabs-list-' + i}>
                         {active === title && <Component />}
                     </React.Fragment>
                 ))}

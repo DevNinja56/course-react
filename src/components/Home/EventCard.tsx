@@ -1,4 +1,4 @@
-import Image from 'next/image';
+// import Image from 'next/image';
 import React from 'react';
 
 interface EventCardProps {
@@ -22,12 +22,12 @@ const EventCard = ({ date }: EventCardProps) => {
                         <hr className="h-[90px] border border-borderColor hidden md:blcok" />
                         <div className="gap-3 flex flex-col">
                             <div className="gap-1 flex items-center">
-                                <Image
+                                <img
                                     height={18}
                                     width={18}
                                     alt="map-point"
                                     src="/images/Home/Map Point.svg"
-                                    priority
+                                    // priority
                                 />
                                 <p className="text-sm text-darkGrayColor">
                                     New York, US
@@ -38,19 +38,19 @@ const EventCard = ({ date }: EventCardProps) => {
                             </h1>
                             <div className="flex items-center gap-1">
                                 <div className="flex">
-                                    <Image
+                                    <img
                                         height={18}
                                         width={18}
                                         alt="user"
                                         src="/images/Home/Ellipse 418.svg"
-                                        priority
+                                        // priority
                                     />
-                                    <Image
+                                    <img
                                         height={18}
                                         width={18}
                                         alt="user-2"
                                         src="/images/Home/Ellipse 419.svg"
-                                        priority
+                                        // priority
                                     />
                                 </div>
                                 <p className="text-sm font-semibold text-darkGrayColor">
@@ -61,12 +61,12 @@ const EventCard = ({ date }: EventCardProps) => {
                     </div>
                     <div className="flex flex-col md:flex-row items-start md:items-center justify-start md:justify-end lg:justify-start gap-4 md:gap-[25px] w-full lg:w-auto">
                         <button className="rounded-[5px] py-[7px] px-[14px] gap-[6px] hover:gap-[10px] transition-all duration-500 bg-profileBgColor text-blueColor font-medium flex items-center">
-                            <Image
+                            <img
                                 height={20}
                                 width={20}
                                 alt="time"
                                 src="/images/Home/Clock Circle.svg"
-                                priority
+                                // priority
                             />
                             10:30am - 12:30pm
                         </button>

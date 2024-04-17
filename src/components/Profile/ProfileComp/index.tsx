@@ -1,4 +1,4 @@
-import Image from 'next/image';
+// import Image from 'next/image';
 import React, { useState } from 'react';
 import PersonalInfo from './PersonalInfo';
 import MyApplies from './MyApplies';
@@ -33,7 +33,7 @@ const ProfileComp = () => {
             <div className="flex flex-col w-full lg:w-[26.5%]">
                 {tabs.map(({ title }, i) => (
                     <div
-                        key={'favorites--tabs' + i}
+                        key={'favourites--tabs' + i}
                         className="flex flex-col gap-y-6"
                         onClick={() => setActive(title)}
                     >
@@ -47,7 +47,7 @@ const ProfileComp = () => {
                             <p className="text-base md:text-xl font-semibold">
                                 {title}
                             </p>
-                            <Image
+                            <img
                                 height={20}
                                 width={20}
                                 alt="img-arrow-down"
@@ -55,7 +55,7 @@ const ProfileComp = () => {
                                 className={`lg:hidden ${
                                     title === active ? 'rotate-[-180deg]' : ''
                                 }`}
-                                priority
+                                // priority
                             />
                         </div>
                     </div>

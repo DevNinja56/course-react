@@ -15,6 +15,10 @@ import { BASE_URL } from '@/utils/axios';
 import { getToken } from '@/utils/axios/token';
 import { country_list } from '@/utils/data/country';
 import toast from 'react-hot-toast';
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { addFiles } from '@/store/slices/apply.slice';
+import { useGetApplyByIdQuery } from '@/store/slices/allRequests';
 
 interface formType {
     startDate: string;
@@ -27,6 +31,14 @@ interface selectType {
     label: string;
 }
 
+interface FileDetails {
+    apply: {
+        files: {
+            conSolidFile: File[];
+        };
+    };
+}
+
 const ConSolid_MarkSheet = () => {
     const {
         register,
@@ -34,20 +46,47 @@ const ConSolid_MarkSheet = () => {
         setValue,
         formState: { errors }
     } = useForm<formType>();
-
+    const Files = useSelector((state: FileDetails) => state.apply.files);
+    const dispatch = useDispatch();
     const router = useRouter();
     const { id } = router.query;
+    const { data: getApply } = useGetApplyByIdQuery(id);
     const token = getToken();
-    const [uploadFiles, setUploadFiles] = useState<string>();
     const [isLoading, setIsLoading] = useState(false);
+    const [fullFile, setFullFile] = useState('');
+
+    const identity = {
+        passport: {
+            url: [getApply?.documents?.identity?.passport?.url],
+            given_name: getApply?.documents?.identity?.passport?.given_name,
+            sur_name: getApply?.documents?.identity?.passport?.sur_name,
+            number: getApply?.documents?.identity?.passport?.number,
+            date_of_issue: getApply?.documents?.identity?.passport?.date_of_issue,
+            date_of_expiry: getApply?.documents?.identity?.passport?.date_of_expiry
+        }
+    };
+    const semester_mark_sheets = {
+        url: getApply?.documents?.academic_certificates?.semester_mark_sheets
+            ?.url
+    };
+
+    const provisional_certificate = {
+        url: getApply?.documents?.academic_certificates?.provisional_certificate
+            ?.url
+    };
 
     const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
-        const files = e?.target?.files?.[0];
-        if (files) {
-            setIsLoading(true);
-            try {
+        const uploadedFiles = e.target.files;
+        const filesArray = uploadedFiles ? [...uploadedFiles] : [];
+        dispatch(addFiles({ type: 'conSolid', filesArray }));
+    };
+
+    const uploadFilesToApi = async (files: File[]) => {
+        const uploadResponses = [];
+        try {
+            for (const file of files) {
                 const formData = new FormData();
-                formData.append('file', files);
+                formData.append('file', file);
                 const response = await axios.post(
                     BASE_URL + API_ENDPOINTS.FILE_S3_UPLOAD,
                     formData,
@@ -57,13 +96,11 @@ const ConSolid_MarkSheet = () => {
                         }
                     }
                 );
-                setUploadFiles(response.data.data.Location);
-            } catch (error) {
-                toast.error('Error uploading file');
-            } finally {
-                setIsLoading(false);
-                toast.success('Document Upload Successfully');
+                uploadResponses.push(response.data.data.Location);
             }
+            return uploadResponses;
+        } catch (error) {
+            console.error('Error uploading files:', error);
         }
     };
 
@@ -72,21 +109,56 @@ const ConSolid_MarkSheet = () => {
     };
 
     const onSubmit = async (data: formType) => {
+        const uploadResponse = await uploadFilesToApi(Files.conSolidFile);
         toast
             .promise(
                 fetchRequest({
                     url: `${BASE_URL}${API_ENDPOINTS.APPLY_DOCUMENTS}/${id}`,
                     type: 'patch',
                     body: {
+                        ...getApply,
+                        course: getApply?.course.id,
+                        user: getApply?.user.id,
                         documents: {
+                            ...(identity.passport.url?.[0]
+                                ? {
+                                      identity: {
+                                          passport: {
+                                            url: identity.passport.url[0],
+                                            given_name: identity.passport.given_name,
+                                            sur_name: identity.passport.sur_name,
+                                            number: identity.passport.number,
+                                            date_of_issue: identity.passport.date_of_issue,
+                                            date_of_expiry: identity.passport.date_of_expiry
+                                          }
+                                      }
+                                  }
+                                : {}),
                             academic_certificates: {
                                 consolidated_mark_sheets: {
-                                    url: [uploadFiles],
-                                    startDate: data.startDate,
-                                    completeDate: data.completeDate,
-                                    institution: data.institution,
+                                    url: uploadResponse,
+                                    date_of_start: data.startDate,
+                                    date_of_completion: data.completeDate,
+                                    institute: data.institution,
                                     country: data.country
-                                }
+                                },
+                                ...(semester_mark_sheets.url
+                                    ? {
+                                          semester_mark_sheets: {
+                                              url: semester_mark_sheets.url
+                                          }
+                                      }
+                                    : {}),
+                                ...(provisional_certificate.url
+                                    ? {
+                                          provisional_certificate: {
+                                              url: provisional_certificate.url
+                                          }
+                                      }
+                                    : {})
+                            },
+                            professional_records: {
+                                ...getApply?.documents?.professional_records
                             }
                         }
                     }
@@ -100,38 +172,14 @@ const ConSolid_MarkSheet = () => {
                 }
             )
             .finally(() => setIsLoading(false));
-
-        // try {
-        //     const response = await axios.patch(
-        //         `${BASE_URL}${API_ENDPOINTS.APPLY_DOCUMENTS}/${id}`,
-        //         {
-        //             documents: {
-        //                 academic_certificates: {
-        //                     consolidated_mark_sheets: {
-        //                         url: [uploadFiles],
-        //                         startDate: data.startDate,
-        //                         completeDate: data.completeDate,
-        //                         institution: data.institution,
-        //                         country: data.country
-        //                     }
-        //                 }
-        //             }
-        //         },
-        //         {
-        //             headers: {
-        //                 Authorization: `Bearer ${token}`
-        //             }
-        //         }
-        //     );
-        //     toast.success('Documents Updates Successfully');
-        //     console.log(response);
-        // } catch (error) {
-        //     toast.error('Error updating data');
-        // }
     };
 
     const handleCountryChange = (selectedOptions: selectType) => {
         setValue('country', selectedOptions.value);
+    };
+
+    const handleFileClick = (fileUrl: string) => {
+        setFullFile(fileUrl);
     };
 
     return (
@@ -167,8 +215,11 @@ const ConSolid_MarkSheet = () => {
                 <div className="w-1/4 flex flex-col md:hidden lg:block sm:hidden">
                     <div className="w-full bg-BgColorPassport bg-opacity-5 p-8">
                         <div className="w-full bg-BgCardPassport p-4">
-                            {uploadFiles && (
-                                <PDFSmallViewer pdfUrl={uploadFiles} />
+                            {Files && (
+                                <PDFSmallViewer
+                                    pdfUrl={Files.conSolidFile}
+                                    onFileClick={handleFileClick}
+                                />
                             )}
                         </div>
                     </div>
@@ -190,7 +241,7 @@ const ConSolid_MarkSheet = () => {
                 </div>
                 <div className="lg:w-[48%] sm:w-full md:w-full py-8 px-16">
                     <div className="w-full bg-BgCardPassport sm:pl-4 md:pl-36 lg:pl-0">
-                        {uploadFiles && <PDFViewer pdfUrl={uploadFiles} />}
+                        {fullFile && <PDFViewer pdfUrl={fullFile} />}
                     </div>
                     <div className="md:flex sm:flex lg:hidden justify-between w-[85%] mx-auto mt-4">
                         <label
@@ -218,91 +269,89 @@ const ConSolid_MarkSheet = () => {
                         </div>
                     </div>
                 </div>
-                {uploadFiles && (
-                    <div className="lg:w-1/4 md:w-full sm:w-full p-8 bg-blueColor bg-opacity-5">
-                        <span className="font-bold text-xl text-mainTextColor">
-                            Fill in your details
+                <div className="lg:w-1/4 md:w-full sm:w-full p-8 bg-blueColor bg-opacity-5">
+                    <span className="font-bold text-xl text-mainTextColor">
+                        Fill in your details
+                    </span>
+                    <p className="p-4 bg-white flex gap-2 items-center rounded-md mt-4">
+                        <BiMessageRoundedError className="text-[4rem] text-blueColor" />
+                        <span className="text-[15px] font-medium text-blueColor">
+                            Add your Undergraduate details and get personalised
+                            tips to improve your chances.
                         </span>
-                        <p className="p-4 bg-white flex gap-2 items-center rounded-md mt-4">
-                            <BiMessageRoundedError className="text-[4rem] text-blueColor" />
-                            <span className="text-[15px] font-medium text-blueColor">
-                                Add your Undergraduate details and get
-                                personalised tips to improve your chances.
-                            </span>
-                        </p>
-                        <form
-                            className="flex flex-col gap-4 pt-4"
-                            onSubmit={handleSubmit(onSubmit)}
-                        >
-                            <div className="w-full border border-gray-300 md:border-none">
-                                <label className="font-bold text-gray-600">
-                                    Where did you studied this ?
-                                </label>
-                                <ReactSelectCustom
-                                    options={country_list.map((country) => ({
-                                        value: country,
-                                        label: country
-                                    }))}
-                                    className=" mt-2 pt-[6px] pb-[6px] rounded-[8px] w-full outline-none placeholder:text-sm text-grayColor border border-grayColor bg-white "
-                                    placeholder="Country for Education?"
-                                    onChange={(selectedOption) =>
-                                        handleCountryChange(
-                                            selectedOption as selectType
-                                        )
-                                    }
-                                />
-                            </div>
+                    </p>
+                    <form
+                        className="flex flex-col gap-4 pt-4"
+                        onSubmit={handleSubmit(onSubmit)}
+                    >
+                        <div className="w-full border border-gray-300 md:border-none">
+                            <label className="font-bold text-gray-600">
+                                Where did you studied this ?
+                            </label>
+                            <ReactSelectCustom
+                                options={country_list.map((country) => ({
+                                    value: country,
+                                    label: country
+                                }))}
+                                className=" mt-2 pt-[6px] pb-[6px] rounded-[8px] w-full outline-none placeholder:text-sm text-grayColor border border-grayColor bg-white "
+                                placeholder="Country for Education?"
+                                onChange={(selectedOption) =>
+                                    handleCountryChange(
+                                        selectedOption as selectType
+                                    )
+                                }
+                            />
+                        </div>
 
-                            <div className="w-full border border-gray-300 md:border-none">
-                                <label className="font-bold text-gray-600">
-                                    Which institution did you study at?
-                                </label>
-                                <InputBox
-                                    {...register('institution', {
-                                        required: 'Institution is required'
-                                    })}
-                                    type="text"
-                                    placeholder="University*"
-                                    error={errors.institution?.message}
-                                    autoComplete="off"
-                                    className="p-0"
-                                    customInputClass="px-2 py-[10px] text-[15px] w-full rounded-md outline-none placeholder:text-sm"
-                                />
-                            </div>
+                        <div className="w-full border border-gray-300 md:border-none">
+                            <label className="font-bold text-gray-600">
+                                Which institution did you study at?
+                            </label>
+                            <InputBox
+                                {...register('institution', {
+                                    required: 'Institution is required'
+                                })}
+                                type="text"
+                                placeholder="University*"
+                                error={errors.institution?.message}
+                                autoComplete="off"
+                                className="p-0"
+                                customInputClass="px-2 py-[10px] text-[15px] w-full rounded-md outline-none placeholder:text-sm"
+                            />
+                        </div>
 
-                            <div className="w-full border border-gray-300 md:border-none">
-                                <label className="font-bold text-gray-600">
-                                    Start date of your degree
-                                </label>
-                                <InputBox
-                                    {...register('startDate', {
-                                        required: 'Start Date is required'
-                                    })}
-                                    type="dob"
-                                    placeholder="Date Of start*"
-                                    error={errors.startDate?.message}
-                                    autoComplete="off"
-                                    className="p-0"
-                                    customInputClass="px-2 py-[10px] text-[15px] w-full rounded-md outline-none placeholder:text-sm mb-4"
-                                />
-                                <label className="font-bold text-gray-600">
-                                    Completion date of your degree
-                                </label>
-                                <InputBox
-                                    {...register('completeDate', {
-                                        required: 'Start Date is required'
-                                    })}
-                                    type="dob"
-                                    placeholder="Date Of completion*"
-                                    error={errors.completeDate?.message}
-                                    autoComplete="off"
-                                    className="p-0"
-                                    customInputClass="px-2 py-[10px] text-[15px] w-full rounded-md outline-none placeholder:text-sm"
-                                />
-                            </div>
-                        </form>
-                    </div>
-                )}
+                        <div className="w-full border border-gray-300 md:border-none">
+                            <label className="font-bold text-gray-600">
+                                Start date of your degree
+                            </label>
+                            <InputBox
+                                {...register('startDate', {
+                                    required: 'Start Date is required'
+                                })}
+                                type="dob"
+                                placeholder="Date Of start*"
+                                error={errors.startDate?.message}
+                                autoComplete="off"
+                                className="p-0"
+                                customInputClass="px-2 py-[10px] text-[15px] w-full rounded-md outline-none placeholder:text-sm mb-4"
+                            />
+                            <label className="font-bold text-gray-600">
+                                Completion date of your degree
+                            </label>
+                            <InputBox
+                                {...register('completeDate', {
+                                    required: 'Start Date is required'
+                                })}
+                                type="dob"
+                                placeholder="Date Of completion*"
+                                error={errors.completeDate?.message}
+                                autoComplete="off"
+                                className="p-0"
+                                customInputClass="px-2 py-[10px] text-[15px] w-full rounded-md outline-none placeholder:text-sm"
+                            />
+                        </div>
+                    </form>
+                </div>
             </div>
         </>
     );

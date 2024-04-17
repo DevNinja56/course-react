@@ -25,6 +25,7 @@ interface formType {
     degree: string;
     course: string;
     institute: string;
+    intake: string;
 }
 
 const messageList = [
@@ -35,6 +36,7 @@ const messageList = [
 ];
 
 const ApplyOnline = () => {
+    const [courseIntakes, setCourseIntakes] = useState<string[]>([]);
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [isSubmit, setIsSubmit] = useState<boolean>(false);
     const [otherMessage, setMessage] = useState(false);
@@ -42,7 +44,9 @@ const ApplyOnline = () => {
         degree,
         course,
         institute,
+        intakes,
         addDegreeState,
+        addIntakesState,
         addCourseState,
         addInstituteState
     } = useApply();
@@ -60,15 +64,23 @@ const ApplyOnline = () => {
         reset
     } = useForm<formType>();
 
+    const findSelectedCourse = (id: string | undefined) => {
+        return courseList?.find((course) => course.id === id);
+    };
+
     useEffect(() => {
         setValue('degree', degree?.value ?? '');
         setValue('course', course?.value ?? '');
         setValue('institute', institute?.value ?? '');
-    }, [degree, course, institute]);
+        setValue('intake', intakes?.value ?? '');
+        const foundCourse = findSelectedCourse(course?.value);
+        if (foundCourse) {
+            setCourseIntakes(foundCourse?.intakes);
+        }
+    }, [degree, course, institute, intakes]);
 
     const handleSubmit = ({ name, email, phone_number, ...body }: formType) => {
         setIsLoading(true);
-
         toast
             .promise(
                 fetchRequest({
@@ -128,7 +140,7 @@ const ApplyOnline = () => {
                                     error={errors.name?.message}
                                     autoComplete="off"
                                     className="p-0"
-                                    customInputClass="px-2 py-[5px] text-[15px] w-full rounded-md outline-none placeholder:text-sm"
+                                    customInputClass="px-2 py-[5px] text-[15px] w-full rounded-md outline-none placeholder:text-md"
                                 />
                                 <InputBox
                                     {...register('email', {
@@ -136,7 +148,7 @@ const ApplyOnline = () => {
                                     })}
                                     placeholder="Email Address"
                                     error={errors.email?.message}
-                                    customInputClass="px-2 py-[5px] text-[15px] w-full rounded-md outline-none placeholder:text-sm"
+                                    customInputClass="px-2 py-[5px] text-[15px] w-full rounded-md outline-none placeholder:text-md"
                                 />
                                 <InputBox
                                     {...register('phone_number', {
@@ -145,7 +157,7 @@ const ApplyOnline = () => {
                                     type="tel"
                                     placeholder="Phone Number"
                                     error={errors.phone_number?.message}
-                                    customInputClass="px-2 py-[5px] text-[15px] w-full rounded-md outline-none placeholder:text-sm"
+                                    customInputClass="px-2 py-[5px] text-[15px] w-full rounded-md outline-none placeholder:text-md"
                                 />
                             </div>
                         )}
@@ -253,41 +265,69 @@ const ApplyOnline = () => {
                                 )}
                             </div>
                         </div>
-                        <div className="w-full my-2">
-                            <Select
-                                {...register('message', {
-                                    required: 'Message is required'
-                                })}
-                                options={messageList?.map((msg) => ({
-                                    label: msg,
-                                    value: msg
-                                }))}
-                                placeholder="Select Message"
-                                onChange={(e) => {
-                                    if (
-                                        e?.value ===
-                                        messageList[messageList.length - 1]
-                                    ) {
-                                        setMessage(true);
-                                        return;
-                                    }
-                                    setMessage(false);
-                                    setValue('message', e?.value ?? '');
-                                }}
-                                styles={{
-                                    control: (base: any) => ({
-                                        ...base,
-                                        border: errors.message?.message
-                                            ? '1px solid red'
-                                            : '1px solid #717070'
-                                    })
-                                }}
-                            />
-                            {errors.message?.message && (
-                                <span className="text-xs mt-1 text-red-600 ">
-                                    {errors.message?.message}
-                                </span>
-                            )}
+                        <div className="w-full my-3 gap-3 flex justify-between">
+                            <div className="w-6/12">
+                                <Select
+                                    {...register('intake', {
+                                        required: 'Intakes is required'
+                                    })}
+                                    options={courseIntakes?.map((intake) => ({
+                                        label: intake,
+                                        value: intake
+                                    }))}
+                                    isDisabled={!course}
+                                    placeholder="Select Intakes"
+                                    isLoading={courseLoading}
+                                    onChange={(e) => {
+                                        addIntakesState({
+                                            value: e?.value ?? '',
+                                            label: e?.label ?? ''
+                                        });
+                                    }}
+                                    defaultValue={intakes ?? null}
+                                />
+                                {errors.course?.message && (
+                                    <span className="text-xs mt-1 text-red-600 ">
+                                        {errors.intake?.message}
+                                    </span>
+                                )}
+                            </div>
+                            <div className="w-6/12">
+                                <Select
+                                    {...register('message', {
+                                        required: 'Message is required'
+                                    })}
+                                    options={messageList?.map((msg) => ({
+                                        label: msg,
+                                        value: msg
+                                    }))}
+                                    placeholder="Select Message"
+                                    onChange={(e) => {
+                                        if (
+                                            e?.value ===
+                                            messageList[messageList.length - 1]
+                                        ) {
+                                            setMessage(true);
+                                            return;
+                                        }
+                                        setMessage(false);
+                                        setValue('message', e?.value ?? '');
+                                    }}
+                                    styles={{
+                                        control: (base: any) => ({
+                                            ...base,
+                                            border: errors.message?.message
+                                                ? '1px solid red'
+                                                : '1px solid #717070'
+                                        })
+                                    }}
+                                />
+                                {errors.message?.message && (
+                                    <span className="text-xs mt-1 text-red-600 ">
+                                        {errors.message?.message}
+                                    </span>
+                                )}
+                            </div>
                         </div>
                         {otherMessage && (
                             <div className="message">
@@ -311,8 +351,9 @@ const ApplyOnline = () => {
                                 )}
                             </div>
                         )}
-                        <div className="mt-5 w-1/4  mx-auto">
+                        <div className="mt-5 w-1/4  mx-auto ">
                             <Button
+                                className="py-2"
                                 type="submit"
                                 disabled={isLoading}
                                 isLoader={isLoading}

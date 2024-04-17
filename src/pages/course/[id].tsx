@@ -8,10 +8,9 @@ import { ROUTES } from '@/config/constant';
 import { useUi } from '@/hooks/user-interface';
 import { modalType } from '@/store/slices/ui.slice';
 import { singleCourseType } from '@/types';
-import { setCurrencyValue } from '@/utils/currencyValue';
 import { getSsrRequest } from '@/utils/ssrRequest';
 import { GetServerSideProps } from 'next';
-import Image from 'next/image';
+// import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 import { CiCalculator2 } from 'react-icons/ci';
@@ -22,11 +21,17 @@ import { GoClockFill } from 'react-icons/go';
 import { FaMoneyBillWave } from 'react-icons/fa';
 import { IoLocation } from 'react-icons/io5';
 import { FaCalendar } from 'react-icons/fa';
+import { getMonths } from '@/utils/get-months';
+import { useCurrency } from '@/hooks/currency';
+import { useCalculate } from '@/hooks/initial-deposit-calculate';
+import LanguageRequirements from '@/components/course/LanguageRequirements';
 // import { BiSolidCalendar } from 'react-icons/bi';
 // import CourseTag from '@/components/course/CourseTag';
 
 const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
     const { updateModal } = useUi();
+    const { setCurrencyValue, getSingleRate } = useCurrency();
+    const { initialDeposit } = useCalculate();
 
     const openUserDetailModal = (courseId: string) => {
         updateModal({
@@ -34,6 +39,9 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
             state: { courseId }
         });
     };
+
+    const rate = getSingleRate(course.feeCurrency);
+
     return (
         <>
             {!course ? (
@@ -41,42 +49,42 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
             ) : (
                 <>
                     <div className="w-full flex justify-center overflow-hidden mt-[100px] relative">
-                        <Image
+                        <img
                             height={60}
                             width={60}
                             alt="course-round"
                             className="top-1/3 absolute -left-3 md:-left-5 h-8 w-8 md:h-16 md:w-16 lg:h-24 lg:w-24 z-10"
                             src="/images/CourseDetail/Circle 3.svg"
-                            priority
+                            // priority
                         />
                         <div className="w-full py-5 pb-10 md:py-10 xl:py-20 flex justify-center xl:container px-4 md:px-[50px] lg:px-2 2xl:px-8">
-                            <Image
-                                height={375}
-                                width={1240}
+                            <img
+                                height={400}
+                                width={1200}
                                 alt="courseDetail"
                                 src={
                                     course?.image ??
                                     '/images/CourseDetail/courseDetailMain.png'
                                 }
-                                className="z-20 h-full w-full lg:block hidden max-h-[375px] object-contain"
-                                priority
+                                className="z-20 h-full w-full lg:block hidden max-h-[375px] object-cover rounded-lg  "
+                                // priority
                             />
-                            <Image
+                            <img
                                 height={375}
                                 width={1240}
                                 alt="courseDetail"
                                 src="/images/CourseDetail/courseDetailMainTablet.png"
                                 className="z-20 h-full w-full lg:hidden block"
-                                priority
+                                // priority
                             />
                         </div>
-                        <Image
+                        <img
                             height={273}
                             width={274}
                             alt="courseDetail-round"
                             className="absolute right-[-40px] lg:-right-20 -top-7 md:-top-16 md:-right-8 md:translate-y-8 lg:translate-y-0 md:bottom-8 lg:-top-16 h-20 w-20 md:h-32 md:w-32 lg:h-80 lg:w-80"
                             src="/images/CourseDetail/Ciecle 4.svg"
-                            priority
+                            // priority
                         />
                     </div>
                     <div className="flex items-center w-full xl:container px-4 md:px-[50px] lg:px-2 2xl:px-8 mx-auto transition-all duration-300 flex-col gap-6 mb-32">
@@ -117,197 +125,245 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                                                 }
                                             })
                                         }
-                                        className="h-8 w-8 rounded-full bg-white shadow-lg lg:flex items-center justify-center hidden cursor-pointer"
+                                        className="h-8 w-8 rounded-full bg-white shadow-lg lg:flex items-center justify-center hidden cursor-pointer group hover:bg-blue-500"
                                     >
-                                        <IoShareSocialSharp className="text-gray-400 h-4 w-4" />
+                                        <IoShareSocialSharp className="text-gray-400 group-hover:text-white h-4 w-4" />
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div className="flex flex-col lg:flex-row gap-0 xl:gap-16 w-full justify-between">
-                            <div className="bg-white w-full lg:w-[70%] xl:w-2/3 h-headerStickyHeight static lg:sticky top-[110px] no-scrollbar mb-48 md:mb-48 lg:mb-96">
-                                <div className=" transition-all duration-300">
-                                    <div className="flex flex-col gap-y-6 mb-16 md:mb-20">
-                                        <div className="tabs-container capitalize">
-                                            <Tabs
-                                                data={[
-                                                    {
-                                                        title: 'Overview',
-                                                        element: (
-                                                            <div className="description w-full flex flex-col gap-3 md:gap-4 items-start">
-                                                                <h1 className="text-black text-lg md:text-2xl font-bold">
-                                                                    Course
-                                                                    Description
-                                                                </h1>
-                                                                <div
-                                                                    className="text-sm md:text-base"
-                                                                    dangerouslySetInnerHTML={{
-                                                                        __html:
-                                                                            course?.description ??
-                                                                            ''
-                                                                    }}
-                                                                />
-                                                            </div>
-                                                        )
-                                                    },
-                                                    {
-                                                        title: 'Entry Requirements',
-                                                        element: (
-                                                            <div className="flex flex-col gap-8">
-                                                                <div className="flex flex-col gap-4 items-start">
-                                                                    <h3 className="text-black text-lg md:text-2xl font-bold">
-                                                                        Entry
-                                                                        Requirements
-                                                                    </h3>
+                        <div className="flex flex-col lg:flex-row gap-0 xl:gap-16 w-full justify-between mb-0 lg:mb-28">
+                            <div className="flex flex-col w-full lg:w-[70%] xl:w-2/3">
+                                <div className="w-full h-courseStickyHeight static lg:sticky top-[110px] no-scrollbar mb-5 lg:mb-[450px] xl:mb-96 overflow-y-scroll">
+                                    <div className="transition-all duration-300">
+                                        <div className="flex flex-col gap-y-6 mb-16 md:mb-20">
+                                            <div className="tabs-container capitalize">
+                                                <Tabs
+                                                    data={[
+                                                        {
+                                                            title: 'Overview',
+                                                            element: (
+                                                                <div className="description w-full flex flex-col gap-3 md:gap-4 items-start">
+                                                                    <h1 className="text-black text-lg md:text-2xl font-bold">
+                                                                        Course
+                                                                        Description
+                                                                    </h1>
                                                                     <div
-                                                                        className="content text-sm md:text-base"
+                                                                        className="text-sm md:text-base"
                                                                         dangerouslySetInnerHTML={{
                                                                             __html:
-                                                                                course
-                                                                                    .entryRequirements?.[0]
-                                                                                    .requirement ??
-                                                                                'No Entry Requirements'
+                                                                                course?.description ??
+                                                                                ''
                                                                         }}
-                                                                    ></div>
+                                                                    />
                                                                 </div>
-                                                            </div>
-                                                        )
-                                                    },
-                                                    {
-                                                        title: 'Language Requirements',
-                                                        element: (
-                                                            <div className="flex flex-col gap-8">
-                                                                <div className="flex flex-col gap-4  items-start">
+                                                            )
+                                                        },
+                                                        {
+                                                            title: 'Entry Requirements',
+                                                            element: (
+                                                                <div className="flex flex-col gap-8">
+                                                                    <div className="flex flex-col gap-4 items-start">
+                                                                        <h3 className="text-black text-lg md:text-2xl font-bold">
+                                                                            Entry
+                                                                            Requirements
+                                                                        </h3>
+                                                                        <div
+                                                                            className="content text-sm md:text-base"
+                                                                            dangerouslySetInnerHTML={{
+                                                                                __html:
+                                                                                    course
+                                                                                        .entryRequirements?.[0]
+                                                                                        .requirement ??
+                                                                                    'No Entry Requirements'
+                                                                            }}
+                                                                        ></div>
+                                                                    </div>
+                                                                </div>
+                                                            )
+                                                        },
+                                                        {
+                                                            title: 'Language Requirements',
+                                                            element: (
+                                                                <div className="flex flex-col gap-8">
+                                                                    <div className="flex flex-col gap-4  items-start">
+                                                                        <h3 className="text-black text-lg md:text-2xl font-bold">
+                                                                            Language
+                                                                            Requirements
+                                                                        </h3>
+                                                                        <div className="flex gap-4">
+                                                                            <LanguageRequirements
+                                                                                language={
+                                                                                    course
+                                                                                        .language[0]
+                                                                                        .language
+                                                                                }
+                                                                            />
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            )
+                                                        },
+                                                        {
+                                                            title: 'Tuitions Fee',
+                                                            element: (
+                                                                <div className="flex flex-col gap-4 items-start">
                                                                     <h3 className="text-black text-lg md:text-2xl font-bold">
-                                                                        Language
-                                                                        Requirements
+                                                                        Tuitions
+                                                                        Fee
                                                                     </h3>
                                                                     <p className="text-sm md:text-base">
-                                                                        {
-                                                                            course
-                                                                                .language?.[0]
-                                                                                .language
-                                                                        }
+                                                                        {setCurrencyValue(
+                                                                            course.tuitionFee *
+                                                                                (rate?.base_rate
+                                                                                    ? +rate?.base_rate
+                                                                                    : 1)
+                                                                        )}
                                                                     </p>
                                                                 </div>
-                                                            </div>
-                                                        )
-                                                    },
-                                                    {
-                                                        title: 'Tuitions Fee',
-                                                        element: (
-                                                            <div className="flex flex-col gap-4 items-start">
-                                                                <h3 className="text-black text-lg md:text-2xl font-bold">
-                                                                    Tuitions Fee
-                                                                </h3>
-                                                                <p className="text-sm md:text-base">
-                                                                    {setCurrencyValue(
-                                                                        course.tuitionFee
-                                                                    )}
-                                                                </p>
-                                                            </div>
-                                                        )
-                                                    },
-                                                    {
-                                                        title: 'Scholarship',
-                                                        element: (
-                                                            <div className="flex flex-col gap-4 items-start">
-                                                                <h3 className="text-black text-lg md:text-2xl font-bold">
-                                                                    All
-                                                                    Scholarship
-                                                                </h3>
-                                                                <ul className="w-full flex flex-col items-start gap-2">
-                                                                    {course.degree.scholarship.map(
-                                                                        ({
-                                                                            name
-                                                                        }) => (
-                                                                            <li
-                                                                                className="text-sm md:text-base"
-                                                                                key={
-                                                                                    'scholarship-list--' +
-                                                                                    name
-                                                                                }
-                                                                            >
-                                                                                {
-                                                                                    name
-                                                                                }
+                                                            )
+                                                        },
+                                                        {
+                                                            title: 'Scholarship',
+                                                            element: (
+                                                                <div className="flex flex-col gap-4 items-start">
+                                                                    <h3 className="text-black text-lg md:text-2xl font-bold">
+                                                                        Course
+                                                                        Scholarship
+                                                                    </h3>
+                                                                    <ul className="w-full flex gap-3 flex-wrap items-start">
+                                                                        {course
+                                                                            .scholarship
+                                                                            .length >
+                                                                        0 ? (
+                                                                            course.scholarship.map(
+                                                                                ({
+                                                                                    name,
+                                                                                    id
+                                                                                }) => (
+                                                                                    <Link
+                                                                                        href={ROUTES.SCHOLARSHIP.replace(
+                                                                                            ':id',
+                                                                                            id
+                                                                                        )}
+                                                                                        className="text-sm md:text-base border-2 p-3 rounded-md border-blueColor text-blueColor hover:bg-blueColor hover:text-white transition-all duration-300 text-center"
+                                                                                        key={
+                                                                                            'scholarship-list--' +
+                                                                                            name
+                                                                                        }
+                                                                                    >
+                                                                                        <div className="">
+                                                                                            <img
+                                                                                                src="/images/Scholarships/scholarship (1) 1.png"
+                                                                                                alt="image"
+                                                                                                className="mx-auto"
+                                                                                                width={
+                                                                                                    100
+                                                                                                }
+                                                                                                height={
+                                                                                                    100
+                                                                                                }
+                                                                                            />
+                                                                                        </div>
+                                                                                        {
+                                                                                            name
+                                                                                        }
+                                                                                    </Link>
+                                                                                )
+                                                                            )
+                                                                        ) : (
+                                                                            <li className="text-sm md:text-base">
+                                                                                No
+                                                                                scholarships
+                                                                                available
                                                                             </li>
-                                                                        )
-                                                                    )}
-                                                                </ul>
-                                                            </div>
-                                                        )
-                                                    },
-                                                    {
-                                                        title: 'Initial Deposit',
-                                                        element: (
-                                                            <div className="flex flex-col gap-4 items-start">
-                                                                <h3 className="text-black text-lg md:text-2xl font-bold">
-                                                                    Initial
-                                                                    Deposit
-                                                                </h3>
-                                                                <p className="text-sm md:text-base">
-                                                                    {setCurrencyValue(
-                                                                        course
-                                                                            .initialDeposit?.[0]
-                                                                            .amount
-                                                                    )}
-                                                                </p>
-                                                            </div>
-                                                        )
-                                                    }
-                                                ]}
-                                            />
-                                        </div>
-                                    </div>
-                                    <div className="py-6 border-t-2 border-borderColor flex items-center justify-between w-full mb-8 md:mb-20">
-                                        <h1 className="text-base md:text-xl font-semibold text-textLightBlackColor">
-                                            Get more details
-                                        </h1>
-                                        <Link
-                                            href={course.institute.instituteURL}
-                                            target="_blank"
-                                            className="text-blueColor text-xs md:text-base"
-                                        >
-                                            Visit university website
-                                        </Link>
-                                    </div>
-                                    {course.documentsRequirement && (
-                                        <div className="flex flex-col gap-5 w-full">
-                                            <div className="flex items-center gap-2">
-                                                <IoDocumentText className="h-7 w-7 md:h-8 md:w-8" />
-                                                <h1 className="font-bold text-lg md:text-2xl text-mainTextColor">
-                                                    Requirements
-                                                </h1>
-                                            </div>
-                                            <p className="text-sm md:text-xl font-medium text-lightGrayColor">
-                                                Listed below are the documents
-                                                required to apply for this
-                                                course.
-                                            </p>
-                                            <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-7">
-                                                {course.documentsRequirement?.map(
-                                                    ({ title, url }, i) => (
-                                                        <RequirementBox
-                                                            key={
-                                                                'docs requirement--' +
-                                                                i +
-                                                                title
-                                                            }
-                                                            text={title}
-                                                            url={url}
-                                                        />
-                                                    )
-                                                )}
+                                                                        )}
+                                                                    </ul>
+                                                                </div>
+                                                            )
+                                                        },
+                                                        {
+                                                            title: 'Initial Deposit',
+                                                            element: (
+                                                                <div className="flex flex-col gap-4 items-start">
+                                                                    <h3 className="text-black text-lg md:text-2xl font-bold">
+                                                                        Initial
+                                                                        Deposit
+                                                                    </h3>
+
+                                                                    <p className="text-sm md:text-base">
+                                                                        {initialDeposit(
+                                                                            {
+                                                                                initialDeposit:
+                                                                                    course
+                                                                                        .initialDeposit?.[0]
+                                                                                        .amount,
+                                                                                tuitionFee:
+                                                                                    course.tuitionFee,
+                                                                                scholarship:
+                                                                                    course
+                                                                                        ?.scholarship[0]
+                                                                                        ?.amount,
+                                                                                currency_code:
+                                                                                    course.feeCurrency
+                                                                            }
+                                                                        )}
+                                                                    </p>
+                                                                </div>
+                                                            )
+                                                        }
+                                                    ]}
+                                                />
                                             </div>
                                         </div>
-                                    )}
+                                    </div>
                                 </div>
+                                <div className="py-6 border-t-2 border-borderColor flex items-center justify-between w-full mb-8 md:mb-20">
+                                    <h1 className="text-base md:text-xl font-semibold text-textLightBlackColor">
+                                        Get more details
+                                    </h1>
+                                    <Link
+                                        href={course.institute.instituteURL}
+                                        target="_blank"
+                                        className="text-blueColor text-xs md:text-base"
+                                    >
+                                        Visit university website
+                                    </Link>
+                                </div>
+                                {course.documentsRequirement && (
+                                    <div className="flex flex-col gap-5 w-full">
+                                        <div className="flex items-center gap-2">
+                                            <IoDocumentText className="h-7 w-7 md:h-8 md:w-8" />
+                                            <h1 className="font-bold text-lg md:text-2xl text-mainTextColor">
+                                                Requirements
+                                            </h1>
+                                        </div>
+                                        <p className="text-sm md:text-xl font-medium text-lightGrayColor">
+                                            Listed below are the documents
+                                            required to apply for this course.
+                                        </p>
+                                        <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-7">
+                                            {course.documentsRequirement?.map(
+                                                ({ title, url }, i) => (
+                                                    <RequirementBox
+                                                        key={
+                                                            'docs requirement--' +
+                                                            i +
+                                                            title
+                                                        }
+                                                        text={title}
+                                                        url={url}
+                                                    />
+                                                )
+                                            )}
+                                        </div>
+                                    </div>
+                                )}
                             </div>
                             <div className="flex flex-col gap-11 w-full lg:w-[28%] xl:w-[30%]">
                                 <div className="bg-white rounded-[10px] px-4 py-6 w-full z-10 shadow-RequirementBox mt-4 hidden lg:block">
                                     <div className="relative flex justify-center items-end w-full h-[228px] pb-3">
-                                        <Image
+                                        <img
                                             height={228}
                                             width={353.5}
                                             alt="minim"
@@ -316,9 +372,9 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                                                 course.institute?.image ??
                                                 '/images/CourseDetail/Rectangle 1697.svg'
                                             }
-                                            priority
+                                            // priority
                                         />
-                                        <h1 className="text-center font-bold text-2xl text-white z-10">
+                                        <h1 className="absolute w-full bottom-0 left-0 py-2 px-5 bg-gradient-to-t from-blueColor text-center font-bold text-2xl text-white z-10  ">
                                             {course.institute.name}
                                         </h1>
                                     </div>
@@ -382,7 +438,10 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                                                 </p>
                                                 <p className="text-lightGrayColor text-base">
                                                     {setCurrencyValue(
-                                                        course.tuitionFee
+                                                        course.tuitionFee *
+                                                            (rate?.base_rate
+                                                                ? +rate?.base_rate
+                                                                : 1)
                                                     )}
                                                 </p>
                                             </div>
@@ -406,7 +465,7 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                                                     Discipline
                                                 </p>
                                                 <p className="text-lightGrayColor text-base">
-                                                    {course.specialization.name}
+                                                    {course?.discipline?.name}
                                                 </p>
                                             </div>
                                         </div>
@@ -417,7 +476,9 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                                                     Duration
                                                 </p>
                                                 <p className="text-lightGrayColor text-base">
-                                                    {course.duration + ' Years'}
+                                                    {getMonths(
+                                                        course.monthDuration
+                                                    )}
                                                 </p>
                                             </div>
                                         </div>
@@ -428,7 +489,12 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                                                     Campus
                                                 </p>
                                                 <p className="text-lightGrayColor text-base">
-                                                    {course.institute.campus}
+                                                    {course.availableCampuses
+                                                        .length
+                                                        ? course.availableCampuses?.join(
+                                                              ' / '
+                                                          )
+                                                        : 'No Campus / Online'}
                                                 </p>
                                             </div>
                                         </div>
@@ -439,7 +505,7 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                                                     Available Intakes
                                                 </p>
                                                 <p className="text-lightGrayColor text-base">
-                                                    {course.intakes.join()}
+                                                    {course.intakes.join(' ')}
                                                 </p>
                                             </div>
                                         </div>

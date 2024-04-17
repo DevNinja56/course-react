@@ -17,8 +17,7 @@ const AcademicInformation = () => {
     const { name: languageTestName, score: languageTestScore } =
         languageTest as { name: string; score: { [key: string]: string } };
     const { speaking, listening, writing, reading } = languageTestScore ?? {};
-    const overallScore = +speaking + +listening + +writing + +reading || 'Null';
-
+    const overallScore = (+speaking + +listening + +writing + +reading) / 4;
     return (
         <div className="lg:flex flex-col w-full lg:w-[67%] ">
             <div className="rounded-[10px] border border-borderColor px-11 pt-11 pb-4 flex flex-col gap-y-6 relative ">
@@ -55,19 +54,19 @@ const AcademicInformation = () => {
                         <div className="score">
                             <div className="flex flex-wrap gap-2">
                                 <span className="">
-                                    Speaking: <b>{speaking ?? 'Null'}</b>
+                                    Speaking: <b>{(+speaking)?.toFixed(1) ?? 'Null'}</b>
                                 </span>
                                 <span className="">
-                                    Listening: <b>{listening ?? 'Null'}</b>
+                                    Listening: <b>{(+listening)?.toFixed(1) ?? 'Null'}</b>
                                 </span>
                                 <span className="">
-                                    Writing: <b>{writing ?? 'Null'}</b>
+                                    Writing: <b>{(+writing)?.toFixed(1) ?? 'Null'}</b>
                                 </span>
                                 <span className="">
-                                    Reading: <b>{reading ?? 'Null'}</b>
+                                    Reading: <b>{(+reading)?.toFixed(1) ?? 'Null'}</b>
                                 </span>
                                 <span className="">
-                                    Over All: <b>{overallScore ?? 'Null'}</b>
+                                    Overall: <b>{(+overallScore)?.toFixed(1) ?? 'Null'}</b>
                                 </span>
                             </div>
                         </div>

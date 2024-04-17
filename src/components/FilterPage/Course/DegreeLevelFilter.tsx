@@ -69,11 +69,11 @@ const DegreeLevelFilter: React.FC<propsType> = ({ data, isLoading }) => {
                         >
                             {type.map((degree) => (
                                 <FilterCheckBox
-                                    key={'degree-type--list--' + degree.id}
-                                    id={degree.name}
-                                    text={degree.name}
+                                    key={'degree-type--list--' + degree?.id}
+                                    id={degree?.name}
+                                    text={degree?.name}
                                     name={'degrees'}
-                                    value={degree.name}
+                                    value={degree?.name}
                                 />
                             ))}
                         </div>

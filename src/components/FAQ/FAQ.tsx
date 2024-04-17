@@ -1,4 +1,4 @@
-import Image from 'next/image';
+// import Image from 'next/image';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import { accordionList } from '@/utils/data/accordion';
@@ -27,14 +27,14 @@ const FAQ = () => {
                 <div className="w-[880px] flex flex-col border border-grayColor border-opacity-10 rounded relative z-30">
                     {router.pathname === '/faq' ? (
                         <>
-                            <Image
+                            <img
                                 height={134}
                                 width={134}
                                 alt="FAQ-Round"
                                 className="absolute left-[-50px] lg:left-[-80px] xl:left-[-200px] bottom-[-50px] md:top-60 lg:top-[180px] z-10 h-24 w-24 lg:h-36 lg:w-36"
                                 src="/images/Ellipse 424.svg"
                             />
-                            <Image
+                            <img
                                 height={72}
                                 width={72}
                                 alt="FAQ-Round"
@@ -44,7 +44,7 @@ const FAQ = () => {
                             <div className="h-11 w-11 border-[10px] border-blueColor rounded-full absolute top-[-25px] md:top-[-35px] right-[-20px] md:right-[-30px] block md:hidden"></div>
                         </>
                     ) : (
-                        <Image
+                        <img
                             height={296}
                             width={296}
                             alt="FAQ-Round"

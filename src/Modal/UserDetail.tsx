@@ -1,14 +1,31 @@
 import { useUi } from '@/hooks/user-interface';
-import { cities_list, country_list } from '@/utils/data/country';
-import React, { useState } from 'react';
+import React, { FormEvent, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useUserAuth } from '@/hooks/auth';
 import toast from 'react-hot-toast';
 import { fetchRequest } from '@/utils/axios/fetch';
 import { API_ENDPOINTS } from '@/config/Api_EndPoints';
 import InputBox from '@/components/Input';
-import Select from 'react-select';
-import Image from 'next/image';
+import Select, { SingleValue } from 'react-select';
+// import Image from 'next/image';
+import { CiCircleRemove } from 'react-icons/ci';
+import { GoogleOAuthProvider } from '@react-oauth/google';
+import GoogleOAuthWraper from '@/components/Auth/GoogleSignInBtn';
+import Button from '@/components/Button';
+import { ROUTES } from '@/config/constant';
+import { modalType } from '@/store/slices/ui.slice';
+import Link from 'next/link';
+import { MdOutlineMail } from 'react-icons/md';
+import { BiLock } from 'react-icons/bi';
+import { FaArrowLeft } from 'react-icons/fa6';
+import dynamic from 'next/dynamic';
+import {
+    useGetCoursesByInstituteQuery,
+    useGetInstituteQuery
+} from '@/store/slices/allRequests';
+const FacebookLoginBtn = dynamic(import('@/components/Auth/FacebookLoginBtn'), {
+    ssr: false
+});
 
 interface formType {
     first_name?: string;
@@ -27,12 +44,12 @@ interface formType {
 }
 
 const intakeOptions = [
-    'january 2025',
-    'july 2025',
-    'january 2026',
-    'july 2026',
-    'january 2027',
-    'july 2027'
+    'January 2025',
+    'July 2025',
+    'January 2026',
+    'July 2026',
+    'January 2027',
+    'July 2027'
 ];
 const messageList = [
     'I want to apply for this course.',
@@ -42,15 +59,30 @@ const messageList = [
 ];
 
 const UserDetail = () => {
-    const { modalState } = useUi();
+    const { modalState, hideModal } = useUi();
     const [otherMessage, setMessage] = useState(false);
     const { courseId } = modalState as { courseId: string };
-    const { isAuthenticated, user } = useUserAuth();
+    const { isAuthenticated, user, updateUserDetails, loggedInUser } =
+        useUserAuth();
+    const { updateModal } = useUi();
+    const [isLoading, setIsLoading] = useState(false);
+    const [email, setEmail] = useState<string>('');
+    const [password, setPassword] = useState<string>('');
+    const [selectedInstituteId, setSelectedInstituteId] = useState<string>();
+    const [selectedCourseId, setSelectedCourseId] = useState<string>();
+    const [selectedIntake, setSelectedIntake] = useState<string[]>();
+
+    const { data } = useGetInstituteQuery();
+    const { data: courseData } = useGetCoursesByInstituteQuery({
+        limit: 10,
+        page: 1,
+        instituteId: selectedInstituteId as string
+    });
 
     const {
         register,
         handleSubmit: fromSubmit,
-        formState: { errors, isValid },
+        formState: { errors },
         setValue,
         getValues,
         reset
@@ -59,15 +91,6 @@ const UserDetail = () => {
     const [firstStep, setFirstStep] = useState<'first' | 'second'>(
         !isAuthenticated ? 'first' : 'second'
     );
-
-    const onClickNext = () => {
-        if (firstStep === 'first' && isValid) {
-            setFirstStep('second');
-        }
-    };
-    const nationality = getValues('nationality');
-    const country = getValues('country_of_residence');
-    const city = getValues('city_of_residence');
     const intake = getValues('intake');
     const message = getValues('message');
 
@@ -87,15 +110,13 @@ const UserDetail = () => {
         phone_number,
         ...body
     }: formType) => {
-        // setIsLoading(true);
-
         toast.promise(
             fetchRequest({
                 url: API_ENDPOINTS.APPLY,
                 type: 'post',
                 body: {
                     ...body,
-                    course: courseId,
+                    course: courseId ? courseId : selectedCourseId,
                     userDetails: !isAuthenticated
                         ? {
                               first_name,
@@ -114,7 +135,7 @@ const UserDetail = () => {
                 loading: 'Please wait...',
                 success: () => {
                     reset();
-
+                    hideModal();
                     return 'Form submitted successfully';
                 },
                 error: 'An error occurred'
@@ -122,278 +143,109 @@ const UserDetail = () => {
         );
     };
 
+    const handleSubmitUser = (e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        setIsLoading(true);
+        fetchRequest({
+            url: API_ENDPOINTS.AUTH.SIGNIN,
+            type: 'post',
+            body: { email: email, password: password }
+        })
+            .then((res) => {
+                updateUserDetails(res.data.user);
+                loggedInUser({
+                    access: res.data.accessToken,
+                    refresh: res.data.refreshToken
+                });
+                setFirstStep('second');
+                toast.success('User Logged In Success');
+            })
+            .finally(() => setIsLoading(false));
+    };
+
     return (
         <>
             {firstStep === 'first' ? (
-                <div className="p-7 bg-white rounded-3xl">
-                    <div className="flex items-center gap-2">
-                        <div className="bg-blueColor p-2 rounded-full">
-                            <Image
-                                width={30}
-                                height={30}
-                                src="/images/userLogo.png"
-                                alt=""
-                            />
-                        </div>
-                        <h2 className="text-3xl font-bold">Basic Details</h2>
-                    </div>
-                    <p className="text-lg font-medium text-darkGrayColor py-3 w-3/4 leading-5">
-                        We have your basic information, please review and make
-                        sure all your data is accurate
-                    </p>
-                    <form
-                        onSubmit={fromSubmit(handleSubmit)}
-                        className="h-auto"
-                    >
-                        <div className="grid grid-cols-1 md:grid-cols-2  gap-5 py-1">
-                            <div className="flex flex-col gap-1">
-                                <label className="text-sm font-semibold text-grayColor">
-                                    First Name
-                                </label>
-
-                                <InputBox
-                                    {...register('first_name', {
-                                        required: 'Name is required'
-                                    })}
-                                    placeholder="Your First Name"
-                                    error={
-                                        errors.first_name &&
-                                        errors.first_name.message
-                                    }
-                                    autoComplete="off"
-                                    className="p-0"
-                                    customInputClass="border py-2 pl-2 pr-20 rounded-md w-full text-sm"
-                                />
-                            </div>
-
-                            <div className="flex flex-col gap-1">
-                                <label className="text-sm font-semibold text-grayColor">
-                                    Last Name
-                                </label>
-
-                                <InputBox
-                                    {...register('last_name', {
-                                        required: 'Last Name is required'
-                                    })}
-                                    placeholder="Your Last Name"
-                                    error={errors.last_name?.message}
-                                    autoComplete="off"
-                                    className="p-0"
-                                    customInputClass="border py-2 pl-2 pr-20 rounded-md w-full text-sm"
-                                />
-                            </div>
-                        </div>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 py-1">
-                            <div className="flex flex-col gap-1">
-                                <label className="text-sm font-semibold text-grayColor">
-                                    Date of birth
-                                </label>
-
-                                <InputBox
-                                    {...register('dob', {
-                                        required: 'Date of Birth is required'
-                                    })}
-                                    type="dob"
-                                    name="dob"
-                                    placeholder="DD/MM/YYYY"
-                                    error={errors.dob && errors.dob.message}
-                                    autoComplete="off"
-                                    className="p-0"
-                                    customInputClass="border py-2 pl-2 pr-2 rounded-md w-full text-sm"
-                                />
-                            </div>
-                            <div className="flex flex-col gap-1">
-                                <label className="text-sm font-semibold text-grayColor ">
-                                    Nationality
-                                </label>
-
-                                <Select
-                                    {...register('nationality', {
-                                        required: 'Nationality is required'
-                                    })}
-                                    options={country_list?.map(
-                                        (nationality) => ({
-                                            label: nationality,
-                                            value: nationality
-                                        })
-                                    )}
-                                    placeholder="Select Nationality"
-                                    onChange={(e) => {
-                                        setValue('nationality', e?.value ?? '');
-                                    }}
-                                    defaultValue={
-                                        nationality
-                                            ? {
-                                                  label: nationality,
-                                                  value: nationality
-                                              }
-                                            : undefined
-                                    }
-                                    styles={{
-                                        control: (base: {
-                                            [key: string]: unknown;
-                                        }) => ({
-                                            ...base,
-                                            padding: '0px',
-                                            borderRadius: '6px',
-                                            fontSize: '14px',
-                                            border: errors.nationality
-                                                ? '1px solid red'
-                                                : '1px solid #717070'
-                                        })
-                                    }}
-                                />
-
-                                {errors.nationality?.message && (
-                                    <span className="text-xs  text-red-600 ">
-                                        {errors.nationality?.message}
-                                    </span>
-                                )}
-                            </div>
-                        </div>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 py-1">
-                            <div className="flex flex-col gap-1">
-                                <label className="text-sm font-semibold text-grayColor">
-                                    Country of residence
-                                </label>
-                                <Select
-                                    {...register('country_of_residence', {
-                                        required: 'Country is required'
-                                    })}
-                                    options={country_list?.map((country) => ({
-                                        label: country,
-                                        value: country
-                                    }))}
-                                    placeholder="Select Country"
-                                    onChange={(e) => {
-                                        setValue(
-                                            'country_of_residence',
-                                            e?.value ?? ''
-                                        );
-                                    }}
-                                    defaultValue={
-                                        country
-                                            ? { label: country, value: country }
-                                            : undefined
-                                    }
-                                    styles={{
-                                        control: (base: {
-                                            [key: string]: unknown;
-                                        }) => ({
-                                            ...base,
-                                            padding: '0px',
-                                            borderRadius: '6px',
-                                            fontSize: '14px',
-
-                                            border:
-                                                errors.country_of_residence &&
-                                                errors.country_of_residence
-                                                    ?.message
-                                                    ? '1px solid red'
-                                                    : '1px solid #717070'
-                                        })
-                                    }}
-                                />
-                                {errors.country_of_residence?.message && (
-                                    <span className="text-xs  text-red-600 ">
-                                        {errors.country_of_residence?.message}
-                                    </span>
-                                )}
-                            </div>
-                            <div className="flex flex-col gap-1">
-                                <label className="text-sm font-semibold text-grayColor">
-                                    City of residence
-                                </label>
-                                <Select
-                                    {...register('city_of_residence', {
-                                        required: 'City is required'
-                                    })}
-                                    options={cities_list?.map((city) => ({
-                                        label: city,
-                                        value: city
-                                    }))}
-                                    placeholder="Select City"
-                                    onChange={(e) => {
-                                        setValue(
-                                            'city_of_residence',
-                                            e?.value ?? ''
-                                        );
-                                    }}
-                                    defaultValue={
-                                        city
-                                            ? { label: city, value: city }
-                                            : undefined
-                                    }
-                                    styles={{
-                                        control: (base: {
-                                            [key: string]: unknown;
-                                        }) => ({
-                                            ...base,
-                                            padding: '0px',
-                                            borderRadius: '6px',
-                                            border:
-                                                errors.city_of_residence &&
-                                                errors.city_of_residence
-                                                    ?.message
-                                                    ? '1px solid red'
-                                                    : '1px solid #717070'
-                                        })
-                                    }}
-                                />
-                                {errors.city_of_residence?.message && (
-                                    <span className="text-xs  text-red-600 ">
-                                        {errors.city_of_residence?.message}
-                                    </span>
-                                )}
-                            </div>
-                        </div>
-                        <div className="flex flex-col gap-1 w-1/2">
-                            <label className="text-sm font-semibold text-grayColor">
-                                Phone Number
-                            </label>
-
+                <div className="rounded-[10px] bg-white custom-shadow p-7 flex flex-col items-center relative min-w-0 md:min-w-[500px]">
+                    <CiCircleRemove
+                        onClick={hideModal}
+                        className="text-blueColor absolute top-4 right-4 text-2xl cursor-pointer"
+                    />
+                    <Link href={ROUTES.HOMEPAGE}>
+                        <FaArrowLeft className="absolute left-5 top-5 cursor-pointer text-blueColor h-6 w-6" />
+                    </Link>
+                    <h1 className="font-medium text-2xl md:text-[36px] text-mainTextColor mb-3">
+                        Welcome Back
+                    </h1>
+                    <Link href={ROUTES.SIGN_UP}>
+                        <p className="text-mainTextColor font-medium mb-4 md:mb-12 text-sm md:text-base">
+                            No Account?{' '}
+                            <span className="text-blueColor">Sign Up</span>
+                        </p>
+                    </Link>
+                    <form className="w-full" onSubmit={handleSubmitUser}>
+                        <div className="flex flex-col w-full gap-y-7 mb-3">
                             <InputBox
-                                {...register('phone_number', {
-                                    required: 'Phone Number is required'
-                                })}
-                                type="tel"
-                                placeholder="Phone Number"
-                                error={errors.phone_number?.message}
-                                customInputClass="border py-2 pl-2 pr-20 rounded-md w-[97%] text-sm"
+                                onChange={(e) => setEmail(e.target.value)}
+                                placeholder="Email"
+                                title="Email"
+                                icon={MdOutlineMail}
+                            />
+                            <InputBox
+                                onChange={(e) => setPassword(e.target.value)}
+                                type="password"
+                                placeholder="Password"
+                                title="Password"
+                                icon={BiLock}
                             />
                         </div>
-                        <div className="flex items-end justify-end">
+                        <div className="flex justify-end mb-4">
                             <button
-                                onClick={onClickNext}
-                                className=" flex items-center gap-2 px-7 py-3 rounded-md text-lg font-semibold bg-blueColor text-white  hover:bg-blue-600"
+                                type="button"
+                                onClick={() =>
+                                    updateModal({
+                                        type: modalType.reset_password,
+                                        state: {}
+                                    })
+                                }
+                                className="w-full text-right rounded-10px text-darkGrayColor"
                             >
-                                Continue
-                                <span>
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        width="20"
-                                        height="20"
-                                        viewBox="0 0 20 20"
-                                        fill="none"
-                                    >
-                                        <path
-                                            d="M7.5 15L12.5 10L7.5 5"
-                                            stroke="white"
-                                            stroke-width="2"
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                        />
-                                    </svg>
-                                </span>
+                                Forgot password?
                             </button>
                         </div>
+                        <Button
+                            className="pt-[14px] pb-[13px]"
+                            type="submit"
+                            disabled={isLoading}
+                            isLoader={isLoading}
+                            text="Sign In"
+                        />
                     </form>
+                    <GoogleOAuthProvider
+                        clientId={
+                            process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID ?? ''
+                        }
+                    >
+                        <div className="w-full ">
+                            <div className="flex items-center w-full my-3 justify-center">
+                                <div className="w-16 h-px bg-gray-500 mr-4" />
+                                <span className="text-gray-500">OR</span>
+                                <div className="w-16 h-px bg-gray-500 ml-4" />
+                            </div>
+                            <GoogleOAuthWraper />
+                            <FacebookLoginBtn />
+                        </div>
+                    </GoogleOAuthProvider>
                 </div>
             ) : (
-                <div className="p-7 bg-white rounded-3xl">
+                <div className="p-7 bg-white rounded-3xl relative">
+                    <CiCircleRemove
+                        onClick={hideModal}
+                        className="text-blueColor absolute top-4 right-4 text-2xl cursor-pointer"
+                    />
                     <div className="flex items-center gap-2">
                         <div className="bg-blueColor p-2 rounded-full">
-                            <Image
+                            <img
                                 width={30}
                                 height={30}
                                 src="/images/userLogo.png"
@@ -408,49 +260,207 @@ const UserDetail = () => {
                     </p>
                     <form onSubmit={fromSubmit(handleSubmit)}>
                         <div className="flex justify-between gap-5 py-3 flex-col">
-                            <div className="flex flex-col gap-1">
-                                <label className="text-sm font-semibold text-grayColor">
-                                    Intake
-                                </label>
-
-                                <Select
-                                    {...register('intake', {
-                                        required: 'Intake selection is required'
-                                    })}
-                                    options={intakeOptions?.map((intake) => ({
-                                        label: intake,
-                                        value: intake
-                                    }))}
-                                    placeholder="January 2025"
-                                    onChange={(e) => {
-                                        setValue('intake', e?.value ?? '');
-                                    }}
-                                    styles={{
-                                        control: (base: {
-                                            [key: string]: unknown;
-                                        }) => ({
-                                            ...base,
-                                            padding: '0px',
-                                            borderRadius: '6px',
-                                            fontSize: '14px',
-                                            border: errors.intake?.message
-                                                ? '1px solid red'
-                                                : '1px solid #717070'
-                                        })
-                                    }}
-                                    defaultValue={
-                                        intake
-                                            ? { label: intake, value: intake }
-                                            : undefined
-                                    }
-                                />
-
-                                {errors.intake?.message && (
-                                    <span className="text-xs  text-red-600 ">
-                                        {errors.intake?.message}
-                                    </span>
-                                )}
-                            </div>
+                            {!courseId ? (
+                                <>
+                                    <div className="flex flex-col gap-1">
+                                        <label className="text-sm font-semibold text-grayColor">
+                                            Institute
+                                        </label>
+                                        <Select
+                                            options={data?.map((institute) => ({
+                                                label: institute.name,
+                                                value: institute.id
+                                            }))}
+                                            placeholder="Select Institute"
+                                            onChange={(selectedOption) => {
+                                                setSelectedInstituteId(
+                                                    selectedOption?.value
+                                                );
+                                            }}
+                                            styles={{
+                                                control: (base: {
+                                                    [key: string]: unknown;
+                                                }) => ({
+                                                    ...base,
+                                                    padding: '0px',
+                                                    borderRadius: '6px',
+                                                    fontSize: '14px',
+                                                    border: errors.intake
+                                                        ?.message
+                                                        ? '1px solid red'
+                                                        : '1px solid #717070'
+                                                })
+                                            }}
+                                            defaultValue={
+                                                intake
+                                                    ? {
+                                                          label: intake,
+                                                          value: intake
+                                                      }
+                                                    : undefined
+                                            }
+                                        />
+                                    </div>
+                                    <div className="flex flex-col gap-1">
+                                        <label className="text-sm font-semibold text-grayColor">
+                                            Course
+                                        </label>
+                                        <Select
+                                            options={
+                                                courseData &&
+                                                courseData?.data?.map(
+                                                    (course) => ({
+                                                        label: course.name,
+                                                        value: course.id,
+                                                        intake: course?.intakes
+                                                    })
+                                                )
+                                            }
+                                            isDisabled={!courseData?.data}
+                                            placeholder="Select Course"
+                                            onChange={(
+                                                selectedOption: SingleValue<{
+                                                    label: string;
+                                                    value: string;
+                                                    intake: string[];
+                                                }>
+                                            ) => {
+                                                if (selectedOption !== null) {
+                                                    setSelectedCourseId(
+                                                        selectedOption.value
+                                                    );
+                                                    setSelectedIntake(
+                                                        selectedOption.intake
+                                                    );
+                                                }
+                                            }}
+                                            styles={{
+                                                control: (base: {
+                                                    [key: string]: unknown;
+                                                }) => ({
+                                                    ...base,
+                                                    padding: '0px',
+                                                    borderRadius: '6px',
+                                                    fontSize: '14px',
+                                                    border: errors.intake
+                                                        ?.message
+                                                        ? '1px solid red'
+                                                        : '1px solid #717070'
+                                                })
+                                            }}
+                                            defaultValue={
+                                                intake
+                                                    ? {
+                                                          label: intake,
+                                                          value: intake,
+                                                          intake: [intake]
+                                                      }
+                                                    : undefined
+                                            }
+                                        />
+                                    </div>
+                                    <div className="flex flex-col gap-1">
+                                        <label className="text-sm font-semibold text-grayColor">
+                                            Intake
+                                        </label>
+                                        <Select
+                                            {...register('intake', {
+                                                required:
+                                                    'Intake selection is required'
+                                            })}
+                                            options={selectedIntake?.map(
+                                                (intake) => ({
+                                                    label: intake,
+                                                    value: intake
+                                                })
+                                            )}
+                                            placeholder="Select Course Intake"
+                                            onChange={(e) => {
+                                                setValue(
+                                                    'intake',
+                                                    e?.value ?? ''
+                                                );
+                                            }}
+                                            isDisabled={!selectedIntake}
+                                            styles={{
+                                                control: (base: {
+                                                    [key: string]: unknown;
+                                                }) => ({
+                                                    ...base,
+                                                    padding: '0px',
+                                                    borderRadius: '6px',
+                                                    fontSize: '14px',
+                                                    border: errors.intake
+                                                        ?.message
+                                                        ? '1px solid red'
+                                                        : '1px solid #717070'
+                                                })
+                                            }}
+                                            defaultValue={
+                                                intake
+                                                    ? {
+                                                          label: intake,
+                                                          value: intake
+                                                      }
+                                                    : undefined
+                                            }
+                                        />
+                                        {errors.intake?.message && (
+                                            <span className="text-xs  text-red-600 ">
+                                                {errors.intake?.message}
+                                            </span>
+                                        )}
+                                    </div>
+                                </>
+                            ) : (
+                                <div className="flex flex-col gap-1">
+                                    <label className="text-sm font-semibold text-grayColor">
+                                        Intake
+                                    </label>
+                                    <Select
+                                        {...register('intake', {
+                                            required:
+                                                'Intake selection is required'
+                                        })}
+                                        options={intakeOptions?.map(
+                                            (intake) => ({
+                                                label: intake,
+                                                value: intake
+                                            })
+                                        )}
+                                        placeholder="January 2025"
+                                        onChange={(e) => {
+                                            setValue('intake', e?.value ?? '');
+                                        }}
+                                        styles={{
+                                            control: (base: {
+                                                [key: string]: unknown;
+                                            }) => ({
+                                                ...base,
+                                                padding: '0px',
+                                                borderRadius: '6px',
+                                                fontSize: '14px',
+                                                border: errors.intake?.message
+                                                    ? '1px solid red'
+                                                    : '1px solid #717070'
+                                            })
+                                        }}
+                                        defaultValue={
+                                            intake
+                                                ? {
+                                                      label: intake,
+                                                      value: intake
+                                                  }
+                                                : undefined
+                                        }
+                                    />
+                                    {errors.intake?.message && (
+                                        <span className="text-xs  text-red-600 ">
+                                            {errors.intake?.message}
+                                        </span>
+                                    )}
+                                </div>
+                            )}
                             <div className="w-full my-2">
                                 <label className="text-sm font-semibold text-grayColor">
                                     Message
