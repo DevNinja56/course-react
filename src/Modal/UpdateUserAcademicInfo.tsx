@@ -34,7 +34,9 @@ const UpdateUserAcademicInfo = () => {
     const { academicInformation } = useUserAuth()?.user ?? {};
     const { user, refetchUser } = useUserAuth();
     const [isLoading, setIsLoading] = useState(false);
-    const [score, setScore] = useState(false);
+    const [score, setScore] = useState(
+        academicInformation?.languageTest.name !== "I don't have any test"
+    );
     const {
         register,
         handleSubmit: fromSubmit,
@@ -206,8 +208,9 @@ const UpdateUserAcademicInfo = () => {
                             {...register('languageTest.score.speaking', {
                                 required: `Speaking is required`
                             })}
-                            min={1}
-                            max={100}
+                            min={0.1}
+                            max={9.0}
+                            step={0.1}
                             placeholder={'Speaking'}
                             className={`border w-1/2 p-1 rounded-md placeholder-shown:text-sm text-sm ${
                                 errors?.languageTest?.score?.speaking?.message
@@ -224,8 +227,9 @@ const UpdateUserAcademicInfo = () => {
                             {...register('languageTest.score.listening', {
                                 required: `Listening is required`
                             })}
-                            min={1}
-                            max={100}
+                            min={0.1}
+                            max={9.0}
+                            step={0.1}
                             placeholder={'Listening'}
                             className={`border w-1/2 p-1 rounded-md placeholder-shown:text-sm text-sm ${
                                 errors?.languageTest?.score?.listening?.message
@@ -242,8 +246,9 @@ const UpdateUserAcademicInfo = () => {
                             {...register('languageTest.score.writing', {
                                 required: `writing is required`
                             })}
-                            min={1}
-                            max={100}
+                            min={0.1}
+                            max={9.0}
+                            step={0.1}
                             placeholder={'Writing'}
                             className={`border w-1/2 p-1 rounded-md placeholder-shown:text-sm text-sm ${
                                 errors?.languageTest?.score?.writing?.message
@@ -260,9 +265,29 @@ const UpdateUserAcademicInfo = () => {
                             {...register('languageTest.score.reading', {
                                 required: `Reading is required`
                             })}
-                            min={1}
-                            max={100}
+                            min={0.1}
+                            max={9.0}
+                            step={0.1}
                             placeholder={'Reading'}
+                            className={`border w-1/2 p-1 rounded-md placeholder-shown:text-sm text-sm ${
+                                errors?.languageTest?.score?.reading?.message
+                                    ? 'border-red-600'
+                                    : 'border-grayColor'
+                            }`}
+                            defaultValue={
+                                academicInformation?.languageTest?.score
+                                    ?.reading
+                            }
+                            type="number"
+                        />
+                        <input
+                            {...register('languageTest.score.overAll', {
+                                required: `overAll is required`
+                            })}
+                            min={0.1}
+                            max={9.0}
+                            step={0.1}
+                            placeholder={'overAll'}
                             className={`border w-1/2 p-1 rounded-md placeholder-shown:text-sm text-sm ${
                                 errors?.languageTest?.score?.reading?.message
                                     ? 'border-red-600'

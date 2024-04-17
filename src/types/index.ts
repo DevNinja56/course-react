@@ -27,6 +27,7 @@ export interface academicInformation {
             speaking: string;
             writing: string;
             reading: string;
+            overAll: string;
         } | null;
     };
 }
