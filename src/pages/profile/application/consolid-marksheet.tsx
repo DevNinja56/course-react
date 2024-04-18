@@ -47,13 +47,23 @@ const ConSolid_MarkSheet = () => {
         formState: { errors }
     } = useForm<formType>();
     const Files = useSelector((state: FileDetails) => state.apply.files);
+    const firstFile = Files?.conSolidFile?.[0];
+    let fileUrl = null;
+    if (firstFile instanceof Blob) {
+        fileUrl = URL.createObjectURL(firstFile);
+    } else {
+        console.error(
+            'Expected firstFile to be an instance of Blob, but received:',
+            firstFile
+        );
+    }
     const dispatch = useDispatch();
     const router = useRouter();
     const { id } = router.query;
     const { data: getApply } = useGetApplyByIdQuery(id);
     const token = getToken();
     const [isLoading, setIsLoading] = useState(false);
-    const [fullFile, setFullFile] = useState('');
+    const [fullFile, setFullFile] = useState(fileUrl);
 
     const identity = {
         passport: {
@@ -61,8 +71,10 @@ const ConSolid_MarkSheet = () => {
             given_name: getApply?.documents?.identity?.passport?.given_name,
             sur_name: getApply?.documents?.identity?.passport?.sur_name,
             number: getApply?.documents?.identity?.passport?.number,
-            date_of_issue: getApply?.documents?.identity?.passport?.date_of_issue,
-            date_of_expiry: getApply?.documents?.identity?.passport?.date_of_expiry
+            date_of_issue:
+                getApply?.documents?.identity?.passport?.date_of_issue,
+            date_of_expiry:
+                getApply?.documents?.identity?.passport?.date_of_expiry
         }
     };
     const semester_mark_sheets = {
@@ -124,12 +136,18 @@ const ConSolid_MarkSheet = () => {
                                 ? {
                                       identity: {
                                           passport: {
-                                            url: identity.passport.url[0],
-                                            given_name: identity.passport.given_name,
-                                            sur_name: identity.passport.sur_name,
-                                            number: identity.passport.number,
-                                            date_of_issue: identity.passport.date_of_issue,
-                                            date_of_expiry: identity.passport.date_of_expiry
+                                              url: identity.passport.url[0],
+                                              given_name:
+                                                  identity.passport.given_name,
+                                              sur_name:
+                                                  identity.passport.sur_name,
+                                              number: identity.passport.number,
+                                              date_of_issue:
+                                                  identity.passport
+                                                      .date_of_issue,
+                                              date_of_expiry:
+                                                  identity.passport
+                                                      .date_of_expiry
                                           }
                                       }
                                   }
@@ -214,7 +232,7 @@ const ConSolid_MarkSheet = () => {
             <div className="flex w-full lg:flex-row md:flex-col sm:flex-col">
                 <div className="w-1/4 flex flex-col md:hidden lg:block sm:hidden">
                     <div className="w-full bg-BgColorPassport bg-opacity-5 p-8">
-                        <div className="w-full bg-BgCardPassport p-4">
+                        <div className="w-full">
                             {Files && (
                                 <PDFSmallViewer
                                     pdfUrl={Files.conSolidFile}
@@ -225,7 +243,7 @@ const ConSolid_MarkSheet = () => {
                     </div>
                     <label
                         htmlFor="fileUpload"
-                        className=" text-center py-4 font-semibold text-3xl cursor-pointer bg-blueColor border-transparent text-white hover:bg-white hover:border-2 hover:border-blueColor hover:text-blueColor px-12 ml-12"
+                        className="rounded-md text-center py-4 font-semibold text-3xl cursor-pointer bg-blueColor border-transparent text-white hover:bg-white hover:border-2 hover:border-blueColor hover:text-blueColor px-12 ml-12"
                     >
                         {' '}
                         {isLoading ? 'Loading...' : '+ ADD'}
