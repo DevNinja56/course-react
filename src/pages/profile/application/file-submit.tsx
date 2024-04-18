@@ -36,6 +36,17 @@ interface FileDetails {
 
 const FileSubmitted = () => {
     const Files = useSelector((state: FileDetails) => state.apply.files);
+    const firstFile = Files?.passportFile?.[0];
+    let fileUrl = null;
+    if (firstFile instanceof Blob) {
+        fileUrl = URL.createObjectURL(firstFile);
+    } else {
+        console.error(
+            'Expected firstFile to be an instance of Blob, but received:',
+            firstFile
+        );
+    }
+
     const dispatch = useDispatch();
     const {
         register,
@@ -47,7 +58,7 @@ const FileSubmitted = () => {
     const { id } = router.query;
     const { data: getApply } = useGetApplyByIdQuery(id);
     const [isLoading, setIsLoading] = useState(false);
-    const [fullFile, setFullFile] = useState('');
+    const [fullFile, setFullFile] = useState(fileUrl);
 
     const consolidated_mark_sheets = {
         url: [
@@ -221,17 +232,17 @@ const FileSubmitted = () => {
                 <div className="md:hidden lg:block sm:hidden">
                     <Button
                         type="submit"
-                        text={isLoading ? 'Loading...' : 'save'}
-                        className="rounded-none py-2 px-4"
+                        text={isLoading ? 'Loading...' : 'Save'}
+                        className="rounded-md py-2 px-4"
                         onClick={handleSubmit(onSubmit)}
                     />
                 </div>
             </div>
 
-            <div className="flex w-full h-[600px] lg:flex-row md:flex-col sm:flex-col">
+            <div className="flex w-full lg:flex-row md:flex-col sm:flex-col">
                 <div className="w-1/4 flex flex-col md:hidden sm:hidden lg:block">
                     <div className="w-full bg-BgColorPassport bg-opacity-5 p-8">
-                        <div className="w-full bg-BgCardPassport p-4">
+                        <div className="w-full">
                             {Files && (
                                 <PDFSmallViewer
                                     pdfUrl={Files.passportFile}
@@ -242,7 +253,7 @@ const FileSubmitted = () => {
                     </div>
                     <label
                         htmlFor="fileUpload"
-                        className=" px-24 ml-12 text-center py-4 font-semibold text-3xl cursor-pointer bg-blueColor border-transparent text-white hover:bg-white hover:border-2 hover:border-blueColor hover:text-blueColor"
+                        className="rounded-md px-24 ml-12 text-center py-4 font-semibold text-3xl cursor-pointer bg-blueColor border-transparent text-white hover:bg-white hover:border-2 hover:border-blueColor hover:text-blueColor"
                     >
                         {' '}
                         {isLoading ? 'Loading...' : '+ ADD'}
