@@ -49,5 +49,8 @@ export const API_ENDPOINTS = {
         'https://fxds-public-exchange-rates-api.oanda.com/cc-api/currencies?base=PKR&quote=${code}&data_type=general_currency_pair&start_date=${pDate}&end_date=${cDate}',
     FETCH_ALL_RATES: '/currency_rate?code=${code}&amount=${amount}',
     FILE_S3_UPLOAD: '/file/s3-upload',
-    APPLY_DOCUMENTS: '/apply'
+    APPLY_DOCUMENTS: '/apply',
+    EVENTS: '/event',
+    FILE_UPLOAD: '/file/s3-upload',
+    FILE_DELETE: '/file/s3-delete'
 };

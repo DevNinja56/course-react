@@ -34,7 +34,7 @@ const SpecializationFilter: React.FC<propsType> = ({
                 ) : (
                     specializationList
                         ?.filter(({ specialization: name }) =>
-                            name.toLowerCase().includes(search.toLowerCase())
+                            name?.toLowerCase()?.includes(search.toLowerCase())
                         )
                         .map(({ specialization: name }, i) => (
                             <FilterCheckBox

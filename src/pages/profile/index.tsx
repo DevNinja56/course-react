@@ -1,8 +1,9 @@
 import ProfileComp from '@/components/Profile/ProfileComp';
 // import Image from 'next/image';
 import { useRouter } from 'next/router';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Favorites from '@/components/Profile/Favorites/index';
+import { ROUTES } from '@/config/constant';
 
 export const profileTabs = {
     profile: 'Profile',
@@ -10,11 +11,17 @@ export const profileTabs = {
 };
 
 const Profile = () => {
-    const { query, isReady } = useRouter();
+    const { query, isReady, push } = useRouter();
     const activeTab = query['tab'] as string;
     const [activeComponent, setActiveComponent] = useState(
         isReady && activeTab ? activeTab : profileTabs.profile
     );
+
+    useEffect(() => {
+        if (isReady && activeTab) {
+            setActiveComponent(activeTab);
+        }
+    }, [activeTab, isReady]);
 
     const tabs = [
         { title: profileTabs.profile, Component: ProfileComp },
@@ -55,7 +62,12 @@ const Profile = () => {
                         {tabs.map(({ title }, i) => (
                             <div
                                 key={'tabs-button-' + i + title}
-                                onClick={() => setActiveComponent(title)}
+                                onClick={() =>
+                                    push({
+                                        pathname: ROUTES.PROFILE,
+                                        query: { tab: title }
+                                    })
+                                }
                                 className={`py-[15px] md:py-[18px] lg:py-[8px] w-[50%] pl-[30px] md:px-[50px] lg:w-auto lg:px-[37px] font-bold text-xl md:text-[26px] lg:text-2xl cursor-pointer ${
                                     activeComponent === title
                                         ? 'bg-blueColor text-white'

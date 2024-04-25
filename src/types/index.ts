@@ -13,7 +13,7 @@ export interface userType {
     role: 'user';
     status: 'in-active' | 'active' | 'block';
     registerWith: 'google' | 'facebook' | 'email';
-    documents: [];
+    documents: { name: string; url: string }[];
     academicInformation: academicInformation | null;
 }
 
@@ -224,7 +224,7 @@ export type filterCourseType = {
 };
 
 export type courseLanguageRequirement = {
-    ielts: { s: string; l: string; r: string; w: string;oa: string };
+    ielts: { s: string; l: string; r: string; w: string; oa: string };
     pte: { s: string; l: string; r: string; w: string; oa: string };
 };
 
@@ -343,8 +343,8 @@ export interface userDocuments {
             given_name: string;
             sur_name: string;
             number: string;
-            country: string,
-            institute: string,
+            country: string;
+            institute: string;
             date_of_start: string;
             date_of_completion: string;
         };
@@ -415,6 +415,22 @@ export interface councillorType {
     bio: string;
     phone_number: string;
     email: string;
+    createdAt: string;
+    updatedAt: string;
+    id: string;
+}
+
+export interface eventType {
+    title: string;
+    location: string;
+    date: string;
+    link: string;
+    time: string;
+    user: {
+        name: string;
+        avatar: string | null;
+        id: string;
+    };
     createdAt: string;
     updatedAt: string;
     id: string;

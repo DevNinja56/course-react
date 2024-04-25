@@ -18,7 +18,7 @@ interface propsType {
 const Card: React.FC<propsType> = ({ scholarship }) => {
     const { name, type, degree, institute, country, amount } = scholarship;
     return (
-        <div className="relative pt-7 shadow-md rounded-lg group hover:-translate-y-2 transition-all duration-500 cursor-pointer flex flex-col border border-gray-100 capitalize ">
+        <div className="relative shadow-md rounded-lg group hover:-translate-y-2 transition-all duration-500 cursor-pointer flex flex-col border border-gray-100 capitalize overflow-auto ">
             <FavoriteButton
                 isActive={!!scholarship?.favoriteId?.[0]}
                 body={{ scholarship: scholarship?._id }}
@@ -27,9 +27,13 @@ const Card: React.FC<propsType> = ({ scholarship }) => {
                 <div className="flex flex-col gap-5 w-full z-10">
                     <div className="w-full">
                         <img
-                            src="/images/Scholarships/scholarship (1) 1.png"
+                            // src="/images/Scholarships/scholarship (1) 1.png"
+                            src={
+                                scholarship?.image ??
+                                '/images/Scholarships/scholarship (1) 1.png'
+                            }
                             alt="image"
-                            className="mx-auto"
+                            className="mx-auto aspect-[1/1] w-full object-cover"
                             width={100}
                             height={100}
                         />

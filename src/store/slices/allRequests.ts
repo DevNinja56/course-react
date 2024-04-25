@@ -13,7 +13,8 @@ import {
     specializationType,
     applyTypes,
     geoIpType,
-    courseType
+    courseType,
+    eventType
 } from '@/types';
 
 export interface PaginatedResponse<data> {
@@ -157,6 +158,17 @@ export const stateQueryApi = createApi({
                 url: API_ENDPOINTS.GET_APPLY_BY_ID.replace(':id', id)
             }),
             transformResponse: (res: { data: applyTypes }) => res.data! ?? res
+        }),
+        getPaginatedEvents: builder.query<
+            PaginatedResponse<eventType[]>,
+            { limit: number; page: number }
+        >({
+            query: ({ limit, page }) => ({
+                url: `${API_ENDPOINTS.EVENTS}?limit=${limit}&page=${page}`
+            }),
+            transformResponse: (res: {
+                data: PaginatedResponse<eventType[]>;
+            }) => res.data! ?? res
         })
     })
 });
@@ -178,5 +190,6 @@ export const {
     useGetUserIpQuery,
     useGetCourseByFilterQuery,
     useGetApplyByIdQuery,
-    useGetCoursesByInstituteQuery
+    useGetCoursesByInstituteQuery,
+    useGetPaginatedEventsQuery
 } = stateQueryApi;

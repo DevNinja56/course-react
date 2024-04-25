@@ -22,7 +22,8 @@ const CourseCard = ({ course }: CardProps) => {
         name,
         tuitionFee,
         intakes,
-        feeCurrency
+        feeCurrency,
+        specialization
     } = course;
 
     const { getCurrencySymbol, setCurrencyValue, getSingleRate } =
@@ -56,7 +57,8 @@ const CourseCard = ({ course }: CardProps) => {
                             title={name}
                             className="font-bold text-mainTextColor text-xs xl:text-sm"
                         >
-                            {name} <br /> at {institute.name}
+                            {name} <br /> at {institute.name} - (
+                            {specialization?.name ?? 'No Specialization'})
                         </h1>
                         <p className="font-medium text-[0.670rem] xl:text-[0.700rem] text-gray-400 capitalize">
                             {degree.type}
