@@ -23,6 +23,7 @@ import {
     useGetCoursesByInstituteQuery,
     useGetInstituteQuery
 } from '@/store/slices/allRequests';
+import { useRouter } from 'next/router';
 const FacebookLoginBtn = dynamic(import('@/components/Auth/FacebookLoginBtn'), {
     ssr: false
 });
@@ -71,6 +72,7 @@ const UserDetail = () => {
     const [selectedInstituteId, setSelectedInstituteId] = useState<string>();
     const [selectedCourseId, setSelectedCourseId] = useState<string>();
     const [selectedIntake, setSelectedIntake] = useState<string[]>();
+    const router = useRouter()
 
     const { data } = useGetInstituteQuery();
     const { data: courseData } = useGetCoursesByInstituteQuery({
@@ -136,6 +138,7 @@ const UserDetail = () => {
                 success: () => {
                     reset();
                     hideModal();
+                    router.push(ROUTES.APPLIES)
                     return 'Form submitted successfully';
                 },
                 error: 'An error occurred'
