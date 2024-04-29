@@ -64,15 +64,21 @@ const MyApplies = () => {
                                         <p className=" text-xs font-semibold ">
                                             {apply?.course?.institute?.name}
                                         </p>
-                                        <p className="text-sm font-normal text-darkGrayColor ">
-                                            campus:{' '}
-                                            {apply?.course?.institute?.campus}
+                                        <p className="text-sm capitalize text-black ">
+                                            <span className="font-bold">
+                                                campus:{' '}
+                                            </span>
+                                            <span>
+                                                {apply?.course?.availableCampuses.join(
+                                                    ' - '
+                                                )}
+                                            </span>
                                         </p>
                                     </div>
                                 </div>
 
                                 <Link
-                                    className=" py-2 px-2 text-[10px] font-semibold text-blueColor bg-blueColor bg-opacity-10 rounded-[5px]"
+                                    className=" py-2 px-2 text-[10px] font-semibold text-blueColor bg-blueColor bg-opacity-10 rounded-[5px] whitespace-nowrap"
                                     href={ROUTES.APPLIES_DETAIL.replace(
                                         ':id',
                                         apply.id

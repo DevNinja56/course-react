@@ -156,7 +156,7 @@ const Sidebar = ({ setShowSideBar }: modalProps) => {
                         <div
                             onClick={() =>
                                 updateModal({
-                                    type: modalType.user_detail,
+                                    type: modalType.start_application,
                                     state: ''
                                 })
                             }

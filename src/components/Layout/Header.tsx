@@ -148,7 +148,7 @@ const Header = ({ onlyLogo }: { onlyLogo?: boolean }) => {
                                 <div
                                     onClick={() =>
                                         updateModal({
-                                            type: modalType.user_detail,
+                                            type: modalType.start_application,
                                             state: ''
                                         })
                                     }
