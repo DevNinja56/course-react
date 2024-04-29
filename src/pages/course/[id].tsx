@@ -25,6 +25,7 @@ import { getMonths } from '@/utils/get-months';
 import { useCurrency } from '@/hooks/currency';
 import { useCalculate } from '@/hooks/initial-deposit-calculate';
 import LanguageRequirements from '@/components/course/LanguageRequirements';
+import { generateIntakes } from '@/utils/generateIntakes';
 // import { BiSolidCalendar } from 'react-icons/bi';
 // import CourseTag from '@/components/course/CourseTag';
 
@@ -32,14 +33,6 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
     const { updateModal } = useUi();
     const { setCurrencyValue, getSingleRate } = useCurrency();
     const { initialDeposit } = useCalculate();
-
-    const openUserDetailModal = (courseId: string) => {
-        updateModal({
-            type: modalType.user_detail,
-            state: { courseId }
-        });
-    };
-
     const rate = getSingleRate(course.feeCurrency);
 
     return (
@@ -408,9 +401,10 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                                                 className="py-3 rounded-md text-sm font-semibold"
                                                 text="Start Application"
                                                 onClick={() =>
-                                                    openUserDetailModal(
-                                                        course.id
-                                                    )
+                                                    updateModal({
+                                                        type: modalType.start_application,
+                                                        state: { course }
+                                                    })
                                                 }
                                             />
 
@@ -475,11 +469,17 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                                                 <p className="font-bold text-base text-mainTextColor">
                                                     Duration
                                                 </p>
-                                                <p className="text-lightGrayColor text-base">
+                                                <ul className="text-lightGrayColor text-base">
                                                     {getMonths(
                                                         course.monthDuration
-                                                    )}
-                                                </p>
+                                                    )
+                                                        .split(' / ')
+                                                        .map((month) => (
+                                                            <li key={month}>
+                                                                {month}
+                                                            </li>
+                                                        ))}
+                                                </ul>
                                             </div>
                                         </div>
                                         <div className="flex items-center gap-4 pl-5 border-b-2 border-gray-200 border-opacity-50 py-4">
@@ -504,9 +504,16 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                                                 <p className="font-bold text-base text-mainTextColor">
                                                     Available Intakes
                                                 </p>
-                                                <p className="text-lightGrayColor text-base">
-                                                    {course.intakes.join(' ')}
-                                                </p>
+                                                <ul className="text-lightGrayColor text-base">
+                                                    {generateIntakes(
+                                                        course.intakes,
+                                                        1
+                                                    ).map((intake) => (
+                                                        <li key={intake}>
+                                                            {intake}
+                                                        </li>
+                                                    ))}
+                                                </ul>
                                             </div>
                                         </div>
                                     </div>

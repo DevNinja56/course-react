@@ -28,7 +28,7 @@ const Footer = () => {
                         <button
                             onClick={() =>
                                 updateModal({
-                                    type: modalType.user_detail,
+                                    type: modalType.start_application,
                                     state: ''
                                 })
                             }
