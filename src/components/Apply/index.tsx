@@ -123,7 +123,7 @@ const ApplyOnline = () => {
                             href={ROUTES.APPLIES}
                             className="border-2 border-blueColor text-blueColor px-5 py-2 rounded-md hover:text-white hover:bg-blueColor"
                         >
-                            View My Applies
+                            View My Applications
                         </Link>
                     </div>
                 </>
