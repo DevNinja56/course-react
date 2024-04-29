@@ -3,7 +3,7 @@ import { useGetUserAppliesQuery } from '@/store/slices/allRequests';
 import Link from 'next/link';
 import { ROUTES } from '@/config/constant';
 import { LoaderIcon } from 'react-hot-toast';
-import Image from 'next/image';
+// import Image from 'next/image';
 
 const MyApplies = () => {
     const { data, isLoading, refetch } = useGetUserAppliesQuery();
@@ -33,22 +33,25 @@ const MyApplies = () => {
                                         apply.id
                                     )}
                                 >
-                                    {apply.course.name}
+                                    {apply?.course?.name}
                                 </Link>
                             </p>
 
                             <div className="flex items-center gap-6">
                                 <p className=" text-[13px] font-medium text-darkGrayColor ">
-                                    {apply.course.degree.type}
+                                    {apply?.course?.degree?.type}
                                 </p>
                                 <p className="relative text-[13px] font-medium text-darkGrayColor before:block before:content-['•'] before:absolute before:-left-6 before:top-[50%] before:-translate-y-1/2">
-                                    {apply.course.specialization.name}
+                                    {apply?.course?.specialization
+                                        ?.map((s) => s.name)
+                                        ?.join(' , ') ??
+                                        'No Specialization Found'}
                                 </p>
                             </div>
 
                             <div className="flex justify-between items-center">
                                 <div className="flex gap-2">
-                                    <Image
+                                    <img
                                         width={100}
                                         height={100}
                                         alt=""
@@ -63,7 +66,7 @@ const MyApplies = () => {
                                         </p>
                                         <p className="text-sm font-normal text-darkGrayColor ">
                                             campus:{' '}
-                                            {apply.course.institute.campus}
+                                            {apply?.course?.institute?.campus}
                                         </p>
                                     </div>
                                 </div>

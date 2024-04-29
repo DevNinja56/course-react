@@ -11,9 +11,9 @@ const ScholarshipSection = () => {
                     <ScholarshipCap />
                     Scholarships
                 </h1>
-                <h1 className="text-blueColor text-sm md:text-xl font-semibold flex items-center gap-2 cursor-pointer">
+                <h1 className="text-blueColor text-sm md:text-xl font-semibold flex items-center gap-3 cursor-pointer group hover:text-opacity-50 transition-all duration-300">
                     Read More
-                    <FaArrowRight className="h-4 w-4" />
+                    <FaArrowRight className="h-4 w-4 group-hover:translate-x-2 transition-all duration-300" />
                 </h1>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

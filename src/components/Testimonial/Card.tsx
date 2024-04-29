@@ -1,4 +1,4 @@
-import Image from 'next/image';
+// import Image from 'next/image';
 import React from 'react';
 
 const Card = () => {
@@ -7,21 +7,21 @@ const Card = () => {
             <div className="bg-white rounded-[10px] py-5 px-5 pr-6 flex flex-col gap-y-4 custom-shadow z-10">
                 <div className="flex flex-col md:flex-row gap-y-5 md:gap-x-5 min-w-[250px] md:min-w-[320px] ">
                     <div className="flex items-center justify-between w-full md:w-auto">
-                        <Image
+                        <img
                             height={100}
                             width={100}
                             alt="testimonial-user"
                             className="h-20 w-20 md:h-[100px] md:w-[100px]"
                             src="/images/Blogs/testimoanlals.svg"
-                            priority
+                            // priority
                         />
-                        <Image
+                        <img
                             height={38}
                             width={50}
                             alt="comment"
                             src="/images/Blogs/“.svg"
                             className="visible md:invisible w-10 h-7 md:h-10 md:w-12"
-                            priority
+                            // priority
                         />
                     </div>
                     <div className="w-full flex items-center justify-between">
@@ -33,13 +33,13 @@ const Card = () => {
                                 Web Developer
                             </p>
                         </div>
-                        <Image
+                        <img
                             height={38}
                             width={50}
                             alt="comment"
                             src="/images/Blogs/“.svg"
                             className="invisible md:visible"
-                            priority
+                            // priority
                         />
                     </div>
                 </div>

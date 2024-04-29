@@ -28,3 +28,19 @@ export const fetchLatestRate = createAsyncThunk(
         }
     }
 );
+export const fetchAllLatestRate = createAsyncThunk(
+    'Fetch All Rate List  From API',
+    async (_, { getState }) => {
+        try {
+            const currentState = getState() as RootState;
+            return http.get(
+                API_ENDPOINTS.FETCH_ALL_RATES.replace(
+                    '${code}',
+                    currentState.currency.base_code
+                ).replace('${amount}', '1')
+            );
+        } catch (error) {
+            throw new Error('Something went wrong');
+        }
+    }
+);

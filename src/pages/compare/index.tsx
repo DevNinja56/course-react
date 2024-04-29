@@ -8,10 +8,15 @@ import { GetServerSideProps } from 'next';
 import { singleCourseType } from '@/types';
 import { API_ENDPOINTS } from '@/config/Api_EndPoints';
 import { getSsrRequest } from '@/utils/ssrRequest';
+import { getMonths } from '@/utils/get-months';
+import { useCurrency } from '@/hooks/currency';
+import { useCalculate } from '@/hooks/initial-deposit-calculate';
 
 const Compare = ({ data }: { data?: singleCourseType }) => {
     const { first, second, third, compareFirst, compareSecond, compareThird } =
         useCompare();
+    const { setCurrencyValue, getSingleRate } = useCurrency();
+    const { initialDeposit } = useCalculate();
 
     useEffect(() => {
         if (data) {
@@ -33,6 +38,40 @@ const Compare = ({ data }: { data?: singleCourseType }) => {
                   : compareThird(compareData);
         }
     }, [data]);
+
+    const getInitialDepositIntoCurrency = ({
+        depositAmount,
+        tuitionFee,
+        scholarshipAmount,
+        feeCurrency
+    }: {
+        depositAmount: string;
+        tuitionFee: number;
+        scholarshipAmount: string;
+        feeCurrency: string;
+    }) => {
+        const initialDepositAmount = initialDeposit({
+            initialDeposit: depositAmount,
+            tuitionFee: tuitionFee,
+            scholarship: scholarshipAmount ?? 0,
+            isNumber: true
+        });
+        const rate = getSingleRate(feeCurrency);
+
+        return setCurrencyValue(
+            +initialDepositAmount * (rate?.base_rate ? +rate?.base_rate : 1)
+        );
+    };
+
+    const getTuitionFeeIntoCurrency = (
+        tuitionFee: number,
+        feeCurrency: string
+    ) => {
+        const rate = getSingleRate(feeCurrency);
+        return setCurrencyValue(
+            tuitionFee * (rate?.base_rate ? +rate?.base_rate : 1)
+        );
+    };
 
     const state = [
         {
@@ -91,9 +130,9 @@ const Compare = ({ data }: { data?: singleCourseType }) => {
                 },
                 {
                     title: 'Campus',
-                    first: first?.institute?.campus,
-                    second: second?.institute?.campus,
-                    third: third?.institute?.campus
+                    first: first?.institute?.campus.join(' | '),
+                    second: second?.institute?.campus.join(' | '),
+                    third: third?.institute?.campus.join(' | ')
                 }
             ]
         },
@@ -113,34 +152,95 @@ const Compare = ({ data }: { data?: singleCourseType }) => {
                     third: third?.course?.name
                 },
                 {
+                    title: 'Discipline',
+                    first: first?.course?.discipline.name,
+                    second: second?.course?.discipline.name,
+                    third: third?.course?.discipline.name
+                },
+                {
                     title: 'Specialization',
-                    first: first?.course?.specialization?.name,
-                    second: second?.course?.specialization?.name,
-                    third: third?.course?.specialization?.name
+                    first: first?.course?.specialization
+                        ?.map((s) => s.name)
+                        ?.join(' , '),
+                    second: second?.course?.specialization
+                        ?.map((s) => s.name)
+                        ?.join(' , '),
+                    third: third?.course?.specialization
+                        ?.map((s) => s.name)
+                        ?.join(' , ')
                 },
                 {
                     title: 'Duration',
-                    first: first?.course?.duration,
-                    second: second?.course?.duration,
-                    third: third?.course?.duration
-                },
-                {
-                    title: 'Initial Deposit',
-                    first: first?.course.initialDeposit[0].amount,
-                    second: second?.course.initialDeposit[0].amount,
-                    third: third?.course.initialDeposit[0].amount
-                },
-                {
-                    title: 'Yearly fee',
-                    first: first?.course.tuitionFee,
-                    second: second?.course.tuitionFee,
-                    third: third?.course.tuitionFee
+                    first: getMonths(first?.course?.monthDuration ?? []),
+                    second: getMonths(second?.course?.monthDuration ?? []),
+                    third: getMonths(third?.course?.monthDuration ?? [])
                 },
                 {
                     title: 'Intake',
-                    first: first?.course.intakes.join(),
-                    second: second?.course.intakes.join(),
-                    third: third?.course.intakes.join()
+                    first: first?.course.intakes.join(' , '),
+                    second: second?.course.intakes.join(' , '),
+                    third: third?.course.intakes.join(' , ')
+                },
+                {
+                    title: 'Initial Deposit',
+                    first: first
+                        ? getInitialDepositIntoCurrency({
+                              depositAmount:
+                                  first?.course.initialDeposit[0].amount,
+                              tuitionFee: first?.course.tuitionFee,
+                              scholarshipAmount:
+                                  first?.course.scholarship?.[0]?.amount ?? 0,
+                              feeCurrency: first?.course.feeCurrency
+                          })
+                        : null,
+                    second: second
+                        ? getInitialDepositIntoCurrency({
+                              depositAmount:
+                                  second?.course.initialDeposit[0].amount,
+                              tuitionFee: second?.course.tuitionFee,
+                              scholarshipAmount:
+                                  second?.course.scholarship?.[0]?.amount ?? 0,
+                              feeCurrency: second?.course.feeCurrency
+                          })
+                        : null,
+                    third: third
+                        ? getInitialDepositIntoCurrency({
+                              depositAmount:
+                                  third?.course.initialDeposit[0].amount,
+                              tuitionFee: third?.course.tuitionFee,
+                              scholarshipAmount:
+                                  third?.course.scholarship?.[0]?.amount ?? 0,
+                              feeCurrency: third?.course.feeCurrency
+                          })
+                        : null
+                },
+                {
+                    title: 'Yearly fee',
+                    first: first
+                        ? getTuitionFeeIntoCurrency(
+                              first.course.tuitionFee,
+                              first.course.feeCurrency
+                          )
+                        : null,
+
+                    second: second
+                        ? getTuitionFeeIntoCurrency(
+                              second.course.tuitionFee,
+                              second.course.feeCurrency
+                          )
+                        : null,
+                    third: third
+                        ? getTuitionFeeIntoCurrency(
+                              third.course.tuitionFee,
+                              third.course.feeCurrency
+                          )
+                        : null
+                },
+                {
+                    title: "On available campus",
+                    first: first?.course?.availableCampuses.join(' | '),
+                    second: second?.course?.availableCampuses.join(' | '),
+                    third: third?.course?.availableCampuses.join(' | ')
                 }
             ]
         },
@@ -179,10 +279,8 @@ const Compare = ({ data }: { data?: singleCourseType }) => {
                                 </h1>
                                 {i === 0 && (
                                     <button
-                                        onClick={() => {
-                                            window.print();
-                                        }}
-                                        className="absolute top-[50%] translate-y-[-50%] right-3 bg-white px-2 py-1 rounded-md print:hidden flex gap-1 justify-center items-center font-bold "
+                                        onClick={() => window?.print()}
+                                        className="absolute top-[50%] translate-y-[-50%] right-3 bg-white px-2 py-1 rounded-md print:hidden flex gap-1 justify-center items-center font-bold hover:bg-opacity-80"
                                     >
                                         <FiPrinter /> Print
                                     </button>

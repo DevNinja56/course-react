@@ -1,5 +1,5 @@
 import { useCompare } from '@/hooks/compare';
-import Image from 'next/image';
+// import Image from 'next/image';
 import { IoCloseSharp } from 'react-icons/io5';
 
 export const InstituteLogoImage = ({
@@ -22,7 +22,7 @@ export const InstituteLogoImage = ({
     };
     return (
         <>
-            <Image src={url} alt="institute logo" width={80} height={80} />
+            <img src={url} alt="institute logo" width={80} height={80} />
             <IoCloseSharp
                 className="absolute top-2 right-2 cursor-pointer hover:text-black print:hidden "
                 onClick={handleClick}
