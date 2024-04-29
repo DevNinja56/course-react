@@ -216,7 +216,7 @@ const FileSubmitted = () => {
 
     return (
         <>
-            <div className="flex justify-between py-8 px-4 bg-white">
+            <div className="flex justify-between py-8 px-4 bg-white items-center">
                 <div className="flex items-center gap-4 pl-4">
                     <FaArrowLeft onClick={() => router.back()} />
                     <div>
@@ -229,12 +229,22 @@ const FileSubmitted = () => {
                         <span className="text-blueColor">Submitted</span>
                     </div>
                 </div>
-                <div className="md:hidden lg:block sm:hidden">
-                    <Button
-                        type="submit"
-                        text={isLoading ? 'Loading...' : 'Save'}
-                        className="rounded-md py-2 px-4"
-                        onClick={handleSubmit(onSubmit)}
+                <div className="md:hidden lg:block sm:hidden flex ">
+                    <span className="font-bold text-xl">Select new file :</span>
+                    <label
+                        htmlFor="fileUpload"
+                        className="rounded-md px-8 ml-12 text-center py-2 font-semibold text-2xl cursor-pointer bg-blueColor border-transparent text-white hover:bg-white hover:border-2 hover:border-blueColor hover:text-blueColor"
+                    >
+                        {' '}
+                        {isLoading ? 'Loading...' : '+ ADD'}
+                    </label>
+                    <input
+                        type="file"
+                        accept=".pdf, image/*"
+                        className="hidden"
+                        multiple
+                        id="fileUpload"
+                        onChange={handleFileChange}
                     />
                 </div>
             </div>
@@ -251,21 +261,6 @@ const FileSubmitted = () => {
                             )}
                         </div>
                     </div>
-                    <label
-                        htmlFor="fileUpload"
-                        className="rounded-md px-24 ml-12 text-center py-4 font-semibold text-3xl cursor-pointer bg-blueColor border-transparent text-white hover:bg-white hover:border-2 hover:border-blueColor hover:text-blueColor"
-                    >
-                        {' '}
-                        {isLoading ? 'Loading...' : '+ ADD'}
-                    </label>
-                    <input
-                        type="file"
-                        accept=".pdf, image/*"
-                        className="hidden"
-                        multiple
-                        id="fileUpload"
-                        onChange={handleFileChange}
-                    />
                 </div>
                 <div className="lg:w-2/4 md:w-full sm:w-full py-8 px-16">
                     <div className="w-full bg-BgCardPassport md:pl-36 sm:pl-4 lg:pl-0">
@@ -378,6 +373,12 @@ const FileSubmitted = () => {
                             autoComplete="off"
                             className="p-0"
                             customInputClass="px-2 py-[10px] text-[15px] w-full rounded-md outline-none placeholder:text-sm"
+                        />
+                        <Button
+                            type="submit"
+                            text={isLoading ? 'Loading...' : 'Save'}
+                            className="rounded-md py-2 px-4 mt-4"
+                            onClick={handleSubmit(onSubmit)}
                         />
                     </form>
                 </div>
