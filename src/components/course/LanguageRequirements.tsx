@@ -1,4 +1,5 @@
 import { courseLanguageRequirement } from '@/types';
+import Image from 'next/image';
 import React from 'react';
 
 const LanguageRequirements = ({
@@ -17,15 +18,24 @@ const LanguageRequirements = ({
     return (
         <div className="flex flex-col gap-4 items-center w-full uppercase  ">
             {Object.entries(language).map(([key, value], i) => (
-                <>
-                    <h1 className='w-full text-left text-xl font-bold'>{key}</h1>
-                    <table className="border-separate border border-blueColor">
+                <div
+                    className="flex flex-wrap gap-3 w-full justify-center items-center"
+                    key={'language-container--' + i}
+                >
+                    <Image
+                        src={`/images/CourseDetail/${key}.jpeg`}
+                        alt="flag"
+                        width={150}
+                        height={70}
+                        className="block ml-2 border-blueColor border rounded-md max-h-[70px]"
+                    />
+                    <table className="border border-blueColor  ">
                         <tbody>
                             <tr>
                                 {Object.keys(value).map((key, i) => (
                                     <th
                                         key={key + i + '--key--'}
-                                        className="px-4 py-2 text-center border border-blueColor bg-blueColor text-white font-bold uppercase"
+                                        className="px-4 py-2 text-center border border-blueColor text-blueColor font-bold uppercase"
                                     >
                                         {data[key]}
                                     </th>
@@ -43,7 +53,7 @@ const LanguageRequirements = ({
                             </tr>
                         </tbody>
                     </table>
-                </>
+                </div>
             ))}
         </div>
     );
