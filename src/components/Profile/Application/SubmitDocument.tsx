@@ -713,16 +713,429 @@ const SubmitDocument = () => {
         );
     };
 
+    const handleFileSecondaryCertificateChange = async (
+        event: React.ChangeEvent<HTMLInputElement>
+    ) => {
+        const fileList = event.target.files;
+        const response = await handleFileUpload(
+            fileList ? (fileList as FileList) : null
+        );
+        toast.promise(
+            fetchRequest({
+                url: `${BASE_URL}${API_ENDPOINTS.APPLY_DOCUMENTS}/${id}`,
+                type: 'patch',
+                body: {
+                    ...getApply,
+                    course: getApply?.course.id,
+                    user: getApply?.user.id,
+                    documents: {
+                        ...(identity.passport.url[0]
+                            ? {
+                                  identity: {
+                                      passport: {
+                                          url: identity.passport.url[0],
+                                          given_name:
+                                              identity.passport.given_name,
+                                          sur_name: identity.passport.sur_name,
+                                          number: identity.passport.number,
+                                          date_of_issue:
+                                              identity.passport.date_of_issue,
+                                          date_of_expiry:
+                                              identity.passport.date_of_expiry
+                                      }
+                                  }
+                              }
+                            : {}),
+                        academic_certificates: {
+                            ...(semester_mark_sheets.url
+                                ? {
+                                      semester_mark_sheets: {
+                                          url: semester_mark_sheets.url
+                                      }
+                                  }
+                                : {}),
+                            ...(provisional_certificate.url
+                                ? {
+                                      provisional_certificate: {
+                                          url: provisional_certificate.url
+                                      }
+                                  }
+                                : {}),
+                            ...(consolidated_mark_sheets?.url[0]
+                                ? {
+                                      consolidated_mark_sheets: {
+                                          ...(consolidated_mark_sheets.url
+                                              ? {
+                                                    url: consolidated_mark_sheets
+                                                        .url?.[0]
+                                                }
+                                              : {}),
+                                          ...(consolidated_mark_sheets.institute
+                                              ? {
+                                                    institute:
+                                                        consolidated_mark_sheets.institute
+                                                }
+                                              : {}),
+                                          ...(consolidated_mark_sheets.country
+                                              ? {
+                                                    country:
+                                                        consolidated_mark_sheets.country
+                                                }
+                                              : {}),
+                                          ...(consolidated_mark_sheets.date_of_completion
+                                              ? {
+                                                    date_of_completion:
+                                                        consolidated_mark_sheets.date_of_completion
+                                                }
+                                              : {}),
+                                          ...(consolidated_mark_sheets.date_of_start
+                                              ? {
+                                                    date_of_start:
+                                                        consolidated_mark_sheets.date_of_start
+                                                }
+                                              : {})
+                                      }
+                                  }
+                                : {})
+                        },
+                        professional_records: {
+                            ...getApply?.documents?.professional_records,
+                            experience_letter: { url: response?.[0] }
+                        }
+                    }
+                }
+            }),
+            {
+                loading: 'Please wait...',
+                success: () => {
+                    fetchApply();
+                    return 'Form submitted successfully';
+                },
+                error: 'An error occurred'
+            }
+        );
+    };
+
+    const handleFileHigherCertificateChange = async (
+        event: React.ChangeEvent<HTMLInputElement>
+    ) => {
+        const fileList = event.target.files;
+        const response = await handleFileUpload(
+            fileList ? (fileList as FileList) : null
+        );
+        toast.promise(
+            fetchRequest({
+                url: `${BASE_URL}${API_ENDPOINTS.APPLY_DOCUMENTS}/${id}`,
+                type: 'patch',
+                body: {
+                    ...getApply,
+                    course: getApply?.course.id,
+                    user: getApply?.user.id,
+                    documents: {
+                        ...(identity.passport.url[0]
+                            ? {
+                                  identity: {
+                                      passport: {
+                                          url: identity.passport.url[0],
+                                          given_name:
+                                              identity.passport.given_name,
+                                          sur_name: identity.passport.sur_name,
+                                          number: identity.passport.number,
+                                          date_of_issue:
+                                              identity.passport.date_of_issue,
+                                          date_of_expiry:
+                                              identity.passport.date_of_expiry
+                                      }
+                                  }
+                              }
+                            : {}),
+                        academic_certificates: {
+                            ...(semester_mark_sheets.url
+                                ? {
+                                      semester_mark_sheets: {
+                                          url: semester_mark_sheets.url
+                                      }
+                                  }
+                                : {}),
+                            ...(provisional_certificate.url
+                                ? {
+                                      provisional_certificate: {
+                                          url: provisional_certificate.url
+                                      }
+                                  }
+                                : {}),
+                            ...(consolidated_mark_sheets?.url[0]
+                                ? {
+                                      consolidated_mark_sheets: {
+                                          ...(consolidated_mark_sheets.url
+                                              ? {
+                                                    url: consolidated_mark_sheets
+                                                        .url?.[0]
+                                                }
+                                              : {}),
+                                          ...(consolidated_mark_sheets.institute
+                                              ? {
+                                                    institute:
+                                                        consolidated_mark_sheets.institute
+                                                }
+                                              : {}),
+                                          ...(consolidated_mark_sheets.country
+                                              ? {
+                                                    country:
+                                                        consolidated_mark_sheets.country
+                                                }
+                                              : {}),
+                                          ...(consolidated_mark_sheets.date_of_completion
+                                              ? {
+                                                    date_of_completion:
+                                                        consolidated_mark_sheets.date_of_completion
+                                                }
+                                              : {}),
+                                          ...(consolidated_mark_sheets.date_of_start
+                                              ? {
+                                                    date_of_start:
+                                                        consolidated_mark_sheets.date_of_start
+                                                }
+                                              : {})
+                                      }
+                                  }
+                                : {})
+                        },
+                        professional_records: {
+                            ...getApply?.documents?.professional_records,
+                            experience_letter: { url: response?.[0] }
+                        }
+                    }
+                }
+            }),
+            {
+                loading: 'Please wait...',
+                success: () => {
+                    fetchApply();
+                    return 'Form submitted successfully';
+                },
+                error: 'An error occurred'
+            }
+        );
+    };
+
+    const handleFileBachelorDegreeChange = async (
+        event: React.ChangeEvent<HTMLInputElement>
+    ) => {
+        const fileList = event.target.files;
+        const response = await handleFileUpload(
+            fileList ? (fileList as FileList) : null
+        );
+        toast.promise(
+            fetchRequest({
+                url: `${BASE_URL}${API_ENDPOINTS.APPLY_DOCUMENTS}/${id}`,
+                type: 'patch',
+                body: {
+                    ...getApply,
+                    course: getApply?.course.id,
+                    user: getApply?.user.id,
+                    documents: {
+                        ...(identity.passport.url[0]
+                            ? {
+                                  identity: {
+                                      passport: {
+                                          url: identity.passport.url[0],
+                                          given_name:
+                                              identity.passport.given_name,
+                                          sur_name: identity.passport.sur_name,
+                                          number: identity.passport.number,
+                                          date_of_issue:
+                                              identity.passport.date_of_issue,
+                                          date_of_expiry:
+                                              identity.passport.date_of_expiry
+                                      }
+                                  }
+                              }
+                            : {}),
+                        academic_certificates: {
+                            ...(semester_mark_sheets.url
+                                ? {
+                                      semester_mark_sheets: {
+                                          url: semester_mark_sheets.url
+                                      }
+                                  }
+                                : {}),
+                            ...(provisional_certificate.url
+                                ? {
+                                      provisional_certificate: {
+                                          url: provisional_certificate.url
+                                      }
+                                  }
+                                : {}),
+                            ...(consolidated_mark_sheets?.url[0]
+                                ? {
+                                      consolidated_mark_sheets: {
+                                          ...(consolidated_mark_sheets.url
+                                              ? {
+                                                    url: consolidated_mark_sheets
+                                                        .url?.[0]
+                                                }
+                                              : {}),
+                                          ...(consolidated_mark_sheets.institute
+                                              ? {
+                                                    institute:
+                                                        consolidated_mark_sheets.institute
+                                                }
+                                              : {}),
+                                          ...(consolidated_mark_sheets.country
+                                              ? {
+                                                    country:
+                                                        consolidated_mark_sheets.country
+                                                }
+                                              : {}),
+                                          ...(consolidated_mark_sheets.date_of_completion
+                                              ? {
+                                                    date_of_completion:
+                                                        consolidated_mark_sheets.date_of_completion
+                                                }
+                                              : {}),
+                                          ...(consolidated_mark_sheets.date_of_start
+                                              ? {
+                                                    date_of_start:
+                                                        consolidated_mark_sheets.date_of_start
+                                                }
+                                              : {})
+                                      }
+                                  }
+                                : {})
+                        },
+                        professional_records: {
+                            ...getApply?.documents?.professional_records,
+                            experience_letter: { url: response?.[0] }
+                        }
+                    }
+                }
+            }),
+            {
+                loading: 'Please wait...',
+                success: () => {
+                    fetchApply();
+                    return 'Form submitted successfully';
+                },
+                error: 'An error occurred'
+            }
+        );
+    };
+
+    const handleFileMasterDegreeChange = async (
+        event: React.ChangeEvent<HTMLInputElement>
+    ) => {
+        const fileList = event.target.files;
+        const response = await handleFileUpload(
+            fileList ? (fileList as FileList) : null
+        );
+        toast.promise(
+            fetchRequest({
+                url: `${BASE_URL}${API_ENDPOINTS.APPLY_DOCUMENTS}/${id}`,
+                type: 'patch',
+                body: {
+                    ...getApply,
+                    course: getApply?.course.id,
+                    user: getApply?.user.id,
+                    documents: {
+                        ...(identity.passport.url[0]
+                            ? {
+                                  identity: {
+                                      passport: {
+                                          url: identity.passport.url[0],
+                                          given_name:
+                                              identity.passport.given_name,
+                                          sur_name: identity.passport.sur_name,
+                                          number: identity.passport.number,
+                                          date_of_issue:
+                                              identity.passport.date_of_issue,
+                                          date_of_expiry:
+                                              identity.passport.date_of_expiry
+                                      }
+                                  }
+                              }
+                            : {}),
+                        academic_certificates: {
+                            ...(semester_mark_sheets.url
+                                ? {
+                                      semester_mark_sheets: {
+                                          url: semester_mark_sheets.url
+                                      }
+                                  }
+                                : {}),
+                            ...(provisional_certificate.url
+                                ? {
+                                      provisional_certificate: {
+                                          url: provisional_certificate.url
+                                      }
+                                  }
+                                : {}),
+                            ...(consolidated_mark_sheets?.url[0]
+                                ? {
+                                      consolidated_mark_sheets: {
+                                          ...(consolidated_mark_sheets.url
+                                              ? {
+                                                    url: consolidated_mark_sheets
+                                                        .url?.[0]
+                                                }
+                                              : {}),
+                                          ...(consolidated_mark_sheets.institute
+                                              ? {
+                                                    institute:
+                                                        consolidated_mark_sheets.institute
+                                                }
+                                              : {}),
+                                          ...(consolidated_mark_sheets.country
+                                              ? {
+                                                    country:
+                                                        consolidated_mark_sheets.country
+                                                }
+                                              : {}),
+                                          ...(consolidated_mark_sheets.date_of_completion
+                                              ? {
+                                                    date_of_completion:
+                                                        consolidated_mark_sheets.date_of_completion
+                                                }
+                                              : {}),
+                                          ...(consolidated_mark_sheets.date_of_start
+                                              ? {
+                                                    date_of_start:
+                                                        consolidated_mark_sheets.date_of_start
+                                                }
+                                              : {})
+                                      }
+                                  }
+                                : {})
+                        },
+                        professional_records: {
+                            ...getApply?.documents?.professional_records,
+                            experience_letter: { url: response?.[0] }
+                        }
+                    }
+                }
+            }),
+            {
+                loading: 'Please wait...',
+                success: () => {
+                    fetchApply();
+                    return 'Form submitted successfully';
+                },
+                error: 'An error occurred'
+            }
+        );
+    };
+
     return (
         <div className="w-full">
             <div className="w-full md:w-1/2 py-5">
-                <p className="text-2xl font-semibold uppercase text-darkGrayColor py-3">
+                <p className="text-[26px] font-bold text-mainTextColor pt-12 pb-3">
                     Identity
                 </p>
                 <label htmlFor="fileUpload">
                     <RequirementBox
                         url={getApply?.documents?.identity?.passport?.url[0]}
                         text="Passport"
+                        description="Please upload first and second pages of your passport"
                     />
                 </label>
                 <input
@@ -739,75 +1152,75 @@ const SubmitDocument = () => {
                 </p>
 
                 <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-7">
-                    <label htmlFor="experienceLetter">
+                    <label htmlFor="secondarySchoolCertificate">
                         <RequirementBox
                             text="Secondary School Certificate"
                             url={
                                 getApply?.documents?.professional_records
                                     ?.experience_letter?.url
                             }
-                            description="Please upload academic worksheet and certificates of year 10.... "
+                            description="Please upload academic worksheet and certificates of year 10th "
                         />
                     </label>
                     <input
                         type="file"
                         className="hidden"
-                        id="experienceLetter"
-                        onChange={handleFileExperienceLetterChange}
+                        id="secondarySchoolCertificate"
+                        onChange={handleFileSecondaryCertificateChange}
                     />
-                    <label htmlFor="experienceLetter">
+                    <label htmlFor="higherSecondarySchoolCertificate">
                         <RequirementBox
                             text="Higher Secondary School Certificate"
                             url={
                                 getApply?.documents?.professional_records
                                     ?.experience_letter?.url
                             }
-                            description="Please upload academic worksheet and certificates of year 12.... "
+                            description="Please upload academic worksheet and certificates of year 12th "
                         />
                     </label>
                     <input
                         type="file"
                         className="hidden"
-                        id="experienceLetter"
-                        onChange={handleFileExperienceLetterChange}
+                        id="higherSecondarySchoolCertificate"
+                        onChange={handleFileHigherCertificateChange}
                     />
 
-                    <label htmlFor="experienceLetter">
+                    <label htmlFor="bachelorDegreeAndTranscripts">
                         <RequirementBox
                             text="Bachelor degree and transcripts"
                             url={
                                 getApply?.documents?.professional_records
                                     ?.experience_letter?.url
                             }
-                            description="Please upload your bachelor degree and transcripts here .... "
+                            description="Please upload your bachelor degree and transcripts here "
                         />
                     </label>
                     <input
                         type="file"
                         className="hidden"
-                        id="experienceLetter"
-                        onChange={handleFileExperienceLetterChange}
+                        id="bachelorDegreeAndTranscripts"
+                        onChange={handleFileBachelorDegreeChange}
                     />
-                    <label htmlFor="experienceLetter">
+                    <label htmlFor="masterDegreeAndTranscripts">
                         <RequirementBox
                             text="Master degree and transcripts  "
                             url={
                                 getApply?.documents?.professional_records
                                     ?.experience_letter?.url
                             }
-                            description="Please upload your master degree and transcripts here.... "
+                            description="Please upload your master degree and transcripts here "
                         />
                     </label>
                     <input
                         type="file"
                         className="hidden"
-                        id="experienceLetter"
-                        onChange={handleFileExperienceLetterChange}
+                        id="masterDegreeAndTranscripts"
+                        onChange={handleFileMasterDegreeChange}
                     />
                 </div>
 
-                <p className="text-2xl font-semibold uppercase text-darkGrayColor py-3">
-                    UNDERGRADUATE
+                <p className="text-[26px] font-bold text-mainTextColor pt-12 pb-3">
+                    Undergraduate
                 </p>
                 <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-7">
                     <label htmlFor="fileUploadConSolid">
@@ -817,6 +1230,7 @@ const SubmitDocument = () => {
                                 getApply?.documents?.academic_certificates
                                     ?.consolidated_mark_sheets?.url[0]
                             }
+                            description="Please upload consolidated marksheets file "
                         />
                     </label>
                     <input
@@ -833,6 +1247,7 @@ const SubmitDocument = () => {
                                 getApply?.documents?.academic_certificates
                                     ?.semester_mark_sheets?.url[0]
                             }
+                            description="Please upload consolidated marksheets file"
                         />
                     </label>
                     <input
@@ -848,6 +1263,7 @@ const SubmitDocument = () => {
                                 getApply?.documents?.academic_certificates
                                     ?.provisional_certificate?.url
                             }
+                            description="Please upload provisional certificate"
                         />
                     </label>
                     <input
@@ -870,6 +1286,7 @@ const SubmitDocument = () => {
                                 getApply?.documents?.professional_records
                                     ?.experience_letter?.url
                             }
+                            description="Please upload experience letter"
                         />
                     </label>
                     <input
@@ -885,6 +1302,7 @@ const SubmitDocument = () => {
                                 getApply?.documents?.professional_records
                                     ?.resume?.url
                             }
+                            description="Please upload CV/Resume"
                         />
                     </label>
                     <input
@@ -900,6 +1318,7 @@ const SubmitDocument = () => {
                                 getApply?.documents?.professional_records
                                     ?.personal_statement?.url
                             }
+                            description="Please upload personal statement"
                         />
                     </label>
                     <input
@@ -915,6 +1334,7 @@ const SubmitDocument = () => {
                                 getApply?.documents?.professional_records
                                     ?.letter_of_reference?.url
                             }
+                            description="Please upload letter of reference"
                         />
                     </label>
                     <input

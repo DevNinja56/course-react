@@ -11,9 +11,9 @@ interface propTypes {
 const RequirementBox = ({ text, url, description }: propTypes) => {
     return (
         <>
-            <p className="text-lightGrayColor mb-2">{description}</p>
+            <p className="text-lightGrayColor mb-2 font-medium capitalize">{description}</p>
             <div className="px-6 py-5 flex items-center justify-between w-full bg-white shadow-RequirementBox rounded-lg cursor-pointer">
-                <p className="font-medium text-lightGrayColor">{text}</p>
+                <p className="font-bold text-lightGrayColor">{text}</p>
                 <a
                     href={url}
                     target="_blank"
