@@ -202,6 +202,7 @@ const FileSubmitted = () => {
                 {
                     loading: 'Please wait...',
                     success: () => {
+                        router.back();
                         return 'Form submitted successfully';
                     },
                     error: 'An error occurred'
@@ -216,7 +217,7 @@ const FileSubmitted = () => {
 
     return (
         <>
-            <div className="flex justify-between py-8 px-4 bg-white items-center">
+            <div className="flex justify-between py-4 px-4 bg-white items-center sticky top-0 z-[9999]">
                 <div className="flex items-center gap-4 pl-4">
                     <FaArrowLeft onClick={() => router.back()} />
                     <div>
@@ -233,10 +234,10 @@ const FileSubmitted = () => {
                     <span className="font-bold text-xl">Select new file :</span>
                     <label
                         htmlFor="fileUpload"
-                        className="rounded-md px-8 ml-12 text-center py-2 font-semibold text-2xl cursor-pointer bg-blueColor border-transparent text-white hover:bg-white hover:border-2 hover:border-blueColor hover:text-blueColor"
+                        className="rounded-md px-8 ml-12 text-center py-2 font-semibold text-2xl cursor-pointer bg-blueColor border-transparent text-white hover:bg-white hover:border border hover:border-blueColor hover:text-blueColor"
                     >
                         {' '}
-                        {isLoading ? 'Loading...' : '+ ADD'}
+                        {isLoading ? 'Loading...' : 'Add'}
                     </label>
                     <input
                         type="file"
@@ -377,7 +378,7 @@ const FileSubmitted = () => {
                         <Button
                             type="submit"
                             text={isLoading ? 'Loading...' : 'Save'}
-                            className="rounded-md py-2 px-4 mt-4"
+                            className="rounded-md py-4 px-4 mt-4"
                             onClick={handleSubmit(onSubmit)}
                         />
                     </form>

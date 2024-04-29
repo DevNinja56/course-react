@@ -184,6 +184,7 @@ const ConSolid_MarkSheet = () => {
                 {
                     loading: 'Please wait...',
                     success: () => {
+                        router.back();
                         return 'Form submitted successfully';
                     },
                     error: 'An error occurred'
@@ -202,7 +203,7 @@ const ConSolid_MarkSheet = () => {
 
     return (
         <>
-            <div className="flex justify-between py-8 px-4 bg-white">
+            <div className="flex justify-between py-4 px-4 bg-white items-center sticky top-0 z-[9999]">
                 <div className="flex items-center gap-4 pl-4">
                     <div onClick={handleBack}>
                         <FaArrowLeft />
@@ -223,10 +224,10 @@ const ConSolid_MarkSheet = () => {
                     <span className="font-bold text-xl">Select new file :</span>
                     <label
                         htmlFor="fileUpload"
-                        className="rounded-md text-center px-8 py-2 font-semibold text-2xl cursor-pointer bg-blueColor border-transparent text-white hover:bg-white hover:border-2 hover:border-blueColor hover:text-blueColor ml-12"
+                        className="rounded-md text-center px-8 py-2 font-semibold text-2xl cursor-pointer bg-blueColor border-transparent text-white hover:bg-white hover:border border hover:border-blueColor hover:text-blueColor ml-12"
                     >
                         {' '}
-                        {isLoading ? 'Loading...' : '+ ADD'}
+                        {isLoading ? 'Loading...' : 'Add'}
                     </label>
                     <input
                         type="file"
