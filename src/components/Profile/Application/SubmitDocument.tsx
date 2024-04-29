@@ -737,6 +737,75 @@ const SubmitDocument = () => {
                 <p className="text-[26px] font-bold text-mainTextColor pt-12 pb-3">
                     Academic Certificates
                 </p>
+
+                <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-7">
+                    <label htmlFor="experienceLetter">
+                        <RequirementBox
+                            text="Secondary School Certificate"
+                            url={
+                                getApply?.documents?.professional_records
+                                    ?.experience_letter?.url
+                            }
+                            description="Please upload academic worksheet and certificates of year 10.... "
+                        />
+                    </label>
+                    <input
+                        type="file"
+                        className="hidden"
+                        id="experienceLetter"
+                        onChange={handleFileExperienceLetterChange}
+                    />
+                    <label htmlFor="experienceLetter">
+                        <RequirementBox
+                            text="Higher Secondary School Certificate"
+                            url={
+                                getApply?.documents?.professional_records
+                                    ?.experience_letter?.url
+                            }
+                            description="Please upload academic worksheet and certificates of year 12.... "
+                        />
+                    </label>
+                    <input
+                        type="file"
+                        className="hidden"
+                        id="experienceLetter"
+                        onChange={handleFileExperienceLetterChange}
+                    />
+
+                    <label htmlFor="experienceLetter">
+                        <RequirementBox
+                            text="Bachelor degree and transcripts"
+                            url={
+                                getApply?.documents?.professional_records
+                                    ?.experience_letter?.url
+                            }
+                            description="Please upload your bachelor degree and transcripts here .... "
+                        />
+                    </label>
+                    <input
+                        type="file"
+                        className="hidden"
+                        id="experienceLetter"
+                        onChange={handleFileExperienceLetterChange}
+                    />
+                    <label htmlFor="experienceLetter">
+                        <RequirementBox
+                            text="Master degree and transcripts  "
+                            url={
+                                getApply?.documents?.professional_records
+                                    ?.experience_letter?.url
+                            }
+                            description="Please upload your master degree and transcripts here.... "
+                        />
+                    </label>
+                    <input
+                        type="file"
+                        className="hidden"
+                        id="experienceLetter"
+                        onChange={handleFileExperienceLetterChange}
+                    />
+                </div>
+
                 <p className="text-2xl font-semibold uppercase text-darkGrayColor py-3">
                     UNDERGRADUATE
                 </p>
