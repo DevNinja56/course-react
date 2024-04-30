@@ -45,7 +45,7 @@ const RightScholarshipCardBox = () => {
                                 amount: scholarship.amount,
                                 id: scholarship._id,
                                 image: scholarship.image,
-                                isActive: !!scholarship.favoriteId[0]
+                                isActive: !!scholarship?.favoriteId?.[0]
                             }}
                         />
                     ))
