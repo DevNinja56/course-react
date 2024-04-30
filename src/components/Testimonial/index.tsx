@@ -53,7 +53,7 @@ const Testimonial = () => {
                     src="/images/Blogs/Ellipse 426.svg"
                     // priority
                 />
-                <div className="flex flex-col lg:flex-row justify-between items-start container mx-auto lg:px-2 2xl:px-8 transition-all duration-300 py-5 md:py-12 lg:py-20 gap-x-16 gap-y-5 lg:gap-y-0">
+                <div className="flex flex-col lg:flex-row justify-between items-start container mx-auto lg:px-2 2xl:px-8 transition-all duration-300 py-5 md:py-28 lg:py-20 gap-x-16 gap-y-5 lg:gap-y-0 px-10">
                     <div className="flex flex-col gap-y-2 z-10 relative">
                         <p className="font-bold text-xl md:text-[23px] text-blueColor">
                             Testimonial
