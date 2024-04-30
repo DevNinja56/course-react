@@ -1247,7 +1247,7 @@ const SubmitDocument = () => {
                                 getApply?.documents?.academic_certificates
                                     ?.semester_mark_sheets?.url[0]
                             }
-                            description="Please upload consolidated marksheets file"
+                            description="Please upload Semester marksheet file"
                         />
                     </label>
                     <input
