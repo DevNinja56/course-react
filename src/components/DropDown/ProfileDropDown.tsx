@@ -39,7 +39,7 @@ const ProfileDropDown: React.FC<DropDownProps> = ({
         { name: 'Profile', Icon: BiUser, to: ROUTES.PROFILE },
         { name: 'My Favourites', Icon: AiOutlineHeart, to: ROUTES.FAVORITES },
         {
-            name: 'My Applies',
+            name: 'My Applications',
             Icon: SiSemanticscholar,
             to: ROUTES.APPLIES
         },
