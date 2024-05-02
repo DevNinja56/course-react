@@ -1,7 +1,7 @@
 import { useCurrency } from '@/hooks/currency';
 import { useCalculate } from '@/hooks/initial-deposit-calculate';
 import { useUi } from '@/hooks/user-interface';
-import { singleCourseType } from '@/types';
+import { scholarshipType, singleCourseType } from '@/types';
 import React from 'react';
 import { IoMdClose } from 'react-icons/io';
 
@@ -13,12 +13,19 @@ const BankStatementCalculate = () => {
     const { initialDeposit: calculateDeposit } = useCalculate();
     const { getSingleRate } = useCurrency();
 
+    const scholarship: scholarshipType | undefined =
+        modalState?.scholarship?.find(
+            (scholarship) => scholarship.type === 'guaranteed'
+        );
+    const scholarshipGuaranteedAmount = scholarship?.amount
+        ? parseInt(scholarship?.amount)
+        : 0;
+
     const {
         tuitionFee,
         monthDuration: [duration],
         institute,
-        initialDeposit: listOfInitialDeposit,
-        scholarship: [scholarship]
+        initialDeposit: listOfInitialDeposit
     } = modalState;
     const [{ amount: initialDeposit }] = listOfInitialDeposit;
     const { setCurrencyValue } = useCurrency();
@@ -28,13 +35,13 @@ const BankStatementCalculate = () => {
     const isLiveLondon = institute.location.toLowerCase().includes('london');
     const livingCost = isLiveAustralia ? 24505 : isLiveLondon ? 12006 : 9207;
     const travelingCost = 2000;
-    const oshc = 700 * +duration;
+    const oshc = 700 * (+duration / 12);
     const total = tuitionFee + livingCost + travelingCost + oshc;
 
     let initialDepositValue = calculateDeposit({
         initialDeposit,
         tuitionFee,
-        scholarship: scholarship?.amount,
+        scholarship: scholarshipGuaranteedAmount + '',
         isNumber: true
     });
 
@@ -46,20 +53,17 @@ const BankStatementCalculate = () => {
         : tuitionFee - initialDepositValue + livingCost;
     const currency = isLiveAustralia ? 'AUD' : 'GBP';
     const { base_rate } = getSingleRate(currency) ?? { base_rate: 1 };
-    const scholarshipAmount =
-        tuitionFee * (parseInt(scholarship?.amount ?? '0') / 100);
+    const scholarshipAmount = tuitionFee * (scholarshipGuaranteedAmount / 100);
 
     const data = [
         {
             name: 'Annual Tuition Fee',
             value: setCurrencyValue(tuitionFee * +base_rate)
         },
-        scholarship
-            ? {
-                  name: `Scholarship Amount - ${scholarship?.type}`,
-                  value: setCurrencyValue(scholarshipAmount * +base_rate)
-              }
-            : {},
+        {
+            name: `Scholarship Amount - ${scholarship?.type ?? 'None'}`,
+            value: setCurrencyValue(scholarshipAmount * +base_rate)
+        },
         {
             name: 'Initial Deposit',
             value: setCurrencyValue(initialDepositValue * +base_rate)

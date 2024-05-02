@@ -123,6 +123,14 @@ const CourseDetail = ({ data: scholarship }: { data: scholarshipType }) => {
                                                                             ''
                                                                     }}
                                                                 />
+                                                                {scholarship?.text_overview && (
+                                                                    <div
+                                                                        className="text-sm md:text-base"
+                                                                        dangerouslySetInnerHTML={{
+                                                                            __html: scholarship?.text_overview
+                                                                        }}
+                                                                    />
+                                                                )}
                                                             </div>
                                                         )
                                                     },
@@ -139,6 +147,14 @@ const CourseDetail = ({ data: scholarship }: { data: scholarshipType }) => {
                                                                         scholarship.type
                                                                     }
                                                                 </div>
+                                                                {scholarship?.text_eligibility_criteria && (
+                                                                    <div
+                                                                        className="text-sm md:text-base"
+                                                                        dangerouslySetInnerHTML={{
+                                                                            __html: scholarship?.text_eligibility_criteria
+                                                                        }}
+                                                                    />
+                                                                )}
                                                             </div>
                                                         )
                                                     },
@@ -181,6 +197,14 @@ const CourseDetail = ({ data: scholarship }: { data: scholarshipType }) => {
                                                                         scholarship.amount
                                                                     }
                                                                 </p>
+                                                                {scholarship?.text_amount && (
+                                                                    <div
+                                                                        className="text-sm md:text-base"
+                                                                        dangerouslySetInnerHTML={{
+                                                                            __html: scholarship?.text_amount
+                                                                        }}
+                                                                    />
+                                                                )}
                                                             </div>
                                                         )
                                                     }
@@ -214,13 +238,13 @@ const CourseDetail = ({ data: scholarship }: { data: scholarshipType }) => {
                                             alt="minim"
                                             className="absolute top-0 left-0 w-full h-[228px] object-cover"
                                             src={
-                                                scholarship.institute?.image ??
+                                                scholarship?.institute?.image ??
                                                 '/images/CourseDetail/Rectangle 1697.svg'
                                             }
                                             // priority
                                         />
                                         <h1 className="absolute w-full bottom-0 left-0 py-2 px-5 bg-gradient-to-t from-blueColor text-center font-bold text-2xl text-white z-10  ">
-                                            {scholarship.institute.name}
+                                            {scholarship?.institute?.name}
                                         </h1>
                                     </div>
                                     <div className="pt-5 px-1 xl:px-3">
@@ -228,7 +252,7 @@ const CourseDetail = ({ data: scholarship }: { data: scholarshipType }) => {
                                             About
                                         </h1>
                                         <p className="text-[13px] text-lightGrayColor mb-2">
-                                            {scholarship.institute?.description.slice(
+                                            {scholarship?.institute?.description.slice(
                                                 0,
                                                 200
                                             )}

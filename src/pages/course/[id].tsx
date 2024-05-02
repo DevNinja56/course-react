@@ -10,7 +10,6 @@ import { modalType } from '@/store/slices/ui.slice';
 import { singleCourseType } from '@/types';
 import { getSsrRequest } from '@/utils/ssrRequest';
 import { GetServerSideProps } from 'next';
-// import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 import { CiCalculator2 } from 'react-icons/ci';
@@ -33,6 +32,12 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
     const { setCurrencyValue, getSingleRate } = useCurrency();
     const { initialDeposit } = useCalculate();
     const rate = getSingleRate(course.feeCurrency);
+    const isUkCourse = course?.institute?.country?.name
+        ?.toLowerCase()
+        ?.includes('united kingdom' || 'uk');
+    const isMasterDegree = course?.degree?.name
+        ?.toLowerCase()
+        ?.includes('master');
 
     return (
         <>
@@ -166,7 +171,7 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                                                                                 __html:
                                                                                     course
                                                                                         .entryRequirements?.[0]
-                                                                                        .requirement ??
+                                                                                        ?.requirement ??
                                                                                     'No Entry Requirements'
                                                                             }}
                                                                         ></div>
@@ -462,18 +467,39 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                                             <GoClockFill className="h-8 w-8 text-blueColor" />
                                             <div className="flex flex-col gap-[6px]">
                                                 <p className="font-bold text-base text-mainTextColor">
-                                                    Duration
+                                                    {isUkCourse &&
+                                                    isMasterDegree
+                                                        ? 'Intake | Duration'
+                                                        : 'Duration'}
                                                 </p>
                                                 <ul className="text-lightGrayColor text-base">
-                                                    {getMonths(
-                                                        course.monthDuration
-                                                    )
-                                                        .split(' / ')
-                                                        .map((month) => (
-                                                            <li key={month}>
-                                                                {month}
-                                                            </li>
-                                                        ))}
+                                                    {isUkCourse &&
+                                                    isMasterDegree ? (
+                                                        <>
+                                                            {generateIntakes(
+                                                                [
+                                                                    course
+                                                                        .intakes[0]
+                                                                ],
+                                                                1
+                                                            )}{' '}
+                                                            |{' '}
+                                                            {getMonths([
+                                                                course
+                                                                    .monthDuration[0]
+                                                            ])}{' '}
+                                                        </>
+                                                    ) : (
+                                                        getMonths(
+                                                            course.monthDuration
+                                                        )
+                                                            .split(' / ')
+                                                            .map((month) => (
+                                                                <li key={month}>
+                                                                    {month}
+                                                                </li>
+                                                            ))
+                                                    )}
                                                 </ul>
                                             </div>
                                         </div>
@@ -493,24 +519,26 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                                                 </p>
                                             </div>
                                         </div>
-                                        <div className="flex items-center gap-4 pl-5 border-opacity-50 py-4">
-                                            <FaCalendar className="h-8 w-8 text-blueColor" />
-                                            <div className="flex flex-col gap-[6px]">
-                                                <p className="font-bold text-base text-mainTextColor">
-                                                    Available Intakes
-                                                </p>
-                                                <ul className="text-lightGrayColor text-base">
-                                                    {generateIntakes(
-                                                        course.intakes,
-                                                        1
-                                                    ).map((intake) => (
-                                                        <li key={intake}>
-                                                            {intake}
-                                                        </li>
-                                                    ))}
-                                                </ul>
+                                        {!isUkCourse && !isMasterDegree && (
+                                            <div className="flex items-center gap-4 pl-5 border-opacity-50 py-4">
+                                                <FaCalendar className="h-8 w-8 text-blueColor" />
+                                                <div className="flex flex-col gap-[6px]">
+                                                    <p className="font-bold text-base text-mainTextColor">
+                                                        Available Intakes
+                                                    </p>
+                                                    <ul className="text-lightGrayColor text-base">
+                                                        {generateIntakes(
+                                                            course.intakes,
+                                                            1
+                                                        ).map((intake) => (
+                                                            <li key={intake}>
+                                                                {intake}
+                                                            </li>
+                                                        ))}
+                                                    </ul>
+                                                </div>
                                             </div>
-                                        </div>
+                                        )}
                                     </div>
                                 </div>
                                 <div className="flex flex-col md:flex-row items-center w-full gap-3 md:gap-5 lg:hidden">
