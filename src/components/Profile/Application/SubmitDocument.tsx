@@ -61,6 +61,23 @@ const SubmitDocument = () => {
             ?.url
     };
 
+    const secondary_school = {
+        url: getApply?.documents?.academic_certificates?.secondary_school?.url
+    };
+
+    const higher_secondary_school = {
+        url: getApply?.documents?.academic_certificates?.higher_secondary_school
+            ?.url
+    };
+
+    const bachelor_degree = {
+        url: getApply?.documents?.academic_certificates?.bachelor_degree?.url
+    };
+
+    const master_degree = {
+        url: getApply?.documents?.academic_certificates?.master_degree?.url
+    };
+
     const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const uploadedFiles = event.target.files;
         const filesArray = uploadedFiles ? [...uploadedFiles] : [];
@@ -122,8 +139,8 @@ const SubmitDocument = () => {
                 type: 'patch',
                 body: {
                     ...getApply,
-                    course: getApply?.course.id,
-                    user: getApply?.user.id,
+                    course: getApply?.course?.id,
+                    user: getApply?.user?.id,
                     documents: {
                         ...(identity.passport.url[0]
                             ? {
@@ -183,6 +200,34 @@ const SubmitDocument = () => {
                                 ? {
                                       provisional_certificate: {
                                           url: provisional_certificate.url
+                                      }
+                                  }
+                                : {}),
+                            ...(secondary_school.url
+                                ? {
+                                      secondary_school: {
+                                          url: secondary_school.url
+                                      }
+                                  }
+                                : {}),
+                            ...(higher_secondary_school.url
+                                ? {
+                                      higher_secondary_school: {
+                                          url: higher_secondary_school.url
+                                      }
+                                  }
+                                : {}),
+                            ...(bachelor_degree.url
+                                ? {
+                                      bachelor_degree: {
+                                          url: bachelor_degree.url
+                                      }
+                                  }
+                                : {}),
+                            ...(master_degree.url
+                                ? {
+                                      master_degree: {
+                                          url: master_degree.url
                                       }
                                   }
                                 : {}),
@@ -218,8 +263,8 @@ const SubmitDocument = () => {
                 type: 'patch',
                 body: {
                     ...getApply,
-                    course: getApply?.course.id,
-                    user: getApply?.user.id,
+                    course: getApply?.course?.id,
+                    user: getApply?.user?.id,
                     documents: {
                         ...(identity.passport.url[0]
                             ? {
@@ -279,6 +324,34 @@ const SubmitDocument = () => {
                                 ? {
                                       semester_mark_sheets: {
                                           url: semester_mark_sheets.url
+                                      }
+                                  }
+                                : {}),
+                            ...(secondary_school.url
+                                ? {
+                                      secondary_school: {
+                                          url: secondary_school.url
+                                      }
+                                  }
+                                : {}),
+                            ...(higher_secondary_school.url
+                                ? {
+                                      higher_secondary_school: {
+                                          url: higher_secondary_school.url
+                                      }
+                                  }
+                                : {}),
+                            ...(bachelor_degree.url
+                                ? {
+                                      bachelor_degree: {
+                                          url: bachelor_degree.url
+                                      }
+                                  }
+                                : {}),
+                            ...(master_degree.url
+                                ? {
+                                      master_degree: {
+                                          url: master_degree.url
                                       }
                                   }
                                 : {}),
@@ -314,8 +387,8 @@ const SubmitDocument = () => {
                 type: 'patch',
                 body: {
                     ...getApply,
-                    course: getApply?.course.id,
-                    user: getApply?.user.id,
+                    course: getApply?.course?.id,
+                    user: getApply?.user?.id,
                     documents: {
                         ...(identity.passport.url[0]
                             ? {
@@ -382,6 +455,34 @@ const SubmitDocument = () => {
                                                         consolidated_mark_sheets.date_of_start
                                                 }
                                               : {})
+                                      }
+                                  }
+                                : {}),
+                            ...(secondary_school.url
+                                ? {
+                                      secondary_school: {
+                                          url: secondary_school.url
+                                      }
+                                  }
+                                : {}),
+                            ...(higher_secondary_school.url
+                                ? {
+                                      higher_secondary_school: {
+                                          url: higher_secondary_school.url
+                                      }
+                                  }
+                                : {}),
+                            ...(bachelor_degree.url
+                                ? {
+                                      bachelor_degree: {
+                                          url: bachelor_degree.url
+                                      }
+                                  }
+                                : {}),
+                            ...(master_degree.url
+                                ? {
+                                      master_degree: {
+                                          url: master_degree.url
                                       }
                                   }
                                 : {})
@@ -417,8 +518,8 @@ const SubmitDocument = () => {
                 type: 'patch',
                 body: {
                     ...getApply,
-                    course: getApply?.course.id,
-                    user: getApply?.user.id,
+                    course: getApply?.course?.id,
+                    user: getApply?.user?.id,
                     documents: {
                         ...(identity.passport.url[0]
                             ? {
@@ -485,6 +586,34 @@ const SubmitDocument = () => {
                                                         consolidated_mark_sheets.date_of_start
                                                 }
                                               : {})
+                                      }
+                                  }
+                                : {}),
+                            ...(secondary_school.url
+                                ? {
+                                      secondary_school: {
+                                          url: secondary_school.url
+                                      }
+                                  }
+                                : {}),
+                            ...(higher_secondary_school.url
+                                ? {
+                                      higher_secondary_school: {
+                                          url: higher_secondary_school.url
+                                      }
+                                  }
+                                : {}),
+                            ...(bachelor_degree.url
+                                ? {
+                                      bachelor_degree: {
+                                          url: bachelor_degree.url
+                                      }
+                                  }
+                                : {}),
+                            ...(master_degree.url
+                                ? {
+                                      master_degree: {
+                                          url: master_degree.url
                                       }
                                   }
                                 : {})
@@ -520,8 +649,8 @@ const SubmitDocument = () => {
                 type: 'patch',
                 body: {
                     ...getApply,
-                    course: getApply?.course.id,
-                    user: getApply?.user.id,
+                    course: getApply?.course?.id,
+                    user: getApply?.user?.id,
                     documents: {
                         ...(identity.passport.url[0]
                             ? {
@@ -588,6 +717,34 @@ const SubmitDocument = () => {
                                                         consolidated_mark_sheets.date_of_start
                                                 }
                                               : {})
+                                      }
+                                  }
+                                : {}),
+                            ...(secondary_school.url
+                                ? {
+                                      secondary_school: {
+                                          url: secondary_school.url
+                                      }
+                                  }
+                                : {}),
+                            ...(higher_secondary_school.url
+                                ? {
+                                      higher_secondary_school: {
+                                          url: higher_secondary_school.url
+                                      }
+                                  }
+                                : {}),
+                            ...(bachelor_degree.url
+                                ? {
+                                      bachelor_degree: {
+                                          url: bachelor_degree.url
+                                      }
+                                  }
+                                : {}),
+                            ...(master_degree.url
+                                ? {
+                                      master_degree: {
+                                          url: master_degree.url
                                       }
                                   }
                                 : {})
@@ -623,8 +780,8 @@ const SubmitDocument = () => {
                 type: 'patch',
                 body: {
                     ...getApply,
-                    course: getApply?.course.id,
-                    user: getApply?.user.id,
+                    course: getApply?.course?.id,
+                    user: getApply?.user?.id,
                     documents: {
                         ...(identity.passport.url[0]
                             ? {
@@ -691,6 +848,34 @@ const SubmitDocument = () => {
                                                         consolidated_mark_sheets.date_of_start
                                                 }
                                               : {})
+                                      }
+                                  }
+                                : {}),
+                            ...(secondary_school.url
+                                ? {
+                                      secondary_school: {
+                                          url: secondary_school.url
+                                      }
+                                  }
+                                : {}),
+                            ...(higher_secondary_school.url
+                                ? {
+                                      higher_secondary_school: {
+                                          url: higher_secondary_school.url
+                                      }
+                                  }
+                                : {}),
+                            ...(bachelor_degree.url
+                                ? {
+                                      bachelor_degree: {
+                                          url: bachelor_degree.url
+                                      }
+                                  }
+                                : {}),
+                            ...(master_degree.url
+                                ? {
+                                      master_degree: {
+                                          url: master_degree.url
                                       }
                                   }
                                 : {})
@@ -726,8 +911,8 @@ const SubmitDocument = () => {
                 type: 'patch',
                 body: {
                     ...getApply,
-                    course: getApply?.course.id,
-                    user: getApply?.user.id,
+                    course: getApply?.course?.id,
+                    user: getApply?.user?.id,
                     documents: {
                         ...(identity.passport.url[0]
                             ? {
@@ -745,7 +930,7 @@ const SubmitDocument = () => {
                                       }
                                   }
                               }
-                            : {}),
+                            : { identity: {} }),
                         academic_certificates: {
                             ...(semester_mark_sheets.url
                                 ? {
@@ -796,11 +981,34 @@ const SubmitDocument = () => {
                                               : {})
                                       }
                                   }
-                                : {})
+                                : {}),
+                            ...(higher_secondary_school.url
+                                ? {
+                                      higher_secondary_school: {
+                                          url: higher_secondary_school.url
+                                      }
+                                  }
+                                : {}),
+                            ...(bachelor_degree.url
+                                ? {
+                                      bachelor_degree: {
+                                          url: bachelor_degree.url
+                                      }
+                                  }
+                                : {}),
+                            ...(master_degree.url
+                                ? {
+                                      master_degree: {
+                                          url: master_degree.url
+                                      }
+                                  }
+                                : {}),
+                            secondary_school: {
+                                url: response?.[0]
+                            }
                         },
                         professional_records: {
-                            ...getApply?.documents?.professional_records,
-                            experience_letter: { url: response?.[0] }
+                            ...getApply?.documents?.professional_records
                         }
                     }
                 }
@@ -829,8 +1037,8 @@ const SubmitDocument = () => {
                 type: 'patch',
                 body: {
                     ...getApply,
-                    course: getApply?.course.id,
-                    user: getApply?.user.id,
+                    course: getApply?.course?.id,
+                    user: getApply?.user?.id,
                     documents: {
                         ...(identity.passport.url[0]
                             ? {
@@ -899,11 +1107,34 @@ const SubmitDocument = () => {
                                               : {})
                                       }
                                   }
-                                : {})
+                                : {}),
+                            ...(secondary_school.url
+                                ? {
+                                      secondary_school: {
+                                          url: secondary_school.url
+                                      }
+                                  }
+                                : {}),
+                            ...(bachelor_degree.url
+                                ? {
+                                      bachelor_degree: {
+                                          url: bachelor_degree.url
+                                      }
+                                  }
+                                : {}),
+                            ...(master_degree.url
+                                ? {
+                                      master_degree: {
+                                          url: master_degree.url
+                                      }
+                                  }
+                                : {}),
+                            higher_secondary_school: {
+                                url: response?.[0]
+                            }
                         },
                         professional_records: {
-                            ...getApply?.documents?.professional_records,
-                            experience_letter: { url: response?.[0] }
+                            ...getApply?.documents?.professional_records
                         }
                     }
                 }
@@ -932,8 +1163,8 @@ const SubmitDocument = () => {
                 type: 'patch',
                 body: {
                     ...getApply,
-                    course: getApply?.course.id,
-                    user: getApply?.user.id,
+                    course: getApply?.course?.id,
+                    user: getApply?.user?.id,
                     documents: {
                         ...(identity.passport.url[0]
                             ? {
@@ -1002,11 +1233,34 @@ const SubmitDocument = () => {
                                               : {})
                                       }
                                   }
-                                : {})
+                                : {}),
+                            ...(secondary_school.url
+                                ? {
+                                      secondary_school: {
+                                          url: secondary_school.url
+                                      }
+                                  }
+                                : {}),
+                            ...(higher_secondary_school.url
+                                ? {
+                                      higher_secondary_school: {
+                                          url: higher_secondary_school.url
+                                      }
+                                  }
+                                : {}),
+                            ...(master_degree.url
+                                ? {
+                                      master_degree: {
+                                          url: master_degree.url
+                                      }
+                                  }
+                                : {}),
+                            bachelor_degree: {
+                                url: response?.[0]
+                            }
                         },
                         professional_records: {
-                            ...getApply?.documents?.professional_records,
-                            experience_letter: { url: response?.[0] }
+                            ...getApply?.documents?.professional_records
                         }
                     }
                 }
@@ -1035,8 +1289,8 @@ const SubmitDocument = () => {
                 type: 'patch',
                 body: {
                     ...getApply,
-                    course: getApply?.course.id,
-                    user: getApply?.user.id,
+                    course: getApply?.course?.id,
+                    user: getApply?.user?.id,
                     documents: {
                         ...(identity.passport.url[0]
                             ? {
@@ -1105,11 +1359,34 @@ const SubmitDocument = () => {
                                               : {})
                                       }
                                   }
-                                : {})
+                                : {}),
+                            ...(secondary_school.url
+                                ? {
+                                      secondary_school: {
+                                          url: secondary_school.url
+                                      }
+                                  }
+                                : {}),
+                            ...(higher_secondary_school.url
+                                ? {
+                                      higher_secondary_school: {
+                                          url: higher_secondary_school.url
+                                      }
+                                  }
+                                : {}),
+                            ...(bachelor_degree.url
+                                ? {
+                                      bachelor_degree: {
+                                          url: bachelor_degree.url
+                                      }
+                                  }
+                                : {}),
+                            master_degree: {
+                                url: response?.[0]
+                            }
                         },
                         professional_records: {
-                            ...getApply?.documents?.professional_records,
-                            experience_letter: { url: response?.[0] }
+                            ...getApply?.documents?.professional_records
                         }
                     }
                 }
@@ -1156,8 +1433,8 @@ const SubmitDocument = () => {
                         <RequirementBox
                             text="Secondary School Certificate"
                             url={
-                                getApply?.documents?.professional_records
-                                    ?.experience_letter?.url
+                                getApply?.documents?.academic_certificates
+                                    ?.secondary_school?.url
                             }
                             description="Please upload academic worksheet and certificates of year 10th "
                         />
@@ -1172,8 +1449,8 @@ const SubmitDocument = () => {
                         <RequirementBox
                             text="Higher Secondary School Certificate"
                             url={
-                                getApply?.documents?.professional_records
-                                    ?.experience_letter?.url
+                                getApply?.documents?.academic_certificates
+                                    ?.higher_secondary_school?.url
                             }
                             description="Please upload academic worksheet and certificates of year 12th "
                         />
@@ -1189,8 +1466,8 @@ const SubmitDocument = () => {
                         <RequirementBox
                             text="Bachelor degree and transcripts"
                             url={
-                                getApply?.documents?.professional_records
-                                    ?.experience_letter?.url
+                                getApply?.documents?.academic_certificates
+                                    ?.bachelor_degree?.url
                             }
                             description="Please upload your bachelor degree and transcripts here "
                         />
@@ -1205,8 +1482,8 @@ const SubmitDocument = () => {
                         <RequirementBox
                             text="Master degree and transcripts  "
                             url={
-                                getApply?.documents?.professional_records
-                                    ?.experience_letter?.url
+                                getApply?.documents?.academic_certificates
+                                    ?.master_degree?.url
                             }
                             description="Please upload your master degree and transcripts here "
                         />
