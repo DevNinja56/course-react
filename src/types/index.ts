@@ -75,6 +75,7 @@ export type scholarshipType = {
     endDate: string;
     institute: instituteType;
     degree: degreeType[];
+    country: countryType;
     course: courseType | null;
     createdAt: string;
     updatedAt: string;

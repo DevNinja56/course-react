@@ -36,7 +36,17 @@ const RightScholarshipCardBox = () => {
                     data?.map((scholarship, i) => (
                         <Card
                             key={'scholarship__key__' + scholarship._id + i}
-                            scholarship={scholarship}
+                            {...{
+                                name: scholarship.name,
+                                type: scholarship.type,
+                                degree: scholarship.degree,
+                                institute: scholarship.institute,
+                                country: scholarship.country,
+                                amount: scholarship.amount,
+                                id: scholarship._id,
+                                image: scholarship.image,
+                                isActive: !!scholarship?.favoriteId?.[0]
+                            }}
                         />
                     ))
                 )}

@@ -25,21 +25,13 @@ import { getMonths } from '@/utils/get-months';
 import { useCurrency } from '@/hooks/currency';
 import { useCalculate } from '@/hooks/initial-deposit-calculate';
 import LanguageRequirements from '@/components/course/LanguageRequirements';
-// import { BiSolidCalendar } from 'react-icons/bi';
-// import CourseTag from '@/components/course/CourseTag';
+import { generateIntakes } from '@/utils/generateIntakes';
+import Card from '@/components/Scholarship/Card';
 
 const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
     const { updateModal } = useUi();
     const { setCurrencyValue, getSingleRate } = useCurrency();
     const { initialDeposit } = useCalculate();
-
-    const openUserDetailModal = (courseId: string) => {
-        updateModal({
-            type: modalType.user_detail,
-            state: { courseId }
-        });
-    };
-
     const rate = getSingleRate(course.feeCurrency);
 
     return (
@@ -231,44 +223,40 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                                                                         Course
                                                                         Scholarship
                                                                     </h3>
-                                                                    <ul className="w-full flex gap-3 flex-wrap items-start">
+                                                                    <ul className="w-full grid grid-cols-4 gap-3 flex-wrap items-start">
                                                                         {course
                                                                             .scholarship
                                                                             .length >
                                                                         0 ? (
                                                                             course.scholarship.map(
-                                                                                ({
-                                                                                    name,
-                                                                                    id
-                                                                                }) => (
-                                                                                    <Link
-                                                                                        href={ROUTES.SCHOLARSHIP.replace(
-                                                                                            ':id',
-                                                                                            id
-                                                                                        )}
-                                                                                        className="text-sm md:text-base border-2 p-3 rounded-md border-blueColor text-blueColor hover:bg-blueColor hover:text-white transition-all duration-300 text-center"
+                                                                                (
+                                                                                    scholarship,
+                                                                                    i
+                                                                                ) => (
+                                                                                    <Card
                                                                                         key={
-                                                                                            'scholarship-list--' +
-                                                                                            name
+                                                                                            'course-scholarship card--' +
+                                                                                            i
                                                                                         }
-                                                                                    >
-                                                                                        <div className="">
-                                                                                            <img
-                                                                                                src="/images/Scholarships/scholarship (1) 1.png"
-                                                                                                alt="image"
-                                                                                                className="mx-auto"
-                                                                                                width={
-                                                                                                    100
-                                                                                                }
-                                                                                                height={
-                                                                                                    100
-                                                                                                }
-                                                                                            />
-                                                                                        </div>
-                                                                                        {
-                                                                                            name
-                                                                                        }
-                                                                                    </Link>
+                                                                                        {...{
+                                                                                            name: scholarship.name,
+                                                                                            type: scholarship.type,
+                                                                                            degree: course.degree,
+                                                                                            institute:
+                                                                                                course.institute,
+                                                                                            country:
+                                                                                                course
+                                                                                                    .institute
+                                                                                                    .country,
+                                                                                            amount: scholarship.amount,
+                                                                                            id: scholarship.id,
+                                                                                            image: scholarship.image,
+                                                                                            isActive:
+                                                                                                null,
+                                                                                            headingClass:
+                                                                                                'text-sm'
+                                                                                        }}
+                                                                                    />
                                                                                 )
                                                                             )
                                                                         ) : (
@@ -408,9 +396,10 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                                                 className="py-3 rounded-md text-sm font-semibold"
                                                 text="Start Application"
                                                 onClick={() =>
-                                                    openUserDetailModal(
-                                                        course.id
-                                                    )
+                                                    updateModal({
+                                                        type: modalType.start_application,
+                                                        state: { course }
+                                                    })
                                                 }
                                             />
 
@@ -475,11 +464,17 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                                                 <p className="font-bold text-base text-mainTextColor">
                                                     Duration
                                                 </p>
-                                                <p className="text-lightGrayColor text-base">
+                                                <ul className="text-lightGrayColor text-base">
                                                     {getMonths(
                                                         course.monthDuration
-                                                    )}
-                                                </p>
+                                                    )
+                                                        .split(' / ')
+                                                        .map((month) => (
+                                                            <li key={month}>
+                                                                {month}
+                                                            </li>
+                                                        ))}
+                                                </ul>
                                             </div>
                                         </div>
                                         <div className="flex items-center gap-4 pl-5 border-b-2 border-gray-200 border-opacity-50 py-4">
@@ -504,9 +499,16 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                                                 <p className="font-bold text-base text-mainTextColor">
                                                     Available Intakes
                                                 </p>
-                                                <p className="text-lightGrayColor text-base">
-                                                    {course.intakes.join(' ')}
-                                                </p>
+                                                <ul className="text-lightGrayColor text-base">
+                                                    {generateIntakes(
+                                                        course.intakes,
+                                                        1
+                                                    ).map((intake) => (
+                                                        <li key={intake}>
+                                                            {intake}
+                                                        </li>
+                                                    ))}
+                                                </ul>
                                             </div>
                                         </div>
                                     </div>

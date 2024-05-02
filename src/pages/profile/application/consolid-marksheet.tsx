@@ -184,6 +184,7 @@ const ConSolid_MarkSheet = () => {
                 {
                     loading: 'Please wait...',
                     success: () => {
+                        router.back();
                         return 'Form submitted successfully';
                     },
                     error: 'An error occurred'
@@ -202,7 +203,7 @@ const ConSolid_MarkSheet = () => {
 
     return (
         <>
-            <div className="flex justify-between py-8 px-4 bg-white">
+            <div className="flex justify-between py-4 px-4 bg-white items-center sticky top-0 z-[9999]">
                 <div className="flex items-center gap-4 pl-4">
                     <div onClick={handleBack}>
                         <FaArrowLeft />
@@ -220,11 +221,21 @@ const ConSolid_MarkSheet = () => {
                     </div>
                 </div>
                 <div className="md:hidden lg:block sm:hidden">
-                    <Button
-                        type="submit"
-                        text="Save"
-                        onClick={handleSubmit(onSubmit)}
-                        className="rounded-none py-2 px-4"
+                    <span className="font-bold text-xl">Select new file :</span>
+                    <label
+                        htmlFor="fileUpload"
+                        className="rounded-md text-center px-8 py-2 font-semibold text-2xl cursor-pointer bg-blueColor border-transparent text-white hover:bg-white hover:border border hover:border-blueColor hover:text-blueColor ml-12"
+                    >
+                        {' '}
+                        {isLoading ? 'Loading...' : 'Add'}
+                    </label>
+                    <input
+                        type="file"
+                        accept=".pdf, image/*"
+                        className="hidden"
+                        multiple
+                        id="fileUpload"
+                        onChange={handleFileChange}
                     />
                 </div>
             </div>
@@ -241,21 +252,6 @@ const ConSolid_MarkSheet = () => {
                             )}
                         </div>
                     </div>
-                    <label
-                        htmlFor="fileUpload"
-                        className="rounded-md text-center py-4 font-semibold text-3xl cursor-pointer bg-blueColor border-transparent text-white hover:bg-white hover:border-2 hover:border-blueColor hover:text-blueColor px-12 ml-12"
-                    >
-                        {' '}
-                        {isLoading ? 'Loading...' : '+ ADD'}
-                    </label>
-                    <input
-                        type="file"
-                        accept=".pdf, image/*"
-                        className="hidden"
-                        multiple
-                        id="fileUpload"
-                        onChange={handleFileChange}
-                    />
                 </div>
                 <div className="lg:w-[48%] sm:w-full md:w-full py-8 px-16">
                     <div className="w-full bg-BgCardPassport sm:pl-4 md:pl-36 lg:pl-0">
@@ -368,6 +364,12 @@ const ConSolid_MarkSheet = () => {
                                 customInputClass="px-2 py-[10px] text-[15px] w-full rounded-md outline-none placeholder:text-sm"
                             />
                         </div>
+                        <Button
+                            type="submit"
+                            text="Save"
+                            className="rounded-md py-2 px-4 mt-4"
+                            onClick={handleSubmit(onSubmit)}
+                        />
                     </form>
                 </div>
             </div>

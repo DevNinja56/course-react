@@ -22,8 +22,6 @@ const ProfileComp = () => {
             : favoritesTabs[0]
     );
 
-    console.log('active', active);
-
     useEffect(() => {
         if (isReady && activeTab) {
             setActive(

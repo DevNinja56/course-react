@@ -23,6 +23,9 @@ import {
     useGetCoursesByInstituteQuery,
     useGetInstituteQuery
 } from '@/store/slices/allRequests';
+import { useRouter } from 'next/router';
+import { singleCourseType } from '@/types';
+import { generateIntakes } from '@/utils/generateIntakes';
 const FacebookLoginBtn = dynamic(import('@/components/Auth/FacebookLoginBtn'), {
     ssr: false
 });
@@ -43,14 +46,6 @@ interface formType {
     permission: boolean;
 }
 
-const intakeOptions = [
-    'January 2025',
-    'July 2025',
-    'January 2026',
-    'July 2026',
-    'January 2027',
-    'July 2027'
-];
 const messageList = [
     'I want to apply for this course.',
     'I want to know more about this course.',
@@ -58,10 +53,10 @@ const messageList = [
     'Other Message'
 ];
 
-const UserDetail = () => {
+const StartApplication = () => {
     const { modalState, hideModal } = useUi();
     const [otherMessage, setMessage] = useState(false);
-    const { courseId } = modalState as { courseId: string };
+    const { course } = modalState as { course: singleCourseType };
     const { isAuthenticated, user, updateUserDetails, loggedInUser } =
         useUserAuth();
     const { updateModal } = useUi();
@@ -70,7 +65,7 @@ const UserDetail = () => {
     const [password, setPassword] = useState<string>('');
     const [selectedInstituteId, setSelectedInstituteId] = useState<string>();
     const [selectedCourseId, setSelectedCourseId] = useState<string>();
-    const [selectedIntake, setSelectedIntake] = useState<string[]>();
+    const [selectedIntake, setSelectedIntake] = useState<string[]>([]);
 
     const { data } = useGetInstituteQuery();
     const { data: courseData } = useGetCoursesByInstituteQuery({
@@ -78,7 +73,7 @@ const UserDetail = () => {
         page: 1,
         instituteId: selectedInstituteId as string
     });
-
+    const router = useRouter();
     const {
         register,
         handleSubmit: fromSubmit,
@@ -116,7 +111,7 @@ const UserDetail = () => {
                 type: 'post',
                 body: {
                     ...body,
-                    course: courseId ? courseId : selectedCourseId,
+                    course: course ? course.id : selectedCourseId,
                     userDetails: !isAuthenticated
                         ? {
                               first_name,
@@ -136,6 +131,7 @@ const UserDetail = () => {
                 success: () => {
                     reset();
                     hideModal();
+                    router.push(ROUTES.APPLIES);
                     return 'Form submitted successfully';
                 },
                 error: 'An error occurred'
@@ -260,7 +256,7 @@ const UserDetail = () => {
                     </p>
                     <form onSubmit={fromSubmit(handleSubmit)}>
                         <div className="flex justify-between gap-5 py-3 flex-col">
-                            {!courseId ? (
+                            {!course ? (
                                 <>
                                     <div className="flex flex-col gap-1">
                                         <label className="text-sm font-semibold text-grayColor">
@@ -368,12 +364,12 @@ const UserDetail = () => {
                                                 required:
                                                     'Intake selection is required'
                                             })}
-                                            options={selectedIntake?.map(
-                                                (intake) => ({
-                                                    label: intake,
-                                                    value: intake
-                                                })
-                                            )}
+                                            options={generateIntakes(
+                                                selectedIntake
+                                            )?.map((intake) => ({
+                                                label: intake,
+                                                value: intake
+                                            }))}
                                             placeholder="Select Course Intake"
                                             onChange={(e) => {
                                                 setValue(
@@ -422,13 +418,13 @@ const UserDetail = () => {
                                             required:
                                                 'Intake selection is required'
                                         })}
-                                        options={intakeOptions?.map(
-                                            (intake) => ({
-                                                label: intake,
-                                                value: intake
-                                            })
-                                        )}
-                                        placeholder="January 2025"
+                                        options={generateIntakes(
+                                            course?.intakes
+                                        )?.map((intake) => ({
+                                            label: intake,
+                                            value: intake
+                                        }))}
+                                        placeholder="Select Course Intake"
                                         onChange={(e) => {
                                             setValue('intake', e?.value ?? '');
                                         }}
@@ -602,4 +598,4 @@ const UserDetail = () => {
     );
 };
 
-export default UserDetail;
+export default StartApplication;
