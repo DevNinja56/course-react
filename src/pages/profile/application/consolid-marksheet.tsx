@@ -61,7 +61,7 @@ const ConSolid_MarkSheet = () => {
     const router = useRouter();
     const { id } = router.query;
     const { data: getApply } = useGetApplyByIdQuery(id);
-    console.log('getApply', getApply?.documents?.identity?.passport);
+
     const token = getToken();
     const [isLoading, setIsLoading] = useState(false);
     const [fullFile, setFullFile] = useState(fileUrl);

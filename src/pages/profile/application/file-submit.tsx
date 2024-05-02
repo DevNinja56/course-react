@@ -57,13 +57,7 @@ const FileSubmitted = () => {
     const router = useRouter();
     const { id } = router.query;
     const { data: getApply } = useGetApplyByIdQuery(id);
-    console.log(
-        'consolidated_mark_sheets?.url?',
-        getApply?.documents.academic_certificates.consolidated_mark_sheets
-            ?.url?.[0]
-            ? true
-            : false
-    );
+
     const [isLoading, setIsLoading] = useState(false);
     const [fullFile, setFullFile] = useState(fileUrl);
 

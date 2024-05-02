@@ -19,6 +19,7 @@ const SubmitDocument = () => {
     const { id } = router.query;
     const { data: getApply, refetch: fetchApply } = useGetApplyByIdQuery(id);
 
+
     const identity = {
         passport: {
             url: [getApply?.documents?.identity?.passport?.url],
@@ -1424,10 +1425,64 @@ const SubmitDocument = () => {
                 />
             </div>
             <div className="w-full">
+                
+            <p className="text-[26px] font-bold text-mainTextColor pt-12 pb-3">
+                    Undergraduate
+                </p>
+                <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-7">
+                    <label htmlFor="fileUploadConSolid">
+                        <RequirementBox
+                            text="Consolidated Marksheets"
+                            url={
+                                getApply?.documents?.academic_certificates
+                                    ?.consolidated_mark_sheets?.url[0]
+                            }
+                            description="Please upload consolidated marksheets file "
+                        />
+                    </label>
+                    <input
+                        type="file"
+                        className="hidden"
+                        multiple
+                        id="fileUploadConSolid"
+                        onChange={handleFileChangeConSolid}
+                    />
+                    <label htmlFor="semesterMarkSheets">
+                        <RequirementBox
+                            text="Semester Marksheets"
+                            url={
+                                getApply?.documents?.academic_certificates
+                                    ?.semester_mark_sheets?.url[0]
+                            }
+                            description="Please upload Semester marksheet file"
+                        />
+                    </label>
+                    <input
+                        type="file"
+                        className="hidden"
+                        id="semesterMarkSheets"
+                        onChange={handleMarkSheetUpload}
+                    />
+                    <label htmlFor="provisionalCertificate">
+                        <RequirementBox
+                            text="Provisional Certificate"
+                            url={
+                                getApply?.documents?.academic_certificates
+                                    ?.provisional_certificate?.url
+                            }
+                            description="Please upload provisional certificate"
+                        />
+                    </label>
+                    <input
+                        type="file"
+                        className="hidden"
+                        id="provisionalCertificate"
+                        onChange={handleFileProvisionalCertificateChange}
+                    />
+                </div>
                 <p className="text-[26px] font-bold text-mainTextColor pt-12 pb-3">
                     Academic Certificates
                 </p>
-
                 <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-7">
                     <label htmlFor="secondarySchoolCertificate">
                         <RequirementBox
@@ -1493,61 +1548,6 @@ const SubmitDocument = () => {
                         className="hidden"
                         id="masterDegreeAndTranscripts"
                         onChange={handleFileMasterDegreeChange}
-                    />
-                </div>
-
-                <p className="text-[26px] font-bold text-mainTextColor pt-12 pb-3">
-                    Undergraduate
-                </p>
-                <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-7">
-                    <label htmlFor="fileUploadConSolid">
-                        <RequirementBox
-                            text="Consolidated Marksheets"
-                            url={
-                                getApply?.documents?.academic_certificates
-                                    ?.consolidated_mark_sheets?.url[0]
-                            }
-                            description="Please upload consolidated marksheets file "
-                        />
-                    </label>
-                    <input
-                        type="file"
-                        className="hidden"
-                        multiple
-                        id="fileUploadConSolid"
-                        onChange={handleFileChangeConSolid}
-                    />
-                    <label htmlFor="semesterMarkSheets">
-                        <RequirementBox
-                            text="Semester Marksheets"
-                            url={
-                                getApply?.documents?.academic_certificates
-                                    ?.semester_mark_sheets?.url[0]
-                            }
-                            description="Please upload Semester marksheet file"
-                        />
-                    </label>
-                    <input
-                        type="file"
-                        className="hidden"
-                        id="semesterMarkSheets"
-                        onChange={handleMarkSheetUpload}
-                    />
-                    <label htmlFor="provisionalCertificate">
-                        <RequirementBox
-                            text="Provisional Certificate"
-                            url={
-                                getApply?.documents?.academic_certificates
-                                    ?.provisional_certificate?.url
-                            }
-                            description="Please upload provisional certificate"
-                        />
-                    </label>
-                    <input
-                        type="file"
-                        className="hidden"
-                        id="provisionalCertificate"
-                        onChange={handleFileProvisionalCertificateChange}
                     />
                 </div>
             </div>
