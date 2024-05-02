@@ -21,7 +21,7 @@ const PDFSmallViewer = ({
     };
 
     return (
-        <div className="h-[550px] w-[300px] overflow-scroll">
+        <div className="h-[550px] w-[300px] overflow-y-scroll">
             {pdfUrl.map((file: File, index: number) => {
                 const fileUrl = URL.createObjectURL(file);
                 return (
