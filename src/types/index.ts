@@ -75,6 +75,7 @@ export type scholarshipType = {
     endDate: string;
     institute: instituteType;
     degree: degreeType[];
+    country: countryType;
     course: courseType | null;
     createdAt: string;
     updatedAt: string;
@@ -349,6 +350,18 @@ export interface userDocuments {
             date_of_completion: string;
         };
         provisional_certificate: {
+            url: string;
+        };
+        secondary_school: {
+            url: string;
+        };
+        higher_secondary_school: {
+            url: string;
+        };
+        bachelor_degree: {
+            url: string;
+        };
+        master_degree: {
             url: string;
         };
     };

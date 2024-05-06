@@ -9,7 +9,6 @@ import { modalType } from '@/store/slices/ui.slice';
 import { scholarshipType } from '@/types';
 import { getSsrRequest } from '@/utils/ssrRequest';
 import { GetServerSideProps } from 'next';
-// import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 import { FaCalendar, FaMoneyBillWave } from 'react-icons/fa6';
@@ -120,7 +119,7 @@ const CourseDetail = ({ data: scholarship }: { data: scholarshipType }) => {
                                                                     className="text-sm md:text-base"
                                                                     dangerouslySetInnerHTML={{
                                                                         __html:
-                                                                        scholarship?.description ??
+                                                                            scholarship?.description ??
                                                                             ''
                                                                     }}
                                                                 />
@@ -393,7 +392,7 @@ export const getServerSideProps: GetServerSideProps<{
         const id = `${API_ENDPOINTS.SCHOLARSHIP_BY_ID.replace(
             ':id',
             context.query?.id as string
-        )}`; 
+        )}`;
         data = await getSsrRequest(id, context);
         return { props: { data } };
     } catch (error) {
