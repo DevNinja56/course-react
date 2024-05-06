@@ -82,7 +82,8 @@ const currency = createSlice({
             .addCase(
                 fetchLatestRate.fulfilled,
                 (state, action: PayloadAction<any>) => {
-                    const rate = action.payload?.response?.[0] as ratesType;
+                    const rate = action.payload?.data
+                        ?.response?.[0] as ratesType;
                     state.rates = rate;
                     state.base_rate = +rate.average_ask;
                     state.base_code = rate.quote_currency;

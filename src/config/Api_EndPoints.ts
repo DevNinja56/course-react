@@ -46,7 +46,8 @@ export const API_ENDPOINTS = {
     APPLY_USER: '/apply/user',
     GEO_IP: '/geoip',
     FETCH_RATES:
-        'https://fxds-public-exchange-rates-api.oanda.com/cc-api/currencies?base=PKR&quote=${code}&data_type=general_currency_pair&start_date=${pDate}&end_date=${cDate}',
+        // 'https://fxds-public-exchange-rates-api.oanda.com/cc-api/currencies?base=PKR&quote=${code}&data_type=general_currency_pair&start_date=${pDate}&end_date=${cDate}',
+        '/currency_rate/find?from_code=PKR&to_code=${code}&start_date=${pDate}&end_date=${cDate}',
     FETCH_ALL_RATES: '/currency_rate?code=${code}&amount=${amount}',
     FILE_S3_UPLOAD: '/file/s3-upload',
     APPLY_DOCUMENTS: '/apply',
