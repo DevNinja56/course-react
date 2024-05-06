@@ -137,7 +137,7 @@ const Home = () => {
                         // priority
                     />
                     <div className="flex flex-col px-0 md:px-20 lg:pr-0 xl:pr-16 z-10 ">
-                        <h1 className="text-mainTextColor text-3xl md:text-[40px] font-extrabold mb-5">
+                        <h1 className="text-mainTextColor text-3xl md:text-[40px] font-extrabold mb-5 mt-5">
                             Why Choose Us?
                         </h1>
                         <p className="text-darkGrayColor mb-10 text-[15px]">

@@ -355,6 +355,18 @@ export interface userDocuments {
         provisional_certificate: {
             url: string;
         };
+        secondary_school: {
+            url: string;
+        };
+        higher_secondary_school: {
+            url: string;
+        };
+        bachelor_degree: {
+            url: string;
+        };
+        master_degree: {
+            url: string;
+        };
     };
     professional_records: {
         experience_letter: {

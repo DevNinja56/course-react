@@ -57,6 +57,7 @@ const FileSubmitted = () => {
     const router = useRouter();
     const { id } = router.query;
     const { data: getApply } = useGetApplyByIdQuery(id);
+
     const [isLoading, setIsLoading] = useState(false);
     const [fullFile, setFullFile] = useState(fileUrl);
 
@@ -87,6 +88,23 @@ const FileSubmitted = () => {
     const provisional_certificate = {
         url: getApply?.documents?.academic_certificates?.provisional_certificate
             ?.url
+    };
+
+    const secondary_school = {
+        url: getApply?.documents?.academic_certificates?.secondary_school?.url
+    };
+
+    const higher_secondary_school = {
+        url: getApply?.documents?.academic_certificates?.higher_secondary_school
+            ?.url
+    };
+
+    const bachelor_degree = {
+        url: getApply?.documents?.academic_certificates?.bachelor_degree?.url
+    };
+
+    const master_degree = {
+        url: getApply?.documents?.academic_certificates?.master_degree?.url
     };
 
     const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -179,6 +197,34 @@ const FileSubmitted = () => {
                                                             consolidated_mark_sheets.date_of_start
                                                     }
                                                   : {})
+                                          }
+                                      }
+                                    : {}),
+                                ...(secondary_school.url
+                                    ? {
+                                          secondary_school: {
+                                              url: secondary_school.url
+                                          }
+                                      }
+                                    : {}),
+                                ...(higher_secondary_school.url
+                                    ? {
+                                          higher_secondary_school: {
+                                              url: higher_secondary_school.url
+                                          }
+                                      }
+                                    : {}),
+                                ...(bachelor_degree.url
+                                    ? {
+                                          bachelor_degree: {
+                                              url: bachelor_degree.url
+                                          }
+                                      }
+                                    : {}),
+                                ...(master_degree.url
+                                    ? {
+                                          master_degree: {
+                                              url: master_degree.url
                                           }
                                       }
                                     : {})
