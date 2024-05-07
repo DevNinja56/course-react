@@ -22,13 +22,13 @@ const CourseCard = ({ course }: CardProps) => {
         name,
         tuitionFee,
         intakes,
-        feeCurrency,
+        // feeCurrency,
         specialization
     } = course;
 
     const { getCurrencySymbol, setCurrencyValue, getSingleRate } =
         useCurrency();
-    const rate = getSingleRate(feeCurrency);
+    const rate = getSingleRate();
 
     return (
         <div

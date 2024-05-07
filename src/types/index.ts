@@ -188,7 +188,7 @@ export type courseType = {
     institute: instituteType;
     intakes: string[];
     tuitionFee: number;
-    feeCurrency: string;
+    // feeCurrency: string;
     country: countryType;
     discipline: disciplineType[];
     countryDetails: {
@@ -237,7 +237,7 @@ export type singleCourseType = {
     monthDuration: string[];
     delivery: string;
     availableCampuses: string[];
-    feeCurrency: string;
+    // feeCurrency: string;
     favoriteId: string[];
     name: string;
     logo: string;
