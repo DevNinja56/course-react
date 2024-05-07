@@ -17,7 +17,7 @@ export const useCalculate = () => {
         tuitionFee,
         scholarship,
         isNumber = false,
-        currency_code
+        currency_code = 'pkr'
     }: initialDepositType): string | number {
         const { base_rate } = getSingleRate(currency_code ?? base_code) ?? {
             base_rate: 1

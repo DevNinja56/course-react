@@ -43,12 +43,12 @@ const Compare = ({ data }: { data?: singleCourseType }) => {
         depositAmount,
         tuitionFee,
         scholarshipAmount,
-        feeCurrency
+        feeCurrency = 'pkr'
     }: {
         depositAmount: string;
         tuitionFee: number;
         scholarshipAmount: string;
-        feeCurrency: string;
+        feeCurrency?: string;
     }) => {
         const initialDepositAmount = initialDeposit({
             initialDeposit: depositAmount,
@@ -63,11 +63,8 @@ const Compare = ({ data }: { data?: singleCourseType }) => {
         );
     };
 
-    const getTuitionFeeIntoCurrency = (
-        tuitionFee: number,
-        feeCurrency: string
-    ) => {
-        const rate = getSingleRate(feeCurrency);
+    const getTuitionFeeIntoCurrency = (tuitionFee: number) => {
+        const rate = getSingleRate();
         return setCurrencyValue(
             tuitionFee * (rate?.base_rate ? +rate?.base_rate : 1)
         );
@@ -189,8 +186,7 @@ const Compare = ({ data }: { data?: singleCourseType }) => {
                                   first?.course.initialDeposit[0].amount,
                               tuitionFee: first?.course.tuitionFee,
                               scholarshipAmount:
-                                  first?.course.scholarship?.[0]?.amount ?? 0,
-                              feeCurrency: first?.course.feeCurrency
+                                  first?.course.scholarship?.[0]?.amount ?? 0
                           })
                         : null,
                     second: second
@@ -199,8 +195,7 @@ const Compare = ({ data }: { data?: singleCourseType }) => {
                                   second?.course.initialDeposit[0].amount,
                               tuitionFee: second?.course.tuitionFee,
                               scholarshipAmount:
-                                  second?.course.scholarship?.[0]?.amount ?? 0,
-                              feeCurrency: second?.course.feeCurrency
+                                  second?.course.scholarship?.[0]?.amount ?? 0
                           })
                         : null,
                     third: third
@@ -209,35 +204,25 @@ const Compare = ({ data }: { data?: singleCourseType }) => {
                                   third?.course.initialDeposit[0].amount,
                               tuitionFee: third?.course.tuitionFee,
                               scholarshipAmount:
-                                  third?.course.scholarship?.[0]?.amount ?? 0,
-                              feeCurrency: third?.course.feeCurrency
+                                  third?.course.scholarship?.[0]?.amount ?? 0
                           })
                         : null
                 },
                 {
                     title: 'Yearly fee',
                     first: first
-                        ? getTuitionFeeIntoCurrency(
-                              first.course.tuitionFee,
-                              first.course.feeCurrency
-                          )
+                        ? getTuitionFeeIntoCurrency(first.course.tuitionFee)
                         : null,
 
                     second: second
-                        ? getTuitionFeeIntoCurrency(
-                              second.course.tuitionFee,
-                              second.course.feeCurrency
-                          )
+                        ? getTuitionFeeIntoCurrency(second.course.tuitionFee)
                         : null,
                     third: third
-                        ? getTuitionFeeIntoCurrency(
-                              third.course.tuitionFee,
-                              third.course.feeCurrency
-                          )
+                        ? getTuitionFeeIntoCurrency(third.course.tuitionFee)
                         : null
                 },
                 {
-                    title: "On available campus",
+                    title: 'On available campus',
                     first: first?.course?.availableCampuses.join(' | '),
                     second: second?.course?.availableCampuses.join(' | '),
                     third: third?.course?.availableCampuses.join(' | ')
