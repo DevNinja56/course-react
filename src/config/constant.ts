@@ -20,8 +20,8 @@ export const ROUTES = {
     FAQ: '/faq',
     PRIVACY_POLICY: '/privacyPolicy',
     TERMS_CONDITION: '/termsCondition',
-    FAVORITES: '/profile?tab=Favourite',
-    APPLIES: '/profile?tab=Profile&tab2=myApplies',
+    FAVORITES: '/profile?tab=Favourite&tab2=Institutes',
+    APPLIES: '/profile?tab=Profile&tab2=My+Applications',
     APPLIES_DETAIL: '/profile/application/:id',
     FILE_SUBMIT: '/profile/application/file-submit',
     CONSOLID_MARKSHEET: '/profile/application/consolid-marksheet'

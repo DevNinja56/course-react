@@ -1,17 +1,17 @@
-import Image from 'next/image';
+// import Image from 'next/image';
 import React from 'react';
 
 const AboutUs = () => {
     return (
         <>
             <div className="w-full flex items-center justify-center h-[200px] mt-[100px] mb-12 relative">
-                <Image
+                <img
                     height={193}
                     width={193}
                     alt="uni-round"
                     className="top-[-50px] left-[-8px] w-[100px] h-[100px] md:w-[150px] md:h-[150px] lg:w-[193px] lg:h-[193px] absolute"
                     src="/images/profileImages/Ellipse 418.svg"
-                    priority
+                    // priority
                 />
                 <div className="flex flex-col items-center">
                     <h1 className="text-mainTextColor text-[32px] md:text-[48px] font-bold">
@@ -21,25 +21,25 @@ const AboutUs = () => {
                         Check out the details below
                     </p>
                 </div>
-                <Image
+                <img
                     height={235}
                     width={100}
                     alt="uni-round-2"
                     className="top-24 md:top-20 h-[175px] w-[50px] md:h-[215px] md:w-[80px] lg:h-[235px] lg:w-[100px] absolute right-0"
                     src="/images/Fields/Frame 691.svg"
-                    priority
+                    // priority
                 />
             </div>
             <div className="w-full pb-28 lg:pb-20">
                 <div className="max-w-[1100px] 2xl:max-w-[2300px] mx-auto px-5 md:px-[50px] lg:px-2 2xl:px-8 transition-all duration-300">
                     <div className="flex flex-col lg:flex-row lg:items-center gap-0 lg:gap-[70px] mb-20 lg:mb-0">
-                        <Image
+                        <img
                             height={506}
                             width={565}
                             alt="mainImg"
                             className="rounded-[10px] custom-shadow mb-24 h-auto md:h-[506px] w-full md:w-[506px]"
                             src="/images/About us/Main Img 1.png"
-                            priority
+                            // priority
                         />
                         <div className="flex flex-col gap-y-8">
                             <div className="flex flex-col gap-y-2">
@@ -63,12 +63,12 @@ const AboutUs = () => {
                     </div>
                     <div className="w-full grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-12 md:gap-5 lg:gap-[126px] mb-20 md:mb-40">
                         <div className="flex flex-col items-center gap-[25px] w-full">
-                            <Image
+                            <img
                                 height={206.97}
                                 width={303}
                                 alt="plant"
                                 src="/images/About us/mission.svg"
-                                priority
+                                // priority
                             />
                             <div className="flex flex-col items-center gap-y-2">
                                 <h1 className="text-xl font-bold text-textLightBlackColor">
@@ -81,12 +81,12 @@ const AboutUs = () => {
                             </div>
                         </div>
                         <div className="flex flex-col items-center gap-[25px] w-full">
-                            <Image
+                            <img
                                 height={206.97}
                                 width={303}
                                 alt="plant-2"
                                 src="/images/About us/vision.svg"
-                                priority
+                                // priority
                             />
                             <div className="flex flex-col items-center gap-y-2">
                                 <h1 className="text-xl font-bold text-textLightBlackColor">
@@ -99,12 +99,12 @@ const AboutUs = () => {
                             </div>
                         </div>
                         <div className="flex flex-col items-center gap-[25px] w-full">
-                            <Image
+                            <img
                                 height={206.97}
                                 width={303}
                                 alt="plant-3"
                                 src="/images/About us/values.svg"
-                                priority
+                                // priority
                             />
                             <div className="flex flex-col items-center gap-y-2">
                                 <h1 className="text-xl font-bold text-textLightBlackColor">
@@ -121,21 +121,21 @@ const AboutUs = () => {
                 <div className="w-full">
                     <div className="max-w-[1100px] 2xl:max-w-[2300px] mx-auto px-2 2xl:px-8 transition-all duration-300">
                         <div className="grid grid-cols-4 gap-[2px]">
-                            <Image
+                            <img
                                 height={187}
                                 width={290}
                                 alt="main-team-img"
                                 className="rounded-t-[1px] w-[100%] h-full"
                                 src="/images/About us/Rectangle 3648.svg"
                             />
-                            <Image
+                            <img
                                 height={187}
                                 width={290}
                                 alt="main-team-img-2"
                                 className="rounded-t-[1px] w-[100%] h-full"
                                 src="/images/About us/Rectangle 3649.svg"
                             />
-                            <Image
+                            <img
                                 height={187}
                                 width={500}
                                 alt="main-team-img-3"
@@ -143,14 +143,14 @@ const AboutUs = () => {
                                 className="rounded-t-[1px] object-cover w-[100%] h-full"
                                 src="/images/About us/Rectangle 3650.svg"
                             />
-                            <Image
+                            <img
                                 height={187}
                                 width={290}
                                 alt="main-team-img-4"
                                 className="rounded-t-[1px] w-[100%] h-full"
                                 src="/images/About us/Rectangle 3651.svg"
                             />
-                            <Image
+                            <img
                                 height={187}
                                 width={500}
                                 alt="main-team-img-5"
@@ -158,7 +158,7 @@ const AboutUs = () => {
                                 className="rounded-t-[1px] object-cover w-[100%] h-full"
                                 src="/images/About us/Rectangle 3653.svg"
                             />
-                            <Image
+                            <img
                                 height={187}
                                 width={290}
                                 alt="main-team-img-6"
@@ -170,13 +170,13 @@ const AboutUs = () => {
                 </div>
             </div>
             <div className="bg-talentedTeamBgColor w-full pt-16 pb-20 relative">
-                <Image
+                <img
                     height={170}
                     width={170}
                     alt="aboutUs-round-3"
                     className="absolute left-0 top-[-55px] h-[104px] w-[81px] md:h-[235px] md:w-[141px] lg:h-[170px] lg:w-[170px]"
                     src="/images/About us/TeamRoundImg.svg"
-                    priority
+                    // priority
                 />
                 <div className="max-w-[1100px] 2xl:max-w-[2300px] mx-auto px-2 2xl:px-8 transition-all duration-300 flex flex-col gap-y-20 mb-8">
                     <div className="flex flex-col items-center gap-[35px] z-10">
@@ -190,13 +190,13 @@ const AboutUs = () => {
                         </div>
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-[29px] w-full px-10 md:px-[150px] lg:px-2">
                             <div className="flex flex-col gap-3">
-                                <Image
+                                <img
                                     height={224.43}
                                     width={268}
                                     className="w-full"
                                     alt="userImg"
                                     src="/images/About us/1 (2).svg"
-                                    priority
+                                    // priority
                                 />
                                 <div className="flex justify-between">
                                     <div className="flex flex-col gap-y-1">
@@ -209,34 +209,34 @@ const AboutUs = () => {
                                     </div>
                                     <div className="flex gap-3">
                                         <div className="h-[32px] w-[32px] border border-talentedTeamBorderColor flex items-center justify-center rounded-full">
-                                            <Image
+                                            <img
                                                 height={13.85}
                                                 width={14.49}
                                                 alt="linked-in"
                                                 src="/images/About us/linkedInIcon.svg"
-                                                priority
+                                                // priority
                                             />
                                         </div>
                                         <div className="h-[32px] w-[32px] border border-talentedTeamBorderColor flex items-center justify-center rounded-full">
-                                            <Image
+                                            <img
                                                 height={15.33}
                                                 width={16}
                                                 alt="git-hub"
                                                 src="/images/About us/gitHubIcon.svg"
-                                                priority
+                                                // priority
                                             />
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div className="flex flex-col gap-3">
-                                <Image
+                                <img
                                     height={224.1}
                                     width={268}
                                     className="w-full"
                                     alt="userImg-2"
                                     src="/images/About us/3 (2).svg"
-                                    priority
+                                    // priority
                                 />
                                 <div className="flex justify-between">
                                     <div className="flex flex-col gap-y-1">
@@ -249,34 +249,34 @@ const AboutUs = () => {
                                     </div>
                                     <div className="flex gap-3">
                                         <div className="h-[32px] w-[32px] border border-talentedTeamBorderColor flex items-center justify-center rounded-full">
-                                            <Image
+                                            <img
                                                 height={13.85}
                                                 width={14.49}
                                                 alt="linked-in"
                                                 src="/images/About us/linkedInIcon.svg"
-                                                priority
+                                                // priority
                                             />
                                         </div>
                                         <div className="h-[32px] w-[32px] border border-talentedTeamBorderColor flex items-center justify-center rounded-full">
-                                            <Image
+                                            <img
                                                 height={15.33}
                                                 width={16}
                                                 alt="git-hub"
                                                 src="/images/About us/gitHubIcon.svg"
-                                                priority
+                                                // priority
                                             />
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div className="flex flex-col gap-3">
-                                <Image
+                                <img
                                     height={224.1}
                                     width={268}
                                     className="w-full"
                                     alt="userImg-3"
                                     src="/images/About us/2 (2).svg"
-                                    priority
+                                    // priority
                                 />
                                 <div className="flex justify-between">
                                     <div className="flex flex-col gap-y-1">
@@ -289,34 +289,34 @@ const AboutUs = () => {
                                     </div>
                                     <div className="flex gap-3">
                                         <div className="h-[32px] w-[32px] border border-talentedTeamBorderColor flex items-center justify-center rounded-full">
-                                            <Image
+                                            <img
                                                 height={13.85}
                                                 width={14.49}
                                                 alt="linked-in"
                                                 src="/images/About us/linkedInIcon.svg"
-                                                priority
+                                                // priority
                                             />
                                         </div>
                                         <div className="h-[32px] w-[32px] border border-talentedTeamBorderColor flex items-center justify-center rounded-full">
-                                            <Image
+                                            <img
                                                 height={15.33}
                                                 width={16}
                                                 alt="git-hub"
                                                 src="/images/About us/gitHubIcon.svg"
-                                                priority
+                                                // priority
                                             />
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div className="flex flex-col gap-3">
-                                <Image
+                                <img
                                     height={224.1}
                                     width={268}
                                     className="w-full"
                                     alt="userImg-4"
                                     src="/images/About us/4 (1).svg"
-                                    priority
+                                    // priority
                                 />
                                 <div className="flex justify-between">
                                     <div className="flex flex-col gap-y-1">
@@ -329,21 +329,21 @@ const AboutUs = () => {
                                     </div>
                                     <div className="flex gap-3">
                                         <div className="h-[32px] w-[32px] border border-talentedTeamBorderColor flex items-center justify-center rounded-full">
-                                            <Image
+                                            <img
                                                 height={13.85}
                                                 width={14.49}
                                                 alt="linked-in"
                                                 src="/images/About us/linkedInIcon.svg"
-                                                priority
+                                                // priority
                                             />
                                         </div>
                                         <div className="h-[32px] w-[32px] border border-talentedTeamBorderColor flex items-center justify-center rounded-full">
-                                            <Image
+                                            <img
                                                 height={15.33}
                                                 width={16}
                                                 alt="git-hub"
                                                 src="/images/About us/gitHubIcon.svg"
-                                                priority
+                                                // priority
                                             />
                                         </div>
                                     </div>
@@ -351,13 +351,13 @@ const AboutUs = () => {
                             </div>
                         </div>
                     </div>
-                    <Image
+                    <img
                         height={92}
                         width={92}
                         alt="aboutUs-round-4"
                         className="right-11 absolute top-[54%] hidden lg:block"
                         src="/images/About us/Team RoundingImg 2.svg"
-                        priority
+                        // priority
                     />
                     <div className="flex flex-col gap-[50px] w-full px-5 md:px-[50px] lg:px-0">
                         <div className="flex flex-col gap-5">
@@ -425,13 +425,13 @@ const AboutUs = () => {
                         </div>
                     </div>
                 </div>
-                <Image
+                <img
                     height={189}
                     width={1440}
                     alt="curved-div"
                     className="absolute mt-2"
                     src="/images/About us/CurvedDiv.svg"
-                    priority
+                    // priority
                 />
             </div>
         </>

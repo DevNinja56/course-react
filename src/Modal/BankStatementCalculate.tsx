@@ -1,7 +1,7 @@
 import { useCurrency } from '@/hooks/currency';
 import { useCalculate } from '@/hooks/initial-deposit-calculate';
 import { useUi } from '@/hooks/user-interface';
-import { singleCourseType } from '@/types';
+import { scholarshipType, singleCourseType } from '@/types';
 import React from 'react';
 import { IoMdClose } from 'react-icons/io';
 
@@ -11,13 +11,21 @@ const BankStatementCalculate = () => {
         hideModal: () => void;
     };
     const { initialDeposit: calculateDeposit } = useCalculate();
+    const { getSingleRate } = useCurrency();
+
+    const scholarship: scholarshipType | undefined =
+        modalState?.scholarship?.find(
+            (scholarship) => scholarship.type === 'guaranteed'
+        );
+    const scholarshipGuaranteedAmount = scholarship?.amount
+        ? parseInt(scholarship?.amount)
+        : 0;
 
     const {
         tuitionFee,
         monthDuration: [duration],
         institute,
-        initialDeposit: listOfInitialDeposit,
-        scholarship: [scholarship]
+        initialDeposit: listOfInitialDeposit
     } = modalState;
     const [{ amount: initialDeposit }] = listOfInitialDeposit;
     const { setCurrencyValue } = useCurrency();
@@ -27,15 +35,15 @@ const BankStatementCalculate = () => {
     const isLiveLondon = institute.location.toLowerCase().includes('london');
     const livingCost = isLiveAustralia ? 24505 : isLiveLondon ? 12006 : 9207;
     const travelingCost = 2000;
-    const oshc = 700 * +duration;
+    const oshc = 700 * (+duration / 12);
     const total = tuitionFee + livingCost + travelingCost + oshc;
 
-    let initialDepositValue = calculateDeposit(
+    let initialDepositValue = calculateDeposit({
         initialDeposit,
         tuitionFee,
-        scholarship.amount,
-        true
-    );
+        scholarship: scholarshipGuaranteedAmount + '',
+        isNumber: true
+    });
 
     initialDepositValue =
         typeof initialDepositValue === 'number' ? initialDepositValue : 0;
@@ -44,49 +52,55 @@ const BankStatementCalculate = () => {
         ? total - initialDepositValue - oshc
         : tuitionFee - initialDepositValue + livingCost;
     const currency = isLiveAustralia ? 'AUD' : 'GBP';
+    const { base_rate } = getSingleRate(currency) ?? { base_rate: 1 };
+    const scholarshipAmount = tuitionFee * (scholarshipGuaranteedAmount / 100);
 
     const data = [
         {
             name: 'Annual Tuition Fee',
-            value: setCurrencyValue(tuitionFee, currency)
+            value: setCurrencyValue(tuitionFee * +base_rate)
+        },
+        {
+            name: `Scholarship Amount - ${scholarship?.type ?? 'None'}`,
+            value: setCurrencyValue(scholarshipAmount * +base_rate)
         },
         {
             name: 'Initial Deposit',
-            value: setCurrencyValue(initialDepositValue, currency)
+            value: setCurrencyValue(initialDepositValue * +base_rate)
         },
         {
             name: 'Living Cost',
-            value: setCurrencyValue(livingCost, currency)
+            value: setCurrencyValue(livingCost * +base_rate)
         },
         ...(isLiveAustralia
             ? [
                   {
                       name: 'Traveling Cost',
-                      value: setCurrencyValue(travelingCost, currency)
+                      value: setCurrencyValue(travelingCost * +base_rate)
                   },
                   {
                       name: 'OSHC',
-                      value: setCurrencyValue(oshc, currency)
+                      value: setCurrencyValue(oshc * +base_rate)
                   },
                   {
                       name: 'Statement Requirement by University',
-                      value: setCurrencyValue(total, currency)
+                      value: setCurrencyValue(total * +base_rate)
                   },
                   {
                       name: 'Statement Requirement for Visa',
-                      value: setCurrencyValue(visaFee, currency)
+                      value: setCurrencyValue(visaFee * +base_rate)
                   }
               ]
             : [
                   {
                       name: 'Statement Requirement for Visa',
-                      value: setCurrencyValue(visaFee, currency)
+                      value: setCurrencyValue(visaFee * +base_rate)
                   }
               ])
     ];
 
     return (
-        <div className="bg-white px-[40px] py-[30px] w-[572px] rounded-md ">
+        <div className="bg-white px-[40px] py-[30px] w-[572px] rounded-md capitalize ">
             <button className="absolute top-10 right-10 bg-blueColor text-white rounded-full w-[30px] h-[30px] px-1 text-[22px]">
                 <IoMdClose onClick={hideModal} />
             </button>

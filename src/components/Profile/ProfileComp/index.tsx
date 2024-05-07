@@ -1,29 +1,42 @@
-import Image from 'next/image';
-import React, { useState } from 'react';
+// import Image from 'next/image';
+import React, { useEffect, useState } from 'react';
 import PersonalInfo from './PersonalInfo';
 import MyApplies from './MyApplies';
 import { useRouter } from 'next/router';
 import AcademicInformation from './AcademicInformation';
+import { ROUTES } from '@/config/constant';
 
-export const favoritesTabs: { [key: string]: string } = {
-    personalInfo: 'Personal Information',
-    myApplies: 'My Applications',
-    academicInformation: 'Academic Information'
-};
+export const favoritesTabs: string[] = [
+    'Personal Information',
+    'My Applications',
+    'Academic Information'
+];
 
 const ProfileComp = () => {
-    const { query, isReady } = useRouter();
-    const activeTab = query['tab2'] as string;
+    const { query, isReady, push } = useRouter();
+    const tab2 = query['tab2'] as string;
+    const activeTab = favoritesTabs.indexOf(tab2);
     const [active, setActive] = useState(
-        isReady && activeTab
+        isReady && tab2 && activeTab > 0
             ? favoritesTabs[activeTab]
-            : favoritesTabs.personalInfo
+            : favoritesTabs[0]
     );
+
+    useEffect(() => {
+        if (isReady && activeTab) {
+            setActive(
+                tab2 && activeTab > 0
+                    ? favoritesTabs[activeTab]
+                    : favoritesTabs[0]
+            );
+        }
+    }, [activeTab, isReady, tab2]);
+
     const tabs = [
-        { title: favoritesTabs.personalInfo, Component: PersonalInfo },
-        { title: favoritesTabs.myApplies, Component: MyApplies },
+        { title: favoritesTabs[0], Component: PersonalInfo },
+        { title: favoritesTabs[1], Component: MyApplies },
         {
-            title: favoritesTabs.academicInformation,
+            title: favoritesTabs[2],
             Component: AcademicInformation
         }
     ];
@@ -35,7 +48,12 @@ const ProfileComp = () => {
                     <div
                         key={'favourites--tabs' + i}
                         className="flex flex-col gap-y-6"
-                        onClick={() => setActive(title)}
+                        onClick={() =>
+                            push({
+                                pathname: ROUTES.PROFILE,
+                                query: { ...query, tab2: title }
+                            })
+                        }
                     >
                         <div
                             className={`py-[14px] md:py-[17px] lg:py-[20px] px-[30px] md:px-[50px] lg:pl-0 lg:pr-5   lg:border-t-white lg:border-b-white lg:border-l-white lg:border-r-4  flex justify-between items-center lg:justify-end border md:border-personalInfoBorderColor cursor-pointer ${
@@ -47,7 +65,7 @@ const ProfileComp = () => {
                             <p className="text-base md:text-xl font-semibold">
                                 {title}
                             </p>
-                            <Image
+                            <img
                                 height={20}
                                 width={20}
                                 alt="img-arrow-down"
@@ -55,7 +73,7 @@ const ProfileComp = () => {
                                 className={`lg:hidden ${
                                     title === active ? 'rotate-[-180deg]' : ''
                                 }`}
-                                priority
+                                // priority
                             />
                         </div>
                     </div>

@@ -12,7 +12,7 @@ const CategoriesSection = () => {
 
     return (
         <div className="container mx-auto px-4 md:px-[50px] lg:px-2 2xl:px-8 transition-all duration-300 flex flex-col gap-y-16 lg:flex-row gap-x-8">
-            <div className="pt-16 w-full lg:w-[35%]">
+            <div className="pt-16 w-full lg:w-[35%] z-10">
                 <p className="text-blueColor text-xl md:text-[23px] font-bold">
                     Top Categories
                 </p>
@@ -25,7 +25,7 @@ const CategoriesSection = () => {
                     maecenas justo sapien.
                 </p>
                 <Link href={ROUTES.FIELDS}>
-                    <button className="pt-4 pb-[17px] px-[48px] bg-blueColor rounded-[5px] font-semibold text-white z-10 sticky hover:bg-opacity-50">
+                    <button className="pt-4 pb-[17px] px-[48px] bg-blueColor rounded-[5px] font-semibold text-white z-10 sticky hover:bg-blue-600">
                         All Categories
                     </button>
                 </Link>

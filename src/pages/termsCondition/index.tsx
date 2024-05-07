@@ -1,17 +1,17 @@
-import Image from 'next/image';
+// import Image from 'next/image';
 import React from 'react';
 
 const TermsAndCondition = () => {
     return (
         <>
             <div className="w-full flex items-center justify-between h-[170px] mt-[100px] bg-profileBgColor overflow-hidden">
-                <Image
+                <img
                     height={85}
                     width={86}
                     alt="t&cRounded"
                     className="mt-[-90px] ml-0 hidden lg:block"
                     src="/images/T&C/roundedImg 1.svg"
-                    priority
+                    // priority
                 />
                 <div className="mt-[-180px] md:mt-[-120px] ml-[-60px] md:ml-[-40px] block lg:hidden h-32 w-32 rounded-full border-[10px] border-blueColor"></div>
                 <div className="flex flex-col items-center">
@@ -22,13 +22,13 @@ const TermsAndCondition = () => {
                         Check out the details below
                     </p>
                 </div>
-                <Image
+                <img
                     height={119}
                     width={100}
                     alt="t&cRounded2"
                     className="mt-12 hidden lg:block"
                     src="/images/profileImages/Frame 691.svg"
-                    priority
+                    // priority
                 />
                 <div className="mt-44 md:mt-32 mr-[-70px] md:mr-[-40px] block lg:hidden h-32 w-32 rounded-full border-[10px] border-blueColor"></div>
             </div>

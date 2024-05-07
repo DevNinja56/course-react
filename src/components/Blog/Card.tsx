@@ -1,5 +1,5 @@
 import { ROUTES } from '@/config/constant';
-import Image from 'next/image';
+// import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React from 'react';
@@ -26,13 +26,13 @@ const Card = ({ title, favorite, tags, image, id }: cardProps) => {
         >
             <FavoriteButton isActive={!!favorite?.[0]} body={{ blog: id }} />
             <Link href={ROUTES.BLOGS_DETAIL.replace(':id', id)}>
-                <Image
+                <img
                     height={203.29}
                     width={366}
                     alt="carding"
                     className="rounded-[10px] rounded-b-none mb-4 w-full"
                     src={`${image}`}
-                    priority
+                    // priority
                 />
                 <div className="px-[25px] flex flex-col gap-y-6">
                     <div className="flex items-center gap-x-3">

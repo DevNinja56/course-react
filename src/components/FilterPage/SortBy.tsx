@@ -4,7 +4,7 @@ import { LuArrowUpWideNarrow, LuArrowDownWideNarrow } from 'react-icons/lu';
 import { FaArrowUpLong, FaArrowDownLong } from 'react-icons/fa6';
 import { FiChevronDown } from 'react-icons/fi';
 import FilterSideBar from '../FilterSideBar/FilterSideBar';
-import Image from 'next/image';
+// import Image from 'next/image';
 
 export const sortState = {
     'A-Z': 1,
@@ -77,12 +77,12 @@ const SortBy = () => {
                 onClick={() => setShowFilterSideBar(!showFilterSideBar)}
                 className="text-sm bg-blueColor py-2 px-4 rounded-[5px] text-white hidden md:flex lg:hidden items-center gap-x-1"
             >
-                <Image
+                <img
                     height={20}
                     width={20}
                     alt="filter"
                     src="/images/Scholarships/Tuning 4.svg"
-                    priority
+                    // priority
                 />{' '}
                 Filters
             </button>
@@ -90,12 +90,12 @@ const SortBy = () => {
                 onClick={() => setShowFilterSideBar(!showFilterSideBar)}
                 className="text-sm bg-blueColor py-2 px-2 md:px-4 rounded-[5px] text-white block md:hidden items-center gap-x-1"
             >
-                <Image
+                <img
                     height={20}
                     width={20}
                     alt="filter"
                     src="/images/Scholarships/Tuning 4.svg"
-                    priority
+                    // priority
                 />{' '}
             </button>
             {showFilterSideBar && (

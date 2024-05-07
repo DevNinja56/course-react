@@ -18,6 +18,7 @@ import toast from 'react-hot-toast';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { addFiles } from '@/store/slices/apply.slice';
+import { useGetApplyByIdQuery } from '@/store/slices/allRequests';
 
 interface formType {
     startDate: string;
@@ -33,7 +34,7 @@ interface selectType {
 interface FileDetails {
     apply: {
         files: {
-            conSolidFile: File[]
+            conSolidFile: File[];
         };
     };
 }
@@ -46,12 +47,63 @@ const ConSolid_MarkSheet = () => {
         formState: { errors }
     } = useForm<formType>();
     const Files = useSelector((state: FileDetails) => state.apply.files);
+    const firstFile = Files?.conSolidFile?.[0];
+    let fileUrl = null;
+    if (firstFile instanceof Blob) {
+        fileUrl = URL.createObjectURL(firstFile);
+    } else {
+        console.error(
+            'Expected firstFile to be an instance of Blob, but received:',
+            firstFile
+        );
+    }
     const dispatch = useDispatch();
     const router = useRouter();
     const { id } = router.query;
+    const { data: getApply } = useGetApplyByIdQuery(id);
+
     const token = getToken();
     const [isLoading, setIsLoading] = useState(false);
-    const [fullFile, setFullFile] = useState('');
+    const [fullFile, setFullFile] = useState(fileUrl);
+
+    const identity = {
+        passport: {
+            url: [getApply?.documents?.identity?.passport?.url],
+            given_name: getApply?.documents?.identity?.passport?.given_name,
+            sur_name: getApply?.documents?.identity?.passport?.sur_name,
+            number: getApply?.documents?.identity?.passport?.number,
+            date_of_issue:
+                getApply?.documents?.identity?.passport?.date_of_issue,
+            date_of_expiry:
+                getApply?.documents?.identity?.passport?.date_of_expiry
+        }
+    };
+    const semester_mark_sheets = {
+        url: getApply?.documents?.academic_certificates?.semester_mark_sheets
+            ?.url
+    };
+
+    const provisional_certificate = {
+        url: getApply?.documents?.academic_certificates?.provisional_certificate
+            ?.url
+    };
+
+    const secondary_school = {
+        url: getApply?.documents?.academic_certificates?.secondary_school?.url
+    };
+
+    const higher_secondary_school = {
+        url: getApply?.documents?.academic_certificates?.higher_secondary_school
+            ?.url
+    };
+
+    const bachelor_degree = {
+        url: getApply?.documents?.academic_certificates?.bachelor_degree?.url
+    };
+
+    const master_degree = {
+        url: getApply?.documents?.academic_certificates?.master_degree?.url
+    };
 
     const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
         const uploadedFiles = e.target.files;
@@ -94,15 +146,83 @@ const ConSolid_MarkSheet = () => {
                     url: `${BASE_URL}${API_ENDPOINTS.APPLY_DOCUMENTS}/${id}`,
                     type: 'patch',
                     body: {
+                        ...getApply,
+                        course: getApply?.course.id,
+                        user: getApply?.user.id,
                         documents: {
+                            ...(identity.passport.url?.[0]
+                                ? {
+                                      identity: {
+                                          passport: {
+                                              url: identity.passport.url[0],
+                                              given_name:
+                                                  identity.passport.given_name,
+                                              sur_name:
+                                                  identity.passport.sur_name,
+                                              number: identity.passport.number,
+                                              date_of_issue:
+                                                  identity.passport
+                                                      .date_of_issue,
+                                              date_of_expiry:
+                                                  identity.passport
+                                                      .date_of_expiry
+                                          }
+                                      }
+                                  }
+                                : {}),
                             academic_certificates: {
                                 consolidated_mark_sheets: {
                                     url: uploadResponse,
-                                    startDate: data.startDate,
-                                    completeDate: data.completeDate,
-                                    institution: data.institution,
+                                    date_of_start: data.startDate,
+                                    date_of_completion: data.completeDate,
+                                    institute: data.institution,
                                     country: data.country
-                                }
+                                },
+                                ...(semester_mark_sheets.url
+                                    ? {
+                                          semester_mark_sheets: {
+                                              url: semester_mark_sheets.url
+                                          }
+                                      }
+                                    : {}),
+                                ...(provisional_certificate.url
+                                    ? {
+                                          provisional_certificate: {
+                                              url: provisional_certificate.url
+                                          }
+                                      }
+                                    : {}),
+                                ...(secondary_school.url
+                                    ? {
+                                          secondary_school: {
+                                              url: secondary_school.url
+                                          }
+                                      }
+                                    : {}),
+                                ...(higher_secondary_school.url
+                                    ? {
+                                          higher_secondary_school: {
+                                              url: higher_secondary_school.url
+                                          }
+                                      }
+                                    : {}),
+                                ...(bachelor_degree.url
+                                    ? {
+                                          bachelor_degree: {
+                                              url: bachelor_degree.url
+                                          }
+                                      }
+                                    : {}),
+                                ...(master_degree.url
+                                    ? {
+                                          master_degree: {
+                                              url: master_degree.url
+                                          }
+                                      }
+                                    : {})
+                            },
+                            professional_records: {
+                                ...getApply?.documents?.professional_records
                             }
                         }
                     }
@@ -110,6 +230,7 @@ const ConSolid_MarkSheet = () => {
                 {
                     loading: 'Please wait...',
                     success: () => {
+                        router.back();
                         return 'Form submitted successfully';
                     },
                     error: 'An error occurred'
@@ -128,7 +249,7 @@ const ConSolid_MarkSheet = () => {
 
     return (
         <>
-            <div className="flex justify-between py-8 px-4 bg-white">
+            <div className="flex justify-between py-4 px-4 bg-white items-center sticky top-0 z-[9999]">
                 <div className="flex items-center gap-4 pl-4">
                     <div onClick={handleBack}>
                         <FaArrowLeft />
@@ -146,33 +267,13 @@ const ConSolid_MarkSheet = () => {
                     </div>
                 </div>
                 <div className="md:hidden lg:block sm:hidden">
-                    <Button
-                        type="submit"
-                        text="Save"
-                        onClick={handleSubmit(onSubmit)}
-                        className="rounded-none py-2 px-4"
-                    />
-                </div>
-            </div>
-
-            <div className="flex w-full lg:flex-row md:flex-col sm:flex-col">
-                <div className="w-1/4 flex flex-col md:hidden lg:block sm:hidden">
-                    <div className="w-full bg-BgColorPassport bg-opacity-5 p-8">
-                        <div className="w-full bg-BgCardPassport p-4">
-                            {Files && (
-                                <PDFSmallViewer
-                                    pdfUrl={Files.conSolidFile}
-                                    onFileClick={handleFileClick}
-                                />
-                            )}
-                        </div>
-                    </div>
+                    <span className="font-bold text-xl">Select new file :</span>
                     <label
                         htmlFor="fileUpload"
-                        className=" text-center py-4 font-semibold text-3xl cursor-pointer bg-blueColor border-transparent text-white hover:bg-white hover:border-2 hover:border-blueColor hover:text-blueColor px-12 ml-12"
+                        className="rounded-md text-center px-8 py-2 font-semibold text-2xl cursor-pointer bg-blueColor border-transparent text-white hover:bg-white hover:border border hover:border-blueColor hover:text-blueColor ml-12"
                     >
                         {' '}
-                        {isLoading ? 'Loading...' : '+ ADD'}
+                        {isLoading ? 'Loading...' : 'Add'}
                     </label>
                     <input
                         type="file"
@@ -182,6 +283,21 @@ const ConSolid_MarkSheet = () => {
                         id="fileUpload"
                         onChange={handleFileChange}
                     />
+                </div>
+            </div>
+
+            <div className="flex w-full lg:flex-row md:flex-col sm:flex-col">
+                <div className="w-1/4 flex flex-col md:hidden lg:block sm:hidden">
+                    <div className="w-full bg-BgColorPassport bg-opacity-5 p-8">
+                        <div className="w-full">
+                            {Files && (
+                                <PDFSmallViewer
+                                    pdfUrl={Files.conSolidFile}
+                                    onFileClick={handleFileClick}
+                                />
+                            )}
+                        </div>
+                    </div>
                 </div>
                 <div className="lg:w-[48%] sm:w-full md:w-full py-8 px-16">
                     <div className="w-full bg-BgCardPassport sm:pl-4 md:pl-36 lg:pl-0">
@@ -294,6 +410,12 @@ const ConSolid_MarkSheet = () => {
                                 customInputClass="px-2 py-[10px] text-[15px] w-full rounded-md outline-none placeholder:text-sm"
                             />
                         </div>
+                        <Button
+                            type="submit"
+                            text="Save"
+                            className="rounded-md py-2 px-4 mt-4"
+                            onClick={handleSubmit(onSubmit)}
+                        />
                     </form>
                 </div>
             </div>

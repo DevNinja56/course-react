@@ -1,6 +1,6 @@
-@import './config';
-@import './slider';
-@import './rangle-slider';
+@import "./config";
+@import "./slider";
+@import "./rangle-slider";
 
 @tailwind base;
 @tailwind components;
@@ -88,11 +88,11 @@ html {
     font-weight: 700;
 }
 .multi-steps > li:before {
-    content: '';
-    content: '✓;';
-    content: '𐀃';
-    content: '𐀄';
-    content: '';
+    content: "";
+    content: "✓;";
+    content: "𐀃";
+    content: "𐀄";
+    content: "";
     display: block;
     margin: 0 auto 4px;
     background-color: #fff;
@@ -111,7 +111,7 @@ html {
     position: relative;
 }
 .multi-steps > li:after {
-    content: '';
+    content: "";
     height: 2px;
     width: 100%;
     background-color: #2c79ff;
@@ -179,4 +179,14 @@ html {
     .multi-steps > li:after {
         top: 9px;
     }
+}
+
+// CSS
+.remove-arrow::-webkit-inner-spin-button,
+.remove-arrow::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+.remove-arrow {
+    -moz-appearance: textfield;
 }

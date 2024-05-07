@@ -54,7 +54,8 @@ const config: Config = {
             },
             height: {
                 headerStickyHeight: 'calc(100vh - 110px)',
-                courseStickyHeight: 'calc(100vh - 410px)'
+                courseStickyHeight: 'calc(100vh - 210px)',
+                instituteStickyHeight: 'calc(100vh - 230px)'
             },
             maxHeight: {
                 headerStickyHeight: 'calc(100vh - 110px)',

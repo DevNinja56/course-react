@@ -1,14 +1,14 @@
 import axios, { AxiosRequestHeaders } from 'axios';
 import { getToken } from './token';
 
-export const BASE_URL =  process.env.NEXT_PUBLIC_REST_API_ENDPOINT ?? ''
+export const BASE_URL = process.env.NEXT_PUBLIC_REST_API_ENDPOINT ?? '';
 
 const http = axios.create({
     baseURL: BASE_URL,
     timeout: 30000,
     headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json'
+        Accept: 'application/json'
+        // 'Content-Type': 'application/json'
     }
 });
 

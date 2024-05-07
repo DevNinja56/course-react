@@ -16,6 +16,7 @@ import { fetchRequest } from '@/utils/axios/fetch';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { addFiles } from '@/store/slices/apply.slice';
+import { useGetApplyByIdQuery } from '@/store/slices/allRequests';
 
 interface formType {
     number: string;
@@ -35,6 +36,17 @@ interface FileDetails {
 
 const FileSubmitted = () => {
     const Files = useSelector((state: FileDetails) => state.apply.files);
+    const firstFile = Files?.passportFile?.[0];
+    let fileUrl = null;
+    if (firstFile instanceof Blob) {
+        fileUrl = URL.createObjectURL(firstFile);
+    } else {
+        console.error(
+            'Expected firstFile to be an instance of Blob, but received:',
+            firstFile
+        );
+    }
+
     const dispatch = useDispatch();
     const {
         register,
@@ -44,8 +56,56 @@ const FileSubmitted = () => {
     const token = getToken();
     const router = useRouter();
     const { id } = router.query;
+    const { data: getApply } = useGetApplyByIdQuery(id);
+
     const [isLoading, setIsLoading] = useState(false);
-    const [fullFile, setFullFile] = useState('');
+    const [fullFile, setFullFile] = useState(fileUrl);
+
+    const consolidated_mark_sheets = {
+        url: [
+            getApply?.documents?.academic_certificates?.consolidated_mark_sheets
+                ?.url
+        ],
+        country:
+            getApply?.documents?.academic_certificates?.consolidated_mark_sheets
+                ?.country,
+        institute:
+            getApply?.documents?.academic_certificates?.consolidated_mark_sheets
+                ?.institute,
+        date_of_start:
+            getApply?.documents?.academic_certificates?.consolidated_mark_sheets
+                ?.date_of_start,
+        date_of_completion:
+            getApply?.documents?.academic_certificates?.consolidated_mark_sheets
+                ?.date_of_completion
+    };
+
+    const semester_mark_sheets = {
+        url: getApply?.documents?.academic_certificates?.semester_mark_sheets
+            ?.url
+    };
+
+    const provisional_certificate = {
+        url: getApply?.documents?.academic_certificates?.provisional_certificate
+            ?.url
+    };
+
+    const secondary_school = {
+        url: getApply?.documents?.academic_certificates?.secondary_school?.url
+    };
+
+    const higher_secondary_school = {
+        url: getApply?.documents?.academic_certificates?.higher_secondary_school
+            ?.url
+    };
+
+    const bachelor_degree = {
+        url: getApply?.documents?.academic_certificates?.bachelor_degree?.url
+    };
+
+    const master_degree = {
+        url: getApply?.documents?.academic_certificates?.master_degree?.url
+    };
 
     const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
         const uploadedFiles = e.target.files;
@@ -77,7 +137,7 @@ const FileSubmitted = () => {
     };
 
     const onSubmit = async (data: formType) => {
-        setIsLoading(true)
+        setIsLoading(true);
         const uploadResponse = await uploadFilesToApi(Files.passportFile);
         toast
             .promise(
@@ -85,7 +145,93 @@ const FileSubmitted = () => {
                     url: `${BASE_URL}${API_ENDPOINTS.APPLY_DOCUMENTS}/${id}`,
                     type: 'patch',
                     body: {
+                        ...getApply,
+                        course: getApply?.course.id,
+                        user: getApply?.user.id,
                         documents: {
+                            academic_certificates: {
+                                ...(semester_mark_sheets.url
+                                    ? {
+                                          semester_mark_sheets: {
+                                              url: semester_mark_sheets.url
+                                          }
+                                      }
+                                    : {}),
+                                ...(provisional_certificate.url
+                                    ? {
+                                          provisional_certificate: {
+                                              url: provisional_certificate.url
+                                          }
+                                      }
+                                    : {}),
+                                ...(consolidated_mark_sheets?.url?.[0]
+                                    ? {
+                                          consolidated_mark_sheets: {
+                                              ...(consolidated_mark_sheets.url
+                                                  ? {
+                                                        url: consolidated_mark_sheets
+                                                            .url?.[0]
+                                                    }
+                                                  : {}),
+                                              ...(consolidated_mark_sheets.institute
+                                                  ? {
+                                                        institute:
+                                                            consolidated_mark_sheets.institute
+                                                    }
+                                                  : {}),
+                                              ...(consolidated_mark_sheets.country
+                                                  ? {
+                                                        country:
+                                                            consolidated_mark_sheets.country
+                                                    }
+                                                  : {}),
+                                              ...(consolidated_mark_sheets.date_of_completion
+                                                  ? {
+                                                        date_of_completion:
+                                                            consolidated_mark_sheets.date_of_completion
+                                                    }
+                                                  : {}),
+                                              ...(consolidated_mark_sheets.date_of_start
+                                                  ? {
+                                                        date_of_start:
+                                                            consolidated_mark_sheets.date_of_start
+                                                    }
+                                                  : {})
+                                          }
+                                      }
+                                    : {}),
+                                ...(secondary_school.url
+                                    ? {
+                                          secondary_school: {
+                                              url: secondary_school.url
+                                          }
+                                      }
+                                    : {}),
+                                ...(higher_secondary_school.url
+                                    ? {
+                                          higher_secondary_school: {
+                                              url: higher_secondary_school.url
+                                          }
+                                      }
+                                    : {}),
+                                ...(bachelor_degree.url
+                                    ? {
+                                          bachelor_degree: {
+                                              url: bachelor_degree.url
+                                          }
+                                      }
+                                    : {}),
+                                ...(master_degree.url
+                                    ? {
+                                          master_degree: {
+                                              url: master_degree.url
+                                          }
+                                      }
+                                    : {})
+                            },
+                            professional_records: {
+                                ...getApply?.documents?.professional_records
+                            },
                             identity: {
                                 passport: {
                                     url: uploadResponse,
@@ -102,6 +248,7 @@ const FileSubmitted = () => {
                 {
                     loading: 'Please wait...',
                     success: () => {
+                        router.back();
                         return 'Form submitted successfully';
                     },
                     error: 'An error occurred'
@@ -116,7 +263,7 @@ const FileSubmitted = () => {
 
     return (
         <>
-            <div className="flex justify-between py-8 px-4 bg-white">
+            <div className="flex justify-between py-4 px-4 bg-white items-center sticky top-0 z-[9999]">
                 <div className="flex items-center gap-4 pl-4">
                     <FaArrowLeft onClick={() => router.back()} />
                     <div>
@@ -129,34 +276,14 @@ const FileSubmitted = () => {
                         <span className="text-blueColor">Submitted</span>
                     </div>
                 </div>
-                <div className="md:hidden lg:block sm:hidden">
-                    <Button
-                        type="submit"
-                        text={isLoading ? 'Loading...' : 'save'}
-                        className="rounded-none py-2 px-4"
-                        onClick={handleSubmit(onSubmit)}
-                    />
-                </div>
-            </div>
-
-            <div className="flex w-full h-[600px] lg:flex-row md:flex-col sm:flex-col">
-                <div className="w-1/4 flex flex-col md:hidden sm:hidden lg:block">
-                    <div className="w-full bg-BgColorPassport bg-opacity-5 p-8">
-                        <div className="w-full bg-BgCardPassport p-4">
-                            {Files && (
-                                <PDFSmallViewer
-                                    pdfUrl={Files.passportFile}
-                                    onFileClick={handleFileClick}
-                                />
-                            )}
-                        </div>
-                    </div>
+                <div className="md:hidden lg:block sm:hidden flex ">
+                    <span className="font-bold text-xl">Select new file :</span>
                     <label
                         htmlFor="fileUpload"
-                        className=" px-24 ml-12 text-center py-4 font-semibold text-3xl cursor-pointer bg-blueColor border-transparent text-white hover:bg-white hover:border-2 hover:border-blueColor hover:text-blueColor"
+                        className="rounded-md px-8 ml-12 text-center py-2 font-semibold text-2xl cursor-pointer bg-blueColor border-transparent text-white hover:bg-white hover:border border hover:border-blueColor hover:text-blueColor"
                     >
                         {' '}
-                        {isLoading ? 'Loading...' : '+ ADD'}
+                        {isLoading ? 'Loading...' : 'Add'}
                     </label>
                     <input
                         type="file"
@@ -166,6 +293,21 @@ const FileSubmitted = () => {
                         id="fileUpload"
                         onChange={handleFileChange}
                     />
+                </div>
+            </div>
+
+            <div className="flex w-full lg:flex-row md:flex-col sm:flex-col">
+                <div className="w-1/4 flex flex-col md:hidden sm:hidden lg:block">
+                    <div className="w-full bg-BgColorPassport bg-opacity-5 p-8">
+                        <div className="w-full">
+                            {Files && (
+                                <PDFSmallViewer
+                                    pdfUrl={Files.passportFile}
+                                    onFileClick={handleFileClick}
+                                />
+                            )}
+                        </div>
+                    </div>
                 </div>
                 <div className="lg:w-2/4 md:w-full sm:w-full py-8 px-16">
                     <div className="w-full bg-BgCardPassport md:pl-36 sm:pl-4 lg:pl-0">
@@ -201,7 +343,7 @@ const FileSubmitted = () => {
                     <span className="font-bold text-xl">
                         Fill in your details
                     </span>
-                    <p className="p-4 bg-white flex gap-2 items-center rounded-md mt-4">
+                    <p className="p-2 bg-white flex gap-2 items-center rounded-md mt-4">
                         <BiMessageRoundedError className="text-[4rem] text-blueColor" />
                         <span className="text-[15px] font-medium text-blueColor">
                             Add your details and get personalised tips to
@@ -209,9 +351,12 @@ const FileSubmitted = () => {
                         </span>
                     </p>
                     <form
-                        className="flex flex-col gap-4 pt-4 "
+                        className="flex flex-col pt-1 "
                         onSubmit={handleSubmit(onSubmit)}
                     >
+                        <label className="font-bold text-gray-600 pt-2">
+                            Passport Number
+                        </label>
                         <InputBox
                             {...register('number', {
                                 required: 'Passport is required'
@@ -222,6 +367,9 @@ const FileSubmitted = () => {
                             className="p-0 border-blueColor"
                             customInputClass="px-2 py-[10px] text-[15px] w-full rounded-md outline-none placeholder:text-sm"
                         />
+                        <label className="font-bold text-gray-600  pt-2">
+                            Surname
+                        </label>
                         <InputBox
                             {...register('sur_name', {
                                 required: 'Surname is required'
@@ -232,6 +380,9 @@ const FileSubmitted = () => {
                             className="p-0"
                             customInputClass="px-2 py-[10px] text-[15px] w-full rounded-md outline-none placeholder:text-sm"
                         />
+                        <label className="font-bold text-gray-600 pt-2">
+                            Given Name
+                        </label>
                         <InputBox
                             {...register('given_name', {
                                 required: 'Given Name is required'
@@ -242,6 +393,9 @@ const FileSubmitted = () => {
                             className="p-0"
                             customInputClass="px-2 py-[10px] text-[15px] w-full rounded-md outline-none placeholder:text-sm"
                         />
+                        <label className="font-bold text-gray-600 pt-2">
+                            Date Of Issue
+                        </label>
                         <InputBox
                             {...register('date_of_issue', {
                                 required: 'Date Of Issue is required'
@@ -253,6 +407,9 @@ const FileSubmitted = () => {
                             className="p-0"
                             customInputClass="px-2 py-[10px] text-[15px] w-full rounded-md outline-none placeholder:text-sm"
                         />
+                        <label className="font-bold text-gray-600 pt-2">
+                            Date Of Expiry
+                        </label>
                         <InputBox
                             {...register('date_of_expiry', {
                                 required: 'Date Of Expiry is required'
@@ -263,6 +420,12 @@ const FileSubmitted = () => {
                             autoComplete="off"
                             className="p-0"
                             customInputClass="px-2 py-[10px] text-[15px] w-full rounded-md outline-none placeholder:text-sm"
+                        />
+                        <Button
+                            type="submit"
+                            text={isLoading ? 'Loading...' : 'Save'}
+                            className="rounded-md py-4 px-4 mt-4"
+                            onClick={handleSubmit(onSubmit)}
                         />
                     </form>
                 </div>

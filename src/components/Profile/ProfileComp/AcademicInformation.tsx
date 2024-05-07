@@ -3,11 +3,11 @@ import { modalType } from '@/store/slices/ui.slice';
 import { FiEdit } from 'react-icons/fi';
 import { useUi } from '@/hooks/user-interface';
 import { useUserAuth } from '@/hooks/auth';
+import Link from 'next/link';
 
 const AcademicInformation = () => {
     const { updateModal } = useUi();
-    const { academicInformation } = useUserAuth()?.user ?? {};
-
+    const { academicInformation, documents } = useUserAuth()?.user ?? {};
     const {
         countryOfEducation = 'Null',
         highestLevelOfEducation = 'Null',
@@ -16,9 +16,9 @@ const AcademicInformation = () => {
 
     const { name: languageTestName, score: languageTestScore } =
         languageTest as { name: string; score: { [key: string]: string } };
-    const { speaking, listening, writing, reading } = languageTestScore ?? {};
-    const overallScore = +speaking + +listening + +writing + +reading || 'Null';
-
+    const { speaking, listening, writing, reading, overAll } =
+        languageTestScore ?? {};
+    // const overallScore = (+speaking + +listening + +writing + +reading) / 4;
     return (
         <div className="lg:flex flex-col w-full lg:w-[67%] ">
             <div className="rounded-[10px] border border-borderColor px-11 pt-11 pb-4 flex flex-col gap-y-6 relative ">
@@ -67,18 +67,38 @@ const AcademicInformation = () => {
                                     Reading: <b>{reading ?? 'Null'}</b>
                                 </span>
                                 <span className="">
-                                    Over All: <b>{overallScore ?? 'Null'}</b>
+                                    Overall: <b>{overAll ?? 'Null'}</b>
                                 </span>
                             </div>
                         </div>
                     )}
                 </div>
-                <div className="pb-5 flex flex-col gap-y-2 text-mainTextColor">
+                <div className="pb-5 flex flex-col gap-y-2 text-mainTextColor relative ">
+                    <button
+                        className="absolute -top-2 -right-3 "
+                        onClick={() =>
+                            updateModal({
+                                type: modalType.upload_user_documents,
+                                state: {}
+                            })
+                        }
+                    >
+                        <FiEdit />
+                    </button>
                     <p>Upload Documents</p>
                     <h1 className="text-xl font-semibold">
-                        {
-                            'Identity Documents, Academic Documents, English Language Test Docs, Other Documents'
-                        }
+                        {documents.length
+                            ? documents.map((doc) => (
+                                  <Link
+                                      href={doc.url ?? ''}
+                                      target="_blank"
+                                      key={`upload-user-docs-${doc}`}
+                                      className="px-4 py-2 border border-blueColor hover:bg-blueColor hover:text-white rounded-md my-2 block"
+                                  >
+                                      {doc.name}
+                                  </Link>
+                              ))
+                            : 'No Docs Uploaded Yet'}
                     </h1>
                 </div>
             </div>

@@ -2,7 +2,7 @@ import React from 'react';
 import { API_ENDPOINTS } from '@/config/Api_EndPoints';
 import { blogsType } from '@/types';
 import { GetServerSideProps } from 'next';
-import Image from 'next/image';
+// import Image from 'next/image';
 import { format } from 'timeago.js';
 import { getSsrRequest } from '@/utils/ssrRequest';
 import { ROUTES } from '@/config/constant';
@@ -11,13 +11,13 @@ const BlogsDetail = ({ data }: { data: blogsType }) => {
     return (
         <>
             <div className="w-full flex items-center mt-[100px] bg-white relative mb-0 lg:mb-10 overflow-hidden">
-                <Image
+                <img
                     height={193}
                     width={193}
                     alt="blogDetail-round"
                     className="top-[-40px] lg:top-[-100px] left-[-35px] lg:left-[-30px] absolute h-[104px] w-[106px] lg:h-[193px] lg:w-[193px]"
                     src="/images/profileImages/Ellipse 418.svg"
-                    priority
+                    // priority
                 />
                 <div className="w-full py-20 z-10">
                     <div className="max-w-[1100px] 2xl:max-w-[2300px] mx-auto px-5 md:px-[50px] lg:px-2 2xl:px-8 transition-all duration-300 flex flex-col lg:flex-row justify-between lg:items-center gap-y-8">
@@ -42,7 +42,7 @@ const BlogsDetail = ({ data }: { data: blogsType }) => {
                                 ))}
                             </div>
                         </div>
-                        <Image
+                        <img
                             height={307}
                             width={450}
                             alt="post"
@@ -51,17 +51,17 @@ const BlogsDetail = ({ data }: { data: blogsType }) => {
                                 data?.image ??
                                 '/images/BlogsDetail/post-1 1.svg'
                             }
-                            priority
+                            // priority
                         />
                     </div>
                 </div>
-                <Image
+                <img
                     height={235}
                     width={100}
                     alt="blogDetail-round2"
                     className="absolute top-56 md:top-12 lg:top-20 right-[-18px] h-[154px] w-[101px] md:h-[154px] md:w-[86px]"
                     src={'/images/BlogsDetail/Frame 691.svg'}
-                    priority
+                    // priority
                 />
             </div>
             <div className="w-full pb-28">

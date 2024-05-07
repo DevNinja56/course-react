@@ -1,4 +1,4 @@
-import Image from 'next/image';
+// import Image from 'next/image';
 import React, { useState } from 'react';
 
 import { API_ENDPOINTS } from '@/config/Api_EndPoints';
@@ -56,37 +56,37 @@ const Map = ({
 
     return (
         <div className="bg-white relative w-full">
-            <Image
+            <img
                 height={240}
                 width={240}
                 alt="map-round-img"
                 className="absolute left-[-20px] md:left-0 lg:left-[-80px] 2xl:left-0 top-[-10px] lg:top-[-70px] 2xl:top-0 z-10 h-16 w-16 lg:h-[240px] lg:w-[240px] backdrop-blur"
                 src={`${mapRoundImg}`}
-                priority
+                // priority
             />
-            <Image
+            <img
                 height={84}
                 width={84}
                 alt="map-round-img-2"
                 className="absolute right-10 md:right-52 top-0 lg:top-[-28px] 2xl:top-0 z-10 h-11 w-11 lg:h-20 lg:w-20"
                 src={`${mapRoundImg2}`}
-                priority
+                // priority
             />
-            <Image
+            <img
                 height={741}
                 width={1160}
                 alt="map"
                 className="absolute top-0 left-0 w-full h-[841px] object-cover hidden lg:block"
                 src="/images/Apply/map.png"
-                priority
+                // priority
             />
-            <Image
+            <img
                 height={841}
                 width={1160}
                 alt="map"
                 className="absolute top-0 left-0 w-full h-[820px] md:h-[851px] object-cover block lg:hidden"
                 src="/images/Apply/TabletMobile2.png"
-                priority
+                // priority
             />
             <div className="relative w-full flex justify-center md:justify-end px-8 md:pr-20 2xl:pr-40 py-[71px] mb-28">
                 <form
@@ -165,21 +165,21 @@ const Map = ({
                     />
                 </form>
             </div>
-            <Image
+            <img
                 height={66}
                 width={66}
                 alt="map-round-img-3"
                 className="absolute left-[-12px] md:left-[-5px] lg:left-[-11px] 2xl:left-4 top-36 md:top-[322px] 2xl:top-[652px] z-10 h-6 w-6 md:h-9 md:w-9 lg:h-10 lg:w-10"
                 src={`${mapRoundImg3}`}
-                priority
+                // priority
             />
-            <Image
+            <img
                 height={114}
                 width={114}
                 alt="map-round-img"
                 className="absolute left-20 lg:left-[300px] 2xl:left-0 top-[770px] md:top-[790px] lg:top-[750px] 2xl:top-[100%] z-10 h-12 w-12 lg:h-32 lg:w-32"
                 src={`${mapRoundImg4}`}
-                priority
+                // priority
             />
         </div>
     );

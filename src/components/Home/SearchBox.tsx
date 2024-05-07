@@ -81,7 +81,7 @@ const SearchBox = () => {
                         className="pt-[14px] pb-[13px]"
                         text="Search"
                         disabled={
-                            !value.degrees.length && !value.countries.length
+                            !value.degrees.length || !value.countries.length
                         }
                         onClick={handleClick}
                     />

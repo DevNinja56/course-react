@@ -125,7 +125,6 @@ const CompareUniversityModal = () => {
                 className="absolute top-3 right-3 cursor-pointer"
                 onClick={hideModal}
             />
-
             <h1 className="text-mainTextColor text-center font-bold text-2xl md:text-[36px] mb-5">
                 Select a Course
             </h1>
@@ -288,13 +287,14 @@ const CompareUniversityModal = () => {
                     }))}
                     onChange={(e) => {
                         fetchAndSetData(
-                            API_ENDPOINTS.COURSES_WITH_DEGREE.replace(
-                                ':degreeId',
-                                compareData?.degreeLevel?.id ?? ''
-                            ).replace(
-                                ':instituteId',
-                                compareData?.institute?.id ?? ''
-                            ),
+                            // API_ENDPOINTS.COURSES_WITH_DEGREE.replace(
+                            //     ':degreeId',
+                            //     compareData?.degreeLevel?.id ?? ''
+                            // ).replace(
+                            //     ':instituteId',
+                            //     compareData?.institute?.id ?? ''
+                            // ),
+                            `${API_ENDPOINTS.COURSE_DEGREE_ID}/${compareData?.degreeLevel?.id ?? ''}`,
                             'course'
                         );
                         setCompareData({
@@ -344,10 +344,20 @@ const CompareUniversityModal = () => {
                     isLoading={isLoading}
                     isDisabled={data.course.length < 1}
                     placeholder="Select Course"
-                    options={data?.course?.map(({ name, id }) => ({
-                        label: name,
-                        value: id
-                    }))}
+                    // options={data?.course?.map(({ name, id }) => ({
+                    //     label: name,
+                    //     value: id
+                    // }))}
+                    options={data?.course
+                        ?.filter(
+                            (course) =>
+                                course.specialization?.[0].id ===
+                                compareData?.specialization?.id
+                        )
+                        .map(({ name, id }) => ({
+                            label: name,
+                            value: id
+                        }))}
                     onChange={(e) => {
                         setCompareData({
                             ...compareData,

@@ -2,7 +2,7 @@ import ProgramSection from '@/components/Institute/ProgramSection';
 import Ranking from '@/components/Institute/Ranking';
 import ScholarshipSection from '@/components/Institute/ScholarshipSection';
 import UniversityFacts from '@/components/Institute/UniversityFacts';
-import Image from 'next/image';
+// import Image from 'next/image';
 import React, { useState } from 'react';
 import { FaGlobeAmericas } from 'react-icons/fa';
 import { instituteType } from '@/types';
@@ -18,16 +18,16 @@ const Institutes = ({ data: institute }: { data: instituteType }) => {
     return (
         <>
             <div className="w-full flex justify-center pt-5 md:pt-16 mb-5 md:mb-16 relative overflow-hidden">
-                <Image
+                <img
                     height={80}
                     width={80}
                     alt="uni-round"
                     className="-left-4 md:-left-3 top-1/2 md:top-1/3 absolute h-11 w-11 md:h-14 md:w-14"
                     src="/images/CourseDetail/Circle 3.svg"
-                    priority
+                    // priority
                 />
                 <div className="w-full xl:container mx-auto px-4 md:px-[50px] lg:px-2 2xl:px-8 transition-all duration-300 z-10 flex justify-center">
-                    <Image
+                    <img
                         height={375}
                         width={1240}
                         alt="institute"
@@ -35,17 +35,17 @@ const Institutes = ({ data: institute }: { data: instituteType }) => {
                             institute?.image ??
                             '/images/institute/instituteMain.png'
                         }
-                        className="w-full rounded-xl max-h-[375px] object-contain"
-                        priority
+                        className="w-full rounded-xl max-h-[375px]"
+                        // priority
                     />
                 </div>
-                <Image
+                <img
                     height={273}
                     width={274}
                     alt="uni-round-2"
                     className="-top-5 md:top-5 absolute -right-12 md:-right-10 h-28 w-28 md:h-40 md:w-40 lg:h-60 lg:w-60"
                     src="/images/CourseDetail/Ciecle 4.svg"
-                    priority
+                    // priority
                 />
             </div>
             <div className="w-full mb-12 lg:mb-32">
@@ -54,16 +54,16 @@ const Institutes = ({ data: institute }: { data: instituteType }) => {
                         <div className="flex flex-col gap-8 md:gap-12 w-full lg:w-3/5">
                             <div className="w-full flex justify-between">
                                 <div className="flex items-center gap-3">
-                                    <Image
+                                    <img
                                         height={92}
                                         width={92}
                                         alt="institute"
-                                        className="h-10 w-8 md:h-auto md:w-auto"
+                                        className="h-10 w-8 md:h-24 md:w-32"
                                         src={
                                             institute?.logo ??
                                             '/images/institute/university-of-portsmouth.svg'
                                         }
-                                        priority
+                                        // priority
                                     />
                                     <div className="flex flex-col gap-1 md:gap-4">
                                         <h1 className="font-extrabold text-base md:text-3xl text-mainTextColor">
@@ -116,7 +116,7 @@ const Institutes = ({ data: institute }: { data: instituteType }) => {
                             <ProgramSection />
                             <ScholarshipSection />
                         </div>
-                        <div className="w-1/3 hidden lg:flex flex-col gap-9 h-courseStickyHeight sticky top-[110px] no-scrollbar">
+                        <div className="w-1/3 hidden lg:flex flex-col gap-9 h-instituteStickyHeight sticky top-[110px] no-scrollbar">
                             <UniversityFacts data={institute} />
                             <Ranking data={institute} />
                         </div>

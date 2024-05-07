@@ -24,6 +24,7 @@ export const API_ENDPOINTS = {
     SCHOLARSHIP: '/scholarship',
     SCHOLARSHIP_BY_ID: '/scholarship/:id',
     COURSE_DEGREE_ID: '/course/degree',
+    COURSE_INSTITUTE_ID: '/course/institute',
     COURSE_SEARCH: '/course/filter',
     COURSE_BY_ID: '/course/:id',
     SCHOLARSHIP_SEARCH: '/scholarship/filter',
@@ -41,10 +42,16 @@ export const API_ENDPOINTS = {
     BLOGS: '/blogs',
     SINGLE_BLOG: '/blogs/:id',
     APPLY: '/apply',
+    GET_APPLY_BY_ID: '/apply/:id',
     APPLY_USER: '/apply/user',
     GEO_IP: '/geoip',
     FETCH_RATES:
-        'https://fxds-public-exchange-rates-api.oanda.com/cc-api/currencies?base=PKR&quote=${code}&data_type=general_currency_pair&start_date=${pDate}&end_date=${cDate}',
+        // 'https://fxds-public-exchange-rates-api.oanda.com/cc-api/currencies?base=PKR&quote=${code}&data_type=general_currency_pair&start_date=${pDate}&end_date=${cDate}',
+        '/currency_rate/find?from_code=PKR&to_code=${code}&start_date=${pDate}&end_date=${cDate}',
+    FETCH_ALL_RATES: '/currency_rate?code=${code}&amount=${amount}',
     FILE_S3_UPLOAD: '/file/s3-upload',
-    APPLY_DOCUMENTS: '/apply'
+    APPLY_DOCUMENTS: '/apply',
+    EVENTS: '/event',
+    FILE_UPLOAD: '/file/s3-upload',
+    FILE_DELETE: '/file/s3-delete'
 };

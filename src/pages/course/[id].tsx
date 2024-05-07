@@ -10,7 +10,6 @@ import { modalType } from '@/store/slices/ui.slice';
 import { singleCourseType } from '@/types';
 import { getSsrRequest } from '@/utils/ssrRequest';
 import { GetServerSideProps } from 'next';
-import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 import { CiCalculator2 } from 'react-icons/ci';
@@ -24,20 +23,21 @@ import { FaCalendar } from 'react-icons/fa';
 import { getMonths } from '@/utils/get-months';
 import { useCurrency } from '@/hooks/currency';
 import { useCalculate } from '@/hooks/initial-deposit-calculate';
-// import { BiSolidCalendar } from 'react-icons/bi';
-// import CourseTag from '@/components/course/CourseTag';
+import LanguageRequirements from '@/components/course/LanguageRequirements';
+import { generateIntakes } from '@/utils/generateIntakes';
+import Card from '@/components/Scholarship/Card';
 
 const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
     const { updateModal } = useUi();
-    const { setCurrencyValue } = useCurrency();
+    const { setCurrencyValue, getSingleRate } = useCurrency();
     const { initialDeposit } = useCalculate();
-
-    const openUserDetailModal = (courseId: string) => {
-        updateModal({
-            type: modalType.user_detail,
-            state: { courseId }
-        });
-    };
+    const rate = getSingleRate(course.feeCurrency);
+    const isUkCourse = course?.institute?.country?.name
+        ?.toLowerCase()
+        ?.includes('united kingdom' || 'uk');
+    const isMasterDegree = course?.degree?.name
+        ?.toLowerCase()
+        ?.includes('master');
 
     return (
         <>
@@ -46,16 +46,16 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
             ) : (
                 <>
                     <div className="w-full flex justify-center overflow-hidden mt-[100px] relative">
-                        <Image
+                        <img
                             height={60}
                             width={60}
                             alt="course-round"
                             className="top-1/3 absolute -left-3 md:-left-5 h-8 w-8 md:h-16 md:w-16 lg:h-24 lg:w-24 z-10"
                             src="/images/CourseDetail/Circle 3.svg"
-                            priority
+                            // priority
                         />
                         <div className="w-full py-5 pb-10 md:py-10 xl:py-20 flex justify-center xl:container px-4 md:px-[50px] lg:px-2 2xl:px-8">
-                            <Image
+                            <img
                                 height={400}
                                 width={1200}
                                 alt="courseDetail"
@@ -64,24 +64,24 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                                     '/images/CourseDetail/courseDetailMain.png'
                                 }
                                 className="z-20 h-full w-full lg:block hidden max-h-[375px] object-cover rounded-lg  "
-                                priority
+                                // priority
                             />
-                            <Image
+                            <img
                                 height={375}
                                 width={1240}
                                 alt="courseDetail"
                                 src="/images/CourseDetail/courseDetailMainTablet.png"
                                 className="z-20 h-full w-full lg:hidden block"
-                                priority
+                                // priority
                             />
                         </div>
-                        <Image
+                        <img
                             height={273}
                             width={274}
                             alt="courseDetail-round"
                             className="absolute right-[-40px] lg:-right-20 -top-7 md:-top-16 md:-right-8 md:translate-y-8 lg:translate-y-0 md:bottom-8 lg:-top-16 h-20 w-20 md:h-32 md:w-32 lg:h-80 lg:w-80"
                             src="/images/CourseDetail/Ciecle 4.svg"
-                            priority
+                            // priority
                         />
                     </div>
                     <div className="flex items-center w-full xl:container px-4 md:px-[50px] lg:px-2 2xl:px-8 mx-auto transition-all duration-300 flex-col gap-6 mb-32">
@@ -130,273 +130,233 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                             </div>
                         </div>
                         <div className="flex flex-col lg:flex-row gap-0 xl:gap-16 w-full justify-between mb-0 lg:mb-28">
-                            <div className="w-full lg:w-[70%] xl:w-2/3 h-courseStickyHeight static lg:sticky top-[110px] no-scrollbar mb-96 lg:mb-96">
-                                <div className=" transition-all duration-300">
-                                    <div className="flex flex-col gap-y-6 mb-16 md:mb-20">
-                                        <div className="tabs-container capitalize">
-                                            <Tabs
-                                                data={[
-                                                    {
-                                                        title: 'Overview',
-                                                        element: (
-                                                            <div className="description w-full flex flex-col gap-3 md:gap-4 items-start">
-                                                                <h1 className="text-black text-lg md:text-2xl font-bold">
-                                                                    Course
-                                                                    Description
-                                                                </h1>
-                                                                <div
-                                                                    className="text-sm md:text-base"
-                                                                    dangerouslySetInnerHTML={{
-                                                                        __html:
-                                                                            course?.description ??
-                                                                            ''
-                                                                    }}
-                                                                />
-                                                            </div>
-                                                        )
-                                                    },
-                                                    {
-                                                        title: 'Entry Requirements',
-                                                        element: (
-                                                            <div className="flex flex-col gap-8">
-                                                                <div className="flex flex-col gap-4 items-start">
-                                                                    <h3 className="text-black text-lg md:text-2xl font-bold">
-                                                                        Entry
-                                                                        Requirements
-                                                                    </h3>
+                            <div className="flex flex-col w-full lg:w-[70%] xl:w-2/3">
+                                <div className="w-full h-courseStickyHeight static lg:sticky top-[110px] no-scrollbar mb-5 lg:mb-[450px] xl:mb-96 overflow-y-scroll">
+                                    <div className="transition-all duration-300">
+                                        <div className="flex flex-col gap-y-6 mb-16 md:mb-20">
+                                            <div className="tabs-container capitalize">
+                                                <Tabs
+                                                    data={[
+                                                        {
+                                                            title: 'Overview',
+                                                            element: (
+                                                                <div className="description w-full flex flex-col gap-3 md:gap-4 items-start">
+                                                                    <h1 className="text-black text-lg md:text-2xl font-bold">
+                                                                        Course
+                                                                        Description
+                                                                    </h1>
                                                                     <div
-                                                                        className="content text-sm md:text-base"
+                                                                        className="text-sm md:text-base"
                                                                         dangerouslySetInnerHTML={{
                                                                             __html:
-                                                                                course
-                                                                                    .entryRequirements?.[0]
-                                                                                    .requirement ??
-                                                                                'No Entry Requirements'
+                                                                                course?.description ??
+                                                                                ''
                                                                         }}
-                                                                    ></div>
+                                                                    />
                                                                 </div>
-                                                            </div>
-                                                        )
-                                                    },
-                                                    {
-                                                        title: 'Language Requirements',
-                                                        element: (
-                                                            <div className="flex flex-col gap-8">
-                                                                <div className="flex flex-col gap-4  items-start">
-                                                                    <h3 className="text-black text-lg md:text-2xl font-bold">
-                                                                        Language
-                                                                        Requirements
-                                                                    </h3>
-                                                                    <div className="flex gap-4">
-                                                                        <div className="flex flex-col gap-4 items-center w-full uppercase  ">
-                                                                            <table className="border-separate border border-slate-500">
-                                                                                <tbody>
-                                                                                    <tr>
-                                                                                        <th className="px-4 py-2 text-center border border-slate-600">
-                                                                                            Type
-                                                                                        </th>
-                                                                                        <th className="px-4 py-2 text-center border border-slate-600">
-                                                                                            speaking
-                                                                                        </th>
-                                                                                        <th className="px-4 py-2 text-center border border-slate-600">
-                                                                                            listening
-                                                                                        </th>
-                                                                                        <th className="px-4 py-2 text-center border border-slate-600">
-                                                                                            reading
-                                                                                        </th>
-                                                                                        <th className="px-4 py-2 text-center border border-slate-600">
-                                                                                            writing
-                                                                                        </th>
-                                                                                    </tr>
-                                                                                    {Object.entries(
-                                                                                        course
-                                                                                            .language[0]
-                                                                                            ?.language
-                                                                                    ).map(
-                                                                                        (
-                                                                                            [
-                                                                                                key,
-                                                                                                value
-                                                                                            ],
-                                                                                            i
-                                                                                        ) => (
-                                                                                            <tr
-                                                                                                key={
-                                                                                                    'language-table--' +
-                                                                                                    i
-                                                                                                }
-                                                                                            >
-                                                                                                <td className="px-4 py-2 text-center border border-slate-600">
-                                                                                                    {
-                                                                                                        key
-                                                                                                    }
-                                                                                                </td>
-                                                                                                <td className="px-4 py-2 text-center border border-slate-600">
-                                                                                                    {
-                                                                                                        value.s
-                                                                                                    }{' '}
-                                                                                                    %
-                                                                                                </td>
-                                                                                                <td className="px-4 py-2 text-center border border-slate-600">
-                                                                                                    {
-                                                                                                        value.l
-                                                                                                    }{' '}
-                                                                                                    %
-                                                                                                </td>
-                                                                                                <td className="px-4 py-2 text-center border border-slate-600">
-                                                                                                    {
-                                                                                                        value.r
-                                                                                                    }{' '}
-                                                                                                    %
-                                                                                                </td>
-                                                                                                <td className="px-4 py-2 text-center border border-slate-600">
-                                                                                                    {
-                                                                                                        value.w
-                                                                                                    }{' '}
-                                                                                                    %
-                                                                                                </td>
-                                                                                            </tr>
-                                                                                        )
-                                                                                    )}
-                                                                                </tbody>
-                                                                            </table>
+                                                            )
+                                                        },
+                                                        {
+                                                            title: 'Entry Requirements',
+                                                            element: (
+                                                                <div className="flex flex-col gap-8">
+                                                                    <div className="flex flex-col gap-4 items-start">
+                                                                        <h3 className="text-black text-lg md:text-2xl font-bold">
+                                                                            Entry
+                                                                            Requirements
+                                                                        </h3>
+                                                                        <div
+                                                                            className="content text-sm md:text-base"
+                                                                            dangerouslySetInnerHTML={{
+                                                                                __html:
+                                                                                    course
+                                                                                        .entryRequirements?.[0]
+                                                                                        ?.requirement ??
+                                                                                    'No Entry Requirements'
+                                                                            }}
+                                                                        ></div>
+                                                                    </div>
+                                                                </div>
+                                                            )
+                                                        },
+                                                        {
+                                                            title: 'Language Requirements',
+                                                            element: (
+                                                                <div className="flex flex-col gap-8">
+                                                                    <div className="flex flex-col gap-4  items-start">
+                                                                        <h3 className="text-black text-lg md:text-2xl font-bold">
+                                                                            Language
+                                                                            Requirements
+                                                                        </h3>
+                                                                        <div className="flex gap-4">
+                                                                            <LanguageRequirements
+                                                                                language={
+                                                                                    course
+                                                                                        .language[0]
+                                                                                        .language
+                                                                                }
+                                                                            />
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                            </div>
-                                                        )
-                                                    },
-                                                    {
-                                                        title: 'Tuitions Fee',
-                                                        element: (
-                                                            <div className="flex flex-col gap-4 items-start">
-                                                                <h3 className="text-black text-lg md:text-2xl font-bold">
-                                                                    Tuitions Fee
-                                                                </h3>
-                                                                <p className="text-sm md:text-base">
-                                                                    {setCurrencyValue(
-                                                                        course.tuitionFee
-                                                                    )}
-                                                                </p>
-                                                            </div>
-                                                        )
-                                                    },
-                                                    {
-                                                        title: 'Scholarship',
-                                                        element: (
-                                                            <div className="flex flex-col gap-4 items-start">
-                                                                <h3 className="text-black text-lg md:text-2xl font-bold">
-                                                                    Course
-                                                                    Scholarship
-                                                                </h3>
-                                                                <ul className="w-full flex flex-col items-start gap-2">
-                                                                    {course
-                                                                        .scholarship
-                                                                        .length >
-                                                                    0 ? (
-                                                                        course.scholarship.map(
-                                                                            ({
-                                                                                name
-                                                                            }) => (
-                                                                                <li
-                                                                                    className="text-sm md:text-base"
-                                                                                    key={
-                                                                                        'scholarship-list--' +
-                                                                                        name
-                                                                                    }
-                                                                                >
-                                                                                    {
-                                                                                        name
-                                                                                    }
-                                                                                </li>
+                                                            )
+                                                        },
+                                                        {
+                                                            title: 'Tuitions Fee',
+                                                            element: (
+                                                                <div className="flex flex-col gap-4 items-start">
+                                                                    <h3 className="text-black text-lg md:text-2xl font-bold">
+                                                                        Tuitions
+                                                                        Fee
+                                                                    </h3>
+                                                                    <p className="text-sm md:text-base">
+                                                                        {setCurrencyValue(
+                                                                            course.tuitionFee *
+                                                                                (rate?.base_rate
+                                                                                    ? +rate?.base_rate
+                                                                                    : 1)
+                                                                        )}
+                                                                    </p>
+                                                                </div>
+                                                            )
+                                                        },
+                                                        {
+                                                            title: 'Scholarship',
+                                                            element: (
+                                                                <div className="flex flex-col gap-4 items-start">
+                                                                    <h3 className="text-black text-lg md:text-2xl font-bold">
+                                                                        Course
+                                                                        Scholarship
+                                                                    </h3>
+                                                                    <ul className="w-full grid grid-cols-4 gap-3 flex-wrap items-start">
+                                                                        {course
+                                                                            .scholarship
+                                                                            .length >
+                                                                        0 ? (
+                                                                            course.scholarship.map(
+                                                                                (
+                                                                                    scholarship,
+                                                                                    i
+                                                                                ) => (
+                                                                                    <Card
+                                                                                        key={
+                                                                                            'course-scholarship card--' +
+                                                                                            i
+                                                                                        }
+                                                                                        {...{
+                                                                                            name: scholarship.name,
+                                                                                            type: scholarship.type,
+                                                                                            degree: course.degree,
+                                                                                            institute:
+                                                                                                course.institute,
+                                                                                            country:
+                                                                                                course
+                                                                                                    .institute
+                                                                                                    .country,
+                                                                                            amount: scholarship.amount,
+                                                                                            id: scholarship.id,
+                                                                                            image: scholarship.image,
+                                                                                            isActive:
+                                                                                                null,
+                                                                                            headingClass:
+                                                                                                'text-sm'
+                                                                                        }}
+                                                                                    />
+                                                                                )
                                                                             )
-                                                                        )
-                                                                    ) : (
-                                                                        <li className="text-sm md:text-base">
-                                                                            No
-                                                                            scholarships
-                                                                            available
-                                                                        </li>
-                                                                    )}
-                                                                </ul>
-                                                            </div>
-                                                        )
-                                                    },
-                                                    {
-                                                        title: 'Initial Deposit',
-                                                        element: (
-                                                            <div className="flex flex-col gap-4 items-start">
-                                                                <h3 className="text-black text-lg md:text-2xl font-bold">
-                                                                    Initial
-                                                                    Deposit
-                                                                </h3>
+                                                                        ) : (
+                                                                            <li className="text-sm md:text-base">
+                                                                                No
+                                                                                scholarships
+                                                                                available
+                                                                            </li>
+                                                                        )}
+                                                                    </ul>
+                                                                </div>
+                                                            )
+                                                        },
+                                                        {
+                                                            title: 'Initial Deposit',
+                                                            element: (
+                                                                <div className="flex flex-col gap-4 items-start">
+                                                                    <h3 className="text-black text-lg md:text-2xl font-bold">
+                                                                        Initial
+                                                                        Deposit
+                                                                    </h3>
 
-                                                                <p className="text-sm md:text-base">
-                                                                    {initialDeposit(
-                                                                        course
-                                                                            .initialDeposit?.[0]
-                                                                            .amount,
-                                                                        course.tuitionFee,
-                                                                        course
-                                                                            ?.scholarship[0]
-                                                                            ?.amount
-                                                                    )}
-                                                                </p>
-                                                            </div>
-                                                        )
-                                                    }
-                                                ]}
-                                            />
-                                        </div>
-                                    </div>
-                                    <div className="py-6 border-t-2 border-borderColor flex items-center justify-between w-full mb-8 md:mb-20">
-                                        <h1 className="text-base md:text-xl font-semibold text-textLightBlackColor">
-                                            Get more details
-                                        </h1>
-                                        <Link
-                                            href={course.institute.instituteURL}
-                                            target="_blank"
-                                            className="text-blueColor text-xs md:text-base"
-                                        >
-                                            Visit university website
-                                        </Link>
-                                    </div>
-                                    {course.documentsRequirement && (
-                                        <div className="flex flex-col gap-5 w-full">
-                                            <div className="flex items-center gap-2">
-                                                <IoDocumentText className="h-7 w-7 md:h-8 md:w-8" />
-                                                <h1 className="font-bold text-lg md:text-2xl text-mainTextColor">
-                                                    Requirements
-                                                </h1>
-                                            </div>
-                                            <p className="text-sm md:text-xl font-medium text-lightGrayColor">
-                                                Listed below are the documents
-                                                required to apply for this
-                                                course.
-                                            </p>
-                                            <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-7">
-                                                {course.documentsRequirement?.map(
-                                                    ({ title, url }, i) => (
-                                                        <RequirementBox
-                                                            key={
-                                                                'docs requirement--' +
-                                                                i +
-                                                                title
-                                                            }
-                                                            text={title}
-                                                            url={url}
-                                                        />
-                                                    )
-                                                )}
+                                                                    <p className="text-sm md:text-base">
+                                                                        {initialDeposit(
+                                                                            {
+                                                                                initialDeposit:
+                                                                                    course
+                                                                                        .initialDeposit?.[0]
+                                                                                        .amount,
+                                                                                tuitionFee:
+                                                                                    course.tuitionFee,
+                                                                                scholarship:
+                                                                                    course
+                                                                                        ?.scholarship[0]
+                                                                                        ?.amount,
+                                                                                currency_code:
+                                                                                    course.feeCurrency
+                                                                            }
+                                                                        )}
+                                                                    </p>
+                                                                </div>
+                                                            )
+                                                        }
+                                                    ]}
+                                                />
                                             </div>
                                         </div>
-                                    )}
+                                    </div>
                                 </div>
+                                <div className="py-6 border-t-2 border-borderColor flex items-center justify-between w-full mb-8 md:mb-20">
+                                    <h1 className="text-base md:text-xl font-semibold text-textLightBlackColor">
+                                        Get more details
+                                    </h1>
+                                    <Link
+                                        href={course.institute.instituteURL}
+                                        target="_blank"
+                                        className="text-blueColor text-xs md:text-base"
+                                    >
+                                        Visit university website
+                                    </Link>
+                                </div>
+                                {course.documentsRequirement && (
+                                    <div className="flex flex-col gap-5 w-full">
+                                        <div className="flex items-center gap-2">
+                                            <IoDocumentText className="h-7 w-7 md:h-8 md:w-8" />
+                                            <h1 className="font-bold text-lg md:text-2xl text-mainTextColor">
+                                                Requirements
+                                            </h1>
+                                        </div>
+                                        <p className="text-sm md:text-xl font-medium text-lightGrayColor">
+                                            Listed below are the documents
+                                            required to apply for this course.
+                                        </p>
+                                        <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-7">
+                                            {course.documentsRequirement?.map(
+                                                ({ title, url }, i) => (
+                                                    <RequirementBox
+                                                        key={
+                                                            'docs requirement--' +
+                                                            i +
+                                                            title
+                                                        }
+                                                        text={title}
+                                                        url={url}
+                                                    />
+                                                )
+                                            )}
+                                        </div>
+                                    </div>
+                                )}
                             </div>
                             <div className="flex flex-col gap-11 w-full lg:w-[28%] xl:w-[30%]">
                                 <div className="bg-white rounded-[10px] px-4 py-6 w-full z-10 shadow-RequirementBox mt-4 hidden lg:block">
                                     <div className="relative flex justify-center items-end w-full h-[228px] pb-3">
-                                        <Image
+                                        <img
                                             height={228}
                                             width={353.5}
                                             alt="minim"
@@ -405,7 +365,7 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                                                 course.institute?.image ??
                                                 '/images/CourseDetail/Rectangle 1697.svg'
                                             }
-                                            priority
+                                            // priority
                                         />
                                         <h1 className="absolute w-full bottom-0 left-0 py-2 px-5 bg-gradient-to-t from-blueColor text-center font-bold text-2xl text-white z-10  ">
                                             {course.institute.name}
@@ -441,9 +401,10 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                                                 className="py-3 rounded-md text-sm font-semibold"
                                                 text="Start Application"
                                                 onClick={() =>
-                                                    openUserDetailModal(
-                                                        course.id
-                                                    )
+                                                    updateModal({
+                                                        type: modalType.start_application,
+                                                        state: { course }
+                                                    })
                                                 }
                                             />
 
@@ -471,7 +432,10 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                                                 </p>
                                                 <p className="text-lightGrayColor text-base">
                                                     {setCurrencyValue(
-                                                        course.tuitionFee
+                                                        course.tuitionFee *
+                                                            (rate?.base_rate
+                                                                ? +rate?.base_rate
+                                                                : 1)
                                                     )}
                                                 </p>
                                             </div>
@@ -503,13 +467,40 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                                             <GoClockFill className="h-8 w-8 text-blueColor" />
                                             <div className="flex flex-col gap-[6px]">
                                                 <p className="font-bold text-base text-mainTextColor">
-                                                    Duration
+                                                    {isUkCourse &&
+                                                    isMasterDegree
+                                                        ? 'Intake | Duration'
+                                                        : 'Duration'}
                                                 </p>
-                                                <p className="text-lightGrayColor text-base">
-                                                    {getMonths(
-                                                        course.monthDuration
+                                                <ul className="text-lightGrayColor text-base">
+                                                    {isUkCourse &&
+                                                    isMasterDegree ? (
+                                                        <>
+                                                            {generateIntakes(
+                                                                [
+                                                                    course
+                                                                        .intakes[0]
+                                                                ],
+                                                                1
+                                                            )}{' '}
+                                                            |{' '}
+                                                            {getMonths([
+                                                                course
+                                                                    .monthDuration[0]
+                                                            ])}{' '}
+                                                        </>
+                                                    ) : (
+                                                        getMonths(
+                                                            course.monthDuration
+                                                        )
+                                                            .split(' / ')
+                                                            .map((month) => (
+                                                                <li key={month}>
+                                                                    {month}
+                                                                </li>
+                                                            ))
                                                     )}
-                                                </p>
+                                                </ul>
                                             </div>
                                         </div>
                                         <div className="flex items-center gap-4 pl-5 border-b-2 border-gray-200 border-opacity-50 py-4">
@@ -528,17 +519,26 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                                                 </p>
                                             </div>
                                         </div>
-                                        <div className="flex items-center gap-4 pl-5 border-opacity-50 py-4">
-                                            <FaCalendar className="h-8 w-8 text-blueColor" />
-                                            <div className="flex flex-col gap-[6px]">
-                                                <p className="font-bold text-base text-mainTextColor">
-                                                    Available Intakes
-                                                </p>
-                                                <p className="text-lightGrayColor text-base">
-                                                    {course.intakes.join(' ')}
-                                                </p>
+                                        {!isUkCourse && !isMasterDegree && (
+                                            <div className="flex items-center gap-4 pl-5 border-opacity-50 py-4">
+                                                <FaCalendar className="h-8 w-8 text-blueColor" />
+                                                <div className="flex flex-col gap-[6px]">
+                                                    <p className="font-bold text-base text-mainTextColor">
+                                                        Available Intakes
+                                                    </p>
+                                                    <ul className="text-lightGrayColor text-base">
+                                                        {generateIntakes(
+                                                            course.intakes,
+                                                            1
+                                                        ).map((intake) => (
+                                                            <li key={intake}>
+                                                                {intake}
+                                                            </li>
+                                                        ))}
+                                                    </ul>
+                                                </div>
                                             </div>
-                                        </div>
+                                        )}
                                     </div>
                                 </div>
                                 <div className="flex flex-col md:flex-row items-center w-full gap-3 md:gap-5 lg:hidden">

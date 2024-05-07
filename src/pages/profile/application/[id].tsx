@@ -7,7 +7,7 @@ import { useUi } from '@/hooks/user-interface';
 import { useGetUserAppliesQuery } from '@/store/slices/allRequests';
 import { modalType } from '@/store/slices/ui.slice';
 import { statusEnum } from '@/types';
-import Image from 'next/image';
+// import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { MdError } from 'react-icons/md';
 
@@ -56,21 +56,21 @@ const UserApplicationDetails = () => {
 
     return (
         <div className="w-full relative overflow-hidden">
-            <Image
+            <img
                 height={60}
                 width={60}
                 alt="course-round"
                 className="top-40 absolute -left-3 md:-left-5 h-8 w-8 md:h-16 md:w-16 lg:h-24 lg:w-24 z-10"
                 src="/images/CourseDetail/Circle 3.svg"
-                priority
+                // priority
             />
-            <Image
+            <img
                 height={273}
                 width={274}
                 alt="courseDetail-round"
                 className="absolute right-[-40px] lg:-right-20 -top-7 md:-top-16 md:-right-8 md:translate-y-8 lg:translate-y-0 md:bottom-8 lg:-top-16 h-20 w-20 md:h-32 md:w-32 lg:h-60 lg:w-60 z-10"
                 src="/images/CourseDetail/Ciecle 4.svg"
-                priority
+                // priority
             />
             {selectedCourse && (
                 <div className="z-20 relative">

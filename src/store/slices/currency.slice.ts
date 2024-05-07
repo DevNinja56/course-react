@@ -1,6 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { fetchLatestRate } from '../actions/getCurrencyRate';
+import {
+    fetchAllLatestRate,
+    fetchLatestRate
+} from '../actions/getCurrencyRate';
 import { countryDataType, geoIpType } from '@/types';
 import { fetchUserCountry } from '../actions/getUserIp';
 import { countriesData } from '@/utils/data/country';
@@ -17,8 +20,16 @@ interface ratesType {
     low_ask: string;
 }
 
+export interface allCurrencyRates {
+    currency: string;
+    calculation: string;
+    base_rate: string;
+    code: string;
+}
+
 interface dataTypes {
     country: countryDataType;
+    rate_list: allCurrencyRates[];
     base_code: string;
     base_rate: number;
     rates: ratesType | unknown;
@@ -35,6 +46,7 @@ const initialState: dataTypes = {
         languages: 'urd,eng',
         code: 'PAK'
     },
+    rate_list: [],
     base_code: 'PKR',
     base_rate: 1,
     rates: {},
@@ -70,7 +82,8 @@ const currency = createSlice({
             .addCase(
                 fetchLatestRate.fulfilled,
                 (state, action: PayloadAction<any>) => {
-                    const rate = action.payload?.response?.[0] as ratesType;
+                    const rate = action.payload?.data
+                        ?.response?.[0] as ratesType;
                     state.rates = rate;
                     state.base_rate = +rate.average_ask;
                     state.base_code = rate.quote_currency;
@@ -82,6 +95,12 @@ const currency = createSlice({
                 state.isLoading = false;
                 state.error = action?.error?.message ?? 'Something went wrong';
             })
+            .addCase(
+                fetchAllLatestRate.fulfilled,
+                (state, action: PayloadAction<any>) => {
+                    state.rate_list = action.payload?.data ?? [];
+                }
+            )
             .addCase(fetchUserCountry.pending, (state) => {
                 state.isLoading = true;
             })

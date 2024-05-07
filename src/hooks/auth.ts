@@ -8,7 +8,7 @@ import { API_ENDPOINTS } from '@/config/Api_EndPoints';
 
 type logInUserType = {
     access: string;
-    refresh?: string;
+    refresh?: string; //
 };
 
 export const useUserAuth = () => {

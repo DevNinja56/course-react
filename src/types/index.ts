@@ -13,7 +13,7 @@ export interface userType {
     role: 'user';
     status: 'in-active' | 'active' | 'block';
     registerWith: 'google' | 'facebook' | 'email';
-    documents: [];
+    documents: { name: string; url: string }[];
     academicInformation: academicInformation | null;
 }
 
@@ -27,6 +27,7 @@ export interface academicInformation {
             speaking: string;
             writing: string;
             reading: string;
+            overAll: string;
         } | null;
     };
 }
@@ -74,10 +75,14 @@ export type scholarshipType = {
     endDate: string;
     institute: instituteType;
     degree: degreeType[];
+    country: countryType;
     course: courseType | null;
     createdAt: string;
     updatedAt: string;
     favoriteId: userType[];
+    text_overview: string;
+    text_eligibility_criteria: string;
+    text_amount: string;
 };
 
 export type filterScholarShipType = {
@@ -160,7 +165,7 @@ export type instituteType = {
     campus: string[];
     country: countryType;
     degrees: degreeType[];
-    course: courseType[];
+    courses: courseType[];
     qsWorldRanking: string;
     timesHigherRanking: string;
     favoriteId: [string];
@@ -183,6 +188,7 @@ export type courseType = {
     institute: instituteType;
     intakes: string[];
     tuitionFee: number;
+    feeCurrency: string;
     country: countryType;
     discipline: disciplineType[];
     countryDetails: {
@@ -222,8 +228,8 @@ export type filterCourseType = {
 };
 
 export type courseLanguageRequirement = {
-    ielts: { s: string; l: string; r: string; w: string };
-    pte: { s: string; l: string; r: string; w: string };
+    ielts: { s: string; l: string; r: string; w: string; oa: string };
+    pte: { s: string; l: string; r: string; w: string; oa: string };
 };
 
 export type singleCourseType = {
@@ -341,10 +347,24 @@ export interface userDocuments {
             given_name: string;
             sur_name: string;
             number: string;
-            date_of_issue: string;
-            date_of_expiry: string;
+            country: string;
+            institute: string;
+            date_of_start: string;
+            date_of_completion: string;
         };
         provisional_certificate: {
+            url: string;
+        };
+        secondary_school: {
+            url: string;
+        };
+        higher_secondary_school: {
+            url: string;
+        };
+        bachelor_degree: {
+            url: string;
+        };
+        master_degree: {
             url: string;
         };
     };
@@ -359,6 +379,9 @@ export interface userDocuments {
             url: string;
         };
         letter_of_reference: {
+            url: string;
+        };
+        provisional_certificate: {
             url: string;
         };
     };
@@ -408,6 +431,22 @@ export interface councillorType {
     bio: string;
     phone_number: string;
     email: string;
+    createdAt: string;
+    updatedAt: string;
+    id: string;
+}
+
+export interface eventType {
+    title: string;
+    location: string;
+    date: string;
+    link: string;
+    time: string;
+    user: {
+        name: string;
+        avatar: string | null;
+        id: string;
+    };
     createdAt: string;
     updatedAt: string;
     id: string;

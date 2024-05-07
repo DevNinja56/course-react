@@ -1,23 +1,24 @@
 import { useAppDispatch, useAppSelector } from './store';
-import { fetchLatestRate } from '@/store/actions/getCurrencyRate';
+import { fetchUserCountry } from '@/store/actions/getUserIp';
+import {
+    fetchAllLatestRate,
+    fetchLatestRate
+} from '@/store/actions/getCurrencyRate';
 import { countryDataType } from '@/types';
 import {
+    allCurrencyRates,
     changeBaseCode,
     changeBaseRate,
     changeCountry,
     getLatestRates
 } from '@/store/slices/currency.slice';
-import { fetchUserCountry } from '@/store/actions/getUserIp';
 
 export const useCurrency = () => {
     const state = useAppSelector((state) => state.currency);
     const dispatch = useAppDispatch();
 
-    // const { data } = useGetUserIpQuery();
-    // const apiKey = 'a52202833727fb095d0858b7';
-    // `https://v6.exchangerate-api.com/v6/${apiKey}/latest/${code}`
-
     const fetchLatest = () => dispatch(fetchLatestRate());
+    const fetchAllLatest = () => dispatch(fetchAllLatestRate());
 
     const updateOldRates = (rates: { [key: string]: number }) =>
         dispatch(getLatestRates(rates));
@@ -38,7 +39,9 @@ export const useCurrency = () => {
         }
         return new Intl.NumberFormat('en-US', {
             style: 'currency',
-            currency: type ?? base_code
+            currency: type ?? base_code,
+            minimumFractionDigits: 0,
+            maximumFractionDigits: 0
         }).format(value * (rate ?? base_rate));
     };
 
@@ -54,15 +57,23 @@ export const useCurrency = () => {
             .trim();
     }
 
+    function getSingleRate(code?: string): allCurrencyRates | undefined {
+        return state.rate_list.find(
+            (rate) => rate.code === code ?? state.base_code
+        );
+    }
+
     return {
         ...state,
         fetchLatestRates: fetchLatest,
+        fetchAllLatestRates: fetchAllLatest,
         updateBaseRate,
         updateBaseCode,
         updateOldRates,
         updateCountry,
         updateGeoIp,
         setCurrencyValue,
-        getCurrencySymbol
+        getCurrencySymbol,
+        getSingleRate
     };
 };

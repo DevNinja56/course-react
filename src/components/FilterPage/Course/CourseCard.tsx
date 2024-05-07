@@ -13,10 +13,22 @@ interface CardProps {
 }
 
 const CourseCard = ({ course }: CardProps) => {
-    const { country, institute, degree, logo, _id, name, tuitionFee, intakes } =
-        course;
+    const {
+        country,
+        institute,
+        degree,
+        logo,
+        _id,
+        name,
+        tuitionFee,
+        intakes,
+        feeCurrency,
+        specialization
+    } = course;
 
-    const { getCurrencySymbol, setCurrencyValue } = useCurrency();
+    const { getCurrencySymbol, setCurrencyValue, getSingleRate } =
+        useCurrency();
+    const rate = getSingleRate(feeCurrency);
 
     return (
         <div
@@ -39,13 +51,14 @@ const CourseCard = ({ course }: CardProps) => {
                         className="h-[200px] w-full object-cover rounded-xl"
                     />
                 </div>
-                <div className="pt-3 pb-6 px-3 flex flex-col gap-7">
+                <div className="pt-3 pb-3 px-3 flex flex-col gap-7">
                     <div className="flex flex-col gap-2">
                         <h1
                             title={name}
                             className="font-bold text-mainTextColor text-xs xl:text-sm"
                         >
-                            {name} <br /> at {institute.name}
+                            {name} <br /> at {institute.name} - (
+                            {specialization?.name ?? 'No Specialization'})
                         </h1>
                         <p className="font-medium text-[0.670rem] xl:text-[0.700rem] text-gray-400 capitalize">
                             {degree.type}
@@ -68,7 +81,12 @@ const CourseCard = ({ course }: CardProps) => {
                                     {getCurrencySymbol()}
                                 </span>
                                 <p className="text-[0.600rem] xl:text-[0.700rem]">
-                                    {setCurrencyValue(tuitionFee)}
+                                    {setCurrencyValue(
+                                        tuitionFee *
+                                            (rate?.base_rate
+                                                ? +rate?.base_rate
+                                                : 1)
+                                    )}
                                 </p>
                             </div>
                             <div className="flex flex-col items-center gap-1">

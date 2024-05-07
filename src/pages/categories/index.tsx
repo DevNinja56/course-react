@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Image from 'next/image';
+// import Image from 'next/image';
 import Card from '@/components/Fields/Card';
 import LoaderSpinner from '@/components/LoaderSpinner';
 import { useGetPaginatedDisciplineQuery } from '@/store/slices/allRequests';
@@ -14,13 +14,13 @@ const Fields = () => {
     return (
         <>
             <div className="w-full flex items-center justify-between h-[214px] mt-[90px] bg-profileBgColor mb-16">
-                <Image
+                <img
                     height={193}
                     width={193}
                     alt="fields-round"
                     className="mt-[-190px] md:mt-[-150px] ml-[-20px] lg:ml-[-4px] h-[89px] w-[91px] md:w-[129px] md:h-[126px] lg:h-[193px] lg:w-[193px]"
                     src="/images/profileImages/Ellipse 418.svg"
-                    priority
+                    // priority
                 />
                 <div className="flex flex-col items-center">
                     <h1 className="text-mainTextColor text-[36px] md:text-[48px] font-bold">
@@ -30,29 +30,29 @@ const Fields = () => {
                         Top Programs all over the World
                     </p>
                 </div>
-                <Image
+                <img
                     height={235}
                     width={100}
                     alt="fields-round-2"
                     className="mt-[207px] hidden lg:block"
                     src="/images/Fields/Frame 691.svg"
-                    priority
+                    // priority
                 />
-                <Image
+                <img
                     height={154}
                     width={109}
                     alt="fields-round-2"
                     className="mt-[207px] hidden md:block lg:hidden"
                     src="/images/Fields/Frame 866.svg"
-                    priority
+                    // priority
                 />
-                <Image
+                <img
                     height={124}
                     width={56}
                     alt="fields-round-2"
                     className="mt-[207px] block md:hidden lg:hidden"
                     src="/images/Fields/Frame 910.svg"
-                    priority
+                    // priority
                 />
             </div>
             <div className="w-full pb-4 md:pb-20">
