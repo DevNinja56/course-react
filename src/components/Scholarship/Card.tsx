@@ -102,7 +102,7 @@ const Card: React.FC<propsType> = ({
                                         className="5-4 w-5 text-blueColor"
                                     />
                                 }
-                                text={institute.name ?? 'No institute'}
+                                text={institute?.name ?? 'No institute'}
                             />
                         </div>
                     )}

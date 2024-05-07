@@ -80,6 +80,9 @@ export type scholarshipType = {
     createdAt: string;
     updatedAt: string;
     favoriteId: userType[];
+    text_overview: string;
+    text_eligibility_criteria: string;
+    text_amount: string;
 };
 
 export type filterScholarShipType = {
