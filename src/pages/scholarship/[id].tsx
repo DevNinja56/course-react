@@ -10,7 +10,7 @@ import { scholarshipType } from '@/types';
 import { getSsrRequest } from '@/utils/ssrRequest';
 import { GetServerSideProps } from 'next';
 import Link from 'next/link';
-import React from 'react';
+import React, { useState } from 'react';
 import { FaCalendar, FaMoneyBillWave } from 'react-icons/fa6';
 import { GiTrophy } from 'react-icons/gi';
 import { GoClockFill } from 'react-icons/go';
@@ -18,6 +18,8 @@ import { IoShareSocialSharp } from 'react-icons/io5';
 
 const CourseDetail = ({ data: scholarship }: { data: scholarshipType }) => {
     const { updateModal } = useUi();
+    const [isActive] = useState<boolean | null>(!!scholarship?.favoriteId?.[0]);
+
     return (
         <>
             {!scholarship ? (
@@ -73,16 +75,15 @@ const CourseDetail = ({ data: scholarship }: { data: scholarshipType }) => {
                                     <button className="rounded-[20px] py-2 px-3 md:px-4 text-xs md:text-sm border-2 border-white hover:border-blueColor text-white hover:text-blueColor bg-blueColor hover:bg-white flex gap-2 items-center">
                                         {scholarship?.institute?.sector}
                                     </button>
-                                    <FavoriteButton
-                                        isActive={
-                                            !!scholarship?.favoriteId?.[0]
-                                        }
-                                        body={{
-                                            scholarship: scholarship._id
-                                        }}
-                                        className="h-8 w-8 md:h-10 md:w-10 rounded-full flex items-center justify-center border-2 border-white bg-heartBgColor hover:bg-white group"
-                                        iconClass={`text-3xl text-white group-hover:text-red-600`}
-                                    />
+                                    {isActive !== null && (
+                                        <FavoriteButton
+                                            isActive={isActive}
+                                            body={{
+                                                scholarship: scholarship._id
+                                            }}
+                                            position="static"
+                                        />
+                                    )}
                                     <div
                                         onClick={() =>
                                             updateModal({
