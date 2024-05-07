@@ -23,31 +23,43 @@ const ShareModal = () => {
     const typedModalState = modalState as ModalState;
 
     return (
-        <div className="bg-white p-10 border-4 border-[#CCCCCC] rounded-lg relative ">
-            <GrFormClose
-                onClick={hideModal}
-                className="absolute top-3 right-3 cursor-pointer text-xl"
-            />
-            <div className="flex items-center gap-3">
+        <div className="bg-white h-52 w-80 rounded-xl relative grid px-4 py-3 border-2 border-blueColor shadow-xl hover:scale-110 duration-500">
+            <div className="flex items-center justify-between h-8 border-b-2 py-6">
+                <h1 className="text-xl font-bold text-mainTextColor">
+                    Share Your Course
+                </h1>
+                <GrFormClose
+                    onClick={hideModal}
+                    className="cursor-pointer text-3xl bg-redColor rounded-full text-white"
+                />
+            </div>
+            <h1 className="text-grayColor font-medium">
+                Share this link via
+            </h1>
+            <div className="flex items-center bg-white w-full justify-between">
                 <FacebookShareButton
+                    className="hover:scale-125 duration-500"
                     url={`${window.location.origin}/${typedModalState.name}/${typedModalState.id}`}
                 >
-                    <FacebookIcon size={32} round />
+                    <FacebookIcon size={50} round />
                 </FacebookShareButton>
                 <WhatsappShareButton
+                    className="hover:scale-125 duration-500"
                     url={`${window.location.origin}/${typedModalState.name}/${typedModalState.id}`}
                 >
-                    <WhatsappIcon size={32} round />
+                    <WhatsappIcon size={50} round />
                 </WhatsappShareButton>
                 <LinkedinShareButton
+                    className="hover:scale-125 duration-500"
                     url={`${window.location.origin}/${typedModalState.name}/${typedModalState.id}`}
                 >
-                    <LinkedinIcon size={32} round />
+                    <LinkedinIcon size={50} round />
                 </LinkedinShareButton>
                 <TwitterShareButton
+                    className="hover:scale-125 duration-500"
                     url={`${window.location.origin}/${typedModalState.name}/${typedModalState.id}`}
                 >
-                    <TwitterIcon size={32} round />
+                    <TwitterIcon size={50} round />
                 </TwitterShareButton>
             </div>
         </div>

@@ -85,7 +85,7 @@ const InputBox = React.forwardRef<HTMLInputElement, propsType>(
                     )}
                     {type === 'password' && (
                         <span
-                            className="absolute top-[-3px] md:top-0 right-0 h-[49px] w-[49px] grid place-items-center cursor-pointer "
+                            className="absolute top-[-7px] md:top-[-1] right-0 h-[49px] w-[49px] grid place-items-center cursor-pointer "
                             onClick={() => setShow((prev) => !prev)}
                         >
                             {isShown ? <FaRegEyeSlash /> : <FaRegEye />}
