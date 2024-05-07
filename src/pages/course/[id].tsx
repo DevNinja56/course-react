@@ -109,8 +109,7 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                                     <FavoriteButton
                                         isActive={!!course?.favoriteId?.[0]}
                                         body={{ course: course.id }}
-                                        className="h-8 w-8 md:h-10 md:w-10 rounded-full flex items-center justify-center border-2 border-white bg-heartBgColor hover:bg-white group"
-                                        iconClass={`text-3xl text-white group-hover:text-red-600`}
+                                        position="static"
                                     />
                                     <div
                                         onClick={() =>

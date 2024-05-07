@@ -42,7 +42,7 @@ const ApplicationStatusBox = ({ selectedCourse }: propTypes) => {
                                 {selectedCourse?.course?.institute?.name}
                             </span>
                             <span className="text-darkGrayColor text-xs md:text-base">
-                                {selectedCourse?.course?.institute?.location}
+                                {selectedCourse?.course?.availableCampuses}
                             </span>
                         </div>
                     </div>
