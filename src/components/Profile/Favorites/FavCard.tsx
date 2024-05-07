@@ -21,7 +21,7 @@ const FavCard: React.FC<propsType> = ({
     type
 }) => {
     return (
-        <div className="border-2 p-3 rounded-lg group hover:border-blueColor relative ">
+        <div className="border-2 p-3 rounded-lg group hover:border-blueColor relative">
             <FavoriteButton
                 isActive={true}
                 body={{
