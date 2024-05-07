@@ -39,7 +39,10 @@ const CourseCard = ({ course }: CardProps) => {
                 isActive={!!course?.favoriteId?.[0]}
                 body={{ course: _id }}
             />
-            <Link href={ROUTES.COURSE.replace(':id', _id)}>
+            <Link
+                href={ROUTES.COURSE.replace(':id', _id)}
+                className="h-full flex flex-col justify-between"
+            >
                 <div className="relative">
                     <img
                         height={174}
