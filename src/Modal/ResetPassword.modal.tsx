@@ -76,7 +76,7 @@ const ResetPassword = () => {
                     />
                     <Button
                         className="pt-[14px] pb-[13px]"
-                        text="Send mail"
+                        text="Submit"
                         type="submit"
                         disabled={isLoading}
                         isLoader={isLoading}
