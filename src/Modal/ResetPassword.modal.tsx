@@ -47,7 +47,7 @@ const ResetPassword = () => {
                 className="absolute top-3 right-3 cursor-pointer"
             />
             <h1 className="text-mainTextColor font-bold text-[36px] mb-5">
-                Reset Password
+                Forgot Password
             </h1>
             {isSendMail ? (
                 <>
@@ -76,7 +76,7 @@ const ResetPassword = () => {
                     />
                     <Button
                         className="pt-[14px] pb-[13px]"
-                        text="Reset"
+                        text="Send mail"
                         type="submit"
                         disabled={isLoading}
                         isLoader={isLoading}
