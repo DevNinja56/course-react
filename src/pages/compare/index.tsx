@@ -279,7 +279,7 @@ const Compare = ({ data }: { data?: singleCourseType }) => {
                                             key={'rows-content--' + title}
                                         >
                                             <div
-                                                className={`w-[50%] md:w-1/4 px-3 py-5 md:p-5 relative border-r border-profileBgColor flex items-center ${
+                                                className={`w-[40%] md:w-1/4 px-3 py-5 md:p-5 relative border-r border-profileBgColor flex items-center ${
                                                     i % 2 === 0
                                                         ? 'bg-lightBlue'
                                                         : 'bg-white'
@@ -290,35 +290,35 @@ const Compare = ({ data }: { data?: singleCourseType }) => {
                                                 </h1>
                                             </div>
                                             <div
-                                                className={`w-[15%] md:w-1/4 px-3 py-5 md:p-5 relative border-x border-profileBgColor flex items-center ${
+                                                className={`w-[20%] md:w-1/4 px-3 max-sm:px-0 py-5 md:p-5 relative border-x border-profileBgColor flex items-center ${
                                                     i % 2 === 0
                                                         ? 'bg-lightBlue'
                                                         : 'bg-white'
                                                 }  `}
                                             >
-                                                <h1 className="font-bold text-sm md:text-base text-grayColor">
+                                                <h1 className="font-bold max-sm:text-xs text-sm md:text-base text-grayColor">
                                                     {first ?? '--'}
                                                 </h1>
                                             </div>
                                             <div
-                                                className={`w-[15%] md:w-1/4 px-3 py-5 md:p-5 relative border-x border-profileBgColor flex items-center ${
+                                                className={`w-[20%] md:w-1/4 px-3 max-sm:px-0 py-5 md:p-5 relative border-x border-profileBgColor flex items-center ${
                                                     i % 2 === 0
                                                         ? 'bg-lightBlue'
                                                         : 'bg-white'
                                                 }  `}
                                             >
-                                                <h1 className="font-bold text-sm md:text-base text-grayColor">
+                                                <h1 className="font-bold max-sm:text-xs text-sm md:text-base text-grayColor">
                                                     {second ?? '--'}
                                                 </h1>
                                             </div>
                                             <div
-                                                className={`w-[15%] md:w-1/4 px-3 py-5 md:p-5 relative border-x border-profileBgColor flex items-center ${
+                                                className={`w-[20%]  md:w-1/4 px-3 max-sm:px-0 py-5 md:p-5 relative border-x border-profileBgColor flex items-center ${
                                                     i % 2 === 0
                                                         ? 'bg-lightBlue'
                                                         : 'bg-white'
                                                 }  `}
                                             >
-                                                <h1 className="font-bold text-sm md:text-base text-grayColor">
+                                                <h1 className="font-bold max-sm:text-xs text-sm md:text-base text-grayColor">
                                                     {third ?? '--'}
                                                 </h1>
                                             </div>
