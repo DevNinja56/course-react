@@ -7,17 +7,13 @@ import { fetchRequest } from '@/utils/axios/fetch';
 import { API_ENDPOINTS } from '@/config/Api_EndPoints';
 import InputBox from '@/components/Input';
 import Select, { SingleValue } from 'react-select';
-// import Image from 'next/image';
 import { CiCircleRemove } from 'react-icons/ci';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import GoogleOAuthWraper from '@/components/Auth/GoogleSignInBtn';
 import Button from '@/components/Button';
 import { ROUTES } from '@/config/constant';
-import { modalType } from '@/store/slices/ui.slice';
-import Link from 'next/link';
 import { MdOutlineMail } from 'react-icons/md';
 import { BiLock } from 'react-icons/bi';
-import { FaArrowLeft } from 'react-icons/fa6';
 import dynamic from 'next/dynamic';
 import {
     useGetCoursesByInstituteQuery,
@@ -59,7 +55,6 @@ const StartApplication = () => {
     const { course } = modalState as { course: singleCourseType };
     const { isAuthenticated, user, updateUserDetails, loggedInUser } =
         useUserAuth();
-    const { updateModal } = useUi();
     const [isLoading, setIsLoading] = useState(false);
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
