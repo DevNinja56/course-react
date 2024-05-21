@@ -37,19 +37,20 @@ export const useCurrency = () => {
             base_code = state.base_code;
             base_rate = state.base_rate;
         }
-        return new Intl.NumberFormat('en-US', {
+        const data =  new Intl.NumberFormat('en-US', {
             style: 'currency',
             currency: type ?? base_code,
             minimumFractionDigits: 0,
             maximumFractionDigits: 0
         }).format(value * (rate ?? base_rate));
+        return data;
     };
 
-    function getCurrencySymbol(currency: string = 'PKR') {
+    function getCurrencySymbol(currency?: string ) {
         return (0)
             .toLocaleString('en-US', {
                 style: 'currency',
-                currency: state.base_code ?? currency,
+                currency: currency ?? state.base_code ,
                 minimumFractionDigits: 0,
                 maximumFractionDigits: 0
             })
@@ -59,7 +60,7 @@ export const useCurrency = () => {
 
     function getSingleRate(code?: string): allCurrencyRates | undefined {
         return state.rate_list.find(
-            (rate) => rate.code === code ?? state.base_code
+            (rate) => rate.code === code?.toUpperCase() ?? state.base_code
         );
     }
 

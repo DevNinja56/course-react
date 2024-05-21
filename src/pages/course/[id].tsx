@@ -31,7 +31,7 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
     const { updateModal } = useUi();
     const { setCurrencyValue, getSingleRate } = useCurrency();
     const { initialDeposit } = useCalculate();
-    const rate = getSingleRate();
+    const rate = getSingleRate(course.feeCurrency);
     const isUkCourse = course?.institute?.country?.name
         ?.toLowerCase()
         ?.includes('united kingdom' || 'uk');
@@ -295,7 +295,9 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                                                                                 scholarship:
                                                                                     course
                                                                                         ?.scholarship[0]
-                                                                                        ?.amount
+                                                                                        ?.amount,
+                                                                                    currency_code:
+                                                                                        course.feeCurrency
                                                                             }
                                                                         )}
                                                                     </p>

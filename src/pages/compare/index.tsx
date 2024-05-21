@@ -15,7 +15,7 @@ import { useCalculate } from '@/hooks/initial-deposit-calculate';
 const Compare = ({ data }: { data?: singleCourseType }) => {
     const { first, second, third, compareFirst, compareSecond, compareThird } =
         useCompare();
-    const { setCurrencyValue, getSingleRate } = useCurrency();
+    const { setCurrencyValue, getSingleRate, base_code } = useCurrency();
     const { initialDeposit } = useCalculate();
 
     useEffect(() => {
@@ -43,12 +43,12 @@ const Compare = ({ data }: { data?: singleCourseType }) => {
         depositAmount,
         tuitionFee,
         scholarshipAmount,
-        feeCurrency = 'pkr'
+        feeCurrency
     }: {
         depositAmount: string;
         tuitionFee: number;
         scholarshipAmount: string;
-        feeCurrency?: string;
+        feeCurrency: string;
     }) => {
         const initialDepositAmount = initialDeposit({
             initialDeposit: depositAmount,
@@ -63,10 +63,14 @@ const Compare = ({ data }: { data?: singleCourseType }) => {
         );
     };
 
-    const getTuitionFeeIntoCurrency = (tuitionFee: number) => {
-        const rate = getSingleRate();
+    const getTuitionFeeIntoCurrency = (
+        tuitionFee: number,
+        feeCurrency: string
+    ) => {
+        const rate = getSingleRate(feeCurrency);
         return setCurrencyValue(
-            tuitionFee * (rate?.base_rate ? +rate?.base_rate : 1)
+            tuitionFee * +(rate?.base_rate ?? 1),
+            rate ? base_code : feeCurrency
         );
     };
 
@@ -186,7 +190,8 @@ const Compare = ({ data }: { data?: singleCourseType }) => {
                                   first?.course.initialDeposit[0].amount,
                               tuitionFee: first?.course.tuitionFee,
                               scholarshipAmount:
-                                  first?.course.scholarship?.[0]?.amount ?? 0
+                                  first?.course.scholarship?.[0]?.amount ?? 0,
+                              feeCurrency: first?.course.feeCurrency
                           })
                         : null,
                     second: second
@@ -195,7 +200,8 @@ const Compare = ({ data }: { data?: singleCourseType }) => {
                                   second?.course.initialDeposit[0].amount,
                               tuitionFee: second?.course.tuitionFee,
                               scholarshipAmount:
-                                  second?.course.scholarship?.[0]?.amount ?? 0
+                                  second?.course.scholarship?.[0]?.amount ?? 0,
+                              feeCurrency: second?.course.feeCurrency
                           })
                         : null,
                     third: third
@@ -204,21 +210,31 @@ const Compare = ({ data }: { data?: singleCourseType }) => {
                                   third?.course.initialDeposit[0].amount,
                               tuitionFee: third?.course.tuitionFee,
                               scholarshipAmount:
-                                  third?.course.scholarship?.[0]?.amount ?? 0
+                                  third?.course.scholarship?.[0]?.amount ?? 0,
+                              feeCurrency: third?.course.feeCurrency
                           })
                         : null
                 },
                 {
                     title: 'Yearly fee',
                     first: first
-                        ? getTuitionFeeIntoCurrency(first.course.tuitionFee)
+                        ? getTuitionFeeIntoCurrency(
+                              first.course.tuitionFee,
+                              first.course.feeCurrency
+                          )
                         : null,
 
                     second: second
-                        ? getTuitionFeeIntoCurrency(second.course.tuitionFee)
+                        ? getTuitionFeeIntoCurrency(
+                              second.course.tuitionFee,
+                              second.course.feeCurrency
+                          )
                         : null,
                     third: third
-                        ? getTuitionFeeIntoCurrency(third.course.tuitionFee)
+                        ? getTuitionFeeIntoCurrency(
+                              third.course.tuitionFee,
+                              third.course.feeCurrency
+                          )
                         : null
                 },
                 {

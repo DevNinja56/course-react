@@ -17,15 +17,16 @@ export const useCalculate = () => {
         tuitionFee,
         scholarship,
         isNumber = false,
-        currency_code = 'pkr'
+        currency_code
     }: initialDepositType): string | number {
-        const { base_rate } = getSingleRate(currency_code ?? base_code) ?? {
-            base_rate: 1
-        };
+        const rate = getSingleRate(currency_code ?? base_code);
         if (!isNaN(+initialDeposit)) {
             return isNumber
-                ? +initialDeposit * +base_rate
-                : setCurrencyValue(+initialDeposit * +base_rate);
+                ? +initialDeposit * +(rate?.base_rate ?? 1)
+                : setCurrencyValue(
+                      +initialDeposit * +(rate?.base_rate ?? 1),
+                      rate ? base_code : currency_code
+                  );
         }
 
         const matches = initialDeposit.match(/^\{([1-9][0-9]?|100)%,(N|G)\}$/);
@@ -35,9 +36,12 @@ export const useCalculate = () => {
 
             if (option === 'G') {
                 return isNumber
-                    ? (tuitionFee * (percentage / 100) ?? 0) * +base_rate
+                    ? (tuitionFee * (percentage / 100) ?? 0) *
+                          +(rate?.base_rate ?? 1)
                     : setCurrencyValue(
-                          (tuitionFee * (percentage / 100) ?? 0) * +base_rate
+                          (tuitionFee * (percentage / 100) ?? 0) *
+                              +(rate?.base_rate ?? 1),
+                          rate ? base_code : currency_code
                       );
             } else if (option === 'N') {
                 return isNumber
@@ -45,14 +49,15 @@ export const useCalculate = () => {
                           tuitionFee * (percentage / 100) -
                               tuitionFee *
                                   (parseInt(scholarship) / 100) *
-                                  +base_rate
+                                  +(rate?.base_rate ?? 1)
                       ) ?? 0
                     : setCurrencyValue(
                           Math.floor(
                               (tuitionFee * (percentage / 100) -
                                   tuitionFee * (parseInt(scholarship) / 100)) *
-                                  +base_rate
-                          ) ?? 0
+                                  +(rate?.base_rate ?? 1)
+                          ) ?? 0,
+                          rate ? base_code : currency_code
                       );
             }
         }

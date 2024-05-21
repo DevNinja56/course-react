@@ -22,13 +22,13 @@ const CourseCard = ({ course }: CardProps) => {
         name,
         tuitionFee,
         intakes,
-        // feeCurrency,
+        feeCurrency,
         specialization
     } = course;
 
-    const { getCurrencySymbol, setCurrencyValue, getSingleRate } =
+    const { getCurrencySymbol, setCurrencyValue, getSingleRate,  base_code } =
         useCurrency();
-    const rate = getSingleRate();
+    const rate = getSingleRate(feeCurrency); 
 
     return (
         <div
@@ -81,14 +81,14 @@ const CourseCard = ({ course }: CardProps) => {
                             </div>
                             <div className="flex flex-col items-center gap-1">
                                 <span className="h-4 w-4 text-blueColor">
-                                    {getCurrencySymbol()}
+                                    {getCurrencySymbol(rate  ? base_code : feeCurrency)}
                                 </span>
                                 <p className="text-[0.600rem] xl:text-[0.700rem]">
                                     {setCurrencyValue(
                                         tuitionFee *
                                             (rate?.base_rate
                                                 ? +rate?.base_rate
-                                                : 1)
+                                                : 1), rate  ? base_code : feeCurrency
                                     )}
                                 </p>
                             </div>
