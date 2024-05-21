@@ -32,7 +32,7 @@ const InputBox = React.forwardRef<HTMLInputElement, propsType>(
             <label
                 htmlFor={'input-box--' + (id ?? name)}
                 className={`text-sm md:text-lg flex flex-col gap-y-1 w-full ${
-                    error ? ' text-red-600 ' : 'text-black'
+                    error ? ' text-red-600 ' : 'text-gray-500'
                 }`}
             >
                 {title}
@@ -47,7 +47,7 @@ const InputBox = React.forwardRef<HTMLInputElement, propsType>(
                             }}
                             className={`${
                                 customInputClass ??
-                                'pt-[7px] pb-[9px] rounded-[10px] w-full outline-none placeholder:text-sm'
+                                'pt-[7px] pb-[9px] rounded-[10px] w-full outline-none placeholder:text-sm flex items-center'
                             } ${
                                 error
                                     ? 'text-red-600 border border-red-600'
@@ -69,7 +69,7 @@ const InputBox = React.forwardRef<HTMLInputElement, propsType>(
                             }
                             className={`${
                                 customInputClass ??
-                                'py-[5px] px-5 rounded-[10px] w-full outline-none placeholder:text-sm'
+                                'py-3 px-5 rounded-[10px] w-full outline-none placeholder:text-sm'
                             } ${
                                 error
                                     ? 'text-red-600 border border-red-600'
@@ -79,13 +79,13 @@ const InputBox = React.forwardRef<HTMLInputElement, propsType>(
                         />
                     )}
                     {Icon && (
-                        <span className="absolute sm:top-[-5px] max-sm:translate-y-[-40px] left-0 h-[49px] w-[49px] grid place-items-center ">
+                        <span className="absolute sm:top-[3px] max-sm:translate-y-[-40px] left-0 h-[49px] w-[49px] grid place-items-center ">
                             <Icon className="h-3 w-3 md:h-[25px] md:w-[25px] " />
                         </span>
                     )}
                     {type === 'password' && (
                         <span
-                            className="absolute top-[-7px] md:top-[-1] right-0 h-[49px] w-[49px] grid place-items-center cursor-pointer "
+                            className="absolute top-[1px] md:top-[-1] right-0 h-[49px] w-[49px] grid place-items-center cursor-pointer "
                             onClick={() => setShow((prev) => !prev)}
                         >
                             {isShown ? <FaRegEyeSlash /> : <FaRegEye />}
