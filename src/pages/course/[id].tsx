@@ -29,9 +29,10 @@ import Card from '@/components/Scholarship/Card';
 
 const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
     const { updateModal } = useUi();
-    const { setCurrencyValue, getSingleRate } = useCurrency();
+    const { setCurrencyValue, getSingleRate, base_code } = useCurrency();
     const { initialDeposit } = useCalculate();
-    const rate = getSingleRate(course.feeCurrency);
+    const isSameCurrency = base_code === course.feeCurrency;
+    const rate = isSameCurrency ? null : getSingleRate(course.feeCurrency);
     const isUkCourse = course?.institute?.country?.name
         ?.toLowerCase()
         ?.includes('united kingdom' || 'uk');
@@ -210,10 +211,16 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                                                                     </h3>
                                                                     <p className="text-sm md:text-base">
                                                                         {setCurrencyValue(
-                                                                            course.tuitionFee *
-                                                                                (rate?.base_rate
-                                                                                    ? +rate?.base_rate
-                                                                                    : 1)
+                                                                            isSameCurrency &&
+                                                                                !rate
+                                                                                ? course.tuitionFee
+                                                                                : course.tuitionFee *
+                                                                                      (rate?.base_rate
+                                                                                          ? +rate?.base_rate
+                                                                                          : 1),
+                                                                            rate
+                                                                                ? base_code
+                                                                                : course.feeCurrency
                                                                         )}
                                                                     </p>
                                                                 </div>
@@ -296,10 +303,11 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                                                                                     course
                                                                                         ?.scholarship[0]
                                                                                         ?.amount,
-                                                                                    currency_code:
-                                                                                        course.feeCurrency
+                                                                                currency_code:
+                                                                                    course.feeCurrency
                                                                             }
                                                                         )}
+                                                                       
                                                                     </p>
                                                                 </div>
                                                             )
@@ -431,10 +439,15 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                                                 </p>
                                                 <p className="text-lightGrayColor text-base">
                                                     {setCurrencyValue(
-                                                        course.tuitionFee *
-                                                            (rate?.base_rate
-                                                                ? +rate?.base_rate
-                                                                : 1)
+                                                        isSameCurrency && !rate
+                                                            ? course.tuitionFee
+                                                            : course.tuitionFee *
+                                                                  (rate?.base_rate
+                                                                      ? +rate?.base_rate
+                                                                      : 1),
+                                                        rate
+                                                            ? base_code
+                                                            : course.feeCurrency
                                                     )}
                                                 </p>
                                             </div>
