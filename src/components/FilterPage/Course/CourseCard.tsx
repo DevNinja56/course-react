@@ -22,7 +22,7 @@ const CourseCard = ({ course }: CardProps) => {
         name,
         tuitionFee,
         intakes,
-        feeCurrency,
+        feeCurrency = 'AUD',
         specialization
     } = course;
 
