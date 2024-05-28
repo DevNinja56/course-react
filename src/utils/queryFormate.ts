@@ -139,7 +139,7 @@ export const formateScholarshipQuery = (query: { [key: string]: any }) => {
 
     if (query.degrees) {
         orConditions.push({
-            'degrees.name': { $in: query.degrees }
+            'degree.name': { $in: query.degrees }
         });
     }
 
