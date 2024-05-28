@@ -37,7 +37,7 @@ export const formateCourseQuery = (query: { [key: string]: any }) => {
 
     if (query.location) {
         orConditions.push({
-            'institute.location': { $in: query.location }
+            'availableCampuses': { $in: query.location }
         });
     }
 

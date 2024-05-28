@@ -84,7 +84,11 @@ const Card: React.FC<propsType> = ({
                                 }
                                 text={
                                     Array.isArray(degree)
-                                        ? degree?.map((d) => d.name).join(' / ')
+                                        ? degree.length
+                                            ? degree
+                                                  ?.map((d) => d.name)
+                                                  .join(' / ')
+                                            : 'No degree'
                                         : degree?.name ?? 'No degree'
                                 }
                             />

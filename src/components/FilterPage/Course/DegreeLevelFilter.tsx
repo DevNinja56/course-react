@@ -27,7 +27,9 @@ const DegreeLevelFilter: React.FC<propsType> = ({ data, isLoading }) => {
             ) : (
                 Object.entries(
                     _.groupBy(
-                        data.map(({ degree }) => degree),
+                        data
+                            .filter(({ degree }) => degree)
+                            .map(({ degree }) => degree),
                         'type'
                     )
                 )?.map(([name, type], i) => (
