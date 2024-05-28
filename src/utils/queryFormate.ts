@@ -145,7 +145,7 @@ export const formateScholarshipQuery = (query: { [key: string]: any }) => {
 
     if (query.degreeType) {
         orConditions.push({
-            'degrees.type': { $in: query.degreeType }
+            'degree.type': { $in: query.degreeType }
         });
     }
 
