@@ -66,17 +66,38 @@ const FilterSideBar = ({ setFilterSideBar }: ModalProps) => {
                             </p>
                         </div>
                         {Object.values(query).length > 0 && (
-                            <div className="my-2">
+                            <div className="my-2  ">
                                 <div className="flex gap-0.5 flex-wrap px-2">
                                     {Object.entries(query).map(
-                                        ([key, item], idx) =>
-                                            item.map((val) => (
-                                                <FilteredButton
-                                                    key={idx}
-                                                    itemKey={key}
-                                                    itemValue={val ?? 'button'}
-                                                />
-                                            ))
+                                        ([key, item], idx) => {
+                                            if (Array.isArray(item)) {
+                                                return item.map((val) => (
+                                                    <FilteredButton
+                                                        key={
+                                                            'query--key--' + idx
+                                                        }
+                                                        itemKey={key}
+                                                        itemValue={
+                                                            val ?? 'button'
+                                                        }
+                                                    />
+                                                ));
+                                            } else if (
+                                                typeof item === 'string'
+                                            ) {
+                                                return (
+                                                    <FilteredButton
+                                                        key={
+                                                            'query--key--' + idx
+                                                        }
+                                                        itemKey={key}
+                                                        itemValue={
+                                                            item ?? 'button'
+                                                        }
+                                                    />
+                                                );
+                                            }
+                                        }
                                     )}
                                 </div>
                                 <div className="mt-2">

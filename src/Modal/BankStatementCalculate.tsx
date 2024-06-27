@@ -57,21 +57,17 @@ const BankStatementCalculate = () => {
 
     const currency = isLiveAustralia ? 'AUD' : 'GBP';
     const { base_rate } = getSingleRate(currency) ?? { base_rate: 1 };
-    const scholarshipAmount = tuitionFee * (scholarshipGuaranteedAmount / 100);
+    // const scholarshipAmount = tuitionFee * (scholarshipGuaranteedAmount / 100);
 
     const data = [
         {
             name: 'Annual Tuition Fee',
             value: setCurrencyValue(tuitionFee * +base_rate)
         },
-        {
-            name: `Scholarship Amount - ${scholarship?.type ?? 'None'}`,
-            value: setCurrencyValue(scholarshipAmount * +base_rate)
-        },
-        {
-            name: 'Initial Deposit',
-            value: setCurrencyValue(initialDepositValue * +base_rate)
-        },
+        // {
+        //     name: `Scholarship Amount - ${scholarship?.type ?? 'None'}`,
+        //     value: setCurrencyValue(scholarshipAmount * +base_rate)
+        // },
         {
             name: 'Living Cost',
             value: setCurrencyValue(livingCost * +base_rate)
@@ -100,7 +96,11 @@ const BankStatementCalculate = () => {
                       name: 'Statement Requirement for Visa',
                       value: setCurrencyValue(visaFee * +base_rate)
                   }
-              ])
+              ]),
+        {
+            name: 'Initial Deposit',
+            value: `(${setCurrencyValue(initialDepositValue * +base_rate)})`
+        }
     ];
 
     return (
@@ -115,7 +115,8 @@ const BankStatementCalculate = () => {
                 Bank Statement Calculator
             </span>
             <p className="font-medium text-lg text-darkGrayColor text-center">
-                Lorem Ipsum is simply dummy text of the printing and type setting industry.
+                Lorem Ipsum is simply dummy text of the printing and type
+                setting industry.
             </p>
             <div className="mt-4 overflow-hidden rounded">
                 <table className="border table w-full">
@@ -299,10 +300,6 @@ export default BankStatementCalculate;
 // Equals To:
 // Bank Statement required for Visa
 
-
-
-
-
 // Bank Statement Calculation for UK:
 
 // 1st Year Course Fee (Gross) (Gross Fee means without deducting any scholarship)
@@ -314,5 +311,3 @@ export default BankStatementCalculate;
 // Initial Deposit
 // Equals To:
 // Bank Statement Required for Visa
-
-

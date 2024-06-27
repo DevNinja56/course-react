@@ -92,9 +92,6 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                             </h1>
                             <div className="flex pr-0">
                                 <div className="flex flex-wrap items-center gap-1 md:gap-2 lg:gap-3">
-                                    <button className="rounded-[20px] py-2 px-3 md:px-4 text-xs md:text-sm border-2 border-white hover:border-purpleColor text-white hover:text-purpleColor bg-purpleColor hover:bg-white capitalize">
-                                        {course?.degree.type}
-                                    </button>
                                     <button
                                         className="rounded-[20px] py-2 px-3 md:px-4 text-xs md:text-sm border-2 border-white hover:border-blueColor text-white hover:text-blueColor bg-blueColor hover:bg-white flex gap-2 items-center"
                                         onClick={() =>
@@ -175,6 +172,14 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                                                                                     'No Entry Requirements'
                                                                             }}
                                                                         ></div>
+                                                                        {course?.textEligibility && (
+                                                                            <div
+                                                                                className="text-sm md:text-base"
+                                                                                dangerouslySetInnerHTML={{
+                                                                                    __html: course?.textEligibility
+                                                                                }}
+                                                                            />
+                                                                        )}
                                                                     </div>
                                                                 </div>
                                                             )
@@ -223,6 +228,14 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                                                                                 : course.feeCurrency
                                                                         )}
                                                                     </p>
+                                                                    {course?.textAmount && (
+                                                                        <div
+                                                                            className="text-sm md:text-base"
+                                                                            dangerouslySetInnerHTML={{
+                                                                                __html: course?.textAmount
+                                                                            }}
+                                                                        />
+                                                                    )}
                                                                 </div>
                                                             )
                                                         },
@@ -307,8 +320,16 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                                                                                     course.feeCurrency
                                                                             }
                                                                         )}
-                                                                       
                                                                     </p>
+
+                                                                    {course?.textInitialDeposit && (
+                                                                        <div
+                                                                            className="text-sm md:text-base"
+                                                                            dangerouslySetInnerHTML={{
+                                                                                __html: course?.textInitialDeposit
+                                                                            }}
+                                                                        />
+                                                                    )}
                                                                 </div>
                                                             )
                                                         }

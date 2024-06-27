@@ -113,8 +113,8 @@ const Institutes = ({ data: institute }: { data: instituteType }) => {
                                 <UniversityFacts data={institute} />
                                 <Ranking data={institute} />
                             </div>
-                            <ProgramSection />
-                            <ScholarshipSection />
+                            <ProgramSection name={institute.name} />
+                            <ScholarshipSection name={institute.name} />
                         </div>
                         <div className="w-1/3 hidden lg:flex flex-col gap-9 h-instituteStickyHeight sticky top-[110px] no-scrollbar">
                             <UniversityFacts data={institute} />

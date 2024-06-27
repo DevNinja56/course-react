@@ -188,7 +188,7 @@ export type courseType = {
     institute: instituteType;
     intakes: string[];
     tuitionFee: number;
-    feeCurrency: 'aud' | 'gbp'
+    feeCurrency: 'aud' | 'gbp';
     country: countryType;
     discipline: disciplineType[];
     countryDetails: {
@@ -237,7 +237,7 @@ export type singleCourseType = {
     monthDuration: string[];
     delivery: string;
     availableCampuses: string[];
-    feeCurrency: 'aud' | 'gbp'
+    feeCurrency: 'aud' | 'gbp';
     favoriteId: string[];
     name: string;
     logo: string;
@@ -253,6 +253,9 @@ export type singleCourseType = {
     createdAt: string;
     updatedAt: string;
     scholarship: scholarshipType[];
+    textInitialDeposit: string;
+    textEligibility: string;
+    textAmount: string;
     language: [
         {
             language: courseLanguageRequirement;

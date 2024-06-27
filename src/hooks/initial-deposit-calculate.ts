@@ -54,7 +54,7 @@ export const useCalculate = () => {
                 ? calculatedAmount
                 : setCurrencyValue(
                       calculatedAmount,
-                      currency_code ?? base_code
+                      rate ? base_code : currency_code
                   );
         }
 

@@ -65,7 +65,11 @@ const Card: React.FC<propsType> = ({
                                 title={name}
                                 className={`font-bold mx-auto ${headingClass}`}
                             >
-                                {name} ({type})
+                                {name}{' '}
+                                {degree
+                                    ? `for - ${!Array.isArray(degree) && degree.name}`
+                                    : ''}{' '}
+                                ({type})
                             </h1>
                         </div>
                     </div>

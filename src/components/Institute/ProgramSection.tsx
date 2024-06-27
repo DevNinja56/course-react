@@ -5,13 +5,14 @@ import { useGetCourseByFilterQuery } from '@/store/slices/allRequests';
 import CourseCard from '../FilterPage/Course/CourseCard';
 import LoaderSpinner from '../LoaderSpinner';
 
-const ProgramSection = () => {
+const ProgramSection = ({ name }: { name: string }) => {
     const [selectedProgram, setSelectedProgram] = useState('postgraduate');
     const { data, isLoading } = useGetCourseByFilterQuery({
         body: [
             {
                 $match: {
-                    'degree.type': selectedProgram
+                    'degree.type': selectedProgram,
+                    'institute.name': name
                 }
             }
         ],
@@ -66,7 +67,7 @@ const ProgramSection = () => {
                                 </button>
                             </div>
                         </div>
-                        {data && (
+                        {data?.data.length ? (
                             <div className="grid grid-cols-1 md:grid-cols-3 gap-2 gap-y-4 md:gap-4">
                                 {data?.data.map((item, i) => (
                                     <CourseCard
@@ -74,6 +75,12 @@ const ProgramSection = () => {
                                         course={item}
                                     />
                                 ))}
+                            </div>
+                        ) : (
+                            <div className="flex items-center justify-center h-12 w-full">
+                                <h1 className="text-lg font-bold text-lightGrayColor capitalize">
+                                    No Programs Founds in {selectedProgram}
+                                </h1>
                             </div>
                         )}
                     </div>

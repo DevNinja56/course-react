@@ -1486,7 +1486,7 @@ const SubmitDocument = () => {
                 <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-7">
                     <label htmlFor="secondarySchoolCertificate">
                         <RequirementBox
-                            text="Secondary School Certificate"
+                            text="Secondary School / O Levels Certificate"
                             url={
                                 getApply?.documents?.academic_certificates
                                     ?.secondary_school?.url
@@ -1502,7 +1502,7 @@ const SubmitDocument = () => {
                     />
                     <label htmlFor="higherSecondarySchoolCertificate">
                         <RequirementBox
-                            text="Higher Secondary School Certificate"
+                            text="Higher Secondary / A Levels  Certificate"
                             url={
                                 getApply?.documents?.academic_certificates
                                     ?.higher_secondary_school?.url
