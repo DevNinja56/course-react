@@ -363,7 +363,7 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                                             Listed below are the documents
                                             required to apply for this course.
                                         </p>
-                                        <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-7">
+                                        <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-7 justify-start">
                                             {course.documentsRequirement?.map(
                                                 ({ title, url }, i) => (
                                                     <RequirementBox
@@ -374,6 +374,7 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                                                         }
                                                         text={title}
                                                         url={url}
+                                                        isDownload={true}
                                                     />
                                                 )
                                             )}

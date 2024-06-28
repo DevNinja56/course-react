@@ -41,7 +41,7 @@ const CountriesFilter: React.FC<propsType> = ({ data, isLoading }) => {
                         .map(({ country: name }, i) => (
                             <FilterCheckBox
                                 key={'country--list--' + i}
-                                id={name}
+                                id={name + '--' + i}
                                 text={name}
                                 name={'countries'}
                                 value={name}

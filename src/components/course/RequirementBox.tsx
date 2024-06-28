@@ -1,18 +1,31 @@
 import React from 'react';
 import { MdOutlineAddCircle } from 'react-icons/md';
 import { FaFileCircleCheck } from 'react-icons/fa6';
+import { BiDownload } from 'react-icons/bi';
 
 interface propTypes {
     text: string;
     url: string | undefined;
     description?: string;
+    isActive?: boolean;
+    isDownload?: boolean;
 }
 
-const RequirementBox = ({ text, url, description }: propTypes) => {
+const RequirementBox = ({
+    text,
+    url,
+    description,
+    isActive = false,
+    isDownload = false
+}: propTypes) => {
     return (
         <>
-            <p className="text-lightGrayColor mb-2 font-medium capitalize">{description}</p>
-            <div className="px-6 py-5 flex items-center justify-between w-full bg-white shadow-RequirementBox rounded-lg cursor-pointer">
+            <p className="text-lightGrayColor mb-2 font-medium capitalize">
+                {description}
+            </p>
+            <div
+                className={`px-6 py-5 flex items-center justify-between w-full bg-white shadow-RequirementBox rounded-lg cursor-pointer ${isActive && 'border-green-600 border-2'} `}
+            >
                 <p className="font-bold text-lightGrayColor">{text}</p>
                 <a
                     href={url}
@@ -22,8 +35,10 @@ const RequirementBox = ({ text, url, description }: propTypes) => {
                     title={`Download ${text} file`}
                     className="h-12 w-12 rounded-md bg-profileBgColor flex items-center justify-center min-w-[48px]"
                 >
-                    {url ? (
-                        <FaFileCircleCheck className="text-blueColor h-8 w-8" />
+                    {isDownload ? (
+                        <BiDownload className="text-blueColor h-8 w-8" />
+                    ) : isActive ? (
+                        <FaFileCircleCheck className="text-green-600 h-8 w-8" />
                     ) : (
                         <MdOutlineAddCircle className="text-blueColor h-8 w-8" />
                     )}

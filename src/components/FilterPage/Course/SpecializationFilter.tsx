@@ -39,7 +39,7 @@ const SpecializationFilter: React.FC<propsType> = ({
                         .map(({ specialization: name }, i) => (
                             <FilterCheckBox
                                 key={'specialization--list--' + i + name}
-                                id={name}
+                                id={name + '--' + i}
                                 text={name}
                                 name={'specialization'}
                                 value={name}

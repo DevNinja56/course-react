@@ -1,14 +1,9 @@
 import { useRouter } from 'next/router';
-import { useEffect } from 'react';
 
 export const useFilterQuery = () => {
     const { query, push, pathname } = useRouter();
     // const dispatch = useAppDispatch();
     // const filterQuery = useAppSelector((state) => state.filterQuery);
-
-    useEffect(() => {
-        // dispatch(addQuery(query));
-    }, [query]);
 
     const addQueryAction = (obj: { [key: string]: string[] }) => {
         // dispatch(addQuery(obj));

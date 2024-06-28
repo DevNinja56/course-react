@@ -19,7 +19,6 @@ const SubmitDocument = () => {
     const { id } = router.query;
     const { data: getApply, refetch: fetchApply } = useGetApplyByIdQuery(id);
 
-
     const identity = {
         passport: {
             url: [getApply?.documents?.identity?.passport?.url],
@@ -1414,6 +1413,9 @@ const SubmitDocument = () => {
                         url={getApply?.documents?.identity?.passport?.url[0]}
                         text="Passport"
                         description="Please upload first and second pages of your passport"
+                        isActive={
+                            !!getApply?.documents?.identity?.passport?.url[0]
+                        }
                     />
                 </label>
                 <input
@@ -1425,8 +1427,7 @@ const SubmitDocument = () => {
                 />
             </div>
             <div className="w-full">
-                
-            <p className="text-[26px] font-bold text-mainTextColor pt-12 pb-3">
+                <p className="text-[26px] font-bold text-mainTextColor pt-12 pb-3">
                     Undergraduate
                 </p>
                 <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-7">
@@ -1438,6 +1439,10 @@ const SubmitDocument = () => {
                                     ?.consolidated_mark_sheets?.url[0]
                             }
                             description="Please upload consolidated marksheets file "
+                            isActive={
+                                !!getApply?.documents?.academic_certificates
+                                    ?.consolidated_mark_sheets?.url[0]
+                            }
                         />
                     </label>
                     <input
@@ -1455,6 +1460,10 @@ const SubmitDocument = () => {
                                     ?.semester_mark_sheets?.url[0]
                             }
                             description="Please upload Semester marksheet file"
+                            isActive={
+                                !!getApply?.documents?.academic_certificates
+                                    ?.semester_mark_sheets?.url[0]
+                            }
                         />
                     </label>
                     <input
@@ -1471,6 +1480,10 @@ const SubmitDocument = () => {
                                     ?.provisional_certificate?.url
                             }
                             description="Please upload provisional certificate"
+                            isActive={
+                                !!getApply?.documents?.academic_certificates
+                                    ?.provisional_certificate?.url
+                            }
                         />
                     </label>
                     <input
@@ -1492,6 +1505,10 @@ const SubmitDocument = () => {
                                     ?.secondary_school?.url
                             }
                             description="Please upload academic worksheet and certificates of year 10th "
+                            isActive={
+                                !!getApply?.documents?.academic_certificates
+                                    ?.secondary_school?.url
+                            }
                         />
                     </label>
                     <input
@@ -1508,6 +1525,10 @@ const SubmitDocument = () => {
                                     ?.higher_secondary_school?.url
                             }
                             description="Please upload academic worksheet and certificates of year 12th "
+                            isActive={
+                                !!getApply?.documents?.academic_certificates
+                                    ?.higher_secondary_school?.url
+                            }
                         />
                     </label>
                     <input
@@ -1525,6 +1546,10 @@ const SubmitDocument = () => {
                                     ?.bachelor_degree?.url
                             }
                             description="Please upload your bachelor degree and transcripts here "
+                            isActive={
+                                !!getApply?.documents?.academic_certificates
+                                    ?.bachelor_degree?.url
+                            }
                         />
                     </label>
                     <input
@@ -1541,6 +1566,10 @@ const SubmitDocument = () => {
                                     ?.master_degree?.url
                             }
                             description="Please upload your master degree and transcripts here "
+                            isActive={
+                                !!getApply?.documents?.academic_certificates
+                                    ?.master_degree?.url
+                            }
                         />
                     </label>
                     <input
@@ -1564,6 +1593,10 @@ const SubmitDocument = () => {
                                     ?.experience_letter?.url
                             }
                             description="Please upload experience letter"
+                            isActive={
+                                !!getApply?.documents?.professional_records
+                                    ?.experience_letter?.url
+                            }
                         />
                     </label>
                     <input
@@ -1580,6 +1613,10 @@ const SubmitDocument = () => {
                                     ?.resume?.url
                             }
                             description="Please upload CV/Resume"
+                            isActive={
+                                !!getApply?.documents?.professional_records
+                                    ?.resume?.url
+                            }
                         />
                     </label>
                     <input
@@ -1596,6 +1633,10 @@ const SubmitDocument = () => {
                                     ?.personal_statement?.url
                             }
                             description="Please upload personal statement"
+                            isActive={
+                                !!getApply?.documents?.professional_records
+                                    ?.personal_statement?.url
+                            }
                         />
                     </label>
                     <input
@@ -1612,6 +1653,10 @@ const SubmitDocument = () => {
                                     ?.letter_of_reference?.url
                             }
                             description="Please upload letter of reference"
+                            isActive={
+                                !!getApply?.documents?.professional_records
+                                    ?.letter_of_reference?.url
+                            }
                         />
                     </label>
                     <input

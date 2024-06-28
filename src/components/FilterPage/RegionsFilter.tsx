@@ -59,7 +59,7 @@ const RegionsFilter: React.FC<propsType> = ({ data, isLoading }) => {
                             .map(({ region: name }, i) => (
                                 <FilterCheckBox
                                     key={'regions--list--' + i}
-                                    id={name}
+                                    id={name+ '--' + i}
                                     text={name}
                                     name={'region'}
                                     value={name}

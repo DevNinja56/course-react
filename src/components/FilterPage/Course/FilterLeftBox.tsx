@@ -50,9 +50,14 @@ const CourseFilter = () => {
                         <div className="flex gap-0.5 flex-wrap px-2">
                             {Object.entries(query).map(([key, item], idx) => {
                                 if (Array.isArray(item)) {
-                                    return item.map((val) => (
+                                    return item.map((val, i) => (
                                         <FilteredButton
-                                            key={'query--key--' + idx}
+                                            key={
+                                                'query--key----' +
+                                                idx +
+                                                '---' +
+                                                i
+                                            }
                                             itemKey={key}
                                             itemValue={val ?? 'button'}
                                         />
@@ -60,7 +65,7 @@ const CourseFilter = () => {
                                 } else if (typeof item === 'string') {
                                     return (
                                         <FilteredButton
-                                            key={'query--key--' + idx}
+                                            key={'query----key--' + idx}
                                             itemKey={key}
                                             itemValue={item ?? 'button'}
                                         />

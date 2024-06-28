@@ -40,7 +40,7 @@ const DegreeLevelFilter: React.FC<propsType> = ({ data, isLoading }) => {
                         <div className="relative flex w-full justify-around items-center">
                             <FilterCheckBox
                                 key={'country--list--' + i}
-                                id={name}
+                                id={name+ '--' + i}
                                 text={name}
                                 value={name}
                                 name={'degreeType'}

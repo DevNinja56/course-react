@@ -20,7 +20,11 @@ export const FilterCheckBox = React.forwardRef<HTMLInputElement, propsType>(
             e: React.ChangeEvent<HTMLInputElement>
         ) => {
             if (e.target.checked) {
-                addQuery({ [name]: [...state, e.target.value] });
+                addQuery({
+                    [name]: state
+                        ? [...state.filter((q) => !!q), e.target.value]
+                        : [e.target.value]
+                });
             } else {
                 state.length > 1
                     ? addQuery({

@@ -55,7 +55,7 @@ const CourseCard = ({ course }: CardProps) => {
                         className="h-[200px] w-full object-cover rounded-xl"
                     />
                 </div>
-                <div className="pt-3 pb-3 px-3 flex flex-col gap-7">
+                <div className="pt-3 px-3 flex flex-col gap-7">
                     <div className="flex flex-col gap-2">
                         <h1
                             title={name}
@@ -105,26 +105,26 @@ const CourseCard = ({ course }: CardProps) => {
                                 </p>
                             </div>
                         </div>
-                        <div className="flex items-center gap-2 justify-between">
-                            <Link
-                                href={ROUTES.COURSE.replace(':id', _id)}
-                                className="py-2 px-4 w-full flex justify-center bg-blueColor border-white hover:bg-white border hover:border-blueColor hover:text-blueColor transition-all duration-500 text-white font-medium rounded-md text-[0.640rem] xl:text-[0.740rem]"
-                            >
-                                View Details
-                            </Link>
-                            <Link
-                                href={{
-                                    pathname: ROUTES.COMPARE,
-                                    query: { course_id: _id }
-                                }}
-                                className="py-2 px-4 w-full flex justify-center bg-profileBgColor hover:bg-blueColor hover:text-white transition-all duration-500 text-blueColor font-medium rounded-md text-[0.640rem] xl:text-[0.740rem]"
-                            >
-                                Compare
-                            </Link>
-                        </div>
                     </div>
                 </div>
             </Link>
+            <div className="flex items-center gap-2 justify-between m-3">
+                <Link
+                    href={ROUTES.COURSE.replace(':id', _id)}
+                    className="py-2 px-4 w-full flex justify-center bg-blueColor border-white hover:bg-white border hover:border-blueColor hover:text-blueColor transition-all duration-500 text-white font-medium rounded-md text-[0.640rem] xl:text-[0.740rem]"
+                >
+                    View Details
+                </Link>
+                <Link
+                    href={{
+                        pathname: ROUTES.COMPARE,
+                        query: { course_id: _id }
+                    }}
+                    className="py-2 px-4 w-full flex justify-center bg-profileBgColor hover:bg-blueColor hover:text-white transition-all duration-500 text-blueColor font-medium rounded-md text-[0.640rem] xl:text-[0.740rem]"
+                >
+                    Compare
+                </Link>
+            </div>
         </div>
     );
 };

@@ -40,7 +40,7 @@ const InstituteFilter: React.FC<propsType> = ({ data, isLoading }) => {
                         .map(({ institute: name }, i) => (
                             <FilterCheckBox
                                 key={'Institute--list--' + name + i}
-                                id={name}
+                                id={name+ '--' + i}
                                 text={name}
                                 name={'institute'}
                                 value={name}
