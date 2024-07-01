@@ -2,7 +2,7 @@
 import { ROUTES } from '@/config/constant';
 import { courseType } from '@/types';
 import Link from 'next/link';
-import React from 'react';
+import React, { useMemo } from 'react';
 import FavoriteButton from '../../Button/FavoriteButton';
 import { LuMapPin } from 'react-icons/lu';
 import { CiCalendarDate } from 'react-icons/ci';
@@ -28,8 +28,7 @@ const CourseCard = ({ course }: CardProps) => {
 
     const { getCurrencySymbol, setCurrencyValue, getSingleRate, base_code } =
         useCurrency();
-    const isSameCurrency = base_code === feeCurrency;
-    const rate = isSameCurrency ? null : getSingleRate(feeCurrency);
+    const rate = useMemo(() => getSingleRate(feeCurrency), [feeCurrency]);
 
     return (
         <div
@@ -83,12 +82,12 @@ const CourseCard = ({ course }: CardProps) => {
                             <div className="flex flex-col items-center gap-1">
                                 <span className="h-4 w-4 text-blueColor">
                                     {getCurrencySymbol(
-                                        rate ? base_code : feeCurrency
+                                        rate?.currency ?? feeCurrency
                                     )}
                                 </span>
                                 <p className="text-[0.600rem] xl:text-[0.700rem]">
                                     {setCurrencyValue(
-                                        isSameCurrency && !rate
+                                        !rate
                                             ? tuitionFee
                                             : tuitionFee *
                                                   (rate?.base_rate

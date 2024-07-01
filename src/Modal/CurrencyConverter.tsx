@@ -1,49 +1,48 @@
 import { useCurrency } from '@/hooks/currency';
-import { countriesData } from '@/utils/data/country';
 import React from 'react';
 import Select from 'react-select';
 
 const CurrencyConverter = () => {
-    const { isLoading, country: savedLocation, updateCountry } = useCurrency();
+    const {
+        isLoading,
+        currentCurrency: savedLocation,
+        rate_list,
+        updateCountry
+    } = useCurrency();
 
     const handleChange = ({
-        name,
-        currencies,
-        code
+        currencies
     }: {
         name: string;
         currencies: string;
         code?: boolean;
     }) => {
-        const filterObject = Object.values(countriesData).filter(
-            (item) =>
-                item.currencies === currencies &&
-                item.name ===
-                    (code ? name.split(currencies + ' - ')[1].trim() : name)
+        const filterObject = rate_list.filter(
+            (item) => item.code === currencies
         )[0];
-        const country = {
-            ...filterObject,
-            currencies: filterObject.currencies.split(',')[0]
-        };
-        updateCountry(country);
-        localStorage.setItem('isChangedCurrency', JSON.stringify(country));
+        // const country = {
+        //     ...filterObject,
+        //     // currencies: filterObject.currencies.split(',')[0]
+        //     currencies: filterObject.code
+        // };
+        // debugger;
+        updateCountry(filterObject);
+        localStorage.setItem('isChangedCurrency', JSON.stringify(filterObject));
     };
 
     return (
-        <div className="bg-white p-10 w-[400px] rounded-md">
+        <div className="bg-white p-10 w-[400px] rounded-md capitalize">
             <h4 className="text-center text-xl">Nationality & Currency</h4>
 
             <div className="w-full my-5">
                 <Select
-                    options={Object.values(countriesData)?.map(
-                        ({ name, currencies }) => ({
-                            label: name,
-                            value: currencies
-                        })
-                    )}
+                    options={rate_list.map(({ name, code }) => ({
+                        label: name,
+                        value: code
+                    }))}
                     value={{
                         label: savedLocation?.name ?? '',
-                        value: savedLocation?.currencies ?? ''
+                        value: savedLocation?.code ?? ''
                     }}
                     placeholder="Select Country"
                     isDisabled={isLoading}
@@ -57,19 +56,19 @@ const CurrencyConverter = () => {
                 />
             </div>
 
-            <div className="w-full my-5">
+            <div className="w-full my-5 uppercase">
                 <Select
-                    options={Object.values(countriesData)?.map(
-                        ({ name, currencies }) => ({
-                            label: `${currencies} - ${name}`,
-                            value: currencies
+                    options={rate_list.map(
+                        ({ currency, code, currency_name }) => ({
+                            label: currency + ' - ' + currency_name,
+                            value: code
                         })
                     )}
                     value={{
                         label:
-                            `${savedLocation?.currencies} - ${savedLocation?.name}` ??
+                            `${savedLocation?.currency} - ${savedLocation?.currency_name}` ??
                             '',
-                        value: savedLocation?.currencies ?? ''
+                        value: savedLocation?.code ?? ''
                     }}
                     isDisabled={isLoading}
                     isLoading={isLoading}

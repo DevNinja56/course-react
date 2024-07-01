@@ -18,7 +18,7 @@ export const fetchLatestRate = createAsyncThunk(
             return http.get(
                 API_ENDPOINTS.FETCH_RATES.replace(
                     '${code}',
-                    currentState.currency.base_code
+                    currentState.currency.base_code.toUpperCase()
                 )
                     .replace('${pDate}', formattedPrevDay)
                     .replace('${cDate}', formattedCurrentDate)
