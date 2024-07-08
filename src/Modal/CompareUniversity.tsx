@@ -77,36 +77,36 @@ const CompareUniversityModal = () => {
                               course: []
                           }
                         : // : field === 'discipline'
-                        //   ? {
-                        //         institute: prev.institute,
-                        //         discipline: data,
-                        //         degreeLevel: [],
-                        //         specialization: [],
-                        //         course: []
-                        //     }
-                        field === 'degreeLevel'
-                        ? {
-                              institute: prev.institute,
-                              //   discipline: prev.discipline,
-                              degreeLevel: data,
-                              specialization: [],
-                              course: []
-                          }
-                        : field === 'specialization'
-                        ? {
-                              institute: prev.institute,
-                              // discipline: prev.discipline,
-                              degreeLevel: prev.degreeLevel,
-                              specialization: data,
-                              course: []
-                          }
-                        : {
-                              institute: prev.institute,
-                              // discipline: prev.discipline,
-                              degreeLevel: prev.degreeLevel,
-                              specialization: prev.specialization,
-                              course: data
-                          }
+                          //   ? {
+                          //         institute: prev.institute,
+                          //         discipline: data,
+                          //         degreeLevel: [],
+                          //         specialization: [],
+                          //         course: []
+                          //     }
+                          field === 'degreeLevel'
+                          ? {
+                                institute: prev.institute,
+                                //   discipline: prev.discipline,
+                                degreeLevel: data,
+                                specialization: [],
+                                course: []
+                            }
+                          : field === 'specialization'
+                            ? {
+                                  institute: prev.institute,
+                                  // discipline: prev.discipline,
+                                  degreeLevel: prev.degreeLevel,
+                                  specialization: data,
+                                  course: []
+                              }
+                            : {
+                                  institute: prev.institute,
+                                  // discipline: prev.discipline,
+                                  degreeLevel: prev.degreeLevel,
+                                  specialization: prev.specialization,
+                                  course: data
+                              }
                 );
             })
             .finally(() => setIsLoading(false));
@@ -171,7 +171,7 @@ const CompareUniversityModal = () => {
                     }))}
                     onChange={(e) => {
                         fetchAndSetData(
-                            API_ENDPOINTS.DEGREE_WITH_INSTITUTE_ID.replace(
+                            API_ENDPOINTS.DEGREES_BY_INSTITUTE_ID.replace(
                                 ':id',
                                 e?.value ?? ''
                             ),
@@ -252,13 +252,13 @@ const CompareUniversityModal = () => {
                     isLoading={isLoading}
                     isDisabled={data.degreeLevel.length < 1}
                     placeholder="Select Degree Level"
-                    options={data?.degreeLevel?.map(({ name, id }) => ({
+                    options={data?.degreeLevel?.map(({ name, _id }) => ({
                         label: name,
-                        value: id
+                        value: _id
                     }))}
                     onChange={(e) => {
                         fetchAndSetData(
-                            API_ENDPOINTS.SPECIALIZATION.replace(
+                            API_ENDPOINTS.GET_SCHOLARSHIP_BY_DEGREE.replace(
                                 ':id',
                                 e?.value ?? ''
                             ),
@@ -281,20 +281,16 @@ const CompareUniversityModal = () => {
                     isLoading={isLoading}
                     isDisabled={data.specialization.length < 1}
                     placeholder="Select Specialization"
-                    options={data?.specialization?.map(({ name, id }) => ({
+                    options={data?.specialization?.map(({ name, _id }) => ({
                         label: name,
-                        value: id
+                        value: _id
                     }))}
                     onChange={(e) => {
                         fetchAndSetData(
-                            // API_ENDPOINTS.COURSES_WITH_DEGREE.replace(
-                            //     ':degreeId',
-                            //     compareData?.degreeLevel?.id ?? ''
-                            // ).replace(
-                            //     ':instituteId',
-                            //     compareData?.institute?.id ?? ''
-                            // ),
-                            `${API_ENDPOINTS.COURSE_DEGREE_ID}/${compareData?.degreeLevel?.id ?? ''}`,
+                            API_ENDPOINTS.COURSE_By_SPECIALIZATION_ID.replace(
+                                ':id',
+                                e?.value ?? ''
+                            ),
                             'course'
                         );
                         setCompareData({
@@ -344,20 +340,10 @@ const CompareUniversityModal = () => {
                     isLoading={isLoading}
                     isDisabled={data.course.length < 1}
                     placeholder="Select Course"
-                    // options={data?.course?.map(({ name, id }) => ({
-                    //     label: name,
-                    //     value: id
-                    // }))}
-                    options={data?.course
-                        ?.filter(
-                            (course) =>
-                                course.specialization?.[0].id ===
-                                compareData?.specialization?.id
-                        )
-                        .map(({ name, id }) => ({
-                            label: name,
-                            value: id
-                        }))}
+                    options={data?.course.map(({ name, id }) => ({
+                        label: name,
+                        value: id
+                    }))}
                     onChange={(e) => {
                         setCompareData({
                             ...compareData,
@@ -379,10 +365,10 @@ const CompareUniversityModal = () => {
                         (index === 'first'
                             ? compareFirst(compareData)
                             : index === 'second'
-                            ? compareSecond(compareData)
-                            : index === 'third'
-                            ? compareThird(compareData)
-                            : null);
+                              ? compareSecond(compareData)
+                              : index === 'third'
+                                ? compareThird(compareData)
+                                : null);
                     hideModal();
                 }}
             />

@@ -140,6 +140,7 @@ export type degreeType = {
     createdAt: string;
     updatedAt: string;
     id: string;
+    _id: string;
 };
 
 export type disciplineType = {
@@ -175,6 +176,7 @@ export type instituteType = {
 export type specializationType = {
     name: string;
     id: string;
+    _id: string;
     course: [];
 };
 

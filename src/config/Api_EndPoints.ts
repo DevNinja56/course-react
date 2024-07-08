@@ -24,7 +24,9 @@ export const API_ENDPOINTS = {
     SCHOLARSHIP: '/scholarship',
     SCHOLARSHIP_BY_ID: '/scholarship/:id',
     COURSE_DEGREE_ID: '/course/degree',
+    COURSE_By_SPECIALIZATION_ID: '/course/specializations/:id',
     COURSE_INSTITUTE_ID: '/course/institute',
+    DEGREES_BY_INSTITUTE_ID: '/course/institute/degree/:id',
     COURSE_SEARCH: '/course/filter',
     COURSE_BY_ID: '/course/:id',
     SCHOLARSHIP_SEARCH: '/scholarship/filter',
@@ -53,5 +55,6 @@ export const API_ENDPOINTS = {
     APPLY_DOCUMENTS: '/apply',
     EVENTS: '/event',
     FILE_UPLOAD: '/file/s3-upload',
-    FILE_DELETE: '/file/s3-delete'
+    FILE_DELETE: '/file/s3-delete',
+    GET_SCHOLARSHIP_BY_DEGREE: '/course/degree/specializations/:id'
 };
