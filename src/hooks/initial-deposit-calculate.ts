@@ -41,13 +41,12 @@ export const useCalculate = () => {
                 calculatedAmount = tuitionFee * (percentage / 100) * baseRate;
             } else if (option === 'N') {
                 const scholarshipAmount = parseFloat(scholarship);
-                if (!isNaN(scholarshipAmount)) {
-                    calculatedAmount = Math.floor(
-                        (tuitionFee * (percentage / 100) -
-                            tuitionFee * (scholarshipAmount / 100)) *
-                            baseRate
-                    );
-                }
+
+                const scholarshipCalculatedAmout =
+                    tuitionFee * ((scholarshipAmount ?? 1) / 100);
+                calculatedAmount =
+                    (tuitionFee - scholarshipCalculatedAmout) *
+                    (percentage / 100);
             }
 
             return isNumber

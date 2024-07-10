@@ -1,3 +1,4 @@
+import React from 'react';
 import Button from '@/components/Button';
 import FavoriteButton from '@/components/Button/FavoriteButton';
 import ScreenLoader from '@/components/Loader/ScreenLoader';
@@ -11,7 +12,6 @@ import { singleCourseType } from '@/types';
 import { getSsrRequest } from '@/utils/ssrRequest';
 import { GetServerSideProps } from 'next';
 import Link from 'next/link';
-import React from 'react';
 import { CiCalculator2 } from 'react-icons/ci';
 import { IoShareSocialSharp } from 'react-icons/io5';
 import { IoDocumentText } from 'react-icons/io5';
@@ -39,6 +39,8 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
     const isMasterDegree = course?.degree?.name
         ?.toLowerCase()
         ?.includes('master');
+
+    console.log(course, 'course');
 
     return (
         <>
@@ -128,7 +130,7 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                         </div>
                         <div className="flex flex-col lg:flex-row gap-0 xl:gap-16 w-full justify-between mb-0 lg:mb-28">
                             <div className="flex flex-col w-full lg:w-[70%] xl:w-2/3">
-                                <div className="w-full h-courseStickyHeight static lg:sticky top-[110px] no-scrollbar mb-5 lg:mb-[450px] xl:mb-96 overflow-y-scroll">
+                                <div className="w-full h-courseStickyHeight static lg:sticky top-[110px] no-scrollbar mb-5 lg:mb-[450px] xl:mb-96">
                                     <div className="transition-all duration-300">
                                         <div className="flex flex-col gap-y-6 mb-16 md:mb-20">
                                             <div className="tabs-container capitalize">
@@ -137,7 +139,7 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                                                         {
                                                             title: 'Overview',
                                                             element: (
-                                                                <div className="description w-full flex flex-col gap-3 md:gap-4 items-start">
+                                                                <div className="description w-full flex flex-col gap-3 md:gap-4 items-start max-h-[70vh] overflow-auto customScroll px-2">
                                                                     <h1 className="text-black text-lg md:text-2xl font-bold">
                                                                         Course
                                                                         Description
@@ -156,7 +158,7 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                                                         {
                                                             title: 'Entry Requirements',
                                                             element: (
-                                                                <div className="flex flex-col gap-8">
+                                                                <div className="flex flex-col gap-8 max-h-[70vh] overflow-auto customScroll px-2">
                                                                     <div className="flex flex-col gap-4 items-start">
                                                                         <h3 className="text-black text-lg md:text-2xl font-bold">
                                                                             Entry
@@ -187,7 +189,7 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                                                         {
                                                             title: 'Language Requirements',
                                                             element: (
-                                                                <div className="flex flex-col gap-8">
+                                                                <div className="flex flex-col gap-8 max-h-[70vh] overflow-auto customScroll px-2">
                                                                     <div className="flex flex-col gap-4  items-start">
                                                                         <h3 className="text-black text-lg md:text-2xl font-bold">
                                                                             Language
@@ -209,7 +211,7 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                                                         {
                                                             title: 'Tuitions Fee',
                                                             element: (
-                                                                <div className="flex flex-col gap-4 items-start">
+                                                                <div className="flex flex-col gap-4 items-start max-h-[70vh] overflow-auto customScroll px-2">
                                                                     <h3 className="text-black text-lg md:text-2xl font-bold">
                                                                         Tuitions
                                                                         Fee
@@ -242,7 +244,7 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                                                         {
                                                             title: 'Scholarship',
                                                             element: (
-                                                                <div className="flex flex-col gap-4 items-start">
+                                                                <div className="flex flex-col gap-4 items-start max-h-[70vh] overflow-auto customScroll px-2">
                                                                     <h3 className="text-black text-lg md:text-2xl font-bold">
                                                                         Course
                                                                         Scholarship
@@ -313,9 +315,15 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                                                                                 tuitionFee:
                                                                                     course.tuitionFee,
                                                                                 scholarship:
-                                                                                    course
-                                                                                        ?.scholarship[0]
-                                                                                        ?.amount,
+                                                                                    course?.scholarship.filter(
+                                                                                        (
+                                                                                            s
+                                                                                        ) =>
+                                                                                            s.type ===
+                                                                                            'guaranteed'
+                                                                                    )?.[0]
+                                                                                        ?.amount ??
+                                                                                    0,
                                                                                 currency_code:
                                                                                     course.feeCurrency
                                                                             }
@@ -338,49 +346,50 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div className="py-6 border-t-2 border-borderColor flex items-center justify-between w-full mb-8 md:mb-20">
-                                    <h1 className="text-base md:text-xl font-semibold text-textLightBlackColor">
-                                        Get more details
-                                    </h1>
-                                    <Link
-                                        href={course.institute.instituteURL}
-                                        target="_blank"
-                                        className="text-blueColor text-xs md:text-base"
-                                    >
-                                        Visit university website
-                                    </Link>
-                                </div>
-                                {course.documentsRequirement && (
-                                    <div className="flex flex-col gap-5 w-full">
-                                        <div className="flex items-center gap-2">
-                                            <IoDocumentText className="h-7 w-7 md:h-8 md:w-8" />
-                                            <h1 className="font-bold text-lg md:text-2xl text-mainTextColor">
-                                                Requirements
-                                            </h1>
-                                        </div>
-                                        <p className="text-sm md:text-xl font-medium text-lightGrayColor">
-                                            Listed below are the documents
-                                            required to apply for this course.
-                                        </p>
-                                        <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-7 justify-start">
-                                            {course.documentsRequirement?.map(
-                                                ({ title, url }, i) => (
-                                                    <RequirementBox
-                                                        key={
-                                                            'docs requirement--' +
-                                                            i +
-                                                            title
-                                                        }
-                                                        text={title}
-                                                        url={url}
-                                                        isDownload={true}
-                                                    />
-                                                )
-                                            )}
-                                        </div>
+                                    <div className="py-6 border-t-2 border-borderColor flex items-center justify-between w-full mb-8 md:mb-20">
+                                        <h1 className="text-base md:text-xl font-semibold text-textLightBlackColor">
+                                            Get more details
+                                        </h1>
+                                        <Link
+                                            href={course.institute.instituteURL}
+                                            target="_blank"
+                                            className="text-blueColor text-xs md:text-base"
+                                        >
+                                            Visit university website
+                                        </Link>
                                     </div>
-                                )}
+                                    {course.documentsRequirement && (
+                                        <div className="flex flex-col gap-5 w-full">
+                                            <div className="flex items-center gap-2">
+                                                <IoDocumentText className="h-7 w-7 md:h-8 md:w-8" />
+                                                <h1 className="font-bold text-lg md:text-2xl text-mainTextColor">
+                                                    Requirements
+                                                </h1>
+                                            </div>
+                                            <p className="text-sm md:text-xl font-medium text-lightGrayColor">
+                                                Listed below are the documents
+                                                required to apply for this
+                                                course.
+                                            </p>
+                                            <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-7 justify-start">
+                                                {course.documentsRequirement?.map(
+                                                    ({ title, url }, i) => (
+                                                        <RequirementBox
+                                                            key={
+                                                                'docs requirement--' +
+                                                                i +
+                                                                title
+                                                            }
+                                                            text={title}
+                                                            url={url}
+                                                            isDownload={true}
+                                                        />
+                                                    )
+                                                )}
+                                            </div>
+                                        </div>
+                                    )}
+                                </div>
                             </div>
                             <div className="flex flex-col gap-11 w-full lg:w-[28%] xl:w-[30%]">
                                 <div className="bg-white rounded-[10px] px-4 py-6 w-full z-10 shadow-RequirementBox mt-4 hidden lg:block">
