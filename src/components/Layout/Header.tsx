@@ -35,7 +35,9 @@ const Header = ({ onlyLogo }: { onlyLogo?: boolean }) => {
     const dropDownRef = useRef<HTMLDivElement>(null);
 
     return (
-        <header className={`w-full fixed top-0 z-40 print:static`}>
+        <header
+            className={`w-[calc(100vw-16px)] fixed top-0 left-0 z-40 print:static`}
+        >
             {user.status == 'block' && <UnActiveUser />}
             {!onlyLogo ? (
                 <div className="bg-white">
