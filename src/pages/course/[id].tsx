@@ -40,7 +40,6 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
         ?.toLowerCase()
         ?.includes('master');
 
-
     return (
         <>
             {!course ? (
@@ -312,7 +311,10 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                                                                                         .initialDeposit?.[0]
                                                                                         .amount,
                                                                                 tuitionFee:
-                                                                                    course.tuitionFee,
+                                                                                    rate
+                                                                                        ? +rate.base_rate *
+                                                                                          +course.tuitionFee
+                                                                                        : course.tuitionFee,
                                                                                 scholarship:
                                                                                     course?.scholarship.filter(
                                                                                         (
