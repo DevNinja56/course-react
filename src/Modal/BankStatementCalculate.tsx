@@ -11,8 +11,7 @@ const BankStatementCalculate = () => {
         hideModal: () => void;
     };
     const { initialDeposit: calculateDeposit } = useCalculate();
-    const { getSingleRate } = useCurrency();
-    const { setCurrencyValue } = useCurrency();
+    const { getSingleRate, setCurrencyValue, currentCurrency } = useCurrency();
 
     const scholarship: scholarshipType | undefined =
         modalState?.scholarship?.find(
@@ -37,12 +36,17 @@ const BankStatementCalculate = () => {
 
     const livingCost = isLiveAustralia ? 29710 : isLiveLondon ? 12006 : 9207; // Update living costs based on provided formulas
     const travelingCost = isLiveAustralia ? 2000 : 0; // Traveling cost is only applicable for Australia
-    const oshc = isLiveAustralia ? 700 * (+duration / 12) : 0; // OSHC is only applicable for Australia
+    const oshc = isLiveAustralia ? 750 * Math.ceil(+duration / 12) : 0; // OSHC is only applicable for Australia
+    const scholarshipAmount = tuitionFee * (scholarshipGuaranteedAmount / 100);
 
-    const total = tuitionFee + livingCost + travelingCost + oshc;
+    const total = isLiveAustralia
+        ? tuitionFee + livingCost + travelingCost + oshc - scholarshipAmount
+        : livingCost + tuitionFee - scholarshipAmount;
 
     let initialDepositValue = calculateDeposit({
-        initialDeposit,
+        initialDeposit: scholarshipAmount
+            ? initialDeposit.replace('G', 'N')
+            : initialDeposit,
         tuitionFee,
         scholarship: scholarshipGuaranteedAmount.toString(),
         isNumber: true
@@ -51,56 +55,93 @@ const BankStatementCalculate = () => {
     initialDepositValue =
         typeof initialDepositValue === 'number' ? initialDepositValue : 0;
 
-    const visaFee = isLiveAustralia
-        ? total - initialDepositValue
-        : tuitionFee - initialDepositValue + livingCost;
+    const visaFee = total - initialDepositValue;
 
     const currency = isLiveAustralia ? 'AUD' : 'GBP';
     const { base_rate } = getSingleRate(currency) ?? { base_rate: 1 };
-    // const scholarshipAmount = tuitionFee * (scholarshipGuaranteedAmount / 100);
 
     const data = [
         {
             name: 'Annual Tuition Fee',
-            value: setCurrencyValue(tuitionFee * +base_rate)
+            value: setCurrencyValue(
+                tuitionFee * +base_rate,
+                currentCurrency?.currency ?? currency
+            )
         },
-        // {
-        //     name: `Scholarship Amount - ${scholarship?.type ?? 'None'}`,
-        //     value: setCurrencyValue(scholarshipAmount * +base_rate)
-        // },
+        ...(scholarshipAmount
+            ? [
+                  {
+                      name: `Scholarship Amount - ${scholarship?.type ?? 'None'}`,
+                      value: `(${setCurrencyValue(
+                          scholarshipAmount * +base_rate,
+                          currentCurrency?.currency ?? currency
+                      )})`
+                  }
+              ]
+            : []),
         {
             name: 'Living Cost',
-            value: setCurrencyValue(livingCost * +base_rate)
+            value: setCurrencyValue(
+                livingCost * +base_rate,
+                currentCurrency?.currency ?? currency
+            )
         },
+
         ...(isLiveAustralia
             ? [
                   {
                       name: 'Traveling Cost',
-                      value: setCurrencyValue(travelingCost * +base_rate)
+                      value: setCurrencyValue(
+                          travelingCost * +base_rate,
+                          currentCurrency?.currency ?? currency
+                      )
                   },
                   {
                       name: 'OSHC',
-                      value: setCurrencyValue(oshc * +base_rate)
+                      value: setCurrencyValue(
+                          oshc * +base_rate,
+                          currentCurrency?.currency ?? currency
+                      )
                   },
                   {
                       name: 'Statement Requirement by University',
-                      value: setCurrencyValue(total * +base_rate)
+                      value: setCurrencyValue(
+                          total * +base_rate,
+                          currentCurrency?.currency ?? currency
+                      )
+                  },
+                  {
+                      name: 'Initial Deposit',
+                      value: `(${setCurrencyValue(initialDepositValue * +base_rate, currentCurrency?.currency ?? currency)})`
                   },
                   {
                       name: 'Statement Requirement for Visa',
-                      value: setCurrencyValue(visaFee * +base_rate)
+                      value: setCurrencyValue(
+                          visaFee * +base_rate,
+                          currentCurrency?.currency ?? currency
+                      )
                   }
               ]
             : [
                   {
+                      name: 'Statement Requirement by University',
+                      value: setCurrencyValue(
+                          total * +base_rate,
+                          currentCurrency?.currency ?? currency
+                      )
+                  },
+                  {
+                      name: 'Initial Deposit',
+                      value: `(${setCurrencyValue(initialDepositValue * +base_rate, currentCurrency?.currency ?? currency)})`
+                  },
+                  {
                       name: 'Statement Requirement for Visa',
-                      value: setCurrencyValue(visaFee * +base_rate)
+                      value: setCurrencyValue(
+                          visaFee * +base_rate,
+                          currentCurrency?.currency ?? currency
+                      )
                   }
-              ]),
-        {
-            name: 'Initial Deposit',
-            value: `(${setCurrencyValue(initialDepositValue * +base_rate)})`
-        }
+              ])
     ];
 
     return (

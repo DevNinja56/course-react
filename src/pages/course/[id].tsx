@@ -40,7 +40,6 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
         ?.toLowerCase()
         ?.includes('master');
 
-    console.log(course, 'course');
 
     return (
         <>

@@ -82,7 +82,7 @@ const CourseCard = ({ course }: CardProps) => {
                             <div className="flex flex-col items-center gap-1">
                                 <span className="h-4 w-4 text-blueColor">
                                     {getCurrencySymbol(
-                                        rate?.currency ?? feeCurrency
+                                        rate ? base_code : feeCurrency
                                     )}
                                 </span>
                                 <p className="text-[0.600rem] xl:text-[0.700rem]">

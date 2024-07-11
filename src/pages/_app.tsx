@@ -12,11 +12,17 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
     const componentLayout = (Component as any).layout as propsType;
 
     useEffect(() => {
-        const lastCacheClear = localStorage.getItem('lastCacheClear');
-        if (lastCacheClear === null) {
-            localStorage.clear();
-            deleteCookie('token');
-            localStorage.setItem('lastCacheClear', new Date().toISOString());
+        if (typeof window !== 'undefined') {
+            const lastCacheClear = localStorage.getItem('last-cache-clear');
+            if (lastCacheClear === null) {
+                localStorage.clear();
+                deleteCookie('token');
+                localStorage.setItem(
+                    'last-cache-clear',
+                    new Date().toISOString()
+                );
+                window.location.reload();
+            }
         }
     }, []);
 
