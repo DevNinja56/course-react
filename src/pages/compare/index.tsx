@@ -50,16 +50,21 @@ const Compare = ({ data }: { data?: singleCourseType }) => {
         scholarshipAmount: string;
         feeCurrency: string;
     }) => {
+        const isSameCurrency =
+            feeCurrency.toLowerCase() === base_code.toLowerCase();
+        const rate = isSameCurrency ? null : getSingleRate(feeCurrency);
         const initialDepositAmount = initialDeposit({
             initialDeposit: depositAmount,
             tuitionFee: tuitionFee,
             scholarship: scholarshipAmount ?? 0,
-            isNumber: true
+            isNumber: true,
+            currency_code: feeCurrency
         });
-        const rate = getSingleRate(feeCurrency);
 
         return setCurrencyValue(
-            +initialDepositAmount * (rate?.base_rate ? +rate?.base_rate : 1)
+            +initialDepositAmount,
+            base_code ?? feeCurrency,
+            rate ? +rate.base_rate : 1
         );
     };
 
@@ -70,7 +75,7 @@ const Compare = ({ data }: { data?: singleCourseType }) => {
         const rate = getSingleRate(feeCurrency);
         return setCurrencyValue(
             tuitionFee * +(rate?.base_rate ?? 1),
-            rate ? base_code : feeCurrency
+            base_code ?? feeCurrency
         );
     };
 
@@ -125,15 +130,33 @@ const Compare = ({ data }: { data?: singleCourseType }) => {
                 },
                 {
                     title: 'Location',
-                    first: first?.institute?.location,
-                    second: second?.institute?.location,
+                    first: first?.institute?.location
+                        ?.split(',')
+                        .map((c) => (
+                            <li key={`key--second-location--${c}`}>{c}</li>
+                        )),
+                    second: second?.institute?.location
+                        ?.split(',')
+                        .map((c) => (
+                            <li key={`key--second-location--${c}`}>{c}</li>
+                        )),
                     third: third?.institute?.location
+                        ?.split(',')
+                        .map((c) => (
+                            <li key={`key--second-location--${c}`}>{c}</li>
+                        ))
                 },
                 {
                     title: 'Campus',
-                    first: first?.institute?.campus.join(' | '),
-                    second: second?.institute?.campus.join(' | '),
-                    third: third?.institute?.campus.join(' | ')
+                    first: first?.institute?.campus.map((c) => (
+                        <li key={`key--second-campus--${c}`}>{c}</li>
+                    )),
+                    second: second?.institute?.campus.map((c) => (
+                        <li key={`key--second-campus--${c}`}>{c}</li>
+                    )),
+                    third: third?.institute?.campus.map((c) => (
+                        <li key={`key--second-campus--${c}`}>{c}</li>
+                    ))
                 }
             ]
         },
@@ -160,15 +183,21 @@ const Compare = ({ data }: { data?: singleCourseType }) => {
                 },
                 {
                     title: 'Specialization',
-                    first: first?.course?.specialization
-                        ?.map((s) => s.name)
-                        ?.join(' , '),
-                    second: second?.course?.specialization
-                        ?.map((s) => s.name)
-                        ?.join(' , '),
-                    third: third?.course?.specialization
-                        ?.map((s) => s.name)
-                        ?.join(' , ')
+                    first: first?.course?.specialization?.map((s) => (
+                        <li key={`key--first-specialization--${s.name}`}>
+                            {s.name}
+                        </li>
+                    )),
+                    second: second?.course?.specialization?.map((s) => (
+                        <li key={`key--second-specialization--${s.name}`}>
+                            {s.name}
+                        </li>
+                    )),
+                    third: third?.course?.specialization?.map((s) => (
+                        <li key={`key--third-specialization--${s.name}`}>
+                            {s.name}
+                        </li>
+                    ))
                 },
                 {
                     title: 'Duration',

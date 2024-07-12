@@ -42,10 +42,10 @@ export const useCalculate = () => {
             } else if (option === 'N') {
                 const scholarshipAmount = parseFloat(scholarship);
 
-                const scholarshipCalculatedAmout =
+                const scholarshipCalculatedAmount =
                     tuitionFee * ((scholarshipAmount ?? 1) / 100);
                 calculatedAmount =
-                    (tuitionFee - scholarshipCalculatedAmout) *
+                    (tuitionFee - scholarshipCalculatedAmount) *
                     (percentage / 100);
             }
 
