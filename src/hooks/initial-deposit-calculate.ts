@@ -13,7 +13,7 @@ export const useCalculate = () => {
     const { base_code } = useCurrency();
 
     function initialDeposit({
-        initialDeposit,
+        initialDeposit: initialDepositVal,
         tuitionFee,
         scholarship,
         isNumber = false,
@@ -22,6 +22,12 @@ export const useCalculate = () => {
         const rate = getSingleRate(currency_code ?? base_code) ?? {
             base_rate: 1
         };
+
+        let initialDeposit = initialDepositVal;
+
+        if (scholarship && initialDepositVal.includes('G')) {
+            initialDeposit = initialDepositVal.replace('G', 'N');
+        }
 
         if (!isNaN(+initialDeposit)) {
             const amount = +initialDeposit * +rate.base_rate;
