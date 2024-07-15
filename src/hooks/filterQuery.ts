@@ -1,26 +1,26 @@
 import { useRouter } from 'next/router';
 
 export const useFilterQuery = () => {
-    const { query, push, pathname } = useRouter();
+    const { query, push } = useRouter();
     // const dispatch = useAppDispatch();
     // const filterQuery = useAppSelector((state) => state.filterQuery);
 
     const addQueryAction = (obj: { [key: string]: string[] }) => {
         // dispatch(addQuery(obj));
         const newQuery = { ...query, ...obj };
-        push({ pathname, query: newQuery });
+        push({ query: newQuery });
     };
 
     const removeQueryAction = (key: string) => {
         // dispatch(removeQuery(key));
         const newQuery = { ...query };
         delete newQuery[key];
-        push({ pathname, query: newQuery });
+        push({ query: newQuery });
     };
 
     const clearQueryAction = () => {
         // dispatch(clearAllQuery());
-        push({ pathname, query: {} });
+        push({ query: {} });
     };
 
     return {

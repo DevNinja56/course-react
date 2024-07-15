@@ -1,5 +1,4 @@
 import { ROUTES } from '@/config/constant';
-import { useFilterQuery } from '@/hooks/filterQuery';
 import { disciplineType } from '@/types';
 // import Image from 'next/image';
 import Link from 'next/link';
@@ -23,14 +22,16 @@ const Card = ({ discipline }: CardProps) => {
         postgraduate: false,
         research: false
     });
-    const { addQuery } = useFilterQuery();
 
     return (
-        <div
-            className="custom-shadow cursor-pointer min-w-[276px] md:min-w-full rounded-[10px] bg-white w-full z-10"
-            onClick={() => addQuery({ discipline: [discipline.name] })}
-        >
-            <Link href={ROUTES.FILTER_COURSE} className="flex flex-col">
+        <div className="custom-shadow cursor-pointer min-w-[276px] md:min-w-full rounded-[10px] bg-white w-full z-10">
+            <Link
+                href={{
+                    pathname: ROUTES.FILTER_COURSE,
+                    query: { discipline: [discipline.name] }
+                }}
+                className="flex flex-col"
+            >
                 <img
                     height={165}
                     width={276}
