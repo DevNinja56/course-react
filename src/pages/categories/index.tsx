@@ -1,16 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 // import Image from 'next/image';
 import Card from '@/components/Fields/Card';
 import LoaderSpinner from '@/components/LoaderSpinner';
-import { useGetPaginatedDisciplineQuery } from '@/store/slices/allRequests';
-import PaginationBox from '@/components/Pagination';
+import { useGetCountDisciplineQuery } from '@/store/slices/allRequests';
 
 const Fields = () => {
-    const [page, setPage] = useState(1);
-    const { data, isLoading } = useGetPaginatedDisciplineQuery({
-        limit: 12,
-        page
-    });
+    const { data, isLoading } = useGetCountDisciplineQuery();
     return (
         <>
             <div className="w-full flex items-center justify-between h-[214px] mt-[90px] bg-profileBgColor mb-16">
@@ -61,16 +56,16 @@ const Fields = () => {
                         {isLoading ? (
                             <LoaderSpinner />
                         ) : (
-                            data?.data?.map((discipline) => (
+                            data?.map((discipline, i) => (
                                 <Card
-                                    key={'discipline--' + discipline.id}
+                                    key={'discipline--query-count' + i}
                                     discipline={discipline}
                                 />
                             ))
                         )}
                     </div>
                 </div>
-                {data?.totalPage && data?.totalPage > 1 && (
+                {/* {data?.totalPage && data?.totalPage > 1 && (
                     <div className="pt-5">
                         <PaginationBox
                             totalPage={data?.totalPage}
@@ -78,7 +73,7 @@ const Fields = () => {
                             refetch={setPage}
                         />
                     </div>
-                )}
+                )} */}
             </div>
         </>
     );

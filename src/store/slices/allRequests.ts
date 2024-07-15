@@ -14,7 +14,8 @@ import {
     applyTypes,
     geoIpType,
     courseType,
-    eventType
+    eventType,
+    DisciplineCountType
 } from '@/types';
 
 export interface PaginatedResponse<data> {
@@ -183,6 +184,11 @@ export const stateQueryApi = createApi({
             transformResponse: (res: {
                 data: PaginatedResponse<eventType[]>;
             }) => res.data! ?? res
+        }),
+        getCountDiscipline: builder.query<DisciplineCountType[], void>({
+            query: () => ({ url: API_ENDPOINTS.DISCIPLINE_COUNT }),
+            transformResponse: (res: { data: DisciplineCountType[] }) =>
+                res.data! ?? res
         })
     })
 });
@@ -206,5 +212,6 @@ export const {
     useGetScholarshipFilterQuery,
     useGetApplyByIdQuery,
     useGetCoursesByInstituteQuery,
-    useGetPaginatedEventsQuery
+    useGetPaginatedEventsQuery,
+    useGetCountDisciplineQuery
 } = stateQueryApi;

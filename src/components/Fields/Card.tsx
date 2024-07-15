@@ -1,5 +1,5 @@
 import { ROUTES } from '@/config/constant';
-import { disciplineType } from '@/types';
+import { DisciplineCountType } from '@/types';
 // import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
@@ -7,7 +7,7 @@ import { BiChevronRight } from 'react-icons/bi';
 // import DegreeDropdowns from './DegreeDropdowns';
 
 interface CardProps {
-    discipline: disciplineType;
+    discipline: DisciplineCountType;
 }
 
 export type stateType = {
@@ -60,9 +60,7 @@ const Card = ({ discipline }: CardProps) => {
                     // }
                 >
                     <p>
-                        <span>
-                            Undergraduate ({discipline.undergraduate.length})
-                        </span>
+                        <span>Undergraduate ({discipline.Undergraduate})</span>
                         {/* {discipline.undergraduate.length > 0 &&
                             isOpen.undergraduate && (
                                 <DegreeDropdowns
@@ -84,9 +82,7 @@ const Card = ({ discipline }: CardProps) => {
                     // }
                 >
                     <p>
-                        <span>
-                            Postgraduate ({discipline.postgraduate.length})
-                        </span>
+                        <span>Postgraduate ({discipline.Postgraduate})</span>
                         {/* {discipline.postgraduate.length > 0 &&
                             isOpen.postgraduate && (
                                 <DegreeDropdowns
