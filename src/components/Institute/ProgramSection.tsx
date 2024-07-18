@@ -4,6 +4,8 @@ import { FaArrowRight } from 'react-icons/fa6';
 import { useGetCourseByFilterQuery } from '@/store/slices/allRequests';
 import CourseCard from '../FilterPage/Course/CourseCard';
 import LoaderSpinner from '../LoaderSpinner';
+import Link from 'next/link';
+import { ROUTES } from '@/config/constant';
 
 const ProgramSection = ({ name }: { name: string }) => {
     const [selectedProgram, setSelectedProgram] = useState('postgraduate');
@@ -32,10 +34,17 @@ const ProgramSection = ({ name }: { name: string }) => {
                                 <RiGraduationCapFill className="h-10 w-10" />
                                 Programs
                             </h1>
-                            <h1 className="text-blueColor text-sm md:text-xl font-semibold flex items-center gap-3 cursor-pointer group hover:text-opacity-50 transition-all duration-300">
-                                Read More
-                                <FaArrowRight className="h-4 w-4 group-hover:translate-x-2 transition-all duration-300" />
-                            </h1>
+                            <Link
+                                href={{
+                                    pathname: ROUTES.FILTER_COURSE,
+                                    query: { institute: name }
+                                }}
+                            >
+                                <h1 className="text-blueColor text-sm md:text-xl font-semibold flex items-center gap-3 cursor-pointer group hover:text-opacity-50 transition-all duration-300">
+                                    Read More
+                                    <FaArrowRight className="h-4 w-4 group-hover:translate-x-2 transition-all duration-300" />
+                                </h1>
+                            </Link>
                         </div>
                         <div className="flex items-center gap-5 w-auto">
                             <div>

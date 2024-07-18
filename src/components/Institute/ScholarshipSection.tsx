@@ -4,6 +4,8 @@ import { FaArrowRight } from 'react-icons/fa6';
 import LoaderSpinner from '../LoaderSpinner';
 import { useGetScholarshipFilterQuery } from '@/store/slices/allRequests';
 import Card from '../Scholarship/Card';
+import Link from 'next/link';
+import { ROUTES } from '@/config/constant';
 
 const ScholarshipSection = ({ name }: { name: string }) => {
     const { data, isLoading } = useGetScholarshipFilterQuery({
@@ -26,10 +28,17 @@ const ScholarshipSection = ({ name }: { name: string }) => {
                     <ScholarshipCap />
                     Scholarships
                 </h1>
-                <h1 className="text-blueColor text-sm md:text-xl font-semibold flex items-center gap-3 cursor-pointer group hover:text-opacity-50 transition-all duration-300">
-                    Read More
-                    <FaArrowRight className="h-4 w-4 group-hover:translate-x-2 transition-all duration-300" />
-                </h1>
+                <Link
+                    href={{
+                        pathname: ROUTES.FILTER_SCHOLARSHIP,
+                        query: { scholarship: name }
+                    }}
+                >
+                    <h1 className="text-blueColor text-sm md:text-xl font-semibold flex items-center gap-3 cursor-pointer group hover:text-opacity-50 transition-all duration-300">
+                        Read More
+                        <FaArrowRight className="h-4 w-4 group-hover:translate-x-2 transition-all duration-300" />
+                    </h1>
+                </Link>
             </div>
 
             {data?.data.length ? (

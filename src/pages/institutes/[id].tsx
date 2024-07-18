@@ -87,12 +87,14 @@ const Institutes = ({ data: institute }: { data: instituteType }) => {
                                 <p
                                     className={`flex flex-col gap-8 font-medium text-lightGrayColor w-full text-sm md:text-base`}
                                 >
-                                    {institute?.description.slice(
-                                        0,
-                                        showText
-                                            ? institute?.description.length
-                                            : 400
-                                    )}
+                                    {institute?.description
+                                        .replace(/<\/?p>/g, '')
+                                        .slice(
+                                            0,
+                                            showText
+                                                ? institute?.description.length
+                                                : 400
+                                        )}
                                     {institute?.description.length > 400 &&
                                         !showText && <>....</>}
                                     {institute?.description.length > 400 && (
