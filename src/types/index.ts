@@ -456,3 +456,10 @@ export interface eventType {
     updatedAt: string;
     id: string;
 }
+
+export interface DisciplineCountType {
+    Undergraduate: number;
+    Postgraduate: number;
+    name: string;
+    image: string;
+}
