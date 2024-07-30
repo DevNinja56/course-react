@@ -28,10 +28,18 @@ const MyApplies = () => {
                         >
                             <p className="text-xs md:text-sm font-semibold text-mainTextColor hover:text-blueColor hover:underline cursor-pointer line-clamp-2 h-4">
                                 <Link
-                                    href={ROUTES.COURSE.replace(
-                                        ':id',
-                                        apply.id
-                                    )}
+                                    href={{
+                                        pathname: ROUTES.COURSE.replace(
+                                            ':title',
+                                            apply.course.name.replaceAll(
+                                                ' ',
+                                                '-'
+                                            )
+                                        ),
+                                        query: {
+                                            course_id: apply.course.id
+                                        }
+                                    }}
                                 >
                                     {apply?.course?.name}
                                 </Link>

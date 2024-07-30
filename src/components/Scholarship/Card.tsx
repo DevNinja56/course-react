@@ -7,9 +7,7 @@ import { FaMapMarkerAlt } from 'react-icons/fa';
 import { RiGraduationCapFill } from 'react-icons/ri';
 import School from '../Institute/icons/School';
 import Tag from '../Institute/Tag';
-// import Image from 'next/image';
 import { MdOutlinePriceChange } from 'react-icons/md';
-// import Certificate from '../Institute/icons/Certificate';
 
 interface propsType {
     name: string;
@@ -46,7 +44,17 @@ const Card: React.FC<propsType> = ({
                     body={{ scholarship: id }}
                 />
             )}
-            <Link href={ROUTES.SCHOLARSHIP.replace(':id', id)}>
+            <Link
+                href={{
+                    pathname: ROUTES.SCHOLARSHIP.replace(
+                        ':title',
+                        name.replaceAll(' ', '-')
+                    ),
+                    query: {
+                        scholarship_id: id
+                    }
+                }}
+            >
                 <div className="flex flex-col w-full z-10 ">
                     <div className="w-full relative">
                         <img

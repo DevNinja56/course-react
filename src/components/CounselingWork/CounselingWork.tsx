@@ -9,19 +9,21 @@ const CounselingWork = () => {
         <div
             className={`w-full relative pb-0 ${
                 router.pathname === '/apply' ||
-                router.pathname.includes(ROUTES.COURSE.replace(':id', '')) ||
-                router.pathname.includes(ROUTES.SCHOLARSHIP.replace(':id', ''))
+                router.pathname.includes(ROUTES.COURSE.replace(':title', '')) ||
+                router.pathname.includes(
+                    ROUTES.SCHOLARSHIP.replace(':title', '')
+                )
                     ? router.pathname.includes(
-                          ROUTES.COURSE.replace(':id', '')
+                          ROUTES.COURSE.replace(':title', '')
                       ) ||
                       router.pathname.includes(
-                          ROUTES.SCHOLARSHIP.replace(':id', '')
+                          ROUTES.SCHOLARSHIP.replace(':title', '')
                       )
                         ? 'bg-profileBgColor md:bg-white'
                         : `bg-profileBgColor`
                     : router.pathname === '/courseDetail'
-                    ? 'bg-lightColor'
-                    : ''
+                      ? 'bg-lightColor'
+                      : ''
             }`}
         >
             {router.pathname === '/courseDetail' ||
@@ -49,15 +51,15 @@ const CounselingWork = () => {
                         router.pathname === '/aboutUs' ||
                         router.pathname === '/apply' ||
                         router.pathname.includes(
-                            ROUTES.COURSE.replace(':id', '')
+                            ROUTES.COURSE.replace(':title', '')
                         ) ||
                         router.pathname.includes(
-                            ROUTES.SCHOLARSHIP.replace(':id', '')
+                            ROUTES.SCHOLARSHIP.replace(':title', '')
                         )
                             ? `${
                                   router.pathname === ROUTES.APPLY ||
                                   router.pathname.includes(
-                                      ROUTES.COURSE.replace(':id', '')
+                                      ROUTES.COURSE.replace(':title', '')
                                   )
                                       ? 'top-[-50px]'
                                       : 'top-[-120px]'
@@ -270,10 +272,10 @@ const CounselingWork = () => {
                     alt="counselling-work"
                     className={`absolute left-0 h-[130px] bottom-[1190px] md:bottom-44 w-[130px] md:h-[206px] md:w-[206px] lg:h-[314px] lg:w-[192px] ${
                         router.pathname.includes(
-                            ROUTES.COURSE.replace(':id', '')
+                            ROUTES.COURSE.replace(':title', '')
                         ) ||
                         router.pathname.includes(
-                            ROUTES.SCHOLARSHIP.replace(':id', '')
+                            ROUTES.SCHOLARSHIP.replace(':title', '')
                         )
                             ? 'block translate-y-10 md:hidden'
                             : ''

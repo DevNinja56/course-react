@@ -11,6 +11,10 @@ import { getSsrRequest } from '@/utils/ssrRequest';
 import { API_ENDPOINTS } from '@/config/Api_EndPoints';
 import { ROUTES } from '@/config/constant';
 import Link from 'next/link';
+import dynamic from 'next/dynamic';
+const InnerHtml = dynamic(() => import('@/components/InnerHtml'), {
+    ssr: false
+});
 
 const Institutes = ({ data: institute }: { data: instituteType }) => {
     const [showText, setShowText] = useState(false);
@@ -24,7 +28,6 @@ const Institutes = ({ data: institute }: { data: instituteType }) => {
                     alt="uni-round"
                     className="-left-4 md:-left-3 top-1/2 md:top-1/3 absolute h-11 w-11 md:h-14 md:w-14"
                     src="/images/CourseDetail/Circle 3.svg"
-                    // priority
                 />
                 <div className="w-full xl:container mx-auto px-4 md:px-[50px] lg:px-2 2xl:px-8 transition-all duration-300 z-10 flex justify-center">
                     <img
@@ -84,15 +87,18 @@ const Institutes = ({ data: institute }: { data: instituteType }) => {
                                 </Link>
                             </div>
                             <div className="flex bg-white bg-opacity-10 gap-1 w-full">
-                                <p
+                                <div
                                     className={`flex flex-col gap-8 font-medium text-lightGrayColor w-full text-sm md:text-base`}
                                 >
-                                    {institute?.description.slice(
-                                        0,
-                                        showText
-                                            ? institute?.description.length
-                                            : 400
-                                    )}
+                                    <InnerHtml
+                                        html={institute?.description.slice(
+                                            0,
+                                            showText
+                                                ? institute?.description.length
+                                                : 400
+                                        )}
+                                    />
+
                                     {institute?.description.length > 400 &&
                                         !showText && <>....</>}
                                     {institute?.description.length > 400 && (
@@ -107,7 +113,7 @@ const Institutes = ({ data: institute }: { data: instituteType }) => {
                                                 : 'Show More'}
                                         </button>
                                     )}
-                                </p>
+                                </div>
                             </div>
                             <div className="flex flex-col gap-12 lg:hidden">
                                 <UniversityFacts data={institute} />
@@ -134,7 +140,8 @@ export const getServerSideProps: GetServerSideProps<{
     try {
         const id = `${API_ENDPOINTS.INSTITUTE_BY_ID.replace(
             ':id',
-            context.query?.id as string
+            (context.query?.institute_id as string) ??
+                (context.query?.id as string)
         )}`;
         data = await getSsrRequest(id, context);
         return { props: { data } };

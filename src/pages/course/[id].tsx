@@ -26,6 +26,10 @@ import { useCalculate } from '@/hooks/initial-deposit-calculate';
 import LanguageRequirements from '@/components/course/LanguageRequirements';
 import { generateIntakes } from '@/utils/generateIntakes';
 import Card from '@/components/Scholarship/Card';
+import dynamic from 'next/dynamic';
+const InnerHtml = dynamic(() => import('@/components/InnerHtml'), {
+    ssr: false
+});
 
 const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
     const { updateModal } = useUi();
@@ -142,14 +146,14 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                                                                         Course
                                                                         Description
                                                                     </h1>
-                                                                    <div
-                                                                        className="text-sm md:text-base"
-                                                                        dangerouslySetInnerHTML={{
-                                                                            __html:
+                                                                    <div className="text-sm md:text-base">
+                                                                        <InnerHtml
+                                                                            html={
                                                                                 course?.description ??
                                                                                 ''
-                                                                        }}
-                                                                    />
+                                                                            }
+                                                                        />
+                                                                    </div>
                                                                 </div>
                                                             )
                                                         },
@@ -162,23 +166,24 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                                                                             Entry
                                                                             Requirements
                                                                         </h3>
-                                                                        <div
-                                                                            className="content text-sm md:text-base"
-                                                                            dangerouslySetInnerHTML={{
-                                                                                __html:
+                                                                        <div className="content text-sm md:text-base">
+                                                                            <InnerHtml
+                                                                                html={
                                                                                     course
                                                                                         .entryRequirements?.[0]
                                                                                         ?.requirement ??
                                                                                     'No Entry Requirements'
-                                                                            }}
-                                                                        ></div>
-                                                                        {course?.textEligibility && (
-                                                                            <div
-                                                                                className="text-sm md:text-base"
-                                                                                dangerouslySetInnerHTML={{
-                                                                                    __html: course?.textEligibility
-                                                                                }}
+                                                                                }
                                                                             />
+                                                                        </div>
+                                                                        {course?.textEligibility && (
+                                                                            <div className="text-sm md:text-base">
+                                                                                <InnerHtml
+                                                                                    html={
+                                                                                        course.textEligibility
+                                                                                    }
+                                                                                />
+                                                                            </div>
                                                                         )}
                                                                     </div>
                                                                 </div>
@@ -229,12 +234,13 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                                                                         )}
                                                                     </p>
                                                                     {course?.textAmount && (
-                                                                        <div
-                                                                            className="text-sm md:text-base"
-                                                                            dangerouslySetInnerHTML={{
-                                                                                __html: course?.textAmount
-                                                                            }}
-                                                                        />
+                                                                        <div className="text-sm md:text-base">
+                                                                            <InnerHtml
+                                                                                html={
+                                                                                    course.textAmount
+                                                                                }
+                                                                            />
+                                                                        </div>
                                                                     )}
                                                                 </div>
                                                             )
@@ -267,7 +273,7 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                                                                                             type: scholarship.type,
                                                                                             degree: course.degree,
                                                                                             institute:
-                                                                                                course.institute,
+                                                                                                course?.institute,
                                                                                             country:
                                                                                                 course
                                                                                                     .institute
@@ -332,12 +338,13 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                                                                     </p>
 
                                                                     {course?.textInitialDeposit && (
-                                                                        <div
-                                                                            className="text-sm md:text-base"
-                                                                            dangerouslySetInnerHTML={{
-                                                                                __html: course?.textInitialDeposit
-                                                                            }}
-                                                                        />
+                                                                        <div className="text-sm md:text-base">
+                                                                            <InnerHtml
+                                                                                html={
+                                                                                    course.textInitialDeposit
+                                                                                }
+                                                                            />
+                                                                        </div>
                                                                     )}
                                                                 </div>
                                                             )
@@ -351,13 +358,18 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                                         <h1 className="text-base md:text-xl font-semibold text-textLightBlackColor">
                                             Get more details
                                         </h1>
-                                        <Link
-                                            href={course.institute.instituteURL}
-                                            target="_blank"
-                                            className="text-blueColor text-xs md:text-base"
-                                        >
-                                            Visit university website
-                                        </Link>
+                                        {course?.institute?.instituteURL && (
+                                            <Link
+                                                href={
+                                                    course.institute
+                                                        .instituteURL
+                                                }
+                                                target="_blank"
+                                                className="text-blueColor text-xs md:text-base"
+                                            >
+                                                Visit university website
+                                            </Link>
+                                        )}
                                     </div>
                                     {course.documentsRequirement && (
                                         <div className="flex flex-col gap-5 w-full">
@@ -407,32 +419,40 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                                             // priority
                                         />
                                         <h1 className="absolute w-full bottom-0 left-0 py-2 px-5 bg-gradient-to-t from-blueColor text-center font-bold text-2xl text-white z-10  ">
-                                            {course?.institute?.name ?? "No Institute Found"}
+                                            {course?.institute?.name ??
+                                                'No Institute Found'}
                                         </h1>
                                     </div>
                                     <div className="pt-5 px-1 xl:px-3">
                                         <h1 className="text-mainTextColor text-xl font-bold mb-2">
                                             About
                                         </h1>
-                                        <p className="text-[13px] text-lightGrayColor mb-2">
-                                            {course.institute.description.slice(
-                                                0,
-                                                200
-                                            )}
-                                            ...
-                                        </p>
+                                        <div className="text-[13px] text-lightGrayColor mb-2">
+                                            <InnerHtml
+                                                html={
+                                                    course?.institute?.description?.slice(
+                                                        0,
+                                                        200
+                                                    ) ?? ''
+                                                }
+                                            />
+                                        </div>
                                         <p className="text-xs text-lightGrayColor mb-8">
                                             Visit the{' '}
-                                            <Link
-                                                href={
-                                                    course.institute
-                                                        .instituteURL
-                                                }
-                                                target="_blank"
-                                                className="text-blueColor font-bold"
-                                            >
-                                                Visit university website
-                                            </Link>{' '}
+                                            {course?.institute?.instituteURL ? (
+                                                <Link
+                                                    href={
+                                                        course?.institute
+                                                            ?.instituteURL
+                                                    }
+                                                    target="_blank"
+                                                    className="text-blueColor font-bold"
+                                                >
+                                                    Visit university website
+                                                </Link>
+                                            ) : (
+                                                'university website'
+                                            )}
                                             for more information
                                         </p>
                                         <div className="flex flex-col gap-3">
@@ -650,7 +670,8 @@ export const getServerSideProps: GetServerSideProps<{
     try {
         const id = `${API_ENDPOINTS.COURSE_BY_ID.replace(
             ':id',
-            context.query?.id as string
+            (context.query?.course_id as string) ??
+                (context.query?.id as string)
         )}`;
         data = await getSsrRequest(id, context);
         return { props: { data } };

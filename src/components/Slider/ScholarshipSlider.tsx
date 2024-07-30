@@ -47,7 +47,15 @@ function ScholarshipSlider() {
                             className="relative border rounded-xl bg-white overflow-hidden"
                         >
                             <Link
-                                href={ROUTES.SCHOLARSHIP.replace(':id', id)}
+                                href={{
+                                    pathname: ROUTES.SCHOLARSHIP.replace(
+                                        ':title',
+                                        title.replaceAll(' ', '-')
+                                    ),
+                                    query: {
+                                        scholarship_id: id
+                                    }
+                                }}
                                 className="max-w-[400px]"
                             >
                                 <img
