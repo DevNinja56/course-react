@@ -60,7 +60,7 @@ const CourseCard = ({ course }: CardProps) => {
                             title={name}
                             className="font-bold text-mainTextColor text-xs xl:text-sm"
                         >
-                            {name} <br /> at {institute.name} - (
+                            {name} <br /> at {institute?.name ?? "No Institute Found"} - (
                             {specialization?.name ?? 'No Specialization'})
                         </h1>
                         <p className="font-medium text-[0.670rem] xl:text-[0.700rem] text-gray-400 capitalize">
@@ -72,11 +72,11 @@ const CourseCard = ({ course }: CardProps) => {
                             <div className="flex flex-col items-center gap-1">
                                 <LuMapPin className="h-4 w-4 text-blueColor" />
                                 <p className="text-[0.600rem] xl:text-[0.700rem]">
-                                    {country.name.split(' ').length > 1
-                                        ? country.name
+                                    {country?.name.split(' ').length > 1
+                                        ? country?.name
                                               .split(' ')
                                               .map((i: string) => i[0])
-                                        : country.name}
+                                        : country?.name}
                                 </p>
                             </div>
                             <div className="flex flex-col items-center gap-1">

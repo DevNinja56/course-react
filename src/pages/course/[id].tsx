@@ -407,7 +407,7 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                                             // priority
                                         />
                                         <h1 className="absolute w-full bottom-0 left-0 py-2 px-5 bg-gradient-to-t from-blueColor text-center font-bold text-2xl text-white z-10  ">
-                                            {course.institute.name}
+                                            {course?.institute?.name ?? "No Institute Found"}
                                         </h1>
                                     </div>
                                     <div className="pt-5 px-1 xl:px-3">
