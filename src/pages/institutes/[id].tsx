@@ -38,7 +38,7 @@ const Institutes = ({ data: institute }: { data: instituteType }) => {
                             institute?.image ??
                             '/images/institute/instituteMain.png'
                         }
-                        className="w-full rounded-xl max-h-[400px] aspect-[12.4/40] object-cover  "
+                        className="w-full rounded-xl aspect-[12.4/4] object-cover  "
                         // priority
                     />
                 </div>
