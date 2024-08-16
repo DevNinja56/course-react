@@ -1,6 +1,6 @@
-@import "./config";
-@import "./slider";
-@import "./rangle-slider";
+@import './config';
+@import './slider';
+@import './rangle-slider';
 
 @tailwind base;
 @tailwind components;
@@ -74,5 +74,25 @@ html {
             -ms-overflow-style: none; /* IE and Edge */
             scrollbar-width: none; /* Firefox */
         }
+    }
+}
+
+[data-remove-styles] * {
+    all: initial;
+}
+
+.revert-styles {
+    ol {
+        all: initial;
+    }
+    ul {
+        all: initial;
+    }
+    table {
+        max-width: 100%;
+    }
+    img {
+        all: initial;
+        max-width: 100%;
     }
 }

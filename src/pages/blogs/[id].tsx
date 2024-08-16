@@ -66,13 +66,15 @@ const BlogsDetail = ({ data }: { data: blogsType }) => {
             </div>
             <div className="w-full pb-28">
                 <div className="max-w-[834px] 2xl:max-w-[1966px] mx-auto px-5 md:px-[50px] lg:px-2">
-                    <div className="flex flex-col gap-y-[35px]">
-                        <div
-                            className="content"
-                            dangerouslySetInnerHTML={{
-                                __html: data?.description ?? ''
-                            }}
-                        />
+                    <div className="flex flex-col gap-y-[35px] ">
+                        <div className="data-remove-styles revert-styles">
+                            <div
+                                className="content"
+                                dangerouslySetInnerHTML={{
+                                    __html: data?.description ?? ''
+                                }}
+                            />
+                        </div>
                         <div className="w-full flex justify-center items-center">
                             <div className="flex items-center gap-x-[25px]">
                                 <div className="flex items-center justify-center h-[38px] w-[38px] rounded-full border border-darkGrayColor hover:border-blueColor transition-all duration-300 group cursor-pointer">

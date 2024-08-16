@@ -118,14 +118,16 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                                                                     Course
                                                                     Description
                                                                 </h1>
-                                                                <div
-                                                                    className="text-base"
-                                                                    dangerouslySetInnerHTML={{
-                                                                        __html:
-                                                                            course?.description ??
-                                                                            ''
-                                                                    }}
-                                                                />
+                                                                <div className="data-remove-styles revert-styles">
+                                                                    <div
+                                                                        className="text-base"
+                                                                        dangerouslySetInnerHTML={{
+                                                                            __html:
+                                                                                course?.description ??
+                                                                                ''
+                                                                        }}
+                                                                    />
+                                                                </div>
                                                             </div>
                                                         )
                                                     },
@@ -138,14 +140,16 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                                                                         Entry
                                                                         Requirements
                                                                     </h3>
-                                                                    <div
-                                                                        className="content text-base"
-                                                                        dangerouslySetInnerHTML={{
-                                                                            __html:
-                                                                                course?.entryRequirements ??
-                                                                                'No Entry Requirements'
-                                                                        }}
-                                                                    ></div>
+                                                                    <div className="data-remove-styles revert-styles">
+                                                                        <div
+                                                                            className="content text-base"
+                                                                            dangerouslySetInnerHTML={{
+                                                                                __html:
+                                                                                    course?.entryRequirements ??
+                                                                                    'No Entry Requirements'
+                                                                            }}
+                                                                        ></div>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         )
