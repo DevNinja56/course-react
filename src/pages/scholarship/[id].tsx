@@ -265,12 +265,15 @@ const CourseDetail = ({ data: scholarship }: { data: scholarshipType }) => {
                                 <h1 className="font-semibold text-lg md:text-xl text-textLightBlackColor">
                                     Description
                                 </h1>
-                                <div
-                                    className="text-sm md:text-base"
-                                    dangerouslySetInnerHTML={{
-                                        __html: scholarship?.description ?? ''
-                                    }}
-                                />
+                                <div className="data-remove-styles revert-styles">
+                                    <div
+                                        className="text-sm md:text-base"
+                                        dangerouslySetInnerHTML={{
+                                            __html:
+                                                scholarship?.description ?? ''
+                                        }}
+                                    />
+                                </div>
                             </div>
                             <div className="py-6 border-t-2 border-borderColor flex items-center justify-between w-full mb-20">
                                 <h1 className="text-lg md:text-xl font-semibold text-textLightBlackColor">
