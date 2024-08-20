@@ -14,7 +14,7 @@ export const ROUTES = {
     BLOGS: '/blogs',
     BLOGS_DETAIL: '/blogs/:id',
     INSTITUTES: '/institutes',
-    INSTITUTES_DETAIL:"/institutes/:id",
+    INSTITUTES_DETAIL: '/institutes/:id',
     ABOUT_US: '/aboutUs',
     CONTACT_US: '/contactUs',
     FAQ: '/faq',
@@ -22,4 +22,5 @@ export const ROUTES = {
     TERMS_CONDITION: '/termsCondition',
     FAVORITES: '/profile?tab=Favorite',
     APPLIES: '/profile?tab=Profile&tab2=myApplies',
+    UCAS: '/ucas'
 };

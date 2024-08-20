@@ -106,6 +106,11 @@ const Footer = () => {
                                         Blogs
                                     </li>
                                 </Link>
+                                <Link href={ROUTES.UCAS}>
+                                    <li className="pt-[9px] pb-[10px]">
+                                        Calculate Your UCAS
+                                    </li>
+                                </Link>
                             </ul>
                         </div>
                         <div className="flex flex-col w-full md:w-auto mb-8">
