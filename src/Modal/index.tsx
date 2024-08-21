@@ -13,6 +13,7 @@ const UpdateUserAcademicInfo = dynamic(
 );
 import CurrencyConverter from './CurrencyConverter';
 import BankStatementCalculate from './BankStatementCalculate';
+import UcasPointCalculate from './UcasPointCalculate';
 
 const ModalWraper = () => {
     const { modal } = useUi();
@@ -26,7 +27,8 @@ const ModalWraper = () => {
         [modalType.login_confirmation]: <LoginConfirmation />,
         [modalType.change_password]: <ChangePassword />,
         [modalType.currency_converter]: <CurrencyConverter />,
-        [modalType.bank_statement_calculator]: <BankStatementCalculate />
+        [modalType.bank_statement_calculator]: <BankStatementCalculate />,
+        [modalType.ucas_points_calculator]: <UcasPointCalculate />
     };
 
     return (

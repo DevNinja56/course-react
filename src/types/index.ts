@@ -247,3 +247,21 @@ export type countryDataType = {
     languages: string;
     code: string;
 };
+
+export type Grade = {
+    grade: string;
+    score: string;
+};
+
+export type QualificationData = {
+    name: string;
+    group: string;
+    grades: Grade[];
+};
+
+export type Qualification = {
+    id: number;
+    selectedQualification?: QualificationData;
+    selectedScore?: string;
+    selectedGrade?: string;
+};

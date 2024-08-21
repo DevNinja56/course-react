@@ -9,7 +9,8 @@ export enum modalType {
     'login_confirmation',
     'change_password',
     'currency_converter',
-    'bank_statement_calculator'
+    'bank_statement_calculator',
+    'ucas_points_calculator'
 }
 
 interface UiState {

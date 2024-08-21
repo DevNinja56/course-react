@@ -1,8 +1,30 @@
-import QualificationSection from '@/components/Ucas/QualificationSection';
+import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
-import React from 'react';
+import QualificationSection from '@/components/Ucas/QualificationSection';
+import Button from '@/components/Button';
+import { Qualification } from '@/types';
+import { useUi } from '@/hooks/user-interface';
+import { modalType } from '@/store/slices/ui.slice';
 
 const UCAS = () => {
+    const { updateModal } = useUi();
+
+    const [qualifications, setQualifications] = useState<Qualification[]>([
+        { id: Date.now() }
+    ]);
+    const [totalScore, setTotalScore] = useState<number>(0);
+
+    useEffect(() => {
+        updateModal({
+            type: modalType.ucas_points_calculator,
+            state: {
+                qualifications,
+                setQualifications,
+                setTotalScore
+            }
+        });
+    }, []);
+
     return (
         <>
             <div className="w-full flex items-center justify-between h-[214px] mt-[90px] bg-profileBgColor mb-16">
@@ -14,14 +36,9 @@ const UCAS = () => {
                     src="/images/profileImages/Ellipse 418.svg"
                     priority
                 />
-                <div className="flex flex-col items-center">
-                    <h1 className="text-mainTextColor text-[36px] md:text-[48px] font-bold">
-                        Calculate your UCAS Tariff points
-                    </h1>
-                    <p className="text-blueColor font-bold text-lg md:text-[23px] text-center">
-                        Explore this section
-                    </p>
-                </div>
+                <h1 className="text-mainTextColor text-[36px] md:text-[48px] font-bold">
+                    Calculate your UCAS Tariff points
+                </h1>
                 <Image
                     height={235}
                     width={100}
@@ -47,50 +64,71 @@ const UCAS = () => {
                     priority
                 />
             </div>
-            <div className="flex flex-col gap-5 container mx-auto">
-                <h2 className="font-bold text-4xl">
-                    Before you use the Tariff Calculator
-                </h2>
-                <ul className="text-gray-500 flex flex-col gap-3 text-lg list-disc pl-4 mb-10">
-                    <li>
-                        Not all qualifications are included in the Tariff, so
-                        don&apos;t worry if you can&apos;t find your
-                        qualification in this calculator - make sure you{' '}
-                        <span className="text-blue-700 cursor-pointer opacity-70 hover:text-red-500 transition-all duration-300">
-                            check the entry requirements in our search tool
-                        </span>{' '}
-                        for the courses you&apos;re interested in.
-                    </li>
-                    <li>
-                        Universities and colleges set their own entry
-                        requirements and do not have to accept a qualification
-                        simply because it is included in the Tariff tables.
-                    </li>
-                    <li>
-                        Universities and colleges don&apos;t have to accept the
-                        Tariff value assigned by UCAS either. For example, if a
-                        university feels the content of the qualification is not
-                        fully relevant for the course you are applying to, they
-                        may tell you it&apos;s worth fewer points than UCAS has
-                        suggested, although most of the time the full Tariff
-                        points will be accepted.
-                    </li>
-                    <li>
-                        The best advice is to check the entry requirements
-                        listed in UCAS&apos; search tool, or with the course
-                        provider, to find out if your qualifications are
-                        accepted.
-                    </li>
-                    <li>
-                        UCAS Tariff points only apply to Level 3/SCQF Level 6
-                        qualifications, not Level 2 qualifications such as
-                        GCSEs. This calculator covers Level 3 UK qualifications
-                        regulated by Ofqual, Qualifications in Wales, CCEA and
-                        QAA, as well as SCQF Level 6 qualifications accredited
-                        by SQA and SCQF.
-                    </li>
-                </ul>
-                <QualificationSection />
+            <div className="container mx-auto mb-5">
+                <div className="w-8/12 flex flex-col gap-5">
+                    <h2 className="font-bold text-4xl">
+                        UCAS Points Calculator
+                    </h2>
+                    <ul className="text-gray-500 flex flex-col gap-3 text-lg mb-10">
+                        <li>
+                            Please use this{' '}
+                            <span className="font-bold text-black">
+                                UCAS Points Calculator
+                            </span>{' '}
+                            to calculate your UCAS Tariff Points. Your UCAS
+                            points score allows you to make broad comparisons
+                            across a wide range of universities and colleges to
+                            find the best courses for your qualifications and
+                            grades.
+                        </li>
+                        <li>
+                            If you are wondering &quot;how many UCAS points do I
+                            have&quot;, then please enter your qualifications
+                            below and we&apos;ll calculate your points for you.
+                            When applying for specific courses, please use the
+                            UCAS points converter as a general guide and always
+                            check the specific requirements of that course.
+                        </li>
+                    </ul>
+                    <div className="flex flex-col gap-8">
+                        <h1 className="font-bold text-3xl">Qualifications</h1>
+                        {qualifications.map((qualification) => (
+                            <QualificationSection
+                                key={'qualification --' + qualification.id}
+                                qualification={qualification}
+                                qualifications={qualifications}
+                                setQualifications={setQualifications}
+                                setTotalScore={setTotalScore}
+                            />
+                        ))}
+                        <div className="border-t pt-5 flex items-center justify-between">
+                            <div className="flex items-center gap-3">
+                                <Button
+                                    onClick={() =>
+                                        setQualifications((prev) => [
+                                            ...prev,
+                                            { id: Date.now() }
+                                        ])
+                                    }
+                                    text="+ Add Qualification"
+                                    className="py-2 px-3 text-sm rounded-[100em] min-w-fit"
+                                />
+                                <Button
+                                    onClick={() => {
+                                        setQualifications([{ id: Date.now() }]);
+                                        setTotalScore(0);
+                                    }}
+                                    text="Clear All"
+                                    className="py-2 px-3 text-sm rounded-[100em]"
+                                />
+                            </div>
+                            <div className="flex flex-col items-center font-bold text-xl">
+                                Total Points:
+                                <span className="text-3xl">{totalScore}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </>
     );
