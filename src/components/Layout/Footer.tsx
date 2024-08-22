@@ -117,7 +117,7 @@ const Footer = () => {
                                 </Link>
                                 <Link href={ROUTES.UCAS}>
                                     <li className="pt-[9px] pb-[10px]">
-                                        Calculate Your UCAS
+                                        UCAS Calculator
                                     </li>
                                 </Link>
                             </ul>
