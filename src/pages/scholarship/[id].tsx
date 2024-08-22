@@ -9,12 +9,16 @@ import { modalType } from '@/store/slices/ui.slice';
 import { scholarshipType } from '@/types';
 import { getSsrRequest } from '@/utils/ssrRequest';
 import { GetServerSideProps } from 'next';
+import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import React, { useState } from 'react';
 import { FaCalendar, FaMoneyBillWave } from 'react-icons/fa6';
 import { GiTrophy } from 'react-icons/gi';
 import { GoClockFill } from 'react-icons/go';
 import { IoShareSocialSharp } from 'react-icons/io5';
+const InnerHtml = dynamic(() => import('@/components/InnerHtml'), {
+    ssr: false
+});
 
 const CourseDetail = ({ data: scholarship }: { data: scholarshipType }) => {
     const { updateModal } = useUi();
@@ -33,7 +37,6 @@ const CourseDetail = ({ data: scholarship }: { data: scholarshipType }) => {
                             alt="course-round"
                             className="top-1/3 absolute -left-3 md:-left-5 h-8 w-8 md:h-16 md:w-16 lg:h-24 lg:w-24 z-10"
                             src="/images/CourseDetail/Circle 3.svg"
-                            // priority
                         />
                         <div className="w-full py-5 pb-10 md:py-10 xl:py-20 flex justify-center xl:container px-4 md:px-[50px] lg:px-2 2xl:px-8">
                             <img
@@ -42,7 +45,6 @@ const CourseDetail = ({ data: scholarship }: { data: scholarshipType }) => {
                                 alt="courseDetail"
                                 src="/images/CourseDetail/courseDetailMain.png"
                                 className="z-20 h-full w-full lg:block hidden"
-                                // priority
                             />
                             <img
                                 height={375}
@@ -50,7 +52,6 @@ const CourseDetail = ({ data: scholarship }: { data: scholarshipType }) => {
                                 alt="courseDetail"
                                 src="/images/CourseDetail/courseDetailMainTablet.png"
                                 className="z-20 h-full w-full lg:hidden block"
-                                // priority
                             />
                         </div>
                         <img
@@ -59,7 +60,6 @@ const CourseDetail = ({ data: scholarship }: { data: scholarshipType }) => {
                             alt="courseDetail-round"
                             className="absolute right-[-40px] lg:-right-20 -top-7 md:-top-16 md:-right-8 md:translate-y-8 lg:translate-y-0 md:bottom-8 lg:-top-16 h-20 w-20 md:h-32 md:w-32 lg:h-80 lg:w-80"
                             src="/images/CourseDetail/Ciecle 4.svg"
-                            // priority
                         />
                     </div>
                     <div className="flex items-center w-full xl:container px-4 md:px-[50px] lg:px-2 2xl:px-8 mx-auto transition-all duration-300 flex-col gap-6 mb-32">
@@ -116,21 +116,23 @@ const CourseDetail = ({ data: scholarship }: { data: scholarshipType }) => {
                                                                     scholarship
                                                                     Description
                                                                 </h1>
-                                                                <div
-                                                                    className="text-sm md:text-base"
-                                                                    dangerouslySetInnerHTML={{
-                                                                        __html:
+                                                                <div className="text-sm md:text-base">
+                                                                    <InnerHtml
+                                                                        html={
                                                                             scholarship?.description ??
                                                                             ''
-                                                                    }}
-                                                                />
-                                                                {scholarship?.text_overview && (
-                                                                    <div
-                                                                        className="text-sm md:text-base"
-                                                                        dangerouslySetInnerHTML={{
-                                                                            __html: scholarship?.text_overview
-                                                                        }}
+                                                                        }
                                                                     />
+                                                                </div>
+                                                                {scholarship?.text_overview && (
+                                                                    <div className="text-sm md:text-base">
+                                                                        <InnerHtml
+                                                                            html={
+                                                                                scholarship?.text_overview ??
+                                                                                ''
+                                                                            }
+                                                                        />
+                                                                    </div>
                                                                 )}
                                                             </div>
                                                         )
@@ -149,12 +151,14 @@ const CourseDetail = ({ data: scholarship }: { data: scholarshipType }) => {
                                                                     }
                                                                 </div>
                                                                 {scholarship?.text_eligibility_criteria && (
-                                                                    <div
-                                                                        className="text-sm md:text-base"
-                                                                        dangerouslySetInnerHTML={{
-                                                                            __html: scholarship?.text_eligibility_criteria
-                                                                        }}
-                                                                    />
+                                                                    <div className="text-sm md:text-base">
+                                                                        <InnerHtml
+                                                                            html={
+                                                                                scholarship?.text_eligibility_criteria ??
+                                                                                ''
+                                                                            }
+                                                                        />
+                                                                    </div>
                                                                 )}
                                                             </div>
                                                         )
@@ -199,12 +203,14 @@ const CourseDetail = ({ data: scholarship }: { data: scholarshipType }) => {
                                                                     }
                                                                 </p>
                                                                 {scholarship?.text_amount && (
-                                                                    <div
-                                                                        className="text-sm md:text-base"
-                                                                        dangerouslySetInnerHTML={{
-                                                                            __html: scholarship?.text_amount
-                                                                        }}
-                                                                    />
+                                                                    <div className="text-sm md:text-base">
+                                                                        <InnerHtml
+                                                                            html={
+                                                                                scholarship?.text_amount ??
+                                                                                ''
+                                                                            }
+                                                                        />
+                                                                    </div>
                                                                 )}
                                                             </div>
                                                         )
@@ -217,16 +223,21 @@ const CourseDetail = ({ data: scholarship }: { data: scholarshipType }) => {
                                         <h1 className="text-base md:text-xl font-semibold text-textLightBlackColor">
                                             Get more details
                                         </h1>
-                                        <Link
-                                            href={
-                                                scholarship?.institute
-                                                    ?.instituteURL
-                                            }
-                                            target="_blank"
-                                            className="text-blueColor text-xs md:text-base"
-                                        >
-                                            Visit university website
-                                        </Link>
+                                        {scholarship?.institute
+                                            ?.instituteURL ? (
+                                            <Link
+                                                href={
+                                                    scholarship?.institute
+                                                        ?.instituteURL
+                                                }
+                                                target="_blank"
+                                                className="text-blueColor text-xs md:text-base"
+                                            >
+                                                Visit university website
+                                            </Link>
+                                        ) : (
+                                            'University website not available'
+                                        )}
                                     </div>
                                 </div>
                             </div>
@@ -242,35 +253,41 @@ const CourseDetail = ({ data: scholarship }: { data: scholarshipType }) => {
                                                 scholarship?.institute?.image ??
                                                 '/images/CourseDetail/Rectangle 1697.svg'
                                             }
-                                            // priority
                                         />
                                         <h1 className="absolute w-full bottom-0 left-0 py-2 px-5 bg-gradient-to-t from-blueColor text-center font-bold text-2xl text-white z-10  ">
-                                            {scholarship?.institute?.name}
+                                            {scholarship?.institute?.name ??
+                                                'No Institute Found'}
                                         </h1>
                                     </div>
                                     <div className="pt-5 px-1 xl:px-3">
                                         <h1 className="text-mainTextColor text-xl font-bold mb-2">
                                             About
                                         </h1>
-                                        <p className="text-[13px] text-lightGrayColor mb-2">
-                                            {scholarship?.institute?.description.slice(
-                                                0,
-                                                200
-                                            )}
-                                            ...
-                                        </p>
+                                        <div className="text-[13px] text-lightGrayColor mb-2">
+                                            <InnerHtml
+                                                html={scholarship?.institute?.description.slice(
+                                                    0,
+                                                    200
+                                                )}
+                                            />
+                                        </div>
                                         <p className="text-xs text-lightGrayColor mb-8">
                                             Visit the{' '}
-                                            <Link
-                                                href={
-                                                    scholarship.institute
-                                                        ?.instituteURL
-                                                }
-                                                target="_blank"
-                                                className="text-blueColor font-bold"
-                                            >
-                                                Visit university website
-                                            </Link>{' '}
+                                            {scholarship.institute
+                                                ?.instituteURL ? (
+                                                <Link
+                                                    href={
+                                                        scholarship.institute
+                                                            ?.instituteURL
+                                                    }
+                                                    target="_blank"
+                                                    className="text-blueColor font-bold"
+                                                >
+                                                    Visit university website
+                                                </Link>
+                                            ) : (
+                                                'University website not available'
+                                            )}
                                             for more information
                                         </p>
                                         <div className="flex flex-col gap-3">
@@ -373,33 +390,7 @@ const CourseDetail = ({ data: scholarship }: { data: scholarshipType }) => {
                                             link={ROUTES.APPLY}
                                         />
                                     </div>
-                                    {/* <div className="w-full">
-                                        <Button
-                                            className="py-4 rounded-md text-base font-semibold w-full"
-                                            text="Compare"
-                                            link={{
-                                                pathname: ROUTES.COMPARE,
-                                                query: {
-                                                    scholarship_id:
-                                                        scholarship._id
-                                                }
-                                            }}
-                                            variant="outline"
-                                        />
-                                    </div> */}
                                 </div>
-                                {/* <CourseTag
-                                    icon={
-                                        <BiSolidCalendar className="h-7 w-7" />
-                                    }
-                                    text="Upcoming Intakes"
-                                    tagName="September 2024"
-                                />
-                                <CourseTag
-                                    icon={<GiOpenBook className="h-7 w-7" />}
-                                    text="Mode of Study"
-                                    tagName="Full Time"
-                                /> */}
                             </div>
                         </div>
                     </div>
@@ -416,7 +407,8 @@ export const getServerSideProps: GetServerSideProps<{
     try {
         const id = `${API_ENDPOINTS.SCHOLARSHIP_BY_ID.replace(
             ':id',
-            context.query?.id as string
+            (context.query?.scholarship_id as string) ??
+                (context.query?.id as string)
         )}`;
         data = await getSsrRequest(id, context);
         return { props: { data } };

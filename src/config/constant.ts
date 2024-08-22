@@ -5,16 +5,16 @@ export const ROUTES = {
     COMPARE: '/compare',
     APPLY: '/apply',
     FILTER_COURSE: '/filter/course',
-    COURSE: '/course/:id',
+    COURSE: '/course/:title',
     FILTER_SCHOLARSHIP: '/filter/scholarship',
-    SCHOLARSHIP: '/scholarship/:id',
+    SCHOLARSHIP: '/scholarship/:title',
     PROFILE: '/profile',
     COUNTRY: '/countries',
     FIELDS: '/categories',
     BLOGS: '/blogs',
     BLOGS_DETAIL: '/blogs/:id',
     INSTITUTES: '/institutes',
-    INSTITUTES_DETAIL: '/institutes/:id',
+    INSTITUTES_DETAIL: '/institutes/:title',
     ABOUT_US: '/aboutUs',
     CONTACT_US: '/contactUs',
     FAQ: '/faq',
@@ -24,5 +24,6 @@ export const ROUTES = {
     APPLIES: '/profile?tab=Profile&tab2=My+Applications',
     APPLIES_DETAIL: '/profile/application/:id',
     FILE_SUBMIT: '/profile/application/file-submit',
-    CONSOLID_MARKSHEET: '/profile/application/consolid-marksheet'
+    CONSOLID_MARKSHEET: '/profile/application/consolid-marksheet',
+    UCAS: '/ucas'
 };

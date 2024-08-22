@@ -40,7 +40,13 @@ const CourseCard = ({ course }: CardProps) => {
                 body={{ course: _id }}
             />
             <Link
-                href={ROUTES.COURSE.replace(':id', _id)}
+                href={{
+                    pathname: ROUTES.COURSE.replace(
+                        ':title',
+                        name.replaceAll(' ', '-')
+                    ),
+                    query: { course_id: _id }
+                }}
                 className="h-full flex flex-col justify-between"
             >
                 <div className="relative">
@@ -60,7 +66,8 @@ const CourseCard = ({ course }: CardProps) => {
                             title={name}
                             className="font-bold text-mainTextColor text-xs xl:text-sm"
                         >
-                            {name} <br /> at {institute.name} - (
+                            {name} <br /> at{' '}
+                            {institute?.name ?? 'No Institute Found'} - (
                             {specialization?.name ?? 'No Specialization'})
                         </h1>
                         <p className="font-medium text-[0.670rem] xl:text-[0.700rem] text-gray-400 capitalize">
@@ -72,11 +79,11 @@ const CourseCard = ({ course }: CardProps) => {
                             <div className="flex flex-col items-center gap-1">
                                 <LuMapPin className="h-4 w-4 text-blueColor" />
                                 <p className="text-[0.600rem] xl:text-[0.700rem]">
-                                    {country.name.split(' ').length > 1
-                                        ? country.name
+                                    {country?.name.split(' ').length > 1
+                                        ? country?.name
                                               .split(' ')
                                               .map((i: string) => i[0])
-                                        : country.name}
+                                        : country?.name}
                                 </p>
                             </div>
                             <div className="flex flex-col items-center gap-1">
@@ -109,7 +116,13 @@ const CourseCard = ({ course }: CardProps) => {
             </Link>
             <div className="flex items-center gap-2 justify-between m-3">
                 <Link
-                    href={ROUTES.COURSE.replace(':id', _id)}
+                    href={{
+                        pathname: ROUTES.COURSE.replace(
+                            ':title',
+                            name.replaceAll(' ', '-')
+                        ),
+                        query: { course_id: _id }
+                    }}
                     className="py-2 px-4 w-full flex justify-center bg-blueColor border-white hover:bg-white border hover:border-blueColor hover:text-blueColor transition-all duration-500 text-white font-medium rounded-md text-[0.640rem] xl:text-[0.740rem]"
                 >
                     View Details
