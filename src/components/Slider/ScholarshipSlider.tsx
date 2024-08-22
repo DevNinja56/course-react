@@ -1,6 +1,6 @@
 import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import Image from 'next/image';
+// import Image from 'next/image';
 import { EffectCoverflow, Pagination, Navigation } from 'swiper';
 
 import 'swiper/css';
@@ -47,15 +47,26 @@ function ScholarshipSlider() {
                             className="relative border rounded-xl bg-white overflow-hidden"
                         >
                             <Link
-                                href={ROUTES.SCHOLARSHIP.replace(':id', id)}
+                                href={{
+                                    pathname: ROUTES.SCHOLARSHIP.replace(
+                                        ':title',
+                                        title.replaceAll(' ', '-')
+                                    ),
+                                    query: {
+                                        scholarship_id: id
+                                    }
+                                }}
                                 className="max-w-[400px]"
                             >
-                                <Image
+                                <img
                                     width={500}
                                     height={500}
-                                    src={logo}
+                                    src={
+                                        logo ??
+                                        '/images/Scholarships/scholarship (1) 1.png'
+                                    }
                                     alt="slide_image"
-                                    className="object-contain p-3 w-auto max-w-full max-h-[calc(100%-50px)] "
+                                    className="p-3 w-auto max-w-full max-h-[calc(100%-50px)] aspect-[1/1] object-cover "
                                 />
                                 <h3 className="bg-gradient-to-t from-blueColor absolute start-0 bottom-0 text-2xl font-bold text-center px-2 py-3 w-full ">
                                     {title}

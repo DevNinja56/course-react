@@ -6,7 +6,7 @@ import { useUserAuth } from '@/hooks/auth';
 import { signUpForm } from '@/types';
 import { fetchRequest } from '@/utils/axios/fetch';
 import { signUpFormSchema } from '@/utils/formSchemas';
-import Image from 'next/image';
+// import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
@@ -61,56 +61,56 @@ const SignUp = () => {
     };
 
     return (
-        <div className="w-full flex justify-center items-center px-0 lg:px-10 2xl:px-40 bg-loginBgColor min-h-[100vh]">
+        <div className="w-full flex justify-center items-center px-0 lg:px-5 2xl:px-40 bg-loginBgColor min-h-[100vh]">
             <div className="w-full px-0 lg:px-2 transition-all duration-300">
-                <div className="relative w-full flex items-center justify-center pt-20 pb-20 md:py-20">
-                    <Image
+                <div className="relative w-full flex items-center justify-center pt-20 pb-20 md:pt-40 md:pb-20">
+                    <img
                         height={610}
                         width={560}
                         alt="mainBgImg"
                         src="/images/sign-up 1.svg"
                         className="h-[750px] object-cover md:h-auto w-full md:w-auto"
-                        priority
+                        // priority
                     />
-                    <Image
+                    <img
                         height={74}
                         width={74}
                         alt="logIn-Img"
                         className="absolute right-12 md:left-12 lg:left-28 xl:left-60 top-16 md:top-24 w-[74px]"
                         src="/images/signUpuRound1.svg"
-                        priority
+                        // priority
                     />
-                    <Image
+                    <img
                         height={200.78}
                         width={98}
                         alt="man"
                         className="absolute left-10 lg:left-20 xl:left-64 bottom-60 w-[98px] hidden md:block"
                         src="/images/man-3.svg"
-                        priority
+                        // priority
                     />
-                    <Image
+                    <img
                         height={48}
                         width={48}
                         alt="login-round-2"
                         className="absolute left-12 md:left-auto md:right-24 lg:right-36 xl:right-80 bottom-4 md:bottom-72 h-20 w-20 md:h-[48px] md:w-[48px]"
                         src="/images/signInRound1.svg"
-                        priority
+                        // priority
                     />
-                    <Image
+                    <img
                         height={123}
                         width={100}
                         alt="man-2"
                         className="absolute right-6 lg:right-8 xl:right-52 bottom-4 md:top-60 h-24 w-24 md:h-[123px] md:w-[123px]"
                         src="/images/man-2.svg"
-                        priority
+                        // priority
                     />
-                    <Image
+                    <img
                         height={66}
                         width={70}
                         alt="flower"
                         className="absolute right-20 lg:right-32 xl:right-64 bottom-20 lg:bottom-20 w-[50px] md:w-[70px] hidden md:block"
                         src="/images/flower.svg"
-                        priority
+                        // priority
                     />
                     <div className=" absolute top-1/2 -translate-y-1/2  rounded-[10px] bg-white custom-shadow pt-10 pb-7 px-4 md:px-12 flex flex-col items-center w-[90%] md:w-[53%] lg:w-[45%] xl:w-[35%] 2xl:w-[50%]  ">
                         <Link href={ROUTES.SIGN_IN}>

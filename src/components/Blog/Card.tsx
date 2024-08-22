@@ -1,10 +1,9 @@
 import { ROUTES } from '@/config/constant';
-import Image from 'next/image';
+// import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React from 'react';
 import FavoriteButton from '../Button/FavoriteButton';
-import { usePaginatedBlogs } from '@/hooks/blogsPaginated';
 import { nanoid } from '@reduxjs/toolkit';
 
 interface cardProps {
@@ -17,28 +16,23 @@ interface cardProps {
 
 const Card = ({ title, favorite, tags, image, id }: cardProps) => {
     const router = useRouter();
-    const { fetchBlogs } = usePaginatedBlogs();
     return (
         <div
-            className={`custom-shadow relative ${
+            className={`custom-shadow relative rounded-[10px] rounded-b-none ${
                 router.pathname === ROUTES.BLOGS_DETAIL
                     ? 'min-w-[340px] 2xl:min-w-0 2xl:w-[27vw]'
                     : ''
             }`}
         >
-            <FavoriteButton
-                isActive={!!favorite?.[0]}
-                body={{ blog: id }}
-                refetch={fetchBlogs}
-            />
+            <FavoriteButton isActive={!!favorite?.[0]} body={{ blog: id }} />
             <Link href={ROUTES.BLOGS_DETAIL.replace(':id', id)}>
-                <Image
+                <img
                     height={203.29}
                     width={366}
                     alt="carding"
-                    className="rounded-[10px] rounded-b-none mb-4 w-full"
+                    className="rounded-[10px] rounded-b-none mb-4 w-full h-52 "
                     src={`${image}`}
-                    priority
+                    // priority
                 />
                 <div className="px-[25px] flex flex-col gap-y-6">
                     <div className="flex items-center gap-x-3">
@@ -51,7 +45,7 @@ const Card = ({ title, favorite, tags, image, id }: cardProps) => {
                             </p>
                         ))}
                     </div>
-                    <h1 className="font-bold text-lg text-mainTextColor">
+                    <h1 className="font-bold text-lg text-mainTextColor line-clamp-2">
                         {title}
                     </h1>
                     <div className="w-full flex items-center justify-between">

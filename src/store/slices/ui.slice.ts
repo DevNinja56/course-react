@@ -6,10 +6,14 @@ export enum modalType {
     'compare_university',
     'update_user_info',
     'update_academic_info',
+    'upload_user_documents',
     'login_confirmation',
     'change_password',
     'currency_converter',
     'bank_statement_calculator',
+    'start_application',
+    'cancel_application',
+    'share_modal',
     'ucas_points_calculator'
 }
 

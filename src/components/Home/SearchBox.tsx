@@ -8,7 +8,6 @@ import {
 } from '@/store/slices/allRequests';
 import { useRouter } from 'next/router';
 import { ROUTES } from '@/config/constant';
-import { useFilterQuery } from '@/hooks/filterQuery';
 
 export type selectType = {
     value: string;
@@ -16,7 +15,6 @@ export type selectType = {
 };
 
 const SearchBox = () => {
-    const { addQuery } = useFilterQuery();
     const [value, setValue] = useState({ degrees: [], countries: [] });
     const { data: countries, isLoading: countryLoading } =
         useGetCountriesQuery();
@@ -35,8 +33,13 @@ const SearchBox = () => {
     const { push } = useRouter();
 
     const handleClick = () => {
-        push(ROUTES.FILTER_COURSE);
-        addQuery(value);
+        push({
+            pathname: ROUTES.FILTER_COURSE,
+            query: {
+                degrees: value.degrees.join(','),
+                countries: value.countries.join(',')
+            }
+        });
     };
 
     return (
@@ -81,7 +84,7 @@ const SearchBox = () => {
                         className="pt-[14px] pb-[13px]"
                         text="Search"
                         disabled={
-                            !value.degrees.length && !value.countries.length
+                            !value.degrees.length || !value.countries.length
                         }
                         onClick={handleClick}
                     />

@@ -13,7 +13,7 @@ export interface userType {
     role: 'user';
     status: 'in-active' | 'active' | 'block';
     registerWith: 'google' | 'facebook' | 'email';
-    documents: [];
+    documents: { name: string; url: string }[];
     academicInformation: academicInformation | null;
 }
 
@@ -27,6 +27,7 @@ export interface academicInformation {
             speaking: string;
             writing: string;
             reading: string;
+            overAll: string;
         } | null;
     };
 }
@@ -61,22 +62,27 @@ export type resetForm = {
 };
 
 export type scholarshipType = {
+    _id: string;
+    id: string;
     name: string;
     image: string;
+    amount: string;
     description: string;
     type: string;
     intakeYear: string;
     applicable: string;
     startDate: string;
     endDate: string;
-    degrees: degreeType[];
     institute: instituteType;
+    degree: degreeType[];
     country: countryType;
-    favoriteId: [string];
+    course: courseType | null;
     createdAt: string;
     updatedAt: string;
-    id: string;
-    _id: string;
+    favoriteId: userType[];
+    text_overview: string;
+    text_eligibility_criteria: string;
+    text_amount: string;
 };
 
 export type filterScholarShipType = {
@@ -84,15 +90,37 @@ export type filterScholarShipType = {
     name: string;
     image: string;
     type: string;
+    amount: string;
     intakeYear: string;
     applicable: string;
     startDate: string;
     endDate: string;
-    degrees: degreeType[];
     institute: instituteType;
+    degree: degreeType | degreeType[];
+    region: string;
     country: countryType;
-    discipline: disciplineType[];
-    favoriteId?: string[];
+    favoriteId: userType[];
+};
+
+export type scholarshipFiltersType = {
+    regions: {
+        region: string;
+    }[];
+    countries: {
+        country: string;
+    }[];
+    institutes: {
+        institute: string;
+    }[];
+    degrees: {
+        degree: degreeType;
+    }[];
+    // disciplines: {
+    //     discipline: string;
+    // }[];
+    scholarship_types: {
+        type: string;
+    }[];
 };
 
 export type countryType = {
@@ -109,11 +137,10 @@ export type countryType = {
 export type degreeType = {
     name: string;
     type: string;
-    course: courseType[];
-    scholarship: scholarshipType[];
     createdAt: string;
     updatedAt: string;
     id: string;
+    _id: string;
 };
 
 export type disciplineType = {
@@ -136,16 +163,12 @@ export type instituteType = {
     sector: string;
     establishedYear: number;
     location: string;
-    campus: string;
+    campus: string[];
     country: countryType;
-    scholarship: scholarshipType[];
-    discipline: disciplineType[];
-    course: courseType[];
-    qsWorldRanking: number;
-    usNewsRanking: number;
-    timesHigherRanking: number;
-    shanghaiRanking: number;
-    tcfIndexRanking: number;
+    degrees: degreeType[];
+    courses: courseType[];
+    qsWorldRanking: string;
+    timesHigherRanking: string;
     favoriteId: [string];
     id: string;
 };
@@ -153,6 +176,7 @@ export type instituteType = {
 export type specializationType = {
     name: string;
     id: string;
+    _id: string;
     course: [];
 };
 
@@ -162,31 +186,103 @@ export type courseType = {
     logo: string;
     degree: degreeType;
     duration: number;
-    language: string[];
     specialization: specializationType;
     institute: instituteType;
     intakes: string[];
     tuitionFee: number;
+    feeCurrency: 'aud' | 'gbp';
     country: countryType;
     discipline: disciplineType[];
+    countryDetails: {
+        country: string;
+        entryRequirement: string;
+        languageRequirement: string;
+        initialDeposit: number;
+    };
     favoriteId?: string[];
 };
+
+export type filterCourseType = {
+    intakes: {
+        intakes: string[];
+    }[];
+    specializations: {
+        specialization: string;
+    }[];
+    regions: {
+        region: string;
+    }[];
+    countries: {
+        country: string;
+    }[];
+    locations: {
+        location: string;
+    }[];
+    institutes: {
+        institute: string;
+    }[];
+    degrees: {
+        degree: degreeType;
+    }[];
+    disciplines: {
+        discipline: string;
+    }[];
+};
+
+export type courseLanguageRequirement = {
+    ielts: { s: string; l: string; r: string; w: string; oa: string };
+    pte: { s: string; l: string; r: string; w: string; oa: string };
+};
+
 export type singleCourseType = {
+    id: string;
+    monthDuration: string[];
     delivery: string;
-    intakes: string[];
+    availableCampuses: string[];
+    feeCurrency: 'aud' | 'gbp';
+    favoriteId: string[];
     name: string;
     logo: string;
+    image: string;
     degree: degreeType;
-    duration: number;
+    intakes: string[];
     tuitionFee: number;
-    initialDeposit: number;
-    language: string[];
-    specialization: specializationType;
+    specialization: specializationType[];
+    discipline: disciplineType;
     description: string;
-    entryRequirements: string;
     institute: instituteType;
-    favoriteId?: string[];
-    id: string;
+    region: string;
+    createdAt: string;
+    updatedAt: string;
+    scholarship: scholarshipType[];
+    textInitialDeposit: string;
+    textEligibility: string;
+    textAmount: string;
+    language: [
+        {
+            language: courseLanguageRequirement;
+            country: string;
+            default: boolean;
+        }
+    ];
+    initialDeposit: [
+        {
+            amount: string;
+            country: string;
+            default: boolean;
+        }
+    ];
+    entryRequirements: [
+        {
+            requirement: string;
+            country: string;
+            default: boolean;
+        }
+    ];
+    documentsRequirement: {
+        title: string;
+        url: string;
+    }[];
 };
 
 export type contactUsForm = {
@@ -212,18 +308,6 @@ export type favoritesType = {
     course: singleCourseType;
     blog: blogsType;
     user: string;
-    createdAt: string;
-    updatedAt: string;
-    id: string;
-};
-
-export type applyTypes = {
-    degree: degreeType;
-    course: singleCourseType;
-    institute: instituteType;
-    user: userType | null;
-    message: string;
-    userDetails: { name: string; phone_number: string; email: string } | null;
     createdAt: string;
     updatedAt: string;
     id: string;
@@ -265,3 +349,135 @@ export type Qualification = {
     selectedScore?: string;
     selectedGrade?: string;
 };
+
+export interface userDocuments {
+    identity: {
+        passport: {
+            url: string[];
+            given_name: string;
+            sur_name: string;
+            number: string;
+            date_of_issue: string;
+            date_of_expiry: string;
+        };
+    };
+    academic_certificates: {
+        semester_mark_sheets: {
+            url: string;
+        };
+        consolidated_mark_sheets: {
+            url: string[];
+            given_name: string;
+            sur_name: string;
+            number: string;
+            country: string;
+            institute: string;
+            date_of_start: string;
+            date_of_completion: string;
+        };
+        provisional_certificate: {
+            url: string;
+        };
+        secondary_school: {
+            url: string;
+        };
+        higher_secondary_school: {
+            url: string;
+        };
+        bachelor_degree: {
+            url: string;
+        };
+        master_degree: {
+            url: string;
+        };
+    };
+    professional_records: {
+        experience_letter: {
+            url: string;
+        };
+        resume: {
+            url: string;
+        };
+        personal_statement: {
+            url: string;
+        };
+        letter_of_reference: {
+            url: string;
+        };
+        provisional_certificate: {
+            url: string;
+        };
+    };
+}
+
+interface applicationStatusSingle {
+    create_at: Date;
+    message: string;
+    message_type: string;
+    document: string;
+}
+
+export enum statusEnum {
+    'initiated' = 'initiated',
+    'submitDocuments' = 'submitDocuments',
+    'apply' = 'apply',
+    'offer' = 'offer',
+    'visa' = 'visa',
+    'enroll' = 'enroll'
+}
+
+export interface applicationStatus {
+    active: statusEnum;
+    initiated: applicationStatusSingle;
+    submitDocuments: applicationStatusSingle | null;
+    apply: applicationStatusSingle | null;
+    offer: applicationStatusSingle | null;
+    visa: applicationStatusSingle | null;
+    enroll: applicationStatusSingle | null;
+}
+
+export interface applyTypes {
+    id: string;
+    intake: string;
+    course: singleCourseType;
+    user: userType;
+    status: applicationStatus;
+    documents: userDocuments;
+    councillor: councillorType;
+    createdAt: string;
+    updatedAt: string;
+}
+
+export interface councillorType {
+    profile_image: string;
+    title: string;
+    bio: string;
+    phone_number: string;
+    email: string;
+    createdAt: string;
+    updatedAt: string;
+    id: string;
+}
+
+export interface eventType {
+    title: string;
+    location: string;
+    date: string;
+    link: string;
+    time: string;
+    user: {
+        name: string;
+        avatar: string | null;
+        id: string;
+    };
+    createdAt: string;
+    updatedAt: string;
+    id: string;
+}
+
+export interface DisciplineCountType {
+    Undergraduate: number;
+    Postgraduate: number;
+    name: string;
+    image: string;
+}

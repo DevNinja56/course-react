@@ -1,7 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { fetchLatestRate } from '../actions/getCurrencyRate';
-import { countryDataType, geoIpType } from '@/types';
+import {
+    fetchAllLatestRate,
+    fetchLatestRate
+} from '../actions/getCurrencyRate';
+import { geoIpType } from '@/types';
 import { fetchUserCountry } from '../actions/getUserIp';
 import { countriesData } from '@/utils/data/country';
 
@@ -17,8 +20,18 @@ interface ratesType {
     low_ask: string;
 }
 
+export interface currencyRate {
+    currency_name: 'pakistani rupee';
+    calculation: '1';
+    base_rate: '1';
+    name: 'Pakistan';
+    currency: 'pkr';
+    code: 'PK';
+}
+
 interface dataTypes {
-    country: countryDataType;
+    currentCurrency: currencyRate;
+    rate_list: currencyRate[];
     base_code: string;
     base_rate: number;
     rates: ratesType | unknown;
@@ -29,12 +42,15 @@ interface dataTypes {
 }
 
 const initialState: dataTypes = {
-    country: {
+    currentCurrency: {
+        currency_name: 'pakistani rupee',
+        calculation: '1',
+        base_rate: '1',
         name: 'Pakistan',
-        currencies: 'PKR',
-        languages: 'urd,eng',
-        code: 'PAK'
+        currency: 'pkr',
+        code: 'PK'
     },
+    rate_list: [],
     base_code: 'PKR',
     base_rate: 1,
     rates: {},
@@ -57,9 +73,9 @@ const currency = createSlice({
         changeBaseCode: (state, action) => {
             state.base_code = action.payload;
         },
-        changeCountry: (state, action: PayloadAction<countryDataType>) => {
-            state.country = action.payload;
-            state.base_code = action.payload.currencies;
+        changeCountry: (state, action: PayloadAction<currencyRate>) => {
+            state.currentCurrency = action.payload;
+            state.base_code = action.payload.currency;
         }
     },
     extraReducers: (builder) => {
@@ -70,7 +86,8 @@ const currency = createSlice({
             .addCase(
                 fetchLatestRate.fulfilled,
                 (state, action: PayloadAction<any>) => {
-                    const rate = action.payload?.response?.[0] as ratesType;
+                    const rate = action.payload?.data
+                        ?.response?.[0] as ratesType;
                     state.rates = rate;
                     state.base_rate = +rate.average_ask;
                     state.base_code = rate.quote_currency;
@@ -82,6 +99,12 @@ const currency = createSlice({
                 state.isLoading = false;
                 state.error = action?.error?.message ?? 'Something went wrong';
             })
+            .addCase(
+                fetchAllLatestRate.fulfilled,
+                (state, action: PayloadAction<any>) => {
+                    state.rate_list = action.payload?.data ?? [];
+                }
+            )
             .addCase(fetchUserCountry.pending, (state) => {
                 state.isLoading = true;
             })
@@ -89,7 +112,7 @@ const currency = createSlice({
                 state.geoIp = action.payload?.data;
                 const countryData =
                     countriesData[action.payload?.data?.country];
-                state.country = countryData;
+                // state.country = countryData;
                 state.base_code = countryData.currencies;
                 state.isLoading = false;
             })

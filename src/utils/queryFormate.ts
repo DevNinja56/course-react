@@ -6,24 +6,21 @@ export const formateCourseQuery = (query: { [key: string]: any }) => {
         $match: {}
     };
     let sort: any;
-
     const orConditions = [];
 
     if (query.searchFilter) {
-        orConditions.push(
-            {
-                name: {
-                    $regex: query.searchFilter[0],
-                    $options: 'i'
-                }
-            },
-            {
-                'instituteId.name': {
-                    $regex: query.searchFilter[0],
-                    $options: 'i'
-                }
+        orConditions.push({
+            'institute.name': {
+                $regex: query.searchFilter[0],
+                $options: 'i'
             }
-        );
+        });
+    }
+
+    if (query.region) {
+        orConditions.push({
+            region: { $in: query.region }
+        });
     }
 
     if (query.degrees) {
@@ -40,7 +37,7 @@ export const formateCourseQuery = (query: { [key: string]: any }) => {
 
     if (query.location) {
         orConditions.push({
-            'institute.location': { $in: query.location }
+            'availableCampuses': { $in: query.location }
         });
     }
 
@@ -71,7 +68,11 @@ export const formateCourseQuery = (query: { [key: string]: any }) => {
     if (query.intakes) {
         orConditions.push({
             intakes: {
-                $in: query.intakes.map((item: string) => item.split(','))
+                $regex: `${query.intakes
+                    ?.map((set: string) => set.replaceAll(',', '|'))
+                    ?.join('|')
+                    ?.toLowerCase()}`,
+                $options: 'i'
             }
         });
     }
@@ -116,20 +117,18 @@ export const formateScholarshipQuery = (query: { [key: string]: any }) => {
     const orConditions = [];
 
     if (query.searchFilter) {
-        orConditions.push(
-            {
-                name: {
-                    $regex: query.searchFilter[0],
-                    $options: 'i'
-                }
-            },
-            {
-                'instituteId.name': {
-                    $regex: query.searchFilter[0],
-                    $options: 'i'
-                }
+        orConditions.push({
+            'institute.name': {
+                $regex: query.searchFilter[0],
+                $options: 'i'
             }
-        );
+        });
+    }
+
+    if (query.region) {
+        orConditions.push({
+            region: { $in: query.region }
+        });
     }
 
     if (query.countries) {
@@ -140,13 +139,13 @@ export const formateScholarshipQuery = (query: { [key: string]: any }) => {
 
     if (query.degrees) {
         orConditions.push({
-            'degrees.name': { $in: query.degrees }
+            'degree.name': { $in: query.degrees }
         });
     }
 
     if (query.degreeType) {
         orConditions.push({
-            'degrees.type': { $in: query.degreeType }
+            'degree.type': { $in: query.degreeType }
         });
     }
 

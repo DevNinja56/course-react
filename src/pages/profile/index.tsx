@@ -1,20 +1,27 @@
 import ProfileComp from '@/components/Profile/ProfileComp';
-import Image from 'next/image';
+// import Image from 'next/image';
 import { useRouter } from 'next/router';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Favorites from '@/components/Profile/Favorites/index';
+import { ROUTES } from '@/config/constant';
 
 export const profileTabs = {
     profile: 'Profile',
-    favorites: 'Favorite'
+    favorites: 'Favourite'
 };
 
 const Profile = () => {
-    const { query, isReady } = useRouter();
+    const { query, isReady, push } = useRouter();
     const activeTab = query['tab'] as string;
     const [activeComponent, setActiveComponent] = useState(
         isReady && activeTab ? activeTab : profileTabs.profile
     );
+
+    useEffect(() => {
+        if (isReady && activeTab) {
+            setActiveComponent(activeTab);
+        }
+    }, [activeTab, isReady]);
 
     const tabs = [
         { title: profileTabs.profile, Component: ProfileComp },
@@ -24,7 +31,7 @@ const Profile = () => {
     return (
         <>
             <div className="w-full flex items-center justify-between h-[176px] mt-[100px] bg-profileBgColor overflow-hidden">
-                <Image
+                <img
                     height={106}
                     width={109}
                     alt="profile-round-img"
@@ -34,14 +41,14 @@ const Profile = () => {
                 <h1 className="text-mainTextColor text-[28px] md:text-[40px] font-extrabold">
                     Your {activeComponent}
                 </h1>
-                <Image
+                <img
                     height={119}
                     width={100}
                     alt="profile-round-img"
                     className="mt-[100px] lg:mt-[56px] h-[93px] w-[95px] md:h-[119px] md:w-[100px] block md:hidden lg:block mr-[-7px] md:ml-0"
                     src="/images/profileImages/Frame 691.svg"
                 />
-                <Image
+                <img
                     height={106}
                     width={109}
                     alt="profile-round-img"
@@ -50,12 +57,17 @@ const Profile = () => {
                 />
             </div>
             <div className="w-full pb-8 lg:pb-16">
-                <div className="w-full lg:max-w-[1100px] 2xl:max-w-[2300px] mx-auto px-0 lg:px-2 2xl:px-8 transition-all duration-300">
+                <div className="w-full lg:max-w-[1200px] 2xl:max-w-[2300px] mx-auto px-0 lg:px-2 2xl:px-8 transition-all duration-300">
                     <div className="flex items-center lg:mb-8">
                         {tabs.map(({ title }, i) => (
                             <div
                                 key={'tabs-button-' + i + title}
-                                onClick={() => setActiveComponent(title)}
+                                onClick={() =>
+                                    push({
+                                        pathname: ROUTES.PROFILE,
+                                        query: { tab: title }
+                                    })
+                                }
                                 className={`py-[15px] md:py-[18px] lg:py-[8px] w-[50%] pl-[30px] md:px-[50px] lg:w-auto lg:px-[37px] font-bold text-xl md:text-[26px] lg:text-2xl cursor-pointer ${
                                     activeComponent === title
                                         ? 'bg-blueColor text-white'

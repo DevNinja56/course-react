@@ -1,14 +1,15 @@
 import React from 'react';
 import DegreeLevelFilter from '../Course/DegreeLevelFilter';
 import CountriesFilter from '../CountriesFilter';
-import DisciplinesFilter from '../Course/DisciplinesFilter';
 import ScholarshipTypeFilter from './ScholarshipTypeFilter';
 // import ScholarshipMonthFilter from './ScholarshipMonthFilter';
 // import ScholarshipYearFilter from './ScholarshipYearFilter';
+// import DisciplinesFilter from '../Course/DisciplinesFilter';
 import { useFilterQuery } from '@/hooks/filterQuery';
-import { useSearchedCourses } from '@/hooks/filterCourses';
 import { FilteredButton } from '../FilteredButton';
 import InstituteFilter from '../Course/InstituteFilter';
+import RegionsFilter from '../RegionsFilter';
+import { useSearchedScholarship } from '@/hooks/filterScholarship';
 
 export const FilterRow = () => (
     <div className="px-4">
@@ -18,7 +19,11 @@ export const FilterRow = () => (
 
 const ScholarshipFilter = () => {
     const { clearALlQuery, query } = useFilterQuery();
-    const { fetchSearchedCoursesRequest: refetch } = useSearchedCourses();
+    const {
+        fetchSearchedScholarshipRequest: refetch,
+        filters,
+        isLoading
+    } = useSearchedScholarship();
 
     const handleClearQuery = () => {
         clearALlQuery();
@@ -42,15 +47,25 @@ const ScholarshipFilter = () => {
                 {Object.values(query).length > 0 && (
                     <div className="my-2  ">
                         <div className="flex gap-0.5 flex-wrap px-2">
-                            {Object.entries(query).map(([key, item], idx) =>
-                                item.map((val) => (
-                                    <FilteredButton
-                                        key={idx}
-                                        itemKey={key}
-                                        itemValue={val ?? 'button'}
-                                    />
-                                ))
-                            )}
+                            {Object.entries(query).map(([key, item], idx) => {
+                                if (Array.isArray(item)) {
+                                    return item.map((val) => (
+                                        <FilteredButton
+                                            key={'query--key--' + idx}
+                                            itemKey={key}
+                                            itemValue={val ?? 'button'}
+                                        />
+                                    ));
+                                } else if (typeof item === 'string') {
+                                    return (
+                                        <FilteredButton
+                                            key={'query--key--' + idx}
+                                            itemKey={key}
+                                            itemValue={item ?? 'button'}
+                                        />
+                                    );
+                                }
+                            })}
                         </div>
                         <div className="mt-2">
                             <FilterRow />
@@ -59,12 +74,26 @@ const ScholarshipFilter = () => {
                 )}
             </div>
             <div className="flex flex-col gap-y-6">
-                <CountriesFilter />
+                <RegionsFilter data={filters.regions} isLoading={isLoading} />
                 <FilterRow />
-                <InstituteFilter />
-                <DisciplinesFilter />
+                <CountriesFilter
+                    data={filters.countries}
+                    isLoading={isLoading}
+                />
                 <FilterRow />
-                <DegreeLevelFilter />
+                <InstituteFilter
+                    data={filters.institutes}
+                    isLoading={isLoading}
+                />
+                {/* <DisciplinesFilter
+                    data={filters.disciplines}
+                    isLoading={isLoading}
+                /> */}
+                <FilterRow />
+                <DegreeLevelFilter
+                    data={filters.degrees}
+                    isLoading={isLoading}
+                />
                 <FilterRow />
                 <ScholarshipTypeFilter />
             </div>

@@ -17,11 +17,13 @@ export const FilteredButton = ({
     const { removeQuery, addQuery, query } = useFilterQuery();
 
     const handleDeleteQuery = () => {
-        const queryList = [...query[itemKey]];
+        const queryList = Array.isArray(query[itemKey])
+            ? query[itemKey]
+            : [query[itemKey]];
         if (queryList.length > 1) {
             const index = queryList.indexOf(itemValue);
-            if (index > -1) queryList.splice(index, 1);
-            addQuery({ [itemKey]: queryList });
+            if (index > -1) (queryList as string[]).splice(index, 1);
+            addQuery({ [itemKey]: queryList as string[] });
         } else {
             removeQuery(itemKey);
         }

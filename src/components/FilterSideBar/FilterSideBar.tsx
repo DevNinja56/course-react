@@ -1,13 +1,15 @@
-import Image from 'next/image';
+// import Image from 'next/image';
 import React from 'react';
 import CountriesFilter from '../FilterPage/CountriesFilter';
 import { FilterRow } from '../FilterPage/Course/FilterLeftBox';
 import DegreeLevelFilter from '../FilterPage/Course/DegreeLevelFilter';
 import DisciplinesFilter from '../FilterPage/Course/DisciplinesFilter';
 import SpecializationFilter from '../FilterPage/Course/SpecializationFilter';
+import IntakesFilter from '../FilterPage/Course/Intakes';
 import InstituteFilter from '../FilterPage/Course/InstituteFilter';
 import { useFilterQuery } from '@/hooks/filterQuery';
 import { useSearchedCourses } from '@/hooks/filterCourses';
+import LocationsFilter from '../FilterPage/Course/Locations';
 import { FilteredButton } from '../FilterPage/FilteredButton';
 
 interface ModalProps {
@@ -19,12 +21,17 @@ const FilterSideBar = ({ setFilterSideBar }: ModalProps) => {
         setFilterSideBar(false);
     };
     const { clearALlQuery, query } = useFilterQuery();
-    const { fetchSearchedCoursesRequest: refetch } = useSearchedCourses();
+    const {
+        fetchSearchedCoursesRequest: refetch,
+        filters,
+        isLoading
+    } = useSearchedCourses();
 
     const handleClearQuery = () => {
         clearALlQuery();
         refetch();
     };
+
     return (
         <div className="w-full flex lg:hidden">
             <div className="backgroundBlack fixed top-0 left-0 h-[100vh] w-full z-40 flex items-center justify-end">
@@ -37,12 +44,12 @@ const FilterSideBar = ({ setFilterSideBar }: ModalProps) => {
                             onClick={onHideSideBar}
                             className="h-[38.33px] w-[38.33px] bg-blueColor flex items-center justify-center rounded-full"
                         >
-                            <Image
+                            <img
                                 width={9.58}
                                 height={9.58}
                                 alt="Logo"
                                 src="/images/cross.svg"
-                                priority
+                                // priority
                             />
                         </div>
                     </div>
@@ -59,17 +66,38 @@ const FilterSideBar = ({ setFilterSideBar }: ModalProps) => {
                             </p>
                         </div>
                         {Object.values(query).length > 0 && (
-                            <div className="my-2">
+                            <div className="my-2  ">
                                 <div className="flex gap-0.5 flex-wrap px-2">
                                     {Object.entries(query).map(
-                                        ([key, item], idx) =>
-                                            item.map((val) => (
-                                                <FilteredButton
-                                                    key={idx}
-                                                    itemKey={key}
-                                                    itemValue={val ?? 'button'}
-                                                />
-                                            ))
+                                        ([key, item], idx) => {
+                                            if (Array.isArray(item)) {
+                                                return item.map((val) => (
+                                                    <FilteredButton
+                                                        key={
+                                                            'query--key--' + idx
+                                                        }
+                                                        itemKey={key}
+                                                        itemValue={
+                                                            val ?? 'button'
+                                                        }
+                                                    />
+                                                ));
+                                            } else if (
+                                                typeof item === 'string'
+                                            ) {
+                                                return (
+                                                    <FilteredButton
+                                                        key={
+                                                            'query--key--' + idx
+                                                        }
+                                                        itemKey={key}
+                                                        itemValue={
+                                                            item ?? 'button'
+                                                        }
+                                                    />
+                                                );
+                                            }
+                                        }
                                     )}
                                 </div>
                                 <div className="mt-2">
@@ -78,15 +106,40 @@ const FilterSideBar = ({ setFilterSideBar }: ModalProps) => {
                             </div>
                         )}
                         <div className="flex flex-col gap-y-6">
-                            <CountriesFilter />
+                            <CountriesFilter
+                                data={filters.countries}
+                                isLoading={isLoading}
+                            />
                             <FilterRow />
-                            <DegreeLevelFilter />
+                            <DegreeLevelFilter
+                                data={filters.degrees}
+                                isLoading={isLoading}
+                            />
                             <FilterRow />
-                            <DisciplinesFilter />
+                            <DisciplinesFilter
+                                data={filters.disciplines}
+                                isLoading={isLoading}
+                            />
                             <FilterRow />
-                            <SpecializationFilter />
+                            <SpecializationFilter
+                                data={filters.specializations}
+                                isLoading={isLoading}
+                            />
                             <FilterRow />
-                            <InstituteFilter />
+                            <LocationsFilter
+                                data={filters.locations}
+                                isLoading={isLoading}
+                            />
+                            <FilterRow />
+                            <InstituteFilter
+                                data={filters.institutes}
+                                isLoading={isLoading}
+                            />
+                            <FilterRow />
+                            <IntakesFilter
+                                data={filters.intakes}
+                                isLoading={isLoading}
+                            />
                         </div>
                     </div>
                 </div>

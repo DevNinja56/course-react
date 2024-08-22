@@ -1,4 +1,4 @@
-import Image from 'next/image';
+// import Image from 'next/image';
 import React from 'react';
 
 interface CardProps {
@@ -10,13 +10,13 @@ interface CardProps {
 const Card = ({ img, title, detail }: CardProps) => {
     return (
         <div className="flex flex-col gap-[15px] w-full z-10">
-            <Image
+            <img
                 height={40}
                 width={40}
                 alt="icons"
                 className="h-10 w-10"
                 src={`${img}`}
-                priority
+                // priority
             />
             <h1 className="font-bold text-lg text-mainTextColor">{title}</h1>
             <p className="font-semibold leading-5 text-blueColor text-sm">

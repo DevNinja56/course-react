@@ -8,10 +8,15 @@ import { GetServerSideProps } from 'next';
 import { singleCourseType } from '@/types';
 import { API_ENDPOINTS } from '@/config/Api_EndPoints';
 import { getSsrRequest } from '@/utils/ssrRequest';
+import { getMonths } from '@/utils/get-months';
+import { useCurrency } from '@/hooks/currency';
+import { useCalculate } from '@/hooks/initial-deposit-calculate';
 
 const Compare = ({ data }: { data?: singleCourseType }) => {
     const { first, second, third, compareFirst, compareSecond, compareThird } =
         useCompare();
+    const { setCurrencyValue, getSingleRate, base_code } = useCurrency();
+    const { initialDeposit } = useCalculate();
 
     useEffect(() => {
         if (data) {
@@ -29,10 +34,50 @@ const Compare = ({ data }: { data?: singleCourseType }) => {
             first === null
                 ? compareFirst(compareData)
                 : second === null
-                ? compareSecond(compareData)
-                : compareThird(compareData);
+                  ? compareSecond(compareData)
+                  : compareThird(compareData);
         }
     }, [data]);
+
+    const getInitialDepositIntoCurrency = ({
+        depositAmount,
+        tuitionFee,
+        scholarshipAmount,
+        feeCurrency
+    }: {
+        depositAmount: string;
+        tuitionFee: number;
+        scholarshipAmount: string;
+        feeCurrency: string;
+    }) => {
+        const isSameCurrency =
+            feeCurrency.toLowerCase() === base_code.toLowerCase();
+        const rate = isSameCurrency ? null : getSingleRate(feeCurrency);
+        const initialDepositAmount = initialDeposit({
+            initialDeposit: depositAmount,
+            tuitionFee: tuitionFee,
+            scholarship: scholarshipAmount ?? 0,
+            isNumber: true,
+            currency_code: feeCurrency
+        });
+
+        return setCurrencyValue(
+            +initialDepositAmount,
+            base_code ?? feeCurrency,
+            rate ? +rate.base_rate : 1
+        );
+    };
+
+    const getTuitionFeeIntoCurrency = (
+        tuitionFee: number,
+        feeCurrency: string
+    ) => {
+        const rate = getSingleRate(feeCurrency);
+        return setCurrencyValue(
+            tuitionFee * +(rate?.base_rate ?? 1),
+            base_code ?? feeCurrency
+        );
+    };
 
     const state = [
         {
@@ -85,15 +130,33 @@ const Compare = ({ data }: { data?: singleCourseType }) => {
                 },
                 {
                     title: 'Location',
-                    first: first?.institute?.location,
-                    second: second?.institute?.location,
+                    first: first?.institute?.location
+                        ?.split(',')
+                        .map((c) => (
+                            <li key={`key--second-location--${c}`}>{c}</li>
+                        )),
+                    second: second?.institute?.location
+                        ?.split(',')
+                        .map((c) => (
+                            <li key={`key--second-location--${c}`}>{c}</li>
+                        )),
                     third: third?.institute?.location
+                        ?.split(',')
+                        .map((c) => (
+                            <li key={`key--second-location--${c}`}>{c}</li>
+                        ))
                 },
                 {
                     title: 'Campus',
-                    first: first?.institute?.campus,
-                    second: second?.institute?.campus,
-                    third: third?.institute?.campus
+                    first: first?.institute?.campus.map((c) => (
+                        <li key={`key--second-campus--${c}`}>{c}</li>
+                    )),
+                    second: second?.institute?.campus.map((c) => (
+                        <li key={`key--second-campus--${c}`}>{c}</li>
+                    )),
+                    third: third?.institute?.campus.map((c) => (
+                        <li key={`key--second-campus--${c}`}>{c}</li>
+                    ))
                 }
             ]
         },
@@ -113,34 +176,101 @@ const Compare = ({ data }: { data?: singleCourseType }) => {
                     third: third?.course?.name
                 },
                 {
+                    title: 'Discipline',
+                    first: first?.course?.discipline.name,
+                    second: second?.course?.discipline.name,
+                    third: third?.course?.discipline.name
+                },
+                {
                     title: 'Specialization',
-                    first: first?.course?.specialization?.name,
-                    second: second?.course?.specialization?.name,
-                    third: third?.course?.specialization?.name
+                    first: first?.course?.specialization?.map((s) => (
+                        <li key={`key--first-specialization--${s.name}`}>
+                            {s.name}
+                        </li>
+                    )),
+                    second: second?.course?.specialization?.map((s) => (
+                        <li key={`key--second-specialization--${s.name}`}>
+                            {s.name}
+                        </li>
+                    )),
+                    third: third?.course?.specialization?.map((s) => (
+                        <li key={`key--third-specialization--${s.name}`}>
+                            {s.name}
+                        </li>
+                    ))
                 },
                 {
                     title: 'Duration',
-                    first: first?.course?.duration,
-                    second: second?.course?.duration,
-                    third: third?.course?.duration
-                },
-                {
-                    title: 'Initial Deposit',
-                    first: first?.course.initialDeposit,
-                    second: second?.course.initialDeposit,
-                    third: third?.course.initialDeposit
-                },
-                {
-                    title: 'Yearly fee',
-                    first: first?.course.tuitionFee,
-                    second: second?.course.tuitionFee,
-                    third: third?.course.tuitionFee
+                    first: getMonths(first?.course?.monthDuration ?? []),
+                    second: getMonths(second?.course?.monthDuration ?? []),
+                    third: getMonths(third?.course?.monthDuration ?? [])
                 },
                 {
                     title: 'Intake',
-                    first: first?.course.intakes.join(),
-                    second: second?.course.intakes.join(),
-                    third: third?.course.intakes.join()
+                    first: first?.course.intakes.join(' , '),
+                    second: second?.course.intakes.join(' , '),
+                    third: third?.course.intakes.join(' , ')
+                },
+                {
+                    title: 'Initial Deposit',
+                    first: first
+                        ? getInitialDepositIntoCurrency({
+                              depositAmount:
+                                  first?.course.initialDeposit[0].amount,
+                              tuitionFee: first?.course.tuitionFee,
+                              scholarshipAmount:
+                                  first?.course.scholarship?.[0]?.amount ?? 0,
+                              feeCurrency: first?.course.feeCurrency
+                          })
+                        : null,
+                    second: second
+                        ? getInitialDepositIntoCurrency({
+                              depositAmount:
+                                  second?.course.initialDeposit[0].amount,
+                              tuitionFee: second?.course.tuitionFee,
+                              scholarshipAmount:
+                                  second?.course.scholarship?.[0]?.amount ?? 0,
+                              feeCurrency: second?.course.feeCurrency
+                          })
+                        : null,
+                    third: third
+                        ? getInitialDepositIntoCurrency({
+                              depositAmount:
+                                  third?.course.initialDeposit[0].amount,
+                              tuitionFee: third?.course.tuitionFee,
+                              scholarshipAmount:
+                                  third?.course.scholarship?.[0]?.amount ?? 0,
+                              feeCurrency: third?.course.feeCurrency
+                          })
+                        : null
+                },
+                {
+                    title: 'Yearly fee',
+                    first: first
+                        ? getTuitionFeeIntoCurrency(
+                              first.course.tuitionFee,
+                              first.course.feeCurrency
+                          )
+                        : null,
+
+                    second: second
+                        ? getTuitionFeeIntoCurrency(
+                              second.course.tuitionFee,
+                              second.course.feeCurrency
+                          )
+                        : null,
+                    third: third
+                        ? getTuitionFeeIntoCurrency(
+                              third.course.tuitionFee,
+                              third.course.feeCurrency
+                          )
+                        : null
+                },
+                {
+                    title: 'On available campus',
+                    first: first?.course?.availableCampuses.join(' | '),
+                    second: second?.course?.availableCampuses.join(' | '),
+                    third: third?.course?.availableCampuses.join(' | ')
                 }
             ]
         },
@@ -152,12 +282,6 @@ const Compare = ({ data }: { data?: singleCourseType }) => {
                     first: first?.institute?.qsWorldRanking,
                     second: second?.institute?.qsWorldRanking,
                     third: third?.institute?.qsWorldRanking
-                },
-                {
-                    title: 'US News Global Universities Rankings',
-                    first: first?.institute?.usNewsRanking,
-                    second: second?.institute?.usNewsRanking,
-                    third: third?.institute?.usNewsRanking
                 },
                 {
                     title: 'Times Higher Education Ranking.',
@@ -185,10 +309,8 @@ const Compare = ({ data }: { data?: singleCourseType }) => {
                                 </h1>
                                 {i === 0 && (
                                     <button
-                                        onClick={() => {
-                                            window.print();
-                                        }}
-                                        className="absolute top-[50%] translate-y-[-50%] right-3 bg-white px-2 py-1 rounded-md print:hidden flex gap-1 justify-center items-center font-bold "
+                                        onClick={() => window?.print()}
+                                        className="absolute top-[50%] translate-y-[-50%] right-3 bg-white px-2 py-1 rounded-md print:hidden flex gap-1 justify-center items-center font-bold hover:bg-opacity-80"
                                     >
                                         <FiPrinter /> Print
                                     </button>
@@ -202,7 +324,7 @@ const Compare = ({ data }: { data?: singleCourseType }) => {
                                             key={'rows-content--' + title}
                                         >
                                             <div
-                                                className={`w-[50%] md:w-1/4 px-3 py-5 md:p-5 relative border-r border-profileBgColor flex items-center ${
+                                                className={`w-[40%] md:w-1/4 px-3 py-5 md:p-5 relative border-r border-profileBgColor flex items-center ${
                                                     i % 2 === 0
                                                         ? 'bg-lightBlue'
                                                         : 'bg-white'
@@ -213,35 +335,35 @@ const Compare = ({ data }: { data?: singleCourseType }) => {
                                                 </h1>
                                             </div>
                                             <div
-                                                className={`w-[15%] md:w-1/4 px-3 py-5 md:p-5 relative border-x border-profileBgColor flex items-center ${
+                                                className={`w-[20%] md:w-1/4 px-3 max-sm:px-0 py-5 md:p-5 relative border-x border-profileBgColor flex items-center ${
                                                     i % 2 === 0
                                                         ? 'bg-lightBlue'
                                                         : 'bg-white'
                                                 }  `}
                                             >
-                                                <h1 className="font-bold text-sm md:text-base text-grayColor">
+                                                <h1 className="font-bold max-sm:text-xs text-sm md:text-base text-grayColor">
                                                     {first ?? '--'}
                                                 </h1>
                                             </div>
                                             <div
-                                                className={`w-[15%] md:w-1/4 px-3 py-5 md:p-5 relative border-x border-profileBgColor flex items-center ${
+                                                className={`w-[20%] md:w-1/4 px-3 max-sm:px-0 py-5 md:p-5 relative border-x border-profileBgColor flex items-center ${
                                                     i % 2 === 0
                                                         ? 'bg-lightBlue'
                                                         : 'bg-white'
                                                 }  `}
                                             >
-                                                <h1 className="font-bold text-sm md:text-base text-grayColor">
+                                                <h1 className="font-bold max-sm:text-xs text-sm md:text-base text-grayColor">
                                                     {second ?? '--'}
                                                 </h1>
                                             </div>
                                             <div
-                                                className={`w-[15%] md:w-1/4 px-3 py-5 md:p-5 relative border-x border-profileBgColor flex items-center ${
+                                                className={`w-[20%]  md:w-1/4 px-3 max-sm:px-0 py-5 md:p-5 relative border-x border-profileBgColor flex items-center ${
                                                     i % 2 === 0
                                                         ? 'bg-lightBlue'
                                                         : 'bg-white'
                                                 }  `}
                                             >
-                                                <h1 className="font-bold text-sm md:text-base text-grayColor">
+                                                <h1 className="font-bold max-sm:text-xs text-sm md:text-base text-grayColor">
                                                     {third ?? '--'}
                                                 </h1>
                                             </div>
@@ -253,11 +375,11 @@ const Compare = ({ data }: { data?: singleCourseType }) => {
                     ))}
                 </div>
             </div>
-            <div className="w-full pb-20 2xl:pb-[700px] flex flex-col items-center overflow-hidden print:hidden">
+            <div className="w-full pb-40 flex flex-col items-center overflow-hidden print:hidden">
                 <p className="text-[23px] font-bold text-blueColor mb-1">
                     Scholarships
                 </p>
-                <h1 className="text-textLightBlackColor text-3xl md:text-[48px] font-extrabold mb-5 text-center">
+                <h1 className="text-textLightBlackColor text-3xl md:text-[48px] font-extrabold mb-10 text-center">
                     Scholarships you may be interested in
                 </h1>
                 <ScholarshipSlider />

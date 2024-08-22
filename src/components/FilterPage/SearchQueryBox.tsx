@@ -21,11 +21,11 @@ const SearchQueryBox = () => {
                     className="custom-shadow rounded-[10px] py-5 pl-[52px] outline-none text-base text-mainTextColor w-full lg:pr-[520px]"
                     value={value}
                     onChange={({ target }) => setValue(target.value)}
-                    placeholder="Type here"
+                    placeholder="Search by Institute name"
                 />
             </div>
             <button
-                className="py-[11px] px-[39px] absolute right-3 top-[11px] bg-blueColor rounded-[5px] text-white text-sm"
+                className="py-[11px] px-[39px] absolute right-3 top-[11px] bg-blueColor rounded-[5px] text-white text-sm hover:bg-opacity-50"
                 type="submit"
             >
                 Search

@@ -1,10 +1,15 @@
-import { useGetInstituteQuery } from '@/store/slices/allRequests';
 import React, { useState } from 'react';
 import SearchBox from '../SearchBox';
 import { FilterCheckBox, FilterCheckBoxLoader } from '../FilterCheckBOx';
 
-const InstituteFilter = () => {
-    const { data: InstituteList, isLoading } = useGetInstituteQuery();
+interface propsType {
+    data: {
+        institute: string;
+    }[];
+    isLoading: boolean;
+}
+
+const InstituteFilter: React.FC<propsType> = ({ data, isLoading }) => {
     const [search, setSearch] = useState<string>('');
 
     return (
@@ -24,19 +29,23 @@ const InstituteFilter = () => {
                 {isLoading ? (
                     <FilterCheckBoxLoader />
                 ) : (
-                    InstituteList?.filter((Institute) =>
-                        Institute.name
-                            .toLowerCase()
-                            .includes(search.toLowerCase())
-                    ).map(({ name, id }) => (
-                        <FilterCheckBox
-                            key={'Institute--list--' + id}
-                            id={name}
-                            text={name}
-                            name={'institute'}
-                            value={name}
-                        />
-                    ))
+                    data
+                        ?.filter(
+                            ({ institute: name }) =>
+                                !!name &&
+                                name
+                                    .toLowerCase()
+                                    .includes(search.toLowerCase())
+                        )
+                        .map(({ institute: name }, i) => (
+                            <FilterCheckBox
+                                key={'Institute--list--' + name + i}
+                                id={name+ '--' + i}
+                                text={name}
+                                name={'institute'}
+                                value={name}
+                            />
+                        ))
                 )}
             </div>
         </div>

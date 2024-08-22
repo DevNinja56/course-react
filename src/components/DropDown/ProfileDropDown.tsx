@@ -11,16 +11,35 @@ import { modalType } from '@/store/slices/ui.slice';
 
 interface DropDownProps {
     showDropDown: boolean;
+    setShowDropDown: React.Dispatch<React.SetStateAction<boolean>>;
+    dropDownRef?: React.RefObject<HTMLDivElement>;
 }
 
-const ProfileDropDown: React.FC<DropDownProps> = ({ showDropDown }) => {
+const ProfileDropDown: React.FC<DropDownProps> = ({
+    showDropDown,
+    setShowDropDown,
+    dropDownRef
+}) => {
     const { logoutUser } = useUserAuth();
     const { updateModal } = useUi();
+
+    const handleClickOutsideDropDown = (event: MouseEvent) => {
+        if (
+            showDropDown &&
+            dropDownRef?.current &&
+            !dropDownRef.current.contains(event.target as Node)
+        ) {
+            setShowDropDown(false);
+        }
+    };
+
+    window.addEventListener('click', handleClickOutsideDropDown);
+
     const allDropDowns = [
         { name: 'Profile', Icon: BiUser, to: ROUTES.PROFILE },
-        { name: 'My Favorites', Icon: AiOutlineHeart, to: ROUTES.FAVORITES },
+        { name: 'My Favourites', Icon: AiOutlineHeart, to: ROUTES.FAVORITES },
         {
-            name: 'My Applies',
+            name: 'My Applications',
             Icon: SiSemanticscholar,
             to: ROUTES.APPLIES
         },

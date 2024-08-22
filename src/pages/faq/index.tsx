@@ -1,6 +1,6 @@
 import Card from '@/components/ContactUs/Card';
 import FAQ from '@/components/FAQ/FAQ';
-import Image from 'next/image';
+// import Image from 'next/image';
 import React from 'react';
 
 const FAQs = () => {
@@ -10,13 +10,13 @@ const FAQs = () => {
                 <FAQ />
             </div>
             <div className="w-full 2xl:mb-[600px] relative">
-                <Image
+                <img
                     height={250}
                     width={250}
                     alt="round"
                     className="absolute h-32 w-32 lg:h-[250px] lg:w-[250px] top-[-50px] lg:top-[-100px] right-0 hidden md:block"
                     src="/images/faq/Ellipse 425.svg"
-                    priority
+                    // priority
                 />
                 <div className="max-w-[1100px] 2xl:max-w-[2300px] mx-auto px-5 md:px-[50px] lg:px-2 2xl:px-8 transition-all duration-300 z-10">
                     <div className="w-full custom-shadow rounded-[10px] p-11 mb-24 z-10 bg-white relative">
