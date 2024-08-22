@@ -20,7 +20,7 @@ const Card = ({ title, favorite, tags, image, id }: cardProps) => {
     const { fetchBlogs } = usePaginatedBlogs();
     return (
         <div
-            className={`custom-shadow relative ${
+            className={`custom-shadow relative rounded-[10px] rounded-b-none ${
                 router.pathname === ROUTES.BLOGS_DETAIL
                     ? 'min-w-[340px] 2xl:min-w-0 2xl:w-[27vw]'
                     : ''
@@ -36,7 +36,7 @@ const Card = ({ title, favorite, tags, image, id }: cardProps) => {
                     height={203.29}
                     width={366}
                     alt="carding"
-                    className="rounded-[10px] rounded-b-none mb-4 w-full"
+                    className="rounded-[10px] rounded-b-none mb-4 w-full h-52 "
                     src={`${image}`}
                     priority
                 />
@@ -51,7 +51,7 @@ const Card = ({ title, favorite, tags, image, id }: cardProps) => {
                             </p>
                         ))}
                     </div>
-                    <h1 className="font-bold text-lg text-mainTextColor">
+                    <h1 className="font-bold text-lg text-mainTextColor line-clamp-2">
                         {title}
                     </h1>
                     <div className="w-full flex items-center justify-between">
