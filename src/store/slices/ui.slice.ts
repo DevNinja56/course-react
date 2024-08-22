@@ -13,8 +13,7 @@ export enum modalType {
     'bank_statement_calculator',
     'start_application',
     'cancel_application',
-    'share_modal',
-    'ucas_points_calculator'
+    'share_modal'
 }
 
 interface UiState {

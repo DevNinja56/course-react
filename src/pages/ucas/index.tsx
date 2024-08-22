@@ -3,29 +3,15 @@ import Image from 'next/image';
 import QualificationSection from '@/components/Ucas/QualificationSection';
 import Button from '@/components/Button';
 import { Qualification } from '@/types';
-import { useUi } from '@/hooks/user-interface';
-import { modalType } from '@/store/slices/ui.slice';
+import UcasPointCalculate from '@/Modal/UcasPointCalculate';
 
 const UCAS = () => {
-    const { updateModal } = useUi();
-
     const [qualifications, setQualifications] = useState<Qualification[]>([
         { id: Date.now() }
     ]);
     const [totalScore, setTotalScore] = useState<number>(0);
     const [isCalculate, setIsCalculate] = useState<boolean>(false);
-
-    useEffect(() => {
-        updateModal({
-            type: modalType.ucas_points_calculator,
-            state: {
-                qualifications,
-                setQualifications,
-                setTotalScore,
-                setIsCalculate
-            }
-        });
-    }, []);
+    const [modalOpen, setModalOpen] = useState<boolean>(true);
 
     const formRef = React.useRef<HTMLDivElement>(null);
 
@@ -40,6 +26,15 @@ const UCAS = () => {
 
     return (
         <>
+            {modalOpen && (
+                <UcasPointCalculate
+                    qualifications={qualifications}
+                    setQualifications={setQualifications}
+                    setTotalScore={setTotalScore}
+                    setIsCalculate={setIsCalculate}
+                    setModalOpen={setModalOpen}
+                />
+            )}
             <div className="w-full flex items-center justify-between h-[214px] mt-[90px] bg-profileBgColor mb-16">
                 <Image
                     height={193}
