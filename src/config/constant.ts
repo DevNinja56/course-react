@@ -24,5 +24,6 @@ export const ROUTES = {
     APPLIES: '/profile?tab=Profile&tab2=My+Applications',
     APPLIES_DETAIL: '/profile/application/:id',
     FILE_SUBMIT: '/profile/application/file-submit',
-    CONSOLID_MARKSHEET: '/profile/application/consolid-marksheet'
+    CONSOLID_MARKSHEET: '/profile/application/consolid-marksheet',
+    UCAS: '/ucas'
 };
