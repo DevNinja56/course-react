@@ -3,13 +3,16 @@ import React from 'react';
 interface propTypes {
     text: string;
     icon: React.ReactElement;
+    className?: string;
 }
 
-const Tag = ({ icon, text }: propTypes) => {
+const Tag = ({ icon, text, className }: propTypes) => {
     return (
-        <div className="py-1 px-2 gap-1 flex items-center rounded-3xl bg-profileBgColor">
+        <div
+            className={`w-full h-20 py-5 px-2 flex flex-col gap-1.5 items-center border border-borderColor ${className}`}
+        >
             {icon}
-            <p className="text-xs text-blueColor">{text}</p>
+            <p className="text-xs text-blueColor text-center">{text}</p>
         </div>
     );
 };

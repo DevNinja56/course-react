@@ -1,94 +1,127 @@
 import { ROUTES } from '@/config/constant';
-import {
-    countryType,
-    degreeType,
-    disciplineType,
-    instituteType
-} from '@/types';
+import { countryType, degreeType, instituteType } from '@/types';
 import Link from 'next/link';
 import React from 'react';
 import FavoriteButton from '../Button/FavoriteButton';
 import { FaMapMarkerAlt } from 'react-icons/fa';
-import Certificate from '../Institute/icons/Certificate';
 import { RiGraduationCapFill } from 'react-icons/ri';
 import School from '../Institute/icons/School';
-import { FaArrowRight } from 'react-icons/fa6';
 import Tag from '../Institute/Tag';
+import { MdOutlinePriceChange } from 'react-icons/md';
 
 interface propsType {
-    id: string;
-    favoriteId?: string[];
-    refetch: () => void;
     name: string;
     type: string;
-    degrees: degreeType[];
+    degree: degreeType | degreeType[];
     institute: instituteType;
-    discipline: disciplineType[];
     country: countryType;
+    amount: string;
+    image: string;
+    id: string;
+    isActive: boolean | null;
+    tagBox?: boolean;
+    headingClass?: string;
 }
 
 const Card: React.FC<propsType> = ({
-    id,
-    favoriteId,
-    refetch,
     name,
     type,
-    degrees,
+    degree,
     institute,
-    discipline,
-    country
+    country,
+    amount,
+    id,
+    image,
+    isActive,
+    tagBox = true,
+    headingClass = 'text-xl'
 }) => {
     return (
-        <div className="relative pt-7 pb-8 shadow-md rounded-lg group hover:-translate-y-2 transition-all duration-500 cursor-pointer flex flex-col border border-gray-100 min-h-[203px]">
-            <FavoriteButton
-                isActive={!!favoriteId?.[0]}
-                body={{ scholarship: id }}
-                refetch={refetch}
-            />
-            <Link href={ROUTES.SCHOLARSHIP.replace(':id', id)}>
-                <div className="flex flex-col gap-5 w-full px-3 z-10">
-                    <div className="flex items-center w-full justify-between gap-2">
-                        <h1
-                            title={name}
-                            className="font-bold text-base text-mainTextColor"
-                        >
-                            {name} ({type})
-                        </h1>
+        <div className="relative group hover:-translate-y-2 transition-all duration-500 cursor-pointer flex flex-col border border-gray-100 capitalize overflow-auto rounded-tr-md rounded-tl-md   ">
+            {isActive !== null && (
+                <FavoriteButton
+                    isActive={isActive}
+                    body={{ scholarship: id }}
+                />
+            )}
+            <Link
+                href={{
+                    pathname: ROUTES.SCHOLARSHIP.replace(
+                        ':title',
+                        name.replaceAll(' ', '-')
+                    ),
+                    query: {
+                        scholarship_id: id
+                    }
+                }}
+            >
+                <div className="flex flex-col w-full z-10 ">
+                    <div className="w-full relative">
+                        <img
+                            // src="/images/Scholarships/scholarship (1) 1.png"
+                            src={
+                                image ??
+                                '/images/Scholarships/scholarship (1) 1.png'
+                            }
+                            alt="image"
+                            className="mx-auto aspect-[1/1] w-full object-cover"
+                            width={100}
+                            height={100}
+                        />
+                        <div className="flex items-center w-full justify-between gap-2 pb-2 px-4 text-center absolute bottom-0 bg-blueColor p-2 text-white ">
+                            <h1
+                                title={name}
+                                className={`font-bold mx-auto ${headingClass}`}
+                            >
+                                {name}{' '}
+                                {degree
+                                    ? `for - ${!Array.isArray(degree) && degree.name}`
+                                    : ''}{' '}
+                                ({type})
+                            </h1>
+                        </div>
                     </div>
-                    <div className="flex items-center gap-2 gap-y-5 flex-wrap w-full">
-                        <Tag
-                            icon={
-                                <FaMapMarkerAlt className="h-4 w-4 text-blueColor" />
-                            }
-                            text={country?.name ?? 'No Country'}
-                        />
-                        <Tag
-                            icon={
-                                <RiGraduationCapFill className="h-4 w-4 text-blueColor" />
-                            }
-                            text={degrees.map((item) => item.name).join()}
-                        />
-                        <Tag
-                            icon={
-                                <Certificate className="h-4 w-4 text-blueColor" />
-                            }
-                            text={discipline.map((item) => item.name).join()}
-                        />
-                        <Tag
-                            icon={
-                                <School
-                                    fill="fill-blueColor"
-                                    className="h-4 w-4 text-blueColor"
-                                />
-                            }
-                            text={institute.name ?? 'No institute'}
-                        />
-                    </div>
-                </div>
-                <div className="border-black flex justify-end w-full absolute bottom-0 right-0">
-                    <div className="flex items-center justify-center bg-gray-200 group-hover:bg-blue-600 transition-all duration-500 h-16 w-16 before:bg-white before:w-16 before:rounded-br-full before:h-full relative before:absolute before:top-0 before:left-0">
-                        <FaArrowRight className="z-10 h-3 w-3 text-white absolute right-1 bottom-[6px]" />
-                    </div>
+                    {tagBox && (
+                        <div className="grid grid-cols-2 w-full">
+                            <Tag
+                                className=""
+                                icon={
+                                    <FaMapMarkerAlt className="h-5 w-5 text-blueColor" />
+                                }
+                                text={country?.name ?? 'No Country'}
+                            />
+                            <Tag
+                                icon={
+                                    <RiGraduationCapFill className="min-h-5 min-w-5 text-blueColor" />
+                                }
+                                text={
+                                    Array.isArray(degree)
+                                        ? degree.length
+                                            ? degree
+                                                  ?.map((d) => d.name)
+                                                  .join(' / ')
+                                            : 'No degree'
+                                        : degree?.name ?? 'No degree'
+                                }
+                            />
+                            <Tag
+                                className=""
+                                icon={
+                                    <MdOutlinePriceChange className="h-5 w-5 text-blueColor" />
+                                }
+                                text={amount}
+                            />
+                            <Tag
+                                icon={
+                                    <School
+                                        fill="fill-blueColor"
+                                        className="5-4 w-5 text-blueColor"
+                                    />
+                                }
+                                text={institute?.name ?? 'No institute'}
+                            />
+                        </div>
+                    )}
                 </div>
             </Link>
         </div>

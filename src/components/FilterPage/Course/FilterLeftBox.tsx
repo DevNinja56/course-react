@@ -10,6 +10,7 @@ import InstituteFilter from './InstituteFilter';
 import FeeSlider from './FeeSlider';
 import LocationsFilter from './Locations';
 import IntakesFilter from './Intakes';
+import RegionsFilter from '../RegionsFilter';
 
 export const FilterRow = () => (
     <div className="px-4">
@@ -19,7 +20,11 @@ export const FilterRow = () => (
 
 const CourseFilter = () => {
     const { clearALlQuery, query } = useFilterQuery();
-    const { fetchSearchedCoursesRequest: refetch } = useSearchedCourses();
+    const {
+        fetchSearchedCoursesRequest: refetch,
+        filters,
+        isLoading
+    } = useSearchedCourses();
 
     const handleClearQuery = () => {
         clearALlQuery();
@@ -27,7 +32,7 @@ const CourseFilter = () => {
     };
 
     return (
-        <div className="rounded-[15px] w-[24%] py-4 pb-5 overflow-y-auto border-[3px] border-[#eaf2ff] hidden lg:block max-h-headerStickyHeight sticky top-[110px] no-scrollbar ">
+        <div className="rounded-[15px] w-[24%] py-4 pb-5 overflow-y-auto border-[3px] border-[#eaf2ff] hidden lg:block max-h-headerStickyHeight sticky top-[110px] bg-white customScroll ">
             <div>
                 <div className="flex justify-between items-center mb-8 px-4">
                     <h1 className="text-[23px] text-mainTextColor font-bold">
@@ -43,15 +48,30 @@ const CourseFilter = () => {
                 {Object.values(query).length > 0 && (
                     <div className="my-2  ">
                         <div className="flex gap-0.5 flex-wrap px-2">
-                            {Object.entries(query).map(([key, item], idx) =>
-                                item.map((val) => (
-                                    <FilteredButton
-                                        key={'query--key--' + idx}
-                                        itemKey={key}
-                                        itemValue={val ?? 'button'}
-                                    />
-                                ))
-                            )}
+                            {Object.entries(query).map(([key, item], idx) => {
+                                if (Array.isArray(item)) {
+                                    return item.map((val, i) => (
+                                        <FilteredButton
+                                            key={
+                                                'query--key----' +
+                                                idx +
+                                                '---' +
+                                                i
+                                            }
+                                            itemKey={key}
+                                            itemValue={val ?? 'button'}
+                                        />
+                                    ));
+                                } else if (typeof item === 'string') {
+                                    return (
+                                        <FilteredButton
+                                            key={'query----key--' + idx}
+                                            itemKey={key}
+                                            itemValue={item ?? 'button'}
+                                        />
+                                    );
+                                }
+                            })}
                         </div>
                         <div className="mt-2">
                             <FilterRow />
@@ -60,19 +80,39 @@ const CourseFilter = () => {
                 )}
             </div>
             <div className="flex flex-col gap-y-6">
-                <CountriesFilter />
+                <RegionsFilter data={filters.regions} isLoading={isLoading} />
                 <FilterRow />
-                <LocationsFilter />
+                <CountriesFilter
+                    data={filters.countries}
+                    isLoading={isLoading}
+                />
                 <FilterRow />
-                <InstituteFilter />
+                <LocationsFilter
+                    data={filters.locations}
+                    isLoading={isLoading}
+                />
                 <FilterRow />
-                <DegreeLevelFilter />
+                <InstituteFilter
+                    data={filters.institutes}
+                    isLoading={isLoading}
+                />
                 <FilterRow />
-                <DisciplinesFilter />
+                <DegreeLevelFilter
+                    data={filters.degrees}
+                    isLoading={isLoading}
+                />
                 <FilterRow />
-                <SpecializationFilter />
+                <DisciplinesFilter
+                    data={filters.disciplines}
+                    isLoading={isLoading}
+                />
                 <FilterRow />
-                <IntakesFilter />
+                <SpecializationFilter
+                    data={filters.specializations}
+                    isLoading={isLoading}
+                />
+                <FilterRow />
+                <IntakesFilter data={filters.intakes} isLoading={isLoading} />
                 <FilterRow />
                 <FeeSlider />
             </div>

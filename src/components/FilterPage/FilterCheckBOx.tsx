@@ -12,13 +12,19 @@ interface propsType extends InputHTMLAttributes<HTMLInputElement> {
 export const FilterCheckBox = React.forwardRef<HTMLInputElement, propsType>(
     ({ id, text, name = '', customF, isChecked, ...props }, ref) => {
         const { query, addQuery, removeQuery } = useFilterQuery();
-        const state = (query[name] as string[]) ?? [];
+        const state: string[] = Array.isArray(query[name])
+            ? (query[name] as string[])
+            : [query[name] as string];
 
         const handleCheckedCountry = (
             e: React.ChangeEvent<HTMLInputElement>
         ) => {
             if (e.target.checked) {
-                addQuery({ [name]: [...state, e.target.value] });
+                addQuery({
+                    [name]: state
+                        ? [...state.filter((q) => !!q), e.target.value]
+                        : [e.target.value]
+                });
             } else {
                 state.length > 1
                     ? addQuery({

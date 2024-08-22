@@ -1,9 +1,10 @@
-import { filterScholarShipType } from '@/types';
+import { filterScholarShipType, scholarshipFiltersType } from '@/types';
 import { createSlice } from '@reduxjs/toolkit';
 import { fetchPaginatedScholarship } from '../actions/getFilteredScholarship';
 
 export interface getAllScholarshipTypes {
     data: filterScholarShipType[];
+    filters: scholarshipFiltersType;
     paginatorInfo: {
         count: number;
         page: number;
@@ -16,6 +17,14 @@ export interface getAllScholarshipTypes {
 
 const initialState: getAllScholarshipTypes = {
     data: [],
+    filters: {
+        regions: [],
+        countries: [],
+        institutes: [],
+        degrees: [],
+        // disciplines: [],
+        scholarship_types: []
+    },
     paginatorInfo: {
         count: 0,
         page: 1,
@@ -46,8 +55,9 @@ const scholarships = createSlice({
                 state.isLoading = true;
             })
             .addCase(fetchPaginatedScholarship.fulfilled, (state, action) => {
-                const { data, ...pagination } = action.payload;
+                const { data, filters, ...pagination } = action.payload;
                 state.data = data;
+                state.filters = filters;
                 state.paginatorInfo = pagination;
                 state.error = null;
                 state.isLoading = false;

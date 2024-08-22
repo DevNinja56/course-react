@@ -1,10 +1,15 @@
 import React, { useState } from 'react';
 import { FilterCheckBox, FilterCheckBoxLoader } from '../FilterCheckBOx';
-import { useGetDisciplineQuery } from '@/store/slices/allRequests';
 import SearchBox from '../SearchBox';
 
-const DisciplinesFilter = () => {
-    const { data: disciplineList, isLoading } = useGetDisciplineQuery();
+interface propsType {
+    data: {
+        discipline: string;
+    }[];
+    isLoading: boolean;
+}
+
+const DisciplinesFilter: React.FC<propsType> = ({ data, isLoading }) => {
     const [search, setSearch] = useState<string>('');
 
     return (
@@ -24,16 +29,18 @@ const DisciplinesFilter = () => {
                 {isLoading ? (
                     <FilterCheckBoxLoader />
                 ) : (
-                    disciplineList
-                        ?.filter((discipline) =>
-                            discipline.name
-                                .toLowerCase()
-                                .includes(search.toLowerCase())
+                    data
+                        ?.filter(
+                            ({ discipline: name }) =>
+                                !!name &&
+                                name
+                                    .toLowerCase()
+                                    .includes(search.toLowerCase())
                         )
-                        .map(({ name, id }) => (
+                        .map(({ discipline: name }, i) => (
                             <FilterCheckBox
-                                key={'discipline--list--' + id}
-                                id={name}
+                                key={'discipline--list--' + name + i}
+                                id={name+ '--' + i}
                                 text={name}
                                 name={'discipline'}
                                 value={name}

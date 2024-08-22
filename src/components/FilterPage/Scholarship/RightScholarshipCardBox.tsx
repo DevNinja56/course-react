@@ -29,22 +29,24 @@ const RightScholarshipCardBox = () => {
                 </div>
                 <hr className="border border-scholarshipBorderColor" />
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-5 mb-3 px-0 md:px-8 lg:px-0">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mb-3 px-0 md:px-8 lg:px-0">
                 {isLoading ? (
                     <LoaderSpinner color="text-black" />
                 ) : (
                     data?.map((scholarship, i) => (
                         <Card
                             key={'scholarship__key__' + scholarship._id + i}
-                            id={scholarship._id}
-                            favoriteId={scholarship.favoriteId}
-                            refetch={fetchScholarship}
-                            name={scholarship.name}
-                            type={scholarship.type}
-                            degrees={scholarship.degrees}
-                            institute={scholarship.institute}
-                            discipline={scholarship.discipline}
-                            country={scholarship.country}
+                            {...{
+                                name: scholarship.name,
+                                type: scholarship.type,
+                                degree: scholarship.degree,
+                                institute: scholarship.institute,
+                                country: scholarship.country,
+                                amount: scholarship.amount,
+                                id: scholarship._id,
+                                image: scholarship.image,
+                                isActive: !!scholarship?.favoriteId?.[0]
+                            }}
                         />
                     ))
                 )}

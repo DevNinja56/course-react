@@ -14,6 +14,8 @@ import UserActivation from '@/components/UserStatus/UserInActive';
 import UserBlock from '@/components/UserStatus/Block';
 import Testimonial from '@/components/Testimonial';
 import CounselingWork from '@/components/CounselingWork/CounselingWork';
+import ChatBoot from '@/components/ChatBoot';
+import { useUi } from '@/hooks/user-interface';
 
 export interface propsType {
     children: React.ReactElement;
@@ -31,6 +33,7 @@ const MainLayout = ({
     isPublic = false
 }: propsType) => {
     const { refetchUser, isAuthenticated, isLoading, user } = useUserAuth();
+    const { modal } = useUi();
     const token = getCookie('access_token');
     const router = useRouter();
     const testimonialRoutes = [
@@ -82,7 +85,9 @@ const MainLayout = ({
     }, [auth, token, isAuthenticated]);
 
     const Layout = () => (
-        <>
+        <div
+            className={`w-screen h-screen overflow-x-hidden ${modal ? 'overflow-y-hidden`' : 'overflow-y-auto`'}`}
+        >
             {header && <Header />}
             <div
                 className={`bg-lightColor ${header && 'mt-[100px] print:mt-0'}`}
@@ -103,13 +108,14 @@ const MainLayout = ({
                 ) : (
                     children
                 )}
+                <ChatBoot />
                 {counselingRoutes.includes(router.pathname) && (
                     <CounselingWork />
                 )}
                 {testimonialRoutes.includes(router.pathname) && <Testimonial />}
             </div>
             {footer && <Footer />}
-        </>
+        </div>
     );
 
     if (isLoading) return <ScreenLoader />;
@@ -121,8 +127,9 @@ const MainLayout = ({
             ) : (
                 <Layout />
             )}
+            {/* <TawkMessengerReact propertyId="property_id" widgetId="1hig23p0k" /> */}
 
-            <Toaster position="bottom-right" reverseOrder={false} />
+            <Toaster position="bottom-center" reverseOrder={false} />
             <ModalWraper />
             <NextNProgress color="#435FB5" />
         </>

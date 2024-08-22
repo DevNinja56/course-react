@@ -18,10 +18,26 @@ export const fetchLatestRate = createAsyncThunk(
             return http.get(
                 API_ENDPOINTS.FETCH_RATES.replace(
                     '${code}',
-                    currentState.currency.base_code
+                    currentState.currency.base_code.toUpperCase()
                 )
                     .replace('${pDate}', formattedPrevDay)
                     .replace('${cDate}', formattedCurrentDate)
+            );
+        } catch (error) {
+            throw new Error('Something went wrong');
+        }
+    }
+);
+export const fetchAllLatestRate = createAsyncThunk(
+    'Fetch All Rate List  From API',
+    async (_, { getState }) => {
+        try {
+            const currentState = getState() as RootState;
+            return http.get(
+                API_ENDPOINTS.FETCH_ALL_RATES.replace(
+                    '${code}',
+                    currentState.currency.base_code
+                ).replace('${amount}', '1')
             );
         } catch (error) {
             throw new Error('Something went wrong');

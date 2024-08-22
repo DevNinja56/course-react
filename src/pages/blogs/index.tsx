@@ -1,7 +1,7 @@
 import Card from '@/components/Blog/Card';
 import PaginationBox from '@/components/Pagination';
 import { usePaginatedBlogs } from '@/hooks/blogsPaginated';
-import Image from 'next/image';
+// import Image from 'next/image';
 import React, { useEffect } from 'react';
 
 const Blog = () => {
@@ -17,13 +17,13 @@ const Blog = () => {
     return (
         <>
             <div className="w-full flex items-center justify-center mt-[100px] bg-profileBgColor py-20 relative mb-24">
-                <Image
+                <img
                     height={193}
                     width={191}
                     alt="blog-round"
                     className="absolute top-[-20px] left-[-20px] lg:top-0 lg:left-0 h-[84px] w-[86px] lg:h-[193px] lg:w-[191px]"
                     src="/images/Blogs/Frame 642.svg"
-                    priority
+                    // priority
                 />
                 <div className="flex flex-col gap-y-5 items-center z-10">
                     <div className="flex flex-col justify-center items-center gap-y-3">
@@ -43,7 +43,7 @@ const Blog = () => {
                         </div>
                     </div>
                 </div>
-                <Image
+                <img
                     height={193}
                     width={191}
                     alt="blog-round-2"

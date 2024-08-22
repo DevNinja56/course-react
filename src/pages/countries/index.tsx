@@ -1,6 +1,6 @@
 import Card from '@/components/Countries/Card';
 import { useGetCountriesQuery } from '@/store/slices/allRequests';
-import Image from 'next/image';
+// import Image from 'next/image';
 import React from 'react';
 import 'flag-icons/css/flag-icons.min.css';
 import LoaderSpinner from '@/components/LoaderSpinner';
@@ -10,13 +10,13 @@ const Countries = () => {
     return (
         <>
             <div className="w-full flex items-center justify-center h-[270px] mt-[100px] mb-16 relative">
-                <Image
+                <img
                     height={193}
                     width={193}
                     alt="uni-round"
                     className="top-[-50px] left-[-8px] w-[100px] h-[100px] md:w-[150px] md:h-[150px] lg:w-[193px] lg:h-[193px] absolute"
                     src="/images/profileImages/Ellipse 418.svg"
-                    priority
+                    // priority
                 />
                 <div className="flex flex-col items-center z-10">
                     <h1 className="text-mainTextColor text-[32px] md:text-[48px] font-bold">
@@ -26,13 +26,13 @@ const Countries = () => {
                         Browse Study Abroad Countries
                     </p>
                 </div>
-                <Image
+                <img
                     height={235}
                     width={100}
                     alt="uni-round-2"
                     className="top-24 md:top-20 h-[175px] w-[50px] md:h-[215px] md:w-[80px] lg:h-[235px] lg:w-[100px] absolute right-0"
                     src="/images/Fields/Frame 691.svg"
-                    priority
+                    // priority
                 />
             </div>
             <div className="w-full pb-4 lg:pb-20">

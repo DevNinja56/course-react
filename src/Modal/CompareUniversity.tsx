@@ -10,7 +10,7 @@ import { useCompare } from '@/hooks/compare';
 import {
     countryType,
     degreeType,
-    disciplineType,
+    // disciplineType,
     instituteType,
     singleCourseType,
     specializationType
@@ -19,7 +19,7 @@ import {
 interface compareDataType {
     country: countryType | null;
     institute: instituteType | null;
-    discipline: disciplineType | null;
+    // discipline: disciplineType | null;
     degreeLevel: degreeType | null;
     specialization: specializationType | null;
     course: singleCourseType | null;
@@ -27,7 +27,7 @@ interface compareDataType {
 
 interface dataType {
     institute: instituteType[] | [];
-    discipline: disciplineType[] | [];
+    // discipline: disciplineType[] | [];
     degreeLevel: degreeType[] | [];
     specialization: specializationType[] | [];
     course: singleCourseType[] | [];
@@ -41,7 +41,7 @@ const CompareUniversityModal = () => {
     const { index } = modalState as { index: 'first' | 'second' | 'third' };
     const [data, setData] = useState<dataType>({
         institute: [],
-        discipline: [],
+        // discipline: [],
         degreeLevel: [],
         specialization: [],
         course: []
@@ -49,7 +49,7 @@ const CompareUniversityModal = () => {
     const [compareData, setCompareData] = useState<compareDataType>({
         country: null,
         institute: null,
-        discipline: null,
+        // discipline: null,
         degreeLevel: null,
         specialization: null,
         course: null
@@ -59,7 +59,7 @@ const CompareUniversityModal = () => {
         url: string,
         field:
             | 'institute'
-            | 'discipline'
+            // | 'discipline'
             | 'degreeLevel'
             | 'specialization'
             | 'course'
@@ -71,42 +71,42 @@ const CompareUniversityModal = () => {
                     field === 'institute'
                         ? {
                               institute: data,
-                              discipline: [],
+                              //   discipline: [],
                               degreeLevel: [],
                               specialization: [],
                               course: []
                           }
-                        : field === 'discipline'
-                        ? {
-                              institute: prev.institute,
-                              discipline: data,
-                              degreeLevel: [],
-                              specialization: [],
-                              course: []
-                          }
-                        : field === 'degreeLevel'
-                        ? {
-                              institute: prev.institute,
-                              discipline: prev.discipline,
-                              degreeLevel: data,
-                              specialization: [],
-                              course: []
-                          }
-                        : field === 'specialization'
-                        ? {
-                              institute: prev.institute,
-                              discipline: prev.discipline,
-                              degreeLevel: prev.degreeLevel,
-                              specialization: data,
-                              course: []
-                          }
-                        : {
-                              institute: prev.institute,
-                              discipline: prev.discipline,
-                              degreeLevel: prev.degreeLevel,
-                              specialization: prev.specialization,
-                              course: data
-                          }
+                        : // : field === 'discipline'
+                          //   ? {
+                          //         institute: prev.institute,
+                          //         discipline: data,
+                          //         degreeLevel: [],
+                          //         specialization: [],
+                          //         course: []
+                          //     }
+                          field === 'degreeLevel'
+                          ? {
+                                institute: prev.institute,
+                                //   discipline: prev.discipline,
+                                degreeLevel: data,
+                                specialization: [],
+                                course: []
+                            }
+                          : field === 'specialization'
+                            ? {
+                                  institute: prev.institute,
+                                  // discipline: prev.discipline,
+                                  degreeLevel: prev.degreeLevel,
+                                  specialization: data,
+                                  course: []
+                              }
+                            : {
+                                  institute: prev.institute,
+                                  // discipline: prev.discipline,
+                                  degreeLevel: prev.degreeLevel,
+                                  specialization: prev.specialization,
+                                  course: data
+                              }
                 );
             })
             .finally(() => setIsLoading(false));
@@ -115,7 +115,7 @@ const CompareUniversityModal = () => {
     const isDisabledButton =
         !country ||
         data.institute.length < 1 ||
-        data.discipline.length < 1 ||
+        // data.discipline?.length < 1 ||
         data.degreeLevel.length < 1 ||
         data.course.length < 1;
 
@@ -125,7 +125,6 @@ const CompareUniversityModal = () => {
                 className="absolute top-3 right-3 cursor-pointer"
                 onClick={hideModal}
             />
-
             <h1 className="text-mainTextColor text-center font-bold text-2xl md:text-[36px] mb-5">
                 Select a Course
             </h1>
@@ -172,11 +171,11 @@ const CompareUniversityModal = () => {
                     }))}
                     onChange={(e) => {
                         fetchAndSetData(
-                            API_ENDPOINTS.DISCIPLINES_WITH_INSTITUTE_ID.replace(
+                            API_ENDPOINTS.DEGREES_BY_INSTITUTE_ID.replace(
                                 ':id',
                                 e?.value ?? ''
                             ),
-                            'discipline'
+                            'degreeLevel'
                         );
                         setCompareData({
                             ...compareData,
@@ -188,7 +187,123 @@ const CompareUniversityModal = () => {
                         });
                     }}
                 />
+                {/* <Select
+                    isSearchable
+                    name="discipline"
+                    isClearable={false}
+                    isLoading={isLoading}
+                    isDisabled={data?.discipline?.length < 1}
+                    placeholder="Select Discipline"
+                    options={data?.discipline?.map(({ name, id }) => ({
+                        label: name,
+                        value: id
+                    }))}
+                    onChange={(e) => {
+                        fetchAndSetData(
+                            API_ENDPOINTS.DEGREE_LEVELS_WITH_DISCIPLINE_ID.replace(
+                                ':id',
+                                e?.value ?? ''
+                            ),
+                            'degreeLevel'
+                        );
+                        setCompareData({
+                            ...compareData,
+                            discipline: data?.discipline
+                                ? data?.discipline?.filter(
+                                      ({ id }) => id === e?.value ?? ''
+                                  )[0]
+                                : null
+                        });
+                    }}
+                /> */}
+                {/* <Select
+                    isSearchable
+                    name="discipline"
+                    isClearable={false}
+                    isLoading={isLoading}
+                    isDisabled={data?.discipline?.length < 1}
+                    placeholder="Select Discipline"
+                    options={data?.discipline?.map(({ name, id }) => ({
+                        label: name,
+                        value: id
+                    }))}
+                    onChange={(e) => {
+                        fetchAndSetData(
+                            API_ENDPOINTS.DEGREE_LEVELS_WITH_DISCIPLINE_ID.replace(
+                                ':id',
+                                e?.value ?? ''
+                            ),
+                            'degreeLevel'
+                        );
+                        setCompareData({
+                            ...compareData,
+                            discipline: data?.discipline
+                                ? data?.discipline?.filter(
+                                      ({ id }) => id === e?.value ?? ''
+                                  )[0]
+                                : null
+                        });
+                    }}
+                /> */}
                 <Select
+                    isSearchable
+                    name="degreeLevel"
+                    isClearable={false}
+                    isLoading={isLoading}
+                    isDisabled={data.degreeLevel.length < 1}
+                    placeholder="Select Degree Level"
+                    options={data?.degreeLevel?.map(({ name, _id }) => ({
+                        label: name,
+                        value: _id
+                    }))}
+                    onChange={(e) => {
+                        fetchAndSetData(
+                            API_ENDPOINTS.GET_SCHOLARSHIP_BY_DEGREE.replace(
+                                ':id',
+                                e?.value ?? ''
+                            ),
+                            'specialization'
+                        );
+                        setCompareData({
+                            ...compareData,
+                            degreeLevel: data?.degreeLevel
+                                ? data?.degreeLevel?.filter(
+                                      ({ id }) => id === e?.value ?? ''
+                                  )[0]
+                                : null
+                        });
+                    }}
+                />
+                <Select
+                    isSearchable
+                    name="specialization"
+                    isClearable={false}
+                    isLoading={isLoading}
+                    isDisabled={data.specialization.length < 1}
+                    placeholder="Select Specialization"
+                    options={data?.specialization?.map(({ name, _id }) => ({
+                        label: name,
+                        value: _id
+                    }))}
+                    onChange={(e) => {
+                        fetchAndSetData(
+                            API_ENDPOINTS.COURSE_By_SPECIALIZATION_ID.replace(
+                                ':id',
+                                e?.value ?? ''
+                            ),
+                            'course'
+                        );
+                        setCompareData({
+                            ...compareData,
+                            specialization: data?.specialization
+                                ? data?.specialization?.filter(
+                                      ({ id }) => id === e?.value ?? ''
+                                  )[0]
+                                : null
+                        });
+                    }}
+                />
+                {/* <Select
                     isSearchable
                     name="discipline"
                     isClearable={false}
@@ -216,68 +331,8 @@ const CompareUniversityModal = () => {
                                 : null
                         });
                     }}
-                />
-                <Select
-                    isSearchable
-                    name="degreeLevel"
-                    isClearable={false}
-                    isLoading={isLoading}
-                    isDisabled={data.degreeLevel.length < 1}
-                    placeholder="Select Degree Level"
-                    options={data?.degreeLevel?.map(({ name, id }) => ({
-                        label: name,
-                        value: id
-                    }))}
-                    onChange={(e) => {
-                        fetchAndSetData(
-                            API_ENDPOINTS.SPECIALIZATION.replace(
-                                ':id',
-                                e?.value ?? ''
-                            ),
-                            'specialization'
-                        );
-                        setCompareData({
-                            ...compareData,
-                            degreeLevel: data?.degreeLevel
-                                ? data?.degreeLevel?.filter(
-                                      ({ id }) => id === e?.value ?? ''
-                                  )[0]
-                                : null
-                        });
-                    }}
-                />
-                <Select
-                    isSearchable
-                    name="specialization"
-                    isClearable={false}
-                    isLoading={isLoading}
-                    isDisabled={data.specialization.length < 1}
-                    placeholder="Select Specialization"
-                    options={data?.specialization?.map(({ name, id }) => ({
-                        label: name,
-                        value: id
-                    }))}
-                    onChange={(e) => {
-                        fetchAndSetData(
-                            API_ENDPOINTS.COURSES_WITH_DEGREE.replace(
-                                ':degreeId',
-                                compareData?.degreeLevel?.id ?? ''
-                            ).replace(
-                                ':instituteId',
-                                compareData?.institute?.id ?? ''
-                            ),
-                            'course'
-                        );
-                        setCompareData({
-                            ...compareData,
-                            specialization: data?.specialization
-                                ? data?.specialization?.filter(
-                                      ({ id }) => id === e?.value ?? ''
-                                  )[0]
-                                : null
-                        });
-                    }}
-                />
+                /> */}
+
                 <Select
                     isSearchable
                     name="course"
@@ -285,7 +340,7 @@ const CompareUniversityModal = () => {
                     isLoading={isLoading}
                     isDisabled={data.course.length < 1}
                     placeholder="Select Course"
-                    options={data?.course?.map(({ name, id }) => ({
+                    options={data?.course.map(({ name, id }) => ({
                         label: name,
                         value: id
                     }))}
@@ -303,17 +358,17 @@ const CompareUniversityModal = () => {
             </div>
             <Button
                 className="pt-[14px] pb-[13px]"
-                text="Send Message"
+                text="Compare"
                 disabled={isDisabledButton}
                 onClick={() => {
                     !isDisabledButton &&
                         (index === 'first'
                             ? compareFirst(compareData)
                             : index === 'second'
-                            ? compareSecond(compareData)
-                            : index === 'third'
-                            ? compareThird(compareData)
-                            : null);
+                              ? compareSecond(compareData)
+                              : index === 'third'
+                                ? compareThird(compareData)
+                                : null);
                     hideModal();
                 }}
             />
