@@ -9,7 +9,7 @@ const Modal: React.FC<{
     const { hideModal } = useUi();
     return (
         <motion.div
-            className="fixed top-0 left-0 bg-black bg-opacity-25 w-screen h-screen z-[999] grid place-items-center "
+            className="fixed top-0 left-0 bg-black bg-opacity-25 w-screen h-screen z-[999] grid place-items-center overflow-auto"
             onClick={onClose ?? hideModal}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}

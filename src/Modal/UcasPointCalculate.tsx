@@ -11,6 +11,7 @@ const UcasPointCalculate = () => {
             qualifications: Qualification[];
             setQualifications: React.Dispatch<SetStateAction<Qualification[]>>;
             setTotalScore: React.Dispatch<SetStateAction<number>>;
+            setIsCalculate: React.Dispatch<SetStateAction<boolean>>;
         };
         hideModal: () => void;
     };
@@ -29,6 +30,7 @@ const UcasPointCalculate = () => {
     const handleApplyChanges = () => {
         modalState.setQualifications(localQualifications);
         modalState.setTotalScore(localTotalScore);
+        modalState.setIsCalculate(true);
         hideModal();
     };
 
@@ -76,7 +78,7 @@ const UcasPointCalculate = () => {
                 <div className="flex items-center gap-3">
                     <Button
                         onClick={handleApplyChanges}
-                        text="Apply Changes"
+                        text="Calculate Total"
                         className="py-2 px-3 text-sm rounded-[100em]"
                     />
                 </div>

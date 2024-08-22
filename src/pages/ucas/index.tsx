@@ -13,6 +13,7 @@ const UCAS = () => {
         { id: Date.now() }
     ]);
     const [totalScore, setTotalScore] = useState<number>(0);
+    const [isCalculate, setIsCalculate] = useState<boolean>(false);
 
     useEffect(() => {
         updateModal({
@@ -20,10 +21,22 @@ const UCAS = () => {
             state: {
                 qualifications,
                 setQualifications,
-                setTotalScore
+                setTotalScore,
+                setIsCalculate
             }
         });
     }, []);
+
+    const formRef = React.useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        if (isCalculate && formRef.current) {
+            formRef.current.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+    }, [isCalculate]);
 
     return (
         <>
@@ -64,12 +77,15 @@ const UCAS = () => {
                     priority
                 />
             </div>
-            <div className="container mx-auto mb-5">
+            <div className="w-11/12 mx-auto mb-5">
                 <div className="w-8/12 flex flex-col gap-5">
                     <h2 className="font-bold text-4xl">
                         UCAS Points Calculator
                     </h2>
-                    <ul className="text-gray-500 flex flex-col gap-3 text-lg mb-10">
+                    <div
+                        ref={formRef}
+                        className="text-gray-500 flex flex-col gap-3 text-lg mb-10"
+                    >
                         <li>
                             Please use this{' '}
                             <span className="font-bold text-black">
@@ -89,7 +105,7 @@ const UCAS = () => {
                             UCAS points converter as a general guide and always
                             check the specific requirements of that course.
                         </li>
-                    </ul>
+                    </div>
                     <div className="flex flex-col gap-8">
                         <h1 className="font-bold text-3xl">Qualifications</h1>
                         {qualifications.map((qualification) => (
