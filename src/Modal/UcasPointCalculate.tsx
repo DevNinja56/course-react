@@ -40,16 +40,16 @@ const UcasPointCalculate = ({
     return (
         <div
             onClick={() => setModalOpen(false)}
-            className="fixed top-0 left-0 w-screen h-screen overflow-auto z-[99999] bg-black/20 flex justify-center items-center"
+            className="fixed top-0 left-0 w-screen h-screen overflow-auto z-[99999] bg-black/20 py-5 grid place-items-center"
         >
             <div
                 onClick={(e) => e.stopPropagation()}
-                className="bg-white p-5 w-[450px] rounded-md relative"
+                className="bg-white py-5 px-3 md:p-5 w-11/12 md:w-[450px] rounded-md relative mx-auto"
             >
-                <button className="absolute top-4 right-4 bg-red-600 text-white rounded-full p-0.5">
+                <button className="absolute top-2 md:top-4 right-2 md:right-4 bg-red-600 text-white rounded-full p-0.5">
                     <RxCross2 onClick={() => setModalOpen(false)} />
                 </button>
-                <h3 className="font-bold text-2xl text-center">
+                <h3 className="font-bold text-xl md:text-2xl text-center">
                     UCAS Points Calculator
                 </h3>
                 <div className="my-8">
@@ -64,7 +64,7 @@ const UcasPointCalculate = ({
                         />
                     ))}
                 </div>
-                <div className="border-t pt-5 flex items-center justify-between">
+                <div className="border-t pt-5 flex flex-wrap gap-2 items-center justify-between">
                     <div className="flex items-center gap-3">
                         <Button
                             onClick={() =>
@@ -74,7 +74,7 @@ const UcasPointCalculate = ({
                                 ])
                             }
                             text="+ Add Qualification"
-                            className="py-2 px-3 text-sm rounded-[100em] min-w-fit"
+                            className="py-2 px-2 md:px-3 text-xs md:text-sm rounded-[100em] min-w-fit"
                         />
                         <Button
                             onClick={() => {
@@ -82,14 +82,14 @@ const UcasPointCalculate = ({
                                 setLocalTotalScore(0);
                             }}
                             text="Clear All"
-                            className="py-2 px-3 text-sm rounded-[100em]"
+                            className="py-2 px-2 md:px-3 text-xs md:text-sm rounded-[100em]"
                         />
                     </div>
                     <div className="flex items-center gap-3">
                         <Button
                             onClick={handleApplyChanges}
                             text="Calculate Total"
-                            className="py-2 px-3 text-sm rounded-[100em]"
+                            className="py-2 px-2 md:px-3 text-xs md:text-sm rounded-[100em]"
                         />
                     </div>
                 </div>
