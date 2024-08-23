@@ -3,29 +3,15 @@ import Image from 'next/image';
 import QualificationSection from '@/components/Ucas/QualificationSection';
 import Button from '@/components/Button';
 import { Qualification } from '@/types';
-import { useUi } from '@/hooks/user-interface';
-import { modalType } from '@/store/slices/ui.slice';
+import UcasPointCalculate from '@/Modal/UcasPointCalculate';
 
 const UCAS = () => {
-    const { updateModal } = useUi();
-
     const [qualifications, setQualifications] = useState<Qualification[]>([
         { id: Date.now() }
     ]);
     const [totalScore, setTotalScore] = useState<number>(0);
     const [isCalculate, setIsCalculate] = useState<boolean>(false);
-
-    useEffect(() => {
-        updateModal({
-            type: modalType.ucas_points_calculator,
-            state: {
-                qualifications,
-                setQualifications,
-                setTotalScore,
-                setIsCalculate
-            }
-        });
-    }, []);
+    const [modalOpen, setModalOpen] = useState<boolean>(true);
 
     const formRef = React.useRef<HTMLDivElement>(null);
 
@@ -40,7 +26,16 @@ const UCAS = () => {
 
     return (
         <>
-            <div className="w-full flex items-center justify-between h-[214px] mt-[90px] bg-profileBgColor mb-16">
+            {modalOpen && (
+                <UcasPointCalculate
+                    qualifications={qualifications}
+                    setQualifications={setQualifications}
+                    setTotalScore={setTotalScore}
+                    setIsCalculate={setIsCalculate}
+                    setModalOpen={setModalOpen}
+                />
+            )}
+            <div className="w-full flex items-center justify-between h-[214px] mt-12 md:mt-[90px] bg-profileBgColor mb-16">
                 <Image
                     height={193}
                     width={193}
@@ -49,7 +44,7 @@ const UCAS = () => {
                     src="/images/profileImages/Ellipse 418.svg"
                     priority
                 />
-                <h1 className="text-mainTextColor text-[36px] md:text-[48px] font-bold">
+                <h1 className="text-mainTextColor text-2xl md:text-[36px] lg:text-5xl xl:text-[48px] font-bold text-center">
                     Calculate your UCAS Tariff points
                 </h1>
                 <Image
@@ -78,13 +73,13 @@ const UCAS = () => {
                 />
             </div>
             <div className="w-11/12 mx-auto mb-5">
-                <div className="w-8/12 flex flex-col gap-5">
-                    <h2 className="font-bold text-4xl">
+                <div className="w-full lg:w-8/12 flex flex-col gap-5">
+                    <h2 className="font-bold text-2xl md:text-4xl">
                         UCAS Points Calculator
                     </h2>
                     <div
                         ref={formRef}
-                        className="text-gray-500 flex flex-col gap-3 text-lg mb-10"
+                        className="text-gray-500 flex flex-col gap-3 text-sm md:text-lg mb-10"
                     >
                         <li>
                             Please use this{' '}
@@ -107,7 +102,9 @@ const UCAS = () => {
                         </li>
                     </div>
                     <div className="flex flex-col gap-8">
-                        <h1 className="font-bold text-3xl">Qualifications</h1>
+                        <h1 className="font-bold text-xl md:text-3xl">
+                            Qualifications
+                        </h1>
                         {qualifications.map((qualification) => (
                             <QualificationSection
                                 key={'qualification --' + qualification.id}
@@ -117,7 +114,7 @@ const UCAS = () => {
                                 setTotalScore={setTotalScore}
                             />
                         ))}
-                        <div className="border-t pt-5 flex items-center justify-between">
+                        <div className="border-t pt-5 flex flex-col-reverse md:flex-row items-start gap-5 md:gap-0 md:items-center justify-between">
                             <div className="flex items-center gap-3">
                                 <Button
                                     onClick={() =>
@@ -127,7 +124,7 @@ const UCAS = () => {
                                         ])
                                     }
                                     text="+ Add Qualification"
-                                    className="py-2 px-3 text-sm rounded-[100em] min-w-fit"
+                                    className="py-2 px-2 md:px-3 text-xs md:text-sm rounded-[100em] min-w-fit"
                                 />
                                 <Button
                                     onClick={() => {
@@ -135,12 +132,14 @@ const UCAS = () => {
                                         setTotalScore(0);
                                     }}
                                     text="Clear All"
-                                    className="py-2 px-3 text-sm rounded-[100em]"
+                                    className="py-2 px-2 md:px-3 text-xs md:text-sm rounded-[100em]"
                                 />
                             </div>
-                            <div className="flex flex-col items-center font-bold text-xl">
+                            <div className="flex flex-col items-center font-bold text-base md:text-xl">
                                 Total Points:
-                                <span className="text-3xl">{totalScore}</span>
+                                <span className="text-xl md:text-3xl">
+                                    {totalScore}
+                                </span>
                             </div>
                         </div>
                     </div>

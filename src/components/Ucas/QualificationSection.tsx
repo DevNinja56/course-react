@@ -68,7 +68,7 @@ const QualificationSection = ({
                 key={qualification.id}
             >
                 <div
-                    className={`${modal && 'flex flex-col gap-5 items-start'} w-full flex gap-2`}
+                    className={`${modal ? 'flex flex-col gap-5 items-start' : 'flex flex-col md:flex-row gap-2'} w-full`}
                 >
                     <div className="w-full">
                         <Select
