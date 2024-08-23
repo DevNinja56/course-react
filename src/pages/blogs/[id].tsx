@@ -23,8 +23,8 @@ const BlogsDetail = ({ data }: { data: blogsType }) => {
                     src="/images/profileImages/Ellipse 418.svg"
                     // priority
                 />
-                <div className="w-full py-20 z-10">
-                    <div className="max-w-[1100px] 2xl:max-w-[2300px] mx-auto px-5 md:px-[50px] lg:px-2 2xl:px-8 transition-all duration-300 flex flex-col lg:flex-row justify-between lg:items-center gap-y-8">
+                <div className="w-full pt-20 z-10">
+                    <div className="max-w-[1260px] 2xl:max-w-[2300px] mx-auto px-5 md:px-[50px] lg:px-2 2xl:px-8 transition-all duration-300 flex flex-col lg:flex-row justify-between lg:items-center gap-y-8">
                         <div className="flex flex-col gap-y-4 transition-all duration-300 z-10">
                             <h1
                                 style={{ lineHeight: '48px' }}
@@ -69,7 +69,7 @@ const BlogsDetail = ({ data }: { data: blogsType }) => {
                 />
             </div>
             <div className="w-full pb-28">
-                <div className="max-w-[834px] 2xl:max-w-[1966px] mx-auto px-5 md:px-[50px] lg:px-2">
+                <div className="max-w-[1260px] 2xl:max-w-[1966px] mx-auto px-5 md:px-[50px] lg:px-2">
                     <div className="flex flex-col gap-y-[35px]">
                         <div className="content">
                             <InnerHtml html={data?.description ?? ''} />

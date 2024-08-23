@@ -64,7 +64,10 @@ const SignIn = () => {
             })
             .finally(() => setIsLoading(false));
     };
-
+    console.log(
+        'process.env.NEXT_PUBLIC_REST_API_ENDPOINT',
+        process.env.NEXT_PUBLIC_REST_API_ENDPOINT
+    );
     return (
         <div className="w-full flex justify-center items-center px-0 lg:px-5 2xl:px-40 bg-loginBgColor min-h-[100vh]">
             <div className="w-full px-0 lg:px-2 transition-all duration-300">
