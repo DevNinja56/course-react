@@ -125,7 +125,9 @@ const QualificationSection = ({
                         />
                     </div>
                 </div>
-                <p className="text-xl">{qualification.selectedScore || '0'}</p>
+                <div className="text-lg h-9 w-11 flex items-center justify-center rounded-md bg-profileBgColor border-2 border-blueColor">
+                    {qualification.selectedScore || '0'}
+                </div>
                 <button
                     disabled={qualifications.length === 1}
                     onClick={() => {
