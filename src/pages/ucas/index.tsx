@@ -45,7 +45,7 @@ const UCAS = () => {
                     priority
                 />
                 <h1 className="text-mainTextColor text-2xl md:text-[36px] lg:text-5xl xl:text-[48px] font-bold text-center">
-                    Calculate your UCAS Tariff Points
+                    Calculate your UCAS Tariff points
                 </h1>
                 <Image
                     height={235}
@@ -151,6 +151,7 @@ const UCAS = () => {
                     src="/images/UCAS/calculator.svg"
                     priority
                 />
+
             </div>
         </>
     );
