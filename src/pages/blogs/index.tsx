@@ -53,7 +53,7 @@ const Blog = () => {
             </div>
             <div className="w-full pb-12">
                 <div className="max-w-[1100px] 2xl:max-w-[2300px] mx-auto px-5 md:px-[90px] lg:px-2 2xl:px-8 transition-all duration-300 flex flex-col items-center gap-y-16">
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-between gap-[31px] w-full">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 justify-between gap-[31px] w-full">
                         {data?.map((blog, i) => (
                             <Card
                                 key={'blogs-card--' + i}
