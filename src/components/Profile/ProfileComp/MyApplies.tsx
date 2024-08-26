@@ -20,24 +20,30 @@ const MyApplies = () => {
             {isLoading ? (
                 <LoaderIcon style={{ width: '20px', height: '20px' }} />
             ) : data && data?.length > 0 ? (
-                <div className=" rounded-xl overflow-hidden w-full grid grid-cols-1 md:grid-cols-2 gap-3 lg:gap-5">
+                <div className=" rounded-xl overflow-hidden w-full grid grid-cols-1 md:grid-cols-2 gap-3 lg:gap-5 ">
                     {data?.map((apply) => (
                         <div
                             key={apply.id}
-                            className="flex flex-wrap border-b flex-col w-full border p-4 md:p-5 rounded-[10px] gap-3"
+                            className="flex flex-wrap border-b flex-col w-full border p-4 md:p-5 rounded-[10px] gap-3 relative"
                         >
+                            {!apply.course && (
+                                <p className="text-red-500 text-xs absolute top-2 right-2 font-bold">
+                                    No course found or maybe deleted form DB!.
+                                </p>
+                            )}
                             <p className="text-xs md:text-sm font-semibold text-mainTextColor hover:text-blueColor hover:underline cursor-pointer line-clamp-2 h-4">
                                 <Link
                                     href={{
                                         pathname: ROUTES.COURSE.replace(
                                             ':title',
-                                            apply.course.name.replaceAll(
-                                                ' ',
-                                                '-'
-                                            )
+                                            (
+                                                apply?.course?.name ??
+                                                'no-course'
+                                            )?.replaceAll(' ', '-')
                                         ),
                                         query: {
-                                            course_id: apply.course.id
+                                            course_id:
+                                                apply?.course?.id ?? 'no-course'
                                         }
                                     }}
                                 >
@@ -79,7 +85,7 @@ const MyApplies = () => {
                                             <span>
                                                 {apply?.course?.availableCampuses.join(
                                                     ' - '
-                                                )}
+                                                ) ?? 'No Campus Found'}
                                             </span>
                                         </p>
                                     </div>
