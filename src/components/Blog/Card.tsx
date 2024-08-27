@@ -30,7 +30,8 @@ const Card = ({ title, favorite, tags, image, id }: cardProps) => {
                     height={203.29}
                     width={366}
                     alt="carding"
-                    className="rounded-[10px] rounded-b-none mb-4 w-full h-52 "
+
+                    className="rounded-[10px] rounded-b-none mb-4 w-full h-44 "
                     src={`${image}`}
                     // priority
                 />
