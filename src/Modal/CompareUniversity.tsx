@@ -144,7 +144,7 @@ const CompareUniversityModal = () => {
                         fetchAndSetData(
                             API_ENDPOINTS.INSTITUTE_WITH_COUNTRY_ID.replace(
                                 ':id',
-                                e?.value ?? ''
+                                e?.value || ''
                             ),
                             'institute'
                         );
@@ -173,7 +173,7 @@ const CompareUniversityModal = () => {
                         fetchAndSetData(
                             API_ENDPOINTS.DEGREES_BY_INSTITUTE_ID.replace(
                                 ':id',
-                                e?.value ?? ''
+                                e?.value || ''
                             ),
                             'degreeLevel'
                         );
@@ -181,7 +181,7 @@ const CompareUniversityModal = () => {
                             ...compareData,
                             institute: data?.institute
                                 ? data?.institute?.filter(
-                                      ({ id }) => id === (e?.value || "")
+                                      ({ id }) => id === (e?.value || '')
                                   )[0]
                                 : null
                         });
@@ -202,7 +202,7 @@ const CompareUniversityModal = () => {
                         fetchAndSetData(
                             API_ENDPOINTS.DEGREE_LEVELS_WITH_DISCIPLINE_ID.replace(
                                 ':id',
-                                e?.value ?? ''
+                                (e?.value || '')
                             ),
                             'degreeLevel'
                         );
@@ -210,7 +210,7 @@ const CompareUniversityModal = () => {
                             ...compareData,
                             discipline: data?.discipline
                                 ? data?.discipline?.filter(
-                                      ({ id }) => id === e?.value ?? ''
+                                      ({ id }) => id === (e?.value || '')
                                   )[0]
                                 : null
                         });
@@ -231,7 +231,7 @@ const CompareUniversityModal = () => {
                         fetchAndSetData(
                             API_ENDPOINTS.DEGREE_LEVELS_WITH_DISCIPLINE_ID.replace(
                                 ':id',
-                                e?.value ?? ''
+                                (e?.value || '')
                             ),
                             'degreeLevel'
                         );
@@ -239,7 +239,7 @@ const CompareUniversityModal = () => {
                             ...compareData,
                             discipline: data?.discipline
                                 ? data?.discipline?.filter(
-                                      ({ id }) => id === e?.value ?? ''
+                                      ({ id }) => id === (e?.value || '')
                                   )[0]
                                 : null
                         });
@@ -260,7 +260,7 @@ const CompareUniversityModal = () => {
                         fetchAndSetData(
                             API_ENDPOINTS.GET_SCHOLARSHIP_BY_DEGREE.replace(
                                 ':id',
-                                e?.value ?? ''
+                                e?.value || ''
                             ),
                             'specialization'
                         );
@@ -268,7 +268,7 @@ const CompareUniversityModal = () => {
                             ...compareData,
                             degreeLevel: data?.degreeLevel
                                 ? data?.degreeLevel?.filter(
-                                      ({ id }) => id === e?.value ?? ''
+                                      ({ id }) => id === (e?.value || '')
                                   )[0]
                                 : null
                         });
@@ -289,7 +289,7 @@ const CompareUniversityModal = () => {
                         fetchAndSetData(
                             API_ENDPOINTS.COURSE_By_SPECIALIZATION_ID.replace(
                                 ':id',
-                                e?.value ?? ''
+                                e?.value || ''
                             ),
                             'course'
                         );
@@ -297,7 +297,7 @@ const CompareUniversityModal = () => {
                             ...compareData,
                             specialization: data?.specialization
                                 ? data?.specialization?.filter(
-                                      ({ id }) => id === e?.value ?? ''
+                                      ({ id }) => id === (e?.value || '')
                                   )[0]
                                 : null
                         });
@@ -318,7 +318,7 @@ const CompareUniversityModal = () => {
                         fetchAndSetData(
                             API_ENDPOINTS.DEGREE_LEVELS_WITH_DISCIPLINE_ID.replace(
                                 ':id',
-                                e?.value ?? ''
+                                (e?.value || '')
                             ),
                             'degreeLevel'
                         );
@@ -326,7 +326,7 @@ const CompareUniversityModal = () => {
                             ...compareData,
                             discipline: data?.discipline
                                 ? data?.discipline?.filter(
-                                      ({ id }) => id === e?.value ?? ''
+                                      ({ id }) => id === (e?.value || '')
                                   )[0]
                                 : null
                         });
@@ -349,7 +349,7 @@ const CompareUniversityModal = () => {
                             ...compareData,
                             course: data?.course
                                 ? data?.course?.filter(
-                                      ({ id }) => id === e?.value ?? ''
+                                      ({ id }) => id === (e?.value || '')
                                   )[0]
                                 : null
                         });
