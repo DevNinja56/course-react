@@ -181,7 +181,7 @@ const CompareUniversityModal = () => {
                             ...compareData,
                             institute: data?.institute
                                 ? data?.institute?.filter(
-                                      ({ id }) => id === e?.value ?? ''
+                                      ({ id }) => id === (e?.value || "")
                                   )[0]
                                 : null
                         });
