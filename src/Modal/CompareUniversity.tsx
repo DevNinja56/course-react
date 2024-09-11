@@ -152,7 +152,7 @@ const CompareUniversityModal = () => {
                             ...compareData,
                             country: country
                                 ? country?.filter(
-                                      ({ id }) => id === e?.value ?? ''
+                                      ({ id }) => id === (e?.value || '')
                                   )[0]
                                 : null
                         });
