@@ -37,7 +37,7 @@ export const useCalculate = () => {
                 : setCurrencyValue(amount, currency_code ?? base_code);
         }
 
-        const matches = initialDeposit.match(/^\{([1-9][0-9]?|100)%,(N|G)\}$/);
+        const matches = initialDeposit?.match(/^\{([1-9][0-9]?|100)%,(N|G)\}$/);
         if (matches) {
             const percentage = parseFloat(matches[1]);
             const option = matches[2];
@@ -99,7 +99,7 @@ export const useCalculate = () => {
 //                   );
 //         }
 
-//         const matches = initialDeposit.match(/^\{([1-9][0-9]?|100)%,(N|G)\}$/);
+//         const matches = initialDeposit?.match(/^\{([1-9][0-9]?|100)%,(N|G)\}$/);
 //         if (matches) {
 //             const percentage = parseFloat(matches[1]);
 //             const option = matches[2];
