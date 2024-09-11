@@ -54,7 +54,7 @@ const RegionsFilter: React.FC<propsType> = ({ data, isLoading }) => {
                                     !!name &&
                                     name
                                         .toLowerCase()
-                                        .includes(search.toLowerCase())
+                                        ?.includes(search.toLowerCase())
                             )
                             .map(({ region: name }, i) => (
                                 <FilterCheckBox

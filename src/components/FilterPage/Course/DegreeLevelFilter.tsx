@@ -53,7 +53,7 @@ const DegreeLevelFilter: React.FC<propsType> = ({ data, isLoading }) => {
                                         )
                                     }
                                     className={`text-grayColor transition-all text-2xl cursor-pointer ${
-                                        query['degreeType']?.includes(name) ||
+                                        query['degreeType']??.includes(name) ||
                                         i === open
                                             ? 'rotate-[-90deg]'
                                             : 'rotate-[90deg]'
@@ -63,7 +63,7 @@ const DegreeLevelFilter: React.FC<propsType> = ({ data, isLoading }) => {
                         </div>
                         <div
                             className={`px-5 overflow-hidden transition-all ${
-                                query['degreeType']?.includes(name) ||
+                                query['degreeType']??.includes(name) ||
                                 open === i
                                     ? 'max-h-[300px]'
                                     : 'max-h-0'

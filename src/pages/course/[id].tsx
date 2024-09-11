@@ -39,12 +39,12 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
     const rate = isSameCurrency ? null : getSingleRate(course.feeCurrency);
     const isUkCourse = (course?.institute?.country?.name
         ?.toLowerCase()
-        ?.includes('united kingdom' ) || course?.institute?.country?.name
+        ??.includes('united kingdom' ) || course?.institute?.country?.name
         ?.toLowerCase()
-        ?.includes('uk' ));
+        ??.includes('uk' ));
     const isMasterDegree = course?.degree?.name
         ?.toLowerCase()
-        ?.includes('master');
+        ??.includes('master');
 
     return (
         <>

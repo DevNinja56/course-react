@@ -26,7 +26,7 @@ export const useCalculate = () => {
         let initialDeposit = initialDepositVal;
 
         //  check if G included in initial deposit
-        if (scholarship && initialDepositVal?.includes('G')) {
+        if (scholarship && initialDepositVal??.includes('G')) {
             initialDeposit = initialDepositVal.replace('G', 'N');
         }
 

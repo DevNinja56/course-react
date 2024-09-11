@@ -35,7 +35,7 @@ const DisciplinesFilter: React.FC<propsType> = ({ data, isLoading }) => {
                                 !!name &&
                                 name
                                     .toLowerCase()
-                                    .includes(search.toLowerCase())
+                                    ?.includes(search.toLowerCase())
                         )
                         .map(({ discipline: name }, i) => (
                             <FilterCheckBox
