@@ -65,9 +65,7 @@ const CurrencyConverter = () => {
                         })
                     )}
                     value={{
-                        label:
-                            `${savedLocation?.currency} - ${savedLocation?.currency_name}` ??
-                            '',
+                        label: `${savedLocation?.currency} - ${savedLocation?.currency_name}`,
                         value: savedLocation?.code ?? ''
                     }}
                     isDisabled={isLoading}

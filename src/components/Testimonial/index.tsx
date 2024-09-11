@@ -38,11 +38,10 @@ const Testimonial = () => {
                 className={`relative pb-0  ${
                     router.pathname === ROUTES.FAQ
                         ? 'pt-10'
-                        : '' ||
-                          router.pathname === ROUTES.HOMEPAGE ||
-                          router.pathname === ROUTES.CONTACT_US
-                        ? 'overflow-visible'
-                        : 'overflow-hidden'
+                        : router.pathname === ROUTES.HOMEPAGE ||
+                            router.pathname === ROUTES.CONTACT_US
+                          ? 'overflow-visible'
+                          : 'overflow-hidden'
                 }`}
             >
                 <img

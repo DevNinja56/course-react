@@ -37,7 +37,7 @@ export const formateCourseQuery = (query: { [key: string]: any }) => {
 
     if (query.location) {
         orConditions.push({
-            'availableCampuses': { $in: query.location }
+            availableCampuses: { $in: query.location }
         });
     }
 
@@ -96,7 +96,7 @@ export const formateCourseQuery = (query: { [key: string]: any }) => {
             | 'tuitionFee-Down';
 
         sort =
-            value === ('A-Z' || 'Z-A')
+            value === 'A-Z' || value === 'Z-A'
                 ? { $sort: { name: sortState[value] } }
                 : { $sort: { tuitionFee: sortState[value] } };
     }
