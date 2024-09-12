@@ -1,26 +1,36 @@
 # Use an official Node runtime as a parent image
-FROM node:18-alpine
-
-# Update packages in the Alpine Linux
-RUN apk update
+FROM node:18-alpine AS builder
 
 # Set the working directory in the container
 WORKDIR /app
 
-# Copy the current directory contents into the container at /app
-COPY . /app
+# Install dependencies first to leverage Docker cache
+COPY package*.json ./
+RUN npm install --force
 
-# Install global packages
-RUN npm install pm2 yarn -g --force
+# Copy the rest of the application into the container
+COPY . .
 
-# Install project dependencies
-RUN yarn install
+# Build the Next.js project
+RUN npm run build
 
-# Build the project
-RUN yarn build
+# Create a minimal runtime image
+FROM node:18-alpine
 
-# Make port 3000 available to the world outside this container
+# Set the working directory in the container
+WORKDIR /app
+
+# Copy only the necessary files from the builder stage
+COPY --from=builder /app/package*.json ./
+COPY --from=builder /app/node_modules ./node_modules
+COPY --from=builder /app/.next ./.next
+COPY --from=builder /app/public ./public
+
+# Copy the .env file (if it is necessary for runtime)
+COPY --from=builder /app/.env ./.env
+
+# Expose the port the app runs on
 EXPOSE 3000
 
-# Define the command to run the app using PM2
-CMD ["pm2-runtime", "start", "ecosystem.config.js"]
+# Define the command to run the app
+CMD ["npm", "start"]
