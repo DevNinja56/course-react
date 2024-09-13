@@ -37,11 +37,11 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
     const { initialDeposit } = useCalculate();
     const isSameCurrency = base_code === course.feeCurrency;
     const rate = isSameCurrency ? null : getSingleRate(course.feeCurrency);
-    const isUkCourse = (course?.institute?.country?.name
-        ?.toLowerCase()
-        ?.includes('united kingdom' ) || course?.institute?.country?.name
-        ?.toLowerCase()
-        ?.includes('uk' ));
+    const isUkCourse =
+        course?.institute?.country?.name
+            ?.toLowerCase()
+            ?.includes('united kingdom') ||
+        course?.institute?.country?.name?.toLowerCase()?.includes('uk');
     const isMasterDegree = course?.degree?.name
         ?.toLowerCase()
         ?.includes('master');
@@ -514,7 +514,7 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                                                     Level
                                                 </p>
                                                 <p className="text-lightGrayColor text-base">
-                                                    {course.degree.type}
+                                                    {course?.degree?.type}
                                                 </p>
                                             </div>
                                         </div>

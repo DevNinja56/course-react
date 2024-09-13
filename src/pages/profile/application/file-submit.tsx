@@ -56,7 +56,7 @@ const FileSubmitted = () => {
     const token = getToken();
     const router = useRouter();
     const { id } = router.query;
-    const { data: getApply } = useGetApplyByIdQuery(id);
+    const { data: getApply, refetch } = useGetApplyByIdQuery(id);
 
     const [isLoading, setIsLoading] = useState(false);
     const [fullFile, setFullFile] = useState(fileUrl);
@@ -248,6 +248,7 @@ const FileSubmitted = () => {
                 {
                     loading: 'Please wait...',
                     success: () => {
+                        refetch();
                         router.back();
                         return 'Form submitted successfully';
                     },

@@ -71,7 +71,7 @@ const CourseCard = ({ course }: CardProps) => {
                             {specialization?.name ?? 'No Specialization'})
                         </h1>
                         <p className="font-medium text-[0.670rem] xl:text-[0.700rem] text-gray-400 capitalize">
-                            {degree.type}
+                            {degree?.type}
                         </p>
                     </div>
                     <div className="flex flex-col gap-3">

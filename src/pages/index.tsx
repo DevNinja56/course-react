@@ -70,7 +70,7 @@ const Home = () => {
                     // priority
                 />
             </div>
-            <div className="w-full px-0 lg:px-0 pb-40 relative bg-white pt-4 md:pt-16 overflow-y-visible overflow-x-hidden md:overflow-hidden">
+            <div className="w-full px-0 lg:px-0 pb-10 relative bg-white pt-4 md:pt-16 overflow-y-visible overflow-x-hidden md:overflow-hidden">
                 <div className="h-[134px] w-[134px] border-[15px] border-blueColor rounded-full absolute right-[-40px] top-[-30px] z-10 block md:hidden"></div>
                 <img
                     height={74}
