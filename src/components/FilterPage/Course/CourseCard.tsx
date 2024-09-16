@@ -22,8 +22,8 @@ const CourseCard = ({ course }: CardProps) => {
         name,
         tuitionFee,
         intakes,
-        feeCurrency = 'AUD',
-        specialization
+        feeCurrency = 'AUD'
+        // specialization
     } = course;
 
     const { getCurrencySymbol, setCurrencyValue, getSingleRate, base_code } =
@@ -67,11 +67,12 @@ const CourseCard = ({ course }: CardProps) => {
                             className="font-bold text-mainTextColor text-xs xl:text-sm"
                         >
                             {name} <br /> at{' '}
-                            {institute?.name ?? 'No Institute Found'} - (
-                            {specialization?.name ?? 'No Specialization'})
+                            {institute?.name ?? 'No Institute Found'}
+                            {/* - (
+                            {specialization?.name ?? 'No Specialization'}) */}
                         </h1>
                         <p className="font-medium text-[0.670rem] xl:text-[0.700rem] text-gray-400 capitalize">
-                            {degree.type}
+                            {degree?.type}
                         </p>
                     </div>
                     <div className="flex flex-col gap-3">

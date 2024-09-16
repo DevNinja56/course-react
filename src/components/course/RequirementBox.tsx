@@ -20,9 +20,11 @@ const RequirementBox = ({
 }: propTypes) => {
     return (
         <>
-            <p className="text-lightGrayColor mb-2 font-medium capitalize">
-                {description}
-            </p>
+            {description && (
+                <p className="text-lightGrayColor mb-2 font-medium">
+                    {description}
+                </p>
+            )}
             <div
                 className={`px-6 py-5 flex items-center justify-between w-full bg-white shadow-RequirementBox rounded-lg cursor-pointer ${isActive && 'border-green-600 border-2'} `}
             >

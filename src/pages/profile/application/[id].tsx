@@ -79,10 +79,12 @@ const UserApplicationDetails = () => {
                         <ApplicationStatusBox selectedCourse={selectedCourse} />
                     </div>
                     <div className="max-w-[1240px] mx-auto p-8 py-16">
-                        <div className="pb-12">
-                            {selectedCourse?.status?.active ===
-                                statusEnum.enroll && <SuccessfullyEnrolled />}
-                        </div>
+                        {selectedCourse?.status?.active ===
+                            statusEnum.enroll && (
+                            <div className="pb-12">
+                                <SuccessfullyEnrolled />
+                            </div>
+                        )}
                         {isError ? (
                             <div className="flex flex-col gap-2 mb-7 md:mb-10 lg:mb-16">
                                 <h1 className="flex items-center gap-2 font-bold text-lg md:text-[26px]">

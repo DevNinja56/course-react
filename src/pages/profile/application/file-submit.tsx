@@ -56,56 +56,10 @@ const FileSubmitted = () => {
     const token = getToken();
     const router = useRouter();
     const { id } = router.query;
-    const { data: getApply } = useGetApplyByIdQuery(id);
+    const { data: getApply, refetch } = useGetApplyByIdQuery(id);
 
     const [isLoading, setIsLoading] = useState(false);
     const [fullFile, setFullFile] = useState(fileUrl);
-
-    const consolidated_mark_sheets = {
-        url: [
-            getApply?.documents?.academic_certificates?.consolidated_mark_sheets
-                ?.url
-        ],
-        country:
-            getApply?.documents?.academic_certificates?.consolidated_mark_sheets
-                ?.country,
-        institute:
-            getApply?.documents?.academic_certificates?.consolidated_mark_sheets
-                ?.institute,
-        date_of_start:
-            getApply?.documents?.academic_certificates?.consolidated_mark_sheets
-                ?.date_of_start,
-        date_of_completion:
-            getApply?.documents?.academic_certificates?.consolidated_mark_sheets
-                ?.date_of_completion
-    };
-
-    const semester_mark_sheets = {
-        url: getApply?.documents?.academic_certificates?.semester_mark_sheets
-            ?.url
-    };
-
-    const provisional_certificate = {
-        url: getApply?.documents?.academic_certificates?.provisional_certificate
-            ?.url
-    };
-
-    const secondary_school = {
-        url: getApply?.documents?.academic_certificates?.secondary_school?.url
-    };
-
-    const higher_secondary_school = {
-        url: getApply?.documents?.academic_certificates?.higher_secondary_school
-            ?.url
-    };
-
-    const bachelor_degree = {
-        url: getApply?.documents?.academic_certificates?.bachelor_degree?.url
-    };
-
-    const master_degree = {
-        url: getApply?.documents?.academic_certificates?.master_degree?.url
-    };
 
     const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
         const uploadedFiles = e.target.files;
@@ -145,93 +99,12 @@ const FileSubmitted = () => {
                     url: `${BASE_URL}${API_ENDPOINTS.APPLY_DOCUMENTS}/${id}`,
                     type: 'patch',
                     body: {
-                        ...getApply,
-                        course: getApply?.course.id,
-                        user: getApply?.user.id,
+                        course: getApply?.course?.id,
+                        intake: getApply?.intake,
+                        status: getApply?.status,
+                        id: getApply?.id,
+                        user: getApply?.user?.id,
                         documents: {
-                            academic_certificates: {
-                                ...(semester_mark_sheets.url
-                                    ? {
-                                          semester_mark_sheets: {
-                                              url: semester_mark_sheets.url
-                                          }
-                                      }
-                                    : {}),
-                                ...(provisional_certificate.url
-                                    ? {
-                                          provisional_certificate: {
-                                              url: provisional_certificate.url
-                                          }
-                                      }
-                                    : {}),
-                                ...(consolidated_mark_sheets?.url?.[0]
-                                    ? {
-                                          consolidated_mark_sheets: {
-                                              ...(consolidated_mark_sheets.url
-                                                  ? {
-                                                        url: consolidated_mark_sheets
-                                                            .url?.[0]
-                                                    }
-                                                  : {}),
-                                              ...(consolidated_mark_sheets.institute
-                                                  ? {
-                                                        institute:
-                                                            consolidated_mark_sheets.institute
-                                                    }
-                                                  : {}),
-                                              ...(consolidated_mark_sheets.country
-                                                  ? {
-                                                        country:
-                                                            consolidated_mark_sheets.country
-                                                    }
-                                                  : {}),
-                                              ...(consolidated_mark_sheets.date_of_completion
-                                                  ? {
-                                                        date_of_completion:
-                                                            consolidated_mark_sheets.date_of_completion
-                                                    }
-                                                  : {}),
-                                              ...(consolidated_mark_sheets.date_of_start
-                                                  ? {
-                                                        date_of_start:
-                                                            consolidated_mark_sheets.date_of_start
-                                                    }
-                                                  : {})
-                                          }
-                                      }
-                                    : {}),
-                                ...(secondary_school.url
-                                    ? {
-                                          secondary_school: {
-                                              url: secondary_school.url
-                                          }
-                                      }
-                                    : {}),
-                                ...(higher_secondary_school.url
-                                    ? {
-                                          higher_secondary_school: {
-                                              url: higher_secondary_school.url
-                                          }
-                                      }
-                                    : {}),
-                                ...(bachelor_degree.url
-                                    ? {
-                                          bachelor_degree: {
-                                              url: bachelor_degree.url
-                                          }
-                                      }
-                                    : {}),
-                                ...(master_degree.url
-                                    ? {
-                                          master_degree: {
-                                              url: master_degree.url
-                                          }
-                                      }
-                                    : {})
-                            },
-                            professional_records: {
-                                ...getApply?.documents?.professional_records
-                            },
                             identity: {
                                 passport: {
                                     url: uploadResponse,
@@ -241,6 +114,24 @@ const FileSubmitted = () => {
                                     date_of_expiry: data.date_of_expiry,
                                     date_of_issue: data.date_of_issue
                                 }
+                            },
+                            academic_certificates:
+                                (
+                                    getApply?.documents?.academic_certificates
+                                        ?.consolidated_mark_sheets?.url ?? []
+                                ).length > 0
+                                    ? {
+                                          ...getApply?.documents
+                                              ?.academic_certificates,
+                                          consolidated_mark_sheets: {
+                                              ...getApply?.documents
+                                                  ?.academic_certificates
+                                                  ?.consolidated_mark_sheets
+                                          }
+                                      }
+                                    : {},
+                            professional_records: {
+                                ...getApply?.documents?.professional_records
                             }
                         }
                     }
@@ -248,6 +139,7 @@ const FileSubmitted = () => {
                 {
                     loading: 'Please wait...',
                     success: () => {
+                        refetch();
                         router.back();
                         return 'Form submitted successfully';
                     },

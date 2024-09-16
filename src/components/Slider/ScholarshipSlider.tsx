@@ -1,12 +1,8 @@
 import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-// import Image from 'next/image';
 import { EffectCoverflow, Pagination, Navigation } from 'swiper';
-
 import 'swiper/css';
 import 'swiper/css/effect-coverflow';
-import 'swiper/css/pagination';
-import 'swiper/css/navigation';
 import Link from 'next/link';
 import { ROUTES } from '@/config/constant';
 import { useGetScholarshipQuery } from '@/store/slices/allRequests';
@@ -20,32 +16,30 @@ function ScholarshipSlider() {
     }));
 
     return (
-        <div className="w-full print:hidden">
+        <div className="h-[40vh] md:h-[50vh] lg:h-[65vh] py-5">
             {data && data?.length > 0 && (
                 <Swiper
                     effect={'coverflow'}
                     grabCursor={true}
-                    autoplay={true}
-                    centeredSlides={true}
-                    loop={true}
-                    slidesPerView={5}
+                    centeredSlides={data?.length > 4 ? true : false}
+                    slidesPerView={data.length < 2 ? 1 : 3}
+                    spaceBetween={-30}
+                    loop={data?.length > 4 ? true : false}
                     coverflowEffect={{
                         rotate: 0,
                         stretch: 0,
-                        depth: 100,
-                        modifier: 2.5,
-                        slideShadows: true
+                        depth: 250,
+                        modifier: 1.2,
+                        slideShadows: false,
+                        scale: 1
                     }}
                     pagination={false}
                     navigation={false}
                     modules={[EffectCoverflow, Pagination, Navigation]}
-                    className="swiper_container"
+                    className={`h-full ${data.length < 2 ? 'w-4/12' : 'w-full'}`}
                 >
                     {data?.map(({ title, logo, id }) => (
-                        <SwiperSlide
-                            key={'scholarship-slider--' + title}
-                            className="relative border rounded-xl bg-white overflow-hidden"
-                        >
+                        <SwiperSlide key={'scholarship-slider--' + title}>
                             <Link
                                 href={{
                                     pathname: ROUTES.SCHOLARSHIP.replace(
@@ -56,19 +50,16 @@ function ScholarshipSlider() {
                                         scholarship_id: id
                                     }
                                 }}
-                                className="max-w-[400px]"
                             >
                                 <img
-                                    width={500}
-                                    height={500}
                                     src={
                                         logo ??
                                         '/images/Scholarships/scholarship (1) 1.png'
                                     }
                                     alt="slide_image"
-                                    className="p-3 w-auto max-w-full max-h-[calc(100%-50px)] aspect-[1/1] object-cover "
+                                    className="h-full relative flex items-end justify-center bg-cover bg-center rounded-[12px] w-full"
                                 />
-                                <h3 className="bg-gradient-to-t from-blueColor absolute start-0 bottom-0 text-2xl font-bold text-center px-2 py-3 w-full ">
+                                <h3 className="bg-gradient-to-t from-blueColor absolute start-0 bottom-0 text-base md:text-2xl font-bold text-center px-2 py-3 w-full ">
                                     {title}
                                 </h3>
                             </Link>
