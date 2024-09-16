@@ -137,7 +137,7 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                                 <div className="w-full h-courseStickyHeight static lg:sticky top-[110px] no-scrollbar mb-5 lg:mb-[450px] xl:mb-96">
                                     <div className="transition-all duration-300">
                                         <div className="flex flex-col gap-y-6 mb-16 md:mb-20">
-                                            <div className="tabs-container capitalize">
+                                            <div className="tabs-container">
                                                 <Tabs
                                                     data={[
                                                         {

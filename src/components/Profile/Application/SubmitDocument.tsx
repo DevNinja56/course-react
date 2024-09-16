@@ -90,7 +90,11 @@ const SubmitDocument = () => {
                     ...getApply,
                     course: getApply?.course?.id,
                     documents: {
-                        identity: { ...getApply?.documents?.identity },
+                        identity:
+                            (getApply?.documents?.identity?.passport?.url ?? [])
+                                .length > 0
+                                ? { ...getApply?.documents?.identity }
+                                : {},
                         academic_certificates:
                             (
                                 getApply?.documents?.academic_certificates

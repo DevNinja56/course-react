@@ -1,6 +1,6 @@
 import React from 'react';
 import DegreeLevelFilter from './DegreeLevelFilter';
-import CountriesFilter from '../CountriesFilter';
+// import CountriesFilter from '../CountriesFilter';
 import DisciplinesFilter from './DisciplinesFilter';
 import { useFilterQuery } from '@/hooks/filterQuery';
 import { useSearchedCourses } from '@/hooks/filterCourses';
@@ -10,7 +10,7 @@ import InstituteFilter from './InstituteFilter';
 import FeeSlider from './FeeSlider';
 import LocationsFilter from './Locations';
 import IntakesFilter from './Intakes';
-import RegionsFilter from '../RegionsFilter';
+// import RegionsFilter from '../RegionsFilter';
 
 export const FilterRow = () => (
     <div className="px-4">
@@ -80,13 +80,13 @@ const CourseFilter = () => {
                 )}
             </div>
             <div className="flex flex-col gap-y-6">
-                <RegionsFilter data={filters.regions} isLoading={isLoading} />
+                {/* <RegionsFilter data={filters.regions} isLoading={isLoading} />
                 <FilterRow />
                 <CountriesFilter
                     data={filters.countries}
                     isLoading={isLoading}
                 />
-                <FilterRow />
+                <FilterRow /> */}
                 <LocationsFilter
                     data={filters.locations}
                     isLoading={isLoading}
