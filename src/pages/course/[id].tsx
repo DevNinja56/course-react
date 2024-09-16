@@ -45,6 +45,7 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
     const isMasterDegree = course?.degree?.name
         ?.toLowerCase()
         ?.includes('master');
+        
 
     return (
         <>
