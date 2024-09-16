@@ -21,7 +21,7 @@ const RequirementBox = ({
     return (
         <>
             {description && (
-                <p className="text-lightGrayColor mb-2 font-medium capitalize">
+                <p className="text-lightGrayColor mb-2 font-medium">
                     {description}
                 </p>
             )}
