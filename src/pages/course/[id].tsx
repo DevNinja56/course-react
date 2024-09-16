@@ -585,26 +585,25 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                                                 </p>
                                             </div>
                                         </div>
-                                        {!isUkCourse && !isMasterDegree && (
-                                            <div className="flex items-center gap-4 pl-5 border-opacity-50 py-4">
-                                                <FaCalendar className="h-8 w-8 text-blueColor" />
-                                                <div className="flex flex-col gap-[6px]">
-                                                    <p className="font-bold text-base text-mainTextColor">
-                                                        Available Intakes
-                                                    </p>
-                                                    <ul className="text-lightGrayColor text-base">
-                                                        {generateIntakes(
-                                                            course.intakes,
-                                                            1
-                                                        ).map((intake) => (
-                                                            <li key={intake}>
-                                                                {intake}
-                                                            </li>
-                                                        ))}
-                                                    </ul>
-                                                </div>
+
+                                        <div className="flex items-center gap-4 pl-5 border-opacity-50 py-4">
+                                            <FaCalendar className="h-8 w-8 text-blueColor" />
+                                            <div className="flex flex-col gap-[6px]">
+                                                <p className="font-bold text-base text-mainTextColor">
+                                                    Available Intakes
+                                                </p>
+                                                <ul className="text-lightGrayColor text-base">
+                                                    {generateIntakes(
+                                                        course.intakes,
+                                                        1
+                                                    ).map((intake) => (
+                                                        <li key={intake}>
+                                                            {intake}
+                                                        </li>
+                                                    ))}
+                                                </ul>
                                             </div>
-                                        )}
+                                        </div>
                                     </div>
                                 </div>
                                 <div className="flex flex-col md:flex-row items-center w-full gap-3 md:gap-5 lg:hidden">
