@@ -87,8 +87,11 @@ const SubmitDocument = () => {
                 url: `${BASE_URL}${API_ENDPOINTS.APPLY_DOCUMENTS}/${id}`,
                 type: 'patch',
                 body: {
-                    ...getApply,
                     course: getApply?.course?.id,
+                    intake: getApply?.intake,
+                    status: getApply?.status,
+                    id: getApply?.id,
+                    user: getApply?.user?.id,
                     documents: {
                         identity:
                             (getApply?.documents?.identity?.passport?.url ?? [])
@@ -114,8 +117,7 @@ const SubmitDocument = () => {
                             ...getApply?.documents?.professional_records,
                             [fileType]: { url: response?.[0] }
                         }
-                    },
-                    user: getApply?.user?.id
+                    }
                 }
             }),
             {
