@@ -59,9 +59,7 @@ export const useCurrency = () => {
 
     function getSingleRate(code?: string): currencyRate | undefined {
         return state.rate_list.find(
-            (rate) =>
-                rate.currency.toLowerCase() === code?.toLowerCase() ||
-                state.base_code
+            (rate) => rate.currency.toLowerCase() === code?.toLowerCase()
         );
     }
 
