@@ -31,8 +31,8 @@ const BankStatementCalculate = () => {
 
     const isLiveAustralia = institute.country.name
         .toLowerCase()
-        .includes('australia');
-    const isLiveLondon = institute.location.toLowerCase().includes('london');
+        ?.includes('australia');
+    const isLiveLondon = institute.location.toLowerCase()?.includes('london');
 
     const livingCost = isLiveAustralia ? 29710 : isLiveLondon ? 12006 : 9207; // Update living costs based on provided formulas
     const travelingCost = isLiveAustralia ? 2000 : 0; // Traveling cost is only applicable for Australia
@@ -217,8 +217,8 @@ export default BankStatementCalculate;
 //     const { setCurrencyValue } = useCurrency();
 //     const isLiveAustralia = institute.country.name
 //         .toLowerCase()
-//         .includes('australia');
-//     const isLiveLondon = institute.location.toLowerCase().includes('london');
+//         ?.includes('australia');
+//     const isLiveLondon = institute.location.toLowerCase()?.includes('london');
 //     const livingCost = isLiveAustralia ? 24505 : isLiveLondon ? 12006 : 9207;
 //     const travelingCost = 2000;
 //     const oshc = 700 * (+duration / 12);

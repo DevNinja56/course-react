@@ -35,7 +35,7 @@ const LocationsFilter: React.FC<propsType> = ({ data, isLoading }) => {
                                 !!location &&
                                 location
                                     .toLowerCase()
-                                    .includes(search.toLowerCase())
+                                    ?.includes(search.toLowerCase())
                         )
                         .map(({ location: name }) => (
                             <FilterCheckBox

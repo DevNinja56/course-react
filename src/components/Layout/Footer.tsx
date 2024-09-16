@@ -12,7 +12,7 @@ const Footer = () => {
     const { updateModal } = useUi();
     return (
         <footer className=" w-full flex justify-center flex-col print:hidden">
-            {!path.includes(ROUTES.APPLY) && (
+            {!path?.includes(ROUTES.APPLY) && (
                 <div className="translate-y-20 transition-all duration-300 object-cover px-5 md:px-[50px] lg:px-0 relative container mx-auto ">
                     <div className="z-10 w-full flex flex-col md:flex-row items-center font-black justify-between relative p-8 md:p-12 lg:p-24 ">
                         <img
@@ -41,7 +41,7 @@ const Footer = () => {
             )}
             <div
                 className={`bg-footerBgColor ${
-                    path.includes(ROUTES.APPLY) ? 'pt-8' : 'pt-32'
+                    path?.includes(ROUTES.APPLY) ? 'pt-8' : 'pt-32'
                 }`}
             >
                 <div className="w-full pb-10">

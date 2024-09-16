@@ -35,7 +35,7 @@ const InstituteFilter: React.FC<propsType> = ({ data, isLoading }) => {
                                 !!name &&
                                 name
                                     .toLowerCase()
-                                    .includes(search.toLowerCase())
+                                    ?.includes(search.toLowerCase())
                         )
                         .map(({ institute: name }, i) => (
                             <FilterCheckBox
