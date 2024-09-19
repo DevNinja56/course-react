@@ -1,3 +1,4 @@
+/* eslint-disable no-debugger */
 import { useCurrency } from '@/hooks/currency';
 
 interface InitialDepositType {
@@ -19,6 +20,7 @@ export const useCalculate = () => {
         isNumber = false,
         currency_code
     }: InitialDepositType): string | number {
+        debugger;
         const rate = getSingleRate(currency_code ?? base_code) ?? {
             base_rate: 1
         };
@@ -63,8 +65,10 @@ export const useCalculate = () => {
                       rate ? base_code : currency_code
                   );
         }
-
-        return isNumber ? 0 : initialDeposit;
+        debugger;
+        return isNumber
+            ? 0
+            : (initialDeposit ?? initialDepositVal ?? 'No Value');
     }
 
     return { initialDeposit };
