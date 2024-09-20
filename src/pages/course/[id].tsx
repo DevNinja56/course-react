@@ -8,7 +8,7 @@ import { API_ENDPOINTS } from '@/config/Api_EndPoints';
 import { ROUTES } from '@/config/constant';
 import { useUi } from '@/hooks/user-interface';
 import { modalType } from '@/store/slices/ui.slice';
-import { singleCourseType } from '@/types';
+import { scholarshipType, singleCourseType } from '@/types';
 import { getSsrRequest } from '@/utils/ssrRequest';
 import { GetServerSideProps } from 'next';
 import Link from 'next/link';
@@ -33,8 +33,9 @@ const InnerHtml = dynamic(() => import('@/components/InnerHtml'), {
 
 const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
     const { updateModal } = useUi();
-    const { setCurrencyValue, getSingleRate, base_code } = useCurrency();
-    const { initialDeposit } = useCalculate();
+    const { setCurrencyValue, getSingleRate, base_code, currentCurrency } =
+        useCurrency();
+    const { initialDeposit: calculateDeposit } = useCalculate();
     const isSameCurrency = base_code === course.feeCurrency;
     const rate = isSameCurrency ? null : getSingleRate(course.feeCurrency);
     const isUkCourse =
@@ -45,7 +46,35 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
     const isMasterDegree = course?.degree?.name
         ?.toLowerCase()
         ?.includes('master');
-        
+
+    const scholarship: scholarshipType | undefined = course?.scholarship?.find(
+        (scholarship) => scholarship.type === 'guaranteed'
+    );
+    const scholarshipGuaranteedAmount = scholarship?.amount
+        ? parseInt(scholarship.amount)
+        : 0;
+
+    const scholarshipAmount =
+        course?.tuitionFee * (scholarshipGuaranteedAmount / 100);
+
+    const [{ amount: initialDeposit }] = course.initialDeposit;
+
+    const initialDepositValue = calculateDeposit({
+        initialDeposit: scholarshipAmount
+            ? initialDeposit.replace('G', 'N')
+            : initialDeposit,
+        tuitionFee: course?.tuitionFee,
+        scholarship: scholarshipGuaranteedAmount.toString(),
+        isNumber: true
+    });
+
+    const isLiveAustralia = course?.institute.country.name
+        .toLowerCase()
+        ?.includes('australia');
+
+    const currency = isLiveAustralia ? 'AUD' : 'GBP';
+
+    const { base_rate } = getSingleRate(currency) ?? { base_rate: 1 };
 
     return (
         <>
@@ -313,30 +342,11 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                                                                     </h3>
 
                                                                     <p className="text-sm md:text-base">
-                                                                        {initialDeposit(
-                                                                            {
-                                                                                initialDeposit:
-                                                                                    course
-                                                                                        .initialDeposit?.[0]
-                                                                                        .amount,
-                                                                                tuitionFee:
-                                                                                    rate
-                                                                                        ? +rate.base_rate *
-                                                                                          +course.tuitionFee
-                                                                                        : course.tuitionFee,
-                                                                                scholarship:
-                                                                                    course?.scholarship.filter(
-                                                                                        (
-                                                                                            s
-                                                                                        ) =>
-                                                                                            s.type ===
-                                                                                            'guaranteed'
-                                                                                    )?.[0]
-                                                                                        ?.amount ??
-                                                                                    0,
-                                                                                currency_code:
-                                                                                    course.feeCurrency
-                                                                            }
+                                                                        {setCurrencyValue(
+                                                                            +initialDepositValue *
+                                                                                +base_rate,
+                                                                            currentCurrency?.currency ??
+                                                                                currency
                                                                         )}
                                                                     </p>
 
