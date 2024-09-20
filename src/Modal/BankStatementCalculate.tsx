@@ -2,7 +2,7 @@ import { useCurrency } from '@/hooks/currency';
 import { useCalculate } from '@/hooks/initial-deposit-calculate';
 import { useUi } from '@/hooks/user-interface';
 import { scholarshipType, singleCourseType } from '@/types';
-import React from 'react';
+import React, { useMemo } from 'react';
 import { IoMdClose } from 'react-icons/io';
 
 const BankStatementCalculate = () => {
@@ -17,9 +17,16 @@ const BankStatementCalculate = () => {
         modalState?.scholarship?.find(
             (scholarship) => scholarship.type === 'guaranteed'
         );
-    const scholarshipGuaranteedAmount = scholarship?.amount
-        ? parseInt(scholarship.amount)
-        : 0;
+    const scholarshipGuaranteedAmount = useMemo(() => {
+        let amount = '0';
+
+        scholarship?.isAmount
+            ? (amount = String(scholarship.amount))
+            : (amount = String(
+                  +(scholarship?.amount ?? 0) * modalState?.tuitionFee
+              ));
+        return amount;
+    }, [modalState]);
 
     const {
         tuitionFee,
@@ -34,10 +41,10 @@ const BankStatementCalculate = () => {
         ?.includes('australia');
     const isLiveLondon = institute.location.toLowerCase()?.includes('london');
 
-    const livingCost = isLiveAustralia ? 29710 : isLiveLondon ? 12006 : 9207; // Update living costs based on provided formulas
+    const livingCost = isLiveAustralia ? 29710 : isLiveLondon ? 13347 : 10224; // Update living costs based on provided formulas
     const travelingCost = isLiveAustralia ? 2000 : 0; // Traveling cost is only applicable for Australia
     const oshc = isLiveAustralia ? 750 * Math.ceil(+duration / 12) : 0; // OSHC is only applicable for Australia
-    const scholarshipAmount = tuitionFee * (scholarshipGuaranteedAmount / 100);
+    const scholarshipAmount = parseInt(scholarshipGuaranteedAmount);
 
     const total = isLiveAustralia
         ? tuitionFee + livingCost + travelingCost + oshc - scholarshipAmount
@@ -103,13 +110,7 @@ const BankStatementCalculate = () => {
                           currentCurrency?.currency ?? currency
                       )
                   },
-                  {
-                      name: 'Statement Requirement by University',
-                      value: setCurrencyValue(
-                          total * +base_rate,
-                          currentCurrency?.currency ?? currency
-                      )
-                  },
+
                   {
                       name: 'Initial Deposit',
                       value: `(${setCurrencyValue(initialDepositValue * +base_rate, currentCurrency?.currency ?? currency)})`
@@ -123,13 +124,6 @@ const BankStatementCalculate = () => {
                   }
               ]
             : [
-                  {
-                      name: 'Statement Requirement by University',
-                      value: setCurrencyValue(
-                          total * +base_rate,
-                          currentCurrency?.currency ?? currency
-                      )
-                  },
                   {
                       name: 'Initial Deposit',
                       value: `(${setCurrencyValue(initialDepositValue * +base_rate, currentCurrency?.currency ?? currency)})`
@@ -156,8 +150,9 @@ const BankStatementCalculate = () => {
                 Bank Statement Calculator
             </span>
             <p className="font-medium text-lg text-darkGrayColor text-center">
-                Lorem Ipsum is simply dummy text of the printing and type
-                setting industry.
+                Our bank statement calculator is aligned with the UKVI&lsquo;s
+                financial evidence requirements, ensuring accurate calculations
+                for your UK study visa.
             </p>
             <div className="mt-4 overflow-hidden rounded">
                 <table className="border table w-full">
@@ -219,7 +214,7 @@ export default BankStatementCalculate;
 //         .toLowerCase()
 //         ?.includes('australia');
 //     const isLiveLondon = institute.location.toLowerCase()?.includes('london');
-//     const livingCost = isLiveAustralia ? 24505 : isLiveLondon ? 12006 : 9207;
+//     const livingCost = isLiveAustralia ? 24505 : isLiveLondon ? 13347 : 10224;
 //     const travelingCost = 2000;
 //     const oshc = 700 * (+duration / 12);
 //     const total = tuitionFee + livingCost + travelingCost + oshc;
@@ -347,7 +342,7 @@ export default BankStatementCalculate;
 // Minus
 // Scholarship Amount (Scholarship amount only be deducted if the type of scholarship is “Guaranteed”)
 // Plus
-// One Year Living Expenses (Living expenses are GBP 12006 if the course is offered in London and GBP 9207 if the course is offered outside of London. This will be linked to the campus location of the course. If it is London, add GBP 12006 in the Bank Statement Calculation, if it is other than London, add GBP 9207 in the Bank Statement Calculation.
+// One Year Living Expenses (Living expenses are GBP 13347 if the course is offered in London and GBP 10224 if the course is offered outside of London. This will be linked to the campus location of the course. If it is London, add GBP 13347 in the Bank Statement Calculation, if it is other than London, add GBP 10224 in the Bank Statement Calculation.
 // Minus
 // Initial Deposit
 // Equals To:

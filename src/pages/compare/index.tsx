@@ -5,7 +5,7 @@ import { InstituteLogoImage } from '@/components/compare/InstituteLogo';
 import ScholarshipSlider from '@/components/Slider/ScholarshipSlider';
 import { FiPrinter } from 'react-icons/fi';
 import { GetServerSideProps } from 'next';
-import { singleCourseType } from '@/types';
+import { scholarshipType, singleCourseType } from '@/types';
 import { API_ENDPOINTS } from '@/config/Api_EndPoints';
 import { getSsrRequest } from '@/utils/ssrRequest';
 import { getMonths } from '@/utils/get-months';
@@ -77,6 +77,15 @@ const Compare = ({ data }: { data?: singleCourseType }) => {
             tuitionFee * +(rate?.base_rate ?? 1),
             base_code ?? feeCurrency
         );
+    };
+
+    const scholarshipAmount = (
+        scholarship: scholarshipType,
+        tuitionFee: number
+    ) => {
+        return scholarship.isAmount
+            ? String(scholarship.amount)
+            : String(+scholarship.amount * tuitionFee);
     };
 
     const state = [
@@ -218,8 +227,10 @@ const Compare = ({ data }: { data?: singleCourseType }) => {
                               depositAmount:
                                   first?.course.initialDeposit[0].amount,
                               tuitionFee: first?.course.tuitionFee,
-                              scholarshipAmount:
-                                  first?.course.scholarship?.[0]?.amount ?? 0,
+                              scholarshipAmount: scholarshipAmount(
+                                  first?.course.scholarship[0],
+                                  first?.course.tuitionFee
+                              ),
                               feeCurrency: first?.course.feeCurrency
                           })
                         : null,
@@ -228,8 +239,10 @@ const Compare = ({ data }: { data?: singleCourseType }) => {
                               depositAmount:
                                   second?.course.initialDeposit[0].amount,
                               tuitionFee: second?.course.tuitionFee,
-                              scholarshipAmount:
-                                  second?.course.scholarship?.[0]?.amount ?? 0,
+                              scholarshipAmount: scholarshipAmount(
+                                  second?.course.scholarship[0],
+                                  second?.course.tuitionFee
+                              ),
                               feeCurrency: second?.course.feeCurrency
                           })
                         : null,
@@ -238,8 +251,10 @@ const Compare = ({ data }: { data?: singleCourseType }) => {
                               depositAmount:
                                   third?.course.initialDeposit[0].amount,
                               tuitionFee: third?.course.tuitionFee,
-                              scholarshipAmount:
-                                  third?.course.scholarship?.[0]?.amount ?? 0,
+                              scholarshipAmount: scholarshipAmount(
+                                  third?.course.scholarship[0],
+                                  third?.course.tuitionFee
+                              ),
                               feeCurrency: third?.course.feeCurrency
                           })
                         : null
