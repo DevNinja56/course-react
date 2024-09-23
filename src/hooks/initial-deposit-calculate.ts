@@ -23,7 +23,6 @@ export const useCalculate = () => {
         const rate = getSingleRate(currency_code ?? base_code) ?? {
             base_rate: 1
         };
-        debugger;
 
         let initialDeposit = initialDepositVal;
 
@@ -34,9 +33,10 @@ export const useCalculate = () => {
 
         if (!isNaN(+initialDeposit)) {
             const amount = +initialDeposit * +rate.base_rate;
+
             return isNumber
                 ? amount
-                : setCurrencyValue(amount, currency_code ?? base_code);
+                : setCurrencyValue(amount, rate ? base_code : currency_code);
         }
 
         const matches = initialDeposit?.match(/^\{([1-9][0-9]?|100)%,(N|G)\}$/);
@@ -51,6 +51,7 @@ export const useCalculate = () => {
             } else if (option === 'N') {
                 calculatedAmount = (tuitionFee - scholarshipAmount) * baseRate;
             }
+
             return isNumber
                 ? calculatedAmount
                 : setCurrencyValue(
@@ -58,7 +59,7 @@ export const useCalculate = () => {
                       rate ? base_code : currency_code
                   );
         }
-        debugger;
+
         return isNumber
             ? 0
             : (initialDeposit ??
