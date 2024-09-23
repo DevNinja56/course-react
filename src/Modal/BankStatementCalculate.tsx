@@ -17,9 +17,12 @@ const BankStatementCalculate = () => {
         modalState?.scholarship?.find(
             (scholarship) => scholarship.type === 'guaranteed'
         );
-    const scholarshipGuaranteedAmount = scholarship?.amount
+
+    const scholarshipGuaranteedAmount = scholarship?.isAmount
         ? parseInt(scholarship.amount)
-        : 0;
+        : scholarship
+          ? parseInt(scholarship.percentage)
+          : 0;
 
     const {
         tuitionFee,
