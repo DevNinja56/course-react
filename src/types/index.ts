@@ -67,12 +67,14 @@ export type scholarshipType = {
     name: string;
     image: string;
     amount: string;
+    percentage: string;
     description: string;
     type: string;
     intakeYear: string;
     applicable: string;
     startDate: string;
     endDate: string;
+    isAmount: boolean;
     institute: instituteType;
     degree: degreeType[];
     country: countryType;

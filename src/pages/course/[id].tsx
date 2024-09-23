@@ -107,7 +107,10 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                                 height={375}
                                 width={1240}
                                 alt="courseDetail"
-                                src="/images/CourseDetail/courseDetailMainTablet.png"
+                                src={
+                                    course?.image ??
+                                    '/images/CourseDetail/courseDetailMain.png'
+                                }
                                 className="z-20 h-full w-full lg:hidden block"
                                 // priority
                             />
