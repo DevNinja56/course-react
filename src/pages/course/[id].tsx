@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import Button from '@/components/Button';
 import FavoriteButton from '@/components/Button/FavoriteButton';
 import ScreenLoader from '@/components/Loader/ScreenLoader';
@@ -45,7 +45,16 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
     const isMasterDegree = course?.degree?.name
         ?.toLowerCase()
         ?.includes('master');
-        
+    const scholarshipAmount = useMemo(() => {
+        let amount = '0';
+        const scholarship = course?.scholarship.filter(
+            (s) => s.type === 'guaranteed'
+        )?.[0];
+        scholarship.isAmount
+            ? (amount = String(scholarship.amount))
+            : (amount = String(+scholarship.amount * course.tuitionFee));
+        return amount;
+    }, [course]);
 
     return (
         <>
@@ -78,7 +87,10 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                                 height={375}
                                 width={1240}
                                 alt="courseDetail"
-                                src="/images/CourseDetail/courseDetailMainTablet.png"
+                                src={
+                                    course?.image ??
+                                    '/images/CourseDetail/courseDetailMain.png'
+                                }
                                 className="z-20 h-full w-full lg:hidden block"
                                 // priority
                             />
@@ -325,15 +337,7 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                                                                                           +course.tuitionFee
                                                                                         : course.tuitionFee,
                                                                                 scholarship:
-                                                                                    course?.scholarship.filter(
-                                                                                        (
-                                                                                            s
-                                                                                        ) =>
-                                                                                            s.type ===
-                                                                                            'guaranteed'
-                                                                                    )?.[0]
-                                                                                        ?.amount ??
-                                                                                    0,
+                                                                                    scholarshipAmount ?? "0",
                                                                                 currency_code:
                                                                                     course.feeCurrency
                                                                             }

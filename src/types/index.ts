@@ -67,6 +67,8 @@ export type scholarshipType = {
     name: string;
     image: string;
     amount: string;
+    isAmount: boolean;
+    percentage: string;
     description: string;
     type: string;
     intakeYear: string;

@@ -50,18 +50,27 @@ export function generateIntakes(
         const intakeYear: number =
             monthDiff < 0 ? currentYear + 1 : currentYear;
 
-        // Calculate the month for the intake
-        // const intakeMonth: number = monthDiff < 0 ? 12 + monthDiff : monthIndex;
-
         for (let i = 0; i < futureYears; i++) {
-            intakes.push(`${fullMonths[monthIndex]} ${intakeYear + i}`);
+            const year = intakeYear + i;
+            // Skip current month and current year if month is in the present month
+            if (year === currentYear && monthIndex === currentMonth) continue;
+            intakes.push(`${fullMonths[monthIndex]} ${year}`);
         }
     });
 
+    // Sort the intakes by year and month
     intakes.sort((a, b) => {
-        const yearA: number = parseInt(a.split(' ')[1]);
-        const yearB: number = parseInt(b.split(' ')[1]);
-        return yearA - yearB;
+        const [monthA, yearA] = a.split(' ');
+        const [monthB, yearB] = b.split(' ');
+
+        // Compare by year first
+        const yearDiff = parseInt(yearA) - parseInt(yearB);
+        if (yearDiff !== 0) return yearDiff;
+
+        // If years are the same, compare by month index
+        const monthIndexA = fullMonths.findIndex(m => m === monthA);
+        const monthIndexB = fullMonths.findIndex(m => m === monthB);
+        return monthIndexA - monthIndexB;
     });
 
     return intakes;

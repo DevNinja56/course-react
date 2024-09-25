@@ -343,7 +343,7 @@ const StartApplication = () => {
                                                     e?.value ?? ''
                                                 );
                                             }}
-                                            isDisabled={!selectedIntake}
+                                            isDisabled={!selectedIntake || selectedIntake.length === 0}
                                             styles={{
                                                 control: (base: {
                                                     [key: string]: unknown;
