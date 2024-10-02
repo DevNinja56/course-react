@@ -85,7 +85,7 @@ const Compare = ({ data }: { data?: singleCourseType }) => {
     ) => {
         return scholarship?.isAmount
             ? String(scholarship?.amount ?? 0)
-            : String((+scholarship?.amount * tuitionFee)??0);
+            : String(scholarship?.amount ? +scholarship?.amount * tuitionFee : 0);
     };
 
     const state = [

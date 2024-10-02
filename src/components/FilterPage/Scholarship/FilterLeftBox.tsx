@@ -1,15 +1,11 @@
 import React from 'react';
 import DegreeLevelFilter from '../Course/DegreeLevelFilter';
-import CountriesFilter from '../CountriesFilter';
 import ScholarshipTypeFilter from './ScholarshipTypeFilter';
-// import ScholarshipMonthFilter from './ScholarshipMonthFilter';
-// import ScholarshipYearFilter from './ScholarshipYearFilter';
-// import DisciplinesFilter from '../Course/DisciplinesFilter';
 import { useFilterQuery } from '@/hooks/filterQuery';
 import { FilteredButton } from '../FilteredButton';
 import InstituteFilter from '../Course/InstituteFilter';
-import RegionsFilter from '../RegionsFilter';
 import { useSearchedScholarship } from '@/hooks/filterScholarship';
+import FilterAccordion from '@/components/FilterAccordion'; 
 
 export const FilterRow = () => (
     <div className="px-4">
@@ -31,7 +27,7 @@ const ScholarshipFilter = () => {
     };
 
     return (
-        <div className="rounded-[15px] w-[24%] py-4 pb-5 max-h-headerStickyHeight overflow-y-auto border-[3px] border-[#eaf2ff] hidden lg:block sticky top-[110px] no-scrollbar">
+        <div className="rounded-[15px] w-[24%] py-4 pb-5 max-h-headerStickyHeight overflow-y-auto border-[3px] border-[#eaf2ff] hidden lg:block sticky top-[110px] no-scrollbar bg-white">
             <div>
                 <div className="flex justify-between items-center mb-8 px-4">
                     <h1 className="text-[23px] text-mainTextColor font-bold">
@@ -73,29 +69,22 @@ const ScholarshipFilter = () => {
                     </div>
                 )}
             </div>
-            <div className="flex flex-col gap-y-6">
-                <RegionsFilter data={filters.regions} isLoading={isLoading} />
-                <FilterRow />
-                <CountriesFilter
-                    data={filters.countries}
-                    isLoading={isLoading}
-                />
-                <FilterRow />
-                <InstituteFilter
-                    data={filters.institutes}
-                    isLoading={isLoading}
-                />
-                {/* <DisciplinesFilter
-                    data={filters.disciplines}
-                    isLoading={isLoading}
-                /> */}
-                <FilterRow />
-                <DegreeLevelFilter
-                    data={filters.degrees}
-                    isLoading={isLoading}
-                />
-                <FilterRow />
-                <ScholarshipTypeFilter />
+            <div className="flex flex-col">
+                {/* <FilterAccordion title="Regions">
+                    <RegionsFilter data={filters.regions} isLoading={isLoading} />
+                </FilterAccordion>
+                <FilterAccordion title="Countries">
+                    <CountriesFilter data={filters.countries} isLoading={isLoading} />
+                </FilterAccordion> */}
+                <FilterAccordion title="Institutes">
+                    <InstituteFilter data={filters.institutes} isLoading={isLoading} />
+                </FilterAccordion>
+                <FilterAccordion title="Degree Levels">
+                    <DegreeLevelFilter data={filters.degrees} isLoading={isLoading} />
+                </FilterAccordion>
+                <FilterAccordion title="Scholarship Type">
+                    <ScholarshipTypeFilter />
+                </FilterAccordion>
             </div>
         </div>
     );

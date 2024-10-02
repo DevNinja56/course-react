@@ -53,7 +53,11 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
         )?.[0];
         scholarship?.isAmount
             ? (amount = String(scholarship?.amount ?? 0))
-            : (amount = String(+scholarship?.amount * course?.tuitionFee ?? 0));
+            : (amount = String(
+                  scholarship?.amount
+                      ? +scholarship?.amount * course?.tuitionFee
+                      : 0
+              ));
         return amount;
     }, [course]);
 
@@ -547,7 +551,8 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                                                         rate
                                                             ? base_code
                                                             : course.feeCurrency
-                                                    )} /year
+                                                    )}{' '}
+                                                    /year
                                                 </p>
                                             </div>
                                         </div>

@@ -6,6 +6,7 @@ import { modalType } from '@/store/slices/ui.slice';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
+import { SiSemanticscholar } from 'react-icons/si';
 
 interface modalProps {
     setShowSideBar: (show: boolean) => void;
@@ -121,6 +122,28 @@ const Sidebar = ({ setShowSideBar }: modalProps) => {
                                     }`}
                                 >
                                     Discover
+                                </p>
+                            </div>
+                        </Link>
+                        <Link href={ROUTES.FILTER_SCHOLARSHIP}>
+                            <div className="flex items-center gap-x-[10px]">
+                                <SiSemanticscholar
+                                    className={`font-semibold text-3xl ${
+                                        router.pathname ===
+                                        ROUTES.FILTER_SCHOLARSHIP
+                                            ? 'text-blueColor'
+                                            : 'text-textBlackColor'
+                                    }`}
+                                />
+                                <p
+                                    className={`font-semibold ${
+                                        router.pathname ===
+                                        ROUTES.FILTER_SCHOLARSHIP
+                                            ? 'text-blueColor'
+                                            : 'text-textBlackColor'
+                                    }`}
+                                >
+                                    Scholarship
                                 </p>
                             </div>
                         </Link>

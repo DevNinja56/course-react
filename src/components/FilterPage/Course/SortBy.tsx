@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { LuArrowUpWideNarrow, LuArrowDownWideNarrow } from 'react-icons/lu';
 import { FaArrowUpLong, FaArrowDownLong } from 'react-icons/fa6';
 import { FiChevronDown } from 'react-icons/fi';
-import FilterSideBar from '../FilterSideBar/ScholarshipFilterSideBar';
+import FilterSideBar from '@/components/FilterSideBar/CourseFilterSideBar';
 // import Image from 'next/image';
 
 export const sortState = {
