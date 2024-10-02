@@ -1,7 +1,7 @@
 // import Image from 'next/image';
 import SearchBox from '@/components/Home/SearchBox';
 import ScholarshipSlider from '@/components/Slider/ScholarshipSlider';
-import CategoriesSection from '@/components/Home/CategoriesSection';
+import DisciplineSection from '@/components/Home/DisciplineSection';
 import Events from '@/components/Events';
 
 const Home = () => {
@@ -29,7 +29,7 @@ const Home = () => {
                     <div className="flex flex-col px-6 md:px-12 lg:px-0 lg:pl-4 lg:pr-40 xl:pr-12 pt-16 lg:pt-32">
                         <div className="pr-0 lg:pr-60 mb-5">
                             <h1 className="text-mainTextColor text-[32px] md:text-[40px] xl:text-[45px] font-black mb-2">
-                                World&lsquo;s Largest Course Search Platform
+                                UK&lsquo;s Largest Course Search Platform
                             </h1>
                             <p className="text-aboutUsTextColor text-base leading-6 aboutUsTextColor mb-5 font-normal">
                                 Make your university application stress free and
@@ -88,7 +88,7 @@ const Home = () => {
                     src="/images/Home/topCategoryRound2.svg"
                     // priority
                 />
-                <CategoriesSection />
+                <DisciplineSection />
             </div>
             <div className="w-full py-8 md:py-12 lg:py-16">
                 <div className="container mx-auto flex flex-col items-center overflow-hidden">

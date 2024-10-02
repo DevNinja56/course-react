@@ -27,6 +27,7 @@ import LanguageRequirements from '@/components/course/LanguageRequirements';
 import { generateIntakes } from '@/utils/generateIntakes';
 import Card from '@/components/Scholarship/Card';
 import dynamic from 'next/dynamic';
+import Image from 'next/image';
 const InnerHtml = dynamic(() => import('@/components/InnerHtml'), {
     ssr: false
 });
@@ -47,12 +48,12 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
         ?.includes('master');
     const scholarshipAmount = useMemo(() => {
         let amount = '0';
-        const scholarship = course?.scholarship.filter(
+        const scholarship = course?.scholarship?.filter(
             (s) => s.type === 'guaranteed'
         )?.[0];
-        scholarship.isAmount
-            ? (amount = String(scholarship.amount))
-            : (amount = String(+scholarship.amount * course.tuitionFee));
+        scholarship?.isAmount
+            ? (amount = String(scholarship?.amount ?? 0))
+            : (amount = String(+scholarship?.amount * course?.tuitionFee ?? 0));
         return amount;
     }, [course]);
 
@@ -230,24 +231,43 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                                                             title: 'Tuitions Fee',
                                                             element: (
                                                                 <div className="flex flex-col gap-4 items-start max-h-[70vh] overflow-auto customScroll px-2">
-                                                                    <h3 className="text-black text-lg md:text-2xl font-bold">
-                                                                        Tuitions
-                                                                        Fee
-                                                                    </h3>
-                                                                    <p className="text-sm md:text-base">
-                                                                        {setCurrencyValue(
-                                                                            isSameCurrency &&
-                                                                                !rate
-                                                                                ? course.tuitionFee
-                                                                                : course.tuitionFee *
-                                                                                      (rate?.base_rate
-                                                                                          ? +rate?.base_rate
-                                                                                          : 1),
-                                                                            rate
-                                                                                ? base_code
-                                                                                : course.feeCurrency
-                                                                        )}
-                                                                    </p>
+                                                                    <div className="border py-2 px-4 flex gap-4 rounded-md items-center">
+                                                                        <span>
+                                                                            <Image
+                                                                                src="/images/price-icon.png"
+                                                                                alt="uk"
+                                                                                height={
+                                                                                    40
+                                                                                }
+                                                                                width={
+                                                                                    40
+                                                                                }
+                                                                            />
+                                                                        </span>
+                                                                        <span className="flex flex-col">
+                                                                            <span className="text-xl font-bold">
+                                                                                {setCurrencyValue(
+                                                                                    isSameCurrency &&
+                                                                                        !rate
+                                                                                        ? course.tuitionFee
+                                                                                        : course.tuitionFee *
+                                                                                              (rate?.base_rate
+                                                                                                  ? +rate?.base_rate
+                                                                                                  : 1),
+                                                                                    rate
+                                                                                        ? base_code
+                                                                                        : course.feeCurrency
+                                                                                )}{' '}
+                                                                                <span className="text-sm font-normal">
+                                                                                    /Year
+                                                                                </span>
+                                                                            </span>
+                                                                            <span className="text-sm">
+                                                                                Tuition
+                                                                                Fee
+                                                                            </span>
+                                                                        </span>
+                                                                    </div>
                                                                     {course?.textAmount && (
                                                                         <div className="text-sm md:text-base">
                                                                             <InnerHtml
@@ -319,30 +339,50 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                                                             title: 'Initial Deposit',
                                                             element: (
                                                                 <div className="flex flex-col gap-4 items-start">
-                                                                    <h3 className="text-black text-lg md:text-2xl font-bold">
-                                                                        Initial
-                                                                        Deposit
-                                                                    </h3>
-
-                                                                    <p className="text-sm md:text-base">
-                                                                        {initialDeposit(
-                                                                            {
-                                                                                initialDeposit:
-                                                                                    course
-                                                                                        .initialDeposit?.[0]
-                                                                                        .amount,
-                                                                                tuitionFee:
-                                                                                    rate
-                                                                                        ? +rate.base_rate *
-                                                                                          +course.tuitionFee
-                                                                                        : course.tuitionFee,
-                                                                                scholarship:
-                                                                                    scholarshipAmount ?? "0",
-                                                                                currency_code:
-                                                                                    course.feeCurrency
-                                                                            }
-                                                                        )}
-                                                                    </p>
+                                                                    <div className="border py-2 px-4 flex gap-4 rounded-md items-center">
+                                                                        <span>
+                                                                            <Image
+                                                                                src="/images/price-icon.png"
+                                                                                alt="uk"
+                                                                                height={
+                                                                                    40
+                                                                                }
+                                                                                width={
+                                                                                    40
+                                                                                }
+                                                                            />
+                                                                        </span>
+                                                                        <span className="flex flex-col">
+                                                                            <span className="text-xl font-bold">
+                                                                                {initialDeposit(
+                                                                                    {
+                                                                                        initialDeposit:
+                                                                                            course
+                                                                                                .initialDeposit?.[0]
+                                                                                                .amount,
+                                                                                        tuitionFee:
+                                                                                            rate
+                                                                                                ? +rate.base_rate *
+                                                                                                  +course.tuitionFee
+                                                                                                : course.tuitionFee,
+                                                                                        scholarship:
+                                                                                            scholarshipAmount ??
+                                                                                            '0',
+                                                                                        currency_code:
+                                                                                            course.feeCurrency
+                                                                                    }
+                                                                                )}{' '}
+                                                                                <span className="text-sm font-normal">
+                                                                                    /One
+                                                                                    Time
+                                                                                </span>
+                                                                            </span>
+                                                                            <span className="text-sm">
+                                                                                Initial
+                                                                                Deposit
+                                                                            </span>
+                                                                        </span>
+                                                                    </div>
 
                                                                     {course?.textInitialDeposit && (
                                                                         <div className="text-sm md:text-base">
@@ -455,10 +495,10 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                                                     target="_blank"
                                                     className="text-blueColor font-bold"
                                                 >
-                                                    Visit university website
+                                                    university website{' '}
                                                 </Link>
                                             ) : (
-                                                'university website'
+                                                ' university website'
                                             )}
                                             for more information
                                         </p>
@@ -507,7 +547,7 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                                                         rate
                                                             ? base_code
                                                             : course.feeCurrency
-                                                    )}
+                                                    )} /year
                                                 </p>
                                             </div>
                                         </div>

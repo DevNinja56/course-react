@@ -48,12 +48,10 @@ export function generateIntakes(
 
         // Calculate the year for the intake
         const intakeYear: number =
-            monthDiff < 0 ? currentYear + 1 : currentYear;
+            monthDiff <= 0 ? currentYear + 1 : currentYear;
 
         for (let i = 0; i < futureYears; i++) {
             const year = intakeYear + i;
-            // Skip current month and current year if month is in the present month
-            if (year === currentYear && monthIndex === currentMonth) continue;
             intakes.push(`${fullMonths[monthIndex]} ${year}`);
         }
     });
@@ -68,8 +66,8 @@ export function generateIntakes(
         if (yearDiff !== 0) return yearDiff;
 
         // If years are the same, compare by month index
-        const monthIndexA = fullMonths.findIndex(m => m === monthA);
-        const monthIndexB = fullMonths.findIndex(m => m === monthB);
+        const monthIndexA = fullMonths.findIndex((m) => m === monthA);
+        const monthIndexB = fullMonths.findIndex((m) => m === monthB);
         return monthIndexA - monthIndexB;
     });
 

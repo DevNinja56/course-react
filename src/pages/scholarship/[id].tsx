@@ -69,12 +69,16 @@ const CourseDetail = ({ data: scholarship }: { data: scholarshipType }) => {
                             </h1>
                             <div className="flex pr-0">
                                 <div className="flex flex-wrap items-center gap-1 md:gap-2 lg:gap-3">
-                                    <button className="rounded-[20px] py-2 px-3 md:px-4 text-xs md:text-sm border-2 border-white hover:border-purpleColor text-white hover:text-purpleColor bg-purpleColor hover:bg-white">
-                                        {scholarship?.type}
-                                    </button>
-                                    <button className="rounded-[20px] py-2 px-3 md:px-4 text-xs md:text-sm border-2 border-white hover:border-blueColor text-white hover:text-blueColor bg-blueColor hover:bg-white flex gap-2 items-center">
-                                        {scholarship?.institute?.sector}
-                                    </button>
+                                    {scholarship?.type && (
+                                        <button className="rounded-[20px] py-2 px-3 md:px-4 text-xs md:text-sm border-2 border-white hover:border-purpleColor text-white hover:text-purpleColor bg-purpleColor hover:bg-white">
+                                            {scholarship?.type}
+                                        </button>
+                                    )}
+                                    {scholarship?.institute?.sector && (
+                                        <button className="rounded-[20px] py-2 px-3 md:px-4 text-xs md:text-sm border-2 border-white hover:border-blueColor text-white hover:text-blueColor bg-blueColor hover:bg-white flex gap-2 items-center">
+                                            {scholarship?.institute?.sector}
+                                        </button>
+                                    )}
                                     {isActive !== null && (
                                         <FavoriteButton
                                             isActive={isActive}
@@ -138,36 +142,11 @@ const CourseDetail = ({ data: scholarship }: { data: scholarshipType }) => {
                                                         )
                                                     },
                                                     {
-                                                        title: 'Eligibility Criteria',
-                                                        element: (
-                                                            <div className="flex flex-col gap-8 items-start">
-                                                                <h3 className="text-black text-lg md:text-2xl font-bold">
-                                                                    Eligibility
-                                                                    Criteria
-                                                                </h3>
-                                                                <div className="content text-sm md:text-base">
-                                                                    {
-                                                                        scholarship.type
-                                                                    }
-                                                                </div>
-                                                                {scholarship?.text_eligibility_criteria && (
-                                                                    <div className="text-sm md:text-base">
-                                                                        <InnerHtml
-                                                                            html={
-                                                                                scholarship?.text_eligibility_criteria ??
-                                                                                ''
-                                                                            }
-                                                                        />
-                                                                    </div>
-                                                                )}
-                                                            </div>
-                                                        )
-                                                    },
-                                                    {
-                                                        title: 'Degrees Offered',
+                                                        title: 'Eligible Degree',
                                                         element: (
                                                             <div className="flex flex-col gap-8">
                                                                 <h3 className="text-black text-lg md:text-2xl font-bold">
+                                                                    Eligible
                                                                     Degree List
                                                                 </h3>
                                                                 {scholarship?.degree?.map(
@@ -283,10 +262,10 @@ const CourseDetail = ({ data: scholarship }: { data: scholarshipType }) => {
                                                     target="_blank"
                                                     className="text-blueColor font-bold"
                                                 >
-                                                    Visit university website
+                                                    university website{' '}
                                                 </Link>
                                             ) : (
-                                                'University website not available'
+                                                'University website'
                                             )}
                                             for more information
                                         </p>

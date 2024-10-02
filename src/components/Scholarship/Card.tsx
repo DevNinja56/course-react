@@ -37,11 +37,12 @@ const Card: React.FC<propsType> = ({
     headingClass = 'text-xl'
 }) => {
     return (
-        <div className="relative group hover:-translate-y-2 transition-all duration-500 cursor-pointer flex flex-col border border-gray-100 capitalize overflow-auto rounded-tr-md rounded-tl-md   ">
+        <div className="relative group cursor-pointer flex flex-col border border-gray-300 capitalize overflow-auto rounded-xl ">
             {isActive !== null && (
                 <FavoriteButton
                     isActive={isActive}
                     body={{ scholarship: id }}
+                    extendClass="group-hover:translate-y-[20px] group-hover:translate-x-[-20px] duration-300 transition-all"
                 />
             )}
             <Link
@@ -57,32 +58,34 @@ const Card: React.FC<propsType> = ({
             >
                 <div className="flex flex-col w-full z-10 ">
                     <div className="w-full relative">
-                        <img
-                            // src="/images/Scholarships/scholarship (1) 1.png"
-                            src={
-                                image ??
-                                '/images/Scholarships/scholarship (1) 1.png'
-                            }
-                            alt="image"
-                            className="mx-auto aspect-[1/1] w-full object-cover"
-                            width={100}
-                            height={100}
-                        />
-                        <div className="flex items-center w-full justify-between gap-2 pb-2 px-4 text-center absolute bottom-0 bg-blueColor p-2 text-white ">
-                            <h1
+                        <div className="">
+                            <img
+                                // src="/images/Scholarships/scholarship (1) 1.png"
+                                src={
+                                    image ??
+                                    '/images/Scholarships/scholarship (1) 1.png'
+                                }
+                                alt="image"
+                                className="mx-auto aspect-[43.4/25.8] w-full object-cover rounded-md group-hover:w-[calc(100%-30px)] group-hover:mt-[15px] transition-all duration-300 "
+                                width={100}
+                                height={100}
+                            />
+                        </div>
+                        <div className="px-3 mt-4  ">
+                            <h3
                                 title={name}
-                                className={`font-bold mx-auto ${headingClass}`}
+                                className={`font-bold mx-auto text-base ${headingClass}`}
                             >
-                                {name}{' '}
-                                {degree
-                                    ? `for - ${!Array.isArray(degree) && degree.name}`
-                                    : ''}{' '}
-                                ({type})
-                            </h1>
+                                {name} ({type})
+                            </h3>
+                            <p className="text-xs my-2">
+                                The University of Portsmouth is the 25th largest
+                                in the UK and dates back to the opening.
+                            </p>
                         </div>
                     </div>
                     {tagBox && (
-                        <div className="grid grid-cols-2 w-full">
+                        <div className="grid grid-cols-2 w-full px-3 py-2 mb-2">
                             <Tag
                                 className=""
                                 icon={
@@ -101,7 +104,7 @@ const Card: React.FC<propsType> = ({
                                                   ?.map((d) => d.name)
                                                   .join(' / ')
                                             : 'No degree'
-                                        : degree?.name ?? 'No degree'
+                                        : (degree?.name ?? 'No degree')
                                 }
                             />
                             <Tag

@@ -445,12 +445,12 @@ export interface applyTypes {
     user: userType;
     status: applicationStatus;
     documents: userDocuments;
-    councillor: councillorType;
+    counsellor: counsellorType;
     createdAt: string;
     updatedAt: string;
 }
 
-export interface councillorType {
+export interface counsellorType {
     profile_image: string;
     title: string;
     bio: string;

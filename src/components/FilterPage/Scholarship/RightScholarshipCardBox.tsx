@@ -29,7 +29,7 @@ const RightScholarshipCardBox = () => {
                 </div>
                 <hr className="border border-scholarshipBorderColor" />
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mb-3 px-0 md:px-8 lg:px-0">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-5 mb-3 px-0 md:px-8 lg:px-0">
                 {isLoading ? (
                     <LoaderSpinner color="text-black" />
                 ) : (
