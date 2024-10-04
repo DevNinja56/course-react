@@ -50,6 +50,8 @@ const YourCounsellorBox = ({ selectedCourse }: propTypes) => {
                                 : 'example@courseoption.com'
                         }
                         className="py-2 px-5 rounded-xl text-sm md:text-base"
+                        link={`mailto:${selectedCourse?.counsellor?.email ?? 'example@courseoption.com'}`}
+                        linkClass='w-full'
                     />
                     <Button
                         icon={
@@ -58,8 +60,17 @@ const YourCounsellorBox = ({ selectedCourse }: propTypes) => {
                         text={
                             selectedCourse?.counsellor?.phone_number
                                 ? selectedCourse?.counsellor?.phone_number
-                                : '+92 0000000'
+                                : '+92 300 0000000'
                         }
+                        className="py-2 px-5 rounded-xl text-sm md:text-base justify-start"
+                        linkClass="w-full"
+                        link={`tel:${selectedCourse?.counsellor?.phone_number ?? '+923000000000'}`}
+                    />
+                    <Button
+                        icon={
+                            <IoCallOutline className="h-5 w-5 text-white group-hover:text-blueColor" />
+                        }
+                        text={'schedule a counselling session'}
                         className="py-2 px-5 rounded-xl text-sm md:text-base"
                     />
                 </div>

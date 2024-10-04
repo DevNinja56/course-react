@@ -43,7 +43,7 @@ const AcademicInformation = () => {
                     <p>Highest level of education</p>
                     <h1 className="text-base md:text-xl font-semibold">
                         {highestLevelOfEducation ??
-                            'HSSE, A Levels, DAE, 2 Years Bachelors Degree, 4 Years Bachelors Degree, Masters degree'}
+                            'HSSC, A Levels, DAE, 2 Years Bachelors Degree, 4 Years Bachelors Degree, Masters degree'}
                     </h1>
                 </div>
                 <div className="border-b border-personalInfoBorderColor pb-5 flex flex-col gap-y-2 text-mainTextColor">
@@ -54,21 +54,31 @@ const AcademicInformation = () => {
                     {languageTestScore && (
                         <div className="score">
                             <div className="flex flex-wrap gap-2">
-                                <span className="">
-                                    Speaking: <b>{speaking ?? 'Null'}</b>
-                                </span>
-                                <span className="">
-                                    Listening: <b>{listening ?? 'Null'}</b>
-                                </span>
-                                <span className="">
-                                    Writing: <b>{writing ?? 'Null'}</b>
-                                </span>
-                                <span className="">
-                                    Reading: <b>{reading ?? 'Null'}</b>
-                                </span>
-                                <span className="">
-                                    Overall: <b>{overAll ?? 'Null'}</b>
-                                </span>
+                                {speaking && (
+                                    <span className="">
+                                        Speaking: <b>{speaking ?? 'Null'}</b>
+                                    </span>
+                                )}
+                                {listening && (
+                                    <span className="">
+                                        Listening: <b>{listening ?? 'Null'}</b>
+                                    </span>
+                                )}
+                                {writing && (
+                                    <span className="">
+                                        Writing: <b>{writing ?? 'Null'}</b>
+                                    </span>
+                                )}
+                                {reading && (
+                                    <span className="">
+                                        Reading: <b>{reading ?? 'Null'}</b>
+                                    </span>
+                                )}
+                                {overAll && (
+                                    <span className="">
+                                        Overall: <b>{overAll ?? 'Null'}</b>
+                                    </span>
+                                )}
                             </div>
                         </div>
                     )}

@@ -53,7 +53,7 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
         )?.[0];
         scholarship?.isAmount
             ? (amount = String(scholarship?.amount ?? 0))
-            : (amount = String(+scholarship?.amount * course?.tuitionFee ?? 0));
+            : (amount = String(+scholarship?.amount * course?.tuitionFee));
         return amount;
     }, [course]);
 
@@ -214,15 +214,28 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                                                                             Language
                                                                             Requirements
                                                                         </h3>
-                                                                        <div className="flex gap-4">
-                                                                            <LanguageRequirements
-                                                                                language={
-                                                                                    course
-                                                                                        .language[0]
-                                                                                        .language
-                                                                                }
-                                                                            />
-                                                                        </div>
+                                                                        {Object.keys(
+                                                                            course
+                                                                                .language[0]
+                                                                                .language
+                                                                        )
+                                                                            .length ? (
+                                                                            <div className="flex gap-4 w-full">
+                                                                                <LanguageRequirements
+                                                                                    language={
+                                                                                        course
+                                                                                            .language[0]
+                                                                                            .language
+                                                                                    }
+                                                                                />
+                                                                            </div>
+                                                                        ) : (
+                                                                            <div className="text-sm md:text-base">
+                                                                                No
+                                                                                Language
+                                                                                Requirements
+                                                                            </div>
+                                                                        )}
                                                                     </div>
                                                                 </div>
                                                             )
@@ -547,7 +560,8 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                                                         rate
                                                             ? base_code
                                                             : course.feeCurrency
-                                                    )} /year
+                                                    )}{' '}
+                                                    /year
                                                 </p>
                                             </div>
                                         </div>

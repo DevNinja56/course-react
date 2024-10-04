@@ -11,6 +11,7 @@ import { MdOutlinePriceChange } from 'react-icons/md';
 
 interface propsType {
     name: string;
+    title_description?: string;
     type: string;
     degree: degreeType | degreeType[];
     institute: instituteType;
@@ -25,6 +26,7 @@ interface propsType {
 
 const Card: React.FC<propsType> = ({
     name,
+    title_description,
     type,
     degree,
     institute,
@@ -79,8 +81,8 @@ const Card: React.FC<propsType> = ({
                                 {name} ({type})
                             </h3>
                             <p className="text-xs my-2">
-                                The University of Portsmouth is the 25th largest
-                                in the UK and dates back to the opening.
+                                {title_description ??
+                                    `The University of ${institute?.name} is the largest in the UK and dates back to the opening.`}
                             </p>
                         </div>
                     </div>
