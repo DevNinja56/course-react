@@ -40,6 +40,7 @@ const RightScholarshipCardBox = () => {
                             key={'scholarship__key__' + scholarship._id + i}
                             {...{
                                 name: scholarship.name,
+                                title_description: scholarship.title_description,
                                 type: scholarship.type,
                                 degree: scholarship.degree,
                                 institute: scholarship.institute,

@@ -1,35 +1,66 @@
 import { CgSearch } from 'react-icons/cg';
 import React, { useState } from 'react';
 import { useFilterQuery } from '@/hooks/filterQuery';
+import Button from '../Button';
+import { useRouter } from 'next/router';
 
 const SearchQueryBox = () => {
-    const [value, setValue] = useState('');
+    const { query } = useRouter();
+    const [value, setValue] = useState({
+        institute: (query?.instituteQuery as string) ?? '',
+        course: (query?.courseQuery as string) ?? ''
+    });
     const { addQuery } = useFilterQuery();
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         if (value) {
-            addQuery({ searchFilter: [value] });
-            setValue('');
+            addQuery({
+                ...(value.institute
+                    ? { instituteQuery: [value.institute] }
+                    : null),
+                ...(value.course ? { courseQuery: [value.course] } : null)
+            });
+            setValue({ institute: '', course: '' });
         }
     };
     return (
         <form onSubmit={handleSubmit} className="relative w-full">
-            <div className="relative">
-                <CgSearch className="text-3xl absolute top-[50%] translate-y-[-50%] left-3 " />
-                <input
-                    className="custom-shadow rounded-[10px] py-5 pl-[52px] outline-none text-base text-mainTextColor w-full lg:pr-[520px]"
-                    value={value}
-                    onChange={({ target }) => setValue(target.value)}
-                    placeholder="Search by Institute name"
+            <div className="flex gap-3 items-center bg-white custom-shadow rounded-xl w-full p-2">
+                <CgSearch className="text-3xl min-w-[40px]" />
+                <div className="flex items-center">
+                    <input
+                        className="p-3 outline-none text-base text-mainTextColor w-[320px]"
+                        value={value.institute}
+                        onChange={({ target }) =>
+                            setValue((prev) => ({
+                                ...prev,
+                                institute: target.value
+                            }))
+                        }
+                        placeholder="Search by Institute name"
+                    />
+                    <div className="w-[1px] bg-black h-full mx-2 bg-opacity-20 overflow-hidden ">
+                        <span className="invisible">.</span>
+                    </div>
+                    <input
+                        className="p-3 outline-none text-base text-mainTextColor w-[320px]"
+                        value={value.course}
+                        onChange={({ target }) =>
+                            setValue((prev) => ({
+                                ...prev,
+                                course: target.value
+                            }))
+                        }
+                        placeholder="Search by course name"
+                    />
+                </div>
+                <Button
+                    type="submit"
+                    text="Search"
+                    className="min-w-[100px] py-2 !mb-0"
                 />
             </div>
-            <button
-                className="py-[11px] px-[39px] absolute right-3 top-[11px] bg-blueColor rounded-[5px] text-white text-sm hover:bg-opacity-50"
-                type="submit"
-            >
-                Search
-            </button>
         </form>
     );
 };

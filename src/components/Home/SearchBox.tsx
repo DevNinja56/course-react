@@ -37,8 +37,8 @@ const SearchBox = () => {
         push({
             pathname: ROUTES.FILTER_COURSE,
             query: {
-                disciplines: value.disciplines.join(','),
-                institutes: value.institutes.join(',')
+                discipline: value.disciplines.join(','),
+                institute: value.institutes.join(',')
             }
         });
     };
@@ -56,7 +56,7 @@ const SearchBox = () => {
                             onChange={(val: any) =>
                                 setValue((prev) => ({
                                     ...prev,
-                                    institute: val.map(
+                                    institutes: val.map(
                                         (item: selectType) => item.value
                                     )
                                 }))
@@ -72,7 +72,7 @@ const SearchBox = () => {
                             onChange={(val: any) =>
                                 setValue((prev) => ({
                                     ...prev,
-                                    discipline: val.map(
+                                    disciplines: val.map(
                                         (item: selectType) => item.value
                                     )
                                 }))

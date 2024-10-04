@@ -12,6 +12,7 @@ interface propsTypes {
     isLoader?: boolean;
     variant?: 'filled' | 'outline';
     icon?: React.ReactElement;
+    linkClass?: string;
 }
 type Props = React.ButtonHTMLAttributes<HTMLButtonElement> & propsTypes;
 type PropsLink = LinkProps & propsTypes;
@@ -24,6 +25,7 @@ const Button: React.FC<Props> = ({
     isLoader,
     variant,
     icon,
+    linkClass,
     ...props
 }) => {
     const Button = () => (
@@ -49,7 +51,7 @@ const Button: React.FC<Props> = ({
     return (
         <>
             {link ? (
-                <Link href={link}>
+                <Link href={link} className={linkClass} >
                     <Button />
                 </Link>
             ) : (
