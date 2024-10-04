@@ -15,7 +15,6 @@ const RightScholarshipCardBox = () => {
     } = useSearchedScholarship();
     const { query } = useFilterQuery();
     
-    console.log(data)
 
     useEffect(() => {
         fetchScholarship();
