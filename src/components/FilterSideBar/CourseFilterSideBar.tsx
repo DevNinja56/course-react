@@ -143,7 +143,7 @@ const FilterSideBar = ({ setFilterSideBar }: ModalProps) => {
                                     isLoading={isLoading}
                                 />
                             </FilterAccordion>
-                            <FilterAccordion title="Fees">
+                            <FilterAccordion title="Fees" noBorder>
                                 <FeeSlider />
                             </FilterAccordion>
                         </div>

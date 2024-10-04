@@ -76,7 +76,8 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                             src="/images/CourseDetail/Circle 3.svg"
                             // priority
                         />
-                        <div className="w-full py-5 pb-10 md:py-10 xl:py-20 flex justify-center xl:container px-4 md:px-[50px] lg:px-2 2xl:px-8">
+
+                        <div className="w-full pb-10 pt-3 flex justify-center xl:container px-4 md:px-[50px] lg:px-2 2xl:px-8">
                             <img
                                 height={400}
                                 width={1200}
@@ -109,7 +110,99 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                             // priority
                         />
                     </div>
-                    <div className="flex items-center w-full xl:container px-4 md:px-[50px] lg:px-2 2xl:px-8 mx-auto transition-all duration-300 flex-col gap-6 mb-32">
+                    <div className="xl:container mx-auto relative bottom-20 z-[35]">
+                        <div className="h-auto w-[70%] md:w-[85%] mx-auto grid max-[475px]:grid-cols-1 grid-cols-2 xl:grid-cols-4 md:gap-5 justify-around rounded-xl bg-white shadow-md">
+                            <div className="flex items-center gap-4 border-b-2 lg:border-none border-gray-200 border-opacity-50 w-full md:w-auto px-4 py-2 sm:p-4 justify-start lg:justify-center">
+                                <div className="md:min-w-52 h-auto flex items-center gap-4">
+                                    <GoClockFill className="h-6 w-6 sm:h-12 sm:w-12 text-blueColor" />
+                                    <div className="flex flex-col md:gap-[6px] text-left">
+                                        <p className="font-bold text-xs sm:text-sm md:text-lg text-mainTextColor">
+                                            {isUkCourse && isMasterDegree
+                                                ? 'Intake | Duration'
+                                                : 'Duration'}
+                                        </p>
+                                        <ul className="text-[10px] sm:text-sm  lg:text-base text-lightGrayColor">
+                                            {isUkCourse && isMasterDegree ? (
+                                                <>
+                                                    {generateIntakes(
+                                                        [course.intakes[0]],
+                                                        1
+                                                    )}{' '}
+                                                    |{' '}
+                                                    {getMonths([
+                                                        course.monthDuration[0]
+                                                    ])}
+                                                </>
+                                            ) : (
+                                                getMonths(course.monthDuration)
+                                                    .split('/')
+                                                    .map((month) => (
+                                                        <li key={month}>
+                                                            {month}
+                                                        </li>
+                                                    ))
+                                            )}
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="flex items-center gap-4 border-b-2 lg:border-none border-gray-200 border-opacity-50 justify-start lg:justify-center w-full md:w-auto px-4 py-2 sm:p-4">
+                                <div className="md:min-w-52 h-auto flex items-center gap-4">
+                                    <FaMoneyBillWave className="h-6 w-6 sm:h-12 sm:w-12 text-blueColor" />
+                                    <div className="flex flex-col gap-1 text-left">
+                                        <p className="font-bold text-xs sm:text-sm md:text-lg text-mainTextColor">
+                                            Tuition Fee
+                                        </p>
+                                        <p className="text-[10px] sm:text-sm  lg:text-base text-lightGrayColor">
+                                            {setCurrencyValue(
+                                                isSameCurrency && !rate
+                                                    ? course.tuitionFee
+                                                    : course.tuitionFee *
+                                                          (rate?.base_rate
+                                                              ? +rate?.base_rate
+                                                              : 1),
+                                                rate
+                                                    ? base_code
+                                                    : course.feeCurrency
+                                            )}
+                                            /year
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="flex items-center gap-4 border-b-2 lg:border-none border-gray-200 border-opacity-50 px-4 py-2 sm:p-4 w-full md:w-auto justify-start lg:justify-center">
+                                <div className="md:min-w-52 h-auto flex items-center gap-4">
+                                    <GiTrophy className="h-6 w-6 sm:h-12 sm:w-12 text-blueColor" />
+                                    <div className="flex flex-col md:gap-[6px] text-left">
+                                        <p className="font-bold text-xs sm:text-sm md:text-lg text-mainTextColor">
+                                            Level
+                                        </p>
+                                        <p className="text-[10px] sm:text-sm  lg:text-base text-lightGrayColor">
+                                            {course?.degree?.type}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="flex items-center gap-4 border-b-2 lg:border-none border-gray-200 border-opacity-50 px-4 py-2 sm:p-4 w-full md:w-auto justify-start lg:justify-center">
+                                <div className="md:min-w-52 h-auto flex items-center gap-4">
+                                    <GiOpenBook className="h-6 w-6 sm:h-12 sm:w-12 text-blueColor" />
+                                    <div className="flex flex-col md:gap-[6px] text-left">
+                                        <p className="font-bold text-xs sm:text-sm md:text-lg text-mainTextColor">
+                                            Discipline
+                                        </p>
+                                        <p className="text-[10px] sm:text-sm  lg:text-base text-lightGrayColor">
+                                            {course?.discipline?.name}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="flex items-center w-full xl:container px-4 md:px-[50px] lg:px-2 2xl:px-8 mx-auto transition-all duration-300 flex-col gap-6 mb-5 -my-10">
                         <div className="w-full flex flex-wrap gap-2 gap-y-4 md:gap-y-8 justify-between">
                             <h1 className="text-mainTextColor text-xl md:text-3xl font-bold">
                                 {course?.name}
@@ -117,7 +210,7 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                             <div className="flex pr-0">
                                 <div className="flex flex-wrap items-center gap-1 md:gap-2 lg:gap-3">
                                     <button
-                                        className="rounded-[20px] py-2 px-3 md:px-4 text-xs md:text-sm border-2 border-white hover:border-blueColor text-white hover:text-blueColor bg-blueColor hover:bg-white flex gap-2 items-center"
+                                        className="rounded-[20px] py-2 px-3 md:px-4 text-xs md:text-sm border-1 border-white hover:border-blueColor text-white hover:text-blueColor bg-blueColor hover:bg-white flex gap-2 items-center"
                                         onClick={() =>
                                             updateModal({
                                                 type: modalType.bank_statement_calculator,
@@ -150,23 +243,23 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                                 </div>
                             </div>
                         </div>
-                        <div className="flex flex-col lg:flex-row gap-0 xl:gap-16 w-full justify-between mb-0 lg:mb-28">
+                        <div className="flex flex-col lg:flex-row gap-0 xl:gap-16 w-full justify-between">
                             <div className="flex flex-col w-full lg:w-[70%] xl:w-2/3">
-                                <div className="w-full h-courseStickyHeight static lg:sticky top-[110px] no-scrollbar mb-5 lg:mb-[450px] xl:mb-96">
+                                <div className="w-full lg:sticky top-[110px] no-scrollbar">
                                     <div className="transition-all duration-300">
-                                        <div className="flex flex-col gap-y-6 mb-16 md:mb-20">
+                                        <div className="flex flex-col gap-y-6">
                                             <div className="tabs-container">
                                                 <Tabs
                                                     data={[
                                                         {
                                                             title: 'Overview',
                                                             element: (
-                                                                <div className="description w-full flex flex-col gap-3 md:gap-4 items-start max-h-[70vh] overflow-auto customScroll px-2">
+                                                                <div className="description w-full flex flex-col gap-3 md:gap-4 items-start">
                                                                     <h1 className="text-black text-lg md:text-2xl font-bold">
                                                                         Course
                                                                         Description
                                                                     </h1>
-                                                                    <div className="text-sm md:text-base">
+                                                                    <div className="text-sm md:text-base text-left">
                                                                         <InnerHtml
                                                                             html={
                                                                                 course?.description ??
@@ -405,7 +498,7 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                                             </div>
                                         </div>
                                     </div>
-                                    <div className="py-6 border-t-2 border-borderColor flex items-center justify-between w-full mb-8 md:mb-20">
+                                    <div className="py-6 border-t-2 border-borderColor flex items-center justify-between w-full mb-14 ">
                                         <h1 className="text-base md:text-xl font-semibold text-textLightBlackColor">
                                             Get more details
                                         </h1>
@@ -535,97 +628,12 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                                 <div className="bg-white rounded-[10px] w-full z-10 shadow-RequirementBox mt-4 py-3">
                                     <div className="flex flex-col capitalize">
                                         <div className="flex items-center gap-4 pl-5 border-b-2 border-gray-200 border-opacity-50 py-4">
-                                            <FaMoneyBillWave className="h-8 w-8 text-blueColor" />
-                                            <div className="flex flex-col gap-1">
-                                                <p className="font-bold text-base text-mainTextColor">
-                                                    Tuition Fee
-                                                </p>
-                                                <p className="text-lightGrayColor text-base">
-                                                    {setCurrencyValue(
-                                                        isSameCurrency && !rate
-                                                            ? course.tuitionFee
-                                                            : course.tuitionFee *
-                                                                  (rate?.base_rate
-                                                                      ? +rate?.base_rate
-                                                                      : 1),
-                                                        rate
-                                                            ? base_code
-                                                            : course.feeCurrency
-                                                    )}{' '}
-                                                    /year
-                                                </p>
-                                            </div>
-                                        </div>
-
-                                        <div className="flex items-center gap-4 pl-5 border-b-2 border-gray-200 border-opacity-50 py-4">
-                                            <GiTrophy className="h-8 w-8 text-blueColor" />
-                                            <div className="flex flex-col gap-[6px]">
-                                                <p className="font-bold text-base text-mainTextColor">
-                                                    Level
-                                                </p>
-                                                <p className="text-lightGrayColor text-base">
-                                                    {course?.degree?.type}
-                                                </p>
-                                            </div>
-                                        </div>
-                                        <div className="flex items-center gap-4 pl-5 border-b-2 border-gray-200 border-opacity-50 py-4">
-                                            <GiOpenBook className="h-8 w-8 text-blueColor" />
-                                            <div className="flex flex-col gap-[6px]">
-                                                <p className="font-bold text-base text-mainTextColor">
-                                                    Discipline
-                                                </p>
-                                                <p className="text-lightGrayColor text-base">
-                                                    {course?.discipline?.name}
-                                                </p>
-                                            </div>
-                                        </div>
-                                        <div className="flex items-center gap-4 pl-5 border-b-2 border-gray-200 border-opacity-50 py-4">
-                                            <GoClockFill className="h-8 w-8 text-blueColor" />
-                                            <div className="flex flex-col gap-[6px]">
-                                                <p className="font-bold text-base text-mainTextColor">
-                                                    {isUkCourse &&
-                                                    isMasterDegree
-                                                        ? 'Intake | Duration'
-                                                        : 'Duration'}
-                                                </p>
-                                                <ul className="text-lightGrayColor text-base">
-                                                    {isUkCourse &&
-                                                    isMasterDegree ? (
-                                                        <>
-                                                            {generateIntakes(
-                                                                [
-                                                                    course
-                                                                        .intakes[0]
-                                                                ],
-                                                                1
-                                                            )}{' '}
-                                                            |{' '}
-                                                            {getMonths([
-                                                                course
-                                                                    .monthDuration[0]
-                                                            ])}{' '}
-                                                        </>
-                                                    ) : (
-                                                        getMonths(
-                                                            course.monthDuration
-                                                        )
-                                                            .split(' / ')
-                                                            .map((month) => (
-                                                                <li key={month}>
-                                                                    {month}
-                                                                </li>
-                                                            ))
-                                                    )}
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <div className="flex items-center gap-4 pl-5 border-b-2 border-gray-200 border-opacity-50 py-4">
                                             <IoLocation className="h-8 w-8 text-blueColor" />
                                             <div className="flex flex-col gap-[6px]">
-                                                <p className="font-bold text-base text-mainTextColor">
+                                                <p className="font-bold text-sm md:text-base text-mainTextColor">
                                                     Campus
                                                 </p>
-                                                <p className="text-lightGrayColor text-base">
+                                                <p className="text-lightGrayColor text-sm md:text-base">
                                                     {course.availableCampuses
                                                         .length
                                                         ? course.availableCampuses?.join(
@@ -639,10 +647,10 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                                         <div className="flex items-center gap-4 pl-5 border-opacity-50 py-4">
                                             <FaCalendar className="h-8 w-8 text-blueColor" />
                                             <div className="flex flex-col gap-[6px]">
-                                                <p className="font-bold text-base text-mainTextColor">
+                                                <p className="font-bold text-sm md:text-base text-mainTextColor">
                                                     Available Intakes
                                                 </p>
-                                                <ul className="text-lightGrayColor text-base">
+                                                <ul className="text-lightGrayColor text-sm md:text-base">
                                                     {generateIntakes(
                                                         course.intakes,
                                                         1
@@ -656,6 +664,7 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                                         </div>
                                     </div>
                                 </div>
+
                                 <div className="flex flex-col md:flex-row items-center w-full gap-3 md:gap-5 lg:hidden">
                                     <div className="w-full">
                                         <Button

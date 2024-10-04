@@ -115,7 +115,7 @@ const FilterSideBar = ({ setFilterSideBar }: ModalProps) => {
                                     isLoading={isLoading}
                                 />
                             </FilterAccordion>
-                            <FilterAccordion title="Scholarship Type">
+                            <FilterAccordion title="Scholarship Type" noBorder>
                                 <ScholarshipTypeFilter />
                             </FilterAccordion>
                         </div>

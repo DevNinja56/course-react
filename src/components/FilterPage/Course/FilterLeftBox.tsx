@@ -90,7 +90,7 @@ const CourseFilter = () => {
                 <FilterAccordion title="Intakes">
                     <IntakesFilter data={filters.intakes} isLoading={isLoading} />
                 </FilterAccordion>
-                <FilterAccordion title="Fees">
+                <FilterAccordion title="Fees" noBorder>
                     <FeeSlider />
                 </FilterAccordion>
             </div>
