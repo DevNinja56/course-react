@@ -214,7 +214,10 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                                                                             Language
                                                                             Requirements
                                                                         </h3>
-                                                                        {Object.keys(
+                                                                        {course
+                                                                            ?.language?.[0]
+                                                                            ?.language &&
+                                                                        Object?.keys(
                                                                             course
                                                                                 .language[0]
                                                                                 .language
