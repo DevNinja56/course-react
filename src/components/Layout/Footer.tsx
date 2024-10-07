@@ -1,49 +1,41 @@
 import { ROUTES } from '@/config/constant';
-// import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 import Logo from '../Logo';
-import { useRouter } from 'next/router';
 import { useUi } from '@/hooks/user-interface';
 import { modalType } from '@/store/slices/ui.slice';
 
 const Footer = () => {
-    const { pathname: path } = useRouter();
     const { updateModal } = useUi();
     return (
         <footer className=" w-full flex justify-center flex-col print:hidden">
-            {!path?.includes(ROUTES.APPLY) && (
-                <div className="translate-y-20 transition-all duration-300 object-cover px-5 md:px-[50px] lg:px-0 relative container mx-auto ">
-                    <div className="z-10 w-full flex flex-col md:flex-row items-center font-black justify-between relative p-8 md:p-12 lg:p-24 ">
-                        <img
-                            height={256}
-                            width={1160}
-                            alt="footer img"
-                            className="rounded-lg object-cover  w-full h-full absolute top-0 left-0 z-[-1]"
-                            src="/images/Frame 608.svg"
-                        />
-                        <h1 className="text-white text-[28px] md:text-[32px] lg:text-5xl leading-10 md:text-start text-center w-[300px] md:w-[313px] lg:w-[531px] mb-6 lg:mb-0">
-                            Want to study at Online program ?
-                        </h1>
-                        <button
-                            onClick={() =>
-                                updateModal({
-                                    type: modalType.start_application,
-                                    state: ''
-                                })
-                            }
-                            className="bg-white py-[13px] md:py-4 lg:py-[21px] px-[84px] md:px-8 lg:px-[51px] rounded-[5px] text-mainTextColor hover:bg-opacity-50 hover:text-white"
-                        >
-                            Apply Now
-                        </button>
-                    </div>
+            <div className="translate-y-20 transition-all duration-300 object-cover px-5 md:px-[50px] lg:px-0 relative container mx-auto ">
+                <div className="z-10 w-full flex flex-col md:flex-row items-center font-black justify-between relative p-8 md:p-12 lg:p-24 ">
+                    <img
+                        height={256}
+                        width={1160}
+                        alt="footer img"
+                        className="rounded-lg object-cover  w-full h-full absolute top-0 left-0 z-[-1]"
+                        src="/images/Frame 608.svg"
+                    />
+                    <h1 className="text-white text-[28px] md:text-[32px] lg:text-5xl leading-10 md:text-start text-center w-[300px] md:w-[313px] lg:w-[531px] mb-6 lg:mb-0">
+                        Want to study at Online program ?
+                    </h1>
+                    <button
+                        onClick={() =>
+                            updateModal({
+                                type: modalType.start_application,
+                                state: {}
+                            })
+                        }
+                        className="bg-white py-[13px] md:py-4 lg:py-[21px] px-[84px] md:px-8 lg:px-[51px] rounded-[5px] text-mainTextColor "
+                    >
+                        Apply Now
+                    </button>
                 </div>
-            )}
-            <div
-                className={`bg-footerBgColor ${
-                    path?.includes(ROUTES.APPLY) ? 'pt-8' : 'pt-32'
-                }`}
-            >
+            </div>
+
+            <div className={`bg-footerBgColor ${'pt-32'}`}>
                 <div className="w-full pb-10">
                     <div className="container mx-auto px-5 md:px-[50px] lg:px-2 flex justify-between lg:items-start flex-wrap">
                         <div className="flex flex-col md:flex-row lg:flex-col items-start md:items-center lg:items-start md:justify-between w-full lg:w-[420px] mb-8">

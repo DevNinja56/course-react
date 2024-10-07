@@ -363,21 +363,16 @@ const ScholarshipDetail = ({
                                             <Button
                                                 className="py-3 rounded-md text-sm font-semibold"
                                                 text="Start Application"
-                                                link={ROUTES.APPLY}
+                                                onClick={() =>
+                                                    updateModal({
+                                                        type: modalType.start_application,
+                                                        state: {
+                                                            institute:
+                                                                scholarship.institute
+                                                        }
+                                                    })
+                                                }
                                             />
-
-                                            {/* <Button
-                                                className="py-3 rounded-md text-sm font-semibold"
-                                                text="Compare"
-                                                link={{
-                                                    pathname: ROUTES.COMPARE,
-                                                    query: {
-                                                        scholarship_id:
-                                                            scholarship._id
-                                                    }
-                                                }}
-                                                variant="outline"
-                                            /> */}
                                         </div>
                                     </div>
                                 </div>
@@ -416,7 +411,15 @@ const ScholarshipDetail = ({
                                         <Button
                                             className="py-4 rounded-md text-sm md:text-base font-semibold w-full"
                                             text="Start Application"
-                                            link={ROUTES.APPLY}
+                                            onClick={() =>
+                                                updateModal({
+                                                    type: modalType.start_application,
+                                                    state: {
+                                                        institute:
+                                                            scholarship.institute
+                                                    }
+                                                })
+                                            }
                                         />
                                     </div>
                                 </div>

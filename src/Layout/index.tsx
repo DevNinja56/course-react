@@ -42,7 +42,6 @@ const MainLayout = ({
         ROUTES.SCHOLARSHIP.replace(':id', '[id]'),
         ROUTES.INSTITUTES_DETAIL.replace(':id', '[id]'),
         ROUTES.ABOUT_US,
-        ROUTES.APPLY,
         ROUTES.BLOGS,
         ROUTES.COMPARE,
         ROUTES.CONTACT_US,
@@ -62,7 +61,6 @@ const MainLayout = ({
         ROUTES.COUNTRY,
         ROUTES.INSTITUTES,
         ROUTES.FAQ,
-        ROUTES.APPLY
     ];
 
     useEffect(() => {

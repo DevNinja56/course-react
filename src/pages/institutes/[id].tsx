@@ -12,6 +12,8 @@ import { API_ENDPOINTS } from '@/config/Api_EndPoints';
 import { ROUTES } from '@/config/constant';
 import Link from 'next/link';
 import dynamic from 'next/dynamic';
+import Tabs from '@/components/Tabs';
+import RankingCards from '@/components/Institute/RankingCards';
 const InnerHtml = dynamic(() => import('@/components/InnerHtml'), {
     ssr: false
 });
@@ -87,32 +89,124 @@ const Institutes = ({ data: institute }: { data: instituteType }) => {
                                 </Link>
                             </div>
                             <div className="flex bg-white bg-opacity-10 gap-1 w-full">
-                                <div
-                                    className={`flex flex-col gap-8 font-medium text-lightGrayColor w-full text-sm md:text-base`}
-                                >
-                                    <InnerHtml
-                                        html={institute?.description.slice(
-                                            0,
-                                            showText
-                                                ? institute?.description.length
-                                                : 400
-                                        )}
-                                    />
+                                <div className="flex flex-col gap-y-6 w-full">
+                                    <div className="tabs-container w-full">
+                                        <Tabs
+                                            data={[
+                                                {
+                                                    title: 'Overview',
+                                                    element: (
+                                                        <div className="description w-full flex flex-col gap-3 md:gap-4 items-start">
+                                                            <h1 className="text-black text-lg md:text-2xl font-bold">
+                                                                Institute
+                                                                Description
+                                                            </h1>
+                                                            <div
+                                                                className={`flex flex-col gap-8 font-medium text-lightGrayColor w-full text-sm md:text-base`}
+                                                            >
+                                                                <InnerHtml
+                                                                    html={institute?.description.slice(
+                                                                        0,
+                                                                        showText
+                                                                            ? institute
+                                                                                  ?.description
+                                                                                  .length
+                                                                            : 400
+                                                                    )}
+                                                                />
 
-                                    {institute?.description.length > 400 &&
-                                        !showText && <>....</>}
-                                    {institute?.description.length > 400 && (
-                                        <button
-                                            onClick={() =>
-                                                setShowText((prev) => !prev)
-                                            }
-                                            className="text-base md:text-xl text-blueColor font-semibold cursor-pointer w-full flex"
-                                        >
-                                            {showText
-                                                ? 'Show Less'
-                                                : 'Show More'}
-                                        </button>
-                                    )}
+                                                                {institute
+                                                                    ?.description
+                                                                    .length >
+                                                                    400 &&
+                                                                    !showText && (
+                                                                        <>
+                                                                            ....
+                                                                        </>
+                                                                    )}
+                                                                {institute
+                                                                    ?.description
+                                                                    .length >
+                                                                    400 && (
+                                                                    <button
+                                                                        onClick={() =>
+                                                                            setShowText(
+                                                                                (
+                                                                                    prev
+                                                                                ) =>
+                                                                                    !prev
+                                                                            )
+                                                                        }
+                                                                        className="text-base md:text-xl text-blueColor font-semibold cursor-pointer w-full flex"
+                                                                    >
+                                                                        {showText
+                                                                            ? 'Show Less'
+                                                                            : 'Show More'}
+                                                                    </button>
+                                                                )}
+                                                            </div>
+                                                        </div>
+                                                    )
+                                                },
+                                                {
+                                                    title: 'Ranking',
+                                                    element: (
+                                                        <div className="flex flex-col gap-8 max-h-[70vh] overflow-auto customScroll px-2">
+                                                            <div className="flex flex-col gap-4 items-start">
+                                                                <h3 className="text-black text-lg md:text-2xl font-bold">
+                                                                    Institute
+                                                                    Ranking
+                                                                </h3>
+                                                            </div>
+                                                            <div className="">
+                                                                <div className="flex flex-col border border-gray-300 rounded-lg">
+                                                                    <RankingCards
+                                                                        img="/images/institute/qs-world-university-rankings 1.svg"
+                                                                        text={
+                                                                            institute.qsWorldRanking
+                                                                        }
+                                                                    />
+
+                                                                    <RankingCards
+                                                                        img="/images/institute/Shanghai_Academic_Ranking_of_World_Universities_–_Logo 2.svg"
+                                                                        text={
+                                                                            institute.timesHigherRanking
+                                                                        }
+                                                                        className="h-6 w-12"
+                                                                    />
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    )
+                                                },
+                                                {
+                                                    title: 'Gallery',
+                                                    element: (
+                                                        <div className="flex flex-col gap-8 max-h-[70vh] overflow-auto customScroll px-2">
+                                                            <div className="flex flex-col gap-4  items-start">
+                                                                <h3 className="text-black text-lg md:text-2xl font-bold">
+                                                                    Gallery
+                                                                </h3>
+                                                            </div>
+                                                        </div>
+                                                    )
+                                                },
+
+                                                {
+                                                    title: "FAQ's",
+                                                    element: (
+                                                        <div className="flex flex-col gap-8 max-h-[70vh] overflow-auto customScroll px-2">
+                                                            <div className="flex flex-col gap-4  items-start">
+                                                                <h3 className="text-black text-lg md:text-2xl font-bold">
+                                                                    FAQ&apos;s
+                                                                </h3>
+                                                            </div>
+                                                        </div>
+                                                    )
+                                                }
+                                            ]}
+                                        />
+                                    </div>
                                 </div>
                             </div>
                             <div className="flex flex-col gap-12 lg:hidden">

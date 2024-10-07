@@ -28,7 +28,7 @@ const Testimonial = () => {
     return (
         <div
             className={`bg-white print:hidden ${
-                router.pathname === (ROUTES.APPLY || ROUTES.FAQ) ||
+                router.pathname === ROUTES.FAQ ||
                 router.pathname?.includes(ROUTES.COURSE.replace(':title', ''))
                     ? ''
                     : 'pt-8'
@@ -111,8 +111,7 @@ const Testimonial = () => {
                         className="absolute right-0 top-[-70px] md:top-[-120px] h-20 w-20 md:h-64 md:w-64 lg:h-[280px] lg:w-[280px]"
                         src="/images/Home/testimoalRoundImg.svg"
                     />
-                ) : router.pathname === ROUTES.APPLY ||
-                  router.pathname === ROUTES.FAQ ? (
+                ) : router.pathname === ROUTES.FAQ ? (
                     <img
                         height={289}
                         width={245}
