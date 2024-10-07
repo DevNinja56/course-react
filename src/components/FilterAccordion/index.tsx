@@ -6,9 +6,10 @@ interface FilterAccordionProps {
     children: React.ReactNode;
     noBorder?: boolean; 
     firstOpen?:boolean;
+    icon?:React.ReactNode;
 }
 
-const FilterAccordion: React.FC<FilterAccordionProps> = ({ title, children, noBorder,firstOpen }) => {
+const FilterAccordion: React.FC<FilterAccordionProps> = ({ title, children, noBorder,firstOpen,icon }) => {
     const [isOpen, setIsOpen] = useState(firstOpen ?? false);
 
     const toggleAccordion = () => {
@@ -21,7 +22,10 @@ const FilterAccordion: React.FC<FilterAccordionProps> = ({ title, children, noBo
                 className="flex justify-between items-center px-4 py-2 cursor-pointer bg-white hover:bg-gray-200"
                 onClick={toggleAccordion}
             >
-                <h2 className="text-lg font-semibold text-gray-800">{title}</h2>
+                <div className="text-lg font-semibold text-gray-800 flex items-center gap-2">
+                    <h1>{icon}</h1>
+                    <h1>{title}</h1>
+                </div>
                 {isOpen ? (
                     <FiChevronUp className="w-5 h-5 text-gray-600" />
                 ) : (

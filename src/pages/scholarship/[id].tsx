@@ -13,12 +13,14 @@ import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import React, { useState } from 'react';
 import { FaCalendar } from 'react-icons/fa6';
-import { AiOutlineCheckCircle } from 'react-icons/ai';
-import { BsCurrencyDollar } from 'react-icons/bs';
 import { MdCategory } from 'react-icons/md';
 import { FaGraduationCap } from 'react-icons/fa';
 import { IoShareSocialSharp } from 'react-icons/io5';
 import { useCurrency } from '@/hooks/currency';
+import { HiMiniCurrencyDollar } from "react-icons/hi2";
+import { FaCheckCircle } from "react-icons/fa";
+
+
 const InnerHtml = dynamic(() => import('@/components/InnerHtml'), {
     ssr: false
 });
@@ -74,7 +76,7 @@ const ScholarshipDetail = ({
                         <div className="h-auto w-[70%] md:w-[85%] mx-auto grid max-[475px]:grid-cols-1 grid-cols-2 xl:grid-cols-4 md:gap-5 justify-around rounded-xl bg-white shadow-md">
                             <div className="flex items-center gap-4 border-b-2 lg:border-none border-gray-200 border-opacity-50 w-full md:w-auto px-4 py-2 sm:p-4 justify-start lg:justify-center">
                                 <div className="md:min-w-52 h-auto flex items-center gap-4">
-                                    <BsCurrencyDollar className="h-6 w-6 sm:h-12 sm:w-12 text-blueColor" />
+                                    <HiMiniCurrencyDollar className="h-6 w-6 sm:h-12 sm:w-12 text-blueColor" />
                                     <div className="flex flex-col text-left">
                                         <p className="font-bold text-xs sm:text-sm md:text-lg text-mainTextColor">
                                             {scholarship.isAmount == true
@@ -125,7 +127,7 @@ const ScholarshipDetail = ({
 
                             <div className="flex items-center gap-4 border-b-2 lg:border-none border-gray-200 border-opacity-50 w-full md:w-auto px-4 py-2 sm:p-4 justify-start lg:justify-center">
                                 <div className="md:min-w-52 h-auto flex items-center gap-4">
-                                    <AiOutlineCheckCircle className="h-6 w-6 sm:h-12 sm:w-12 text-blueColor" />
+                                    <FaCheckCircle className="h-6 w-6 sm:h-12 sm:w-12 text-blueColor" />
                                     <div className="flex flex-col text-left">
                                         <p className="font-bold text-xs sm:text-sm md:text-lg text-mainTextColor">
                                             Applicable
