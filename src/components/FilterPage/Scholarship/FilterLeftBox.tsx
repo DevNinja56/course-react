@@ -8,8 +8,7 @@ import { useSearchedScholarship } from '@/hooks/filterScholarship';
 import FilterAccordion from '@/components/FilterAccordion';
 
 import { AiOutlineBank, AiOutlineDollarCircle } from 'react-icons/ai';
-import { LuGraduationCap } from "react-icons/lu";
-
+import { LuGraduationCap } from 'react-icons/lu';
 
 export const FilterRow = () => (
     <div className="px-4">
@@ -74,14 +73,33 @@ const ScholarshipFilter = () => {
                 )}
             </div>
             <div className="flex flex-col">
-
-                <FilterAccordion title="Institutes" icon={<AiOutlineBank />} firstOpen>
-                    <InstituteFilter data={filters.institutes} isLoading={isLoading} />
+                <FilterAccordion
+                    title="Institutes"
+                    icon={<AiOutlineBank />}
+                    firstOpen
+                    name={'institute'}
+                >
+                    <InstituteFilter
+                        data={filters.institutes}
+                        isLoading={isLoading}
+                    />
                 </FilterAccordion>
-                <FilterAccordion title="Degree Levels" icon={<LuGraduationCap />}>
-                    <DegreeLevelFilter data={filters.degrees} isLoading={isLoading} />
+                <FilterAccordion
+                    title="Degree Levels"
+                    icon={<LuGraduationCap />}
+                    name={'degrees'}
+                >
+                    <DegreeLevelFilter
+                        data={filters.degrees}
+                        isLoading={isLoading}
+                    />
                 </FilterAccordion>
-                <FilterAccordion title="Scholarship Type" icon={<AiOutlineDollarCircle />} noBorder>
+                <FilterAccordion
+                    title="Scholarship Type"
+                    icon={<AiOutlineDollarCircle />}
+                    noBorder
+                    name={'scholarshipType'}
+                >
                     <ScholarshipTypeFilter />
                 </FilterAccordion>
             </div>

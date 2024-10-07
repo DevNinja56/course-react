@@ -109,6 +109,7 @@ const FilterSideBar = ({ setFilterSideBar }: ModalProps) => {
                                 title="Institutes"
                                 icon={<AiOutlineBank />}
                                 firstOpen
+                                name={'institute'}
                             >
                                 <InstituteFilter
                                     data={filters.institutes}
@@ -118,6 +119,7 @@ const FilterSideBar = ({ setFilterSideBar }: ModalProps) => {
                             <FilterAccordion
                                 title="Degree Levels"
                                 icon={<LuGraduationCap />}
+                                name={'degrees'}
                             >
                                 <DegreeLevelFilter
                                     data={filters.degrees}
@@ -128,6 +130,7 @@ const FilterSideBar = ({ setFilterSideBar }: ModalProps) => {
                                 title="Scholarship Type"
                                 icon={<AiOutlineDollarCircle />}
                                 noBorder
+                                name={'scholarshipType'}
                             >
                                 <ScholarshipTypeFilter />
                             </FilterAccordion>

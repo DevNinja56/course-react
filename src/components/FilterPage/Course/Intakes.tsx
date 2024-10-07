@@ -30,7 +30,7 @@ const IntakesFilter: React.FC<PropsType> = ({ isLoading }) => {
                                 id={name.join(',')}
                                 text={name.join(', ')}
                                 name={'intakes'}
-                                value={name}
+                                value={name.join(', ')}
                             />
                         ))
                 )}

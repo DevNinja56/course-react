@@ -26,6 +26,7 @@ export const FilterRow = () => (
 );
 
 const CourseFilter = () => {
+    
     const { clearALlQuery, query } = useFilterQuery();
     const {
         fetchSearchedCoursesRequest: refetch,
@@ -37,6 +38,8 @@ const CourseFilter = () => {
         clearALlQuery();
         refetch();
     };
+
+    
 
     return (
         <div className="rounded-[15px] w-[24%] py-4 pb-5 overflow-y-auto border-[3px] border-[#eaf2ff] hidden lg:block max-h-headerStickyHeight sticky top-[110px] bg-white customScroll ">
@@ -87,31 +90,31 @@ const CourseFilter = () => {
                 )}
             </div>
             <div className="flex flex-col">
-                <FilterAccordion title="Locations" icon={<AiOutlineEnvironment />} firstOpen>
+                <FilterAccordion title="Locations" icon={<AiOutlineEnvironment />} name="location" firstOpen>
                     <LocationsFilter
                         data={filters.locations}
                         isLoading={isLoading}
                     />
                 </FilterAccordion>
-                <FilterAccordion title="Institutes" icon={<AiOutlineBank />}>
+                <FilterAccordion title="Institutes" icon={<AiOutlineBank />} name="institute">
                     <InstituteFilter
                         data={filters.institutes}
                         isLoading={isLoading}
                     />
                 </FilterAccordion>
-                <FilterAccordion title="Degree Levels" icon={<LuGraduationCap />}>
+                <FilterAccordion title="Degree Levels" icon={<LuGraduationCap />} name="degrees">
                     <DegreeLevelFilter
                         data={filters.degrees}
                         isLoading={isLoading}
                     />
                 </FilterAccordion>
-                <FilterAccordion title="Disciplines" icon={<AiOutlineAppstore />}>
+                <FilterAccordion title="Disciplines" icon={<AiOutlineAppstore />} name="specialization">
                     <DisciplinesFilter
                         data={filters.disciplines}
                         isLoading={isLoading}
                     />
                 </FilterAccordion>
-                <FilterAccordion title="Intakes" icon={<AiOutlineCalendar />}>
+                <FilterAccordion title="Intakes" icon={<AiOutlineCalendar />} name="intakes">
                     <IntakesFilter
                         data={filters.intakes}
                         isLoading={isLoading}

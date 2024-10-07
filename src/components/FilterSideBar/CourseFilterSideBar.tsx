@@ -11,7 +11,13 @@ import LocationsFilter from '../FilterPage/Course/Locations';
 import { FilteredButton } from '../FilterPage/FilteredButton';
 import FilterAccordion from '../FilterAccordion';
 import FeeSlider from '../FilterPage/Course/FeeSlider';
-import { AiOutlineAppstore, AiOutlineBank, AiOutlineCalendar, AiOutlineDollarCircle, AiOutlineEnvironment } from 'react-icons/ai';
+import {
+    AiOutlineAppstore,
+    AiOutlineBank,
+    AiOutlineCalendar,
+    AiOutlineDollarCircle,
+    AiOutlineEnvironment
+} from 'react-icons/ai';
 import { LuGraduationCap } from 'react-icons/lu';
 interface ModalProps {
     setFilterSideBar: (show: boolean) => void;
@@ -110,6 +116,7 @@ const FilterSideBar = ({ setFilterSideBar }: ModalProps) => {
                             <FilterAccordion
                                 title="Locations"
                                 icon={<AiOutlineEnvironment />}
+                                name="location"
                                 firstOpen
                             >
                                 <LocationsFilter
@@ -120,6 +127,7 @@ const FilterSideBar = ({ setFilterSideBar }: ModalProps) => {
                             <FilterAccordion
                                 title="Institutes"
                                 icon={<AiOutlineBank />}
+                                name="institute"
                             >
                                 <InstituteFilter
                                     data={filters.institutes}
@@ -129,6 +137,7 @@ const FilterSideBar = ({ setFilterSideBar }: ModalProps) => {
                             <FilterAccordion
                                 title="Degree Levels"
                                 icon={<LuGraduationCap />}
+                                name="degrees"
                             >
                                 <DegreeLevelFilter
                                     data={filters.degrees}
@@ -138,6 +147,7 @@ const FilterSideBar = ({ setFilterSideBar }: ModalProps) => {
                             <FilterAccordion
                                 title="Disciplines"
                                 icon={<AiOutlineAppstore />}
+                                name="specialization"
                             >
                                 <DisciplinesFilter
                                     data={filters.disciplines}
@@ -147,6 +157,7 @@ const FilterSideBar = ({ setFilterSideBar }: ModalProps) => {
                             <FilterAccordion
                                 title="Intakes"
                                 icon={<AiOutlineCalendar />}
+                                name="intakes"
                             >
                                 <IntakesFilter
                                     data={filters.intakes}
@@ -154,7 +165,7 @@ const FilterSideBar = ({ setFilterSideBar }: ModalProps) => {
                                 />
                             </FilterAccordion>
                             <FilterAccordion
-                                title="Fees"
+                                title="Tuition Fees"
                                 icon={<AiOutlineDollarCircle />}
                                 noBorder
                             >
