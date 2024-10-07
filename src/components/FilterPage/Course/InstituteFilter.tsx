@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 // import SearchBox from '../SearchBox';
-import { FilterCheckBox, FilterCheckBoxLoader } from '../FilterCheckBOx';
+import { FilterCheckBox, FilterCheckBoxLoader } from '../FilterCheckBox';
 
 interface PropsType {
     data: {
@@ -32,7 +32,9 @@ const InstituteFilter: React.FC<PropsType> = ({ data, isLoading }) => {
                         ?.filter(
                             ({ institute: name }) =>
                                 !!name &&
-                                name.toLowerCase().includes(search.toLowerCase())
+                                name
+                                    .toLowerCase()
+                                    .includes(search.toLowerCase())
                         )
                         .map(({ institute: name }, i) => (
                             <FilterCheckBox

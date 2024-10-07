@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import SubFilterAccordion from '@/components/FilterAccordion/SubFilterAccordion';
-import { FilterCheckBox, FilterCheckBoxLoader } from '../FilterCheckBOx';
+import { FilterCheckBox, FilterCheckBoxLoader } from '../FilterCheckBox';
 // import SearchBox from '../SearchBox';
 
 interface SpecializationType {
@@ -48,15 +48,21 @@ const DisciplinesFilter: React.FC<PropsType> = ({ data, isLoading }) => {
                                 title={name}
                                 noBorder
                             >
-                                {specialization.map(({ name: specializationName }, j) => (
-                                    <FilterCheckBox
-                                        key={'specialization--list--' + specializationName + j}
-                                        id={specializationName + '--' + j}
-                                        text={specializationName}
-                                        name={'specialization'}
-                                        value={specializationName}
-                                    />
-                                ))}
+                                {specialization.map(
+                                    ({ name: specializationName }, j) => (
+                                        <FilterCheckBox
+                                            key={
+                                                'specialization--list--' +
+                                                specializationName +
+                                                j
+                                            }
+                                            id={specializationName + '--' + j}
+                                            text={specializationName}
+                                            name={'specialization'}
+                                            value={specializationName}
+                                        />
+                                    )
+                                )}
                             </SubFilterAccordion>
                         ))
                 )}

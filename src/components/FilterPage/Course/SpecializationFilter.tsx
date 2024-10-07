@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 // import SearchBox from '../SearchBox';
-import { FilterCheckBox, FilterCheckBoxLoader } from '../FilterCheckBOx';
+import { FilterCheckBox, FilterCheckBoxLoader } from '../FilterCheckBox';
 
 interface PropsType {
     data: {
@@ -11,13 +11,12 @@ interface PropsType {
 
 const SpecializationFilter: React.FC<PropsType> = ({
     data: specializationList,
-    isLoading,
+    isLoading
 }) => {
     const [search] = useState<string>('');
 
     return (
         <div className="flex flex-col gap-y-3">
-
             {/* {specializationList.length > 5 && (
                 <div className="flex justify-between items-center px-4 relative">
                     <SearchBox

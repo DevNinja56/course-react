@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FilterCheckBox, FilterCheckBoxLoader } from '../FilterCheckBOx';
+import { FilterCheckBox, FilterCheckBoxLoader } from '../FilterCheckBox';
 import { BiChevronRight } from 'react-icons/bi';
 import { useFilterQuery } from '@/hooks/filterQuery';
 import * as _ from 'lodash';
@@ -19,7 +19,6 @@ const DegreeLevelFilter: React.FC<propsType> = ({ data, isLoading }) => {
 
     return (
         <div className="flex flex-col gap-y-3">
-
             {isLoading ? (
                 <FilterCheckBoxLoader />
             ) : (
@@ -38,7 +37,7 @@ const DegreeLevelFilter: React.FC<propsType> = ({ data, isLoading }) => {
                         <div className="relative flex w-full justify-around items-center">
                             <FilterCheckBox
                                 key={'country--list--' + i}
-                                id={name+ '--' + i}
+                                id={name + '--' + i}
                                 text={name}
                                 value={name}
                                 name={'degreeType'}

@@ -1,5 +1,5 @@
 import React from 'react';
-import { FilterCheckBox, FilterCheckBoxLoader } from '../FilterCheckBOx';
+import { FilterCheckBox, FilterCheckBoxLoader } from '../FilterCheckBox';
 
 interface PropsType {
     data: {
