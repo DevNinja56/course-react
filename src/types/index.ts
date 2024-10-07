@@ -210,12 +210,13 @@ export type courseType = {
     favoriteId?: string[];
 };
 
+export interface SpecializationType {
+    name: string;
+    _id: string;
+}
 export type filterCourseType = {
     intakes: {
         intakes: string[];
-    }[];
-    specializations: {
-        specialization: string;
     }[];
     regions: {
         region: string;
@@ -233,7 +234,8 @@ export type filterCourseType = {
         degree: degreeType;
     }[];
     disciplines: {
-        discipline: string;
+        name: string;
+        specialization: SpecializationType[];
     }[];
 };
 

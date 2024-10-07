@@ -22,7 +22,6 @@ const initialState: getAllCourseTypes = {
         countries: [],
         institutes: [],
         disciplines: [],
-        specializations: [],
         intakes: [],
         degrees: [],
         locations: []

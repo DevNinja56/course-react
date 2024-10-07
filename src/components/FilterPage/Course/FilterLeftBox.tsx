@@ -4,7 +4,6 @@ import DisciplinesFilter from './DisciplinesFilter';
 import { useFilterQuery } from '@/hooks/filterQuery';
 import { useSearchedCourses } from '@/hooks/filterCourses';
 import { FilteredButton } from '../FilteredButton';
-import SpecializationFilter from './SpecializationFilter';
 import InstituteFilter from './InstituteFilter';
 import FeeSlider from './FeeSlider';
 import LocationsFilter from './Locations';
@@ -83,9 +82,6 @@ const CourseFilter = () => {
                 </FilterAccordion>
                 <FilterAccordion title="Disciplines">
                     <DisciplinesFilter data={filters.disciplines} isLoading={isLoading} />
-                </FilterAccordion>
-                <FilterAccordion title="Specializations">
-                    <SpecializationFilter data={filters.specializations} isLoading={isLoading} />
                 </FilterAccordion>
                 <FilterAccordion title="Intakes">
                     <IntakesFilter data={filters.intakes} isLoading={isLoading} />

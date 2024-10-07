@@ -3,7 +3,6 @@ import React from 'react';
 import { FilterRow } from '../FilterPage/Course/FilterLeftBox';
 import DegreeLevelFilter from '../FilterPage/Course/DegreeLevelFilter';
 import DisciplinesFilter from '../FilterPage/Course/DisciplinesFilter';
-import SpecializationFilter from '../FilterPage/Course/SpecializationFilter';
 import IntakesFilter from '../FilterPage/Course/Intakes';
 import InstituteFilter from '../FilterPage/Course/InstituteFilter';
 import { useFilterQuery } from '@/hooks/filterQuery';
@@ -128,12 +127,6 @@ const FilterSideBar = ({ setFilterSideBar }: ModalProps) => {
                             <FilterAccordion title="Disciplines">
                                 <DisciplinesFilter
                                     data={filters.disciplines}
-                                    isLoading={isLoading}
-                                />
-                            </FilterAccordion>
-                            <FilterAccordion title="Specializations">
-                                <SpecializationFilter
-                                    data={filters.specializations}
                                     isLoading={isLoading}
                                 />
                             </FilterAccordion>
