@@ -19,9 +19,7 @@ const DegreeLevelFilter: React.FC<propsType> = ({ data, isLoading }) => {
 
     return (
         <div className="flex flex-col gap-y-3">
-            <h1 className="text-lg text-darkGrayColor font-medium px-4">
-                Degree Level
-            </h1>
+
             {isLoading ? (
                 <FilterCheckBoxLoader />
             ) : (

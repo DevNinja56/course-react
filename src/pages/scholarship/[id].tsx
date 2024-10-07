@@ -12,18 +12,26 @@ import { GetServerSideProps } from 'next';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import React, { useState } from 'react';
-import { FaCalendar, FaMoneyBillWave } from 'react-icons/fa6';
-import { GiTrophy } from 'react-icons/gi';
-import { GoClockFill } from 'react-icons/go';
+import { FaCalendar } from 'react-icons/fa6';
+import { AiOutlineCheckCircle } from 'react-icons/ai';
+import { BsCurrencyDollar } from 'react-icons/bs';
+import { MdCategory } from 'react-icons/md';
+import { FaGraduationCap } from 'react-icons/fa';
 import { IoShareSocialSharp } from 'react-icons/io5';
+import { useCurrency } from '@/hooks/currency';
 const InnerHtml = dynamic(() => import('@/components/InnerHtml'), {
     ssr: false
 });
 
-const CourseDetail = ({ data: scholarship }: { data: scholarshipType }) => {
+const ScholarshipDetail = ({
+    data: scholarship
+}: {
+    data: scholarshipType;
+}) => {
+    const { setCurrencyValue } = useCurrency();
+
     const { updateModal } = useUi();
     const [isActive] = useState<boolean | null>(!!scholarship?.favoriteId?.[0]);
-
     return (
         <>
             {!scholarship ? (
@@ -38,7 +46,7 @@ const CourseDetail = ({ data: scholarship }: { data: scholarshipType }) => {
                             className="top-1/3 absolute -left-3 md:-left-5 h-8 w-8 md:h-16 md:w-16 lg:h-24 lg:w-24 z-10"
                             src="/images/CourseDetail/Circle 3.svg"
                         />
-                        <div className="w-full py-5 pb-10 md:py-10 xl:py-20 flex justify-center xl:container px-4 md:px-[50px] lg:px-2 2xl:px-8">
+                        <div className="w-full p-5 flex justify-center xl:container px-4 md:px-[50px] lg:px-2 2xl:px-8">
                             <img
                                 height={375}
                                 width={1240}
@@ -62,10 +70,86 @@ const CourseDetail = ({ data: scholarship }: { data: scholarshipType }) => {
                             src="/images/CourseDetail/Ciecle 4.svg"
                         />
                     </div>
-                    <div className="flex items-center w-full xl:container px-4 md:px-[50px] lg:px-2 2xl:px-8 mx-auto transition-all duration-300 flex-col gap-6 mb-32">
+                    <div className="xl:container mx-auto relative bottom-16 z-[35]">
+                        <div className="h-auto w-[70%] md:w-[85%] mx-auto grid max-[475px]:grid-cols-1 grid-cols-2 xl:grid-cols-4 md:gap-5 justify-around rounded-xl bg-white shadow-md">
+                            <div className="flex items-center gap-4 border-b-2 lg:border-none border-gray-200 border-opacity-50 w-full md:w-auto px-4 py-2 sm:p-4 justify-start lg:justify-center">
+                                <div className="md:min-w-52 h-auto flex items-center gap-4">
+                                    <BsCurrencyDollar className="h-6 w-6 sm:h-12 sm:w-12 text-blueColor" />
+                                    <div className="flex flex-col text-left">
+                                        <p className="font-bold text-xs sm:text-sm md:text-lg text-mainTextColor">
+                                            {scholarship.isAmount == true
+                                                ? 'Amount'
+                                                : 'Percentage'}
+                                        </p>
+                                        <p className="text-[10px] sm:text-sm lg:text-base text-lightGrayColor">
+                                            {scholarship.isAmount
+                                                ? setCurrencyValue(
+                                                      +scholarship.amount,
+                                                      'GBP'
+                                                  )
+                                                : `${scholarship.percentage}%`}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="flex items-center gap-4 border-b-2 lg:border-none border-gray-200 border-opacity-50 w-full md:w-auto px-4 py-2 sm:p-4 justify-start lg:justify-center">
+                                <div className="md:min-w-52 h-auto flex items-center gap-4">
+                                    <MdCategory className="h-6 w-6 sm:h-12 sm:w-12 text-blueColor" />
+                                    <div className="flex flex-col text-left">
+                                        <p className="font-bold text-xs sm:text-sm md:text-lg text-mainTextColor">
+                                            Type
+                                        </p>
+                                        <p className="text-[10px] sm:text-sm lg:text-base text-lightGrayColor">
+                                            {scholarship.type}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="flex items-center gap-4 border-b-2 lg:border-none border-gray-200 border-opacity-50 w-full md:w-auto px-4 py-2 sm:p-4 justify-start lg:justify-center">
+                                <div className="md:min-w-52 h-auto flex items-center gap-4">
+                                    <FaGraduationCap className="h-6 w-6 sm:h-12 sm:w-12 text-blueColor" />
+                                    <div className="flex flex-col text-left">
+                                        <p className="font-bold text-xs sm:text-sm md:text-lg text-mainTextColor">
+                                            Level
+                                        </p>
+                                        <p className="text-[10px] sm:text-sm lg:text-base text-lightGrayColor">
+                                            {scholarship?.degree
+                                                ?.map((degree) => degree.type)
+                                                .join('-') ?? 'No Level Found'}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="flex items-center gap-4 border-b-2 lg:border-none border-gray-200 border-opacity-50 w-full md:w-auto px-4 py-2 sm:p-4 justify-start lg:justify-center">
+                                <div className="md:min-w-52 h-auto flex items-center gap-4">
+                                    <AiOutlineCheckCircle className="h-6 w-6 sm:h-12 sm:w-12 text-blueColor" />
+                                    <div className="flex flex-col text-left">
+                                        <p className="font-bold text-xs sm:text-sm md:text-lg text-mainTextColor">
+                                            Applicable
+                                        </p>
+                                        <p className="text-[10px] sm:text-sm lg:text-base text-lightGrayColor">
+                                            {scholarship.applicable}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="flex items-center w-full xl:container px-4 md:px-[50px] lg:px-2 2xl:px-8 mx-auto transition-all duration-300 flex-col gap-6">
                         <div className="w-full flex flex-wrap gap-2 gap-y-4 md:gap-y-8 justify-between">
                             <h1 className="text-mainTextColor text-xl md:text-3xl font-bold">
-                                {`${scholarship?.name} - ${scholarship?.amount}`}
+                                {`${scholarship?.name} - ${
+                                    scholarship?.isAmount
+                                        ? setCurrencyValue(
+                                              +scholarship.amount,
+                                              'GBP'
+                                          )
+                                        : `${scholarship.percentage}%`
+                                }`}
                             </h1>
                             <div className="flex pr-0">
                                 <div className="flex flex-wrap items-center gap-1 md:gap-2 lg:gap-3">
@@ -105,10 +189,11 @@ const CourseDetail = ({ data: scholarship }: { data: scholarshipType }) => {
                                 </div>
                             </div>
                         </div>
+
                         <div className="flex flex-col lg:flex-row gap-0 xl:gap-16 w-full justify-between">
-                            <div className="w-full lg:w-[70%] xl:w-2/3 h-courseStickyHeight static lg:sticky top-[110px] no-scrollbar mb-0 md:mb-0 lg:mb-96">
+                            <div className="w-full lg:w-[70%] xl:w-2/3 lg:sticky top-[110px] no-scrollbar mb-0 ">
                                 <div className=" transition-all duration-300">
-                                    <div className="flex flex-col gap-y-6 mb-16 md:mb-20">
+                                    <div className="flex flex-col gap-y-6 mb-3">
                                         <div className="tabs-container capitalize">
                                             <Tabs
                                                 data={[
@@ -177,10 +262,15 @@ const CourseDetail = ({ data: scholarship }: { data: scholarshipType }) => {
                                                                     Amount
                                                                 </h3>
                                                                 <p className="text-sm md:text-base">
-                                                                    {
-                                                                        scholarship.amount
-                                                                    }
+                                                                    {scholarship.isAmount ==
+                                                                    true
+                                                                        ? setCurrencyValue(
+                                                                              +scholarship.amount,
+                                                                              'GBP'
+                                                                          )
+                                                                        : `${scholarship.percentage}%`}
                                                                 </p>
+
                                                                 {scholarship?.text_amount && (
                                                                     <div className="text-sm md:text-base">
                                                                         <InnerHtml
@@ -198,7 +288,7 @@ const CourseDetail = ({ data: scholarship }: { data: scholarshipType }) => {
                                             />
                                         </div>
                                     </div>
-                                    <div className="py-6 border-t-2 border-borderColor flex items-center justify-between w-full mb-8 md:mb-20">
+                                    <div className="py-6 border-t-2 border-borderColor flex items-center justify-between w-full">
                                         <h1 className="text-base md:text-xl font-semibold text-textLightBlackColor">
                                             Get more details
                                         </h1>
@@ -294,46 +384,6 @@ const CourseDetail = ({ data: scholarship }: { data: scholarshipType }) => {
                                 <div className="bg-white rounded-[10px] w-full z-10 shadow-RequirementBox mt-4 py-3">
                                     <div className="flex flex-col capitalize">
                                         <div className="flex items-center gap-4 pl-5 border-b-2 border-gray-200 border-opacity-50 py-4">
-                                            <FaMoneyBillWave className="h-8 w-8 text-blueColor" />
-                                            <div className="flex flex-col gap-1">
-                                                <p className="font-bold text-base text-mainTextColor">
-                                                    Type
-                                                </p>
-                                                <p className="text-lightGrayColor text-base">
-                                                    {scholarship.type}
-                                                </p>
-                                            </div>
-                                        </div>
-
-                                        <div className="flex items-center gap-4 pl-5 border-b-2 border-gray-200 border-opacity-50 py-4">
-                                            <GiTrophy className="h-8 w-8 text-blueColor" />
-                                            <div className="flex flex-col gap-[6px]">
-                                                <p className="font-bold text-base text-mainTextColor">
-                                                    Level
-                                                </p>
-                                                <p className="text-lightGrayColor text-base">
-                                                    {scholarship?.degree
-                                                        ?.map(
-                                                            (degree) =>
-                                                                degree.type
-                                                        )
-                                                        ?.join('-') ??
-                                                        'No Level Found'}
-                                                </p>
-                                            </div>
-                                        </div>
-                                        <div className="flex items-center gap-4 pl-5 border-b-2 border-gray-200 border-opacity-50 py-4">
-                                            <GoClockFill className="h-8 w-8 text-blueColor" />
-                                            <div className="flex flex-col gap-[6px]">
-                                                <p className="font-bold text-base text-mainTextColor">
-                                                    Applicable
-                                                </p>
-                                                <p className="text-lightGrayColor text-base">
-                                                    {scholarship.applicable}
-                                                </p>
-                                            </div>
-                                        </div>
-                                        <div className="flex items-center gap-4 pl-5 border-b-2 border-gray-200 border-opacity-50 py-4">
                                             <FaCalendar className="h-8 w-8 text-blueColor" />
                                             <div className="flex flex-col gap-[6px]">
                                                 <p className="font-bold text-base text-mainTextColor">
@@ -346,7 +396,7 @@ const CourseDetail = ({ data: scholarship }: { data: scholarshipType }) => {
                                                 </p>
                                             </div>
                                         </div>
-                                        <div className="flex items-center gap-4 pl-5 border-b-2 border-gray-200 border-opacity-50 py-4">
+                                        <div className="flex items-center gap-4 pl-5 border-opacity-50 py-4">
                                             <FaCalendar className="h-8 w-8 text-blueColor" />
                                             <div className="flex flex-col gap-[6px]">
                                                 <p className="font-bold text-base text-mainTextColor">
@@ -401,4 +451,4 @@ export const getServerSideProps: GetServerSideProps<{
     }
 };
 
-export default CourseDetail;
+export default ScholarshipDetail;

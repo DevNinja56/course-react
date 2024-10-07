@@ -12,9 +12,9 @@ const FAQ = () => {
     return (
         <>
             <div
-                className={`w-full flex items-center justify-center h-[200px]`}
+                className={`w-full flex items-center justify-center h-[200px] `}
             >
-                <div className="flex flex-col gap-4 justify-center items-center">
+                <div className="flex flex-col gap-4 justify-center items-center ">
                     <p className="text-blueColor text-xl md:text-[23px] font-bold">
                         Have a Question?
                     </p>

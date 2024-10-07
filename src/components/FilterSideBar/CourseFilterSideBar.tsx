@@ -1,6 +1,5 @@
 // import Image from 'next/image';
 import React from 'react';
-import CountriesFilter from '../FilterPage/CountriesFilter';
 import { FilterRow } from '../FilterPage/Course/FilterLeftBox';
 import DegreeLevelFilter from '../FilterPage/Course/DegreeLevelFilter';
 import DisciplinesFilter from '../FilterPage/Course/DisciplinesFilter';
@@ -11,6 +10,8 @@ import { useFilterQuery } from '@/hooks/filterQuery';
 import { useSearchedCourses } from '@/hooks/filterCourses';
 import LocationsFilter from '../FilterPage/Course/Locations';
 import { FilteredButton } from '../FilterPage/FilteredButton';
+import FilterAccordion from '../FilterAccordion';
+import FeeSlider from '../FilterPage/Course/FeeSlider';
 
 interface ModalProps {
     setFilterSideBar: (show: boolean) => void;
@@ -53,8 +54,8 @@ const FilterSideBar = ({ setFilterSideBar }: ModalProps) => {
                             />
                         </div>
                     </div>
-                    <div className="h-[483px] overflow-y-auto py-[29px] px-4">
-                        <div className="w-full flex justify-between items-center mb-7 px-4">
+                    <div className=" overflow-scroll py-[29px] px-4 h-[85vh]">
+                        <div className="w-full flex justify-between items-center mb-7 px-4 ">
                             <h1 className="font-bold text-[23px] text-mainTextColor">
                                 Filters
                             </h1>
@@ -105,41 +106,46 @@ const FilterSideBar = ({ setFilterSideBar }: ModalProps) => {
                                 </div>
                             </div>
                         )}
-                        <div className="flex flex-col gap-y-6">
-                            <CountriesFilter
-                                data={filters.countries}
-                                isLoading={isLoading}
-                            />
-                            <FilterRow />
-                            <DegreeLevelFilter
-                                data={filters.degrees}
-                                isLoading={isLoading}
-                            />
-                            <FilterRow />
-                            <DisciplinesFilter
-                                data={filters.disciplines}
-                                isLoading={isLoading}
-                            />
-                            <FilterRow />
-                            <SpecializationFilter
-                                data={filters.specializations}
-                                isLoading={isLoading}
-                            />
-                            <FilterRow />
-                            <LocationsFilter
-                                data={filters.locations}
-                                isLoading={isLoading}
-                            />
-                            <FilterRow />
-                            <InstituteFilter
-                                data={filters.institutes}
-                                isLoading={isLoading}
-                            />
-                            <FilterRow />
-                            <IntakesFilter
-                                data={filters.intakes}
-                                isLoading={isLoading}
-                            />
+                        <div className="flex flex-col">
+                            <FilterAccordion title="Locations">
+                                <LocationsFilter
+                                    data={filters.locations}
+                                    isLoading={isLoading}
+                                />
+                            </FilterAccordion>
+                            <FilterAccordion title="Institutes">
+                                <InstituteFilter
+                                    data={filters.institutes}
+                                    isLoading={isLoading}
+                                />
+                            </FilterAccordion>
+                            <FilterAccordion title="Degree Levels">
+                                <DegreeLevelFilter
+                                    data={filters.degrees}
+                                    isLoading={isLoading}
+                                />
+                            </FilterAccordion>
+                            <FilterAccordion title="Disciplines">
+                                <DisciplinesFilter
+                                    data={filters.disciplines}
+                                    isLoading={isLoading}
+                                />
+                            </FilterAccordion>
+                            <FilterAccordion title="Specializations">
+                                <SpecializationFilter
+                                    data={filters.specializations}
+                                    isLoading={isLoading}
+                                />
+                            </FilterAccordion>
+                            <FilterAccordion title="Intakes">
+                                <IntakesFilter
+                                    data={filters.intakes}
+                                    isLoading={isLoading}
+                                />
+                            </FilterAccordion>
+                            <FilterAccordion title="Fees" noBorder>
+                                <FeeSlider />
+                            </FilterAccordion>
                         </div>
                     </div>
                 </div>

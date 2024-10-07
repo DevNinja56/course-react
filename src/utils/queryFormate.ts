@@ -1,4 +1,4 @@
-import { sortState } from '@/components/FilterPage/SortBy';
+import { sortState } from '@/components/FilterPage/Scholarship/SortBy';
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export const formateCourseQuery = (query: { [key: string]: any }) => {
