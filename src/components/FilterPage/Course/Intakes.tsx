@@ -1,5 +1,5 @@
 import React from 'react';
-import { FilterCheckBox, FilterCheckBoxLoader } from '../FilterCheckBOx';
+import { FilterCheckBox, FilterCheckBoxLoader } from '../FilterCheckBox';
 
 interface PropsType {
     data: {
@@ -30,7 +30,7 @@ const IntakesFilter: React.FC<PropsType> = ({ isLoading }) => {
                                 id={name.join(',')}
                                 text={name.join(', ')}
                                 name={'intakes'}
-                                value={name}
+                                value={name.join(', ')}
                             />
                         ))
                 )}

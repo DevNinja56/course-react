@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 // import SearchBox from '../SearchBox';
-import { FilterCheckBox, FilterCheckBoxLoader } from '../FilterCheckBOx';
+import { FilterCheckBox, FilterCheckBoxLoader } from '../FilterCheckBox';
 
 interface PropsType {
     data: {
@@ -9,11 +9,22 @@ interface PropsType {
     isLoading: boolean;
 }
 
+
 const InstituteFilter: React.FC<PropsType> = ({ data, isLoading }) => {
     const [search] = useState<string>('');
 
     return (
         <div className="flex flex-col gap-y-3">
+            {/* {data.length > 5 && (
+                <div className="flex justify-between items-center px-4 relative">
+                    <SearchBox
+                        searchVal={setSearch}
+                        value={search}
+                        className="max-w-full"
+                        placeholder="Search Disciplines"
+                    />
+                </div>
+            )} */}
             {/* {data.length > 5 && (
                 <div className="flex justify-between items-center px-4 relative">
                     <SearchBox
@@ -32,7 +43,9 @@ const InstituteFilter: React.FC<PropsType> = ({ data, isLoading }) => {
                         ?.filter(
                             ({ institute: name }) =>
                                 !!name &&
-                                name.toLowerCase().includes(search.toLowerCase())
+                                name
+                                    .toLowerCase()
+                                    .includes(search.toLowerCase())
                         )
                         .map(({ institute: name }, i) => (
                             <FilterCheckBox

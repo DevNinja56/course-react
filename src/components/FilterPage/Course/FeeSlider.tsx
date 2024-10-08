@@ -19,9 +19,6 @@ const FeeSlider = () => {
 
     return (
         <div className="flex justify-between  flex-col px-4 relative ">
-            <h5 className="text-lg text-darkGrayColor font-medium">
-                Tuition Fee
-            </h5>
             <div className="rangeSLiderWithMinMax flex flex-col gap-5 relative">
                 <div className="w-full  text-xs">
                     <div className="w-full flex justify-between mt-2">

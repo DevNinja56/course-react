@@ -5,7 +5,10 @@ import { useFilterQuery } from '@/hooks/filterQuery';
 import { FilteredButton } from '../FilteredButton';
 import InstituteFilter from '../Course/InstituteFilter';
 import { useSearchedScholarship } from '@/hooks/filterScholarship';
-import FilterAccordion from '@/components/FilterAccordion'; 
+import FilterAccordion from '@/components/FilterAccordion';
+
+import { AiOutlineBank, AiOutlineDollarCircle } from 'react-icons/ai';
+import { LuGraduationCap } from 'react-icons/lu';
 
 export const FilterRow = () => (
     <div className="px-4">
@@ -70,19 +73,33 @@ const ScholarshipFilter = () => {
                 )}
             </div>
             <div className="flex flex-col">
-                {/* <FilterAccordion title="Regions">
-                    <RegionsFilter data={filters.regions} isLoading={isLoading} />
+                <FilterAccordion
+                    title="Institutes"
+                    icon={<AiOutlineBank />}
+                    firstOpen
+                    name={'institute'}
+                >
+                    <InstituteFilter
+                        data={filters.institutes}
+                        isLoading={isLoading}
+                    />
                 </FilterAccordion>
-                <FilterAccordion title="Countries">
-                    <CountriesFilter data={filters.countries} isLoading={isLoading} />
-                </FilterAccordion> */}
-                <FilterAccordion title="Institutes">
-                    <InstituteFilter data={filters.institutes} isLoading={isLoading} />
+                <FilterAccordion
+                    title="Degree Levels"
+                    icon={<LuGraduationCap />}
+                    name={'degrees'}
+                >
+                    <DegreeLevelFilter
+                        data={filters.degrees}
+                        isLoading={isLoading}
+                    />
                 </FilterAccordion>
-                <FilterAccordion title="Degree Levels">
-                    <DegreeLevelFilter data={filters.degrees} isLoading={isLoading} />
-                </FilterAccordion>
-                <FilterAccordion title="Scholarship Type" noBorder>
+                <FilterAccordion
+                    title="Scholarship Type"
+                    icon={<AiOutlineDollarCircle />}
+                    noBorder
+                    name={'scholarshipType'}
+                >
                     <ScholarshipTypeFilter />
                 </FilterAccordion>
             </div>

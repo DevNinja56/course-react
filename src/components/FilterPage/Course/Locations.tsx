@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 // import SearchBox from '../SearchBox';
-import { FilterCheckBox, FilterCheckBoxLoader } from '../FilterCheckBOx';
+import { FilterCheckBox, FilterCheckBoxLoader } from '../FilterCheckBox';
 
 interface PropsType {
     data: {
@@ -14,7 +14,7 @@ const LocationsFilter: React.FC<PropsType> = ({ data, isLoading }) => {
 
     return (
         <div className="flex flex-col gap-y-3">
-           {/* {data.length > 5 && (
+            {/* {data.length > 5 && (
                 <div className="flex justify-between items-center px-4 relative">
                     <SearchBox
                         searchVal={setSearch}
@@ -32,7 +32,9 @@ const LocationsFilter: React.FC<PropsType> = ({ data, isLoading }) => {
                         ?.filter(
                             ({ location }) =>
                                 !!location &&
-                                location.toLowerCase().includes(search.toLowerCase())
+                                location
+                                    .toLowerCase()
+                                    .includes(search.toLowerCase())
                         )
                         .map(({ location: name }) => (
                             <FilterCheckBox
