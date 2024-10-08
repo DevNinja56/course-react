@@ -1,6 +1,6 @@
 import React from 'react';
 import { scholarshipMonths } from './data';
-import { FilterCheckBox } from '../FilterCheckBox';
+import { FilterCheckBox } from '../FilterBoxCheck';
 
 const ScholarshipMonthFilter = () => {
     return (
