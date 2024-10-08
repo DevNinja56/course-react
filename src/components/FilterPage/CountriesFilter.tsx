@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 // import { useGetCountriesQuery } from '@/store/slices/allRequests';
-import { FilterCheckBox, FilterCheckBoxLoader } from './FilterCheckBox';
+import { FilterCheckBox, FilterCheckBoxLoader } from './FilterBoxCheck';
 import SearchBox from './SearchBox';
 
 interface propsType {
