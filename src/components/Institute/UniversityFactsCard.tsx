@@ -3,7 +3,7 @@ import React from 'react';
 interface UniversityFactsCardProps {
     icon: React.ReactElement;
     types: string;
-    text: string;
+    text: string | JSX.Element;
 }
 
 const UniversityFactsCard = ({

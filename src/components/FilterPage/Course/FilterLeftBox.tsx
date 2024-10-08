@@ -62,12 +62,7 @@ const CourseFilter = () => {
                                 if (Array.isArray(item)) {
                                     return item.map((val, i) => (
                                         <FilteredButton
-                                            key={
-                                                'query--key----' +
-                                                idx +
-                                                '---' +
-                                                i
-                                            }
+                                            key={'query--key----' + idx + '---' + i}
                                             itemKey={key}
                                             itemValue={val ?? 'button'}
                                         />

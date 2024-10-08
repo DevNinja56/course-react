@@ -687,22 +687,12 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                                         <Button
                                             className="py-4 rounded-md text-sm md:text-base font-semibold w-full"
                                             text="Start Application"
-                                            link={ROUTES.APPLY}
-                                            // onClick={() => {
-                                            //     addInstituteState({
-                                            //         label: course.institute
-                                            //             .name,
-                                            //         value: course.institute.id
-                                            //     });
-                                            //     addDegreeState({
-                                            //         label: course.degree.name,
-                                            //         value: course.degree.id
-                                            //     });
-                                            //     addCourseState({
-                                            //         label: course.name,
-                                            //         value: course.id
-                                            //     });
-                                            // }}
+                                            onClick={() =>
+                                                updateModal({
+                                                    type: modalType.start_application,
+                                                    state: { course }
+                                                })
+                                            }
                                         />
                                     </div>
                                     <div className="w-full">

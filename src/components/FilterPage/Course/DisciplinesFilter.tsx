@@ -30,6 +30,16 @@ const DisciplinesFilter: React.FC<PropsType> = ({ data, isLoading }) => {
                     />
                 </div>
             )} */}
+            {/* {data.length > 5 && (
+                <div className="flex justify-between items-center px-4 relative">
+                    <SearchBox
+                        searchVal={setSearch}
+                        value={search}
+                        className="max-w-full"
+                        placeholder="Search Disciplines"
+                    />
+                </div>
+            )} */}
             <div className="flex flex-col gap-y-1 max-h-[360px] overflow-hidden overflow-y-auto setScrollBar">
                 {isLoading ? (
                     <FilterCheckBoxLoader />

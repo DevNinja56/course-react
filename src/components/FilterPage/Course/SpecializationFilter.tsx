@@ -11,7 +11,7 @@ interface PropsType {
 
 const SpecializationFilter: React.FC<PropsType> = ({
     data: specializationList,
-    isLoading
+    isLoading,
 }) => {
     const [search] = useState<string>('');
 

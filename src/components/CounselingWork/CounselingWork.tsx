@@ -9,7 +9,9 @@ const CounselingWork = () => {
         <div
             className={`w-full relative pb-0 ${
                 router.pathname === '/apply' ||
-                router.pathname?.includes(ROUTES.COURSE.replace(':title', '')) ||
+                router.pathname?.includes(
+                    ROUTES.COURSE.replace(':title', '')
+                ) ||
                 router.pathname?.includes(
                     ROUTES.SCHOLARSHIP.replace(':title', '')
                 )
@@ -57,7 +59,6 @@ const CounselingWork = () => {
                             ROUTES.SCHOLARSHIP.replace(':title', '')
                         )
                             ? `${
-                                  router.pathname === ROUTES.APPLY ||
                                   router.pathname?.includes(
                                       ROUTES.COURSE.replace(':title', '')
                                   )

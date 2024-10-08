@@ -17,7 +17,7 @@ const Tabs: React.FC<propsType> = ({ data }) => {
 
     return (
         <>
-            <div className="text-sm font-medium text-center text-gray-500 md:border-b-2 md:border-gray-300">
+            <div className="text-sm font-medium text-center text-gray-500 md:border-b-2 md:border-gray-300 w-full">
                 <ul className="flex-col md:flex-row flex w-full justify-start -mb-px capitalize">
                     {data.map(({ title }, i) => (
                         <li
