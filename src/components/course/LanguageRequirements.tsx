@@ -15,44 +15,44 @@ const LanguageRequirements = ({
         w: 'Writing'
     };
 
+    const titleNames: { [key: string]: string } = {
+        ielts: 'IELTS',
+        pte: 'PTE',
+        oxford: 'Oxford ELLT',
+        language: 'Language Cert',
+        duolingo: 'Duolingo'
+    };
+
     return (
-        <div className="flex flex-col gap-4 items-center w-full uppercase  ">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 w-full">
             {Object.entries(language).map(([key, value], i) => (
                 <div
-                    className="flex flex-wrap gap-3 w-full justify-center items-center"
-                    key={'language-container--' + i}
+                    key={'language-card-' + i}
+                    className="bg-card border border-border p-4 rounded-lg flex flex-col items-center w-full group hover:border-blueColor transition-all duration-150"
                 >
                     <Image
-                        src={`/images/CourseDetail/${key}.jpeg`}
-                        alt="flag"
-                        width={150}
-                        height={70}
-                        className="block ml-2 border-blueColor border rounded-md max-h-[70px]"
+                        width={224}
+                        height={128}
+                        src={`/images/CourseDetail/${key}.png`}
+                        alt={`${key} Logo`}
+                        className="block mb-4 aspect-[112/55] w-4/6 border-blueColor border rounded-md object-cover group-hover:w-9/12 group-hover:mb-2 transition-all duration-150 "
                     />
-                    <table className="border border-blueColor  ">
-                        <tbody>
-                            <tr>
-                                {Object.keys(value).map((key, i) => (
-                                    <th
-                                        key={key + i + '--key--'}
-                                        className="px-4 py-2 text-center border border-blueColor text-blueColor font-bold uppercase"
-                                    >
-                                        {data[key]}
-                                    </th>
-                                ))}
-                            </tr>
-                            <tr key={'language-table--' + i}>
-                                {Object.keys(value).map((key, i) => (
-                                    <td
-                                        key={key + i + '--value--'}
-                                        className="px-4 py-2 text-center border border-blueColor"
-                                    >
-                                        {value[key as keyof typeof value]}
-                                    </td>
-                                ))}
-                            </tr>
-                        </tbody>
-                    </table>
+                    <div className="text-lg font-bold mb-2">
+                        {titleNames?.[key] ?? 'No Title'}
+                    </div>
+                    <div className="border border-blueColor w-full flex flex-col rounded-md group-hover:text-blueColor transition-all duration-150">
+                        {Object.keys(value).map((key, subIndex) => (
+                            <div
+                                key={`value-${subIndex}`}
+                                className="px-4 py-2 text-center border-b border-blueColor last-of-type:border-0 "
+                            >
+                                <span>{data[key]}</span> /{' '}
+                                <span>
+                                    {(value as { [key: string]: string })[key]}
+                                </span>
+                            </div>
+                        ))}
+                    </div>
                 </div>
             ))}
         </div>

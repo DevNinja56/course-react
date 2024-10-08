@@ -26,7 +26,7 @@ const RequirementBox = ({
                 </p>
             )}
             <div
-                className={`px-6 py-5 flex items-center justify-between w-full bg-white shadow-RequirementBox rounded-lg cursor-pointer ${isActive && 'border-green-600 border-2'} `}
+                className={`px-6 py-5 mb-6 flex items-center justify-between w-full md:w-[70%] bg-white shadow-RequirementBox rounded-lg cursor-pointer ${isActive && 'border-green-600 border-2'} `}
             >
                 <p className="font-bold text-lightGrayColor">{text}</p>
                 <a

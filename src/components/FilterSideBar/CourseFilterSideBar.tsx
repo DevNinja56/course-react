@@ -1,17 +1,24 @@
 // import Image from 'next/image';
 import React from 'react';
-import CountriesFilter from '../FilterPage/CountriesFilter';
 import { FilterRow } from '../FilterPage/Course/FilterLeftBox';
 import DegreeLevelFilter from '../FilterPage/Course/DegreeLevelFilter';
 import DisciplinesFilter from '../FilterPage/Course/DisciplinesFilter';
-import SpecializationFilter from '../FilterPage/Course/SpecializationFilter';
 import IntakesFilter from '../FilterPage/Course/Intakes';
 import InstituteFilter from '../FilterPage/Course/InstituteFilter';
 import { useFilterQuery } from '@/hooks/filterQuery';
 import { useSearchedCourses } from '@/hooks/filterCourses';
 import LocationsFilter from '../FilterPage/Course/Locations';
 import { FilteredButton } from '../FilterPage/FilteredButton';
-
+import FilterAccordion from '../FilterAccordion';
+import FeeSlider from '../FilterPage/Course/FeeSlider';
+import {
+    AiOutlineAppstore,
+    AiOutlineBank,
+    AiOutlineCalendar,
+    AiOutlineDollarCircle,
+    AiOutlineEnvironment
+} from 'react-icons/ai';
+import { LuGraduationCap } from 'react-icons/lu';
 interface ModalProps {
     setFilterSideBar: (show: boolean) => void;
 }
@@ -53,8 +60,8 @@ const FilterSideBar = ({ setFilterSideBar }: ModalProps) => {
                             />
                         </div>
                     </div>
-                    <div className="h-[483px] overflow-y-auto py-[29px] px-4">
-                        <div className="w-full flex justify-between items-center mb-7 px-4">
+                    <div className=" overflow-scroll py-[29px] px-4 h-[85vh]">
+                        <div className="w-full flex justify-between items-center mb-7 px-4 ">
                             <h1 className="font-bold text-[23px] text-mainTextColor">
                                 Filters
                             </h1>
@@ -105,41 +112,65 @@ const FilterSideBar = ({ setFilterSideBar }: ModalProps) => {
                                 </div>
                             </div>
                         )}
-                        <div className="flex flex-col gap-y-6">
-                            <CountriesFilter
-                                data={filters.countries}
-                                isLoading={isLoading}
-                            />
-                            <FilterRow />
-                            <DegreeLevelFilter
-                                data={filters.degrees}
-                                isLoading={isLoading}
-                            />
-                            <FilterRow />
-                            <DisciplinesFilter
-                                data={filters.disciplines}
-                                isLoading={isLoading}
-                            />
-                            <FilterRow />
-                            <SpecializationFilter
-                                data={filters.specializations}
-                                isLoading={isLoading}
-                            />
-                            <FilterRow />
-                            <LocationsFilter
-                                data={filters.locations}
-                                isLoading={isLoading}
-                            />
-                            <FilterRow />
-                            <InstituteFilter
-                                data={filters.institutes}
-                                isLoading={isLoading}
-                            />
-                            <FilterRow />
-                            <IntakesFilter
-                                data={filters.intakes}
-                                isLoading={isLoading}
-                            />
+                        <div className="flex flex-col">
+                            <FilterAccordion
+                                title="Locations"
+                                icon={<AiOutlineEnvironment />}
+                                name="location"
+                                firstOpen
+                            >
+                                <LocationsFilter
+                                    data={filters.locations}
+                                    isLoading={isLoading}
+                                />
+                            </FilterAccordion>
+                            <FilterAccordion
+                                title="Institutes"
+                                icon={<AiOutlineBank />}
+                                name="institute"
+                            >
+                                <InstituteFilter
+                                    data={filters.institutes}
+                                    isLoading={isLoading}
+                                />
+                            </FilterAccordion>
+                            <FilterAccordion
+                                title="Degree Levels"
+                                icon={<LuGraduationCap />}
+                                name="degrees"
+                            >
+                                <DegreeLevelFilter
+                                    data={filters.degrees}
+                                    isLoading={isLoading}
+                                />
+                            </FilterAccordion>
+                            <FilterAccordion
+                                title="Disciplines"
+                                icon={<AiOutlineAppstore />}
+                                name="specialization"
+                            >
+                                <DisciplinesFilter
+                                    data={filters.disciplines}
+                                    isLoading={isLoading}
+                                />
+                            </FilterAccordion>
+                            <FilterAccordion
+                                title="Intakes"
+                                icon={<AiOutlineCalendar />}
+                                name="intakes"
+                            >
+                                <IntakesFilter
+                                    data={filters.intakes}
+                                    isLoading={isLoading}
+                                />
+                            </FilterAccordion>
+                            <FilterAccordion
+                                title="Tuition Fees"
+                                icon={<AiOutlineDollarCircle />}
+                                noBorder
+                            >
+                                <FeeSlider />
+                            </FilterAccordion>
                         </div>
                     </div>
                 </div>

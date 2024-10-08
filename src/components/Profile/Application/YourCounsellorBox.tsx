@@ -18,8 +18,8 @@ const YourCounsellorBox = ({ selectedCourse }: propTypes) => {
                         width={122}
                         alt="userImg"
                         src={
-                            selectedCourse?.councillor?.profile_image
-                                ? selectedCourse?.councillor?.profile_image
+                            selectedCourse?.counsellor?.profile_image
+                                ? selectedCourse?.counsellor?.profile_image
                                 : '/images/anonymous-user-circle.avif'
                         }
                         className="rounded-full h-16 w-16"
@@ -27,8 +27,8 @@ const YourCounsellorBox = ({ selectedCourse }: propTypes) => {
                     />
                     <div className="flex flex-col gap-1 items-center">
                         <h1 className="text-xl md:text-base lg:text-xl font-semibold text-textBlackColor min-w-fit">
-                            {selectedCourse?.councillor?.title
-                                ? selectedCourse?.councillor?.title
+                            {selectedCourse?.counsellor?.title
+                                ? selectedCourse?.counsellor?.title
                                 : 'Waiting For Counsellor'}
                         </h1>
                     </div>
@@ -37,7 +37,7 @@ const YourCounsellorBox = ({ selectedCourse }: propTypes) => {
             <hr className="h-[175px] w-[1px] border border-blueColor opacity-25 hidden md:block lg:hidden" />
             <div className="flex flex-col items-center md:items-start lg:items-center gap-2">
                 <p className="text-lightGrayColor text-sm text-center mb-3">
-                    {selectedCourse?.councillor?.bio}
+                    {selectedCourse?.counsellor?.bio}
                 </p>
                 <div className="flex flex-col md:flex-row items-center lg:items-start lg:flex-col gap-2">
                     <Button
@@ -45,21 +45,32 @@ const YourCounsellorBox = ({ selectedCourse }: propTypes) => {
                             <IoMailOutline className="h-5 w-5 text-white group-hover:text-blueColor" />
                         }
                         text={
-                            selectedCourse?.councillor?.email
-                                ? selectedCourse?.councillor?.email
+                            selectedCourse?.counsellor?.email
+                                ? selectedCourse?.counsellor?.email
                                 : 'example@courseoption.com'
                         }
                         className="py-2 px-5 rounded-xl text-sm md:text-base"
+                        link={`mailto:${selectedCourse?.counsellor?.email ?? 'example@courseoption.com'}`}
+                        linkClass='w-full'
                     />
                     <Button
                         icon={
                             <IoCallOutline className="h-5 w-5 text-white group-hover:text-blueColor" />
                         }
                         text={
-                            selectedCourse?.councillor?.phone_number
-                                ? selectedCourse?.councillor?.phone_number
-                                : '+92 0000000'
+                            selectedCourse?.counsellor?.phone_number
+                                ? selectedCourse?.counsellor?.phone_number
+                                : '+92 300 0000000'
                         }
+                        className="py-2 px-5 rounded-xl text-sm md:text-base justify-start"
+                        linkClass="w-full"
+                        link={`tel:${selectedCourse?.counsellor?.phone_number ?? '+923000000000'}`}
+                    />
+                    <Button
+                        icon={
+                            <IoCallOutline className="h-5 w-5 text-white group-hover:text-blueColor" />
+                        }
+                        text={'schedule a counselling session'}
                         className="py-2 px-5 rounded-xl text-sm md:text-base"
                     />
                 </div>

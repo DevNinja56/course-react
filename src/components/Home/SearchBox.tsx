@@ -3,8 +3,8 @@ import React, { useState } from 'react';
 import ReactSelectCustom from '../Select';
 import Button from '../Button';
 import {
-    useGetCountriesQuery,
-    useGetDegreesQuery
+    useGetDisciplineQuery,
+    useGetInstituteQuery
 } from '@/store/slices/allRequests';
 import { useRouter } from 'next/router';
 import { ROUTES } from '@/config/constant';
@@ -15,18 +15,19 @@ export type selectType = {
 };
 
 const SearchBox = () => {
-    const [value, setValue] = useState({ degrees: [], countries: [] });
-    const { data: countries, isLoading: countryLoading } =
-        useGetCountriesQuery();
-    const { data: degrees, isLoading: degreeLoading } = useGetDegreesQuery();
-    const degreesList =
-        degrees?.map((degree) => ({
+    const [value, setValue] = useState({ disciplines: [], institutes: [] });
+    const { data: institutes, isLoading: instituteLoading } =
+        useGetInstituteQuery();
+    const { data: disciplines, isLoading: degreeLoading } =
+        useGetDisciplineQuery();
+    const disciplinesList =
+        disciplines?.map((degree) => ({
             value: degree.name,
             label: degree.name
         })) ?? [];
 
-    const countriesList =
-        countries?.map((country) => ({
+    const institutesList =
+        institutes?.map((country) => ({
             value: country.name,
             label: country.name
         })) ?? [];
@@ -36,8 +37,8 @@ const SearchBox = () => {
         push({
             pathname: ROUTES.FILTER_COURSE,
             query: {
-                degrees: value.degrees.join(','),
-                countries: value.countries.join(',')
+                discipline: value.disciplines.join(','),
+                institute: value.institutes.join(',')
             }
         });
     };
@@ -48,14 +49,14 @@ const SearchBox = () => {
                 <div className="flex flex-col gap-y-4 md:flex-row items-center w-full justify-around ">
                     <div className="w-full border border-gray-300 md:border-none">
                         <ReactSelectCustom
-                            options={degreesList}
+                            options={institutesList}
                             isMulti
-                            placeholder="What to Study?"
-                            isLoading={degreeLoading}
+                            placeholder="Where to Study?"
+                            isLoading={instituteLoading}
                             onChange={(val: any) =>
                                 setValue((prev) => ({
                                     ...prev,
-                                    degrees: val.map(
+                                    institutes: val.map(
                                         (item: selectType) => item.value
                                     )
                                 }))
@@ -64,14 +65,14 @@ const SearchBox = () => {
                     </div>
                     <div className="w-full border border-gray-300 md:border-none">
                         <ReactSelectCustom
-                            options={countriesList}
+                            options={disciplinesList}
                             isMulti
-                            placeholder="Where to Study?"
-                            isLoading={countryLoading}
+                            placeholder="What to Study?"
+                            isLoading={degreeLoading}
                             onChange={(val: any) =>
                                 setValue((prev) => ({
                                     ...prev,
-                                    countries: val.map(
+                                    disciplines: val.map(
                                         (item: selectType) => item.value
                                     )
                                 }))
@@ -84,7 +85,8 @@ const SearchBox = () => {
                         className="pt-[14px] pb-[13px]"
                         text="Search"
                         disabled={
-                            !value.degrees.length || !value.countries.length
+                            !value.disciplines.length ||
+                            !value.institutes.length
                         }
                         onClick={handleClick}
                     />

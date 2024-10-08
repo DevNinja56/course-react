@@ -4,7 +4,7 @@ import { useSearchedScholarship } from '@/hooks/filterScholarship';
 import { useFilterQuery } from '@/hooks/filterQuery';
 import LoaderSpinner from '../../LoaderSpinner';
 import PaginationBox from '../../Pagination';
-import SortBy from '../SortBy';
+import SortBy from './SortBy';
 
 const RightScholarshipCardBox = () => {
     const {
@@ -14,6 +14,7 @@ const RightScholarshipCardBox = () => {
         paginatorInfo: { count, totalPage, page }
     } = useSearchedScholarship();
     const { query } = useFilterQuery();
+    
 
     useEffect(() => {
         fetchScholarship();
@@ -29,7 +30,7 @@ const RightScholarshipCardBox = () => {
                 </div>
                 <hr className="border border-scholarshipBorderColor" />
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mb-3 px-0 md:px-8 lg:px-0">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-5 mb-3 px-0 md:px-8 lg:px-0">
                 {isLoading ? (
                     <LoaderSpinner color="text-black" />
                 ) : (
@@ -38,6 +39,7 @@ const RightScholarshipCardBox = () => {
                             key={'scholarship__key__' + scholarship._id + i}
                             {...{
                                 name: scholarship.name,
+                                title_description: scholarship.title_description,
                                 type: scholarship.type,
                                 degree: scholarship.degree,
                                 institute: scholarship.institute,
@@ -46,6 +48,8 @@ const RightScholarshipCardBox = () => {
                                 id: scholarship._id,
                                 image: scholarship.image,
                                 isActive: !!scholarship?.favoriteId?.[0]
+                                
+
                             }}
                         />
                     ))

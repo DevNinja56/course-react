@@ -16,19 +16,23 @@ export interface userType {
     documents: { name: string; url: string }[];
     academicInformation: academicInformation | null;
 }
+export type LanguageTestScoreType =
+    | 'speaking'
+    | 'listening'
+    | 'writing'
+    | 'reading'
+    | 'overAll';
 
 export interface academicInformation {
     countryOfEducation: string;
     highestLevelOfEducation: string;
     languageTest: {
         name: string;
-        score?: {
-            listening: string;
-            speaking: string;
-            writing: string;
-            reading: string;
-            overAll: string;
-        } | null;
+        score?:
+            | {
+                  [key in LanguageTestScoreType]: string;
+              }
+            | null;
     };
 }
 
@@ -65,6 +69,7 @@ export type scholarshipType = {
     _id: string;
     id: string;
     name: string;
+    title_description: string;
     image: string;
     amount: string;
     isAmount: boolean;
@@ -90,6 +95,7 @@ export type scholarshipType = {
 export type filterScholarShipType = {
     _id: string;
     name: string;
+    title_description: string;
     image: string;
     type: string;
     amount: string;
@@ -204,12 +210,13 @@ export type courseType = {
     favoriteId?: string[];
 };
 
+export interface SpecializationType {
+    name: string;
+    _id: string;
+}
 export type filterCourseType = {
     intakes: {
         intakes: string[];
-    }[];
-    specializations: {
-        specialization: string;
     }[];
     regions: {
         region: string;
@@ -227,13 +234,17 @@ export type filterCourseType = {
         degree: degreeType;
     }[];
     disciplines: {
-        discipline: string;
+        name: string;
+        specialization: SpecializationType[];
     }[];
 };
 
 export type courseLanguageRequirement = {
     ielts: { s: string; l: string; r: string; w: string; oa: string };
     pte: { s: string; l: string; r: string; w: string; oa: string };
+    oxford: { oa: string };
+    language: { oa: string };
+    duolingo: { oa: string };
 };
 
 export type singleCourseType = {
@@ -445,12 +456,12 @@ export interface applyTypes {
     user: userType;
     status: applicationStatus;
     documents: userDocuments;
-    councillor: councillorType;
+    counsellor: counsellorType;
     createdAt: string;
     updatedAt: string;
 }
 
-export interface councillorType {
+export interface counsellorType {
     profile_image: string;
     title: string;
     bio: string;

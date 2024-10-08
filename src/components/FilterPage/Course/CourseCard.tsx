@@ -14,7 +14,6 @@ interface CardProps {
 
 const CourseCard = ({ course }: CardProps) => {
     const {
-        country,
         institute,
         degree,
         logo,
@@ -80,11 +79,8 @@ const CourseCard = ({ course }: CardProps) => {
                             <div className="flex flex-col items-center gap-1">
                                 <LuMapPin className="h-4 w-4 text-blueColor" />
                                 <p className="text-[0.600rem] xl:text-[0.700rem]">
-                                    {country?.name.split(' ').length > 1
-                                        ? country?.name
-                                              .split(' ')
-                                              .map((i: string) => i[0])
-                                        : country?.name}
+                                    {institute?.location?.split(',')?.[0] ??
+                                        'No Location'}
                                 </p>
                             </div>
                             <div className="flex flex-col items-center gap-1">
@@ -102,7 +98,8 @@ const CourseCard = ({ course }: CardProps) => {
                                                       ? +rate?.base_rate
                                                       : 1),
                                         rate ? base_code : feeCurrency
-                                    )}
+                                    )}{' '}
+                                    /Year
                                 </p>
                             </div>
                             <div className="flex flex-col items-center gap-1">

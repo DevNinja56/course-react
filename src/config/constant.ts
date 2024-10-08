@@ -3,7 +3,6 @@ export const ROUTES = {
     SIGN_IN: '/signIn',
     SIGN_UP: '/signUp',
     COMPARE: '/compare',
-    APPLY: '/apply',
     FILTER_COURSE: '/filter/course',
     COURSE: '/course/:title',
     FILTER_SCHOLARSHIP: '/filter/scholarship',
