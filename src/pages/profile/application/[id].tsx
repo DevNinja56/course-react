@@ -1,18 +1,19 @@
 import React from 'react';
 import ApplicationStatusBox from '@/components/Profile/Application/ApplicationStatusBox';
-import SubmitDocument from '@/components/Profile/Application/SubmitDocument';
+// import SubmitDocument from '@/components/Profile/Application/SubmitDocument';
 import SuccessfullyEnrolled from '@/components/Profile/Application/SuccessfullyEnrolled';
 import YourCounsellorBox from '@/components/Profile/Application/YourCounsellorBox';
-import { useUi } from '@/hooks/user-interface';
+// import { useUi } from '@/hooks/user-interface';
 import { useGetUserAppliesQuery } from '@/store/slices/allRequests';
-import { modalType } from '@/store/slices/ui.slice';
+// import { modalType } from '@/store/slices/ui.slice';
 import { statusEnum } from '@/types';
 // import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { MdError } from 'react-icons/md';
+import ChatBox from '@/components/Chatbox';
 
 const UserApplicationDetails = () => {
-    const { updateModal } = useUi();
+    // const { updateModal } = useUi();
     const router = useRouter();
     const { id } = router.query;
     const { data } = useGetUserAppliesQuery();
@@ -109,7 +110,7 @@ const UserApplicationDetails = () => {
                         ) : (
                             ''
                         )}
-                        {selectedCourse?.status?.active ===
+                        {/* {selectedCourse?.status?.active ===
                         statusEnum.submitDocuments ? (
                             <SubmitDocument />
                         ) : (
@@ -126,8 +127,9 @@ const UserApplicationDetails = () => {
                                     ></embed>
                                 )}
                             </div>
-                        )}
-                        {selectedCourse?.status?.active ===
+                        )} */}
+                        <ChatBox/>
+                        {/* {selectedCourse?.status?.active ===
                             statusEnum.submitDocuments && (
                             <button
                                 onClick={() =>
@@ -140,7 +142,7 @@ const UserApplicationDetails = () => {
                             >
                                 Cancel Application
                             </button>
-                        )}
+                        )} */}
                     </div>
                 </div>
             )}
