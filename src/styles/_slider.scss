@@ -1,0 +1,46 @@
+.slider-3d {
+    .slideC {
+        position: relative;
+        perspective: 1000px;
+        transform-style: preserve-3d;
+        width: 362px;
+        min-height: 572px;
+        margin: 0 auto;
+    }
+
+    .slide {
+        width: 362px;
+        min-height: 272px;
+        transition:
+            transform 500ms ease 0s,
+            opacity 500ms ease 0s,
+            visibility 500ms ease 0s;
+        position: absolute;
+        top: 0;
+        border-radius: 12px;
+    }
+
+    .slide {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .sliderContent {
+        display: flex;
+        flex-direction: column;
+        color: white;
+        padding: 30px;
+        align-items: flex-start;
+        font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana,
+            sans-serif;
+    }
+
+    .sliderContent h2 {
+        margin: 16px 0;
+    }
+    .sliderContent p {
+        margin: 0;
+        margin-bottom: 16px;
+    }
+}

@@ -1,12 +1,14 @@
 import Link from 'next/link';
 import React from 'react';
-import Card from './Card';
 import { ROUTES } from '@/config/constant';
 import { useGetPaginatedDisciplineQuery } from '@/store/slices/allRequests';
+import dynamic from 'next/dynamic';
+// import Card from './Card';
+const Card = dynamic(() => import('./Card'), { ssr: false });
 
 const DisciplineSection = () => {
     const { data } = useGetPaginatedDisciplineQuery({
-        limit: 6,
+        limit: 9,
         page: 1
     });
 
@@ -34,8 +36,9 @@ const DisciplineSection = () => {
                 {data?.data?.map((category) => (
                     <Card
                         key={'category--list--' + category.name}
-                        img="/images/Home/download (35).svg"
                         title={category.name}
+                        icon={category.icon}
+                        description={category.description}
                     />
                 ))}
             </div>
