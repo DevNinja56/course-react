@@ -1,8 +1,15 @@
-// import Image from 'next/image';
 import SearchBox from '@/components/Home/SearchBox';
 import ScholarshipSlider from '@/components/Slider/ScholarshipSlider';
-import DisciplineSection from '@/components/Home/DisciplineSection';
 import Events from '@/components/Events';
+import dynamic from 'next/dynamic';
+// import DisciplineSection from '@/components/Home/DisciplineSection';
+const DisciplineSection = dynamic(
+    () => import('@/components/Home/DisciplineSection'),
+    {
+        ssr: false,
+        loading: () => <div className="w-full">Loading....</div>
+    }
+);
 
 const Home = () => {
     return (
@@ -31,7 +38,7 @@ const Home = () => {
                             <h1 className="text-mainTextColor text-[32px] md:text-[40px] xl:text-[45px] font-black mb-2">
                                 UK&lsquo;s Largest Course Search Platform
                             </h1>
-                            <p className="text-aboutUsTextColor text-base leading-6 aboutUsTextColor mb-5 font-normal">
+                            <p className="text-aboutUsTextColor text-base leading-6 aboutUsTextColor mb-5 font-normal line-clamp-3 overflow-hidden text-ellipsis">
                                 Make your university application stress free and
                                 discover in minutes if you&lsquo;d get into your
                                 dream university. Enter your academic profile
