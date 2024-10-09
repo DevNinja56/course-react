@@ -9,7 +9,7 @@ import School from '../Institute/icons/School';
 import Tag from '../Institute/Tag';
 import { MdOutlinePriceChange } from 'react-icons/md';
 
-interface propsType {
+export interface ScholarshipCardPropsType {
     name: string;
     title_description?: string;
     type: string;
@@ -19,12 +19,14 @@ interface propsType {
     amount: string;
     image: string;
     id: string;
-    isActive: boolean | null;
+    isActive?: boolean | null;
     tagBox?: boolean;
     headingClass?: string;
+    isFavBtn?: boolean;
+    isLink?: boolean;
 }
 
-const Card: React.FC<propsType> = ({
+const Card: React.FC<ScholarshipCardPropsType> = ({
     name,
     title_description,
     type,
@@ -36,28 +38,41 @@ const Card: React.FC<propsType> = ({
     image,
     isActive,
     tagBox = true,
-    headingClass = 'text-xl'
+    headingClass = 'text-xl',
+    isFavBtn = true,
+    isLink = true
 }) => {
+    const CardLinkWraper = ({ children }: { children: React.ReactNode }) => {
+        if (isLink) {
+            return (
+                <Link
+                    href={{
+                        pathname: ROUTES.SCHOLARSHIP.replace(
+                            ':title',
+                            name?.replaceAll(' ', '-')
+                        ),
+                        query: {
+                            scholarship_id: id
+                        }
+                    }}
+                >
+                    {children}
+                </Link>
+            );
+        }
+        return <>{children}</>;
+    };
+
     return (
         <div className="relative group cursor-pointer flex flex-col border border-gray-300 capitalize overflow-auto rounded-xl ">
-            {isActive !== null && (
+            {isFavBtn && isActive !== null && (
                 <FavoriteButton
                     isActive={isActive}
                     body={{ scholarship: id }}
                     extendClass="group-hover:translate-y-[20px] group-hover:translate-x-[-20px] duration-300 transition-all"
                 />
             )}
-            <Link
-                href={{
-                    pathname: ROUTES.SCHOLARSHIP.replace(
-                        ':title',
-                        name.replaceAll(' ', '-')
-                    ),
-                    query: {
-                        scholarship_id: id
-                    }
-                }}
-            >
+            <CardLinkWraper>
                 <div className="flex flex-col w-full z-10 ">
                     <div className="w-full relative">
                         <div className="">
@@ -128,7 +143,7 @@ const Card: React.FC<propsType> = ({
                         </div>
                     )}
                 </div>
-            </Link>
+            </CardLinkWraper>
         </div>
     );
 };

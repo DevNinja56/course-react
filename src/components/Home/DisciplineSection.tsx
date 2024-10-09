@@ -6,7 +6,7 @@ import { useGetPaginatedDisciplineQuery } from '@/store/slices/allRequests';
 
 const DisciplineSection = () => {
     const { data } = useGetPaginatedDisciplineQuery({
-        limit: 6,
+        limit: 9,
         page: 1
     });
 
