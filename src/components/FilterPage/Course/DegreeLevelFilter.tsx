@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FilterCheckBox, FilterCheckBoxLoader } from '../FilterCheckBox';
+import { FilterCheckBox, FilterCheckBoxLoader } from '../FilterBoxCheck';
 import { BiChevronRight } from 'react-icons/bi';
 import { useFilterQuery } from '@/hooks/filterQuery';
 import * as _ from 'lodash';

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 // import SearchBox from '../SearchBox';
-import { FilterCheckBox, FilterCheckBoxLoader } from '../FilterCheckBox';
+import { FilterCheckBox, FilterCheckBoxLoader } from '../FilterBoxCheck';
 
 interface PropsType {
     data: {
