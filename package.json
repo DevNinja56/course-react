@@ -33,6 +33,7 @@
     "nextjs-progressbar": "^0.0.16",
     "react": "latest",
     "react-content-loader": "^6.2.1",
+    "react-datepicker": "^7.4.0",
     "react-dom": "latest",
     "react-facebook-login": "^4.1.1",
     "react-hook-form": "^7.47.0",

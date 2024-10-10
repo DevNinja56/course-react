@@ -153,9 +153,8 @@ export type degreeType = {
 
 export type disciplineType = {
     name: string;
-    image: string;
-    undergraduate: degreeType[];
-    postgraduate: degreeType[];
+    icon: string;
+    description: string | null;
     research: degreeType[];
     createdAt: string;
     updatedAt: string;
