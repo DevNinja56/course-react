@@ -17,8 +17,7 @@ import ShareModal from './ShareModal';
 import StartApplication from './StartApplication';
 import CancelApplication from './CancelApplication';
 import UploadUserDocuments from './UploadUserDocuments';
-import { ScheduleSession } from './ScheduleSession';
-import { MeetingDetails } from './MeetingDetails';
+import { ScheduleMeeting } from './ScheduleMeeting';
 
 const ModalWraper = () => {
     const { modal } = useUi();
@@ -37,8 +36,7 @@ const ModalWraper = () => {
         [modalType.cancel_application]: <CancelApplication />,
         [modalType.share_modal]: <ShareModal />,
         [modalType.upload_user_documents]: <UploadUserDocuments />,
-        [modalType.schedule_session]: <ScheduleSession/>,
-        [modalType.meeting_details]: <MeetingDetails/>
+        [modalType.schedule_meeting]: <ScheduleMeeting/>,
     };
 
     return (

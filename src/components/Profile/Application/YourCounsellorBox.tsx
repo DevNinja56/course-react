@@ -74,7 +74,7 @@ const YourCounsellorBox = ({ selectedCourse }: propTypes) => {
                     <Button
                         onClick={() =>
                             updateModal({
-                                type: modalType.meeting_details,
+                                type: modalType.schedule_meeting,
                                 state: {}
                             })
                         }
