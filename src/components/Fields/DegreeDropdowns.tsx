@@ -3,7 +3,7 @@ import React from 'react';
 import { stateType } from './Card';
 import Link from 'next/link';
 import { ROUTES } from '@/config/constant';
-import { useCoursesFilterQuery } from '@/hooks/filterCoursesQuery';
+import { useFilterQuery } from '@/hooks/filterQuery';
 
 interface propsType {
     data: degreeType[];
@@ -12,7 +12,7 @@ interface propsType {
 }
 
 const DegreeDropdowns: React.FC<propsType> = ({ setOpen, data, type }) => {
-    const { addQuery } = useCoursesFilterQuery();
+    const { addQuery } = useFilterQuery();
     return (
         <div className="absolute top-2 left-2 w-full bg-white shadow-lg z-10 ">
             <div

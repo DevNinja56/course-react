@@ -13,7 +13,7 @@ interface OptionType {
     label: string;
 }
 
-const timeOptions = [
+const timeOptions: OptionType[] = [
     { value: '10:00 AM', label: '10:00 AM' },
     { value: '11:00 AM', label: '11:00 AM' },
     { value: '12:00 PM', label: '12:00 PM' },
@@ -53,11 +53,21 @@ export const ScheduleMeeting = () => {
     const [startDate, setStartDate] = useState<Date | null>(null);
     const [selectedTime, setSelectedTime] = useState<OptionType | null>(null);
     const [meetingScheduled, setMeetingScheduled] = useState(false);
+    const [error, setError] = useState<string | null>(null); // State for validation error
 
     const handleConfirm = () => {
-        if (startDate && selectedTime) {
-            setMeetingScheduled(true);
+        // Validate date and time selection
+        if (!startDate) {
+            setError('Please select a date.');
+            return;
         }
+        if (!selectedTime) {
+            setError('Please select a time.');
+            return;
+        }
+
+        setError(null); // Clear error if validation passes
+        setMeetingScheduled(true);
     };
 
     if (meetingScheduled) {
@@ -71,7 +81,7 @@ export const ScheduleMeeting = () => {
                 </div>
                 <h1 className="text-2xl font-bold text-left">Meeting Details</h1>
                 <p className="py-2">
-                    Your meeting with <span className="font-bold">Saqib Shah</span>{' '}
+                    Your meeting with <span className="font-bold">Counsellor</span>{' '}
                     has been successfully scheduled!
                 </p>
                 <div className="flex items-center gap-3 py-2">
@@ -107,10 +117,16 @@ export const ScheduleMeeting = () => {
                 />
             </div>
             <h1 className="text-2xl font-bold text-center mb-6">Schedule Meeting</h1>
+            
+            {error && <p className="text-red-500 mb-4">{error}</p>} {/* Display validation error */}
+
             <div className="mb-4">
                 <DatePicker
                     selected={startDate}
-                    onChange={(date) => setStartDate(date)}
+                    onChange={(date) => {
+                        setStartDate(date);
+                        if (date) setError(null); // Clear error on date selection
+                    }}
                     className="w-full p-3 border border-gray-300 rounded-lg focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50
                     pl-4 placeholder:font-bold placeholder:text-[#a0aec0]"
                     placeholderText="Select Date"
@@ -123,7 +139,10 @@ export const ScheduleMeeting = () => {
                     placeholder="Select Time"
                     styles={customStyles}
                     options={timeOptions}
-                    onChange={setSelectedTime}
+                    onChange={(option) => {
+                        setSelectedTime(option);
+                        if (option) setError(null); // Clear error on time selection
+                    }}
                     isDisabled={!startDate}
                 />
             </div>
