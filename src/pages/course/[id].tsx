@@ -288,6 +288,22 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                                                                                     'No Entry Requirements'
                                                                                 }
                                                                             />
+
+                                                                            <button
+                                                                                onClick={() =>
+                                                                                    updateModal(
+                                                                                        {
+                                                                                            type: modalType.ucas_calculator,
+                                                                                            state: {}
+                                                                                        }
+                                                                                    )
+                                                                                }
+                                                                                className="bg-blueColor text-white px-3 py-2 rounded-md "
+                                                                            >
+                                                                                UCAS
+                                                                                Points
+                                                                                Calculator
+                                                                            </button>
                                                                         </div>
                                                                         {course?.textEligibility && (
                                                                             <div className="text-sm md:text-base">
@@ -643,7 +659,6 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                                 </div>
                                 <div className="bg-white rounded-[10px] w-full z-10 shadow-RequirementBox mt-4 py-3">
                                     <div className="flex flex-col capitalize">
-                                        
                                         <div className="flex items-center gap-4 pl-5 border-b-2 border-gray-200 border-opacity-50 py-4">
                                             <IoLocation className="h-8 w-8 text-blueColor" />
                                             <div className="flex flex-col gap-[6px]">

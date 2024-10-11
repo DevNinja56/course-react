@@ -3,15 +3,16 @@ import Image from 'next/image';
 import QualificationSection from '@/components/Ucas/QualificationSection';
 import Button from '@/components/Button';
 import { Qualification } from '@/types';
-import UcasPointCalculate from '@/Modal/UcasPointCalculate';
+import { useRouter } from 'next/router';
+import { ROUTES } from '@/config/constant';
 
 const UCAS = () => {
+    const { query, replace } = useRouter();
     const [qualifications, setQualifications] = useState<Qualification[]>([
         { id: Date.now() }
     ]);
     const [totalScore, setTotalScore] = useState<number>(0);
-    const [isCalculate, setIsCalculate] = useState<boolean>(false);
-    const [modalOpen, setModalOpen] = useState<boolean>(true);
+    const [isCalculate] = useState<boolean>(false);
 
     const formRef = React.useRef<HTMLDivElement>(null);
 
@@ -24,17 +25,26 @@ const UCAS = () => {
         }
     }, [isCalculate]);
 
+    useEffect(() => {
+        if (query.qualifications) {
+            setQualifications(() => {
+                const allQualifications: Qualification[] = JSON.parse(
+                    query.qualifications as string
+                );
+                setTotalScore(
+                    allQualifications.reduce((total, qualification) => {
+                        return (
+                            total + parseInt(qualification.selectedScore || '0')
+                        );
+                    }, 0)
+                );
+                return allQualifications;
+            });
+        }
+    }, [query.qualifications]);
+
     return (
         <>
-            {modalOpen && (
-                <UcasPointCalculate
-                    qualifications={qualifications}
-                    setQualifications={setQualifications}
-                    setTotalScore={setTotalScore}
-                    setIsCalculate={setIsCalculate}
-                    setModalOpen={setModalOpen}
-                />
-            )}
             <div className="w-full flex items-center justify-between h-[214px] mt-12 md:mt-[90px] bg-profileBgColor mb-16">
                 <Image
                     height={193}
@@ -130,6 +140,7 @@ const UCAS = () => {
                                     onClick={() => {
                                         setQualifications([{ id: Date.now() }]);
                                         setTotalScore(0);
+                                        replace(ROUTES.UCAS);
                                     }}
                                     text="Clear All"
                                     className="py-2 px-2 md:px-3 text-xs md:text-sm rounded-[100em]"
@@ -151,7 +162,6 @@ const UCAS = () => {
                     src="/images/UCAS/calculator.svg"
                     priority
                 />
-
             </div>
         </>
     );
