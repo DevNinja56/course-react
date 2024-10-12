@@ -42,7 +42,6 @@ const MainLayout = ({
         ROUTES.SCHOLARSHIP.replace(':id', '[id]'),
         ROUTES.INSTITUTES_DETAIL.replace(':id', '[id]'),
         ROUTES.ABOUT_US,
-        ROUTES.APPLY,
         ROUTES.BLOGS,
         ROUTES.COMPARE,
         ROUTES.CONTACT_US,
@@ -62,7 +61,6 @@ const MainLayout = ({
         ROUTES.COUNTRY,
         ROUTES.INSTITUTES,
         ROUTES.FAQ,
-        ROUTES.APPLY
     ];
 
     useEffect(() => {
@@ -92,8 +90,8 @@ const MainLayout = ({
             <div
                 className={`bg-lightColor ${header && 'mt-[100px] print:mt-0'}`}
             >
-                {(router.pathname.includes(ROUTES.SIGN_IN) ||
-                    router.pathname.includes(ROUTES.SIGN_UP)) && (
+                {(router.pathname?.includes(ROUTES.SIGN_IN) ||
+                    router.pathname?.includes(ROUTES.SIGN_UP)) && (
                     <Header onlyLogo />
                 )}
 
@@ -109,10 +107,10 @@ const MainLayout = ({
                     children
                 )}
                 <ChatBoot />
-                {counselingRoutes.includes(router.pathname) && (
+                {counselingRoutes?.includes(router.pathname) && (
                     <CounselingWork />
                 )}
-                {testimonialRoutes.includes(router.pathname) && <Testimonial />}
+                {testimonialRoutes?.includes(router.pathname) && <Testimonial />}
             </div>
             {footer && <Footer />}
         </div>

@@ -26,7 +26,7 @@ const ApplicationStatusBox = ({ selectedCourse }: propTypes) => {
                                 ?.join(' , ') ?? 'No Specialization Found'}
                         </p>
                         <p className="text-xs md:text-base relative before:block before:content-[''] before:w-[6px] before:h-[6px] md:before:w-2 md:before:h-2 before:bg-black before:rounded-full before:absolute before:-left-6 before:top-[50%] before:-translate-y-1/2">
-                            January 2025
+                            {selectedCourse?.intake}
                         </p>
                     </div>
                     <div className="flex items-center gap-3">
@@ -42,7 +42,7 @@ const ApplicationStatusBox = ({ selectedCourse }: propTypes) => {
                                 {selectedCourse?.course?.institute?.name}
                             </span>
                             <span className="text-darkGrayColor text-xs md:text-base">
-                                {selectedCourse?.course?.institute?.campus}
+                                {selectedCourse?.course?.availableCampuses}
                             </span>
                         </div>
                     </div>

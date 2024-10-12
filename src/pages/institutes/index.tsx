@@ -1,9 +1,7 @@
+import React from 'react';
 import ScreenLoader from '@/components/Loader/ScreenLoader';
 import UniversitiesCards from '@/components/Universities/UniversitiesCard';
 import { useGetInstituteQuery } from '@/store/slices/allRequests';
-
-// import Image from 'next/image';
-import React from 'react';
 
 const Universities = () => {
     const { data } = useGetInstituteQuery();
@@ -17,7 +15,6 @@ const Universities = () => {
                     alt="uni-round"
                     className="top-[-50px] left-[-8px] w-[100px] h-[100px] md:w-[150px] md:h-[150px] lg:w-[193px] lg:h-[193px] absolute"
                     src="/images/profileImages/Ellipse 418.svg"
-                    // priority
                 />
                 <div className="flex flex-col items-center z-10">
                     <p className="text-blueColor font-bold text-base md:text-[23px] text-center">

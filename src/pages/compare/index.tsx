@@ -5,7 +5,7 @@ import { InstituteLogoImage } from '@/components/compare/InstituteLogo';
 import ScholarshipSlider from '@/components/Slider/ScholarshipSlider';
 import { FiPrinter } from 'react-icons/fi';
 import { GetServerSideProps } from 'next';
-import { singleCourseType } from '@/types';
+import { scholarshipType, singleCourseType } from '@/types';
 import { API_ENDPOINTS } from '@/config/Api_EndPoints';
 import { getSsrRequest } from '@/utils/ssrRequest';
 import { getMonths } from '@/utils/get-months';
@@ -15,7 +15,7 @@ import { useCalculate } from '@/hooks/initial-deposit-calculate';
 const Compare = ({ data }: { data?: singleCourseType }) => {
     const { first, second, third, compareFirst, compareSecond, compareThird } =
         useCompare();
-    const { setCurrencyValue, getSingleRate } = useCurrency();
+    const { setCurrencyValue, getSingleRate, base_code } = useCurrency();
     const { initialDeposit } = useCalculate();
 
     useEffect(() => {
@@ -50,16 +50,21 @@ const Compare = ({ data }: { data?: singleCourseType }) => {
         scholarshipAmount: string;
         feeCurrency: string;
     }) => {
+        const isSameCurrency =
+            feeCurrency.toLowerCase() === base_code.toLowerCase();
+        const rate = isSameCurrency ? null : getSingleRate(feeCurrency);
         const initialDepositAmount = initialDeposit({
             initialDeposit: depositAmount,
             tuitionFee: tuitionFee,
             scholarship: scholarshipAmount ?? 0,
-            isNumber: true
+            isNumber: true,
+            currency_code: feeCurrency
         });
-        const rate = getSingleRate(feeCurrency);
 
         return setCurrencyValue(
-            +initialDepositAmount * (rate?.base_rate ? +rate?.base_rate : 1)
+            +initialDepositAmount,
+            base_code ?? feeCurrency,
+            rate ? +rate.base_rate : 1
         );
     };
 
@@ -69,8 +74,18 @@ const Compare = ({ data }: { data?: singleCourseType }) => {
     ) => {
         const rate = getSingleRate(feeCurrency);
         return setCurrencyValue(
-            tuitionFee * (rate?.base_rate ? +rate?.base_rate : 1)
+            tuitionFee * +(rate?.base_rate ?? 1),
+            base_code ?? feeCurrency
         );
+    };
+
+    const scholarshipAmount = (
+        scholarship: scholarshipType,
+        tuitionFee: number
+    ) => {
+        return scholarship?.isAmount
+            ? String(scholarship?.amount ?? 0)
+            : String(+scholarship?.amount * tuitionFee);
     };
 
     const state = [
@@ -124,15 +139,33 @@ const Compare = ({ data }: { data?: singleCourseType }) => {
                 },
                 {
                     title: 'Location',
-                    first: first?.institute?.location,
-                    second: second?.institute?.location,
+                    first: first?.institute?.location
+                        ?.split(',')
+                        .map((c) => (
+                            <li key={`key--second-location--${c}`}>{c}</li>
+                        )),
+                    second: second?.institute?.location
+                        ?.split(',')
+                        .map((c) => (
+                            <li key={`key--second-location--${c}`}>{c}</li>
+                        )),
                     third: third?.institute?.location
+                        ?.split(',')
+                        .map((c) => (
+                            <li key={`key--second-location--${c}`}>{c}</li>
+                        ))
                 },
                 {
                     title: 'Campus',
-                    first: first?.institute?.campus.join(' | '),
-                    second: second?.institute?.campus.join(' | '),
-                    third: third?.institute?.campus.join(' | ')
+                    first: first?.institute?.campus.map((c) => (
+                        <li key={`key--second-campus--${c}`}>{c}</li>
+                    )),
+                    second: second?.institute?.campus.map((c) => (
+                        <li key={`key--second-campus--${c}`}>{c}</li>
+                    )),
+                    third: third?.institute?.campus.map((c) => (
+                        <li key={`key--second-campus--${c}`}>{c}</li>
+                    ))
                 }
             ]
         },
@@ -159,15 +192,21 @@ const Compare = ({ data }: { data?: singleCourseType }) => {
                 },
                 {
                     title: 'Specialization',
-                    first: first?.course?.specialization
-                        ?.map((s) => s.name)
-                        ?.join(' , '),
-                    second: second?.course?.specialization
-                        ?.map((s) => s.name)
-                        ?.join(' , '),
-                    third: third?.course?.specialization
-                        ?.map((s) => s.name)
-                        ?.join(' , ')
+                    first: first?.course?.specialization?.map((s) => (
+                        <li key={`key--first-specialization--${s.name}`}>
+                            {s.name}
+                        </li>
+                    )),
+                    second: second?.course?.specialization?.map((s) => (
+                        <li key={`key--second-specialization--${s.name}`}>
+                            {s.name}
+                        </li>
+                    )),
+                    third: third?.course?.specialization?.map((s) => (
+                        <li key={`key--third-specialization--${s.name}`}>
+                            {s.name}
+                        </li>
+                    ))
                 },
                 {
                     title: 'Duration',
@@ -188,8 +227,10 @@ const Compare = ({ data }: { data?: singleCourseType }) => {
                               depositAmount:
                                   first?.course.initialDeposit[0].amount,
                               tuitionFee: first?.course.tuitionFee,
-                              scholarshipAmount:
-                                  first?.course.scholarship?.[0]?.amount ?? 0,
+                              scholarshipAmount: scholarshipAmount(
+                                  first?.course.scholarship[0],
+                                  first?.course.tuitionFee
+                              ),
                               feeCurrency: first?.course.feeCurrency
                           })
                         : null,
@@ -198,8 +239,10 @@ const Compare = ({ data }: { data?: singleCourseType }) => {
                               depositAmount:
                                   second?.course.initialDeposit[0].amount,
                               tuitionFee: second?.course.tuitionFee,
-                              scholarshipAmount:
-                                  second?.course.scholarship?.[0]?.amount ?? 0,
+                              scholarshipAmount: scholarshipAmount(
+                                  second?.course.scholarship[0],
+                                  second?.course.tuitionFee
+                              ),
                               feeCurrency: second?.course.feeCurrency
                           })
                         : null,
@@ -208,8 +251,10 @@ const Compare = ({ data }: { data?: singleCourseType }) => {
                               depositAmount:
                                   third?.course.initialDeposit[0].amount,
                               tuitionFee: third?.course.tuitionFee,
-                              scholarshipAmount:
-                                  third?.course.scholarship?.[0]?.amount ?? 0,
+                              scholarshipAmount: scholarshipAmount(
+                                  third?.course.scholarship[0],
+                                  third?.course.tuitionFee
+                              ),
                               feeCurrency: third?.course.feeCurrency
                           })
                         : null
@@ -237,7 +282,7 @@ const Compare = ({ data }: { data?: singleCourseType }) => {
                         : null
                 },
                 {
-                    title: "On available campus",
+                    title: 'On available campus',
                     first: first?.course?.availableCampuses.join(' | '),
                     second: second?.course?.availableCampuses.join(' | '),
                     third: third?.course?.availableCampuses.join(' | ')
@@ -294,7 +339,7 @@ const Compare = ({ data }: { data?: singleCourseType }) => {
                                             key={'rows-content--' + title}
                                         >
                                             <div
-                                                className={`w-[50%] md:w-1/4 px-3 py-5 md:p-5 relative border-r border-profileBgColor flex items-center ${
+                                                className={`w-[40%] md:w-1/4 px-3 py-5 md:p-5 relative border-r border-profileBgColor flex items-center ${
                                                     i % 2 === 0
                                                         ? 'bg-lightBlue'
                                                         : 'bg-white'
@@ -305,35 +350,35 @@ const Compare = ({ data }: { data?: singleCourseType }) => {
                                                 </h1>
                                             </div>
                                             <div
-                                                className={`w-[15%] md:w-1/4 px-3 py-5 md:p-5 relative border-x border-profileBgColor flex items-center ${
+                                                className={`w-[20%] md:w-1/4 px-3 max-sm:px-0 py-5 md:p-5 relative border-x border-profileBgColor flex items-center ${
                                                     i % 2 === 0
                                                         ? 'bg-lightBlue'
                                                         : 'bg-white'
                                                 }  `}
                                             >
-                                                <h1 className="font-bold text-sm md:text-base text-grayColor">
+                                                <h1 className="font-bold max-sm:text-xs text-sm md:text-base text-grayColor">
                                                     {first ?? '--'}
                                                 </h1>
                                             </div>
                                             <div
-                                                className={`w-[15%] md:w-1/4 px-3 py-5 md:p-5 relative border-x border-profileBgColor flex items-center ${
+                                                className={`w-[20%] md:w-1/4 px-3 max-sm:px-0 py-5 md:p-5 relative border-x border-profileBgColor flex items-center ${
                                                     i % 2 === 0
                                                         ? 'bg-lightBlue'
                                                         : 'bg-white'
                                                 }  `}
                                             >
-                                                <h1 className="font-bold text-sm md:text-base text-grayColor">
+                                                <h1 className="font-bold max-sm:text-xs text-sm md:text-base text-grayColor">
                                                     {second ?? '--'}
                                                 </h1>
                                             </div>
                                             <div
-                                                className={`w-[15%] md:w-1/4 px-3 py-5 md:p-5 relative border-x border-profileBgColor flex items-center ${
+                                                className={`w-[20%]  md:w-1/4 px-3 max-sm:px-0 py-5 md:p-5 relative border-x border-profileBgColor flex items-center ${
                                                     i % 2 === 0
                                                         ? 'bg-lightBlue'
                                                         : 'bg-white'
                                                 }  `}
                                             >
-                                                <h1 className="font-bold text-sm md:text-base text-grayColor">
+                                                <h1 className="font-bold max-sm:text-xs text-sm md:text-base text-grayColor">
                                                     {third ?? '--'}
                                                 </h1>
                                             </div>

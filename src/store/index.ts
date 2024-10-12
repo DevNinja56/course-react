@@ -24,7 +24,8 @@ export const store = configureStore({
         currency
     },
     middleware: (getDefaultMiddleware) =>
-        getDefaultMiddleware().concat(stateQueryApi.middleware)
+        getDefaultMiddleware().concat(stateQueryApi.middleware),
+    devTools: process.env.NODE_ENV !== 'production'
 });
 
 export type RootState = ReturnType<typeof store.getState>;

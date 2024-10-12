@@ -2,7 +2,7 @@
 import { ROUTES } from '@/config/constant';
 import { courseType } from '@/types';
 import Link from 'next/link';
-import React from 'react';
+import React, { useMemo } from 'react';
 import FavoriteButton from '../../Button/FavoriteButton';
 import { LuMapPin } from 'react-icons/lu';
 import { CiCalendarDate } from 'react-icons/ci';
@@ -14,7 +14,6 @@ interface CardProps {
 
 const CourseCard = ({ course }: CardProps) => {
     const {
-        country,
         institute,
         degree,
         logo,
@@ -22,13 +21,13 @@ const CourseCard = ({ course }: CardProps) => {
         name,
         tuitionFee,
         intakes,
-        feeCurrency,
-        specialization
+        feeCurrency = 'AUD'
+        // specialization
     } = course;
 
-    const { getCurrencySymbol, setCurrencyValue, getSingleRate } =
+    const { getCurrencySymbol, setCurrencyValue, getSingleRate, base_code } =
         useCurrency();
-    const rate = getSingleRate(feeCurrency);
+    const rate = useMemo(() => getSingleRate(feeCurrency), [feeCurrency]);
 
     return (
         <div
@@ -39,7 +38,16 @@ const CourseCard = ({ course }: CardProps) => {
                 isActive={!!course?.favoriteId?.[0]}
                 body={{ course: _id }}
             />
-            <Link href={ROUTES.COURSE.replace(':id', _id)}>
+            <Link
+                href={{
+                    pathname: ROUTES.COURSE.replace(
+                        ':title',
+                        name.replaceAll(' ', '-')
+                    ),
+                    query: { course_id: _id }
+                }}
+                className="h-full flex flex-col justify-between"
+            >
                 <div className="relative">
                     <img
                         height={174}
@@ -51,17 +59,19 @@ const CourseCard = ({ course }: CardProps) => {
                         className="h-[200px] w-full object-cover rounded-xl"
                     />
                 </div>
-                <div className="pt-3 pb-3 px-3 flex flex-col gap-7">
+                <div className="pt-3 px-3 flex flex-col gap-7">
                     <div className="flex flex-col gap-2">
                         <h1
                             title={name}
                             className="font-bold text-mainTextColor text-xs xl:text-sm"
                         >
-                            {name} <br /> at {institute.name} - (
-                            {specialization?.name ?? 'No Specialization'})
+                            {name} <br /> at{' '}
+                            {institute?.name ?? 'No Institute Found'}
+                            {/* - (
+                            {specialization?.name ?? 'No Specialization'}) */}
                         </h1>
                         <p className="font-medium text-[0.670rem] xl:text-[0.700rem] text-gray-400 capitalize">
-                            {degree.type}
+                            {degree?.type}
                         </p>
                     </div>
                     <div className="flex flex-col gap-3">
@@ -69,24 +79,27 @@ const CourseCard = ({ course }: CardProps) => {
                             <div className="flex flex-col items-center gap-1">
                                 <LuMapPin className="h-4 w-4 text-blueColor" />
                                 <p className="text-[0.600rem] xl:text-[0.700rem]">
-                                    {country.name.split(' ').length > 1
-                                        ? country.name
-                                              .split(' ')
-                                              .map((i: string) => i[0])
-                                        : country.name}
+                                    {institute?.location?.split(',')?.[0] ??
+                                        'No Location'}
                                 </p>
                             </div>
                             <div className="flex flex-col items-center gap-1">
                                 <span className="h-4 w-4 text-blueColor">
-                                    {getCurrencySymbol()}
+                                    {getCurrencySymbol(
+                                        rate ? base_code : feeCurrency
+                                    )}
                                 </span>
                                 <p className="text-[0.600rem] xl:text-[0.700rem]">
                                     {setCurrencyValue(
-                                        tuitionFee *
-                                            (rate?.base_rate
-                                                ? +rate?.base_rate
-                                                : 1)
-                                    )}
+                                        !rate
+                                            ? tuitionFee
+                                            : tuitionFee *
+                                                  (rate?.base_rate
+                                                      ? +rate?.base_rate
+                                                      : 1),
+                                        rate ? base_code : feeCurrency
+                                    )}{' '}
+                                    /Year
                                 </p>
                             </div>
                             <div className="flex flex-col items-center gap-1">
@@ -96,26 +109,32 @@ const CourseCard = ({ course }: CardProps) => {
                                 </p>
                             </div>
                         </div>
-                        <div className="flex items-center gap-2 justify-between">
-                            <Link
-                                href={ROUTES.COURSE.replace(':id', _id)}
-                                className="py-2 px-4 w-full flex justify-center bg-blueColor border-white hover:bg-white border hover:border-blueColor hover:text-blueColor transition-all duration-500 text-white font-medium rounded-md text-[0.640rem] xl:text-[0.740rem]"
-                            >
-                                View Details
-                            </Link>
-                            <Link
-                                href={{
-                                    pathname: ROUTES.COMPARE,
-                                    query: { course_id: _id }
-                                }}
-                                className="py-2 px-4 w-full flex justify-center bg-profileBgColor hover:bg-blueColor hover:text-white transition-all duration-500 text-blueColor font-medium rounded-md text-[0.640rem] xl:text-[0.740rem]"
-                            >
-                                Compare
-                            </Link>
-                        </div>
                     </div>
                 </div>
             </Link>
+            <div className="flex items-center gap-2 justify-between m-3">
+                <Link
+                    href={{
+                        pathname: ROUTES.COURSE.replace(
+                            ':title',
+                            name.replaceAll(' ', '-')
+                        ),
+                        query: { course_id: _id }
+                    }}
+                    className="py-2 px-4 w-full flex justify-center bg-blueColor border-white hover:bg-white border hover:border-blueColor hover:text-blueColor transition-all duration-500 text-white font-medium rounded-md text-[0.640rem] xl:text-[0.740rem]"
+                >
+                    View Details
+                </Link>
+                <Link
+                    href={{
+                        pathname: ROUTES.COMPARE,
+                        query: { course_id: _id }
+                    }}
+                    className="py-2 px-4 w-full flex justify-center bg-profileBgColor hover:bg-blueColor hover:text-white transition-all duration-500 text-blueColor font-medium rounded-md text-[0.640rem] xl:text-[0.740rem]"
+                >
+                    Compare
+                </Link>
+            </div>
         </div>
     );
 };

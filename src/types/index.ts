@@ -16,19 +16,23 @@ export interface userType {
     documents: { name: string; url: string }[];
     academicInformation: academicInformation | null;
 }
+export type LanguageTestScoreType =
+    | 'speaking'
+    | 'listening'
+    | 'writing'
+    | 'reading'
+    | 'overAll';
 
 export interface academicInformation {
     countryOfEducation: string;
     highestLevelOfEducation: string;
     languageTest: {
         name: string;
-        score?: {
-            listening: string;
-            speaking: string;
-            writing: string;
-            reading: string;
-            overAll: string;
-        } | null;
+        score?:
+            | {
+                  [key in LanguageTestScoreType]: string;
+              }
+            | null;
     };
 }
 
@@ -65,8 +69,11 @@ export type scholarshipType = {
     _id: string;
     id: string;
     name: string;
+    title_description: string;
     image: string;
     amount: string;
+    isAmount: boolean;
+    percentage: string;
     description: string;
     type: string;
     intakeYear: string;
@@ -75,15 +82,20 @@ export type scholarshipType = {
     endDate: string;
     institute: instituteType;
     degree: degreeType[];
+    country: countryType;
     course: courseType | null;
     createdAt: string;
     updatedAt: string;
     favoriteId: userType[];
+    text_overview: string;
+    text_eligibility_criteria: string;
+    text_amount: string;
 };
 
 export type filterScholarShipType = {
     _id: string;
     name: string;
+    title_description: string;
     image: string;
     type: string;
     amount: string;
@@ -136,13 +148,13 @@ export type degreeType = {
     createdAt: string;
     updatedAt: string;
     id: string;
+    _id: string;
 };
 
 export type disciplineType = {
     name: string;
-    image: string;
-    undergraduate: degreeType[];
-    postgraduate: degreeType[];
+    icon: string;
+    description: string | null;
     research: degreeType[];
     createdAt: string;
     updatedAt: string;
@@ -171,6 +183,7 @@ export type instituteType = {
 export type specializationType = {
     name: string;
     id: string;
+    _id: string;
     course: [];
 };
 
@@ -184,7 +197,7 @@ export type courseType = {
     institute: instituteType;
     intakes: string[];
     tuitionFee: number;
-    feeCurrency: string;
+    feeCurrency: 'aud' | 'gbp';
     country: countryType;
     discipline: disciplineType[];
     countryDetails: {
@@ -196,12 +209,13 @@ export type courseType = {
     favoriteId?: string[];
 };
 
+export interface SpecializationType {
+    name: string;
+    _id: string;
+}
 export type filterCourseType = {
     intakes: {
         intakes: string[];
-    }[];
-    specializations: {
-        specialization: string;
     }[];
     regions: {
         region: string;
@@ -219,13 +233,17 @@ export type filterCourseType = {
         degree: degreeType;
     }[];
     disciplines: {
-        discipline: string;
+        name: string;
+        specialization: SpecializationType[];
     }[];
 };
 
 export type courseLanguageRequirement = {
     ielts: { s: string; l: string; r: string; w: string; oa: string };
     pte: { s: string; l: string; r: string; w: string; oa: string };
+    oxford: { oa: string };
+    language: { oa: string };
+    duolingo: { oa: string };
 };
 
 export type singleCourseType = {
@@ -233,7 +251,7 @@ export type singleCourseType = {
     monthDuration: string[];
     delivery: string;
     availableCampuses: string[];
-    feeCurrency: string;
+    feeCurrency: 'aud' | 'gbp';
     favoriteId: string[];
     name: string;
     logo: string;
@@ -249,6 +267,9 @@ export type singleCourseType = {
     createdAt: string;
     updatedAt: string;
     scholarship: scholarshipType[];
+    textInitialDeposit: string;
+    textEligibility: string;
+    textAmount: string;
     language: [
         {
             language: courseLanguageRequirement;
@@ -323,6 +344,24 @@ export type countryDataType = {
     code: string;
 };
 
+export type Grade = {
+    grade: string;
+    score: string;
+};
+
+export type QualificationData = {
+    name: string;
+    group: string;
+    grades: Grade[];
+};
+
+export type Qualification = {
+    id: number;
+    selectedQualification?: QualificationData;
+    selectedScore?: string;
+    selectedGrade?: string;
+};
+
 export interface userDocuments {
     identity: {
         passport: {
@@ -349,6 +388,18 @@ export interface userDocuments {
             date_of_completion: string;
         };
         provisional_certificate: {
+            url: string;
+        };
+        secondary_school: {
+            url: string;
+        };
+        higher_secondary_school: {
+            url: string;
+        };
+        bachelor_degree: {
+            url: string;
+        };
+        master_degree: {
             url: string;
         };
     };
@@ -404,12 +455,12 @@ export interface applyTypes {
     user: userType;
     status: applicationStatus;
     documents: userDocuments;
-    councillor: councillorType;
+    counsellor: counsellorType;
     createdAt: string;
     updatedAt: string;
 }
 
-export interface councillorType {
+export interface counsellorType {
     profile_image: string;
     title: string;
     bio: string;
@@ -434,4 +485,11 @@ export interface eventType {
     createdAt: string;
     updatedAt: string;
     id: string;
+}
+
+export interface DisciplineCountType {
+    Undergraduate: number;
+    Postgraduate: number;
+    name: string;
+    image: string;
 }

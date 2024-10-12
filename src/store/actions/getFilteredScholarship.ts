@@ -6,7 +6,16 @@ import { formateScholarshipQuery } from '@/utils/queryFormate';
 
 export const fetchPaginatedScholarship = createAsyncThunk(
     API_ENDPOINTS.SCHOLARSHIP_SEARCH,
-    async (nextPageParam: number, { getState }) => {
+    async (
+        {
+            nextPageParam,
+            query
+        }: {
+            nextPageParam: number | null;
+            query: { [key: string]: string[] };
+        },
+        { getState }
+    ) => {
         const state = getState() as RootState;
 
         try {
@@ -14,9 +23,7 @@ export const fetchPaginatedScholarship = createAsyncThunk(
                 .post(
                     `${API_ENDPOINTS.SCHOLARSHIP_SEARCH}`,
                     {
-                        pipeline: Object.values(
-                            formateScholarshipQuery(state.filterQuery.query)
-                        )
+                        pipeline: Object.values(formateScholarshipQuery(query))
                     },
                     {
                         params: {

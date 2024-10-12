@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import SearchBox from './SearchBox';
-import { FilterCheckBox, FilterCheckBoxLoader } from './FilterCheckBOx';
+import { FilterCheckBox, FilterCheckBoxLoader } from './FilterBoxCheck';
 
 export const regions = [
     'North America',
@@ -54,12 +54,12 @@ const RegionsFilter: React.FC<propsType> = ({ data, isLoading }) => {
                                     !!name &&
                                     name
                                         .toLowerCase()
-                                        .includes(search.toLowerCase())
+                                        ?.includes(search.toLowerCase())
                             )
                             .map(({ region: name }, i) => (
                                 <FilterCheckBox
                                     key={'regions--list--' + i}
-                                    id={name}
+                                    id={name + '--' + i}
                                     text={name}
                                     name={'region'}
                                     value={name}

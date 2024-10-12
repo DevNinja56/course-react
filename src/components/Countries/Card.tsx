@@ -1,5 +1,4 @@
 import { ROUTES } from '@/config/constant';
-import { useFilterQuery } from '@/hooks/filterQuery';
 import { countryType } from '@/types';
 import Link from 'next/link';
 import React from 'react';
@@ -9,13 +8,13 @@ interface CountryProps {
 }
 
 const Card = ({ country }: CountryProps) => {
-    const { addQuery } = useFilterQuery();
-
     return (
         <Link
-            href={ROUTES.FILTER_COURSE}
+            href={{
+                pathname: ROUTES.FILTER_COURSE,
+                query: { countries: [country.name] }
+            }}
             className="z-10 lg:w-1/4 md:w-[45%] w-full"
-            onClick={() => addQuery({ countries: [country.name] })}
         >
             <div
                 className="border-2 border-countryBorderColor py-3 px-3 flex flex-col items-center gap-x-[35px] rounded-lg cursor-pointer hover:border-blueColor bg-white"

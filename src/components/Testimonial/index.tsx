@@ -28,8 +28,8 @@ const Testimonial = () => {
     return (
         <div
             className={`bg-white print:hidden ${
-                router.pathname === (ROUTES.APPLY || ROUTES.FAQ) ||
-                router.pathname.includes(ROUTES.COURSE.replace(':id', ''))
+                router.pathname === ROUTES.FAQ ||
+                router.pathname?.includes(ROUTES.COURSE.replace(':title', ''))
                     ? ''
                     : 'pt-8'
             } `}
@@ -38,11 +38,10 @@ const Testimonial = () => {
                 className={`relative pb-0  ${
                     router.pathname === ROUTES.FAQ
                         ? 'pt-10'
-                        : '' ||
-                          router.pathname === ROUTES.HOMEPAGE ||
-                          router.pathname === ROUTES.CONTACT_US
-                        ? 'overflow-visible'
-                        : 'overflow-hidden'
+                        : router.pathname === ROUTES.HOMEPAGE ||
+                            router.pathname === ROUTES.CONTACT_US
+                          ? 'overflow-visible'
+                          : 'overflow-hidden'
                 }`}
             >
                 <img
@@ -53,7 +52,7 @@ const Testimonial = () => {
                     src="/images/Blogs/Ellipse 426.svg"
                     // priority
                 />
-                <div className="flex flex-col lg:flex-row justify-between items-start container mx-auto lg:px-2 2xl:px-8 transition-all duration-300 py-5 md:py-12 lg:py-20 gap-x-16 gap-y-5 lg:gap-y-0">
+                <div className="flex flex-col lg:flex-row justify-between items-start container mx-auto lg:px-2 2xl:px-8 transition-all duration-300 py-5 md:py-28 lg:py-20 gap-x-16 gap-y-5 lg:gap-y-0 px-10">
                     <div className="flex flex-col gap-y-2 z-10 relative">
                         <p className="font-bold text-xl md:text-[23px] text-blueColor">
                             Testimonial
@@ -112,8 +111,7 @@ const Testimonial = () => {
                         className="absolute right-0 top-[-70px] md:top-[-120px] h-20 w-20 md:h-64 md:w-64 lg:h-[280px] lg:w-[280px]"
                         src="/images/Home/testimoalRoundImg.svg"
                     />
-                ) : router.pathname === ROUTES.APPLY ||
-                  router.pathname === ROUTES.FAQ ? (
+                ) : router.pathname === ROUTES.FAQ ? (
                     <img
                         height={289}
                         width={245}
@@ -121,10 +119,10 @@ const Testimonial = () => {
                         alt="testimonial-round-2"
                         className="absolute right-0 top-0 h-24 w-20 md:h-[150px] md:w-[130px] lg:h-[289px] lg:w-[245px]"
                     />
-                ) : router.pathname.includes(
-                      ROUTES.COURSE.replace(':id', '')
+                ) : router.pathname?.includes(
+                      ROUTES.COURSE.replace(':title', '')
                   ) ||
-                  router.pathname.includes(
+                  router.pathname?.includes(
                       ROUTES.INSTITUTES.replace(':id', '')
                   ) ? (
                     <img

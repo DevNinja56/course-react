@@ -9,29 +9,33 @@ const CounselingWork = () => {
         <div
             className={`w-full relative pb-0 ${
                 router.pathname === '/apply' ||
-                router.pathname.includes(ROUTES.COURSE.replace(':id', '')) ||
-                router.pathname.includes(ROUTES.SCHOLARSHIP.replace(':id', ''))
-                    ? router.pathname.includes(
-                          ROUTES.COURSE.replace(':id', '')
+                router.pathname?.includes(
+                    ROUTES.COURSE.replace(':title', '')
+                ) ||
+                router.pathname?.includes(
+                    ROUTES.SCHOLARSHIP.replace(':title', '')
+                )
+                    ? router.pathname?.includes(
+                          ROUTES.COURSE.replace(':title', '')
                       ) ||
-                      router.pathname.includes(
-                          ROUTES.SCHOLARSHIP.replace(':id', '')
+                      router.pathname?.includes(
+                          ROUTES.SCHOLARSHIP.replace(':title', '')
                       )
                         ? 'bg-profileBgColor md:bg-white'
                         : `bg-profileBgColor`
                     : router.pathname === '/courseDetail'
-                    ? 'bg-lightColor'
-                    : ''
+                      ? 'bg-lightColor'
+                      : ''
             }`}
         >
             {router.pathname === '/courseDetail' ||
-            router.pathname.includes(ROUTES.INSTITUTES.replace(':id', '')) ? (
+            router.pathname?.includes(ROUTES.INSTITUTES.replace(':id', '')) ? (
                 <img
                     height={217}
                     width={175}
                     alt="circle"
                     className={`absolute left-0 top-0 h-28 w-28 md:h-40 md:w-40 -translate-x-4 ${
-                        router.pathname.includes(
+                        router.pathname?.includes(
                             ROUTES.INSTITUTES.replace(':id', '')
                         )
                             ? '-left-3 h-24 w-24 lg:h-auto lg:w-auto'
@@ -48,16 +52,15 @@ const CounselingWork = () => {
                     className={`absolute right-0 h-[156px] w-[106px] md:h-[206px] md:w-[156px] lg:h-[314px] lg:w-[237px] top-[-100px] md:top-44 lg:top-0 ${
                         router.pathname === '/aboutUs' ||
                         router.pathname === '/apply' ||
-                        router.pathname.includes(
-                            ROUTES.COURSE.replace(':id', '')
+                        router.pathname?.includes(
+                            ROUTES.COURSE.replace(':title', '')
                         ) ||
-                        router.pathname.includes(
-                            ROUTES.SCHOLARSHIP.replace(':id', '')
+                        router.pathname?.includes(
+                            ROUTES.SCHOLARSHIP.replace(':title', '')
                         )
                             ? `${
-                                  router.pathname === ROUTES.APPLY ||
-                                  router.pathname.includes(
-                                      ROUTES.COURSE.replace(':id', '')
+                                  router.pathname?.includes(
+                                      ROUTES.COURSE.replace(':title', '')
                                   )
                                       ? 'top-[-50px]'
                                       : 'top-[-120px]'
@@ -261,7 +264,7 @@ const CounselingWork = () => {
                 </div>
             </div>
             {router.pathname === '/courseDetail' ||
-            router.pathname.includes(ROUTES.INSTITUTES.replace(':id', '')) ? (
+            router.pathname?.includes(ROUTES.INSTITUTES.replace(':id', '')) ? (
                 ''
             ) : (
                 <img
@@ -269,11 +272,11 @@ const CounselingWork = () => {
                     width={192}
                     alt="counselling-work"
                     className={`absolute left-0 h-[130px] bottom-[1190px] md:bottom-44 w-[130px] md:h-[206px] md:w-[206px] lg:h-[314px] lg:w-[192px] ${
-                        router.pathname.includes(
-                            ROUTES.COURSE.replace(':id', '')
+                        router.pathname?.includes(
+                            ROUTES.COURSE.replace(':title', '')
                         ) ||
-                        router.pathname.includes(
-                            ROUTES.SCHOLARSHIP.replace(':id', '')
+                        router.pathname?.includes(
+                            ROUTES.SCHOLARSHIP.replace(':title', '')
                         )
                             ? 'block translate-y-10 md:hidden'
                             : ''

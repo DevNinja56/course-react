@@ -14,7 +14,8 @@ import {
     applyTypes,
     geoIpType,
     courseType,
-    eventType
+    eventType,
+    DisciplineCountType
 } from '@/types';
 
 export interface PaginatedResponse<data> {
@@ -153,6 +154,20 @@ export const stateQueryApi = createApi({
                 data: PaginatedResponse<courseType[]>;
             }) => res.data! ?? res
         }),
+        getScholarshipFilter: builder.query<
+            PaginatedResponse<scholarshipType[]>,
+            { limit: number; page: number; body: object[] }
+        >({
+            query: ({ limit, page, body }) => ({
+                url: `${API_ENDPOINTS.SCHOLARSHIP_SEARCH}?limit=${limit}&page=${page}`,
+                method: 'POST',
+                body: { pipeline: [...body] }
+            }),
+            transformResponse: (res: {
+                data: PaginatedResponse<scholarshipType[]>;
+            }) => res.data! ?? res
+        }),
+
         getApplyById: builder.query<applyTypes, ApplyId>({
             query: (id: string) => ({
                 url: API_ENDPOINTS.GET_APPLY_BY_ID.replace(':id', id)
@@ -169,6 +184,11 @@ export const stateQueryApi = createApi({
             transformResponse: (res: {
                 data: PaginatedResponse<eventType[]>;
             }) => res.data! ?? res
+        }),
+        getCountDiscipline: builder.query<DisciplineCountType[], void>({
+            query: () => ({ url: API_ENDPOINTS.DISCIPLINE_COUNT }),
+            transformResponse: (res: { data: DisciplineCountType[] }) =>
+                res.data! ?? res
         })
     })
 });
@@ -189,7 +209,9 @@ export const {
     useGetUserAppliesQuery,
     useGetUserIpQuery,
     useGetCourseByFilterQuery,
+    useGetScholarshipFilterQuery,
     useGetApplyByIdQuery,
     useGetCoursesByInstituteQuery,
-    useGetPaginatedEventsQuery
+    useGetPaginatedEventsQuery,
+    useGetCountDisciplineQuery
 } = stateQueryApi;

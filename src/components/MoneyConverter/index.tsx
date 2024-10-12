@@ -6,7 +6,7 @@ import React, { memo, useEffect, useState } from 'react';
 const CurrencyConverter = () => {
     const { updateModal } = useUi();
     const {
-        country,
+        currentCurrency: country,
         fetchLatestRates,
         updateGeoIp,
         geoIp,
@@ -33,7 +33,7 @@ const CurrencyConverter = () => {
     return (
         <div className="relative">
             <button
-                className="border-2 border-gray-800 py-1 md:py-2 px-1 md:px-3 flex gap-1 group hover:border-transparent hover:bg-blueColor hover:text-white transition-all duration-200 font-bold text-xs md:text-base"
+                className="border-2 border-gray-800 py-1 md:py-2 px-1 md:px-3 flex gap-1 group hover:border-transparent hover:bg-blueColor hover:text-white transition-all duration-200 font-bold text-xs md:text-base uppercase "
                 onClick={() =>
                     updateModal({
                         type: modalType.currency_converter,
@@ -44,13 +44,13 @@ const CurrencyConverter = () => {
                 <div className="w-8 flex justify-center">{country?.code}</div>
                 <div className="font-light">|</div>
                 <div className="w-8 flex justify-center">
-                    {country?.currencies}
+                    {country.currency}
                 </div>
             </button>
 
             {isChangedCurrency && (
                 <div className="fixed top-[90px] right-2   bg-white rounded-md border-gray-300 border overflow-hidden">
-                    <div className="border-l-[6px] border-l-blueColor w-[350px] p-5">
+                    <div className="border-l-[6px] border-l-blueColor w-[350px] p-5 capitalize ">
                         <div className="mb-5">
                             Please confirm these details. so you see the most
                             appropriate dates and tuition fees.
@@ -60,7 +60,7 @@ const CurrencyConverter = () => {
                                 Nationality: <b>{country.name}</b>
                             </div>
                             <div>
-                                Currency: <b>{country?.currencies}</b>
+                                Currency: <b>{country?.currency_name}</b>
                             </div>
                         </div>
                         <div className="flex gap-3">

@@ -11,6 +11,12 @@ import { getSsrRequest } from '@/utils/ssrRequest';
 import { API_ENDPOINTS } from '@/config/Api_EndPoints';
 import { ROUTES } from '@/config/constant';
 import Link from 'next/link';
+import dynamic from 'next/dynamic';
+import Tabs from '@/components/Tabs';
+import RankingCards from '@/components/Institute/RankingCards';
+const InnerHtml = dynamic(() => import('@/components/InnerHtml'), {
+    ssr: false
+});
 
 const Institutes = ({ data: institute }: { data: instituteType }) => {
     const [showText, setShowText] = useState(false);
@@ -24,18 +30,17 @@ const Institutes = ({ data: institute }: { data: instituteType }) => {
                     alt="uni-round"
                     className="-left-4 md:-left-3 top-1/2 md:top-1/3 absolute h-11 w-11 md:h-14 md:w-14"
                     src="/images/CourseDetail/Circle 3.svg"
-                    // priority
                 />
                 <div className="w-full xl:container mx-auto px-4 md:px-[50px] lg:px-2 2xl:px-8 transition-all duration-300 z-10 flex justify-center">
                     <img
-                        height={375}
+                        height={400}
                         width={1240}
                         alt="institute"
                         src={
                             institute?.image ??
                             '/images/institute/instituteMain.png'
                         }
-                        className="w-full rounded-xl max-h-[375px]"
+                        className="w-full rounded-xl aspect-[12.4/4] object-cover  "
                         // priority
                     />
                 </div>
@@ -84,37 +89,132 @@ const Institutes = ({ data: institute }: { data: instituteType }) => {
                                 </Link>
                             </div>
                             <div className="flex bg-white bg-opacity-10 gap-1 w-full">
-                                <p
-                                    className={`flex flex-col gap-8 font-medium text-lightGrayColor w-full text-sm md:text-base`}
-                                >
-                                    {institute?.description.slice(
-                                        0,
-                                        showText
-                                            ? institute?.description.length
-                                            : 400
-                                    )}
-                                    {institute?.description.length > 400 &&
-                                        !showText && <>....</>}
-                                    {institute?.description.length > 400 && (
-                                        <button
-                                            onClick={() =>
-                                                setShowText((prev) => !prev)
-                                            }
-                                            className="text-base md:text-xl text-blueColor font-semibold cursor-pointer w-full flex"
-                                        >
-                                            {showText
-                                                ? 'Show Less'
-                                                : 'Show More'}
-                                        </button>
-                                    )}
-                                </p>
+                                <div className="flex flex-col gap-y-6 w-full">
+                                    <div className="tabs-container w-full">
+                                        <Tabs
+                                            data={[
+                                                {
+                                                    title: 'Overview',
+                                                    element: (
+                                                        <div className="description w-full flex flex-col gap-3 md:gap-4 items-start">
+                                                            <h1 className="text-black text-lg md:text-2xl font-bold">
+                                                                Institute
+                                                                Description
+                                                            </h1>
+                                                            <div
+                                                                className={`flex flex-col gap-8 font-medium text-lightGrayColor w-full text-sm md:text-base`}
+                                                            >
+                                                                <InnerHtml
+                                                                    html={institute?.description.slice(
+                                                                        0,
+                                                                        showText
+                                                                            ? institute
+                                                                                  ?.description
+                                                                                  .length
+                                                                            : 400
+                                                                    )}
+                                                                />
+
+                                                                {institute
+                                                                    ?.description
+                                                                    .length >
+                                                                    400 &&
+                                                                    !showText && (
+                                                                        <>
+                                                                            ....
+                                                                        </>
+                                                                    )}
+                                                                {institute
+                                                                    ?.description
+                                                                    .length >
+                                                                    400 && (
+                                                                    <button
+                                                                        onClick={() =>
+                                                                            setShowText(
+                                                                                (
+                                                                                    prev
+                                                                                ) =>
+                                                                                    !prev
+                                                                            )
+                                                                        }
+                                                                        className="text-base md:text-xl text-blueColor font-semibold cursor-pointer w-full flex"
+                                                                    >
+                                                                        {showText
+                                                                            ? 'Show Less'
+                                                                            : 'Show More'}
+                                                                    </button>
+                                                                )}
+                                                            </div>
+                                                        </div>
+                                                    )
+                                                },
+                                                {
+                                                    title: 'Ranking',
+                                                    element: (
+                                                        <div className="flex flex-col gap-8 max-h-[70vh] overflow-auto customScroll px-2">
+                                                            <div className="flex flex-col gap-4 items-start">
+                                                                <h3 className="text-black text-lg md:text-2xl font-bold">
+                                                                    Institute
+                                                                    Ranking
+                                                                </h3>
+                                                            </div>
+                                                            <div className="">
+                                                                <div className="flex flex-col border border-gray-300 rounded-lg">
+                                                                    <RankingCards
+                                                                        img="/images/institute/qs-world-university-rankings 1.svg"
+                                                                        text={
+                                                                            institute.qsWorldRanking
+                                                                        }
+                                                                    />
+
+                                                                    <RankingCards
+                                                                        img="/images/institute/Shanghai_Academic_Ranking_of_World_Universities_–_Logo 2.svg"
+                                                                        text={
+                                                                            institute.timesHigherRanking
+                                                                        }
+                                                                        className="h-6 w-12"
+                                                                    />
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    )
+                                                },
+                                                {
+                                                    title: 'Gallery',
+                                                    element: (
+                                                        <div className="flex flex-col gap-8 max-h-[70vh] overflow-auto customScroll px-2">
+                                                            <div className="flex flex-col gap-4  items-start">
+                                                                <h3 className="text-black text-lg md:text-2xl font-bold">
+                                                                    Gallery
+                                                                </h3>
+                                                            </div>
+                                                        </div>
+                                                    )
+                                                },
+
+                                                {
+                                                    title: "FAQ's",
+                                                    element: (
+                                                        <div className="flex flex-col gap-8 max-h-[70vh] overflow-auto customScroll px-2">
+                                                            <div className="flex flex-col gap-4  items-start">
+                                                                <h3 className="text-black text-lg md:text-2xl font-bold">
+                                                                    FAQ&apos;s
+                                                                </h3>
+                                                            </div>
+                                                        </div>
+                                                    )
+                                                }
+                                            ]}
+                                        />
+                                    </div>
+                                </div>
                             </div>
                             <div className="flex flex-col gap-12 lg:hidden">
                                 <UniversityFacts data={institute} />
                                 <Ranking data={institute} />
                             </div>
-                            <ProgramSection />
-                            <ScholarshipSection />
+                            <ProgramSection name={institute.name} />
+                            <ScholarshipSection name={institute.name} />
                         </div>
                         <div className="w-1/3 hidden lg:flex flex-col gap-9 h-instituteStickyHeight sticky top-[110px] no-scrollbar">
                             <UniversityFacts data={institute} />
@@ -134,7 +234,8 @@ export const getServerSideProps: GetServerSideProps<{
     try {
         const id = `${API_ENDPOINTS.INSTITUTE_BY_ID.replace(
             ':id',
-            context.query?.id as string
+            (context.query?.institute_id as string) ??
+                (context.query?.id as string)
         )}`;
         data = await getSsrRequest(id, context);
         return { props: { data } };

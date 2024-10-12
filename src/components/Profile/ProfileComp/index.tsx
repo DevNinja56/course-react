@@ -41,10 +41,12 @@ const ProfileComp = () => {
         }
     ];
 
+    const isActiveComponentRendered = false;
+
     return (
         <div className="flex flex-col lg:flex-row lg:justify-between">
             <div className="flex flex-col w-full lg:w-[26.5%]">
-                {tabs.map(({ title }, i) => (
+                {tabs.map(({ Component, title }, i) => (
                     <div
                         key={'favourites--tabs' + i}
                         className="flex flex-col gap-y-6"
@@ -56,7 +58,7 @@ const ProfileComp = () => {
                         }
                     >
                         <div
-                            className={`py-[14px] md:py-[17px] lg:py-[20px] px-[30px] md:px-[50px] lg:pl-0 lg:pr-5   lg:border-t-white lg:border-b-white lg:border-l-white lg:border-r-4  flex justify-between items-center lg:justify-end border md:border-personalInfoBorderColor cursor-pointer ${
+                            className={`py-[14px] md:py-[17px] lg:py-[20px] px-[30px] md:px-[50px] lg:pl-0 lg:pr-5 lg:border-t-white lg:border-b-white lg:border-l-white lg:border-r-4 flex justify-between items-center lg:justify-end border md:border-personalInfoBorderColor cursor-pointer ${
                                 active === title
                                     ? 'text-blueColor lg:border-blueColor lg:bg-profileBgColor'
                                     : 'text-mainTextColor lg:border-transparent'
@@ -76,10 +78,19 @@ const ProfileComp = () => {
                                 // priority
                             />
                         </div>
+                        {!isActiveComponentRendered && active === title && (
+                            <div className="flex lg:hidden flex-col gap-y-3 w-full">
+                                <React.Fragment
+                                    key={'favorites-tabs-list-' + i}
+                                >
+                                    {active === title && <Component />}
+                                </React.Fragment>
+                            </div>
+                        )}
                     </div>
                 ))}
             </div>
-            <div className="lg:flex flex-col gap-y-3 w-[67%] hidden">
+            <div className="hidden lg:flex flex-col gap-y-3 w-[67%]">
                 {tabs.map(({ Component, title }, i) => (
                     <React.Fragment key={'favorites-tabs-list-' + i}>
                         {active === title && <Component />}

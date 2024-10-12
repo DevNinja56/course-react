@@ -1,4 +1,4 @@
-import { sortState } from '@/components/FilterPage/SortBy';
+import { sortState } from '@/components/FilterPage/Scholarship/SortBy';
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export const formateCourseQuery = (query: { [key: string]: any }) => {
@@ -37,7 +37,7 @@ export const formateCourseQuery = (query: { [key: string]: any }) => {
 
     if (query.location) {
         orConditions.push({
-            'institute.location': { $in: query.location }
+            availableCampuses: { $in: query.location }
         });
     }
 
@@ -96,7 +96,7 @@ export const formateCourseQuery = (query: { [key: string]: any }) => {
             | 'tuitionFee-Down';
 
         sort =
-            value === ('A-Z' || 'Z-A')
+            value === 'A-Z' || value === 'Z-A'
                 ? { $sort: { name: sortState[value] } }
                 : { $sort: { tuitionFee: sortState[value] } };
     }
@@ -139,13 +139,13 @@ export const formateScholarshipQuery = (query: { [key: string]: any }) => {
 
     if (query.degrees) {
         orConditions.push({
-            'degrees.name': { $in: query.degrees }
+            'degree.name': { $in: query.degrees }
         });
     }
 
     if (query.degreeType) {
         orConditions.push({
-            'degrees.type': { $in: query.degreeType }
+            'degree.type': { $in: query.degreeType }
         });
     }
 

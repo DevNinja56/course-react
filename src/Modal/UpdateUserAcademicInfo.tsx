@@ -4,7 +4,7 @@ import { IoMdClose } from 'react-icons/io';
 import { useUi } from '@/hooks/user-interface';
 import Button from '@/components/Button';
 import { useForm } from 'react-hook-form';
-import { academicInformation } from '@/types';
+import { academicInformation, LanguageTestScoreType } from '@/types';
 import { useUserAuth } from '@/hooks/auth';
 import toast from 'react-hot-toast';
 import { fetchRequest } from '@/utils/axios/fetch';
@@ -12,22 +12,46 @@ import { API_ENDPOINTS } from '@/config/Api_EndPoints';
 import Select from 'react-select';
 import { country_list_with_code } from '@/utils/data/country';
 
-export const levelOfEducationList = [
-    'HSSE',
-    'A Levels',
-    'DAE',
-    '2 Years Bachelors Degree',
-    '4 Years Bachelors Degree',
-    'Masters degree'
+const groupedOptions = [
+    {
+        label: 'Secondary Education',
+        options: [
+            { label: 'HSSC', value: 'HSSC' },
+            { label: 'A Levels', value: 'A Levels' }
+        ]
+    },
+    {
+        label: 'Technical/Vocational Education',
+        options: [{ label: 'DAE', value: 'DAE' }]
+    },
+    {
+        label: 'Undergraduate Education',
+        options: [
+            {
+                label: '2 Years Bachelors Degree',
+                value: '2 Years Bachelors Degree'
+            },
+            {
+                label: '4 Years Bachelors Degree',
+                value: '4 Years Bachelors Degree'
+            }
+        ]
+    },
+    {
+        label: 'Graduate Education',
+        options: [{ label: 'Masters degree', value: 'Masters degree' }]
+    }
 ];
-export const languageTestList = [
-    "I don't have any test",
-    'IELTS',
-    'PTE',
-    'TOFEL',
-    'Language CERT',
-    'Oxford (ELLT)'
-];
+
+const languageTestScore = {
+    "I haven't given any test": [],
+    IELTS: ['speaking', 'listening', 'writing', 'reading', 'overAll'],
+    PTE: ['speaking', 'listening', 'writing', 'reading', 'overAll'],
+    Duolingo: ['overAll'],
+    'Language CERT': ['overAll'],
+    'Oxford (ELLT)': ['overAll']
+};
+const languageTestList = Object.keys(languageTestScore);
 
 const UpdateUserAcademicInfo = () => {
     const { hideModal } = useUi();
@@ -36,11 +60,12 @@ const UpdateUserAcademicInfo = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [score, setScore] = useState(
         academicInformation
-            ? academicInformation?.languageTest?.name !== languageTestList[0]
-            : false
+            ? academicInformation?.languageTest?.name
+            : languageTestList[0]
     );
     const {
         register,
+        unregister,
         handleSubmit: fromSubmit,
         formState: { errors },
         setValue
@@ -120,9 +145,10 @@ const UpdateUserAcademicInfo = () => {
                         onChange={(e) => {
                             setValue('countryOfEducation', e?.value ?? '');
                         }}
-                        defaultInputValue={
-                            academicInformation?.countryOfEducation
-                        }
+                        defaultValue={{
+                            label: academicInformation?.countryOfEducation,
+                            value: academicInformation?.countryOfEducation
+                        }}
                         styles={{
                             control: (base: any) => ({
                                 ...base,
@@ -143,17 +169,18 @@ const UpdateUserAcademicInfo = () => {
                         {...register('highestLevelOfEducation', {
                             required: false
                         })}
-                        options={levelOfEducationList?.map((level) => ({
-                            label: level,
-                            value: level
-                        }))}
+                        options={groupedOptions}
                         placeholder="Select Level of education"
                         onChange={(e) => {
-                            setValue('highestLevelOfEducation', e?.value ?? '');
+                            setValue(
+                                'highestLevelOfEducation',
+                                (e as unknown as { value: string })?.value ?? ''
+                            );
                         }}
-                        defaultInputValue={
-                            academicInformation?.highestLevelOfEducation
-                        }
+                        defaultValue={{
+                            label: academicInformation?.highestLevelOfEducation,
+                            value: academicInformation?.highestLevelOfEducation
+                        }}
                         styles={{
                             control: (base: any) => ({
                                 ...base,
@@ -180,12 +207,14 @@ const UpdateUserAcademicInfo = () => {
                         }))}
                         placeholder="Select Language Test"
                         onChange={(e) => {
-                            setScore(e?.value !== languageTestList[0]);
+                            setScore(e?.value ?? languageTestList[0]);
                             setValue('languageTest.name', e?.value ?? '');
+                            unregister('languageTest.score');
                         }}
-                        defaultInputValue={
-                            academicInformation?.languageTest?.name
-                        }
+                        defaultValue={{
+                            label: academicInformation?.languageTest?.name,
+                            value: academicInformation?.languageTest?.name
+                        }}
                         styles={{
                             control: (base: any) => ({
                                 ...base,
@@ -202,90 +231,37 @@ const UpdateUserAcademicInfo = () => {
                     )}
                 </div>
 
-                {score && (
+                {
                     <div className="flex gap-2">
-                        <input
-                            {...register('languageTest.score.speaking', {
-                                required: `Speaking is required`
-                            })}
-                            placeholder={'Speaking'}
-                            className={`border w-1/2 p-1 rounded-md placeholder-shown:text-sm text-sm remove-arrow text-center ${
-                                errors?.languageTest?.score?.speaking?.message
-                                    ? 'border-red-600'
-                                    : 'border-grayColor'
-                            }`}
-                            defaultValue={
-                                academicInformation?.languageTest?.score
-                                    ?.speaking
-                            }
-                            type="number"
-                        />
-                        <input
-                            {...register('languageTest.score.listening', {
-                                required: `Listening is required`
-                            })}
-                            placeholder={'Listening'}
-                            className={`border w-1/2 p-1 rounded-md placeholder-shown:text-sm text-sm remove-arrow text-center ${
-                                errors?.languageTest?.score?.listening?.message
-                                    ? 'border-red-600'
-                                    : 'border-grayColor'
-                            }`}
-                            defaultValue={
-                                academicInformation?.languageTest?.score
-                                    ?.listening
-                            }
-                            type="number"
-                        />
-                        <input
-                            {...register('languageTest.score.writing', {
-                                required: `writing is required`
-                            })}
-                            placeholder={'Writing'}
-                            className={`border w-1/2 p-1 rounded-md placeholder-shown:text-sm text-sm remove-arrow text-center ${
-                                errors?.languageTest?.score?.writing?.message
-                                    ? 'border-red-600'
-                                    : 'border-grayColor'
-                            }`}
-                            defaultValue={
-                                academicInformation?.languageTest?.score
-                                    ?.writing
-                            }
-                            type="number"
-                        />
-                        <input
-                            {...register('languageTest.score.reading', {
-                                required: `Reading is required`
-                            })}
-                            placeholder={'Reading'}
-                            className={`border w-1/2 p-1 rounded-md placeholder-shown:text-sm text-sm remove-arrow text-center ${
-                                errors?.languageTest?.score?.reading?.message
-                                    ? 'border-red-600'
-                                    : 'border-grayColor'
-                            }`}
-                            defaultValue={
-                                academicInformation?.languageTest?.score
-                                    ?.reading
-                            }
-                            type="number"
-                        />
-                        <input
-                            {...register('languageTest.score.overAll', {
-                                required: `overAll is required`
-                            })}
-                            placeholder={'OverAll'}
-                            className={`border w-1/2 p-1 rounded-md placeholder-shown:text-sm text-sm remove-arrow text-center ${
-                                errors?.languageTest?.score?.reading?.message
-                                    ? 'border-red-600'
-                                    : 'border-grayColor'
-                            }`}
-                            defaultValue={
-                                academicInformation?.languageTest?.score
-                                    ?.reading
-                            }
-                            type="number"
-                        />
+                        {languageTestScore[
+                            score as unknown as keyof typeof languageTestScore
+                        ]?.map((test, i) => (
+                            <input
+                                key={'input--' + test + i}
+                                {...register(
+                                    `languageTest.score.${test as LanguageTestScoreType}`,
+                                    {
+                                        required: `${test} is required`
+                                    }
+                                )}
+                                placeholder={test}
+                                className={`border w-1/2 p-1 rounded-md placeholder-shown:text-sm text-sm remove-arrow text-center max-w-[25%] ${
+                                    errors?.languageTest?.score?.[
+                                        test as LanguageTestScoreType
+                                    ]?.message
+                                        ? 'border-red-600'
+                                        : 'border-grayColor'
+                                }`}
+                                defaultValue={
+                                    academicInformation?.languageTest?.score?.[
+                                        test as LanguageTestScoreType
+                                    ]
+                                }
+                                type="number"
+                            />
+                        ))}
                     </div>
-                )}
+                }
                 <Button
                     text="Update"
                     type="submit"

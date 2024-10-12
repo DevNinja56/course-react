@@ -21,7 +21,7 @@ const FavCard: React.FC<propsType> = ({
     type
 }) => {
     return (
-        <div className="border-2 p-3 rounded-lg group hover:border-blueColor relative ">
+        <div className="border-2 p-3 rounded-lg group hover:border-blueColor relative">
             <FavoriteButton
                 isActive={true}
                 body={{
@@ -32,7 +32,7 @@ const FavCard: React.FC<propsType> = ({
                 <div className="img">
                     <img src={image} width={300} height={300} alt={title} />
                 </div>
-                <div className="group-hover:text-blueColor capitalize mt-5">
+                <div className="group-hover:text-blueColor mt-5">
                     {title}
                 </div>
             </Link>

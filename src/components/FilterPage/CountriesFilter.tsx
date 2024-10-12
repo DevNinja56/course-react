@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 // import { useGetCountriesQuery } from '@/store/slices/allRequests';
-import { FilterCheckBox, FilterCheckBoxLoader } from './FilterCheckBOx';
+import { FilterCheckBox, FilterCheckBoxLoader } from './FilterBoxCheck';
 import SearchBox from './SearchBox';
 
 interface propsType {
@@ -36,12 +36,12 @@ const CountriesFilter: React.FC<propsType> = ({ data, isLoading }) => {
                                 !!name &&
                                 name
                                     .toLowerCase()
-                                    .includes(search.toLowerCase())
+                                    ?.includes(search.toLowerCase())
                         )
                         .map(({ country: name }, i) => (
                             <FilterCheckBox
                                 key={'country--list--' + i}
-                                id={name}
+                                id={name + '--' + i}
                                 text={name}
                                 name={'countries'}
                                 value={name}

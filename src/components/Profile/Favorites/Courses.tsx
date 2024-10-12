@@ -11,23 +11,31 @@ const Courses = () => {
     }, []);
     return (
         <div>
-            <p className="py-[14px] text-[32px] font-semibold">Courses</p>
-            <div className="pb-4 grid justify-between grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <p className="py-[14px] text-[32px] font-semibold hidden lg:block">
+                Courses
+            </p>
+            <div className="pb-4 grid justify-between grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-12 lg:px-0">
                 {isLoading ? (
                     <LoaderSpinner color="#000" />
                 ) : !data?.length ? (
                     <p>No Favorite Course Found</p>
                 ) : (
-                    data?.map(({ course }) => (
-                        <FavCard
-                            key={'course-institute--' + course.id}
-                            id={course.id}
-                            title={course.name}
-                            image={course.logo}
-                            type="course"
-                            link={ROUTES.COURSE.replace(':id', course.id)}
-                        />
-                    ))
+                    data?.map(
+                        ({ course }) =>
+                            course && (
+                                <FavCard
+                                    key={'course-institute--' + course.id}
+                                    id={course.id}
+                                    title={course.name}
+                                    image={course.logo}
+                                    type="course"
+                                    link={ROUTES.COURSE.replace(
+                                        ':id',
+                                        course.id
+                                    )}
+                                />
+                            )
+                    )
                 )}
             </div>
         </div>

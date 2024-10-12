@@ -6,16 +6,25 @@ import { formateCourseQuery } from '@/utils/queryFormate';
 
 export const fetchPaginatedCourses = createAsyncThunk(
     API_ENDPOINTS.COURSE_SEARCH,
-    async (nextPageParam: number, { getState }) => {
+    async (
+        {
+            nextPageParam,
+            query
+        }: {
+            nextPageParam: number | null;
+            query: { [key: string]: string[] };
+        },
+        { getState }
+    ) => {
         const state = getState() as RootState;
-        const query = formateCourseQuery(state.filterQuery.query);
+        const updatedQueryQuery = formateCourseQuery(query);
 
         try {
             return http
                 .post(
                     `${API_ENDPOINTS.COURSE_SEARCH}`,
                     {
-                        pipeline: Object.values(query)
+                        pipeline: Object.values(updatedQueryQuery)
                     },
                     {
                         params: {

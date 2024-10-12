@@ -1,8 +1,15 @@
-// import Image from 'next/image';
 import SearchBox from '@/components/Home/SearchBox';
 import ScholarshipSlider from '@/components/Slider/ScholarshipSlider';
-import CategoriesSection from '@/components/Home/CategoriesSection';
 import Events from '@/components/Events';
+import dynamic from 'next/dynamic';
+// import DisciplineSection from '@/components/Home/DisciplineSection';
+const DisciplineSection = dynamic(
+    () => import('@/components/Home/DisciplineSection'),
+    {
+        ssr: false,
+        loading: () => <div className="w-full">Loading....</div>
+    }
+);
 
 const Home = () => {
     return (
@@ -29,9 +36,9 @@ const Home = () => {
                     <div className="flex flex-col px-6 md:px-12 lg:px-0 lg:pl-4 lg:pr-40 xl:pr-12 pt-16 lg:pt-32">
                         <div className="pr-0 lg:pr-60 mb-5">
                             <h1 className="text-mainTextColor text-[32px] md:text-[40px] xl:text-[45px] font-black mb-2">
-                                World&lsquo;s Largest Course Search Platform
+                                UK&lsquo;s Largest Course Search Platform
                             </h1>
-                            <p className="text-aboutUsTextColor text-base leading-6 aboutUsTextColor mb-5 font-normal">
+                            <p className="text-aboutUsTextColor text-base leading-6 aboutUsTextColor mb-5 font-normal line-clamp-3 overflow-hidden text-ellipsis">
                                 Make your university application stress free and
                                 discover in minutes if you&lsquo;d get into your
                                 dream university. Enter your academic profile
@@ -70,7 +77,7 @@ const Home = () => {
                     // priority
                 />
             </div>
-            <div className="w-full px-0 lg:px-0 pb-40 relative bg-white pt-4 md:pt-16 overflow-y-visible overflow-x-hidden md:overflow-hidden">
+            <div className="w-full px-0 lg:px-0 pb-10 relative bg-white pt-4 md:pt-16 overflow-y-visible overflow-x-hidden md:overflow-hidden">
                 <div className="h-[134px] w-[134px] border-[15px] border-blueColor rounded-full absolute right-[-40px] top-[-30px] z-10 block md:hidden"></div>
                 <img
                     height={74}
@@ -88,7 +95,7 @@ const Home = () => {
                     src="/images/Home/topCategoryRound2.svg"
                     // priority
                 />
-                <CategoriesSection />
+                <DisciplineSection />
             </div>
             <div className="w-full py-8 md:py-12 lg:py-16">
                 <div className="container mx-auto flex flex-col items-center overflow-hidden">
@@ -137,7 +144,7 @@ const Home = () => {
                         // priority
                     />
                     <div className="flex flex-col px-0 md:px-20 lg:pr-0 xl:pr-16 z-10 ">
-                        <h1 className="text-mainTextColor text-3xl md:text-[40px] font-extrabold mb-5">
+                        <h1 className="text-mainTextColor text-3xl md:text-[40px] font-extrabold mb-5 mt-5">
                             Why Choose Us?
                         </h1>
                         <p className="text-darkGrayColor mb-10 text-[15px]">

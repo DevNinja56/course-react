@@ -56,38 +56,10 @@ const FileSubmitted = () => {
     const token = getToken();
     const router = useRouter();
     const { id } = router.query;
-    const { data: getApply } = useGetApplyByIdQuery(id);
+    const { data: getApply, refetch } = useGetApplyByIdQuery(id);
+
     const [isLoading, setIsLoading] = useState(false);
     const [fullFile, setFullFile] = useState(fileUrl);
-
-    const consolidated_mark_sheets = {
-        url: [
-            getApply?.documents?.academic_certificates?.consolidated_mark_sheets
-                ?.url
-        ],
-        country:
-            getApply?.documents?.academic_certificates?.consolidated_mark_sheets
-                ?.country,
-        institute:
-            getApply?.documents?.academic_certificates?.consolidated_mark_sheets
-                ?.institute,
-        date_of_start:
-            getApply?.documents?.academic_certificates?.consolidated_mark_sheets
-                ?.date_of_start,
-        date_of_completion:
-            getApply?.documents?.academic_certificates?.consolidated_mark_sheets
-                ?.date_of_completion
-    };
-
-    const semester_mark_sheets = {
-        url: getApply?.documents?.academic_certificates?.semester_mark_sheets
-            ?.url
-    };
-
-    const provisional_certificate = {
-        url: getApply?.documents?.academic_certificates?.provisional_certificate
-            ?.url
-    };
 
     const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
         const uploadedFiles = e.target.files;
@@ -127,65 +99,12 @@ const FileSubmitted = () => {
                     url: `${BASE_URL}${API_ENDPOINTS.APPLY_DOCUMENTS}/${id}`,
                     type: 'patch',
                     body: {
-                        ...getApply,
-                        course: getApply?.course.id,
-                        user: getApply?.user.id,
+                        course: getApply?.course?.id,
+                        intake: getApply?.intake,
+                        status: getApply?.status,
+                        id: getApply?.id,
+                        user: getApply?.user?.id,
                         documents: {
-                            academic_certificates: {
-                                ...(semester_mark_sheets.url
-                                    ? {
-                                          semester_mark_sheets: {
-                                              url: semester_mark_sheets.url
-                                          }
-                                      }
-                                    : {}),
-                                ...(provisional_certificate.url
-                                    ? {
-                                          provisional_certificate: {
-                                              url: provisional_certificate.url
-                                          }
-                                      }
-                                    : {}),
-                                ...(consolidated_mark_sheets?.url?.[0]
-                                    ? {
-                                          consolidated_mark_sheets: {
-                                              ...(consolidated_mark_sheets.url
-                                                  ? {
-                                                        url: consolidated_mark_sheets
-                                                            .url?.[0]
-                                                    }
-                                                  : {}),
-                                              ...(consolidated_mark_sheets.institute
-                                                  ? {
-                                                        institute:
-                                                            consolidated_mark_sheets.institute
-                                                    }
-                                                  : {}),
-                                              ...(consolidated_mark_sheets.country
-                                                  ? {
-                                                        country:
-                                                            consolidated_mark_sheets.country
-                                                    }
-                                                  : {}),
-                                              ...(consolidated_mark_sheets.date_of_completion
-                                                  ? {
-                                                        date_of_completion:
-                                                            consolidated_mark_sheets.date_of_completion
-                                                    }
-                                                  : {}),
-                                              ...(consolidated_mark_sheets.date_of_start
-                                                  ? {
-                                                        date_of_start:
-                                                            consolidated_mark_sheets.date_of_start
-                                                    }
-                                                  : {})
-                                          }
-                                      }
-                                    : {})
-                            },
-                            professional_records: {
-                                ...getApply?.documents?.professional_records
-                            },
                             identity: {
                                 passport: {
                                     url: uploadResponse,
@@ -195,6 +114,24 @@ const FileSubmitted = () => {
                                     date_of_expiry: data.date_of_expiry,
                                     date_of_issue: data.date_of_issue
                                 }
+                            },
+                            academic_certificates:
+                                (
+                                    getApply?.documents?.academic_certificates
+                                        ?.consolidated_mark_sheets?.url ?? []
+                                ).length > 0
+                                    ? {
+                                          ...getApply?.documents
+                                              ?.academic_certificates,
+                                          consolidated_mark_sheets: {
+                                              ...getApply?.documents
+                                                  ?.academic_certificates
+                                                  ?.consolidated_mark_sheets
+                                          }
+                                      }
+                                    : {},
+                            professional_records: {
+                                ...getApply?.documents?.professional_records
                             }
                         }
                     }
@@ -202,6 +139,8 @@ const FileSubmitted = () => {
                 {
                     loading: 'Please wait...',
                     success: () => {
+                        refetch();
+                        router.back();
                         return 'Form submitted successfully';
                     },
                     error: 'An error occurred'
@@ -216,7 +155,7 @@ const FileSubmitted = () => {
 
     return (
         <>
-            <div className="flex justify-between py-8 px-4 bg-white">
+            <div className="flex justify-between py-4 px-4 bg-white items-center sticky top-0 z-[9999]">
                 <div className="flex items-center gap-4 pl-4">
                     <FaArrowLeft onClick={() => router.back()} />
                     <div>
@@ -229,12 +168,22 @@ const FileSubmitted = () => {
                         <span className="text-blueColor">Submitted</span>
                     </div>
                 </div>
-                <div className="md:hidden lg:block sm:hidden">
-                    <Button
-                        type="submit"
-                        text={isLoading ? 'Loading...' : 'Save'}
-                        className="rounded-md py-2 px-4"
-                        onClick={handleSubmit(onSubmit)}
+                <div className="md:hidden lg:block sm:hidden flex ">
+                    <span className="font-bold text-xl">Select new file :</span>
+                    <label
+                        htmlFor="fileUpload"
+                        className="rounded-md px-8 ml-12 text-center py-2 font-semibold text-2xl cursor-pointer bg-blueColor border-transparent text-white hover:bg-white hover:border border hover:border-blueColor hover:text-blueColor"
+                    >
+                        {' '}
+                        {isLoading ? 'Loading...' : 'Add'}
+                    </label>
+                    <input
+                        type="file"
+                        accept=".pdf, image/*"
+                        className="hidden"
+                        multiple
+                        id="fileUpload"
+                        onChange={handleFileChange}
                     />
                 </div>
             </div>
@@ -251,21 +200,6 @@ const FileSubmitted = () => {
                             )}
                         </div>
                     </div>
-                    <label
-                        htmlFor="fileUpload"
-                        className="rounded-md px-24 ml-12 text-center py-4 font-semibold text-3xl cursor-pointer bg-blueColor border-transparent text-white hover:bg-white hover:border-2 hover:border-blueColor hover:text-blueColor"
-                    >
-                        {' '}
-                        {isLoading ? 'Loading...' : '+ ADD'}
-                    </label>
-                    <input
-                        type="file"
-                        accept=".pdf, image/*"
-                        className="hidden"
-                        multiple
-                        id="fileUpload"
-                        onChange={handleFileChange}
-                    />
                 </div>
                 <div className="lg:w-2/4 md:w-full sm:w-full py-8 px-16">
                     <div className="w-full bg-BgCardPassport md:pl-36 sm:pl-4 lg:pl-0">
@@ -378,6 +312,12 @@ const FileSubmitted = () => {
                             autoComplete="off"
                             className="p-0"
                             customInputClass="px-2 py-[10px] text-[15px] w-full rounded-md outline-none placeholder:text-sm"
+                        />
+                        <Button
+                            type="submit"
+                            text={isLoading ? 'Loading...' : 'Save'}
+                            className="rounded-md py-4 px-4 mt-4"
+                            onClick={handleSubmit(onSubmit)}
                         />
                     </form>
                 </div>

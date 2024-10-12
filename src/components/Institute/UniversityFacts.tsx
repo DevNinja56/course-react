@@ -31,12 +31,24 @@ const UniversityFacts = ({ data }: { data: instituteType }) => {
                 <UniversityFactsCard
                     icon={<FaMapMarkerAlt className="h-7 w-7 md:h-9 md:w-9" />}
                     types="Location"
-                    text={data.location}
+                    text={
+                        <>
+                            {data.location.split(',').map((location) => (
+                                <li key={location}>{location}</li>
+                            ))}
+                        </>
+                    }
                 />
                 <UniversityFactsCard
                     icon={<FaSchool className="h-7 w-7 md:h-9 md:w-9" />}
                     types="Campus"
-                    text={data.campus.join(' | ')}
+                    text={
+                        <>
+                            {data.campus.map((campus) => (
+                                <li key={campus}>{campus}</li>
+                            ))}
+                        </>
+                    }
                 />
             </div>
         </div>

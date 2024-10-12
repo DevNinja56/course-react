@@ -61,6 +61,7 @@ const config: Config = {
                 headerStickyHeight: 'calc(100vh - 110px)',
                 courseStickyHeight: 'calc(100vh - 410px)'
             }
+            
         }
     },
     plugins: []

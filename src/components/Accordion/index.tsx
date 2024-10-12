@@ -31,8 +31,8 @@ const Accordion: React.FC<propsType> = ({
                 animate={isActive ? 'open' : 'collapsed'}
                 exit="collapsed"
                 variants={{
-                    open: { maxHeight: 1000, padding: '40px 20px' },
-                    collapsed: { maxHeight: 0, padding: '0px 20px' }
+                    open: { maxHeight: 1000, padding: '40px 20px',backgroundColor:"white",zIndex:"100" },
+                    collapsed: { maxHeight: 0, padding: '0px 20px',backgroundColor:"white",zIndex:"100" }
                 }}
                 transition={{ duration: 0.3, ease: 'easeInOut' }}
             >

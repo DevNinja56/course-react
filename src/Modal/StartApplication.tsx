@@ -7,17 +7,13 @@ import { fetchRequest } from '@/utils/axios/fetch';
 import { API_ENDPOINTS } from '@/config/Api_EndPoints';
 import InputBox from '@/components/Input';
 import Select, { SingleValue } from 'react-select';
-// import Image from 'next/image';
 import { CiCircleRemove } from 'react-icons/ci';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import GoogleOAuthWraper from '@/components/Auth/GoogleSignInBtn';
 import Button from '@/components/Button';
 import { ROUTES } from '@/config/constant';
-import { modalType } from '@/store/slices/ui.slice';
-import Link from 'next/link';
 import { MdOutlineMail } from 'react-icons/md';
 import { BiLock } from 'react-icons/bi';
-import { FaArrowLeft } from 'react-icons/fa6';
 import dynamic from 'next/dynamic';
 import {
     useGetCoursesByInstituteQuery,
@@ -59,7 +55,6 @@ const StartApplication = () => {
     const { course } = modalState as { course: singleCourseType };
     const { isAuthenticated, user, updateUserDetails, loggedInUser } =
         useUserAuth();
-    const { updateModal } = useUi();
     const [isLoading, setIsLoading] = useState(false);
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
@@ -162,30 +157,15 @@ const StartApplication = () => {
     return (
         <>
             {firstStep === 'first' ? (
-                <div className="rounded-[10px] bg-white custom-shadow p-7 flex flex-col items-center relative min-w-0 md:min-w-[500px]">
-                    <CiCircleRemove
-                        onClick={hideModal}
-                        className="text-blueColor absolute top-4 right-4 text-2xl cursor-pointer"
-                    />
-                    <Link href={ROUTES.HOMEPAGE}>
-                        <FaArrowLeft className="absolute left-5 top-5 cursor-pointer text-blueColor h-6 w-6" />
-                    </Link>
-                    <h1 className="font-medium text-2xl md:text-[36px] text-mainTextColor mb-3">
-                        Welcome Back
-                    </h1>
-                    <Link href={ROUTES.SIGN_UP}>
-                        <p className="text-mainTextColor font-medium mb-4 md:mb-12 text-sm md:text-base">
-                            No Account?{' '}
-                            <span className="text-blueColor">Sign Up</span>
-                        </p>
-                    </Link>
-                    <form className="w-full" onSubmit={handleSubmitUser}>
-                        <div className="flex flex-col w-full gap-y-7 mb-3">
+                <div className="rounded-[10px] bg-white custom-shadow p-7 flex flex-col items-center relative min-w-0 md:min-w-[500px] xl:min-w-[25rem]">
+                    <form className="w-full mt-4" onSubmit={handleSubmitUser}>
+                        <div className="flex flex-col w-full gap-y-3 mb-3">
                             <InputBox
                                 onChange={(e) => setEmail(e.target.value)}
                                 placeholder="Email"
                                 title="Email"
                                 icon={MdOutlineMail}
+                                // className='!py-2'
                             />
                             <InputBox
                                 onChange={(e) => setPassword(e.target.value)}
@@ -194,20 +174,6 @@ const StartApplication = () => {
                                 title="Password"
                                 icon={BiLock}
                             />
-                        </div>
-                        <div className="flex justify-end mb-4">
-                            <button
-                                type="button"
-                                onClick={() =>
-                                    updateModal({
-                                        type: modalType.reset_password,
-                                        state: {}
-                                    })
-                                }
-                                className="w-full text-right rounded-10px text-darkGrayColor"
-                            >
-                                Forgot password?
-                            </button>
                         </div>
                         <Button
                             className="pt-[14px] pb-[13px]"
@@ -222,7 +188,7 @@ const StartApplication = () => {
                             process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID ?? ''
                         }
                     >
-                        <div className="w-full ">
+                        <div className="w-full flex flex-col gap-2-1">
                             <div className="flex items-center w-full my-3 justify-center">
                                 <div className="w-16 h-px bg-gray-500 mr-4" />
                                 <span className="text-gray-500">OR</span>
@@ -377,7 +343,7 @@ const StartApplication = () => {
                                                     e?.value ?? ''
                                                 );
                                             }}
-                                            isDisabled={!selectedIntake}
+                                            isDisabled={!selectedIntake || selectedIntake.length === 0}
                                             styles={{
                                                 control: (base: {
                                                     [key: string]: unknown;

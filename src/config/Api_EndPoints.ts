@@ -20,11 +20,14 @@ export const API_ENDPOINTS = {
     COUNTRY: '/country',
     DEGREE: '/degree',
     DISCIPLINE: '/discipline',
+    DISCIPLINE_COUNT: '/discipline/count',
     DISCIPLINE_PAGINATED: '/discipline/paginated',
     SCHOLARSHIP: '/scholarship',
     SCHOLARSHIP_BY_ID: '/scholarship/:id',
     COURSE_DEGREE_ID: '/course/degree',
+    COURSE_By_SPECIALIZATION_ID: '/course/specializations/:id',
     COURSE_INSTITUTE_ID: '/course/institute',
+    DEGREES_BY_INSTITUTE_ID: '/course/institute/degree/:id',
     COURSE_SEARCH: '/course/filter',
     COURSE_BY_ID: '/course/:id',
     SCHOLARSHIP_SEARCH: '/scholarship/filter',
@@ -46,11 +49,13 @@ export const API_ENDPOINTS = {
     APPLY_USER: '/apply/user',
     GEO_IP: '/geoip',
     FETCH_RATES:
-        'https://fxds-public-exchange-rates-api.oanda.com/cc-api/currencies?base=PKR&quote=${code}&data_type=general_currency_pair&start_date=${pDate}&end_date=${cDate}',
+        // 'https://fxds-public-exchange-rates-api.oanda.com/cc-api/currencies?base=PKR&quote=${code}&data_type=general_currency_pair&start_date=${pDate}&end_date=${cDate}',
+        '/currency_rate/find?from_code=PKR&to_code=${code}&start_date=${pDate}&end_date=${cDate}',
     FETCH_ALL_RATES: '/currency_rate?code=${code}&amount=${amount}',
     FILE_S3_UPLOAD: '/file/s3-upload',
     APPLY_DOCUMENTS: '/apply',
     EVENTS: '/event',
     FILE_UPLOAD: '/file/s3-upload',
-    FILE_DELETE: '/file/s3-delete'
+    FILE_DELETE: '/file/s3-delete',
+    GET_SCHOLARSHIP_BY_DEGREE: '/course/degree/specializations/:id'
 };

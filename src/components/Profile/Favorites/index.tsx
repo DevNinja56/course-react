@@ -41,6 +41,8 @@ const Favorites = () => {
         { title: favoritesTabs[3], Component: Blogs }
     ];
 
+    const isActiveComponentRendered = false;
+
     return (
         <div className="flex flex-col lg:flex-row lg:justify-between">
             <div className="flex flex-col w-full lg:w-[26.5%]">
@@ -76,6 +78,17 @@ const Favorites = () => {
                                 // priority
                             />
                         </div>
+                        {!isActiveComponentRendered && active === title && (
+                            <div className="lg:hidden flex-col gap-y-3 flex">
+                                {tabs.map(({ Component, title }, i) => (
+                                    <React.Fragment
+                                        key={'favourites-tabs-list-' + i}
+                                    >
+                                        {active === title && <Component />}
+                                    </React.Fragment>
+                                ))}
+                            </div>
+                        )}
                     </div>
                 ))}
             </div>

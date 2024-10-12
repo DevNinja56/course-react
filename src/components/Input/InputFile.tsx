@@ -32,7 +32,7 @@ const InputFile = React.forwardRef(
         const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
             const file = e.target.files?.[0];
             if (file) {
-                if (exemptFileType && exemptFileType.includes(file.type)) {
+                if (exemptFileType && exemptFileType?.includes(file.type)) {
                     setFileName('');
                 } else {
                     setFileName(file.name);

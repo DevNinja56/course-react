@@ -13,35 +13,49 @@ const MyApplies = () => {
     }, []);
 
     return (
-        <div className="lg:flex flex-col w-full ">
-            <h2 className="text-[32px] font-semibold leading-10 text-mainTextColor py-5">
+        <div className="lg:flex flex-col w-full px-7 md:px-12 lg:px-0 pb-8 lg:pb-0">
+            <h2 className="text-[32px] font-semibold leading-10 text-mainTextColor py-5 hidden lg:block">
                 My Applications
             </h2>
             {isLoading ? (
                 <LoaderIcon style={{ width: '20px', height: '20px' }} />
             ) : data && data?.length > 0 ? (
-                <div className=" rounded-xl overflow-hidden w-full grid grid-cols-2 gap-5">
+                <div className=" rounded-xl overflow-hidden w-full grid grid-cols-1 md:grid-cols-2 gap-3 lg:gap-5 ">
                     {data?.map((apply) => (
                         <div
                             key={apply.id}
-                            className="flex flex-wrap border-b flex-col w-full border p-5 rounded-[10px] gap-3"
+                            className="flex flex-wrap border-b flex-col w-full border p-4 md:p-5 rounded-[10px] gap-3 relative"
                         >
-                            <p className=" text-sm font-semibold text-mainTextColor hover:text-blueColor hover:underline cursor-pointer line-clamp-2 h-4">
+                            {!apply.course && (
+                                <p className="text-red-500 text-xs absolute top-2 right-2 font-bold">
+                                    No course found or maybe deleted form DB!.
+                                </p>
+                            )}
+                            <p className="text-xs md:text-sm font-semibold text-mainTextColor hover:text-blueColor hover:underline cursor-pointer line-clamp-2 h-4">
                                 <Link
-                                    href={ROUTES.COURSE.replace(
-                                        ':id',
-                                        apply.id
-                                    )}
+                                    href={{
+                                        pathname: ROUTES.COURSE.replace(
+                                            ':title',
+                                            (
+                                                apply?.course?.name ??
+                                                'no-course'
+                                            )?.replaceAll(' ', '-')
+                                        ),
+                                        query: {
+                                            course_id:
+                                                apply?.course?.id ?? 'no-course'
+                                        }
+                                    }}
                                 >
                                     {apply?.course?.name}
                                 </Link>
                             </p>
 
                             <div className="flex items-center gap-6">
-                                <p className=" text-[13px] font-medium text-darkGrayColor ">
+                                <p className="text-[11px] md:text-[13px] font-medium text-darkGrayColor ">
                                     {apply?.course?.degree?.type}
                                 </p>
-                                <p className="relative text-[13px] font-medium text-darkGrayColor before:block before:content-['•'] before:absolute before:-left-6 before:top-[50%] before:-translate-y-1/2">
+                                <p className="relative text-[11px] md:text-[13px] font-medium text-darkGrayColor before:block before:content-['•'] before:absolute before:-left-6 before:top-[50%] before:-translate-y-1/2">
                                     {apply?.course?.specialization
                                         ?.map((s) => s.name)
                                         ?.join(' , ') ??
@@ -61,24 +75,24 @@ const MyApplies = () => {
                                         }
                                     />
                                     <div className="flex flex-col">
-                                        <p className=" text-xs font-semibold ">
+                                        <p className="text-[10px] md:text-xs font-semibold ">
                                             {apply?.course?.institute?.name}
                                         </p>
-                                        <p className="text-sm capitalize text-black ">
+                                        <p className="text-[10px] md:text-sm capitalize text-black ">
                                             <span className="font-bold">
                                                 campus:{' '}
                                             </span>
                                             <span>
                                                 {apply?.course?.availableCampuses.join(
                                                     ' - '
-                                                )}
+                                                ) ?? 'No Campus Found'}
                                             </span>
                                         </p>
                                     </div>
                                 </div>
 
                                 <Link
-                                    className=" py-2 px-2 text-[10px] font-semibold text-blueColor bg-blueColor bg-opacity-10 rounded-[5px] whitespace-nowrap"
+                                    className="py-2 px-1.5 md:px-2 text-[9px] md:text-[10px] font-semibold text-blueColor bg-blueColor bg-opacity-10 rounded-[5px] whitespace-nowrap"
                                     href={ROUTES.APPLIES_DETAIL.replace(
                                         ':id',
                                         apply.id
