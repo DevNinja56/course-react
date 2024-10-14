@@ -17,7 +17,6 @@ interface PropsType {
 
 const DisciplinesFilter: React.FC<PropsType> = ({ data, isLoading }) => {
     const [search] = useState<string>('');
-    console.log(data);
     return (
         <div className="flex flex-col gap-y-3">
             {/* {data.length > 5 && (

@@ -19,6 +19,7 @@ import {
     AiOutlineEnvironment
 } from 'react-icons/ai';
 import { LuGraduationCap } from 'react-icons/lu';
+import { useRouter } from 'next/router';
 interface ModalProps {
     setFilterSideBar: (show: boolean) => void;
 }
@@ -27,16 +28,23 @@ const FilterSideBar = ({ setFilterSideBar }: ModalProps) => {
     const onHideSideBar = () => {
         setFilterSideBar(false);
     };
-    const { clearALlQuery, query } = useFilterQuery();
+    const { clearAllQuery, query } = useFilterQuery();
     const {
         fetchSearchedCoursesRequest: refetch,
         filters,
         isLoading
     } = useSearchedCourses();
 
+    const {query:urlQuery,push} = useRouter();
+
     const handleClearQuery = () => {
-        clearALlQuery();
-        refetch();
+        if (Object.keys(urlQuery).length != 0) {
+            push({ query: {} });
+            refetch();
+        } else {
+            clearAllQuery();
+            refetch();
+        }
     };
 
     return (

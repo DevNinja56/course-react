@@ -1,32 +1,29 @@
-import { useRouter } from 'next/router';
+
+import { addQuery, removeQuery, clearAllQuery } from '@/store/slices/filterQuery';
+import { useAppDispatch, useAppSelector } from './store';
 
 export const useFilterQuery = () => {
-    const { query, push } = useRouter();
-    // const dispatch = useAppDispatch();
-    // const filterQuery = useAppSelector((state) => state.filterQuery);
+    const dispatch = useAppDispatch();
+    const query = useAppSelector((state) => state.filterQuery.query);
 
     const addQueryAction = (obj: { [key: string]: string[] }) => {
-        // dispatch(addQuery(obj));
-        const newQuery = { ...query, ...obj };
-        push({ query: newQuery });
+        dispatch(addQuery(obj));
     };
 
     const removeQueryAction = (key: string) => {
-        // dispatch(removeQuery(key));
-        const newQuery = { ...query };
-        delete newQuery[key];
-        push({ query: newQuery });
+        dispatch(removeQuery(key));
     };
 
     const clearQueryAction = () => {
-        // dispatch(clearAllQuery());
-        push({ query: {} });
+        dispatch(clearAllQuery());
+
     };
 
+
     return {
-        query: query as { [key: string]: string | string[] },
+        query,
         addQuery: addQueryAction,
         removeQuery: removeQueryAction,
-        clearALlQuery: clearQueryAction
+        clearAllQuery: clearQueryAction
     };
 };

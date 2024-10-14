@@ -1,35 +1,41 @@
 import { fetchPaginatedCourses } from '@/store/actions/getFilteredCourse';
 import { useAppDispatch, useAppSelector } from './store';
 import { setInitialValue, setLoading } from '@/store/slices/filtersCourse';
+import { useFilterQuery } from './filterQuery';
 import { useRouter } from 'next/router';
 
 export const useSearchedCourses = () => {
     const state = useAppSelector((state) => state.courses);
     const dispatch = useAppDispatch();
-    const { query } = useRouter();
+    const { query: reduxQuery } = useFilterQuery(); 
+    const { query: urlQuery } = useRouter(); 
 
-    const updatedQuery = Object.entries(query).reduce(
-        (acc, [key, value]) => {
-            if (Array.isArray(value)) {
-                acc[key] = value;
-            } else if (typeof value === 'string' && value !== '') {
-                acc[key] = [value as string];
-            }
-            return acc;
-        },
-        {} as { [key: string]: string[] }
-    );
+    const mergedQuery = {
+        ...reduxQuery,
+        ...Object.entries(urlQuery).reduce(
+            (acc, [key, value]) => {
+                if (Array.isArray(value)) {
+                    acc[key] = value;
+                } else if (typeof value === 'string' && value !== '') {
+                    acc[key] = [value];
+                }
+                return acc;
+            },
+            {} as { [key: string]: string[] }
+        ),
+    };
 
     const fetchSearchedCoursesRequest = (
-        nexPage: number = state.paginatorInfo.page ?? 1
+        nextPage: number = state.paginatorInfo.page ?? 1
     ) => {
         dispatch(
             fetchPaginatedCourses({
-                nextPageParam: nexPage,
-                query: updatedQuery
+                nextPageParam: nextPage,
+                query: mergedQuery 
             })
         );
     };
+
     const initialState = () => dispatch(setInitialValue());
     const startLoading = () => dispatch(setLoading());
 

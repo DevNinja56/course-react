@@ -1,14 +1,19 @@
 import Button from '@/components/Button';
+import { useUi } from '@/hooks/user-interface';
 import { applyTypes } from '@/types';
 // import Image from 'next/image';
 import React from 'react';
 import { IoCallOutline, IoMailOutline } from 'react-icons/io5';
+import { MdSchedule } from 'react-icons/md';
+import { modalType } from '@/store/slices/ui.slice';
 
 interface propTypes {
     selectedCourse: applyTypes;
 }
 
 const YourCounsellorBox = ({ selectedCourse }: propTypes) => {
+    const { updateModal } = useUi();
+
     return (
         <div className="bg-white rounded-3xl w-full lg:w-2/5 xl:w-1/2 shadow-progressBarShadow flex flex-col md:flex-row justify-center md:justify-start lg:flex-col items-center gap-3 md:gap-7 lg:gap-3 py-7 px-5 lg:px-8">
             <div className="flex flex-col gap-2 items-center w-full md:w-auto">
@@ -51,7 +56,7 @@ const YourCounsellorBox = ({ selectedCourse }: propTypes) => {
                         }
                         className="py-2 px-5 rounded-xl text-sm md:text-base"
                         link={`mailto:${selectedCourse?.counsellor?.email ?? 'example@courseoption.com'}`}
-                        linkClass='w-full'
+                        linkClass="w-full"
                     />
                     <Button
                         icon={
@@ -67,10 +72,16 @@ const YourCounsellorBox = ({ selectedCourse }: propTypes) => {
                         link={`tel:${selectedCourse?.counsellor?.phone_number ?? '+923000000000'}`}
                     />
                     <Button
-                        icon={
-                            <IoCallOutline className="h-5 w-5 text-white group-hover:text-blueColor" />
+                        onClick={() =>
+                            updateModal({
+                                type: modalType.schedule_meeting,
+                                state: {}
+                            })
                         }
-                        text={'schedule a counselling session'}
+                        icon={
+                            <MdSchedule className="h-5 w-5 text-white group-hover:text-blueColor" />
+                        }
+                        text={'Schedule Session'}
                         className="py-2 px-5 rounded-xl text-sm md:text-base"
                     />
                 </div>

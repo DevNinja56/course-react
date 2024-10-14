@@ -14,6 +14,7 @@ export enum modalType {
     'start_application',
     'cancel_application',
     'share_modal',
+    'schedule_meeting',
     'ucas_calculator'
 }
 

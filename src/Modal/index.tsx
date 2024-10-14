@@ -18,6 +18,7 @@ import StartApplication from './StartApplication';
 import CancelApplication from './CancelApplication';
 import UploadUserDocuments from './UploadUserDocuments';
 import UcasPointCalculate from './UcasPointCalculate';
+import { ScheduleMeeting } from './ScheduleMeeting';
 
 const ModalWraper = () => {
     const { modal } = useUi();
@@ -36,6 +37,7 @@ const ModalWraper = () => {
         [modalType.cancel_application]: <CancelApplication />,
         [modalType.share_modal]: <ShareModal />,
         [modalType.upload_user_documents]: <UploadUserDocuments />,
+        [modalType.schedule_meeting]: <ScheduleMeeting/>,
         [modalType.ucas_calculator]: <UcasPointCalculate />
     };
 
