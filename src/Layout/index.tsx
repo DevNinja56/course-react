@@ -16,6 +16,7 @@ import Testimonial from '@/components/Testimonial';
 import CounselingWork from '@/components/CounselingWork/CounselingWork';
 import ChatBoot from '@/components/ChatBoot';
 import { useUi } from '@/hooks/user-interface';
+import BestFitTool from '@/components/BestFitTool';
 
 export interface propsType {
     children: React.ReactElement;
@@ -60,7 +61,7 @@ const MainLayout = ({
         ROUTES.INSTITUTES_DETAIL.replace(':id', '[id]'),
         ROUTES.COUNTRY,
         ROUTES.INSTITUTES,
-        ROUTES.FAQ,
+        ROUTES.FAQ
     ];
 
     useEffect(() => {
@@ -107,10 +108,15 @@ const MainLayout = ({
                     children
                 )}
                 <ChatBoot />
+                <div className="fixed z-50 bottom-32 right-[1rem] w-24 h-24">
+                    <BestFitTool />
+                </div>
                 {counselingRoutes?.includes(router.pathname) && (
                     <CounselingWork />
                 )}
-                {testimonialRoutes?.includes(router.pathname) && <Testimonial />}
+                {testimonialRoutes?.includes(router.pathname) && (
+                    <Testimonial />
+                )}
             </div>
             {footer && <Footer />}
         </div>

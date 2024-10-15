@@ -53,11 +53,9 @@ export const ScheduleMeeting = () => {
     const [startDate, setStartDate] = useState<Date | null>(null);
     const [selectedTime, setSelectedTime] = useState<OptionType | null>(null);
     const [meetingScheduled, setMeetingScheduled] = useState(false);
-    const [error, setError] = useState<string | null>(null); // State for validation error
-
+    const [error, setError] = useState<string | null>(null); 
     const handleConfirm = () => {
-        // Validate date and time selection
-        if (!startDate) {
+            if (!startDate) {
             setError('Please select a date.');
             return;
         }
@@ -66,19 +64,17 @@ export const ScheduleMeeting = () => {
             return;
         }
 
-        setError(null); // Clear error if validation passes
+        setError(null);
         setMeetingScheduled(true);
     };
 
     if (meetingScheduled) {
         return (
             <div className="flex flex-col w-[400px] bg-white rounded-xl p-6 shadow-lg">
-                <div className="flex justify-end">
                     <MdCancel
-                        className="rounded-full text-blue-500 w-7 h-7 flex items-center justify-center cursor-pointer"
+                        className="rounded-full text-blue-500 w-7 h-7 absolute right-10 cursor-pointer"
                         onClick={hideModal}
                     />
-                </div>
                 <h1 className="text-2xl font-bold text-left">Meeting Details</h1>
                 <p className="py-2">
                     Your meeting with <span className="font-bold">Counsellor</span>{' '}
@@ -110,22 +106,20 @@ export const ScheduleMeeting = () => {
 
     return (
         <div className="flex flex-col w-[400px] bg-white rounded-xl p-6 shadow-lg">
-            <div className="flex justify-end">
                 <MdCancel
-                    className="rounded-full text-blue-500 w-7 h-7 flex items-center justify-center cursor-pointer"
+                    className="rounded-full text-blue-500 w-7 h-7 absolute cursor-pointer right-10"
                     onClick={hideModal}
                 />
-            </div>
             <h1 className="text-2xl font-bold text-center mb-6">Schedule Meeting</h1>
             
-            {error && <p className="text-red-500 mb-4">{error}</p>} {/* Display validation error */}
+            {error && <p className="text-red-500 mb-4">{error}</p>}
 
             <div className="mb-4">
                 <DatePicker
                     selected={startDate}
                     onChange={(date) => {
                         setStartDate(date);
-                        if (date) setError(null); // Clear error on date selection
+                        if (date) setError(null); 
                     }}
                     className="w-full p-3 border border-gray-300 rounded-lg focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50
                     pl-4 placeholder:font-bold placeholder:text-[#a0aec0]"
@@ -141,7 +135,7 @@ export const ScheduleMeeting = () => {
                     options={timeOptions}
                     onChange={(option) => {
                         setSelectedTime(option);
-                        if (option) setError(null); // Clear error on time selection
+                        if (option) setError(null); 
                     }}
                     isDisabled={!startDate}
                 />
@@ -154,3 +148,4 @@ export const ScheduleMeeting = () => {
         </div>
     );
 };
+

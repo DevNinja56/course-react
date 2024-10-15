@@ -19,6 +19,7 @@ import CancelApplication from './CancelApplication';
 import UploadUserDocuments from './UploadUserDocuments';
 import UcasPointCalculate from './UcasPointCalculate';
 import { ScheduleMeeting } from './ScheduleMeeting';
+import { BestFitTool } from './BestFitTool';
 
 const ModalWraper = () => {
     const { modal } = useUi();
@@ -38,7 +39,8 @@ const ModalWraper = () => {
         [modalType.share_modal]: <ShareModal />,
         [modalType.upload_user_documents]: <UploadUserDocuments />,
         [modalType.schedule_meeting]: <ScheduleMeeting/>,
-        [modalType.ucas_calculator]: <UcasPointCalculate />
+        [modalType.ucas_calculator]: <UcasPointCalculate />,
+        [modalType.best_fit_tool] : <BestFitTool/>
     };
 
     return (
