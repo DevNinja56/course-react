@@ -34,7 +34,6 @@ const MainLayout = ({
     isPublic = false
 }: propsType) => {
     const { refetchUser, isAuthenticated, isLoading, user } = useUserAuth();
-    const { modal } = useUi();
     const token = getCookie('access_token');
     const router = useRouter();
     const testimonialRoutes = [
@@ -85,7 +84,7 @@ const MainLayout = ({
 
     const Layout = () => (
         <div
-            className={`w-screen h-screen overflow-x-hidden ${modal ? 'overflow-y-hidden`' : 'overflow-y-auto`'}`}
+            className={`w-screen h-screen overflow-x-hidden ${'overflow-y-auto`'}`}
         >
             {header && <Header />}
             <div
@@ -140,4 +139,4 @@ const MainLayout = ({
     );
 };
 
-export default MainLayout;
+export default React.memo(MainLayout);

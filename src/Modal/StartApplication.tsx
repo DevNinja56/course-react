@@ -551,9 +551,9 @@ const StartApplication = () => {
                                         <path
                                             d="M7.5 15L12.5 10L7.5 5"
                                             stroke="white"
-                                            stroke-width="2"
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
+                                            strokeWidth="2"
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
                                         />
                                     </svg>
                                 </span>

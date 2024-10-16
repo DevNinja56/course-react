@@ -14,7 +14,7 @@ export const useCalculate = () => {
     const { base_code } = useCurrency();
 
     function initialDeposit({
-        initialDeposit: initialDepositVal,
+        initialDeposit: initialDepositVal = '',
         tuitionFee,
         scholarship,
         isNumber = false,
@@ -25,9 +25,9 @@ export const useCalculate = () => {
         };
 
         let initialDeposit = initialDepositVal;
-
+        debugger;
         //  check if G included in initial deposit
-        if (scholarship && initialDepositVal?.includes('G')) {
+        if (scholarship && !!initialDepositVal && initialDepositVal?.includes('G')) {
             initialDeposit = initialDepositVal.replace('G', 'N');
         }
 
