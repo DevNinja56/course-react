@@ -1,3 +1,4 @@
+
 export interface userType {
     id: string;
     name: string;
@@ -458,8 +459,25 @@ export interface applyTypes {
     counsellor: counsellorType;
     createdAt: string;
     updatedAt: string;
+    schedule?: scheduleTypes;
 }
 
+export interface scheduleTypes 
+{
+    startTime: string,
+    endTime: string,
+    date: string,
+    counsellorId: string,
+    userId: string,
+    applicationId: string,
+    status: string,
+    reason: string,
+    meetingUrl: string,
+    meetingId: string,
+    createdAt: string,
+    updatedAt: string,
+    id: string
+}
 export interface counsellorType {
     profile_image: string;
     title: string;

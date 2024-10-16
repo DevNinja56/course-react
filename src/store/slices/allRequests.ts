@@ -189,7 +189,16 @@ export const stateQueryApi = createApi({
             query: () => ({ url: API_ENDPOINTS.DISCIPLINE_COUNT }),
             transformResponse: (res: { data: DisciplineCountType[] }) =>
                 res.data! ?? res
-        })
+        }),
+        getCounsellorSchedule: builder.query<
+            unknown,
+            { id: unknown; date: string }
+        >({
+            query: ({ id, date }) => ({
+                url: `${API_ENDPOINTS.COUNSELLOR}/${id}/${date}`
+            }),
+            transformResponse: (res: { data: unknown }) => res.data! ?? res
+        }),
     })
 });
 
@@ -213,5 +222,7 @@ export const {
     useGetApplyByIdQuery,
     useGetCoursesByInstituteQuery,
     useGetPaginatedEventsQuery,
-    useGetCountDisciplineQuery
+    useGetCountDisciplineQuery,
+    useGetCounsellorScheduleQuery,
+    
 } = stateQueryApi;
