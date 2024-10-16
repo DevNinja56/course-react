@@ -182,6 +182,7 @@ export const ScheduleMeeting = () => {
                         <a
                             href={applyData?.schedule?.meetingUrl}
                             className="inline-block bg-blue-500 text-white font-bold py-2 px-4 rounded transition duration-200 hover:bg-blue-600"
+                            target="_blank"
                         >
                             Join Meeting
                         </a>

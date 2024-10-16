@@ -18,22 +18,24 @@ const YourCounsellorBox = ({ selectedCourse }: propTypes) => {
     const { id } = router.query;
     const { data: applyData } = useGetApplyByIdQuery(id);
     const [buttonText, setButtonText] = useState('Schedule Session');
-    const [buttonStyle, setButtonStyle] = useState('bg-gray-500');
+    const [buttonStyle, setButtonStyle] = useState('[#2c79ff]');
 
     useEffect(() => {
-        if (applyData?.schedule?.status === 'accepted') {
-            setButtonStyle('green-500');
-            // setButtonText(countdown && `Meeting starts in ${countdown}` : 'Meeting Started');
-            setButtonText(`View Schedule`);
-        } else if (applyData?.schedule?.status === 'pending') {
-            setButtonStyle('yellow-500');
-            setButtonText('Scheduling...');
-        } else if (applyData?.schedule?.status === 'rejected') {
-            setButtonStyle('red-500');
-            setButtonText('Meeting Rejected');
-        } else {
-            setButtonStyle('[#2c79ff]');
-            setButtonText('Schedule Session');
+        if (selectedCourse.counsellor?.id) {
+            if (applyData?.schedule?.status === 'accepted') {
+                setButtonStyle('green-500');
+                // setButtonText(countdown && `Meeting starts in ${countdown}` : 'Meeting Started');
+                setButtonText(`View Schedule`);
+            } else if (applyData?.schedule?.status === 'pending') {
+                setButtonStyle('yellow-500');
+                setButtonText('Scheduling...');
+            } else if (applyData?.schedule?.status === 'rejected') {
+                setButtonStyle('red-500');
+                setButtonText('Meeting Rejected');
+            } else {
+                setButtonStyle('[#2c79ff]');
+                setButtonText('Schedule Session');
+            }
         }
     }, [applyData]);
 
@@ -91,6 +93,7 @@ const YourCounsellorBox = ({ selectedCourse }: propTypes) => {
                         linkClass="w-full"
                         link={`tel:${selectedCourse?.counsellor?.phone_number ?? '+923000000000'}`}
                     />
+
                     <Button
                         onClick={() =>
                             updateModal({
@@ -98,7 +101,11 @@ const YourCounsellorBox = ({ selectedCourse }: propTypes) => {
                                 state: { selectedCourse, applyData }
                             })
                         }
-                        icon={<MdSchedule className={`h-5 w-5 hover:text-${buttonStyle}`} />}
+                        icon={
+                            <MdSchedule
+                                className={`h-5 w-5 hover:text-${buttonStyle}`}
+                            />
+                        }
                         text={
                             !selectedCourse.counsellor?.id
                                 ? 'Counselor Not Assigned'
