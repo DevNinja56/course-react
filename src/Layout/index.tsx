@@ -15,7 +15,6 @@ import UserBlock from '@/components/UserStatus/Block';
 import Testimonial from '@/components/Testimonial';
 import CounselingWork from '@/components/CounselingWork/CounselingWork';
 import ChatBoot from '@/components/ChatBoot';
-import { useUi } from '@/hooks/user-interface';
 import BestFitTool from '@/components/BestFitTool';
 
 export interface propsType {

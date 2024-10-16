@@ -78,7 +78,6 @@ const YourCounsellorBox = ({ selectedCourse }: propTypes) => {
                         className="py-2 px-5 rounded-xl text-sm md:text-base"
                         link={`mailto:${selectedCourse?.counsellor?.email ?? 'example@courseoption.com'}`}
                         linkClass="w-full"
-                        linkClass="w-full"
                     />
                     <Button
                         icon={
