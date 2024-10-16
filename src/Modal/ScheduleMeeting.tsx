@@ -177,7 +177,7 @@ export const ScheduleMeeting = () => {
                         </p>
                     </div>
                 </div>
-                {!shouldShowMeetingURL ? (
+                {shouldShowMeetingURL ? (
                     <div className="py-2 text-right">
                         <a
                             href={applyData?.schedule?.meetingUrl}
