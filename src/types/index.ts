@@ -194,7 +194,7 @@ export type courseType = {
     logo: string;
     degree: degreeType;
     duration: number;
-    specialization: specializationType;
+    specializations: specializationType;
     institute: instituteType;
     intakes: string[];
     tuitionFee: number;
@@ -235,7 +235,7 @@ export type filterCourseType = {
     }[];
     disciplines: {
         name: string;
-        specialization: SpecializationType[];
+        specializations: SpecializationType[];
     }[];
 };
 
