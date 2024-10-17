@@ -5,12 +5,12 @@ import { useRouter } from 'next/router';
 import { useFilterQuery } from './filterQuery';
 import { fetchScholarshipFilters } from '@/store/actions/getScholarshipFilters';
 
+
 export const useSearchedScholarship = () => {
     const state = useAppSelector((state) => state.scholarships);
     const dispatch = useAppDispatch();
     const { query: reduxQuery } = useFilterQuery();
     const { query: urlQuery } = useRouter();
-
     const mergedQuery = {
         ...reduxQuery,
         ...Object.entries(urlQuery).reduce(
@@ -24,6 +24,7 @@ export const useSearchedScholarship = () => {
             },
             {} as { [key: string]: string[] }
         )
+
     };
 
     const fetchSearchedScholarshipRequest = (
@@ -33,6 +34,7 @@ export const useSearchedScholarship = () => {
             fetchPaginatedScholarship({
                 nextPageParam: nextPage,
                 query: mergedQuery
+
             })
         );
         dispatch(fetchScholarshipFilters({ query: mergedQuery }));
@@ -41,10 +43,11 @@ export const useSearchedScholarship = () => {
     const initialState = () => dispatch(setInitialValue());
     const startLoading = () => dispatch(setLoading());
 
+
     return {
-        ...state,
-        fetchSearchedScholarshipRequest,
-        initialState,
-        startLoading
+        ...state,  
+        fetchSearchedScholarshipRequest,  
+        initialState,  
+        startLoading  
     };
 };
