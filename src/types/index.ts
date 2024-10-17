@@ -113,21 +113,26 @@ export type filterScholarShipType = {
 export type scholarshipFiltersType = {
     regions: {
         region: string;
+        count: number;
     }[];
     countries: {
         country: string;
+        count: number;
     }[];
     institutes: {
         institute: string;
+        count: number;
     }[];
     degrees: {
         degree: degreeType;
+        count: number;
     }[];
     // disciplines: {
     //     discipline: string;
     // }[];
     scholarship_types: {
         type: string;
+        count: number;
     }[];
 };
 
