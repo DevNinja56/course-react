@@ -31,6 +31,7 @@ export const API_ENDPOINTS = {
     COURSE_INSTITUTE_ID: '/course/institute',
     DEGREES_BY_INSTITUTE_ID: '/course/institute/degree/:id',
     COURSE_SEARCH: '/course/filter',
+    COURSE_FILTERS_SEARCH: '/course/side-filter',
     COURSE_BY_ID: '/course/:id',
     SCHOLARSHIP_SEARCH: '/scholarship/filter',
     FAVORITE: '/favorite',

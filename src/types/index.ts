@@ -1,4 +1,3 @@
-
 export interface userType {
     id: string;
     name: string;
@@ -212,30 +211,38 @@ export type courseType = {
 
 export interface SpecializationType {
     name: string;
+    count: number;
     _id: string;
 }
 export type filterCourseType = {
     intakes: {
         intakes: string[];
+        count: number;
     }[];
     regions: {
         region: string;
+        count: number;
     }[];
     countries: {
         country: string;
+        count: number;
     }[];
     locations: {
         location: string;
+        count: number;
     }[];
     institutes: {
         institute: string;
+        count: number;
     }[];
     degrees: {
         degree: degreeType;
+        count: number;
     }[];
     disciplines: {
         name: string;
         specializations: SpecializationType[];
+        count: number;
     }[];
 };
 
@@ -462,21 +469,20 @@ export interface applyTypes {
     schedule?: scheduleTypes;
 }
 
-export interface scheduleTypes 
-{
-    startTime: string,
-    endTime: string,
-    date: string,
-    counsellorId: string,
-    userId: string,
-    applicationId: string,
-    status: string,
-    reason: string,
-    meetingUrl: string,
-    meetingId: string,
-    createdAt: string,
-    updatedAt: string,
-    id: string
+export interface scheduleTypes {
+    startTime: string;
+    endTime: string;
+    date: string;
+    counsellorId: string;
+    userId: string;
+    applicationId: string;
+    status: string;
+    reason: string;
+    meetingUrl: string;
+    meetingId: string;
+    createdAt: string;
+    updatedAt: string;
+    id: string;
 }
 export interface counsellorType {
     profile_image: string;
