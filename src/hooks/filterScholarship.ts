@@ -2,15 +2,15 @@ import { fetchPaginatedScholarship } from '@/store/actions/getFilteredScholarshi
 import { useAppDispatch, useAppSelector } from '@/hooks/store';
 import { setInitialValue, setLoading } from '@/store/slices/filtersScholarship';
 import { useRouter } from 'next/router';
-import { useFilterQuery } from './filterQuery';  
+import { useFilterQuery } from './filterQuery';
+import { fetchScholarshipFilters } from '@/store/actions/getScholarshipFilters';
+
 
 export const useSearchedScholarship = () => {
     const state = useAppSelector((state) => state.scholarships);
     const dispatch = useAppDispatch();
-    const { query: reduxQuery } = useFilterQuery();  
-    const { query: urlQuery } = useRouter();  
-
-    
+    const { query: reduxQuery } = useFilterQuery();
+    const { query: urlQuery } = useRouter();
     const mergedQuery = {
         ...reduxQuery,
         ...Object.entries(urlQuery).reduce(
@@ -23,7 +23,8 @@ export const useSearchedScholarship = () => {
                 return acc;
             },
             {} as { [key: string]: string[] }
-        ),
+        )
+
     };
 
     const fetchSearchedScholarshipRequest = (
@@ -32,13 +33,16 @@ export const useSearchedScholarship = () => {
         dispatch(
             fetchPaginatedScholarship({
                 nextPageParam: nextPage,
-                query: mergedQuery  
+                query: mergedQuery
+
             })
         );
+        dispatch(fetchScholarshipFilters({ query: mergedQuery }));
     };
 
-    const initialState = () => dispatch(setInitialValue());  
-    const startLoading = () => dispatch(setLoading());  
+    const initialState = () => dispatch(setInitialValue());
+    const startLoading = () => dispatch(setLoading());
+
 
     return {
         ...state,  
