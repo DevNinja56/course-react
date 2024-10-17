@@ -204,6 +204,7 @@ const Home = () => {
                             More Details
                         </button>
                     </div>
+                  
                 </div>
             </div>
         </>

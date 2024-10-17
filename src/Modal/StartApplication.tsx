@@ -63,6 +63,8 @@ const StartApplication = () => {
     const [selectedIntake, setSelectedIntake] = useState<string[]>([]);
 
     const { data } = useGetInstituteQuery();
+    console.log(data)
+
     const { data: courseData } = useGetCoursesByInstituteQuery({
         limit: 10,
         page: 1,
