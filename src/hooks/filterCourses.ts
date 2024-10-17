@@ -37,7 +37,6 @@ export const useSearchedCourses = () => {
         );
         dispatch(
             fetchCourseFilters({
-                nextPageParam: nextPage,
                 query: mergedQuery
             })
         );

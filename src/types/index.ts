@@ -130,7 +130,7 @@ export type scholarshipFiltersType = {
     // disciplines: {
     //     discipline: string;
     // }[];
-    scholarship_types: {
+    types: {
         type: string;
         count: number;
     }[];
