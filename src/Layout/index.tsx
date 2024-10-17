@@ -15,6 +15,7 @@ import UserBlock from '@/components/UserStatus/Block';
 import Testimonial from '@/components/Testimonial';
 import CounselingWork from '@/components/CounselingWork/CounselingWork';
 import ChatBoot from '@/components/ChatBoot';
+import BestFitTool from '@/components/BestFitTool';
 
 export interface propsType {
     children: React.ReactElement;
@@ -105,6 +106,9 @@ const MainLayout = ({
                     children
                 )}
                 <ChatBoot />
+                <div className="fixed z-50 bottom-32 right-[1rem] w-24 h-24">
+                    <BestFitTool />
+                </div>
                 {counselingRoutes?.includes(router.pathname) && (
                     <CounselingWork />
                 )}

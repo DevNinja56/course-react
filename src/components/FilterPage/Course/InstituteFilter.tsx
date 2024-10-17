@@ -5,6 +5,7 @@ import { FilterCheckBox, FilterCheckBoxLoader } from '../FilterBoxCheck';
 interface PropsType {
     data: {
         institute: string;
+        count: number;
     }[];
     isLoading: boolean;
 }
@@ -47,13 +48,14 @@ const InstituteFilter: React.FC<PropsType> = ({ data, isLoading }) => {
                                     .toLowerCase()
                                     .includes(search.toLowerCase())
                         )
-                        .map(({ institute: name }, i) => (
+                        .map(({ institute: name,count }, i) => (
                             <FilterCheckBox
                                 key={'Institute--list--' + name + i}
                                 id={name + '--' + i}
                                 text={name}
                                 name={'institute'}
                                 value={name}
+                                count={count}
                             />
                         ))
                 )}

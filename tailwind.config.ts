@@ -60,8 +60,14 @@ const config: Config = {
             maxHeight: {
                 headerStickyHeight: 'calc(100vh - 110px)',
                 courseStickyHeight: 'calc(100vh - 410px)'
+            },
+            keyframes: {
+                wiggle: {
+                    '0%, 100%': { transform: 'rotate(-10deg)' },
+                    '50%': { transform: 'rotate(10deg)' }
+                },
+                
             }
-            
         }
     },
     plugins: []

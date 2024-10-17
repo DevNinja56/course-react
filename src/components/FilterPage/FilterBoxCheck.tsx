@@ -7,10 +7,11 @@ interface propsType extends InputHTMLAttributes<HTMLInputElement> {
     text: string;
     customF?: () => void;
     isChecked?: boolean;
+    count?: number;
 }
 
 export const FilterCheckBox = React.forwardRef<HTMLInputElement, propsType>(
-    ({ id, text, name = '', customF, isChecked, ...props }, ref) => {
+    ({ id, text, name = '', customF, isChecked, count, ...props }, ref) => {
         const { query, addQuery, removeQuery } = useFilterQuery();
         const state: string[] = Array.isArray(query[name])
             ? (query[name] as string[])
@@ -36,13 +37,12 @@ export const FilterCheckBox = React.forwardRef<HTMLInputElement, propsType>(
             }
         };
 
-        
         return (
             <label
                 className="w-full p-[6px] hover:bg-profileBgColor px-4 flex gap-x-2 group select-none cursor-pointer "
                 htmlFor={id}
             >
-                <div className="relative flex items-center">
+                <div className="relative flex items-center w-full">
                     <input
                         {...props}
                         id={id}
@@ -52,8 +52,9 @@ export const FilterCheckBox = React.forwardRef<HTMLInputElement, propsType>(
                         checked={isChecked! ?? state?.includes(text)}
                         className="h-5 w-5 rounded-[2px] border border-borderColor cursor-pointer pb-0 group-hover:border-blueColor accent-[blueColor]"
                     />
-                    <p className="text-sm flex-1 text-grayColor group-hover:text-blueColor ml-2 capitalize line-clamp-1 ">
-                        {text}
+                    <p className="text-sm flex-1 text-grayColor group-hover:text-blueColor ml-2 capitalize line-clamp-1 flex justify-between w-full ">
+                        <span>{text}</span>
+                        <span className="text-sm font-bold">{count}</span>
                     </p>
                 </div>
             </label>

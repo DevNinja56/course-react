@@ -1,6 +1,8 @@
 import { courseType, filterCourseType } from '@/types';
 import { createSlice } from '@reduxjs/toolkit';
 import { fetchPaginatedCourses } from '../actions/getFilteredCourse';
+import { fetchCourseFilters } from '../actions/getCourseFilters';
+import { mergeCourseFilter } from '@/utils/filters/merge_course_filters';
 
 export interface getAllCourseTypes {
     data: courseType[];
@@ -56,14 +58,23 @@ const courses = createSlice({
                 state.isLoading = true;
             })
             .addCase(fetchPaginatedCourses.fulfilled, (state, action) => {
-                const { data, filters, ...pagination } = action.payload;
+                const { data, ...pagination } = action.payload;
                 state.data = data;
-                state.filters = filters;
                 state.paginatorInfo = pagination;
                 state.error = null;
                 state.isLoading = false;
             })
             .addCase(fetchPaginatedCourses.rejected, (state, action) => {
+                state.error = action.error.message ?? 'An error occurred';
+            })
+            .addCase(fetchCourseFilters.pending, (state) => {
+                state.isLoading = true;
+            })
+            .addCase(fetchCourseFilters.fulfilled, (state, action) => {
+                const filters = mergeCourseFilter(action.payload) as unknown as filterCourseType;
+                state.filters = filters;
+            })
+            .addCase(fetchCourseFilters.rejected, (state, action) => {
                 state.error = action.error.message ?? 'An error occurred';
             });
     }

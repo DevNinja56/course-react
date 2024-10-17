@@ -5,12 +5,14 @@ import { FilterCheckBox, FilterCheckBoxLoader } from '../FilterBoxCheck';
 
 interface SpecializationType {
     name: string;
+    count?: number;
 }
 
 interface PropsType {
     data: {
         name: string;
-        specialization: SpecializationType[];
+        specializations: SpecializationType[];
+        count?: number;
     }[];
     isLoading: boolean;
 }
@@ -46,19 +48,20 @@ const DisciplinesFilter: React.FC<PropsType> = ({ data, isLoading }) => {
                     data
                         ?.filter(
                             ({ name }) =>
-                                !!name &&
-                                name
+                                !!name[0] &&
+                                name[0]
                                     .toLowerCase()
                                     .includes(search.toLowerCase())
                         )
-                        .map(({ name, specialization }, i) => (
+                        .map(({ name, specializations, count }, i) => (
                             <SubFilterAccordion
                                 key={'discipline--list--' + name + i}
-                                title={name}
+                                title={name[0]}
                                 noBorder
+                                count={count}
                             >
-                                {specialization.map(
-                                    ({ name: specializationName }, j) => (
+                                {specializations.map(
+                                    ({ name: specializationName, count }, j) => (
                                         <FilterCheckBox
                                             key={
                                                 'specialization--list--' +
@@ -69,6 +72,7 @@ const DisciplinesFilter: React.FC<PropsType> = ({ data, isLoading }) => {
                                             text={specializationName}
                                             name={'specialization'}
                                             value={specializationName}
+                                            count={count}
                                         />
                                     )
                                 )}

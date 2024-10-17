@@ -34,7 +34,6 @@ const CourseFilter = () => {
         filters,
         isLoading
     } = useSearchedCourses();
-
     const handleClearQuery = () => {
         if (Object.keys(urlQuery).length != 0) {
             push({query:{}})
@@ -44,7 +43,6 @@ const CourseFilter = () => {
             refetch();
         }
     };
-
     return (
         <div className="rounded-[15px] w-[24%] py-4 pb-5 overflow-y-auto border-[3px] border-[#eaf2ff] hidden lg:block max-h-headerStickyHeight sticky top-[110px] bg-white customScroll ">
             <div>
