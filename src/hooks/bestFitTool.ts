@@ -1,12 +1,12 @@
 
-import { addQuery, removeQuery, clearAllQuery } from '@/store/slices/filterQuery';
+import { addQuery, removeQuery, clearAllQuery } from '@/store/slices/bestFitTool';
 import { useAppDispatch, useAppSelector } from './store';
 
-export const useFilterQuery = () => {
+export const useBestFitTool = () => {
     const dispatch = useAppDispatch();
-    const query = useAppSelector((state) => state.filterQuery.query);
+    const query = useAppSelector((state) => state.bestFitTool.query);
 
-    const addQueryAction = (obj: { [key: string]: string[] }) => {
+    const addQueryAction = (obj: { [key: string]: string }) => {
         dispatch(addQuery(obj));
     };
 

@@ -34,7 +34,9 @@ const BankStatementCalculate = () => {
         institute,
         initialDeposit: listOfInitialDeposit
     } = modalState;
-    const [{ amount: initialDeposit }] = listOfInitialDeposit;
+    const [{ amount: initialDeposit }] = listOfInitialDeposit ?? [
+        { amount: 0 }
+    ];
 
     const isLiveAustralia = institute.country.name
         .toLowerCase()

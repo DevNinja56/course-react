@@ -19,7 +19,7 @@ const FilterSideBar = ({ setFilterSideBar }: ModalProps) => {
     const onHideSideBar = () => {
         setFilterSideBar(false);
     };
-    const { clearALlQuery, query } = useFilterQuery();
+    const { clearAllQuery, query } = useFilterQuery();
     const {
         fetchSearchedCoursesRequest: refetch,
         filters,
@@ -27,7 +27,7 @@ const FilterSideBar = ({ setFilterSideBar }: ModalProps) => {
     } = useSearchedCourses();
 
     const handleClearQuery = () => {
-        clearALlQuery();
+        clearAllQuery();
         refetch();
     };
 

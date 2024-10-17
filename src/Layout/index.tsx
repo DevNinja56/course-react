@@ -15,7 +15,7 @@ import UserBlock from '@/components/UserStatus/Block';
 import Testimonial from '@/components/Testimonial';
 import CounselingWork from '@/components/CounselingWork/CounselingWork';
 import ChatBoot from '@/components/ChatBoot';
-import { useUi } from '@/hooks/user-interface';
+import BestFitTool from '@/components/BestFitTool';
 
 export interface propsType {
     children: React.ReactElement;
@@ -33,7 +33,6 @@ const MainLayout = ({
     isPublic = false
 }: propsType) => {
     const { refetchUser, isAuthenticated, isLoading, user } = useUserAuth();
-    const { modal } = useUi();
     const token = getCookie('access_token');
     const router = useRouter();
     const testimonialRoutes = [
@@ -60,7 +59,7 @@ const MainLayout = ({
         ROUTES.INSTITUTES_DETAIL.replace(':id', '[id]'),
         ROUTES.COUNTRY,
         ROUTES.INSTITUTES,
-        ROUTES.FAQ,
+        ROUTES.FAQ
     ];
 
     useEffect(() => {
@@ -84,7 +83,7 @@ const MainLayout = ({
 
     const Layout = () => (
         <div
-            className={`w-screen h-screen overflow-x-hidden ${modal ? 'overflow-y-hidden`' : 'overflow-y-auto`'}`}
+            className={`w-screen h-screen overflow-x-hidden ${'overflow-y-auto`'}`}
         >
             {header && <Header />}
             <div
@@ -107,10 +106,15 @@ const MainLayout = ({
                     children
                 )}
                 <ChatBoot />
+                <div className="fixed z-50 bottom-32 right-[1rem] w-24 h-24">
+                    <BestFitTool />
+                </div>
                 {counselingRoutes?.includes(router.pathname) && (
                     <CounselingWork />
                 )}
-                {testimonialRoutes?.includes(router.pathname) && <Testimonial />}
+                {testimonialRoutes?.includes(router.pathname) && (
+                    <Testimonial />
+                )}
             </div>
             {footer && <Footer />}
         </div>
@@ -134,4 +138,4 @@ const MainLayout = ({
     );
 };
 
-export default MainLayout;
+export default React.memo(MainLayout);

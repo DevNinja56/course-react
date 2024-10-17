@@ -9,7 +9,7 @@ import FeeSlider from './FeeSlider';
 import LocationsFilter from './Locations';
 import IntakesFilter from './Intakes';
 import FilterAccordion from '@/components/FilterAccordion';
-import { LuGraduationCap } from "react-icons/lu";
+import { LuGraduationCap } from 'react-icons/lu';
 
 import {
     AiOutlineEnvironment,
@@ -18,6 +18,7 @@ import {
     AiOutlineCalendar,
     AiOutlineDollarCircle
 } from 'react-icons/ai';
+import { useRouter } from 'next/router';
 
 export const FilterRow = () => (
     <div className="px-4">
@@ -26,21 +27,22 @@ export const FilterRow = () => (
 );
 
 const CourseFilter = () => {
-    
-    const { clearALlQuery, query } = useFilterQuery();
+    const { query: urlQuery,push } = useRouter();
+    const { clearAllQuery, query } = useFilterQuery();
     const {
         fetchSearchedCoursesRequest: refetch,
         filters,
         isLoading
     } = useSearchedCourses();
-
     const handleClearQuery = () => {
-        clearALlQuery();
-        refetch();
+        if (Object.keys(urlQuery).length != 0) {
+            push({query:{}})
+            refetch();
+        } else {
+            clearAllQuery();
+            refetch();
+        }
     };
-
-    
-
     return (
         <div className="rounded-[15px] w-[24%] py-4 pb-5 overflow-y-auto border-[3px] border-[#eaf2ff] hidden lg:block max-h-headerStickyHeight sticky top-[110px] bg-white customScroll ">
             <div>
@@ -62,7 +64,12 @@ const CourseFilter = () => {
                                 if (Array.isArray(item)) {
                                     return item.map((val, i) => (
                                         <FilteredButton
-                                            key={'query--key----' + idx + '---' + i}
+                                            key={
+                                                'query--key----' +
+                                                idx +
+                                                '---' +
+                                                i
+                                            }
                                             itemKey={key}
                                             itemValue={val ?? 'button'}
                                         />
@@ -85,37 +92,62 @@ const CourseFilter = () => {
                 )}
             </div>
             <div className="flex flex-col">
-                <FilterAccordion title="Locations" icon={<AiOutlineEnvironment />} name="location" firstOpen>
+                <FilterAccordion
+                    title="Locations"
+                    icon={<AiOutlineEnvironment />}
+                    name="location"
+                    firstOpen
+                >
                     <LocationsFilter
                         data={filters.locations}
                         isLoading={isLoading}
                     />
                 </FilterAccordion>
-                <FilterAccordion title="Institutes" icon={<AiOutlineBank />} name="institute">
+                <FilterAccordion
+                    title="Institutes"
+                    icon={<AiOutlineBank />}
+                    name="institute"
+                >
                     <InstituteFilter
                         data={filters.institutes}
                         isLoading={isLoading}
                     />
                 </FilterAccordion>
-                <FilterAccordion title="Degree Levels" icon={<LuGraduationCap />} name="degrees">
+                <FilterAccordion
+                    title="Degree Levels"
+                    icon={<LuGraduationCap />}
+                    name="degrees"
+                >
                     <DegreeLevelFilter
                         data={filters.degrees}
                         isLoading={isLoading}
                     />
                 </FilterAccordion>
-                <FilterAccordion title="Disciplines" icon={<AiOutlineAppstore />} name="specialization">
+                <FilterAccordion
+                    title="Disciplines"
+                    icon={<AiOutlineAppstore />}
+                    name="specialization"
+                >
                     <DisciplinesFilter
                         data={filters.disciplines}
                         isLoading={isLoading}
                     />
                 </FilterAccordion>
-                <FilterAccordion title="Intakes" icon={<AiOutlineCalendar />} name="intakes">
+                <FilterAccordion
+                    title="Intakes"
+                    icon={<AiOutlineCalendar />}
+                    name="intakes"
+                >
                     <IntakesFilter
                         data={filters.intakes}
                         isLoading={isLoading}
                     />
                 </FilterAccordion>
-                <FilterAccordion title="Tuition Fees" icon={<AiOutlineDollarCircle />} noBorder>
+                <FilterAccordion
+                    title="Tuition Fees"
+                    icon={<AiOutlineDollarCircle />}
+                    noBorder
+                >
                     <FeeSlider />
                 </FilterAccordion>
             </div>

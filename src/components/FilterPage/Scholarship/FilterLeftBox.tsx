@@ -17,7 +17,7 @@ export const FilterRow = () => (
 );
 
 const ScholarshipFilter = () => {
-    const { clearALlQuery, query } = useFilterQuery();
+    const { clearAllQuery, query } = useFilterQuery();
     const {
         fetchSearchedScholarshipRequest: refetch,
         filters,
@@ -25,7 +25,7 @@ const ScholarshipFilter = () => {
     } = useSearchedScholarship();
 
     const handleClearQuery = () => {
-        clearALlQuery();
+        clearAllQuery();
         refetch();
     };
 

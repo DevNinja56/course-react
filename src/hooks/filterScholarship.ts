@@ -2,41 +2,48 @@ import { fetchPaginatedScholarship } from '@/store/actions/getFilteredScholarshi
 import { useAppDispatch, useAppSelector } from '@/hooks/store';
 import { setInitialValue, setLoading } from '@/store/slices/filtersScholarship';
 import { useRouter } from 'next/router';
+import { useFilterQuery } from './filterQuery';  
 
 export const useSearchedScholarship = () => {
     const state = useAppSelector((state) => state.scholarships);
     const dispatch = useAppDispatch();
-    const { query } = useRouter();
+    const { query: reduxQuery } = useFilterQuery();  
+    const { query: urlQuery } = useRouter();  
 
-    const updatedQuery = Object.entries(query).reduce(
-        (acc, [key, value]) => {
-            if (Array.isArray(value)) {
-                acc[key] = value;
-            } else if (typeof value === 'string' && value !== '') {
-                acc[key] = [value as string];
-            }
-            return acc;
-        },
-        {} as { [key: string]: string[] }
-    );
+    
+    const mergedQuery = {
+        ...reduxQuery,
+        ...Object.entries(urlQuery).reduce(
+            (acc, [key, value]) => {
+                if (Array.isArray(value)) {
+                    acc[key] = value;
+                } else if (typeof value === 'string' && value !== '') {
+                    acc[key] = [value];
+                }
+                return acc;
+            },
+            {} as { [key: string]: string[] }
+        ),
+    };
 
     const fetchSearchedScholarshipRequest = (
-        nexPage: number = state.paginatorInfo.page ?? 1
+        nextPage: number = state.paginatorInfo.page ?? 1
     ) => {
         dispatch(
             fetchPaginatedScholarship({
-                nextPageParam: nexPage,
-                query: updatedQuery
+                nextPageParam: nextPage,
+                query: mergedQuery  
             })
         );
     };
-    const initialState = () => dispatch(setInitialValue());
-    const startLoading = () => dispatch(setLoading());
+
+    const initialState = () => dispatch(setInitialValue());  
+    const startLoading = () => dispatch(setLoading());  
 
     return {
-        ...state,
-        fetchSearchedScholarshipRequest,
-        initialState,
-        startLoading
+        ...state,  
+        fetchSearchedScholarshipRequest,  
+        initialState,  
+        startLoading  
     };
 };
