@@ -51,6 +51,7 @@ const ChatBoxInput = ({ applicationId, setMessage, page }: propTypes) => {
                 setValue('');
                 setUploadedFile(null);
                 setAudioUrl(null);
+
                 setMessage((prevValue) => {
                     const currentPageMessages = prevValue[page] || [];
                     const isMessageAlreadyPresent = currentPageMessages.some(

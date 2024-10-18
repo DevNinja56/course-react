@@ -14,7 +14,7 @@ import ChatBoxInput from './ChatBoxInput';
 import { formatMessageDate } from '@/utils/formateMessageDate';
 
 const ChatBox = () => {
-    const { chatChannel, initialPusher } = usePusher();
+    const { chatChannel } = usePusher();
     const { id: applicationId } = useParams();
     const [page, setPage] = useState(1);
     const [itemsByPage, setItemsByPage] = useState<{
@@ -74,14 +74,22 @@ const ChatBox = () => {
             (message: MessageInterface) => {
                 setItemsByPage((prevValue) => {
                     const currentPageMessages = prevValue[page] || [];
-                    return {
-                        ...prevValue,
-                        [page]: [message, ...currentPageMessages]
-                    };
+
+                    const isMessageAlreadyPresent = currentPageMessages.some(
+                        (msg) => msg._id === message._id
+                    );
+
+                    if (!isMessageAlreadyPresent) {
+                        return {
+                            ...prevValue,
+                            [page]: [message, ...currentPageMessages]
+                        };
+                    }
+
+                    return prevValue;
                 });
             }
         );
-        initialPusher();
 
         return () => {
             chatChannel.unbind(`get-${applicationId}`);
@@ -126,7 +134,7 @@ const ChatBox = () => {
 
     if (messageLoading) return <LoaderSpinner />;
     return (
-        <div className="h-[500px] rounded-2xl overflow-hidden relative shadow-lg flex flex-col">
+        <div className="h-[496px] rounded-2xl overflow-hidden relative shadow-lg flex flex-col">
             <div className="bg-[#2c79ff] h-14 flex items-center px-6 justify-between">
                 <div className="flex gap-1 justify-start items-center">
                     <RxAvatar className="text-[35px] text-white" />
@@ -143,7 +151,7 @@ const ChatBox = () => {
                 <IoDocumentText className="text-[20px] text-white" />
             </div>
 
-            <div className="flex-1 overflow-y-auto no-scrollbar bg-[url('/images/ChatBox/BackgroundPattern.png')] bg-cover bg-center bg-repeat bg-opacity-5 relative px-6 py-2 ">
+            <div className="flex-1 overflow-y-auto no-scrollbar bg-[url('/images/ChatBox/BackgroundPattern.png')] bg-cover bg-center bg-repeat bg-opacity-5 relative pt-2">
                 <div className="text-center my-5 relative z-10">
                     <h1 className="text-black font-bold">
                         Counsellor accepted your message request.
@@ -188,7 +196,7 @@ const ChatBox = () => {
                 <div
                     id="scrollContainer"
                     ref={scrollContainerRef}
-                    className="flex flex-col-reverse gap-7 items-center px-5 max-h-72 overflow-y-scroll no-scrollbar pt-7 w-full"
+                    className="flex flex-col-reverse gap-7 items-center px-5 h-72 max-h-72 overflow-y-scroll no-scrollbar pt-7 w-full"
                 >
                     <InfiniteScroll
                         dataLength={Object.values(itemsByPage).flat().length}
