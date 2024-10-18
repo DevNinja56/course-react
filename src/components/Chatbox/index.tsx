@@ -11,6 +11,7 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 import { useUserAuth } from '@/hooks/auth';
 import ChatBoxMessage from './ChatBoxMessage';
 import ChatBoxInput from './ChatBoxInput';
+import { formatMessageDate } from '@/utils/formateMessageDate';
 
 const ChatBox = () => {
     const { chatChannel, initialPusher } = usePusher();
@@ -21,6 +22,8 @@ const ChatBox = () => {
     }>({});
     const [hasMore, setHasMore] = useState(true);
     const { user } = useUserAuth();
+    const [counselorLastSeen, setCounselorLastSeen] = useState<string>();
+    const [hasRunOnce, setHasRunOnce] = useState(false);
 
     const {
         data: response,
@@ -69,7 +72,6 @@ const ChatBox = () => {
         chatChannel.bind(
             `get-${applicationId}`,
             (message: MessageInterface) => {
-                console.log(message, 'message');
                 setItemsByPage((prevValue) => {
                     const currentPageMessages = prevValue[page] || [];
                     return {
@@ -99,6 +101,29 @@ const ChatBox = () => {
         }
     };
 
+    useEffect(() => {
+        if (!hasRunOnce && Object.keys(itemsByPage).length > 0) {
+            let lastSeen = '';
+
+            Object.entries(itemsByPage).forEach(([, values]) => {
+                if (values.length > 0) {
+                    const filterCounsellor = values.filter(
+                        (item) => item?.from?.id !== user.id
+                    );
+                    const lastOnlineCounsellor = filterCounsellor[0];
+
+                    if (lastOnlineCounsellor) {
+                        lastSeen = lastOnlineCounsellor?.createdAt;
+                    }
+                }
+            });
+
+            setCounselorLastSeen(lastSeen);
+
+            setHasRunOnce(true);
+        }
+    }, [itemsByPage, user]);
+
     if (messageLoading) return <LoaderSpinner />;
     return (
         <div className="h-[500px] rounded-2xl overflow-hidden relative shadow-lg flex flex-col">
@@ -109,7 +134,10 @@ const ChatBox = () => {
                         <h1 className="text-white text-md font-bold">
                             Counsellor
                         </h1>
-                        <p className="text-white text-xs">Last seen 3h ago</p>
+                        <p className="text-white text-xs">
+                            Last seen{' '}
+                            {formatMessageDate(counselorLastSeen ?? '')}
+                        </p>
                     </div>
                 </div>
                 <IoDocumentText className="text-[20px] text-white" />
