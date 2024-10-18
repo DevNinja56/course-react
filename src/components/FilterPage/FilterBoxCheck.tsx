@@ -54,7 +54,7 @@ export const FilterCheckBox = React.forwardRef<HTMLInputElement, propsType>(
                     />
                     <p className="text-sm flex-1 text-grayColor group-hover:text-blueColor ml-2 capitalize line-clamp-1 flex justify-between w-full ">
                         <span>{text}</span>
-                        <span className="text-sm font-bold">{count}</span>
+                        <span className="text-xs font-bold">{count}</span>
                     </p>
                 </div>
             </label>

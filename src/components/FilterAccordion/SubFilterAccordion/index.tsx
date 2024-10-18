@@ -27,7 +27,7 @@ const SubFilterAccordion: React.FC<SubFilterAccordionProps> = ({
             >
                 <h2 className="text-sm font-semibold text-gray-800">{title}</h2>
                 <div className='flex justify-center items-center gap-1'>
-                    {count !== undefined && count > 0 && (
+                    {count !== undefined  && (
                         <div className="text-xs font-bold">{count}</div>
                     )}
                     {isOpen ? (
