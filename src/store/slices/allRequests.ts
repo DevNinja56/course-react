@@ -15,7 +15,8 @@ import {
     geoIpType,
     courseType,
     eventType,
-    DisciplineCountType
+    DisciplineCountType,
+    MessageInterface
 } from '@/types';
 
 export interface PaginatedResponse<data> {
@@ -190,6 +191,17 @@ export const stateQueryApi = createApi({
             transformResponse: (res: { data: DisciplineCountType[] }) =>
                 res.data! ?? res
         }),
+        getMessages: builder.query<
+            PaginatedResponse<MessageInterface[]>,
+            { page: number; limit: number; applicationId: string }
+        >({
+            query: ({ page, limit, applicationId }) => ({
+                url: `${API_ENDPOINTS.MESSAGE}?page=${page ?? 1}&limit=${limit ?? 10}&application=${applicationId}`
+            }),
+            transformResponse: (res: {
+                data: PaginatedResponse<MessageInterface[]>;
+            }) => res.data! ?? res
+        }),
         getCounsellorSchedule: builder.query<
             unknown,
             { id: unknown; date: string }
@@ -198,7 +210,7 @@ export const stateQueryApi = createApi({
                 url: `${API_ENDPOINTS.COUNSELLOR}/${id}/${date}`
             }),
             transformResponse: (res: { data: unknown }) => res.data! ?? res
-        }),
+        })
     })
 });
 
@@ -223,6 +235,6 @@ export const {
     useGetCoursesByInstituteQuery,
     useGetPaginatedEventsQuery,
     useGetCountDisciplineQuery,
-    useGetCounsellorScheduleQuery,
-    
+    useGetMessagesQuery,
+    useGetCounsellorScheduleQuery
 } = stateQueryApi;

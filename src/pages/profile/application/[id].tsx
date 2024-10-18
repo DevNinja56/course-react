@@ -128,7 +128,7 @@ const UserApplicationDetails = () => {
                                 )}
                             </div>
                         )} */}
-                        <ChatBox/>
+                        <ChatBox />
                         {/* {selectedCourse?.status?.active ===
                             statusEnum.submitDocuments && (
                             <button

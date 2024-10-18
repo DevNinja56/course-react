@@ -522,3 +522,20 @@ export interface DisciplineCountType {
     name: string;
     image: string;
 }
+
+export interface fromOrToInterface {
+    name: string;
+    email: string;
+    avatar: string;
+    role: string;
+    instituteLink: string;
+    id: string;
+}
+
+export interface MessageInterface {
+    _id: string;
+    from: fromOrToInterface;
+    message: string;
+    attachment: string;
+    createdAt: string;
+}
