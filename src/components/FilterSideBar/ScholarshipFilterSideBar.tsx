@@ -4,12 +4,12 @@ import { FilterRow } from '../FilterPage/Course/FilterLeftBox';
 import DegreeLevelFilter from '../FilterPage/Course/DegreeLevelFilter';
 import InstituteFilter from '../FilterPage/Course/InstituteFilter';
 import { useFilterQuery } from '@/hooks/filterQuery';
-import { useSearchedCourses } from '@/hooks/filterCourses';
 import { FilteredButton } from '../FilterPage/FilteredButton';
 import FilterAccordion from '../FilterAccordion';
 import ScholarshipTypeFilter from '../FilterPage/Scholarship/ScholarshipTypeFilter';
 import { AiOutlineBank, AiOutlineDollarCircle } from 'react-icons/ai';
 import { LuGraduationCap } from 'react-icons/lu';
+import { useSearchedScholarship } from '@/hooks/filterScholarship';
 
 interface ModalProps {
     setFilterSideBar: (show: boolean) => void;
@@ -21,10 +21,10 @@ const FilterSideBar = ({ setFilterSideBar }: ModalProps) => {
     };
     const { clearAllQuery, query } = useFilterQuery();
     const {
-        fetchSearchedCoursesRequest: refetch,
+        fetchSearchedScholarshipRequest: refetch,
         filters,
         isLoading
-    } = useSearchedCourses();
+    } = useSearchedScholarship();
 
     const handleClearQuery = () => {
         clearAllQuery();
@@ -132,7 +132,7 @@ const FilterSideBar = ({ setFilterSideBar }: ModalProps) => {
                                 noBorder
                                 name={'scholarshipType'}
                             >
-                                <ScholarshipTypeFilter />
+                                <ScholarshipTypeFilter data={filters.types} />
                             </FilterAccordion>
                         </div>
                     </div>

@@ -100,7 +100,7 @@ const ScholarshipFilter = () => {
                     noBorder
                     name={'scholarshipType'}
                 >
-                    <ScholarshipTypeFilter />
+                    <ScholarshipTypeFilter data={filters.types} />
                 </FilterAccordion>
             </div>
         </div>

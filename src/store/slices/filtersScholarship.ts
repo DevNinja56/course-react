@@ -1,6 +1,8 @@
 import { filterScholarShipType, scholarshipFiltersType } from '@/types';
 import { createSlice } from '@reduxjs/toolkit';
 import { fetchPaginatedScholarship } from '../actions/getFilteredScholarship';
+import { fetchScholarshipFilters } from '../actions/getScholarshipFilters';
+import { mergeDataFilters } from '@/utils/filters/merge_scholarship_filters';
 
 export interface getAllScholarshipTypes {
     data: filterScholarShipType[];
@@ -23,7 +25,7 @@ const initialState: getAllScholarshipTypes = {
         institutes: [],
         degrees: [],
         // disciplines: [],
-        scholarship_types: []
+        types: []
     },
     paginatorInfo: {
         count: 0,
@@ -55,14 +57,25 @@ const scholarships = createSlice({
                 state.isLoading = true;
             })
             .addCase(fetchPaginatedScholarship.fulfilled, (state, action) => {
-                const { data, filters, ...pagination } = action.payload;
+                const { data, ...pagination } = action.payload;
                 state.data = data;
-                state.filters = filters;
                 state.paginatorInfo = pagination;
                 state.error = null;
                 state.isLoading = false;
             })
             .addCase(fetchPaginatedScholarship.rejected, (state, action) => {
+                state.error = action.error.message ?? 'An error occurred';
+            })
+            .addCase(fetchScholarshipFilters.pending, (state) => {
+                state.isLoading = true;
+            })
+            .addCase(fetchScholarshipFilters.fulfilled, (state, action) => {
+                const filters = mergeDataFilters(
+                    action.payload
+                ) as unknown as scholarshipFiltersType;
+                state.filters = filters;
+            })
+            .addCase(fetchScholarshipFilters.rejected, (state, action) => {
                 state.error = action.error.message ?? 'An error occurred';
             });
     }

@@ -34,6 +34,7 @@ export const API_ENDPOINTS = {
     COURSE_FILTERS_SEARCH: '/course/side-filter',
     COURSE_BY_ID: '/course/:id',
     SCHOLARSHIP_SEARCH: '/scholarship/filter',
+    SCHOLARSHIP_FILTERS_SEARCH: '/scholarship/side-filter',
     FAVORITE: '/favorite',
     FAVORITE_DELETE: '/favorite/delete',
     USER_FAVORITES: '/favorite/user?type=:type',
