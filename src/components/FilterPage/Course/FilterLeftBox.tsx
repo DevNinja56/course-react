@@ -43,7 +43,6 @@ const CourseFilter = () => {
             refetch();
         }
     };
-console.log(filters.disciplines)
     return (
         <div className="rounded-[15px] w-[24%] py-4 pb-5 overflow-y-auto border-[3px] border-[#eaf2ff] hidden lg:block max-h-headerStickyHeight sticky top-[110px] bg-white customScroll ">
             <div>

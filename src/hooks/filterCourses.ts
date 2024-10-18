@@ -3,12 +3,13 @@ import { useAppDispatch, useAppSelector } from './store';
 import { setInitialValue, setLoading } from '@/store/slices/filtersCourse';
 import { useFilterQuery } from './filterQuery';
 import { useRouter } from 'next/router';
+import { fetchCourseFilters } from '@/store/actions/getCourseFilters';
 
 export const useSearchedCourses = () => {
     const state = useAppSelector((state) => state.courses);
     const dispatch = useAppDispatch();
-    const { query: reduxQuery } = useFilterQuery(); 
-    const { query: urlQuery } = useRouter(); 
+    const { query: reduxQuery } = useFilterQuery();
+    const { query: urlQuery } = useRouter();
 
     const mergedQuery = {
         ...reduxQuery,
@@ -22,7 +23,7 @@ export const useSearchedCourses = () => {
                 return acc;
             },
             {} as { [key: string]: string[] }
-        ),
+        )
     };
 
     const fetchSearchedCoursesRequest = (
@@ -31,7 +32,12 @@ export const useSearchedCourses = () => {
         dispatch(
             fetchPaginatedCourses({
                 nextPageParam: nextPage,
-                query: mergedQuery 
+                query: mergedQuery
+            })
+        );
+        dispatch(
+            fetchCourseFilters({
+                query: mergedQuery
             })
         );
     };

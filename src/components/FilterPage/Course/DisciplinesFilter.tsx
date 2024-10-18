@@ -5,6 +5,7 @@ import { FilterCheckBox, FilterCheckBoxLoader } from '../FilterBoxCheck';
 
 interface SpecializationType {
     name: string;
+    count?: number;
 }
 
 interface PropsType {
@@ -60,7 +61,7 @@ const DisciplinesFilter: React.FC<PropsType> = ({ data, isLoading }) => {
                                 count={count}
                             >
                                 {specializations.map(
-                                    ({ name: specializationName }, j) => (
+                                    ({ name: specializationName, count }, j) => (
                                         <FilterCheckBox
                                             key={
                                                 'specialization--list--' +
@@ -71,6 +72,7 @@ const DisciplinesFilter: React.FC<PropsType> = ({ data, isLoading }) => {
                                             text={specializationName}
                                             name={'specialization'}
                                             value={specializationName}
+                                            count={count}
                                         />
                                     )
                                 )}

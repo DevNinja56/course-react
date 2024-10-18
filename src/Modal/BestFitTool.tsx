@@ -1,8 +1,19 @@
+import {
+    EnglishTest,
+    GradingSystem,
+    months
+} from '@/components/BestFitTool/data';
+import InputField from '@/components/BestFitTool/input';
 import Button from '@/components/Button';
+import { ROUTES } from '@/config/constant';
 import { useBestFitTool } from '@/hooks/bestFitTool';
 import { useUi } from '@/hooks/user-interface';
-import { useGetCountriesQuery } from '@/store/slices/allRequests';
-import React, { useState } from 'react';
+import {
+    useGetCountriesQuery,
+    useGetDisciplineQuery
+} from '@/store/slices/allRequests';
+import { useRouter } from 'next/router';
+import React, { useEffect, useState } from 'react';
 import { IoIosCloseCircle } from 'react-icons/io';
 import { IoArrowBackCircle } from 'react-icons/io5';
 import Select, { StylesConfig } from 'react-select';
@@ -40,10 +51,15 @@ const customStyles: StylesConfig = {
 export const BestFitTool = () => {
     const [step, setStep] = useState(1);
     const [progress, setProgress] = useState(0);
+    const [englishTest, setEnglishTest] = useState('');
+    const [sum, setSum] = useState(0);
+    const router = useRouter();
+
     const { hideModal } = useUi();
     const TotalStep = 7;
-    const { addQuery } = useBestFitTool();
+    const { addQuery, query: data } = useBestFitTool();
     const { data: CountryData } = useGetCountriesQuery();
+    const { data: DisciplineData } = useGetDisciplineQuery();
     const [year, setYear] = useState('');
     const currentYear = new Date().getFullYear();
     const yearOptions = [
@@ -57,35 +73,144 @@ export const BestFitTool = () => {
             label: (currentYear + 2).toString()
         }
     ];
+    const [errorMessages, setErrorMessages] = useState<{
+        [key: string]: string;
+    }>({
+        year: '',
+        month: '',
+        studyLevel: '',
+        subject: '',
+        educationCountry: '',
+        educationBoard: '',
+        gradingSystem: '',
+        score: '',
+        percentage: '',
+        englishTest: '',
+        listening: '',
+        reading: '',
+        speaking: '',
+        writing: ''
+    });
 
-    const months = [
-        { value: 'January', label: 'January' },
-        { value: 'February', label: 'February' },
-        { value: 'March', label: 'March' },
-        { value: 'April', label: 'April' },
-        { value: 'May', label: 'May' },
-        { value: 'June', label: 'June' },
-        { value: 'July', label: 'July' },
-        { value: 'August', label: 'August' },
-        { value: 'September', label: 'September' },
-        { value: 'October', label: 'October' },
-        { value: 'November', label: 'November' },
-        { value: 'December', label: 'December' }
-    ];
+    const validateFields = () => {
+        let isValid = true;
+        const errors: { [key: string]: string } = {};
+
+        switch (step) {
+            case 2:
+                if (!data.year) {
+                    errors.year = 'Year is required';
+                    isValid = false;
+                }
+                if (!data.month) {
+                    errors.month = 'Month is required';
+                    isValid = false;
+                }
+                break;
+            case 3:
+                if (!data.studyLevel) {
+                    errors.studyLevel = 'Study level is required';
+                    isValid = false;
+                }
+                if (!data.discipline) {
+                    errors.discipline = 'Discipline is required';
+                    isValid = false;
+                }
+                break;
+            case 4:
+                if (!data.educationCountry) {
+                    errors.educationCountry = 'Education country is required';
+                    isValid = false;
+                }
+                if (!data.educationBoard) {
+                    errors.educationBoard = 'Education board is required';
+                    isValid = false;
+                }
+                if (!data.gradingSystem) {
+                    errors.gradingSystem = 'Grading system is required';
+                    isValid = false;
+                }
+                if (!data.score) {
+                    errors.score = 'Score is required';
+                    isValid = false;
+                }
+                if (!data.percentage) {
+                    errors.percentage = 'Percentage is required';
+                    isValid = false;
+                } else if (+data.percentage < 0 || +data.percentage > 100) {
+                    errors.percentage = 'Percentage must be between 0 and 100';
+                    isValid = false;
+                }
+                break;
+            case 5:
+                if (!data.englishTest) {
+                    errors.englishTest = 'English test is required';
+                    isValid = false;
+                }
+                break;
+            case 6:
+                if (!data.listening) {
+                    errors.listening = 'Listening score is required';
+                    isValid = false;
+                }
+                if (!data.reading) {
+                    errors.reading = 'Reading score is required';
+                    isValid = false;
+                }
+                if (!data.speaking) {
+                    errors.speaking = 'Speaking score is required';
+                    isValid = false;
+                }
+                if (!data.writing) {
+                    errors.writing = 'Writing score is required';
+                    isValid = false;
+                }
+                break;
+            default:
+                break;
+        }
+        setErrorMessages(errors);
+        return isValid;
+    };
+
 
     const availableMonths = () => {
         if (year === currentYear.toString()) {
-            return months.slice(new Date().getMonth());
+            return months.slice(new Date().getMonth() + 1);
         }
         return months;
     };
 
+    useEffect(() => {
+        const listening = parseFloat(data.listening) || 0;
+        const reading = parseFloat(data.reading) || 0;
+        const speaking = parseFloat(data.speaking) || 0;
+        const writing = parseFloat(data.writing) || 0;
+
+        setSum(listening + reading + speaking + writing);
+    }, [data.listening, data.reading, data.speaking, data.writing]);
+
+    useEffect(() => {
+        setSum(0);
+    }, [step]);
+
     const handleNext = () => {
-        if (step <= TotalStep) {
-            setStep((prevStep) => {
-                const nextStep = prevStep + 1;
-                setProgress((nextStep / TotalStep) * 100);
-                return nextStep;
+        if (validateFields()) {
+            if (step < TotalStep) {
+                setStep((prevStep) => {
+                    const nextStep = prevStep + 1;
+                    setProgress((nextStep / TotalStep) * 100);
+                    return nextStep;
+                });
+            }
+        }
+    };
+
+    const handleSubmit = () => {
+        if (validateFields()) {
+            router.push({
+                pathname: ROUTES.FILTER_COURSE,
+                query: data
             });
         }
     };
@@ -99,6 +224,7 @@ export const BestFitTool = () => {
             });
         }
     };
+
     return (
         <div className="bg-white w-[550px] h-fit pb-8 rounded-lg ">
             <div className="bg-gradient-to-b from-blue-700 to-blue-400 h-fit rounded-t-lg ">
@@ -152,6 +278,22 @@ export const BestFitTool = () => {
                                     nationality: (option as OptionType).value
                                 });
                             }}
+                            value={
+                                CountryData && CountryData.length > 0
+                                    ? {
+                                          label: CountryData[0].name,
+                                          value: CountryData[0].name
+                                      }
+                                    : null
+                            }
+                            defaultValue={
+                                CountryData && CountryData.length > 0
+                                    ? {
+                                          label: CountryData[0].name,
+                                          value: CountryData[0].name
+                                      }
+                                    : null
+                            }
                         />
                     </div>
                 </>
@@ -168,7 +310,7 @@ export const BestFitTool = () => {
                             When do you plan to kick-start your studies?
                         </h1>
                     </div>
-                    <div className="flex flex-col justify-center items-center gap-1 ">
+                    <div className="flex flex-col items-center gap-1">
                         <Select
                             styles={customStyles}
                             className="pt-4 w-[80%] transition-all"
@@ -180,10 +322,26 @@ export const BestFitTool = () => {
                                 });
                                 setYear((option as OptionType).value);
                             }}
+                            value={
+                                data.year
+                                    ? { label: data.year, value: data.year }
+                                    : null
+                            }
+                            defaultValue={
+                                data.year
+                                    ? { label: data.year, value: data.year }
+                                    : null
+                            }
                         />
+                        {errorMessages.year && (
+                            <span className="text-red-500 text-sm self-start px-16">
+                                {errorMessages.year}
+                            </span>
+                        )}
+
                         <Select
                             styles={customStyles}
-                            className="pt-4 w-[80%] transition-all"
+                            className={`pt-4 w-[80%] transition-all ${!year && 'opacity-65'}`}
                             placeholder="Start Month"
                             options={availableMonths()}
                             onChange={(option) => {
@@ -191,7 +349,18 @@ export const BestFitTool = () => {
                                     month: (option as OptionType).value
                                 });
                             }}
+                            isDisabled={!data.year}
+                            value={
+                                data.month
+                                    ? { label: data.month, value: data.month }
+                                    : null
+                            }
                         />
+                        {errorMessages.month && (
+                            <span className="text-red-500 text-sm self-start px-16">
+                                {errorMessages.month}
+                            </span>
+                        )}
                     </div>
                 </>
             )}
@@ -210,24 +379,58 @@ export const BestFitTool = () => {
                             styles={customStyles}
                             className="pt-4 w-[80%] transition-all"
                             placeholder="Select Study Level"
-                            options={yearOptions}
+                            options={['Undergraduate', 'Postgraduate']?.map(
+                                (item) => ({
+                                    label: item,
+                                    value: item
+                                })
+                            )}
                             onChange={(option) => {
                                 addQuery({
                                     studyLevel: (option as OptionType).value
                                 });
                             }}
+                            value={
+                                data.studyLevel
+                                    ? {
+                                          label: data.studyLevel,
+                                          value: data.studyLevel
+                                      }
+                                    : null
+                            }
                         />
+                        {errorMessages.studyLevel && (
+                            <span className="text-red-500 text-sm self-start px-16">
+                                {errorMessages.studyLevel}
+                            </span>
+                        )}
                         <Select
                             styles={customStyles}
                             className="pt-4 w-[80%] transition-all"
-                            placeholder="Select Subjects"
-                            options={availableMonths()}
+                            placeholder="Select Discipline"
+                            options={DisciplineData?.map((item) => ({
+                                label: item.name,
+                                value: item.name
+                            }))}
                             onChange={(option) => {
                                 addQuery({
-                                    subject: (option as OptionType).value
+                                    discipline: (option as OptionType).value
                                 });
                             }}
+                            value={
+                                data.discipline
+                                    ? {
+                                          label: data.discipline,
+                                          value: data.discipline
+                                      }
+                                    : null
+                            }
                         />
+                        {errorMessages.discipline && (
+                            <span className="text-red-500 text-sm self-start px-16">
+                                {errorMessages.discipline}
+                            </span>
+                        )}
                     </div>
                 </>
             )}
@@ -244,72 +447,98 @@ export const BestFitTool = () => {
                         </h1>
                     </div>
                     <div className="flex flex-col justify-center items-center gap-1 ">
-                        <Select
-                            styles={customStyles}
-                            className="pt-4 w-[80%] transition-all"
+                        <InputField
                             placeholder="Country of Education"
-                            options={yearOptions}
-                            onChange={(option) => {
+                            onChange={(e) => {
                                 addQuery({
-                                    educationCountry: (option as OptionType)
-                                        .value
+                                    educationCountry: e.target.value
                                 });
                             }}
+                            value={data.educationCountry || ''}
                         />
-                        <Select
-                            styles={customStyles}
-                            className="pt-4 w-[80%] transition-all"
+                        {errorMessages.educationCountry && (
+                            <span className="text-red-500 text-sm self-start px-16">
+                                {errorMessages.educationCountry}
+                            </span>
+                        )}
+                        <InputField
                             placeholder="Board of Education (optional)"
-                            options={availableMonths()}
-                            onChange={(option) => {
+                            onChange={(e) => {
                                 addQuery({
-                                    educationBoard: (option as OptionType).value
+                                    educationBoard: e.target.value
                                 });
                             }}
+                            value={data.educationBoard || ''}
                         />
+                        {errorMessages.educationBoard && (
+                            <span className="text-red-500 text-sm self-start px-16">
+                                {errorMessages.educationBoard}
+                            </span>
+                        )}
                         <Select
                             styles={customStyles}
                             className="pt-4 w-[80%] transition-all"
                             placeholder="Grading System"
-                            options={availableMonths()}
+                            options={GradingSystem}
                             onChange={(option) => {
                                 addQuery({
                                     gradingSystem: (option as OptionType).value
                                 });
                             }}
+                            value={
+                                data.gradingSystem
+                                    ? {
+                                          label: data.gradingSystem,
+                                          value: data.gradingSystem
+                                      }
+                                    : null
+                            }
                         />
-                        <Select
-                            styles={customStyles}
-                            className="pt-4 w-[80%] transition-all"
+                        {errorMessages.gradingSystem && (
+                            <span className="text-red-500 text-sm self-start px-16">
+                                {errorMessages.gradingSystem}
+                            </span>
+                        )}
+                        <InputField
                             placeholder="Enter Score"
-                            options={availableMonths()}
-                            onChange={(option) => {
+                            type="number"
+                            value={data.score || ''}
+                            onChange={(e) => {
                                 addQuery({
-                                    highSchoolScore: (option as OptionType)
-                                        .value
+                                    score: e.target.value
                                 });
                             }}
                         />
-                        <Select
-                            styles={customStyles}
-                            className="pt-4 w-[80%] transition-all"
-                            placeholder="English Percentage (1-100)"
-                            options={availableMonths()}
-                            onChange={(option) => {
+                        {errorMessages.score && (
+                            <span className="text-red-500 text-sm self-start px-16">
+                                {errorMessages.score}
+                            </span>
+                        )}
+                        <InputField
+                            placeholder="Enter English Percentage (1-100)"
+                            type="number"
+                            value={data.percentage || ''}
+                            onChange={(e) => {
                                 addQuery({
-                                    englishPercentage: (option as OptionType).value
+                                    percentage: e.target.value
                                 });
                             }}
                         />
+                        {errorMessages.percentage && (
+                            <span className="text-red-500 text-sm self-start px-16">
+                                {errorMessages.percentage}
+                            </span>
+                        )}
                     </div>
                 </>
             )}
+
             {step === 5 && (
                 <>
                     <div className="flex justify-center items-center flex-col text-xl font-bold">
                         <img
-                            src="/images/BestFitTool/Writing.png"
-                            alt="Writing"
+                            src="/images/BestFitTool/writing.png"
+                            alt="writing"
                             className="h-24"
                         />
                         <h1 className="py-2">
@@ -321,16 +550,27 @@ export const BestFitTool = () => {
                             styles={customStyles}
                             className="pt-4 w-[80%] transition-all"
                             placeholder="Select English Test"
-                            options={CountryData?.map((item) => ({
-                                label: item.name,
-                                value: item.name
-                            }))}
+                            options={EnglishTest}
                             onChange={(option) => {
                                 addQuery({
                                     englishTest: (option as OptionType).value
                                 });
+                                setEnglishTest((option as OptionType).value);
                             }}
+                            value={
+                                data.englishTest
+                                    ? {
+                                          label: data.englishTest,
+                                          value: data.englishTest
+                                      }
+                                    : null
+                            }
                         />
+                        {errorMessages.englishTest && (
+                            <span className="text-red-500 text-sm self-start px-16">
+                                {errorMessages.englishTest}
+                            </span>
+                        )}
                     </div>
                 </>
             )}
@@ -342,59 +582,65 @@ export const BestFitTool = () => {
                             alt="Book"
                             className="h-24"
                         />
-                        <h1 className="py-2">
-                            Enter your PTE Academic results
-                        </h1>
+                        <h1 className="py-2">{`Enter your ${englishTest} results`}</h1>
                     </div>
-                    <div className="flex flex-col justify-center items-center gap-5 mt-5 ">
-                        <input
-                            className="p-3 bg-blue-50 rounded-md border border-blue-200 focus:border-blue-600 focus:ring-0 placeholder:text-blue-600 font-normal w-[80%]"
-                            placeholder="Listening (1-90)"
-                            onChange={(e) => {
-                                addQuery({
-                                    pteSpeaking: e.target.value
-                                });
-                            }}
-                            
+                    <div className="flex flex-col justify-center items-center">
+                        <InputField
+                            placeholder="Listening"
+                            onChange={(e) =>
+                                addQuery({ listening: e.target.value })
+                            }
+                            value={data.listening || ''}
                         />
-                        <input
-                            className="p-3 bg-blue-50 rounded-md border border-blue-200 focus:border-blue-600 focus:ring-0 placeholder:text-blue-600 font-normal w-[80%]"
-                            placeholder="Reading (1-90)"
-                            onChange={(e) => {
-                                addQuery({
-                                    pteReading: e.target.value
-                                });
-                            }}
+                        {errorMessages.listening && (
+                            <span className="text-red-500 text-sm self-start px-16">
+                                {errorMessages.listening}
+                            </span>
+                        )}
+                        <InputField
+                            placeholder="Reading"
+                            onChange={(e) =>
+                                addQuery({ reading: e.target.value })
+                            }
+                            value={data.reading || ''}
                         />
-                        <input
-                            className="p-3 bg-blue-50 rounded-md border border-blue-200 focus:border-blue-600 focus:ring-0 placeholder:text-blue-600 font-normal w-[80%]"
-                            placeholder="Speaking (1-90)"
-                            onChange={(e) => {
-                                addQuery({
-                                    pteSpeaking: e.target.value
-                                });
-                            }}
-                            
+                        {errorMessages.reading && (
+                            <span className="text-red-500 text-sm self-start px-16">
+                                {errorMessages.reading}
+                            </span>
+                        )}
+                        <InputField
+                            placeholder="Speaking"
+                            onChange={(e) =>
+                                addQuery({ speaking: e.target.value })
+                            }
+                            value={data.speaking || ''}
                         />
-                        <input
-                            className="p-3 bg-blue-50 rounded-md border border-blue-200 focus:border-blue-600 focus:ring-0 placeholder:text-blue-600 font-normal w-[80%]"
-                            placeholder="Writing (1-90)"
-                            onChange={(e) => {
-                                addQuery({
-                                    pteWriting: e.target.value
-                                });
-                            }}
-                            
+                        {errorMessages.speaking && (
+                            <span className="text-red-500 text-sm self-start px-16">
+                                {errorMessages.speaking}
+                            </span>
+                        )}
+                        <InputField
+                            placeholder="Writing"
+                            onChange={(e) =>
+                                addQuery({ writing: e.target.value })
+                            }
+                            value={data.writing || ''}
                         />
-                        <input
-                            className="p-3 bg-blue-50 rounded-md border border-blue-200 focus:border-blue-600 focus:ring-0 placeholder:text-blue-600 font-normal w-[80%]"
-                            placeholder="Overall Score (1-90)"
+                        {errorMessages.writing && (
+                            <span className="text-red-500 text-sm self-start px-16">
+                                {errorMessages.writing}
+                            </span>
+                        )}
+                        <InputField
+                            placeholder={`Overall Score = ${sum}`}
                             disabled
-                        
                         />
                     </div>
                 </>
             )}
+
             {step === 7 && (
                 <>
                     <div className="flex justify-center items-center flex-col text-xl font-bold">
@@ -411,10 +657,11 @@ export const BestFitTool = () => {
                 </>
             )}
             <div className="flex justify-center mt-8">
-                {step === 9 ? (
+                {step === 7 ? (
                     <Button
                         text="Reveal my matches"
                         className="transition-all py-3 !w-[80%] rounded-lg"
+                        onClick={handleSubmit}
                     />
                 ) : (
                     <Button
