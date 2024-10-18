@@ -61,5 +61,6 @@ export const API_ENDPOINTS = {
     EVENTS: '/event',
     FILE_UPLOAD: '/file/s3-upload',
     FILE_DELETE: '/file/s3-delete',
-    GET_SCHOLARSHIP_BY_DEGREE: '/course/degree/specializations/:id'
+    GET_SCHOLARSHIP_BY_DEGREE: '/course/degree/specializations/:id',
+    MESSAGE: '/message'
 };

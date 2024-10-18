@@ -240,6 +240,19 @@ html {
     background-color: #2c79ff;
     color: white;
 }
-.react-datepicker__current-month, .react-datepicker__day-names div {
+.react-datepicker__current-month,
+.react-datepicker__day-names div {
     color: white;
+}
+
+.infinite-scroll-component__outerdiv {
+    width: 100%;
+}
+
+.infinite-scroll-component {
+    overflow: visible !important;
+}
+
+.infinite-scroll-component::-webkit-scrollbar {
+    overflow: hidden;
 }
