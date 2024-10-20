@@ -210,7 +210,9 @@ export const BestFitTool = () => {
         if (validateFields()) {
             router.push({
                 pathname: ROUTES.FILTER_COURSE,
-                query: data
+                query: {
+                    discipline: data.discipline
+                }
             });
         }
     };
