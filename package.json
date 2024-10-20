@@ -37,6 +37,7 @@
     "react-content-loader": "^6.2.1",
     "react-datepicker": "^7.4.0",
     "react-dom": "latest",
+    "react-draggable": "^4.4.6",
     "react-facebook-login": "^4.1.1",
     "react-hook-form": "^7.47.0",
     "react-hot-toast": "^2.4.1",
