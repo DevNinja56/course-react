@@ -27,7 +27,7 @@ export const FilterRow = () => (
 );
 
 const CourseFilter = () => {
-    const { query: urlQuery,push } = useRouter();
+    const { query: urlQuery, push } = useRouter();
     const { clearAllQuery, query } = useFilterQuery();
     const {
         fetchSearchedCoursesRequest: refetch,
@@ -36,7 +36,7 @@ const CourseFilter = () => {
     } = useSearchedCourses();
     const handleClearQuery = () => {
         if (Object.keys(urlQuery).length != 0) {
-            push({query:{}})
+            push({ query: {} });
             refetch();
         } else {
             clearAllQuery();
