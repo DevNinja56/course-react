@@ -655,7 +655,6 @@ export const BestFitTool = () => {
                             className="h-24"
                         />
                         <h1 className="py-2">{`Enter your ${englishTest} results`}</h1>
-                        <h1 className="py-2">{`Enter your ${englishTest} results`}</h1>
                     </div>
                     <div className="flex flex-col justify-center items-center">
                         <InputField
