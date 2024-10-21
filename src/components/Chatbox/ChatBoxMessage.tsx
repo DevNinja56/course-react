@@ -2,7 +2,6 @@ import { MessageInterface } from '@/types';
 import { formatMessageDate } from '@/utils/formateMessageDate';
 import Image from 'next/image';
 import React from 'react';
-import { RxAvatar } from 'react-icons/rx';
 
 interface propTypes {
     item: MessageInterface;
@@ -31,14 +30,24 @@ const ChatBoxMessage = ({ item, counsellor }: propTypes) => {
                                 className="h-7 w-7 rounded-full"
                             />
                         ) : (
-                            <RxAvatar className="text-2xl" />
+                            <img
+                                src="/images/logo-icon.png"
+                                className="w-5 h-5 rounded-full"
+                                alt="profile-pic"
+                            />
                         )}
                     </div>
                 </div>
                 <div
                     className={`flex justify-end items-center gap-1 ${counsellor && 'flex-row-reverse'}`}
                 >
-                    <h1 className="bg-[#2c79ff] px-3 py-1 text-white rounded-lg text-sm text-left max-w-[300px] w-fit flex flex-col gap-2">
+                    <h1
+                        className={`${
+                            counsellor
+                                ? 'bg-gray-100 text-blue-500'
+                                : 'bg-[#2c79ff] text-white'
+                        } px-3 py-1 rounded-lg text-sm text-left max-w-[300px] w-fit flex flex-col gap-2`}
+                    >
                         {item?.message}
                         {item?.attachment && (
                             <>
