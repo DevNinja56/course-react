@@ -158,6 +158,7 @@ export const BestFitTool = () => {
     const availableMonths = () => {
         if (year === currentYear.toString()) {
             return months.slice(new Date().getMonth() + 1);
+            return months.slice(new Date().getMonth() + 1);
         }
         return months;
     };
@@ -351,6 +352,7 @@ export const BestFitTool = () => {
                     </div>
                 </>
             )}
+
             {step === 3 && (
                 <>
                     <div className="flex justify-center items-center flex-col text-xl font-bold">
@@ -462,9 +464,12 @@ export const BestFitTool = () => {
                     </div>
                     <div className="flex flex-col justify-center items-center gap-1 ">
                         <InputField
+                        <InputField
                             placeholder="Country of Education"
                             onChange={(e) => {
+                            onChange={(e) => {
                                 addQuery({
+                                    educationCountry: e.target.value
                                     educationCountry: e.target.value
                                 });
                             }}
@@ -476,14 +481,30 @@ export const BestFitTool = () => {
                             </span>
                         )}
                         <InputField
+                            value={data.educationCountry || ''}
+                        />
+                        {errorMessages.educationCountry && (
+                            <span className="text-red-500 text-sm self-start px-16">
+                                {errorMessages.educationCountry}
+                            </span>
+                        )}
+                        <InputField
                             placeholder="Board of Education (optional)"
                             onChange={(e) => {
+                            onChange={(e) => {
                                 addQuery({
+                                    educationBoard: e.target.value
                                     educationBoard: e.target.value
                                 });
                             }}
                             value={data.educationBoard || ''}
+                            value={data.educationBoard || ''}
                         />
+                        {errorMessages.educationBoard && (
+                            <span className="text-red-500 text-sm self-start px-16">
+                                {errorMessages.educationBoard}
+                            </span>
+                        )}
                         {errorMessages.educationBoard && (
                             <span className="text-red-500 text-sm self-start px-16">
                                 {errorMessages.educationBoard}
@@ -493,6 +514,7 @@ export const BestFitTool = () => {
                             styles={customStyles}
                             className="pt-4 w-[80%] transition-all"
                             placeholder="Grading System"
+                            options={GradingSystem}
                             options={GradingSystem}
                             onChange={(option) => {
                                 addQuery({
@@ -514,11 +536,30 @@ export const BestFitTool = () => {
                             </span>
                         )}
                         <InputField
+                            value={
+                                data.gradingSystem
+                                    ? {
+                                          label: data.gradingSystem,
+                                          value: data.gradingSystem
+                                      }
+                                    : null
+                            }
+                        />
+                        {errorMessages.gradingSystem && (
+                            <span className="text-red-500 text-sm self-start px-16">
+                                {errorMessages.gradingSystem}
+                            </span>
+                        )}
+                        <InputField
                             placeholder="Enter Score"
                             type="number"
                             value={data.score || ''}
                             onChange={(e) => {
+                            type="number"
+                            value={data.score || ''}
+                            onChange={(e) => {
                                 addQuery({
+                                    score: e.target.value
                                     score: e.target.value
                                 });
                             }}
@@ -533,11 +574,27 @@ export const BestFitTool = () => {
                             type="number"
                             value={data.percentage || ''}
                             onChange={(e) => {
+                        {errorMessages.score && (
+                            <span className="text-red-500 text-sm self-start px-16">
+                                {errorMessages.score}
+                            </span>
+                        )}
+                        <InputField
+                            placeholder="Enter English Percentage (1-100)"
+                            type="number"
+                            value={data.percentage || ''}
+                            onChange={(e) => {
                                 addQuery({
+                                    percentage: e.target.value
                                     percentage: e.target.value
                                 });
                             }}
                         />
+                        {errorMessages.percentage && (
+                            <span className="text-red-500 text-sm self-start px-16">
+                                {errorMessages.percentage}
+                            </span>
+                        )}
                         {errorMessages.percentage && (
                             <span className="text-red-500 text-sm self-start px-16">
                                 {errorMessages.percentage}
@@ -598,6 +655,7 @@ export const BestFitTool = () => {
                             className="h-24"
                         />
                         <h1 className="py-2">{`Enter your ${englishTest} results`}</h1>
+                        <h1 className="py-2">{`Enter your ${englishTest} results`}</h1>
                     </div>
                     <div className="flex flex-col justify-center items-center">
                         <InputField
@@ -628,11 +686,10 @@ export const BestFitTool = () => {
                         )}
                         <InputField
                             placeholder="Speaking"
-                            onChange={(e) =>{
-                                addQuery({ speaking: e.target.value })
+                            onChange={(e) => {
+                                addQuery({ speaking: e.target.value });
                                 clearError('speaking');
-                            }
-                            }
+                            }}
                             value={data.speaking || ''}
                         />
                         {errorMessages.speaking && (
