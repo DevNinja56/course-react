@@ -3,6 +3,7 @@ import { formatMessageDate } from '@/utils/formateMessageDate';
 import Image from 'next/image';
 import React from 'react';
 
+
 interface propTypes {
     item: MessageInterface;
     counsellor: boolean;
@@ -48,6 +49,7 @@ const ChatBoxMessage = ({ item, counsellor }: propTypes) => {
                                 : 'bg-[#2c79ff] text-white'
                         } px-3 py-1 rounded-lg text-sm text-left max-w-[300px] w-fit flex flex-col gap-2`}
                     >
+
                         {item?.message}
                         {item?.attachment && (
                             <>

@@ -91,6 +91,7 @@ const ChatBox = () => {
             }
         );
 
+
         return () => {
             chatChannel.unbind(`get-${applicationId}`);
         };
@@ -150,8 +151,8 @@ const ChatBox = () => {
                 </div>
                 <IoDocumentText className="text-[20px] text-white" />
             </div>
-
             <div className="flex-1 overflow-y-auto no-scrollbar bg-[url('/images/ChatBox/BackgroundPattern.png')] bg-cover bg-center bg-repeat bg-opacity-5 relative pt-2">
+
                 <div className="text-center my-5 relative z-10">
                     <h1 className="text-black font-bold">
                         Counsellor accepted your message request.
