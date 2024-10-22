@@ -19,7 +19,7 @@ export default function BestFitTool() {
                 >
                     <div className="relative">
                         <span className="absolute right-[1.5rem] w-12 h-12 rounded-full bg-blueColor opacity-75 animate-ping top-6"></span>
-                        <img
+                        <img draggable={false}
                             src="/images/BestFitTool/BestFitTool.png"
                             alt="Best Fit Tool"
                             className="animate-[wiggle_1s_ease-in-out_infinite]"
