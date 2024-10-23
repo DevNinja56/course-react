@@ -157,6 +157,7 @@ export const BestFitTool = () => {
     const availableMonths = () => {
         if (year === currentYear.toString()) {
             return months.slice(new Date().getMonth() + 1);
+            return months.slice(new Date().getMonth() + 1);
         }
         return months;
     };
@@ -192,6 +193,7 @@ export const BestFitTool = () => {
             });
         }
     };
+    console.log(step, progress);
 
     const handleBack = () => {
         if (step > 0) {
