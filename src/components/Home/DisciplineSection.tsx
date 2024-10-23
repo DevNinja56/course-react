@@ -2,15 +2,17 @@ import Link from 'next/link';
 import React from 'react';
 import { ROUTES } from '@/config/constant';
 import { useGetPaginatedDisciplineQuery } from '@/store/slices/allRequests';
-import dynamic from 'next/dynamic';
-// import Card from './Card';
-const Card = dynamic(() => import('./Card'), { ssr: false });
+// import dynamic from 'next/dynamic';
+import Card from './Card';
+
+// const Card = dynamic(() => import('./Card'), { ssr: false });
 
 const DisciplineSection = () => {
-    const { data } = useGetPaginatedDisciplineQuery({
-        limit: 9,
+    const { data, isLoading } = useGetPaginatedDisciplineQuery({
+        limit: 6,
         page: 1
     });
+
 
     return (
         <div className="container mx-auto px-4 md:px-[50px] lg:px-2 2xl:px-8 transition-all duration-300 flex flex-col gap-y-16 lg:flex-row gap-x-8">
@@ -33,14 +35,25 @@ const DisciplineSection = () => {
                 </Link>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-5 z-10 w-full lg:w-[65%]">
-                {data?.data?.map((category) => (
-                    <Card
-                        key={'category--list--' + category.name}
-                        title={category.name}
-                        icon={category.icon}
-                        description={category.description}
-                    />
-                ))}
+                {isLoading
+                    ? Array.from({ length: 6 }).map((_, index) => (
+                          <Card
+                              key={'loading-card-' + index}
+                              title=""
+                              icon=""
+                              description={null}
+                              isLoading={true}
+                          />
+                      ))
+                    : data?.data?.map((category) => (
+                          <Card
+                              key={'category--list--' + category.name}
+                              title={category.name}
+                              icon={category.icon}
+                              description={category.description}
+                              isLoading={false}
+                          />
+                      ))}
             </div>
         </div>
     );

@@ -48,7 +48,7 @@ const customStyles: StylesConfig = {
     dropdownIndicator: () => ({ color: '#1d4ed8', paddingRight: '10px' })
 };
 
-export const BestFitTool = () => {
+const SmartMatch = () => {
     const [step, setStep] = useState(1);
     const [progress, setProgress] = useState(0);
     const [englishTest, setEnglishTest] = useState('');
@@ -746,3 +746,6 @@ export const BestFitTool = () => {
         </div>
     );
 };
+
+
+export default SmartMatch;

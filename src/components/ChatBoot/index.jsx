@@ -4,7 +4,7 @@ import React from 'react';
 const ChatBoot = () => {
     return (
         <Head>
-            <script
+            {/* <script
                 id="tawk_to"
                 type="text/javascript"
                 dangerouslySetInnerHTML={{
@@ -18,7 +18,7 @@ const ChatBoot = () => {
                     s0.parentNode.insertBefore(s1,s0);
                     })();`
                 }}
-            />
+            /> */}
         </Head>
     );
 };
