@@ -1,15 +1,15 @@
 import SearchBox from '@/components/Home/SearchBox';
 import ScholarshipSlider from '@/components/Slider/ScholarshipSlider';
 import Events from '@/components/Events';
-import dynamic from 'next/dynamic';
-// import DisciplineSection from '@/components/Home/DisciplineSection';
-const DisciplineSection = dynamic(
-    () => import('@/components/Home/DisciplineSection'),
-    {
-        ssr: false,
-        loading: () => <div className="w-full">Loading....</div>
-    }
-);
+// import dynamic from 'next/dynamic';
+import DisciplineSection from '@/components/Home/DisciplineSection';
+// const DisciplineSection = dynamic(
+//     () => import('@/components/Home/DisciplineSection'),
+//     {
+//         ssr: false,
+//         loading: () => <div className="w-full">Loading....</div>
+//     }
+// );
 
 const Home = () => {
     return (
