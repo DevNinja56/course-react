@@ -16,7 +16,6 @@ export enum modalType {
     'share_modal',
     'schedule_meeting',
     'ucas_calculator',
-    'best_fit_tool'
 }
 
 interface UiState {

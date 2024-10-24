@@ -34,6 +34,7 @@ const CourseFilter = () => {
         filters,
         isLoading
     } = useSearchedCourses();
+
     const handleClearQuery = () => {
         if (Object.keys(urlQuery).length != 0) {
             push({ query: {} });

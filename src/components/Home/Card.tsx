@@ -1,18 +1,28 @@
 import { ROUTES } from '@/config/constant';
 import { useFilterQuery } from '@/hooks/filterQuery';
-// import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 import { CustomIcon } from '@/utils/Icons';
+import { FilterCheckBoxLoader } from '../FilterPage/FilterBoxCheck';
 
-interface cardProps {
+interface CardProps {
     title: string;
     icon: string;
     description: string | null;
+    isLoading?: boolean;
 }
 
-const Card = ({ title, icon, description }: cardProps) => {
+const Card = ({ title, icon, description, isLoading }: CardProps) => {
     const { addQuery } = useFilterQuery();
+
+    if (isLoading) {
+        return (
+            <div className="bg-white rounded-[10px] custom-shadow p-4 pb-7 cursor-pointer border-2 border-white hover:border-blueColor group">
+                <FilterCheckBoxLoader />
+            </div>
+        );
+    }
+
     return (
         <Link
             href={ROUTES.FILTER_COURSE}
@@ -21,13 +31,6 @@ const Card = ({ title, icon, description }: cardProps) => {
         >
             <div className="bg-white rounded-[10px] custom-shadow p-3  cursor-pointer border-2 md:border-white hover:border-blueColor group transition-all duration-300">
                 <div className="h-12 w-12 flex items-center justify-center border-2 border-blueColor rounded-full mb-3">
-                    {/* <img
-                        height={24}
-                        width={24}
-                        alt="icon"
-                        src={`${img}`}
-                        // priority
-                    /> */}
                     <CustomIcon
                         name={icon}
                         className="text-[28px] text-blueColor"

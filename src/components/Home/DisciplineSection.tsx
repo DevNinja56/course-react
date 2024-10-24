@@ -2,14 +2,12 @@ import Link from 'next/link';
 import React, { useState } from 'react';
 import { ROUTES } from '@/config/constant';
 import { useGetPaginatedDisciplineQuery } from '@/store/slices/allRequests';
-import dynamic from 'next/dynamic';
-
-const Card = dynamic(() => import('./Card'), { ssr: false });
+import Card from './Card';
 
 const DisciplineSection = () => {
     const [page, setPage] = useState(1);
 
-    const { data } = useGetPaginatedDisciplineQuery({
+    const { data, isLoading } = useGetPaginatedDisciplineQuery({
         limit: 6,
         page
     });
@@ -65,14 +63,26 @@ const DisciplineSection = () => {
 
             <div className="w-full lg:w-[65%]">
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 md:gap-3 min-h-96">
-                    {data?.data?.map((category, index) => (
-                        <Card
-                            key={'category--list--' + category.name + index}
-                            title={category.name}
-                            icon={category.icon}
-                            description={category.description}
-                        />
-                    ))}
+                    {isLoading
+                        ? Array.from({ length: 6 }).map((_, index) => (
+                              <Card
+                                  key={'loading-card-' + index}
+                                  title=""
+                                  icon=""
+                                  description={null}
+                                  isLoading={true}
+                              />
+                          ))
+                        : data?.data?.map((category, index) => (
+                              <Card
+                                  key={
+                                      'category--list--' + category.name + index
+                                  }
+                                  title={category.name}
+                                  icon={category.icon}
+                                  description={category.description}
+                              />
+                          ))}
                 </div>
 
                 <div className="flex justify-center mt-8 space-x-4">

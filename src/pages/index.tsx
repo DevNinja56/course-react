@@ -1,4 +1,3 @@
-import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import { IoMdBook } from 'react-icons/io';
 import { PiBuildings } from 'react-icons/pi';
@@ -7,13 +6,7 @@ import HeroSectionCard from '@/components/Home/HeriSectionCard';
 import SmartMatchButton from '@/components/Home/SmartMatchButton';
 import HomeLearnMoreSection from '@/components/Home/HomeLearnMoreSection';
 import SearchAnywhereContainer from '@/components/Home/SearchAnywhereContainer';
-const DisciplineSection = dynamic(
-    () => import('@/components/Home/DisciplineSection'),
-    {
-        ssr: false,
-        loading: () => <div className="w-full">Loading....</div>
-    }
-);
+import DisciplineSection from '@/components/Home/DisciplineSection';
 
 const Home = () => {
     return (
