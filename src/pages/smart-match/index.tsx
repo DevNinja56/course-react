@@ -38,8 +38,8 @@ const SmartMatch = () => {
                             only relevant criteria for your application.
                         </p>
 
-                        <Link href={ROUTES.SMART_MATCH_TOOL}>
-                            <button className="text-md text-[#2C79FF] flex items-center gap-1 bg-white px-6 md:px-8 py-2 rounded-full mt-8">
+                        <Link href={ROUTES.SMART_MATCH_TOOL} className='  mt-8'>
+                            <button className="text-md text-[#2C79FF] flex items-center gap-1 bg-white px-6 md:px-8 py-2 rounded-full hover:shadow-xl transition-all">
                                 <p className="font-extrabold">Try Now</p>
                                 <HiOutlineSparkles className="text-2xl" />
                                 <p className="font-extrabold italic">
