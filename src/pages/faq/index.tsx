@@ -6,7 +6,7 @@ import React from 'react';
 const FAQs = () => {
     return (
         <>
-            <div className="w-full mt-[100px] mb-8">
+            <div className="w-full mb-8">
                 <FAQ />
             </div>
             <div className="w-full 2xl:mb-[600px] relative">

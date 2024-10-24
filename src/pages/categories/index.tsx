@@ -8,7 +8,7 @@ const Fields = () => {
     const { data, isLoading } = useGetCountDisciplineQuery();
     return (
         <>
-            <div className="w-full flex items-center justify-between h-[214px] mt-[90px] bg-profileBgColor mb-16">
+            <div className="w-full flex items-center justify-between h-[214px] bg-profileBgColor mb-16">
                 <img
                     height={193}
                     width={193}

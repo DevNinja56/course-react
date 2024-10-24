@@ -1,46 +1,89 @@
 import Link from 'next/link';
-import React from 'react';
+import React, { useState } from 'react';
 import { ROUTES } from '@/config/constant';
 import { useGetPaginatedDisciplineQuery } from '@/store/slices/allRequests';
 import dynamic from 'next/dynamic';
-// import Card from './Card';
+
 const Card = dynamic(() => import('./Card'), { ssr: false });
 
 const DisciplineSection = () => {
+    const [page, setPage] = useState(1);
+
     const { data } = useGetPaginatedDisciplineQuery({
-        limit: 9,
-        page: 1
+        limit: 6,
+        page
     });
 
+    const totalPages = data?.totalPage || 1;
+    const visiblePages = 3;
+
+    const getPaginationBars = () => {
+        const startPage = Math.max(1, page - Math.floor(visiblePages / 2));
+        const endPage = Math.min(startPage + visiblePages - 1, totalPages);
+        const pages = [];
+
+        for (let i = startPage; i <= endPage; i++) {
+            pages.push(i);
+        }
+
+        return pages;
+    };
+
+    const handlePageClick = (selectedPage: number) => {
+        setPage(selectedPage);
+    };
+
+    console.log(Card, 'data?.data');
+
     return (
-        <div className="container mx-auto px-4 md:px-[50px] lg:px-2 2xl:px-8 transition-all duration-300 flex flex-col gap-y-16 lg:flex-row gap-x-8">
-            <div className="pt-16 w-full lg:w-[35%] z-10 flex flex-col justify-center">
-                <p className="text-blueColor text-xl md:text-[23px] font-bold">
+        <div className="w-full lg:w-10/12 xl:w-11/12 mx-auto px-2 md:px-8 lg:px-0 xl:px-20 2xl:px-8 transition-all duration-300 flex flex-col gap-y-10 md:gap-y-16 lg:flex-row gap-x-8 z-10 relative">
+            <img
+                height={60}
+                width={60}
+                alt="home-round-2"
+                className="absolute -top-28 -left-8 lg:-left-20 xl:-left-7 z-10"
+                src="/images/Home/homeRound2.svg"
+            />
+            <div className="w-full lg:w-[35%] z-10 flex flex-col items-center md:items-start justify-center">
+                <p className="text-lg font-extrabold text-mainTextColor">
                     Top Discipline
                 </p>
-                <h1 className="text-mainTextColor font-extrabold text-[35px] mb-2">
+                <h1 className="text-blueColor font-extrabold text-xl md:text-2xl mb-2">
                     Explore our Popular Discipline
                 </h1>
-                <p className="text-darkGrayColor text-base mb-7">
+                <p className="text-darkGrayColor text-xs mb-7 text-center md:text-start">
                     Pellentesque fringilla, massa sit amet feugiat mollis, leo
                     turpis elementum justo, vel consequat ex urna ut massa
                     maecenas justo sapien.
                 </p>
                 <Link href={ROUTES.FIELDS}>
-                    <button className="pt-4 pb-[17px] px-[48px] bg-blueColor rounded-[5px] font-semibold text-white z-10 sticky hover:bg-blue-600">
+                    <button className="py-2.5 md:py-4 px-4 md:px-9 text-sm bg-blueColor rounded-[5px] font-semibold text-white z-10 sticky hover:bg-opacity-80 transition-all duration-300">
                         All Disciplines
                     </button>
                 </Link>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-5 z-10 w-full lg:w-[65%]">
-                {data?.data?.map((category) => (
-                    <Card
-                        key={'category--list--' + category.name}
-                        title={category.name}
-                        icon={category.icon}
-                        description={category.description}
-                    />
-                ))}
+
+            <div className="w-full lg:w-[65%]">
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 md:gap-3 min-h-96">
+                    {data?.data?.map((category, index) => (
+                        <Card
+                            key={'category--list--' + category.name + index}
+                            title={category.name}
+                            icon={category.icon}
+                            description={category.description}
+                        />
+                    ))}
+                </div>
+
+                <div className="flex justify-center mt-8 space-x-4">
+                    {getPaginationBars().map((pageNum) => (
+                        <button
+                            key={pageNum}
+                            className={`w-8 h-1.5 ${pageNum === page ? 'bg-blue-600' : 'bg-gray-400'} rounded-full transition-all duration-300`}
+                            onClick={() => handlePageClick(pageNum)}
+                        ></button>
+                    ))}
+                </div>
             </div>
         </div>
     );
