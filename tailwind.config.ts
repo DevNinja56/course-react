@@ -48,7 +48,9 @@ const config: Config = {
                 progressBarShadow:
                     '0px 11px 25.8px 0px rgba(190, 190, 190, 0.15);',
                 customHeroSectionButtonShadow:
-                    '-4px 6px 5.2px 0 rgba(46, 44, 44, 0.31)'
+                    '-4px 6px 5.2px 0 rgba(46, 44, 44, 0.31)',
+                customTermsAndConditionShadow:
+                    '0px 2px 9px 0px rgba(0, 0, 0, 0.09)'
             },
             height: {
                 headerStickyHeight: 'calc(100vh - 110px)',

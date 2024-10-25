@@ -135,14 +135,13 @@ const Footer = () => {
                                     </li>
                                 </Link>
 
-                                <Link href={ROUTES.PRIVACY_POLICY}>
+                                <Link
+                                    href={
+                                        ROUTES.PRIVACY_POLICY_TERMS_AND_CONDITION
+                                    }
+                                >
                                     <li className="pt-[9px] pb-[10px]">
-                                        Privacy Policy
-                                    </li>
-                                </Link>
-                                <Link href={ROUTES.TERMS_CONDITION}>
-                                    <li className="pt-[9px] pb-[10px]">
-                                        Terms and Condition
+                                        Privacy Policy - Terms & Conditions
                                     </li>
                                 </Link>
                             </ul>
