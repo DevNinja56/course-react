@@ -1,15 +1,15 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-export interface bestFitToolStateType {
+export interface smartMatchType {
     query: { [key: string]: string };
 }
 
-const initialState: bestFitToolStateType = {
+const initialState: smartMatchType = {
     query: {}
 };
 
-const bestFitTool = createSlice({
-    name: 'bestFitTool',
+const smartMatch = createSlice({
+    name: 'smartMatch',
     initialState,
     reducers: {
         addQuery(state, action: PayloadAction<{ [key: string]: string }>) {
@@ -24,5 +24,5 @@ const bestFitTool = createSlice({
     }
 });
 
-export const { addQuery, removeQuery, clearAllQuery } = bestFitTool.actions;
-export default bestFitTool.reducer;
+export const { addQuery, removeQuery, clearAllQuery } = smartMatch.actions;
+export default smartMatch.reducer;
