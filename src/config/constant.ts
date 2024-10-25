@@ -27,5 +27,6 @@ export const ROUTES = {
     FILE_SUBMIT: '/profile/application/file-submit',
     CONSOLID_MARKSHEET: '/profile/application/consolid-marksheet',
     UCAS: '/ucas',
-    UCAS_APPLICATION: '/ucas-application'
+    UCAS_APPLICATION: '/ucas-application',
+    EXPERT_COUNSELLING: '/expert-counselling'
 };

@@ -17,7 +17,7 @@ const config: Config = {
                 lightGrayColor: '#495057',
                 profileBgColor: '#eaf2ff',
                 darkGrayColor: '#626262',
-                blueColor: '#2563EB',
+                blueColor: '#357CFA',
                 borderColor: '#CCCCCC',
                 personalInfoBorderColor: '#E7E7E7',
                 footerBgColor: '#F5F5F5',

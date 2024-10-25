@@ -82,11 +82,6 @@ const Footer = () => {
                                 QUICK LINKS
                             </h1>
                             <ul className="text-lightGrayColor">
-                                <Link href={ROUTES.COUNTRY}>
-                                    <li className="pt-[9px] pb-[10px]">
-                                        Find Country
-                                    </li>
-                                </Link>
                                 <Link href={ROUTES.FIELDS}>
                                     <li className="pt-[9px] pb-[10px]">
                                         Find Courses
@@ -102,14 +97,46 @@ const Footer = () => {
                                         All Scholarships
                                     </li>
                                 </Link>
+                                <Link href={ROUTES.UCAS}>
+                                    <li className="pt-[9px] pb-[10px]">
+                                        UCAS Calculator
+                                    </li>
+                                </Link>
                                 <Link href={ROUTES.BLOGS}>
                                     <li className="pt-[9px] pb-[10px]">
                                         Blogs
                                     </li>
                                 </Link>
-                                <Link href={ROUTES.UCAS}>
+                            </ul>
+                        </div>
+                        <div className="flex flex-col w-full md:w-auto mb-8">
+                            <h1 className="pt-[15px] pb-4 text-textLightBlackColor text-lg font-extrabold">
+                                Learn More
+                            </h1>
+                            <ul className="text-lightGrayColor">
+                                <Link href={ROUTES.SMART_MATCH}>
                                     <li className="pt-[9px] pb-[10px]">
-                                        UCAS Calculator
+                                        How To Use SmartMatch
+                                    </li>
+                                </Link>
+                                <Link href={ROUTES.FIELDS}>
+                                    <li className="pt-[9px] pb-[10px]">
+                                        How To Search a Course
+                                    </li>
+                                </Link>
+                                <Link href={ROUTES.INSTITUTES}>
+                                    <li className="pt-[9px] pb-[10px]">
+                                        Local Entry Requirements
+                                    </li>
+                                </Link>
+                                <Link href={ROUTES.FILTER_SCHOLARSHIP}>
+                                    <li className="pt-[9px] pb-[10px]">
+                                        Expert Counselling Advise
+                                    </li>
+                                </Link>
+                                <Link href={ROUTES.BLOGS}>
+                                    <li className="pt-[9px] pb-[10px]">
+                                        Bank Statement Calculator
                                     </li>
                                 </Link>
                             </ul>

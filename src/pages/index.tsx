@@ -7,6 +7,7 @@ import SmartMatchButton from '@/components/Home/SmartMatchButton';
 import HomeLearnMoreSection from '@/components/Home/HomeLearnMoreSection';
 import SearchAnywhereContainer from '@/components/Home/SearchAnywhereContainer';
 import DisciplineSection from '@/components/Home/DisciplineSection';
+import { ROUTES } from '@/config/constant';
 
 const Home = () => {
     return (
@@ -126,6 +127,7 @@ const Home = () => {
                 title="Fees, Requirements, Language, Scholarships"
                 circleStyling="bottom-0 top-64 lg:-top-7 right-0 rotate-180"
                 backgroundColor
+                link=""
             />
             <div className="w-full relative bg-white py-20 lg:py-36">
                 <img
@@ -147,6 +149,7 @@ const Home = () => {
                 circleStyling="bottom-0 top-64 lg:top-44 right-0 rotate-180"
                 leftSideContent
                 backgroundColor
+                link=""
             />
             <HomeLearnMoreSection
                 image="/images/Home/home-bank-statement-mobile.png"
@@ -155,6 +158,7 @@ const Home = () => {
                 paragraph="Our Bank Statement Calculator provides accurate financial proof requirements for your visa with a simple click of a button on every course page."
                 title="Accurate, Visa Ready, Convenient, Detailed Calculations"
                 circleStyling="bottom-0 top-96 lg:top-12 -left-10"
+                link=""
             />
             <HomeLearnMoreSection
                 image="/images/Home/home-counsellor.png"
@@ -165,6 +169,7 @@ const Home = () => {
                 circleStyling="bottom-0 top-64 lg:-bottom-14 lg:top-auto -right-10 rotate-180"
                 leftSideContent
                 backgroundColor
+                link=""
             />
             <HomeLearnMoreSection
                 image="/images/Home/home-ucas-image.png"
@@ -174,6 +179,7 @@ const Home = () => {
                 title="Guidance, Tracking, Preferences, Deadlines"
                 circleStyling="bottom-0 top-64 lg:top-12 -left-10"
                 noCircle
+                link={ROUTES.UCAS_APPLICATION}
             />
             <div className="w-full bg-blueColor z-10 relative py-16">
                 <div className="w-full lg:w-9/12 xl:w-8/12 mx-auto flex items-center flex-col-reverse md:flex-row gap-10 md:gap-28 px-2 md:px-8 lg:px-0">
