@@ -182,6 +182,8 @@ const Home = () => {
                 link={ROUTES.UCAS_APPLICATION}
             />
             <div className="w-full bg-blueColor z-10 relative py-16">
+                <div className="h-24 w-24 lg:h-32 lg:w-32 rounded-full border-[15px] border-[#10BDF3] absolute top-7 lg:bottom-0 -left-8 hidden md:block"></div>
+                <div className="h-24 w-24 lg:h-32 lg:w-32 rounded-full border-[15px] border-[#10BDF3] absolute bottom-7 lg:bottom-28 -right-8 hidden md:block"></div>
                 <div className="w-full lg:w-9/12 xl:w-8/12 mx-auto flex items-center flex-col-reverse md:flex-row gap-10 md:gap-28 px-2 md:px-8 lg:px-0">
                     <Image
                         height={2613}

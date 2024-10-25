@@ -1,3 +1,4 @@
+import LetUsHelpContainer from '@/components/LetUsHelpContainer';
 import HereSectionCircle from '@/components/privacy-policy-terms-and-condition/hereSectionCircle';
 import PrivacyPolicyContainer from '@/components/privacy-policy-terms-and-condition/privacyPolicyContainer';
 import Image from 'next/image';
@@ -100,7 +101,21 @@ const PrivacyPolicyTermsAndCondition = () => {
                     information.
                 </p>
             </div>
-            <div className="flex flex-col items-center w-full gap-12 bg-profileBgColor pb-12 mb-10 ">
+            <div className="flex flex-col items-center w-full gap-12 bg-profileBgColor pb-12 mb-10 relative">
+                <Image
+                    height={2168}
+                    width={2181}
+                    alt="circle-1"
+                    src="/images/elipse.png"
+                    className="absolute md:bottom-10 lg:bottom-36 right-16 xl:right-20 h-20 w-20 hidden lg:block"
+                />
+                <Image
+                    height={2168}
+                    width={2181}
+                    alt="circle-1"
+                    src="/images/elipse.png"
+                    className="absolute bottom-96 lg:bottom-80 -left-10 lg:-left-20 h-16 w-16 lg:h-36 lg:w-36 hidden md:block"
+                />
                 <div className="w-full">
                     <div className="bg-[#2B79FF] w-full py-6 flex justify-center">
                         <p className="text-center text-white text-xs md:text-lg font-light w-full md:w-11/12 lg:w-10/12 mx-auto px-2 md:px-0">
@@ -113,7 +128,7 @@ const PrivacyPolicyTermsAndCondition = () => {
                             learning providers. We do that by:
                         </p>
                     </div>
-                    <div className="w-full md:w-11/12 lg:w-10/12 mx-auto px-2 md:px-0">
+                    <div className="w-full md:w-11/12 lg:w-10/12 mx-auto px-2 md:px-0 z-10 relative">
                         <div className="bg-white py-5 md:py-12 px-4 md:px-10 lg:pl-20 lg:pr-16 shadow-customTermsAndConditionShadow rounded-[18px] rounded-t-none flex items-start">
                             <div className="relative h-[420px] md:h-[430px] lg:h-[380px] xl:h-[360px]">
                                 <hr className="border md:border-2 border-[#2563EB] h-full" />
@@ -182,7 +197,21 @@ const PrivacyPolicyTermsAndCondition = () => {
                     information to any third party.
                 </p>
             </div>
-            <div className="px-2 md:px-0">
+            <div className="px-2 md:px-0 mb-14 relative">
+                <Image
+                    height={2168}
+                    width={2181}
+                    alt="circle-1"
+                    src="/images/elipse.png"
+                    className="absolute md:bottom-10 lg:bottom-10 -right-16 h-36 w-36 hidden lg:block"
+                />
+                <Image
+                    height={2168}
+                    width={2181}
+                    alt="circle-1"
+                    src="/images/elipse.png"
+                    className="absolute bottom-96 lg:bottom-80 -left-10 lg:-left-10 h-16 w-16 lg:h-20 lg:w-20 hidden md:block"
+                />
                 <div className="w-full md:w-10/12 bg-[#2C79FF] rounded-[18px] py-7 md:py-12 px-2 md:px-14 lg:px-24 flex flex-col gap-4 md:gap-8 items-center mx-auto">
                     <h1 className="text-white font-bold text-xl md:text-2xl">
                         Privacy Policy
@@ -227,6 +256,11 @@ const PrivacyPolicyTermsAndCondition = () => {
                     </div>
                 </div>
             </div>
+            <LetUsHelpContainer
+                buttonText=" admin@courseoptions.com"
+                heading="Contact Us"
+                title="For questions or concerns, reach us at"
+            />
         </>
     );
 };
