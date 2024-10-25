@@ -30,7 +30,7 @@ const Profile = () => {
 
     return (
         <>
-            <div className="w-full flex items-center justify-between h-[176px] mt-[100px] bg-profileBgColor overflow-hidden">
+            <div className="w-full flex items-center justify-between h-[176px] bg-profileBgColor overflow-hidden">
                 <img
                     height={106}
                     width={109}

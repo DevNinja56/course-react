@@ -6,7 +6,7 @@ import { modalType } from '@/store/slices/ui.slice';
 const HeadBox = () => {
     const { updateModal } = useUi();
     return (
-        <div className="w-full px-5 md:px-[50px] lg:px-2 2xl:px-8 flex items-center justify-center mt-[100px] bg-profileBgColor py-20 relative mb-16 print:py-5 print:mt-0">
+        <div className="w-full px-5 md:px-[50px] lg:px-2 2xl:px-8 flex items-center justify-center bg-profileBgColor py-20 relative mb-16 print:py-5 print:mt-0">
             <img
                 height={193}
                 width={191}

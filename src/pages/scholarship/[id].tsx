@@ -17,8 +17,8 @@ import { MdCategory } from 'react-icons/md';
 import { FaGraduationCap } from 'react-icons/fa';
 import { IoShareSocialSharp } from 'react-icons/io5';
 import { useCurrency } from '@/hooks/currency';
-import { HiMiniCurrencyDollar } from "react-icons/hi2";
-import { FaCheckCircle } from "react-icons/fa";
+import { HiMiniCurrencyDollar } from 'react-icons/hi2';
+import { FaCheckCircle } from 'react-icons/fa';
 const InnerHtml = dynamic(() => import('@/components/InnerHtml'), {
     ssr: false
 });
@@ -38,7 +38,7 @@ const ScholarshipDetail = ({
                 <ScreenLoader />
             ) : (
                 <>
-                    <div className="w-full flex justify-center overflow-hidden mt-[100px] relative">
+                    <div className="w-full flex justify-center overflow-hidden relative">
                         <img
                             height={60}
                             width={60}
