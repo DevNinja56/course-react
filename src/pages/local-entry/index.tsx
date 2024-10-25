@@ -37,7 +37,7 @@ const LocalEntry = () => {
 
             <div className="flex flex-col-reverse lg:flex-row justify-around mx-4 items-center lg:items-start bg-white relative">
                 <img
-                    alt="FAQ-Round"
+                    alt="Elipse"
                     className="absolute lg:h-32 h-24 -right-10 -top-32"
                     src="/images/elipse.png"
                 />
