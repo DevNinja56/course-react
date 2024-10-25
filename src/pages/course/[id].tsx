@@ -67,7 +67,7 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                 <ScreenLoader />
             ) : (
                 <>
-                    <div className="w-full flex justify-center overflow-hidden mt-[100px] relative">
+                    <div className="w-full flex justify-center overflow-hidden relative">
                         <img
                             height={60}
                             width={60}

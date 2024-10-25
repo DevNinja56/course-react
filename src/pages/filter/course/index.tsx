@@ -7,7 +7,7 @@ import ScholarshipSlider from '@/components/Slider/ScholarshipSlider';
 const FilterPage = () => {
     return (
         <>
-            <div className="w-full flex items-center justify-center mt-[100px] bg-profileBgColor py-24 md:py-20 relative ">
+            <div className="w-full flex items-center justify-center bg-profileBgColor py-24 md:py-20 relative ">
                 <img
                     height={193}
                     width={191}
