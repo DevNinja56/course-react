@@ -35,7 +35,12 @@ const LocalEntry = () => {
                 </div>
             </div>
 
-            <div className="flex flex-col-reverse lg:flex-row justify-around mx-4 items-center lg:items-start bg-white">
+            <div className="flex flex-col-reverse lg:flex-row justify-around mx-4 items-center lg:items-start bg-white relative">
+                <img
+                    alt="FAQ-Round"
+                    className="absolute lg:h-32 h-24 -right-10 -top-32"
+                    src="/images/elipse.png"
+                />
                 <img
                     src="/images/LocalEntry/WorldMap.png"
                     alt="WorldMap"
@@ -84,15 +89,22 @@ const LocalEntry = () => {
                 </div>
             </div>
 
-            <PageCard
-                heading="For Undergraduate Applicants"
-                description="Discover the required percentage from your local
-                            high school qualification for undergraduate courses,
-                            ensuring you meet the necessary criteria before
-                            applying."
-                imageUrl="/images/LocalEntry/Undergraduate.png"
-            />
+            <div className="relative">
+                <img
+                    alt="FAQ-Round"
+                    className="absolute lg:h-32 h-24 -left-10 top-40"
+                    src="/images/elipse.png"
+                />
 
+                <PageCard
+                    heading="For Undergraduate Applicants"
+                    description="Discover the required percentage from your local
+                high school qualification for undergraduate courses,
+                ensuring you meet the necessary criteria before
+                applying."
+                    imageUrl="/images/LocalEntry/Undergraduate.png"
+                />
+            </div>
             <PageCard
                 heading="For Postgraduate Applicants"
                 description="Find out the specific percentage or CGPA required from your local bachelor's degree
@@ -100,22 +112,41 @@ to qualify for postgraduate programs, giving you accurate insights into the entr
                 imageUrl="/images/LocalEntry/Postgraduate.png"
                 reverse
             />
+            <div className="relative">
+                <img
+                    alt="FAQ-Round"
+                    className="absolute h-14 md:h-20 right-2 -top-10"
+                    src="/images/Ellipse 424.svg"
+                />
 
-            <PageCard
-                heading="For A Level Students"
-                description="Understand the required grades or UCAS points from your A Level qualifications 
+                <PageCard
+                    heading="For A Level Students"
+                    description="Understand the required grades or UCAS points from your A Level qualifications 
 for entry into undergraduate courses, ensuring your subjects and grades meet the 
 necessary standards."
-                imageUrl="/images/LocalEntry/Alevels.png"
-            />
+                    imageUrl="/images/LocalEntry/Alevels.png"
+                />
+            </div>
+            <div className="relative">
+                <img
+                    alt="FAQ-Round"
+                    className="absolute h-14 md:h-20 left-2 -top-10"
+                    src="/images/Ellipse 424.svg"
+                />
 
-            <PageCard
-                heading="For A Level Students"
-                description="Find the specific International Baccalaureate (IB) points and subject requirements 
+                <PageCard
+                    heading="For A Level Students"
+                    description="Find the specific International Baccalaureate (IB) points and subject requirements 
 needed to apply for undergraduate programs at UK universities."
-                imageUrl="/images/LocalEntry/International.png"
-                reverse
-            />
+                    imageUrl="/images/LocalEntry/International.png"
+                    reverse
+                />
+                <img
+                    alt="FAQ-Round"
+                    className="absolute h-14 md:h-20 -right-10 bottom-10"
+                    src="/images/Ellipse 424.svg"
+                />
+            </div>
         </div>
     );
 };
