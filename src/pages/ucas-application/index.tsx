@@ -1,5 +1,6 @@
 import KeyService from '@/components/KeyService';
 import LetUsHelpContainer from '@/components/LetUsHelpContainer';
+import { ROUTES } from '@/config/constant';
 import Image from 'next/image';
 import React from 'react';
 
@@ -71,6 +72,7 @@ const UcasApplication = () => {
                 />
             </div>
             <LetUsHelpContainer
+                link={ROUTES.UCAS}
                 heading="Let us help you submit a winning UCAS application!"
                 buttonText="Start Now!"
             />

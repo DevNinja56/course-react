@@ -1,5 +1,6 @@
 import KeyService from '@/components/KeyService';
 import LetUsHelpContainer from '@/components/LetUsHelpContainer';
+import { ROUTES } from '@/config/constant';
 import Image from 'next/image';
 import React from 'react';
 
@@ -86,6 +87,7 @@ const ExpertCounselling = () => {
                 />
             </div>
             <LetUsHelpContainer
+                link={ROUTES.FILTER_COURSE}
                 heading="Need Our Expert Counselling?"
                 buttonText="Schedule A Meeting Now!"
             />

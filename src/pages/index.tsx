@@ -127,7 +127,7 @@ const Home = () => {
                 title="Fees, Requirements, Language, Scholarships"
                 circleStyling="bottom-0 top-64 lg:-top-7 right-0 rotate-180"
                 backgroundColor
-                link=""
+                link={ROUTES.DISCOVER}
             />
             <div className="w-full relative bg-white py-20 lg:py-36">
                 <img
@@ -149,7 +149,7 @@ const Home = () => {
                 circleStyling="bottom-0 top-64 lg:top-44 right-0 rotate-180"
                 leftSideContent
                 backgroundColor
-                link=""
+                link={ROUTES.LOCAL_ENTRY}
             />
             <HomeLearnMoreSection
                 image="/images/Home/home-bank-statement-mobile.png"
@@ -158,7 +158,7 @@ const Home = () => {
                 paragraph="Our Bank Statement Calculator provides accurate financial proof requirements for your visa with a simple click of a button on every course page."
                 title="Accurate, Visa Ready, Convenient, Detailed Calculations"
                 circleStyling="bottom-0 top-96 lg:top-12 -left-10"
-                link=""
+                link={ROUTES.BANK_STATEMENT}
             />
             <HomeLearnMoreSection
                 image="/images/Home/home-counsellor.png"
@@ -169,7 +169,7 @@ const Home = () => {
                 circleStyling="bottom-0 top-64 lg:-bottom-14 lg:top-auto -right-10 rotate-180"
                 leftSideContent
                 backgroundColor
-                link=""
+                link={ROUTES.EXPERT_COUNSELLING}
             />
             <HomeLearnMoreSection
                 image="/images/Home/home-ucas-image.png"

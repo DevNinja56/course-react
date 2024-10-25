@@ -1,6 +1,7 @@
 import LetUsHelpContainer from '@/components/LetUsHelpContainer';
 import HereSectionCircle from '@/components/privacy-policy-terms-and-condition/hereSectionCircle';
 import PrivacyPolicyContainer from '@/components/privacy-policy-terms-and-condition/privacyPolicyContainer';
+import { ROUTES } from '@/config/constant';
 import Image from 'next/image';
 import React from 'react';
 
@@ -257,6 +258,7 @@ const PrivacyPolicyTermsAndCondition = () => {
                 </div>
             </div>
             <LetUsHelpContainer
+                link={ROUTES.CONTACT_US}
                 buttonText=" admin@courseoptions.com"
                 heading="Contact Us"
                 title="For questions or concerns, reach us at"

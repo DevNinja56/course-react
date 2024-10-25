@@ -82,7 +82,7 @@ const Footer = () => {
                                 QUICK LINKS
                             </h1>
                             <ul className="text-lightGrayColor">
-                                <Link href={ROUTES.FIELDS}>
+                                <Link href={ROUTES.FILTER_COURSE}>
                                     <li className="pt-[9px] pb-[10px]">
                                         Find Courses
                                     </li>
@@ -119,22 +119,22 @@ const Footer = () => {
                                         How To Use SmartMatch
                                     </li>
                                 </Link>
-                                <Link href={ROUTES.FIELDS}>
+                                <Link href={ROUTES.DISCOVER}>
                                     <li className="pt-[9px] pb-[10px]">
                                         How To Search a Course
                                     </li>
                                 </Link>
-                                <Link href={ROUTES.INSTITUTES}>
+                                <Link href={ROUTES.LOCAL_ENTRY}>
                                     <li className="pt-[9px] pb-[10px]">
                                         Local Entry Requirements
                                     </li>
                                 </Link>
-                                <Link href={ROUTES.FILTER_SCHOLARSHIP}>
+                                <Link href={ROUTES.EXPERT_COUNSELLING}>
                                     <li className="pt-[9px] pb-[10px]">
                                         Expert Counselling Advise
                                     </li>
                                 </Link>
-                                <Link href={ROUTES.BLOGS}>
+                                <Link href={ROUTES.BANK_STATEMENT}>
                                     <li className="pt-[9px] pb-[10px]">
                                         Bank Statement Calculator
                                     </li>
