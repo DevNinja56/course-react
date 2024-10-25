@@ -33,7 +33,7 @@ const CurrencyConverter = () => {
     return (
         <div className="relative">
             <button
-                className="border-2 border-gray-800 py-1 md:py-2 px-1 md:px-3 flex gap-1 group hover:border-transparent hover:bg-blueColor hover:text-white transition-all duration-200 font-bold text-xs md:text-base uppercase "
+                className="border-2 border-gray-800 py-1 md:py-1.5 px-1 md:px-1 xl:px-1.5 flex gap-[2px] group hover:border-transparent hover:bg-blueColor hover:text-white transition-all duration-200 font-bold text-xs xl:text-sm uppercase "
                 onClick={() =>
                     updateModal({
                         type: modalType.currency_converter,

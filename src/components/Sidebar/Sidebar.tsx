@@ -2,10 +2,11 @@ import { ROUTES } from '@/config/constant';
 import { useFilterQuery } from '@/hooks/filterQuery';
 import { useUi } from '@/hooks/user-interface';
 import { modalType } from '@/store/slices/ui.slice';
-// import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
+import { IoMdBook } from 'react-icons/io';
+import { PiBuildings } from 'react-icons/pi';
 import { SiSemanticscholar } from 'react-icons/si';
 
 interface modalProps {
@@ -33,7 +34,7 @@ const Sidebar = ({ setShowSideBar }: modalProps) => {
     return (
         <div className="w-full flex lg:hidden">
             <div className="backgroundBlack fixed top-0 left-0 h-[100vh] w-full z-40 flex items-center justify-end">
-                <div className="bg-white h-[100%] w-[481px] px-[34px]">
+                <div className="bg-white h-[100%] w-[481px] px-[34px] overflow-auto py-2">
                     <div className="flex w-full items-center justify-between border-b border-siderBarBottom py-4 mb-8">
                         <img
                             width={187.68}
@@ -80,40 +81,14 @@ const Sidebar = ({ setShowSideBar }: modalProps) => {
                     <div className="flex flex-col gap-y-11">
                         <Link href={ROUTES.FILTER_COURSE}>
                             <div className="flex items-center gap-x-[10px]">
-                                <svg
-                                    width="32"
-                                    height="33"
-                                    viewBox="0 0 32 33"
-                                    fill="none"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                >
-                                    <path
-                                        fillRule="evenodd"
-                                        clipRule="evenodd"
-                                        d="M11.0269 20.4347L13.1509 13.6494L19.9362 11.5254L17.8122 18.3107L11.0269 20.4347Z"
-                                        className={`font-semibold ${
-                                            router.pathname ===
-                                            ROUTES.FILTER_COURSE
-                                                ? 'stroke-blueColor'
-                                                : 'stroke-textBlackColor'
-                                        }`}
-                                        strokeWidth="2"
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                    />
-                                    <path
-                                        d="M15.4814 28.7953C22.5588 28.7953 28.2961 23.058 28.2961 15.9807C28.2961 8.90334 22.5588 3.16602 15.4814 3.16602C8.40407 3.16602 2.66675 8.90334 2.66675 15.9807C2.66675 23.058 8.40407 28.7953 15.4814 28.7953Z"
-                                        className={`font-semibold ${
-                                            router.pathname ===
-                                            ROUTES.FILTER_COURSE
-                                                ? 'stroke-blueColor'
-                                                : 'stroke-textBlackColor'
-                                        }`}
-                                        strokeWidth="2"
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                    />
-                                </svg>
+                                <IoMdBook
+                                    className={`font-semibold text-3xl ${
+                                        router.pathname ===
+                                        ROUTES.FILTER_SCHOLARSHIP
+                                            ? 'text-blueColor'
+                                            : 'text-textBlackColor'
+                                    }`}
+                                />
                                 <p
                                     className={`font-semibold ${
                                         router.pathname === ROUTES.FILTER_COURSE
@@ -121,7 +96,28 @@ const Sidebar = ({ setShowSideBar }: modalProps) => {
                                             : 'text-textBlackColor'
                                     }`}
                                 >
-                                    Discover
+                                    Courses
+                                </p>
+                            </div>
+                        </Link>
+                        <Link href={ROUTES.INSTITUTES}>
+                            <div className="flex items-center gap-x-[10px]">
+                                <PiBuildings
+                                    className={`font-semibold text-3xl ${
+                                        router.pathname ===
+                                        ROUTES.FILTER_SCHOLARSHIP
+                                            ? 'text-blueColor'
+                                            : 'text-textBlackColor'
+                                    }`}
+                                />
+                                <p
+                                    className={`font-semibold ${
+                                        router.pathname === ROUTES.INSTITUTES
+                                            ? 'text-blueColor'
+                                            : 'text-textBlackColor'
+                                    }`}
+                                >
+                                    Institutes
                                 </p>
                             </div>
                         </Link>

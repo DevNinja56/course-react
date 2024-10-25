@@ -1,634 +1,184 @@
-import {
-    EnglishTest,
-    months,
-    TestScoreRanges,
-    testScoreRanges
-} from '@/components/SmartMatch/data';
-import InputField from '@/components/SmartMatch/input';
-import Button from '@/components/Button';
+import FAQ from '@/components/FAQ/FAQ';
 import { ROUTES } from '@/config/constant';
-import { useBestFitTool } from '@/hooks/bestFitTool';
-import { useGetDisciplineQuery } from '@/store/slices/allRequests';
-import { country_list_with_code } from '@/utils/data/country';
-import { useRouter } from 'next/router';
-import React, { useState } from 'react';
-import { IoArrowBackCircle } from 'react-icons/io5';
-import Select, { StylesConfig } from 'react-select';
-
-interface OptionType {
-    value: string;
-    label: string;
-}
-
-const customStyles: StylesConfig = {
-    control: (provided) => ({
-        ...provided,
-        padding: '6px',
-        backgroundColor: '#2C79FF1A',
-        borderRadius: '0.5rem',
-        borderColor: '#bbd4ff',
-        boxShadow: 'none',
-        '&:hover': {
-            borderColor: '#307cff'
-        }
-    }),
-    indicatorSeparator: () => ({}),
-    placeholder: (provided) => ({
-        ...provided,
-        fontWeight: '400',
-        color: '#2C79FF'
-    }),
-    option: (provided) => ({
-        ...provided,
-        zIndex: '999'
-    }),
-    dropdownIndicator: () => ({ color: '#1d4ed8', paddingRight: '10px' })
-};
+import Link from 'next/link';
+import React from 'react';
+import { FaSliders } from 'react-icons/fa6';
+import { HiOutlineSparkles } from 'react-icons/hi2';
+import { TbClockBolt, TbTargetArrow } from 'react-icons/tb';
 
 const SmartMatch = () => {
-    const [step, setStep] = useState(1);
-    const [progress, setProgress] = useState(0);
-    const [englishTest, setEnglishTest] = useState('');
-    const router = useRouter();
-    const TotalStep = 6;
-    const { addQuery, query: data } = useBestFitTool();
-    const { data: DisciplineData } = useGetDisciplineQuery();
-    const [year, setYear] = useState('');
-    const currentYear = new Date().getFullYear();
-    const yearOptions = [
-        { value: currentYear.toString(), label: currentYear.toString() },
-        {
-            value: (currentYear + 1).toString(),
-            label: (currentYear + 1).toString()
-        },
-        {
-            value: (currentYear + 2).toString(),
-            label: (currentYear + 2).toString()
-        }
-    ];
-
-    const selectedTest = englishTest;
-    const scoreRange = testScoreRanges[selectedTest as keyof TestScoreRanges];
-
-    const [errorMessages, setErrorMessages] = useState<{
-        [key: string]: string;
-    }>({
-        nationality: '',
-        year: '',
-        month: '',
-        studyLevel: '',
-        subject: '',
-        educationCountry: '',
-        educationBoard: '',
-        gradingSystem: '',
-        score: '',
-        percentage: '',
-        englishTest: '',
-        listening: '',
-        reading: '',
-        speaking: '',
-        writing: ''
-    });
-
-    const validateFields = () => {
-        let isValid = true;
-        const errors: { [key: string]: string } = {};
-
-        switch (step) {
-            case 1:
-                if (!data.nationality) {
-                    errors.nationality = 'Nationality is required';
-                    isValid = false;
-                }
-
-                break;
-            case 2:
-                if (!data.year) {
-                    errors.year = 'Year is required';
-                    isValid = false;
-                }
-                if (!data.month) {
-                    errors.month = 'Month is required';
-                    isValid = false;
-                }
-                break;
-            case 3:
-                if (!data.studyLevel) {
-                    errors.studyLevel = 'Study level is required';
-                    isValid = false;
-                }
-                if (!data.discipline) {
-                    errors.discipline = 'Discipline is required';
-                    isValid = false;
-                }
-                break;
-
-            case 4:
-                if (!data.englishTest) {
-                    errors.englishTest = 'English test is required';
-                    isValid = false;
-                }
-                break;
-            case 5:
-                if (!data.listening) {
-                    errors.listening = 'Listening score is required';
-                    isValid = false;
-                } else if (
-                    +data.listening < scoreRange.min ||
-                    +data.listening > scoreRange.max
-                ) {
-                    errors.listening = `Listening score must be between ${scoreRange.min} and ${scoreRange.max} for ${selectedTest}`;
-                    isValid = false;
-                }
-
-                if (!data.reading) {
-                    errors.reading = 'Reading score is required';
-                    isValid = false;
-                } else if (
-                    +data.reading < scoreRange.min ||
-                    +data.reading > scoreRange.max
-                ) {
-                    errors.reading = `Reading score must be between ${scoreRange.min} and ${scoreRange.max} for ${selectedTest}`;
-                    isValid = false;
-                }
-
-                if (!data.speaking) {
-                    errors.speaking = 'Speaking score is required';
-                    isValid = false;
-                } else if (
-                    +data.speaking < scoreRange.min ||
-                    +data.speaking > scoreRange.max
-                ) {
-                    errors.speaking = `Speaking score must be between ${scoreRange.min} and ${scoreRange.max} for ${selectedTest}`;
-                    isValid = false;
-                }
-
-                if (!data.writing) {
-                    errors.writing = 'Writing score is required';
-                    isValid = false;
-                } else if (
-                    +data.writing < scoreRange.min ||
-                    +data.writing > scoreRange.max
-                ) {
-                    errors.writing = `Writing score must be between ${scoreRange.min} and ${scoreRange.max} for ${selectedTest}`;
-                    isValid = false;
-                }
-
-                if (!data.overallscore) {
-                    errors.overallscore = 'Overall score is required';
-                    isValid = false;
-                } else if (
-                    +data.overallscore < scoreRange.min ||
-                    +data.overallscore > scoreRange.max
-                ) {
-                    errors.overallscore = `Overall score must be between ${scoreRange.min} and ${scoreRange.max} for ${selectedTest}`;
-                    isValid = false;
-                }
-                break;
-            default:
-                break;
-        }
-        setErrorMessages(errors);
-        return isValid;
-    };
-
-    const availableMonths = () => {
-        if (year === currentYear.toString()) {
-            return months.slice(new Date().getMonth() + 1);
-        }
-        return months;
-    };
-
-    const clearError = (field: keyof typeof errorMessages) => {
-        setErrorMessages((prev) => ({
-            ...prev,
-            [field]: ''
-        }));
-    };
-
-    const handleNext = () => {
-        if (validateFields()) {
-            if (step < TotalStep) {
-                setStep((prevStep) => {
-                    const nextStep = prevStep + 1;
-                    setProgress((nextStep / TotalStep) * 100);
-                    return nextStep;
-                });
-            }
-        }
-    };
-
-    const handleSubmit = () => {
-        if (validateFields()) {
-            router.push({
-                pathname: ROUTES.FILTER_COURSE,
-                query: {
-                    discipline: data.discipline,
-                    intakes: data.month,
-                    degreeType: data.studyLevel.toLowerCase()
-                }
-            });
-        }
-    };
-
-    const handleBack = () => {
-        if (step > 0) {
-            setStep((prevStep) => {
-                const nextStep = prevStep - 1;
-                setProgress(nextStep === 1 ? 0 : (nextStep / TotalStep) * 100);
-                return nextStep;
-            });
-        }
-    };
     return (
-        <div className="flex justify-center">
-            <div className=" bg-white w-[80%] h-full min-h-[500px] pb-8 rounded-lg shadow m-8 ">
-                <div className="bg-gradient-to-b from-blue-700 to-blue-400 h-fit rounded-t-lg relative">
-                    {step > 1 && (
-                        <IoArrowBackCircle
-                            className="absolute text-white text-3xl top-2 left-8 cursor-pointer"
-                            onClick={handleBack}
-                        />
-                    )}
+        <>
+            <div className="bg-gradient-to-b from-blue-600 via-blue-600/20 to-white w-full relative h-screens flex flex-col pb-5 ">
+                <img
+                    src="/images/SmartMatch/Pattern.png"
+                    className="h-80 absolute left-0 top-0 scale-x-[-1] hidden md:h-[450px] lg:block"
+                    alt="Pattern"
+                />
+                <img
+                    src="/images/SmartMatch/Pattern.png"
+                    className="h-80 absolute right-0 top-0 hidden md:h-[450px] lg:block"
+                    alt="Pattern"
+                />
+                <div className="flex flex-col justify-center items-center self-center text-center w-11/12 md:w-1/2 z-10 mt-12">
+                    <div className="text-[1.8rem] flex items-center justify-center gap-1 ">
+                        <HiOutlineSparkles className="text-4xl text-white" />
+                        <h1 className="font-extrabold italic text-white m-0 p-0">
+                            SmartMatch
+                        </h1>
+                    </div>
 
-                    <h1 className="text-white font-bold text-xl flex justify-center items-center p-2">
-                        Smart Matcher
-                    </h1>
+                    <div className="flex flex-col items-center">
+                        <h1 className="text-[1.5rem] md:text-[2rem] text-white font-[500] mb-1">
+                            Unlock Your Future with SmartMatch
+                        </h1>
+                        <p className="text-white w-full md:w-3/4 text-xs md:text-sm">
+                            Our platform provides localized entry requirements
+                            based on your country of education, ensuring you see
+                            only relevant criteria for your application.
+                        </p>
+
+                        <Link href={ROUTES.SMART_MATCH_TOOL} className='  mt-8'>
+                            <button className="text-md text-[#2C79FF] flex items-center gap-1 bg-white px-6 md:px-8 py-2 rounded-full hover:shadow-xl transition-all">
+                                <p className="font-extrabold">Try Now</p>
+                                <HiOutlineSparkles className="text-2xl" />
+                                <p className="font-extrabold italic">
+                                    SmartMatch
+                                </p>
+                            </button>
+                        </Link>
+                    </div>
+                    <div className="flex flex-col items-center p-6">
+                        <img
+                            src="/images/SmartMatch/AiBot.png"
+                            alt="AiBot"
+                            className="h-44"
+                        />
+                        <img
+                            src="/images/SmartMatch/AiBotShadow.png"
+                            alt="AiBotShadow"
+                            className="h-fit w-36"
+                        />
+                    </div>
                 </div>
 
-                <div className="w-full m-auto">
-                    <div className="flex justify-center items-center py-8">
-                        <div className="w-[80%] bg-[#e8f0fc] h-2.5 rounded-full overflow-hidden">
-                            <div
-                                className="bg-gradient-to-b from-blue-700 to-blue-400 h-full transition-all duration-700"
-                                style={{ width: `${progress}%` }}
-                            ></div>
+                <div className="flex flex-col-reverse lg:flex-row justify-between mx-4 sm:px-20 lg:-mt-[4.6rem] max-lg:items-center max-lg:gap-10">
+                    <div className="px-5 flex flex-col gap-5 justify-center lg:mb-0 mb-8">
+                        <h1 className="text-2xl max-[400px]:text-[1.1rem] sm:text-3xl text-[#2563eb] flex items-center gap-1">
+                            <span className="font-extrabold">Why Choose</span>
+                            <HiOutlineSparkles className="text-2xl sm:text-5xl" />
+                            <span className="font-extrabold italic">
+                                SmartMatch?
+                            </span>
+                        </h1>
+
+                        <div className="flex flex-col gap-5 justify-center ">
+                            <div className="flex items-start gap-2">
+                                <TbTargetArrow className="text-blue-600 text-4xl sm:text-5xl min-w-10 self-center flex" />
+                                <div>
+                                    <h3 className="text-md sm:text-lg font-semibold">
+                                        AI-Driven Accuracy:
+                                    </h3>
+                                    <p className="text-sm">
+                                        Get courses that truly match your
+                                        academic strengths and future goals.
+                                    </p>
+                                </div>
+                            </div>
+                            <div className="flex items-start gap-2">
+                                <TbClockBolt className="text-blue-600 text-4xl sm:text-5xl min-w-10 self-center flex" />
+                                <div>
+                                    <h3 className="text-md sm:text-lg font-semibold">
+                                        Fast & Efficient:
+                                    </h3>
+                                    <p className="text-sm">
+                                        Save hours of research—let SmartMatch AI
+                                        analyze thousands of courses in seconds.
+                                    </p>
+                                </div>
+                            </div>
+                            <div className="flex items-start gap-2">
+                                <FaSliders className="text-blue-600 text-4xl sm:text-5xl p-1 min-w-10 self-center flex" />
+                                <div>
+                                    <h3 className="text-md sm:text-lg font-semibold">
+                                        Tailored Suggestions:
+                                    </h3>
+                                    <p className="text-sm">
+                                        Receive personalized results that fit
+                                        your qualifications and budget.
+                                    </p>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    {step === 1 && (
-                        <>
-                            <div className="flex justify-center items-center flex-col text-xl font-bold">
-                                <img
-                                    src="/images/BestFitTool/World.png"
-                                    alt="World"
-                                    className="h-24"
-                                />
-                                <h1 className="py-2 w-[80%] max-sm:text-md text-center lg:text-2xl">
-                                    What is your country of nationality?
-                                </h1>
-                            </div>
-                            <div className="flex flex-col justify-center items-center gap-1">
-                                <Select
-                                    styles={customStyles}
-                                    className="pt-4 w-[80%] transition-all"
-                                    placeholder="Select Country/Nationality"
-                                    options={Object.values(
-                                        country_list_with_code
-                                    ).map((country) => ({
-                                        label: country,
-                                        value: country
-                                    }))}
-                                    onChange={(option) => {
-                                        addQuery({
-                                            nationality: (option as OptionType)
-                                                .value
-                                        });
-                                        clearError('nationality');
-                                    }}
-                                    value={
-                                        data.nationality
-                                            ? {
-                                                  label: data.nationality,
-                                                  value: data.nationality
-                                              }
-                                            : null
-                                    }
-                                />
-                                {errorMessages.nationality && (
-                                    <span className="text-red-500 text-sm self-start px-32">
-                                        {errorMessages.nationality}
-                                    </span>
-                                )}
-                            </div>
-                        </>
-                    )}
-                    {step === 2 && (
-                        <>
-                            <div className="flex justify-center items-center flex-col text-xl font-bold">
-                                <img
-                                    src="/images/BestFitTool/Calendar.png"
-                                    alt="Calendar"
-                                    className="h-24"
-                                />
-                                <h1 className="py-2 w-[80%] max-sm:text-md text-center lg:text-2xl">
-                                    When do you plan to kick-start your studies?
-                                </h1>
-                            </div>
-                            <div className="flex flex-col items-center gap-1">
-                                <Select
-                                    styles={customStyles}
-                                    className="pt-4 w-[80%] transition-all"
-                                    placeholder="Select Year"
-                                    options={yearOptions}
-                                    onChange={(option) => {
-                                        addQuery({
-                                            year: (option as OptionType).value
-                                        });
-                                        setYear((option as OptionType).value);
-                                        clearError('year');
-                                    }}
-                                    value={
-                                        data.year
-                                            ? {
-                                                  label: data.year,
-                                                  value: data.year
-                                              }
-                                            : null
-                                    }
-                                    defaultValue={
-                                        data.year
-                                            ? {
-                                                  label: data.year,
-                                                  value: data.year
-                                              }
-                                            : null
-                                    }
-                                />
-                                {errorMessages.year && (
-                                    <span className="text-red-500 text-sm self-start px-32">
-                                        {errorMessages.year}
-                                    </span>
-                                )}
-                                <Select
-                                    styles={customStyles}
-                                    className={`pt-4 w-[80%] transition-all ${!data.year && 'opacity-65'}`}
-                                    placeholder="Start Month"
-                                    options={availableMonths()}
-                                    onChange={(option) => {
-                                        addQuery({
-                                            month: (option as OptionType).value
-                                        });
-                                        clearError('month');
-                                    }}
-                                    isDisabled={!data.year}
-                                    defaultValue={
-                                        data.month
-                                            ? months.find(
-                                                  (month) =>
-                                                      month.value === data.month
-                                              )
-                                            : null
-                                    }
-                                />
-                                {errorMessages.month && (
-                                    <span className="text-red-500 text-sm self-start px-32">
-                                        {errorMessages.month}
-                                    </span>
-                                )}{' '}
-                            </div>
-                        </>
-                    )}
-
-                    {step === 3 && (
-                        <>
-                            <div className="flex justify-center items-center flex-col text-xl font-bold">
-                                <img
-                                    src="/images/BestFitTool/Book.png"
-                                    alt="Book"
-                                    className="h-24"
-                                />
-                                <h1 className="py-2 w-[80%] max-sm:text-md text-center lg:text-2xl">
-                                    What do you wish to study?
-                                </h1>
-                            </div>
-                            <div className="flex flex-col justify-center items-center gap-1 ">
-                                <Select
-                                    styles={customStyles}
-                                    className="pt-4 w-[80%] transition-all"
-                                    placeholder="Select Study Level"
-                                    options={[
-                                        'Undergraduate',
-                                        'Postgraduate'
-                                    ]?.map((item) => ({
-                                        label: item,
-                                        value: item
-                                    }))}
-                                    onChange={(option) => {
-                                        addQuery({
-                                            studyLevel: (option as OptionType)
-                                                .value
-                                        });
-                                        clearError('studyLevel');
-                                    }}
-                                    value={
-                                        data.studyLevel
-                                            ? {
-                                                  label: data.studyLevel,
-                                                  value: data.studyLevel
-                                              }
-                                            : null
-                                    }
-                                />
-                                {errorMessages.studyLevel && (
-                                    <span className="text-red-500 text-sm self-start px-32">
-                                        {errorMessages.studyLevel}
-                                    </span>
-                                )}
-                                <Select
-                                    styles={customStyles}
-                                    className="pt-4 w-[80%] transition-all"
-                                    placeholder="Select Discipline"
-                                    options={DisciplineData?.map((item) => ({
-                                        label: item.name,
-                                        value: item.name
-                                    }))}
-                                    onChange={(option) => {
-                                        addQuery({
-                                            discipline: (option as OptionType)
-                                                .value
-                                        });
-                                        clearError('discipline');
-                                    }}
-                                    value={
-                                        data.discipline
-                                            ? {
-                                                  label: data.discipline,
-                                                  value: data.discipline
-                                              }
-                                            : null
-                                    }
-                                />
-                                {errorMessages.discipline && (
-                                    <span className="text-red-500 text-sm self-start px-32">
-                                        {errorMessages.discipline}
-                                    </span>
-                                )}
-                            </div>
-                        </>
-                    )}
-
-                    {step === 4 && (
-                        <>
-                            <div className="flex justify-center items-center flex-col text-xl font-bold">
-                                <img
-                                    src="/images/BestFitTool/writing.png"
-                                    alt="writing"
-                                    className="h-24"
-                                />
-                                <h1 className="py-2 w-[80%] max-sm:text-md text-center lg:text-2xl">
-                                    Which English language test have you taken
-                                    so far?
-                                </h1>
-                            </div>
-                            <div className="flex flex-col justify-center items-center gap-1">
-                                <Select
-                                    styles={customStyles}
-                                    className="pt-4 w-[80%] transition-all"
-                                    placeholder="Select English Test"
-                                    options={EnglishTest}
-                                    onChange={(option) => {
-                                        addQuery({
-                                            englishTest: (option as OptionType)
-                                                .value
-                                        });
-                                        setEnglishTest(
-                                            (option as OptionType).value
-                                        );
-                                        clearError('englishTest');
-                                    }}
-                                    value={
-                                        data.englishTest
-                                            ? {
-                                                  label: data.englishTest,
-                                                  value: data.englishTest
-                                              }
-                                            : null
-                                    }
-                                />
-                                {errorMessages.englishTest && (
-                                    <span className="text-red-500 text-sm self-start px-32">
-                                        {errorMessages.englishTest}
-                                    </span>
-                                )}
-                            </div>
-                        </>
-                    )}
-                    {step === 5 && (
-                        <>
-                            <div className="flex justify-center items-center flex-col text-xl font-bold">
-                                <img
-                                    src="/images/BestFitTool/Test Outcome.png"
-                                    alt="Book"
-                                    className="h-24"
-                                />
-                                <h1 className="py-2 w-[80%] max-sm:text-md text-center lg:text-2xl">{`Enter your ${englishTest} results`}</h1>
-                            </div>
-                            <div className="flex flex-col justify-center items-center">
-                                <InputField
-                                    placeholder="Listening Score"
-                                    onChange={(e) => {
-                                        addQuery({ listening: e.target.value });
-                                        clearError('listening');
-                                    }}
-                                    value={data.listening || ''}
-                                />
-                                {errorMessages.listening && (
-                                    <span className="text-red-500 text-sm self-start px-32">
-                                        {errorMessages.listening}
-                                    </span>
-                                )}
-                                <InputField
-                                    placeholder="Reading Score"
-                                    onChange={(e) => {
-                                        addQuery({ reading: e.target.value });
-                                        clearError('reading');
-                                    }}
-                                    value={data.reading || ''}
-                                />
-                                {errorMessages.reading && (
-                                    <span className="text-red-500 text-sm self-start px-32">
-                                        {errorMessages.reading}
-                                    </span>
-                                )}
-                                <InputField
-                                    placeholder="Speaking Score"
-                                    onChange={(e) => {
-                                        addQuery({ speaking: e.target.value });
-                                        clearError('speaking');
-                                    }}
-                                    value={data.speaking || ''}
-                                />
-                                {errorMessages.speaking && (
-                                    <span className="text-red-500 text-sm self-start px-32">
-                                        {errorMessages.speaking}
-                                    </span>
-                                )}
-                                <InputField
-                                    placeholder="Writing Score"
-                                    onChange={(e) => {
-                                        addQuery({ writing: e.target.value });
-                                        clearError('writing');
-                                    }}
-                                    value={data.writing || ''}
-                                />
-                                {errorMessages.writing && (
-                                    <span className="text-red-500 text-sm self-start px-32">
-                                        {errorMessages.writing}
-                                    </span>
-                                )}
-
-                                <InputField
-                                    placeholder="Overall Score"
-                                    onChange={(e) => {
-                                        addQuery({
-                                            overallscore: e.target.value
-                                        });
-                                        clearError('overallscore');
-                                    }}
-                                    value={data.overallscore || ''}
-                                />
-                                {errorMessages.overallscore && (
-                                    <span className="text-red-500 text-sm self-start px-32">
-                                        {errorMessages.overallscore}
-                                    </span>
-                                )}
-                            </div>
-                        </>
-                    )}
-
-                    {step === 6 && (
-                        <>
-                            <div className="flex justify-center items-center flex-col text-xl font-bold">
-                                <img
-                                    src="/images/BestFitTool/Checkmark.png"
-                                    alt="Book"
-                                    className="h-52"
-                                />
-                                <h1 className="py-2 w-[80%] text-center">
-                                    The search is complete and these are the
-                                    best courses for you.
-                                </h1>
-                            </div>
-                        </>
-                    )}
-                    <div className="flex justify-center mt-8">
-                        {step === 6 ? (
-                            <Button
-                                text="Reveal my matches"
-                                className="transition-all py-3 !w-[80%] rounded-lg"
-                                onClick={handleSubmit}
-                            />
-                        ) : (
-                            <Button
-                                text="Continue"
-                                className="transition-all py-3 !w-[80%] rounded-lg"
-                                onClick={handleNext}
-                            />
-                        )}
+                    <div className="flex justify-center ">
+                        <img
+                            src="/images/SmartMatch/Card.png"
+                            alt="AiBotShadow"
+                            className="h-80 sm:h-[500px] drop-shadow-2xl"
+                        />
                     </div>
                 </div>
             </div>
-        </div>
+
+            <div className="flex flex-col lg:flex-row justify-between mx-4 sm:px-20 lg:p-10 items-center relative">
+                <img
+                    src="/images/SmartMatch/Preferences.png"
+                    alt="Preferences"
+                    className="h-80 sm:h-[450px] mx-auto object-contain z-100"
+                />
+                <img
+                    alt="FAQ-Round"
+                    className="absolute h-32 -right-20 top-64"
+                    src="/images/elipse.png"
+                />
+
+                <img
+                    alt="FAQ-Round"
+                    className="absolute h-20 -top-10 left-2"
+                    src="/images/Ellipse 424.svg"
+                />
+                <div className="px-5 flex flex-col gap-5 justify-center">
+                    <h1 className="text-xl sm:text-3xl text-[#2563eb] font-extrabold">
+                        How It Works?
+                    </h1>
+
+                    <div className="flex flex-col gap-5">
+                        <div className="flex flex-col items-start gap-2">
+                            <h3 className="text-md sm:text-lg font-semibold">
+                                Enter Your Details:
+                            </h3>
+                            <p className="text-sm">
+                                Get courses that truly match your academic
+                                strengths and future goals.
+                            </p>
+                        </div>
+                        <div className="flex flex-col items-start gap-2">
+                            <h3 className="text-md sm:text-lg font-semibold">
+                                Fast & Efficient:
+                            </h3>
+                            <p className="text-sm">
+                                Save hours of research—let SmartMatch AI analyze
+                                thousands of courses in seconds.
+                            </p>
+                        </div>
+                        <div className="flex flex-col items-start gap-2">
+                            <h3 className="text-md sm:text-lg font-semibold">
+                                Tailored Suggestions:
+                            </h3>
+                            <p className="text-sm">
+                                Receive personalized results that fit your
+                                qualifications and budget.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div className="py-10">
+                <FAQ />
+            </div>
+        </>
     );
 };
 

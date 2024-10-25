@@ -17,6 +17,8 @@ export const ROUTES = {
     ABOUT_US: '/aboutUs',
     CONTACT_US: '/contactUs',
     FAQ: '/faq',
+    SMART_MATCH: '/smart-match',
+    SMART_MATCH_TOOL: '/smart-match/tool',
     PRIVACY_POLICY: '/privacyPolicy',
     TERMS_CONDITION: '/termsCondition',
     FAVORITES: '/profile?tab=Favourite&tab2=Institutes',

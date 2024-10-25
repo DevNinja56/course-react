@@ -1,10 +1,13 @@
-
-import { addQuery, removeQuery, clearAllQuery } from '@/store/slices/bestFitTool';
+import {
+    addQuery,
+    removeQuery,
+    clearAllQuery
+} from '@/store/slices/smartMatch';
 import { useAppDispatch, useAppSelector } from './store';
 
-export const useBestFitTool = () => {
+export const useSmartMatchTool = () => {
     const dispatch = useAppDispatch();
-    const query = useAppSelector((state) => state.bestFitTool.query);
+    const query = useAppSelector((state) => state.smartMatch.query);
 
     const addQueryAction = (obj: { [key: string]: string }) => {
         dispatch(addQuery(obj));
@@ -16,9 +19,7 @@ export const useBestFitTool = () => {
 
     const clearQueryAction = () => {
         dispatch(clearAllQuery());
-
     };
-
 
     return {
         query,
