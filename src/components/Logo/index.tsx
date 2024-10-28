@@ -12,7 +12,7 @@ const Logo = () => {
                     width={204}
                     alt="course options Logo"
                     src="/images/courseoptionslogo 1.svg"
-                    className="w-32 h-auto md:w-[204px]"
+                    className="w-32 h-auto md:w-[170px] lg:w-32 xl:w-[170px]"
                     // priority
                 />
             </strong>

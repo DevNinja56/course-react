@@ -6,7 +6,7 @@ import scholarships from '@/store/slices/filtersScholarship';
 import filterQuery from '@/store/slices/filterQuery';
 import compareInstitute from '@/store/slices/compare.slice';
 import blogs from '@/store/slices/blogsPaginated';
-import bestFitTool from '@/store/slices/bestFitTool';
+import smartMatch from '@/store/slices/smartMatch';
 import apply from '@/store/slices/apply.slice';
 import currency from '@/store/slices/currency.slice';
 import { stateQueryApi } from './slices/allRequests';
@@ -21,6 +21,6 @@ export const rootReducer = combineReducers({
     filterQuery,
     compareInstitute,
     apply,
-    bestFitTool,
+    smartMatch,
     currency
 });

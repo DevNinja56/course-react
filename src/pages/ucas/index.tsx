@@ -45,7 +45,7 @@ const UCAS = () => {
 
     return (
         <>
-            <div className="w-full flex items-center justify-between h-[214px] mt-12 md:mt-[90px] bg-profileBgColor mb-16">
+            <div className="w-full flex items-center justify-between h-[214px] bg-profileBgColor mb-16">
                 <Image
                     height={193}
                     width={193}

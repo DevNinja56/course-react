@@ -8,7 +8,7 @@ const Universities = () => {
 
     return (
         <>
-            <div className="w-full flex items-center justify-center h-[270px] mt-[100px] mb-4 relative">
+            <div className="w-full flex items-center justify-center h-[270px] mt-[74px] mb-4 relative">
                 <img
                     height={193}
                     width={193}
