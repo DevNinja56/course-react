@@ -82,12 +82,7 @@ const Footer = () => {
                                 QUICK LINKS
                             </h1>
                             <ul className="text-lightGrayColor">
-                                <Link href={ROUTES.COUNTRY}>
-                                    <li className="pt-[9px] pb-[10px]">
-                                        Find Country
-                                    </li>
-                                </Link>
-                                <Link href={ROUTES.FIELDS}>
+                                <Link href={ROUTES.FILTER_COURSE}>
                                     <li className="pt-[9px] pb-[10px]">
                                         Find Courses
                                     </li>
@@ -102,14 +97,46 @@ const Footer = () => {
                                         All Scholarships
                                     </li>
                                 </Link>
+                                <Link href={ROUTES.UCAS}>
+                                    <li className="pt-[9px] pb-[10px]">
+                                        UCAS Calculator
+                                    </li>
+                                </Link>
                                 <Link href={ROUTES.BLOGS}>
                                     <li className="pt-[9px] pb-[10px]">
                                         Blogs
                                     </li>
                                 </Link>
-                                <Link href={ROUTES.UCAS}>
+                            </ul>
+                        </div>
+                        <div className="flex flex-col w-full md:w-auto mb-8">
+                            <h1 className="pt-[15px] pb-4 text-textLightBlackColor text-lg font-extrabold">
+                                Learn More
+                            </h1>
+                            <ul className="text-lightGrayColor">
+                                <Link href={ROUTES.SMART_MATCH}>
                                     <li className="pt-[9px] pb-[10px]">
-                                        UCAS Calculator
+                                        How To Use SmartMatch
+                                    </li>
+                                </Link>
+                                <Link href={ROUTES.DISCOVER}>
+                                    <li className="pt-[9px] pb-[10px]">
+                                        How To Search a Course
+                                    </li>
+                                </Link>
+                                <Link href={ROUTES.LOCAL_ENTRY}>
+                                    <li className="pt-[9px] pb-[10px]">
+                                        Local Entry Requirements
+                                    </li>
+                                </Link>
+                                <Link href={ROUTES.EXPERT_COUNSELLING}>
+                                    <li className="pt-[9px] pb-[10px]">
+                                        Expert Counselling Advise
+                                    </li>
+                                </Link>
+                                <Link href={ROUTES.BANK_STATEMENT}>
+                                    <li className="pt-[9px] pb-[10px]">
+                                        Bank Statement Calculator
                                     </li>
                                 </Link>
                             </ul>
@@ -135,14 +162,13 @@ const Footer = () => {
                                     </li>
                                 </Link>
 
-                                <Link href={ROUTES.PRIVACY_POLICY}>
+                                <Link
+                                    href={
+                                        ROUTES.PRIVACY_POLICY_TERMS_AND_CONDITION
+                                    }
+                                >
                                     <li className="pt-[9px] pb-[10px]">
-                                        Privacy Policy
-                                    </li>
-                                </Link>
-                                <Link href={ROUTES.TERMS_CONDITION}>
-                                    <li className="pt-[9px] pb-[10px]">
-                                        Terms and Condition
+                                        Privacy Policy - Terms & Conditions
                                     </li>
                                 </Link>
                             </ul>

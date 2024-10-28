@@ -8,7 +8,7 @@ import { TbClockBolt, TbTargetArrow } from 'react-icons/tb';
 
 const SmartMatch = () => {
     return (
-        <>
+        <div className="2xl:container 2xl:mx-auto overflow-hidden">
             <div className="bg-gradient-to-b from-blue-600 via-blue-600/20 to-white w-full relative h-screens flex flex-col pb-5 ">
                 <img
                     src="/images/SmartMatch/Pattern.png"
@@ -38,7 +38,7 @@ const SmartMatch = () => {
                             only relevant criteria for your application.
                         </p>
 
-                        <Link href={ROUTES.SMART_MATCH_TOOL} className='  mt-8'>
+                        <Link href={ROUTES.SMART_MATCH_TOOL} className="  mt-8">
                             <button className="text-md text-[#2C79FF] flex items-center gap-1 bg-white px-6 md:px-8 py-2 rounded-full hover:shadow-xl transition-all">
                                 <p className="font-extrabold">Try Now</p>
                                 <HiOutlineSparkles className="text-2xl" />
@@ -178,7 +178,7 @@ const SmartMatch = () => {
             <div className="py-10">
                 <FAQ />
             </div>
-        </>
+        </div>
     );
 };
 

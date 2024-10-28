@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import React from 'react';
 import Button from '../Button';
+import Link from 'next/link';
 
 interface propTypes {
     image: string;
@@ -13,6 +14,7 @@ interface propTypes {
     noCircle?: boolean;
     backgroundColor?: boolean;
     imageSize?: string;
+    link: string;
 }
 
 const HomeLearnMoreSection = ({
@@ -25,7 +27,8 @@ const HomeLearnMoreSection = ({
     circleStyling,
     noCircle,
     backgroundColor,
-    imageSize
+    imageSize,
+    link
 }: propTypes) => {
     return (
         <div
@@ -73,12 +76,12 @@ const HomeLearnMoreSection = ({
                         {title}
                     </h2>
                 </div>
-                <div className="w-fit">
+                <Link href={link} className="w-fit">
                     <Button
                         className="py-2 md:py-3 px-4 md:px-16 rounded-xl text-sm md:text-base font-bold"
                         text="Learn More"
                     />
-                </div>
+                </Link>
             </div>
         </div>
     );
