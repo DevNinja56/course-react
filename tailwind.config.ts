@@ -17,7 +17,7 @@ const config: Config = {
                 lightGrayColor: '#495057',
                 profileBgColor: '#eaf2ff',
                 darkGrayColor: '#626262',
-                blueColor: '#2563EB',
+                blueColor: '#357CFA',
                 borderColor: '#CCCCCC',
                 personalInfoBorderColor: '#E7E7E7',
                 footerBgColor: '#F5F5F5',
@@ -48,7 +48,9 @@ const config: Config = {
                 progressBarShadow:
                     '0px 11px 25.8px 0px rgba(190, 190, 190, 0.15);',
                 customHeroSectionButtonShadow:
-                    '-4px 6px 5.2px 0 rgba(46, 44, 44, 0.31)'
+                    '-4px 6px 5.2px 0 rgba(46, 44, 44, 0.31)',
+                customTermsAndConditionShadow:
+                    '0px 2px 9px 0px rgba(0, 0, 0, 0.09)'
             },
             height: {
                 headerStickyHeight: 'calc(100vh - 110px)',

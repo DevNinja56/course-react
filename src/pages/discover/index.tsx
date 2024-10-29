@@ -1,5 +1,6 @@
 // import { ROUTES } from '@/config/constant';
 import StepsCard from '@/components/Discover/StepsCard';
+import LetUsHelpContainer from '@/components/LetUsHelpContainer';
 import { ROUTES } from '@/config/constant';
 import Link from 'next/link';
 import React from 'react';
@@ -42,7 +43,7 @@ const Discover = () => {
                         />
                     </div>
                 </div>
-                <div className="relative">
+                <div className="relative mb-10">
                     <hr className="w-1 lg:w-2 bg-[#2563eb] border-none rounded-full  h-[85%] md:h-[86%] z-150 absolute  max-[330px]:left-4 left-10 lg:left-16 top-56 lg:top-40 xl:left-[15.2rem] 2xl:left-[17.2rem]  " />
                     <StepsCard
                         heading="Choose Location"
@@ -88,6 +89,12 @@ or medium of instruction letter."
                         leftSmallLeftBottomCircle
                     />
                 </div>
+                <LetUsHelpContainer
+                    link={ROUTES.FILTER_COURSE}
+                    containerWIdth
+                    heading="Our intuitive filters make it easier than ever to find a course that suits your academic journey. Simply set your preferences, and we’ll do the rest!"
+                    buttonText="Try Now"
+                />
             </div>
         </>
     );

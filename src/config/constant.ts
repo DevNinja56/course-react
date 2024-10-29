@@ -19,6 +19,7 @@ export const ROUTES = {
     FAQ: '/faq',
     SMART_MATCH: '/smart-match',
     SMART_MATCH_TOOL: '/smart-match/tool',
+    PRIVACY_POLICY_TERMS_AND_CONDITION: '/privacy-policy-terms-and-condition',
     LOCAL_ENTRY: '/local-entry',
     DISCOVER: '/discover',
     BANK_STATEMENT: '/bank-statement',
@@ -29,5 +30,7 @@ export const ROUTES = {
     APPLIES_DETAIL: '/profile/application/:id',
     FILE_SUBMIT: '/profile/application/file-submit',
     CONSOLID_MARKSHEET: '/profile/application/consolid-marksheet',
-    UCAS: '/ucas'
+    UCAS: '/ucas',
+    UCAS_APPLICATION: '/ucas-application',
+    EXPERT_COUNSELLING: '/expert-counselling'
 };
