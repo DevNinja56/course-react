@@ -11,7 +11,7 @@ interface ChipProps {
     label?: string;
     data?: string[];
     onSelect?: (value: string) => void;
-    selectedValue?: string;
+    selectedValue?: string | string[];
     error?: string;
     useSelect?: boolean;
     options?: OptionType[];
@@ -59,6 +59,9 @@ export const Chip: React.FC<ChipProps> = ({
         }),
     };
 
+    
+    const selectedSet = new Set(Array.isArray(selectedValue) ? selectedValue : [selectedValue]);
+
     return (
         <div className="px-2 lg:px-14 relative flex flex-col">
             {label && <p className="text-xs font-[500] mb-2">{label}</p>}
@@ -69,12 +72,12 @@ export const Chip: React.FC<ChipProps> = ({
                         options={options}
                         onChange={onChange} 
                         placeholder={placeholder}
-                        isClearable
                         isMulti={isMulti} 
                         styles={customStyles}
                         components={{
                             IndicatorSeparator: () => null,
                         }}
+                        value={null}
                     />
                 </div>
             ) : (
@@ -84,7 +87,7 @@ export const Chip: React.FC<ChipProps> = ({
                             key={'chip-data' + item}
                             onClick={() => onSelect && onSelect(item)} 
                             className={`px-4 py-2 rounded-full cursor-pointer select-none transition-all ${
-                                selectedValue === item
+                                selectedSet.has(item)
                                     ? 'bg-[#1058d6] text-white'
                                     : 'bg-[#cee0ff]'
                             }`}

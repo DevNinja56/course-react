@@ -1,5 +1,10 @@
 import React, { useState } from 'react';
-import Select, { StylesConfig, MultiValue, SingleValue, ActionMeta } from 'react-select';
+import Select, {
+    StylesConfig,
+    MultiValue,
+    SingleValue,
+    ActionMeta
+} from 'react-select';
 
 interface OptionType {
     value: string;
@@ -9,6 +14,7 @@ interface OptionType {
 interface InputFieldProps {
     label?: string;
     data?: string[];
+    type?: string;
     onSelect?: (value: string) => void;
     selectedValue?: string;
     error?: string;
@@ -20,15 +26,21 @@ interface InputFieldProps {
         actionMeta: ActionMeta<OptionType>
     ) => void;
     isMulti?: boolean;
+    isDisabled?: boolean;
+    defaultValue?: OptionType ;
+    
 }
 
 export const InputField = ({
     onSelect,
     selectedValue = '',
     error,
+    type = 'string',
     useSelect = false,
     options = [],
+    isDisabled,
     onChange,
+    defaultValue,
     placeholder = 'Search here to select subjects',
     isMulti = false
 }: InputFieldProps) => {
@@ -48,7 +60,8 @@ export const InputField = ({
                 boxShadow: 'none'
             },
             fontSize: '0.75rem',
-            fontWeight: '500'
+            fontWeight: '500',
+            opacity: isDisabled ? 0.5 : 1
         }),
         placeholder: (base) => ({
             ...base,
@@ -62,9 +75,9 @@ export const InputField = ({
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;
-        setInputValue(value); 
+        setInputValue(value);
         if (onSelect) {
-            onSelect(value); 
+            onSelect(value);
         }
     };
 
@@ -76,7 +89,6 @@ export const InputField = ({
                         options={options}
                         onChange={onChange}
                         placeholder={placeholder}
-                        isClearable
                         isMulti={isMulti}
                         styles={customStyles}
                         components={{
@@ -91,21 +103,24 @@ export const InputField = ({
                                       (option) => option.value === selectedValue
                                   )
                         }
+                        isDisabled={isDisabled}
+                        defaultValue={defaultValue}
                     />
                 </div>
             ) : (
                 <input
-                    type="text"
-                    value={inputValue} 
-                    onChange={handleInputChange} 
+                    type={type}
+                    value={inputValue}
+                    onChange={handleInputChange}
                     placeholder={placeholder}
-                    className="px-4 py-2 rounded-full bg-[#e2ebfb] border-none shadow-none w-full focus:outline-none text-sm placeholder:text-[#727d94]"
+                    className={`px-4 py-2 rounded-full bg-[#e2ebfb] border-none shadow-none w-full focus:outline-none text-sm placeholder:text-[#727d94] ${isDisabled && "opacity-50"}`}
                     style={{
                         borderRadius: '10px',
                         backgroundColor: '#e2ebfb',
                         fontSize: '0.75rem',
                         fontWeight: '500'
                     }}
+                    disabled={isDisabled}
                 />
             )}
             {error && <p className="text-red-500 text-xs">{error}</p>}
