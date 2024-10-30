@@ -1,71 +1,34 @@
 import {
     EnglishTest,
-    months,
+    Months,
     TestScoreRanges,
-    testScoreRanges
+    testScoreRanges,
+    yearOptions
 } from '@/components/SmartMatch/data';
-import InputField from '@/components/SmartMatch/input';
 import Button from '@/components/Button';
 import { ROUTES } from '@/config/constant';
 import { useSmartMatchTool } from '@/hooks/smartMatch';
 import { useGetDisciplineQuery } from '@/store/slices/allRequests';
-import { country_list_with_code } from '@/utils/data/country';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
-import { IoArrowBackCircle } from 'react-icons/io5';
-import Select, { StylesConfig } from 'react-select';
+import { BiArrowBack } from 'react-icons/bi';
+import { IoArrowForward } from 'react-icons/io5';
+import { InputField } from '@/components/SmartMatch/InputField';
+import { Chip } from '@/components/SmartMatch/Chip';
 
 interface OptionType {
     value: string;
     label: string;
 }
 
-const customStyles: StylesConfig = {
-    control: (provided) => ({
-        ...provided,
-        padding: '6px',
-        backgroundColor: '#2C79FF1A',
-        borderRadius: '0.5rem',
-        borderColor: '#bbd4ff',
-        boxShadow: 'none',
-        '&:hover': {
-            borderColor: '#307cff'
-        }
-    }),
-    indicatorSeparator: () => ({}),
-    placeholder: (provided) => ({
-        ...provided,
-        fontWeight: '400',
-        color: '#2C79FF'
-    }),
-    option: (provided) => ({
-        ...provided,
-        zIndex: '999'
-    }),
-    dropdownIndicator: () => ({ color: '#1d4ed8', paddingRight: '10px' })
-};
-
 const SmartMatchTool = () => {
     const [step, setStep] = useState(1);
     const [progress, setProgress] = useState(0);
-    const [englishTest, setEnglishTest] = useState('');
+    const [englishTest] = useState('');
     const router = useRouter();
     const TotalStep = 6;
     const { addQuery, query: data } = useSmartMatchTool();
     const { data: DisciplineData } = useGetDisciplineQuery();
-    const [year, setYear] = useState('');
-    const currentYear = new Date().getFullYear();
-    const yearOptions = [
-        { value: currentYear.toString(), label: currentYear.toString() },
-        {
-            value: (currentYear + 1).toString(),
-            label: (currentYear + 1).toString()
-        },
-        {
-            value: (currentYear + 2).toString(),
-            label: (currentYear + 2).toString()
-        }
-    ];
 
     const selectedTest = englishTest;
     const scoreRange = testScoreRanges[selectedTest as keyof TestScoreRanges];
@@ -79,8 +42,9 @@ const SmartMatchTool = () => {
         studyLevel: '',
         subject: '',
         educationCountry: '',
-        educationBoard: '',
+        qualification: '',
         gradingSystem: '',
+        englishPercentage: '',
         score: '',
         percentage: '',
         englishTest: '',
@@ -124,12 +88,35 @@ const SmartMatchTool = () => {
                 break;
 
             case 4:
+                if (!data.educationCountry) {
+                    errors.educationCountry = 'Education Country is required';
+                    isValid = false;
+                }
+                if (!data.qualification) {
+                    errors.qualification = 'Qualification is required';
+                    isValid = false;
+                }
+                if (!data.gradingSystem) {
+                    errors.gradingSystem = 'Grading System is required';
+                    isValid = false;
+                }
+                if (!data.score) {
+                    errors.score = 'Score is required';
+                    isValid = false;
+                }
+                if (!data.englishPercentage) {
+                    errors.englishPercentage = 'English Percentage is required';
+                    isValid = false;
+                }
+                break;
+
+            case 5:
                 if (!data.englishTest) {
                     errors.englishTest = 'English test is required';
                     isValid = false;
                 }
                 break;
-            case 5:
+            case 6:
                 if (!data.listening) {
                     errors.listening = 'Listening score is required';
                     isValid = false;
@@ -185,18 +172,12 @@ const SmartMatchTool = () => {
                     isValid = false;
                 }
                 break;
+
             default:
                 break;
         }
         setErrorMessages(errors);
         return isValid;
-    };
-
-    const availableMonths = () => {
-        if (year === currentYear.toString()) {
-            return months.slice(new Date().getMonth() + 1);
-        }
-        return months;
     };
 
     const clearError = (field: keyof typeof errorMessages) => {
@@ -240,392 +221,298 @@ const SmartMatchTool = () => {
             });
         }
     };
+
     return (
-        <div className="flex justify-center">
-            <div className=" bg-white w-[80%] h-full min-h-[500px] pb-8 rounded-lg shadow m-8 ">
-                <div className="bg-gradient-to-b from-blue-700 to-blue-400 h-fit rounded-t-lg relative">
+        <div className="2xl:container mx-auto h-fit bg-white bg-[url('/images/SmartMatch/tool/Background.png')] bg-contain p-4 md:p-10">
+            <div className=" w-full sm:w-3/4 lg:w-[55%] bg-[#f8fbff] rounded-xl mx-auto flex flex-col gap-5 h-fit p-7 px-6 md:px-14 ">
+                <div className="flex justify-center items-center relative">
                     {step > 1 && (
-                        <IoArrowBackCircle
-                            className="absolute text-white text-3xl top-2 left-8 cursor-pointer"
+                        <BiArrowBack
+                            className="absolute text-black text-xl left-0 cursor-pointer"
                             onClick={handleBack}
                         />
                     )}
-
-                    <h1 className="text-white font-bold text-xl flex justify-center items-center p-2">
-                        Smart Matcher
-                    </h1>
+                    <div className="w-4/5 md:w-2/3  bg-[#e8f0fc] h-2.5 rounded-full overflow-hidden">
+                        <div
+                            className="bg-gradient-to-b from-blue-700 to-blue-400 h-full transition-all duration-700"
+                            style={{ width: `${progress}%` }}
+                        ></div>
+                    </div>
                 </div>
 
-                <div className="w-full m-auto">
-                    <div className="flex justify-center items-center py-8">
-                        <div className="w-[80%] bg-[#e8f0fc] h-2.5 rounded-full overflow-hidden">
-                            <div
-                                className="bg-gradient-to-b from-blue-700 to-blue-400 h-full transition-all duration-700"
-                                style={{ width: `${progress}%` }}
-                            ></div>
+                {step === 1 && (
+                    <>
+                        <div className="flex gap-1 text-center justify-center items-center">
+                            <h1 className=" lg:text-md font-semibold">
+                                What is your country of nationality?
+                            </h1>
+                            <img
+                                src="/images/SmartMatch/Tool/World.png"
+                                alt="world"
+                                className="h-6"
+                            />
                         </div>
-                    </div>
-                    {step === 1 && (
-                        <>
-                            <div className="flex justify-center items-center flex-col text-xl font-bold">
-                                <img
-                                    src="/images/SmartMatch/Tool/World.png"
-                                    alt="World"
-                                    className="h-24"
-                                />
-                                <h1 className="py-2 w-[80%] max-sm:text-md text-center lg:text-2xl">
-                                    What is your country of nationality?
-                                </h1>
-                            </div>
-                            <div className="flex flex-col justify-center items-center gap-1">
-                                <Select
-                                    styles={customStyles}
-                                    className="pt-4 w-[80%] transition-all"
-                                    placeholder="Select Country/Nationality"
-                                    options={Object.values(
-                                        country_list_with_code
-                                    ).map((country) => ({
-                                        label: country,
-                                        value: country
-                                    }))}
-                                    onChange={(option) => {
+                        <hr className="border h-0.5 bg-blueColor" />
+                        <Chip
+                            label="Select your nationality"
+                            data={[
+                                'Pakistan',
+                                'India',
+                                'Bangladesh',
+                                'Sri Lanka',
+                                'Nepal',
+                                'Saudi Arabia',
+                                'UAE',
+                                'Kuwait',
+                                'Oman',
+                                'Nigeria'
+                            ]}
+                            onSelect={(value: string) => {
+                                addQuery({
+                                    nationality: value
+                                });
+                                clearError('nationality');
+                            }}
+                            selectedValue={data.nationality}
+                            error={errorMessages.nationality}
+                        />
+                    </>
+                )}
+
+                {step === 2 && (
+                    <>
+                        <div className="flex gap-1 text-center justify-center items-center">
+                            <h1 className=" lg:text-md font-semibold">
+                                When do you plan to kick-start your studies?
+                            </h1>
+                            <img
+                                src="/images/SmartMatch/Tool/Calendar.png"
+                                alt="world"
+                                className="h-6"
+                            />
+                        </div>
+                        <hr className="border h-0.5 bg-blueColor" />
+                        <Chip
+                            label="Start Year"
+                            data={yearOptions}
+                            onSelect={(value: string) => {
+                                addQuery({
+                                    year: value
+                                });
+                                clearError('nationality');
+                            }}
+                            selectedValue={data.year}
+                            error={errorMessages.year}
+                        />
+
+                        {data.year && (
+                            <>
+                                <hr className="border h-0.5 bg-blueColor" />
+                                <Chip
+                                    label="Start Month"
+                                    data={Months}
+                                    onSelect={(value: string) => {
                                         addQuery({
-                                            nationality: (option as OptionType)
-                                                .value
-                                        });
-                                        clearError('nationality');
-                                    }}
-                                    value={
-                                        data.nationality
-                                            ? {
-                                                  label: data.nationality,
-                                                  value: data.nationality
-                                              }
-                                            : null
-                                    }
-                                />
-                                {errorMessages.nationality && (
-                                    <span className="text-red-500 text-sm self-start px-32">
-                                        {errorMessages.nationality}
-                                    </span>
-                                )}
-                            </div>
-                        </>
-                    )}
-                    {step === 2 && (
-                        <>
-                            <div className="flex justify-center items-center flex-col text-xl font-bold">
-                                <img
-                                    src="/images/SmartMatch/Tool/Calendar.png"
-                                    alt="Calendar"
-                                    className="h-24"
-                                />
-                                <h1 className="py-2 w-[80%] max-sm:text-md text-center lg:text-2xl">
-                                    When do you plan to kick-start your studies?
-                                </h1>
-                            </div>
-                            <div className="flex flex-col items-center gap-1">
-                                <Select
-                                    styles={customStyles}
-                                    className="pt-4 w-[80%] transition-all"
-                                    placeholder="Select Year"
-                                    options={yearOptions}
-                                    onChange={(option) => {
-                                        addQuery({
-                                            year: (option as OptionType).value
-                                        });
-                                        setYear((option as OptionType).value);
-                                        clearError('year');
-                                    }}
-                                    value={
-                                        data.year
-                                            ? {
-                                                  label: data.year,
-                                                  value: data.year
-                                              }
-                                            : null
-                                    }
-                                    defaultValue={
-                                        data.year
-                                            ? {
-                                                  label: data.year,
-                                                  value: data.year
-                                              }
-                                            : null
-                                    }
-                                />
-                                {errorMessages.year && (
-                                    <span className="text-red-500 text-sm self-start px-32">
-                                        {errorMessages.year}
-                                    </span>
-                                )}
-                                <Select
-                                    styles={customStyles}
-                                    className={`pt-4 w-[80%] transition-all ${!data.year && 'opacity-65'}`}
-                                    placeholder="Start Month"
-                                    options={availableMonths()}
-                                    onChange={(option) => {
-                                        addQuery({
-                                            month: (option as OptionType).value
+                                            month: value
                                         });
                                         clearError('month');
                                     }}
-                                    isDisabled={!data.year}
-                                    defaultValue={
-                                        data.month
-                                            ? months.find(
-                                                  (month) =>
-                                                      month.value === data.month
-                                              )
-                                            : null
-                                    }
+                                    selectedValue={data.month}
+                                    error={errorMessages.month}
                                 />
-                                {errorMessages.month && (
-                                    <span className="text-red-500 text-sm self-start px-32">
-                                        {errorMessages.month}
-                                    </span>
-                                )}{' '}
-                            </div>
-                        </>
-                    )}
-
-                    {step === 3 && (
-                        <>
-                            <div className="flex justify-center items-center flex-col text-xl font-bold">
-                                <img
-                                    src="/images/SmartMatch/Tool/Book.png"
-                                    alt="Book"
-                                    className="h-24"
-                                />
-                                <h1 className="py-2 w-[80%] max-sm:text-md text-center lg:text-2xl">
-                                    What do you wish to study?
-                                </h1>
-                            </div>
-                            <div className="flex flex-col justify-center items-center gap-1 ">
-                                <Select
-                                    styles={customStyles}
-                                    className="pt-4 w-[80%] transition-all"
-                                    placeholder="Select Study Level"
-                                    options={[
-                                        'Undergraduate',
-                                        'Postgraduate'
-                                    ]?.map((item) => ({
-                                        label: item,
-                                        value: item
-                                    }))}
-                                    onChange={(option) => {
-                                        addQuery({
-                                            studyLevel: (option as OptionType)
-                                                .value
-                                        });
-                                        clearError('studyLevel');
-                                    }}
-                                    value={
-                                        data.studyLevel
-                                            ? {
-                                                  label: data.studyLevel,
-                                                  value: data.studyLevel
-                                              }
-                                            : null
-                                    }
-                                />
-                                {errorMessages.studyLevel && (
-                                    <span className="text-red-500 text-sm self-start px-32">
-                                        {errorMessages.studyLevel}
-                                    </span>
-                                )}
-                                <Select
-                                    styles={customStyles}
-                                    className="pt-4 w-[80%] transition-all"
-                                    placeholder="Select Discipline"
-                                    options={DisciplineData?.map((item) => ({
-                                        label: item.name,
-                                        value: item.name
-                                    }))}
-                                    onChange={(option) => {
-                                        addQuery({
-                                            discipline: (option as OptionType)
-                                                .value
-                                        });
-                                        clearError('discipline');
-                                    }}
-                                    value={
-                                        data.discipline
-                                            ? {
-                                                  label: data.discipline,
-                                                  value: data.discipline
-                                              }
-                                            : null
-                                    }
-                                />
-                                {errorMessages.discipline && (
-                                    <span className="text-red-500 text-sm self-start px-32">
-                                        {errorMessages.discipline}
-                                    </span>
-                                )}
-                            </div>
-                        </>
-                    )}
-
-                    {step === 4 && (
-                        <>
-                            <div className="flex justify-center items-center flex-col text-xl font-bold">
-                                <img
-                                    src="/images/SmartMatch/Tool/writing.png"
-                                    alt="writing"
-                                    className="h-24"
-                                />
-                                <h1 className="py-2 w-[80%] max-sm:text-md text-center lg:text-2xl">
-                                    Which English language test have you taken
-                                    so far?
-                                </h1>
-                            </div>
-                            <div className="flex flex-col justify-center items-center gap-1">
-                                <Select
-                                    styles={customStyles}
-                                    className="pt-4 w-[80%] transition-all"
-                                    placeholder="Select English Test"
-                                    options={EnglishTest}
-                                    onChange={(option) => {
-                                        addQuery({
-                                            englishTest: (option as OptionType)
-                                                .value
-                                        });
-                                        setEnglishTest(
-                                            (option as OptionType).value
-                                        );
-                                        clearError('englishTest');
-                                    }}
-                                    value={
-                                        data.englishTest
-                                            ? {
-                                                  label: data.englishTest,
-                                                  value: data.englishTest
-                                              }
-                                            : null
-                                    }
-                                />
-                                {errorMessages.englishTest && (
-                                    <span className="text-red-500 text-sm self-start px-32">
-                                        {errorMessages.englishTest}
-                                    </span>
-                                )}
-                            </div>
-                        </>
-                    )}
-                    {step === 5 && (
-                        <>
-                            <div className="flex justify-center items-center flex-col text-xl font-bold">
-                                <img
-                                    src="/images/SmartMatch/Tool/Test Outcome.png"
-                                    alt="Book"
-                                    className="h-24"
-                                />
-                                <h1 className="py-2 w-[80%] max-sm:text-md text-center lg:text-2xl">{`Enter your ${englishTest} results`}</h1>
-                            </div>
-                            <div className="flex flex-col justify-center items-center">
-                                <InputField
-                                    placeholder="Listening Score"
-                                    onChange={(e) => {
-                                        addQuery({ listening: e.target.value });
-                                        clearError('listening');
-                                    }}
-                                    value={data.listening || ''}
-                                />
-                                {errorMessages.listening && (
-                                    <span className="text-red-500 text-sm self-start px-32">
-                                        {errorMessages.listening}
-                                    </span>
-                                )}
-                                <InputField
-                                    placeholder="Reading Score"
-                                    onChange={(e) => {
-                                        addQuery({ reading: e.target.value });
-                                        clearError('reading');
-                                    }}
-                                    value={data.reading || ''}
-                                />
-                                {errorMessages.reading && (
-                                    <span className="text-red-500 text-sm self-start px-32">
-                                        {errorMessages.reading}
-                                    </span>
-                                )}
-                                <InputField
-                                    placeholder="Speaking Score"
-                                    onChange={(e) => {
-                                        addQuery({ speaking: e.target.value });
-                                        clearError('speaking');
-                                    }}
-                                    value={data.speaking || ''}
-                                />
-                                {errorMessages.speaking && (
-                                    <span className="text-red-500 text-sm self-start px-32">
-                                        {errorMessages.speaking}
-                                    </span>
-                                )}
-                                <InputField
-                                    placeholder="Writing Score"
-                                    onChange={(e) => {
-                                        addQuery({ writing: e.target.value });
-                                        clearError('writing');
-                                    }}
-                                    value={data.writing || ''}
-                                />
-                                {errorMessages.writing && (
-                                    <span className="text-red-500 text-sm self-start px-32">
-                                        {errorMessages.writing}
-                                    </span>
-                                )}
-
-                                <InputField
-                                    placeholder="Overall Score"
-                                    onChange={(e) => {
-                                        addQuery({
-                                            overallscore: e.target.value
-                                        });
-                                        clearError('overallscore');
-                                    }}
-                                    value={data.overallscore || ''}
-                                />
-                                {errorMessages.overallscore && (
-                                    <span className="text-red-500 text-sm self-start px-32">
-                                        {errorMessages.overallscore}
-                                    </span>
-                                )}
-                            </div>
-                        </>
-                    )}
-
-                    {step === 6 && (
-                        <>
-                            <div className="flex justify-center items-center flex-col text-xl font-bold">
-                                <img
-                                    src="/images/SmartMatch/Tool/Checkmark.png"
-                                    alt="Book"
-                                    className="h-52"
-                                />
-                                <h1 className="py-2 w-[80%] text-center">
-                                    The search is complete and these are the
-                                    best courses for you.
-                                </h1>
-                            </div>
-                        </>
-                    )}
-                    <div className="flex justify-center mt-8">
-                        {step === 6 ? (
-                            <Button
-                                text="Reveal my matches"
-                                className="transition-all py-3 !w-[80%] rounded-lg"
-                                onClick={handleSubmit}
-                            />
-                        ) : (
-                            <Button
-                                text="Continue"
-                                className="transition-all py-3 !w-[80%] rounded-lg"
-                                onClick={handleNext}
-                            />
+                            </>
                         )}
-                    </div>
+                    </>
+                )}
+
+                {step === 3 && (
+                    <>
+                        <div className="flex gap-1 text-center justify-center items-center">
+                            <h1 className=" lg:text-md font-semibold">
+                                What do you wish to study?
+                            </h1>
+                            <img
+                                src="/images/SmartMatch/Tool/Book.png"
+                                alt="world"
+                                className="h-6"
+                            />
+                        </div>
+                        <hr className="border h-0.5 bg-blueColor" />
+                        <Chip
+                            label="Study Level"
+                            data={[
+                                'Foundation',
+                                'Undergraduate',
+                                'Postgraduate'
+                            ]}
+                            onSelect={(value: string) => {
+                                addQuery({
+                                    studyLevel: value
+                                });
+                                clearError('studyLevel');
+                            }}
+                            selectedValue={data.studyLevel}
+                            error={errorMessages.studyLevel}
+                        />
+                        <Chip
+                            label="Select Subjects"
+                            useSelect
+                            options={DisciplineData?.map((item) => ({
+                                label: item.name,
+                                value: item.name
+                            }))}
+                            onChange={(option) => {
+                                addQuery({
+                                    discipline: (option as OptionType).value
+                                });
+                                clearError('discipline');
+                            }}
+                            placeholder="Search here to select subjects"
+                            isMulti
+                        />
+
+                        <Chip
+                            label="Popular searches"
+                            data={DisciplineData?.map((item) => item.name)}
+                            onSelect={(value: string) => {
+                                addQuery({
+                                    discipline: value
+                                });
+                                clearError('discipline');
+                            }}
+                            selectedValue={data.discipline}
+                        />
+                    </>
+                )}
+
+                {step === 4 && (
+                    <>
+                        <div className="flex gap-2 text-center justify-center items-center">
+                            <h1 className=" lg:text-md font-semibold">
+                                Tell us your Senior High School story
+                            </h1>
+                            <img
+                                src="/images/SmartMatch/Tool/Film Script Book.png"
+                                alt="world"
+                                className="h-6"
+                            />
+                        </div>
+                        <hr className="border h-0.5 bg-blueColor" />
+
+                        <InputField
+                            useSelect
+                            options={DisciplineData?.map((item) => ({
+                                label: item.name,
+                                value: item.name
+                            }))}
+                            onChange={(option) => {
+                                addQuery({
+                                    educationCountry: (option as OptionType)
+                                        .value
+                                });
+                                clearError('educationCountry');
+                            }}
+                            placeholder="Country of Education*"
+                            error={errorMessages.educationCountry}
+                        />
+                        <InputField
+                            useSelect
+                            options={DisciplineData?.map((item) => ({
+                                label: item.name,
+                                value: item.name
+                            }))}
+                            onChange={(option) => {
+                                addQuery({
+                                    qualification: (option as OptionType).value
+                                });
+                                clearError('qualification');
+                            }}
+                            placeholder="Qualification*"
+                            error={errorMessages.qualification}
+                        />
+                        <InputField
+                            useSelect
+                            options={DisciplineData?.map((item) => ({
+                                label: item.name,
+                                value: item.name
+                            }))}
+                            onChange={(option) => {
+                                addQuery({
+                                    gradingSystem: (option as OptionType).value
+                                });
+                                clearError('gradingSystem');
+                            }}
+                            placeholder="Grading System*"
+                            error={errorMessages.gradingSystem}
+                        />
+
+                        <InputField
+                            onSelect={(value) => {
+                                addQuery({
+                                    score: value
+                                });
+                                clearError('score');
+                            }}
+                            placeholder="Enter Score*"
+                            error={errorMessages.score}
+                        />
+
+                        <InputField
+                            onSelect={(value) => {
+                                addQuery({
+                                    englishPercentage: value
+                                });
+                                clearError('englishPercentage');
+                            }}
+                            placeholder="English Percentage (1-100)*"
+                            error={errorMessages.englishPercentage}
+                        />
+                    </>
+                )}
+
+                {step === 5 && (
+                    <>
+                        <div className="flex gap-1 text-center justify-center items-center">
+                            <h1 className=" lg:text-md font-semibold">
+                                Which English language test have you taken so
+                                far?
+                            </h1>
+                            <img
+                                src="/images/SmartMatch/Tool/Writing.png"
+                                alt="world"
+                                className="h-6"
+                            />
+                        </div>
+                        <hr className="border h-0.5 bg-blueColor" />
+                        <Chip
+                            data={EnglishTest}
+                            onSelect={(value: string) => {
+                                addQuery({
+                                    englishTest: value
+                                });
+                                clearError('englishTest');
+                            }}
+                            selectedValue={data.englishTest}
+                            error={errorMessages.englishTest}
+                        />
+                    </>
+                )}
+                <div className="flex justify-center">
+                    {step === 6 ? (
+                        <Button
+                            text="Reveal my matches"
+                            className="transition-all py-3 !w-[80%] rounded-lg bg-gradient-to-r from-[#2C79FF] to-[#0953AA] hover:bg-gradient-to-l hover:text-white"
+                            onClick={handleSubmit}
+                        />
+                    ) : (
+                        <Button
+                            text="Continue"
+                            className="transition-all !w-fit px-6 md:px-20 py-2 rounded-md bg-gradient-to-r from-[#2C79FF] to-[#0953AA] text-xs hover:text-white hover:bg-gradient-to-l"
+                            onClick={handleNext}
+                            icon={<IoArrowForward />}
+                            iconPlace
+                        />
+                    )}
                 </div>
             </div>
         </div>

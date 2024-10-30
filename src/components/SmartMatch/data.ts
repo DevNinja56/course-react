@@ -1,4 +1,3 @@
-
 interface ScoreRange {
     min: number;
     max: number;
@@ -12,18 +11,17 @@ export interface TestScoreRanges {
     CERT: ScoreRange;
 }
 
-
 export const EnglishTest = [
-    { value: 'TOEFL', label: 'TOEFL' },
-    { value: 'PTE', label: 'PTE Academic' },
-    { value: 'IELTS', label: 'IELTS' },
-    { value: 'Duolingo', label: 'Duolingo' },
-    { value: 'CERT', label: 'Language CERT' }
+   'TOEFL',
+    'PTE Academic',
+    'IELTS',
+    'Duolingo',
+    'Language CERT' 
 ];
 
-export const testScoreRanges : TestScoreRanges = {
+export const testScoreRanges: TestScoreRanges = {
     IELTS: { min: 1, max: 9 },
-    TOEFL: { min: 0, max: 30 }, 
+    TOEFL: { min: 0, max: 30 },
     PTE: { min: 10, max: 90 },
     Duolingo: { min: 10, max: 160 },
     CERT: { min: 10, max: 100 }
@@ -57,4 +55,22 @@ export const intakesFilterMonths = [
     { value: ['Apr, May, Jun'], label: ['Apr, May, Jun'] },
     { value: ['Jul, Aug, Sep'], label: ['Jul, Aug, Sep'] },
     { value: ['Oct, Nov, Dec'], label: ['Oct, Nov, Dec'] }
+];
+
+const currentYear = new Date().getFullYear();
+
+export const yearOptions = [
+    (currentYear + 1).toString(),
+    (currentYear + 2).toString(),
+    (currentYear + 3).toString(),
+    (currentYear + 4).toString(),
+    'Help me decide'
+];
+
+export const Months = [
+    "January – March",
+    "April – June",
+    "July – September",
+    "October – December",
+    "Help me decide"
 ];
