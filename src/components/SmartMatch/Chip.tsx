@@ -98,7 +98,8 @@ export const Chip: React.FC<ChipProps> = ({
             ) : (
                 <div className="flex text-[0.7rem] gap-x-3 gap-y-3 flex-wrap my-2 font-[500]">
                     {data?.map((item) => (
-                        <div onClick={() => onSelect && onSelect(item)}
+                        <div
+                            onClick={() => onSelect && onSelect(item)}
                             key={'chip-data' + item}
                             className={`flex items-center px-4 py-2 rounded-full cursor-pointer select-none transition-all ${
                                 selectedSet.has(item)
@@ -106,9 +107,7 @@ export const Chip: React.FC<ChipProps> = ({
                                     : 'bg-[#cee0ff]'
                             }`}
                         >
-                            <p >
-                                {item}
-                            </p>
+                            <p>{item}</p>
                             {onRemove && (
                                 <IoIosClose
                                     className="ml-1 text-white hover:text-blue-200 text-lg"
@@ -121,12 +120,12 @@ export const Chip: React.FC<ChipProps> = ({
                     ))}
                 </div>
             )}
-            {error && <p className="text-red-500 text-xs">{error}</p>}
             {useSelect && (
                 <p className="text-xs text-gray-500 mt-1">
                     You can select up to 3 subjects
                 </p>
             )}
+            {error && <p className="text-red-500 text-xs">{error}</p>}
         </div>
     );
 };

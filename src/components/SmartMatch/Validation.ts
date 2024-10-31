@@ -1,23 +1,7 @@
+import { gradingScaleFormats, gradingScalesPostGraduate } from './data';
+
 export interface ErrorMessages {
-    nationality?: string;
-    year?: string;
-    month?: string;
-    studyLevel?: string;
-    discipline?: string;
-    educationCountry?: string;
-    qualification?: string;
-    gradingSystem?: string;
-    englishPercentage?: string;
-    score?: string;
-    percentage?: string;
-    englishTest?: string;
-    listening?: string;
-    reading?: string;
-    speaking?: string;
-    writing?: string;
-    overallscore?: string;
-    feebudget?: string;
-    specialization?: string;
+    [key: string]: string | undefined; 
 }
 
 export interface FormData {
@@ -39,8 +23,13 @@ export interface FormData {
     writing?: string;
     overallscore?: string;
     feebudget?: string;
-    specialization?: [];
+    specialization?: string[]; 
 }
+
+const setError = (errors: ErrorMessages, key: keyof FormData, message: string) => {
+    errors[key] = message;
+};
+
 export const validateFields = (
     data: FormData,
     step: number
@@ -51,119 +40,126 @@ export const validateFields = (
     switch (step) {
         case 1:
             if (!data.nationality) {
-                errors.nationality = 'Nationality is required';
+                setError(errors, 'nationality', 'Nationality is required');
                 isValid = false;
             }
             break;
+
         case 2:
             if (!data.year) {
-                errors.year = 'Year is required';
+                setError(errors, 'year', 'Year is required');
                 isValid = false;
             }
             if (!data.month) {
-                errors.month = 'Month is required';
+                setError(errors, 'month', 'Month is required');
                 isValid = false;
             }
             break;
+
         case 3:
             if (!data.studyLevel) {
-                errors.studyLevel = 'Study level is required';
+                setError(errors, 'studyLevel', 'Study level is required');
                 isValid = false;
             }
-            if (data.discipline?.length === 0) {
-                errors.discipline = 'Subjects are required';
+            if (data.specialization?.length === 0 || !data.specialization) {
+                setError(errors, 'specialization', 'Specializations are required');
                 isValid = false;
             }
             break;
+
         case 4:
             if (!data.educationCountry) {
-                errors.educationCountry = 'Education Country is required';
+                setError(errors, 'educationCountry', 'Education Country is required');
                 isValid = false;
             }
-            if (!data.qualification) {
-                errors.qualification = 'Qualification is required';
+            if (!data.qualification && data.studyLevel === 'Undergraduate') {
+                setError(errors, 'qualification', 'Qualification is required');
                 isValid = false;
             }
             if (!data.gradingSystem) {
-                errors.gradingSystem = 'Grading System is required';
+                setError(errors, 'gradingSystem', 'Grading System is required');
                 isValid = false;
             }
+
+            if (data.studyLevel === 'Postgraduate') {
+                const selectedScale = gradingScalesPostGraduate.find(
+                    (scale) => scale.description === data.gradingSystem
+                );
+
+                if (!selectedScale) {
+                    setError(errors, 'gradingSystem', 'Invalid grading system selected for postgraduate.');
+                    isValid = false;
+                } else {
+                    const score = Number(data.score);
+                    if (score < selectedScale.min || score > selectedScale.max) {
+                        setError(errors, 'score', `Score must be between ${selectedScale.min} and ${selectedScale.max}.`);
+                        isValid = false;
+                    }
+                }
+            }
+
             if (!data.score) {
-                errors.score = 'Score is required';
+                setError(errors, 'score', 'Score is required');
                 isValid = false;
+            } else {
+                const gradingSystem = gradingScaleFormats[data.gradingSystem as string];
+                if (gradingSystem) {
+                    const { min, max, options, type } = gradingSystem;
+                    const scoreValue = Number(data.score);
+                    if (type === 'number' && (scoreValue < (min ?? 0) || scoreValue > (max ?? 100))) {
+                        setError(errors, 'score', `Score must be between ${min} and ${max}`);
+                        isValid = false;
+                    } else if (type === 'text' && options && !options.includes(data.score)) {
+                        setError(errors, 'score', `Score must be one of the following: ${options.join(', ')}`);
+                        isValid = false;
+                    }
+                }
             }
-            if (!data.englishPercentage) {
-                errors.englishPercentage = 'English Percentage is required';
+
+            if (!data.englishPercentage && data.studyLevel === 'Undergraduate') {
+                setError(errors, 'englishPercentage', 'English Percentage is required');
                 isValid = false;
+            } else if (data.studyLevel === 'Undergraduate') {
+                const englishPercentageValue = Number(data.englishPercentage);
+                if (englishPercentageValue < 1 || englishPercentageValue > 100) {
+                    setError(errors, 'englishPercentage', 'Percentage should be between 1 and 100');
+                    isValid = false;
+                }
             }
-            if (
-                !(
-                    Number(data?.englishPercentage) >= 0 &&
-                    Number(data?.englishPercentage) <= 100
-                )
-            ) {
-                errors.englishPercentage =
-                    'Percentage should be between 0 to 100';
-                isValid = false;
-            }
-            
             break;
+
         case 5:
             if (!data.englishTest) {
-                errors.englishTest = 'English test is required';
+                setError(errors, 'englishTest', 'English test is required');
                 isValid = false;
-            }
-            if (
-                data.englishTest === 'IELTS' ||
-                data.englishTest === 'PTE Academic'
-            ) {
-                
+            } else if (['IELTS', 'PTE Academic'].includes(data.englishTest)) {
                 const tests = {
-                    listening: {
-                        min: data.englishTest === 'IELTS' ? 1 : 10,
-                        max: data.englishTest === 'IELTS' ? 9 : 90
-                    },
-                    reading: {
-                        min: data.englishTest === 'IELTS' ? 1 : 10,
-                        max: data.englishTest === 'IELTS' ? 9 : 90
-                    },
-                    speaking: {
-                        min: data.englishTest === 'IELTS' ? 1 : 10,
-                        max: data.englishTest === 'IELTS' ? 9 : 90
-                    },
-                    writing: {
-                        min: data.englishTest === 'IELTS' ? 1 : 10,
-                        max: data.englishTest === 'IELTS' ? 9 : 90
-                    },
-                    overallscore: {
-                        min: data.englishTest === 'IELTS' ? 1 : 10,
-                        max: data.englishTest === 'IELTS' ? 9 : 90
-                    }
+                    listening: { min: data.englishTest === 'IELTS' ? 1 : 10, max: data.englishTest === 'IELTS' ? 9 : 90 },
+                    reading: { min: data.englishTest === 'IELTS' ? 1 : 10, max: data.englishTest === 'IELTS' ? 9 : 90 },
+                    speaking: { min: data.englishTest === 'IELTS' ? 1 : 10, max: data.englishTest === 'IELTS' ? 9 : 90 },
+                    writing: { min: data.englishTest === 'IELTS' ? 1 : 10, max: data.englishTest === 'IELTS' ? 9 : 90 },
+                    overallscore: { min: data.englishTest === 'IELTS' ? 1 : 10, max: data.englishTest === 'IELTS' ? 9 : 90 }
                 };
 
                 Object.entries(tests).forEach(([key, { min, max }]) => {
-                    
                     if (!data[key as keyof FormData]) {
-                        errors[key as keyof ErrorMessages] =
-                            `${key.charAt(0).toUpperCase() + key.slice(1)} score is required`;
+                        setError(errors, key as keyof FormData, `${key.charAt(0).toUpperCase() + key.slice(1)} score is required`);
                         isValid = false;
-                    } else if (
-                        Number(data[key as keyof FormData]) < min ||
-                        Number(data[key as keyof FormData]) > max
-                    ) {
-                        errors[key as keyof ErrorMessages] =
-                            `${key.charAt(0).toUpperCase() + key.slice(1)} score must be between ${min} and ${max}`;
+                    } else if (Number(data[key as keyof FormData]) < min || Number(data[key as keyof FormData]) > max) {
+                        setError(errors, key as keyof FormData, `${key.charAt(0).toUpperCase() + key.slice(1)} score must be between ${min} and ${max}`);
                         isValid = false;
                     }
                 });
             }
             break;
+
         case 6:
             if (!data.feebudget) {
-                errors.feebudget = 'Fee Budget is required';
+                setError(errors, 'feebudget', 'Fee Budget is required');
                 isValid = false;
             }
             break;
+
         default:
             break;
     }
@@ -178,6 +174,6 @@ export const clearError = (
 ) => {
     setErrorMessages((prevErrors) => ({
         ...prevErrors,
-        [field]: ''
+        [field]: undefined 
     }));
 };

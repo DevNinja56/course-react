@@ -1,16 +1,3 @@
-interface ScoreRange {
-    min: number;
-    max: number;
-}
-
-export interface TestScoreRanges {
-    IELTS: ScoreRange;
-    PTE: ScoreRange;
-    Duolingo: ScoreRange;
-    CERT: ScoreRange;
-}
-
-
 export const Countries = [
     'Pakistan',
     'India',
@@ -23,6 +10,18 @@ export const Countries = [
     'Oman',
     'Nigeria'
 ];
+
+type GradingScaleFormat = {
+    description: string;
+    type: string;
+    min?: number;
+    max?: number;
+    options?: string[];
+};
+
+type GradingScaleFormats = {
+    [key: string]: GradingScaleFormat;
+};
 
 export const educationalQualifications = [
     {
@@ -123,11 +122,7 @@ export const gradingScalesPostGraduate = [
     }
 ];
 
-
-
-
-
-export const gradingScaleFormats = {
+export const gradingScaleFormats: GradingScaleFormats = {
     'Percentage Marks': {
         description: 'A percentage from 0 to 100',
         type: 'number',
@@ -170,13 +165,6 @@ export const EnglishTest = [
     'Duolingo',
     "I haven't taken any test"
 ];
-
-export const testScoreRanges: TestScoreRanges = {
-    IELTS: { min: 1, max: 9 },
-    PTE: { min: 10, max: 90 },
-    Duolingo: { min: 10, max: 160 },
-    CERT: { min: 10, max: 100 }
-};
 
 export const months = [
     { label: 'January', value: 'Jan' },

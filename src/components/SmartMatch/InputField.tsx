@@ -33,7 +33,7 @@ interface InputFieldProps {
 
 export const InputField = ({
     onSelect,
-    selectedValue = '',
+    selectedValue,
     error,
     type = 'string',
     useSelect = false,
