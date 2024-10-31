@@ -17,6 +17,7 @@ export interface ErrorMessages {
     writing?: string;
     overallscore?: string;
     feebudget?: string;
+    specialization?: string;
 }
 
 export interface FormData {
@@ -38,8 +39,8 @@ export interface FormData {
     writing?: string;
     overallscore?: string;
     feebudget?: string;
+    specialization?: [];
 }
-
 export const validateFields = (
     data: FormData,
     step: number
@@ -70,8 +71,7 @@ export const validateFields = (
                 isValid = false;
             }
             if (data.discipline?.length === 0) {
-                console.log(data.discipline);
-                errors.discipline = 'Subjects is required';
+                errors.discipline = 'Subjects are required';
                 isValid = false;
             }
             break;
@@ -96,6 +96,17 @@ export const validateFields = (
                 errors.englishPercentage = 'English Percentage is required';
                 isValid = false;
             }
+            if (
+                !(
+                    Number(data?.englishPercentage) >= 0 &&
+                    Number(data?.englishPercentage) <= 100
+                )
+            ) {
+                errors.englishPercentage =
+                    'Percentage should be between 0 to 100';
+                isValid = false;
+            }
+            
             break;
         case 5:
             if (!data.englishTest) {
@@ -106,26 +117,45 @@ export const validateFields = (
                 data.englishTest === 'IELTS' ||
                 data.englishTest === 'PTE Academic'
             ) {
-                if (!data.listening) {
-                    errors.listening = 'Listening score is required';
-                    isValid = false;
-                }
-                if (!data.reading) {
-                    errors.reading = 'Reading score is required';
-                    isValid = false;
-                }
-                if (!data.speaking) {
-                    errors.speaking = 'Speaking score is required';
-                    isValid = false;
-                }
-                if (!data.writing) {
-                    errors.writing = 'Writing score is required';
-                    isValid = false;
-                }
-                if (!data.overallscore) {
-                    errors.overallscore = 'Overall score is required';
-                    isValid = false;
-                }
+                
+                const tests = {
+                    listening: {
+                        min: data.englishTest === 'IELTS' ? 1 : 10,
+                        max: data.englishTest === 'IELTS' ? 9 : 90
+                    },
+                    reading: {
+                        min: data.englishTest === 'IELTS' ? 1 : 10,
+                        max: data.englishTest === 'IELTS' ? 9 : 90
+                    },
+                    speaking: {
+                        min: data.englishTest === 'IELTS' ? 1 : 10,
+                        max: data.englishTest === 'IELTS' ? 9 : 90
+                    },
+                    writing: {
+                        min: data.englishTest === 'IELTS' ? 1 : 10,
+                        max: data.englishTest === 'IELTS' ? 9 : 90
+                    },
+                    overallscore: {
+                        min: data.englishTest === 'IELTS' ? 1 : 10,
+                        max: data.englishTest === 'IELTS' ? 9 : 90
+                    }
+                };
+
+                Object.entries(tests).forEach(([key, { min, max }]) => {
+                    
+                    if (!data[key as keyof FormData]) {
+                        errors[key as keyof ErrorMessages] =
+                            `${key.charAt(0).toUpperCase() + key.slice(1)} score is required`;
+                        isValid = false;
+                    } else if (
+                        Number(data[key as keyof FormData]) < min ||
+                        Number(data[key as keyof FormData]) > max
+                    ) {
+                        errors[key as keyof ErrorMessages] =
+                            `${key.charAt(0).toUpperCase() + key.slice(1)} score must be between ${min} and ${max}`;
+                        isValid = false;
+                    }
+                });
             }
             break;
         case 6:
@@ -144,7 +174,7 @@ export const validateFields = (
 export const clearError = (
     errorMessages: ErrorMessages,
     setErrorMessages: React.Dispatch<React.SetStateAction<ErrorMessages>>,
-    field: keyof ErrorMessages
+    field: keyof ErrorMessages | string
 ) => {
     setErrorMessages((prevErrors) => ({
         ...prevErrors,

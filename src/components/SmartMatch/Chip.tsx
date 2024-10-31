@@ -1,6 +1,11 @@
 import React from 'react';
-import Select, { StylesConfig, MultiValue, SingleValue, ActionMeta } from 'react-select';
-import { IoIosSearch } from 'react-icons/io';
+import Select, {
+    StylesConfig,
+    MultiValue,
+    SingleValue,
+    ActionMeta
+} from 'react-select';
+import { IoIosSearch, IoIosClose } from 'react-icons/io';
 
 interface OptionType {
     value: string;
@@ -16,8 +21,13 @@ interface ChipProps {
     useSelect?: boolean;
     options?: OptionType[];
     placeholder?: string;
-    onChange?: (value: MultiValue<OptionType> | SingleValue<OptionType>, actionMeta: ActionMeta<OptionType>) => void; 
-    isMulti?: boolean; 
+    onChange?: (
+        value: MultiValue<OptionType> | SingleValue<OptionType>,
+        actionMeta: ActionMeta<OptionType>
+    ) => void;
+    isMulti?: boolean;
+    isDisable?: boolean;
+    onRemove?: (value: string) => void;
 }
 
 export const Chip: React.FC<ChipProps> = ({
@@ -29,8 +39,10 @@ export const Chip: React.FC<ChipProps> = ({
     useSelect = false,
     options = [],
     onChange,
-    placeholder = 'Search here to select subjects',
-    isMulti = false, 
+    placeholder,
+    isMulti = false,
+    isDisable,
+    onRemove
 }) => {
     const customStyles: StylesConfig<OptionType> = {
         control: (base) => ({
@@ -43,24 +55,26 @@ export const Chip: React.FC<ChipProps> = ({
             border: 'none',
             boxShadow: 'none',
             '&:hover': {
-                boxShadow: 'none',
+                boxShadow: 'none'
             },
             fontSize: '0.75rem',
             fontWeight: '500',
             paddingLeft: '20px',
+            opacity: isDisable ? '0.5' : '1'
         }),
         placeholder: (base) => ({
             ...base,
-            color: 'black',
+            color: 'black'
         }),
         menu: (base) => ({
             ...base,
-            fontSize: '0.7rem',
-        }),
+            fontSize: '0.7rem'
+        })
     };
 
-    
-    const selectedSet = new Set(Array.isArray(selectedValue) ? selectedValue : [selectedValue]);
+    const selectedSet = new Set(
+        Array.isArray(selectedValue) ? selectedValue : [selectedValue]
+    );
 
     return (
         <div className="px-2 lg:px-14 relative flex flex-col">
@@ -70,30 +84,40 @@ export const Chip: React.FC<ChipProps> = ({
                     <IoIosSearch className="absolute top-2.5 left-3 text-gray-500 z-10" />
                     <Select
                         options={options}
-                        onChange={onChange} 
+                        onChange={onChange}
                         placeholder={placeholder}
-                        isMulti={isMulti} 
+                        isMulti={isMulti}
                         styles={customStyles}
                         components={{
-                            IndicatorSeparator: () => null,
+                            IndicatorSeparator: () => null
                         }}
+                        isDisabled={isDisable}
                         value={null}
                     />
                 </div>
             ) : (
                 <div className="flex text-[0.7rem] gap-x-3 gap-y-3 flex-wrap my-2 font-[500]">
                     {data?.map((item) => (
-                        <p
+                        <div onClick={() => onSelect && onSelect(item)}
                             key={'chip-data' + item}
-                            onClick={() => onSelect && onSelect(item)} 
-                            className={`px-4 py-2 rounded-full cursor-pointer select-none transition-all ${
+                            className={`flex items-center px-4 py-2 rounded-full cursor-pointer select-none transition-all ${
                                 selectedSet.has(item)
                                     ? 'bg-[#1058d6] text-white'
                                     : 'bg-[#cee0ff]'
                             }`}
                         >
-                            {item}
-                        </p>
+                            <p >
+                                {item}
+                            </p>
+                            {onRemove && (
+                                <IoIosClose
+                                    className="ml-1 text-white hover:text-blue-200 text-lg"
+                                    onClick={() => {
+                                        onRemove && onRemove(item);
+                                    }}
+                                />
+                            )}
+                        </div>
                     ))}
                 </div>
             )}

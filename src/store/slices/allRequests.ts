@@ -10,13 +10,13 @@ import {
     favoritesType,
     instituteType,
     scholarshipType,
-    specializationType,
     applyTypes,
     geoIpType,
     courseType,
     eventType,
     DisciplineCountType,
-    MessageInterface
+    MessageInterface,
+    specializationDataType
 } from '@/types';
 
 export interface PaginatedResponse<data> {
@@ -83,9 +83,9 @@ export const stateQueryApi = createApi({
             transformResponse: (res: { data: scholarshipType[] }) =>
                 res.data! ?? res
         }),
-        getSpecialization: builder.query<specializationType[], void>({
+        getSpecialization: builder.query<specializationDataType[], void>({
             query: () => ({ url: API_ENDPOINTS.SPECIALIZATION }),
-            transformResponse: (res: { data: specializationType[] }) =>
+            transformResponse: (res: { data: specializationDataType[] }) =>
                 res.data! ?? res
         }),
         getInstitute: builder.query<instituteType[], void>({

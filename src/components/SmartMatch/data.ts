@@ -10,6 +10,7 @@ export interface TestScoreRanges {
     CERT: ScoreRange;
 }
 
+
 export const Countries = [
     'Pakistan',
     'India',
@@ -122,6 +123,10 @@ export const gradingScalesPostGraduate = [
     }
 ];
 
+
+
+
+
 export const gradingScaleFormats = {
     'Percentage Marks': {
         description: 'A percentage from 0 to 100',
@@ -146,8 +151,7 @@ export const gradingScaleFormats = {
         options: ['A', 'B', 'C', 'S', 'F']
     },
     'A/AS Level': {
-        description:
-            'Grades from A* to U (UCAS points will be calculated by entering the grades)',
+        description: 'Grades from A* to U',
         type: 'text',
         options: ['A*', 'A', 'B', 'C', 'D', 'E', 'U']
     },
@@ -164,7 +168,7 @@ export const EnglishTest = [
     'Language Cert',
     'Oxford ELLT',
     'Duolingo',
-    'I havent taken any test'
+    "I haven't taken any test"
 ];
 
 export const testScoreRanges: TestScoreRanges = {
@@ -220,4 +224,16 @@ export const Months = [
     'July – September',
     'October – December',
     'Help me decide'
+];
+
+export const feeBudgetOptions = [
+    { label: '100 - 500', value: '100-500' },
+    { label: '500 - 1,000', value: '500-1000' },
+    { label: '1,000 - 5,000', value: '1000-5000' },
+    { label: '5,000 - 10,000', value: '5000-10000' },
+    { label: '10,000 - 25,000', value: '10000-25000' },
+    { label: '25,000 - 50,000', value: '25000-50000' },
+    { label: '50,000 - 100,000', value: '50000-100000' },
+    { label: '100,000 - 250,000', value: '100000-250000' },
+    { label: '250,000 - 500,000', value: '250000-500000' }
 ];

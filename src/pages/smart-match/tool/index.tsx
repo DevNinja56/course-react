@@ -2,6 +2,7 @@ import {
     Countries,
     educationalQualifications,
     EnglishTest,
+    feeBudgetOptions,
     gradingScaleFormats,
     gradingScalesPostGraduate,
     Months,
@@ -11,9 +12,12 @@ import {
 import Button from '@/components/Button';
 import { ROUTES } from '@/config/constant';
 import { useSmartMatchTool } from '@/hooks/smartMatch';
-import { useGetDisciplineQuery } from '@/store/slices/allRequests';
+import {
+    useGetDisciplineQuery,
+    useGetSpecializationQuery
+} from '@/store/slices/allRequests';
 import { useRouter } from 'next/router';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { BiArrowBack } from 'react-icons/bi';
 import { IoArrowForward } from 'react-icons/io5';
 import { InputField } from '@/components/SmartMatch/InputField';
@@ -32,15 +36,46 @@ interface OptionType {
 const SmartMatchTool = () => {
     const [step, setStep] = useState(1);
     const [progress, setProgress] = useState(0);
-
     const router = useRouter();
-    const TotalStep = 8;
+    const TotalStep = 7;
     const { addQuery, query: data } = useSmartMatchTool();
     const { data: DisciplineData } = useGetDisciplineQuery();
+    const { data: SpecializationData } = useGetSpecializationQuery();
+    const [disciplineId, setDisciplineId] = useState('');
+    const [englishTest, setEnglishTest] = useState('');
     const [errorMessages, setErrorMessages] = useState<ErrorMessages>({});
     type GradingScaleKeys = keyof typeof gradingScaleFormats;
-
     const key: GradingScaleKeys = data.gradingSystem as GradingScaleKeys;
+
+    const gradingEduScale = educationalQualifications
+        .filter(
+            (item) =>
+                item.country === data.educationCountry &&
+                item.qualification === data.qualification
+        )
+        .map((item) => ({
+            label: item.gradingScale,
+            value: item.gradingScale
+        }));
+
+    useEffect(() => {
+        if (disciplineId) {
+            addQuery({ specialization: [] });
+        }
+    }, [disciplineId]);
+
+    useEffect(() => {
+        if (englishTest) {
+            addQuery({
+                reading: '',
+                listening: '',
+                overallscore: '',
+                speaking: '',
+                writing: ''
+            });
+            setErrorMessages({});
+        }
+    }, [englishTest]);
 
     const handleNext = () => {
         const { isValid, errors } = validateFields(data, step);
@@ -60,7 +95,10 @@ const SmartMatchTool = () => {
         if (isValid) {
             router.push({
                 pathname: ROUTES.FILTER_COURSE,
-                query: { discipline: data.subject, degreeType: data.studyLevel }
+                query: {
+                    discipline: data.discipline,
+                    degreeType: data.studyLevel
+                }
             });
         }
     };
@@ -213,9 +251,36 @@ const SmartMatchTool = () => {
                             error={errorMessages.studyLevel}
                         />
                         <Chip
+                            label="Popular searches"
+                            data={DisciplineData?.map((item) => item.name)}
+                            onSelect={(value: string) => {
+                                const selectedDiscipline = DisciplineData?.find(
+                                    (item) => item.name === value
+                                );
+
+                                if (selectedDiscipline) {
+                                    setDisciplineId(selectedDiscipline.id);
+
+                                    addQuery({
+                                        discipline: selectedDiscipline.name
+                                    });
+
+                                    clearError(
+                                        errorMessages,
+                                        setErrorMessages,
+                                        'discipline'
+                                    );
+                                }
+                            }}
+                            selectedValue={data.discipline}
+                            error={errorMessages.discipline}
+                        />
+                        <Chip
                             label="Select Subjects"
                             useSelect
-                            options={DisciplineData?.map((item) => ({
+                            options={SpecializationData?.filter(
+                                (item) => item.discipline === disciplineId
+                            ).map((item) => ({
                                 label: item.name,
                                 value: item.name
                             }))}
@@ -223,30 +288,29 @@ const SmartMatchTool = () => {
                                 const selectedValue = (option as OptionType)
                                     .value;
 
-                                const disciplines = Array.isArray(
-                                    data.discipline
+                                const specialization = Array.isArray(
+                                    data.specialization
                                 )
-                                    ? data.discipline
+                                    ? data.specialization
                                     : [];
 
                                 const isSelected =
-                                    disciplines.includes(selectedValue);
+                                    specialization.includes(selectedValue);
 
-                                if (!isSelected && disciplines.length < 3) {
+                                if (!isSelected && specialization.length < 3) {
                                     addQuery({
-                                        discipline: [
-                                            ...disciplines,
+                                        specialization: [
+                                            ...specialization,
                                             selectedValue
                                         ]
                                     });
                                 } else if (isSelected) {
                                     addQuery({
-                                        discipline: disciplines.filter(
+                                        specialization: specialization.filter(
                                             (item) => item !== selectedValue
                                         )
                                     });
                                 }
-
                                 clearError(
                                     errorMessages,
                                     setErrorMessages,
@@ -254,40 +318,27 @@ const SmartMatchTool = () => {
                                 );
                             }}
                             placeholder="Search here to select subjects"
+                            isDisable={!data.discipline}
                         />
-
                         <Chip
-                            label="Popular searches"
-                            data={DisciplineData?.map((item) => item.name)}
-                            onSelect={(value: string) => {
-                                const disciplines = Array.isArray(
-                                    data.discipline
-                                )
-                                    ? data.discipline
-                                    : [];
-
-                                const isSelected = disciplines.includes(value);
-
-                                if (!isSelected && disciplines.length < 3) {
-                                    addQuery({
-                                        discipline: [...disciplines, value]
-                                    });
-                                } else if (isSelected) {
-                                    addQuery({
-                                        discipline: disciplines.filter(
-                                            (item) => item !== value
-                                        )
-                                    });
-                                }
-
-                                clearError(
-                                    errorMessages,
-                                    setErrorMessages,
-                                    'discipline'
-                                );
+                            data={
+                                Array.isArray(data.specialization)
+                                    ? data.specialization
+                                    : []
+                            }
+                            selectedValue={data.specialization}
+                            error={errorMessages.specialization}
+                            onRemove={(value) => {
+                                addQuery({
+                                    specialization: Array.isArray(
+                                        data.specialization
+                                    )
+                                        ? data.specialization.filter(
+                                              (item) => item != value
+                                          )
+                                        : []
+                                });
                             }}
-                            selectedValue={data.discipline}
-                            error={errorMessages.discipline}
                         />
                     </>
                 )}
@@ -382,18 +433,20 @@ const SmartMatchTool = () => {
                         {data.studyLevel === 'Undergraduate' && (
                             <InputField
                                 useSelect
-                                options={educationalQualifications
-                                    .filter(
-                                        (item) =>
-                                            item.country ===
-                                                data.educationCountry &&
-                                            item.qualification ===
-                                                data.qualification
-                                    )
-                                    .map((item) => ({
-                                        label: item.gradingScale,
-                                        value: item.gradingScale
-                                    }))}
+                                options={
+                                    gradingEduScale.length
+                                        ? gradingEduScale
+                                        : otherQualification
+                                              .filter(
+                                                  (item) =>
+                                                      item.qualification ===
+                                                      data.qualification
+                                              )
+                                              .map((item) => ({
+                                                  label: item.qualification,
+                                                  value: item.qualification
+                                              }))
+                                }
                                 onChange={(option) => {
                                     addQuery({
                                         gradingSystem: (option as OptionType)
@@ -466,9 +519,11 @@ const SmartMatchTool = () => {
                             placeholder={`${gradingScaleFormats[key] ? `Enter Score (${gradingScaleFormats[key].description})*` : 'Enter Score*'}`}
                             error={errorMessages.score}
                             isDisabled={!data.gradingSystem}
+                            selectedValue={data.score && String(data.score)}
                         />
 
                         <InputField
+                            type="number"
                             onSelect={(value) => {
                                 addQuery({ englishPercentage: value });
                                 clearError(
@@ -479,13 +534,17 @@ const SmartMatchTool = () => {
                             }}
                             placeholder="English Percentage (1-100)*"
                             error={errorMessages.englishPercentage}
+                            selectedValue={
+                                data.englishPercentage &&
+                                String(data.englishPercentage)
+                            }
                         />
                     </>
                 )}
                 {step === 5 && (
                     <>
                         <div className="flex gap-1 text-center justify-center items-center">
-                            <h1 className=" lg:text-md font-semibold">
+                            <h1 className="lg:text-md font-semibold">
                                 Which English language test have you taken so
                                 far?
                             </h1>
@@ -499,6 +558,7 @@ const SmartMatchTool = () => {
                         <Chip
                             data={EnglishTest}
                             onSelect={(value: string) => {
+                                setEnglishTest(value);
                                 addQuery({
                                     englishTest: value
                                 });
@@ -515,79 +575,42 @@ const SmartMatchTool = () => {
                             data.englishTest === 'PTE Academic') && (
                             <>
                                 <hr className="border h-0.5 bg-blueColor" />
-
-                                <InputField
-                                    onSelect={(value) => {
-                                        addQuery({
-                                            overallscore: value
-                                        });
-                                        clearError(
-                                            errorMessages,
-                                            setErrorMessages,
-                                            'overallscore'
-                                        );
-                                    }}
-                                    placeholder="Overall Band Score (1-10)"
-                                    error={errorMessages.overallscore}
-                                />
-
-                                <InputField
-                                    onSelect={(value) => {
-                                        addQuery({
-                                            listening: value
-                                        });
-                                        clearError(
-                                            errorMessages,
-                                            setErrorMessages,
-                                            'listening'
-                                        );
-                                    }}
-                                    placeholder="Listening (1-10)"
-                                    error={errorMessages.listening}
-                                />
-                                <InputField
-                                    onSelect={(value) => {
-                                        addQuery({
-                                            reading: value
-                                        });
-                                        clearError(
-                                            errorMessages,
-                                            setErrorMessages,
-                                            'reading'
-                                        );
-                                    }}
-                                    placeholder="Reading (1-10)"
-                                    error={errorMessages.reading}
-                                />
-                                <InputField
-                                    onSelect={(value) => {
-                                        addQuery({
-                                            writing: value
-                                        });
-                                        clearError(
-                                            errorMessages,
-                                            setErrorMessages,
-                                            'writing'
-                                        );
-                                    }}
-                                    placeholder="Writing (1-10)"
-                                    error={errorMessages.writing}
-                                />
-
-                                <InputField
-                                    onSelect={(value) => {
-                                        addQuery({
-                                            speaking: value
-                                        });
-                                        clearError(
-                                            errorMessages,
-                                            setErrorMessages,
-                                            'speaking'
-                                        );
-                                    }}
-                                    placeholder="Speaking (1-10)"
-                                    error={errorMessages.speaking}
-                                />
+                                {[
+                                    'overallscore',
+                                    'listening',
+                                    'reading',
+                                    'writing',
+                                    'speaking'
+                                ].map((field) => (
+                                    <InputField
+                                        key={field}
+                                        onSelect={(value) => {
+                                            addQuery({ [field]: value });
+                                            clearError(
+                                                errorMessages,
+                                                setErrorMessages,
+                                                field as keyof ErrorMessages
+                                            ); 
+                                        }}
+                                        placeholder={
+                                            field === 'overallscore'
+                                                ? data.englishTest === 'IELTS'
+                                                    ? 'Overall Band Score (1-10)'
+                                                    : 'Overall Score (10-90)'
+                                                : `${field.charAt(0).toUpperCase() + field.slice(1)} Score ${
+                                                      data.englishTest ===
+                                                      'IELTS'
+                                                          ? '(1-10)'
+                                                          : '(10-90)'
+                                                  }`
+                                        }
+                                        error={
+                                            errorMessages[
+                                                field as keyof ErrorMessages
+                                            ]
+                                        } 
+                                    />
+                                ))}
                             </>
                         )}
                     </>
@@ -608,10 +631,7 @@ const SmartMatchTool = () => {
                         <hr className="border h-0.5 bg-blueColor" />
                         <InputField
                             useSelect
-                            options={DisciplineData?.map((item) => ({
-                                label: item.name,
-                                value: item.name
-                            }))}
+                            options={feeBudgetOptions}
                             onChange={(option) => {
                                 addQuery({
                                     feebudget: (option as OptionType).value
@@ -627,42 +647,7 @@ const SmartMatchTool = () => {
                         />
                     </>
                 )}
-
                 {step === 7 && (
-                    <>
-                        <div className="flex gap-1 text-center justify-center items-center">
-                            <h1 className=" lg:text-md font-semibold">
-                                Tell us about your tuition fee budget?
-                            </h1>
-                            <img
-                                src="/images/SmartMatch/Tool/Wallet.png"
-                                alt="Wallet"
-                                className="h-6"
-                            />
-                        </div>
-                        <hr className="border h-0.5 bg-blueColor" />
-                        <InputField
-                            useSelect
-                            options={DisciplineData?.map((item) => ({
-                                label: item.name,
-                                value: item.name
-                            }))}
-                            onChange={(option) => {
-                                addQuery({
-                                    feebudget: (option as OptionType).value
-                                });
-                                clearError(
-                                    errorMessages,
-                                    setErrorMessages,
-                                    'feebudget'
-                                );
-                            }}
-                            placeholder="Fee Budget"
-                            error={errorMessages.feebudget}
-                        />
-                    </>
-                )}
-                {step === 8 && (
                     <>
                         <div className="flex justify-center items-center flex-col text-xl font-bold">
                             <img
@@ -678,7 +663,7 @@ const SmartMatchTool = () => {
                     </>
                 )}
                 <div className="flex justify-center">
-                    {step === 8 ? (
+                    {step === 7 ? (
                         <Button
                             text="Reveal my matches"
                             className="transition-all !w-fit px-6 md:px-20 py-2 rounded-md bg-gradient-to-r from-[#2C79FF] to-[#0953AA] text-xs hover:text-white hover:bg-gradient-to-l"
