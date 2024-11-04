@@ -36,8 +36,8 @@ const SmartMatchBanner = () => {
                     </div>
                 </div>
                 <img
-                    src="/images/About Us/MacBook Pro 16.png"
-                    alt="WorldMap"
+                    src="/images/About us/MacBook Pro 16.png"
+                    alt="MacBook"
                     className="h-auto lg:h-72 drop-shadow-2xl object-contain mt-5"
                 />
             </div>

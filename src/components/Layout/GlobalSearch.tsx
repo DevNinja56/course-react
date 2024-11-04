@@ -22,6 +22,7 @@ const GlobalSearch = () => {
         }
     };
 
+    
     return (
         <form
             onSubmit={handleSubmit}
