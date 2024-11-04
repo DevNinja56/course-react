@@ -1,5 +1,3 @@
-// import { ROUTES } from '@/config/constant';
-
 import PageCard from '@/components/LocalEntry/PageCard';
 import Link from 'next/link';
 import React from 'react';

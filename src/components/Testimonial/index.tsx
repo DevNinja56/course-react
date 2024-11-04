@@ -27,7 +27,7 @@ const Testimonial = () => {
 
     return (
         <div
-            className={`bg-white print:hidden ${
+            className={`bg-white print:hidden overflow-hidden  ${
                 router.pathname === ROUTES.FAQ ||
                 router.pathname?.includes(ROUTES.COURSE.replace(':title', ''))
                     ? ''

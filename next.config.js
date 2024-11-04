@@ -9,7 +9,8 @@ const nextConfig = {
             'lh3.googleusercontent.com',
             'www.scholarshipsads.com',
             'course-options-assets.s3.ap-south-1.amazonaws.com',
-            "mu-website.azureedge.net"
+            'mu-website.azureedge.net',
+            'course-options-assets-ragzon.s3.ap-south-1.amazonaws.com'
         ]
     }
 };

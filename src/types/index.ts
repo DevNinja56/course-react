@@ -128,9 +128,9 @@ export type scholarshipFiltersType = {
         degree: degreeType;
         count: number;
     }[];
-    // disciplines: {
-    //     discipline: string;
-    // }[];
+    
+    
+    
     types: {
         type: string;
         count: number;
@@ -192,6 +192,22 @@ export type specializationType = {
     _id: string;
     course: [];
 };
+
+export interface specializationDataType {
+    name: string;
+    discipline: string; 
+    createdAt: string; 
+    updatedAt: string; 
+    id: string;
+  }
+
+export interface Discipline {
+    name: string;
+    discipline: string; 
+    createdAt: string; 
+    updatedAt: string; 
+    id: string;
+  }
 
 export type courseType = {
     _id: string;

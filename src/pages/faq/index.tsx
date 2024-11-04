@@ -1,4 +1,4 @@
-import Card from '@/components/ContactUs/Card';
+import Card from '@/components/FAQ/Card';
 import FAQ from '@/components/FAQ/FAQ';
 // import Image from 'next/image';
 import React from 'react';

@@ -1,4 +1,3 @@
-'use client';
 import React, { InputHTMLAttributes, useState } from 'react';
 import { IconType } from 'react-icons';
 import { FaRegEyeSlash, FaRegEye } from 'react-icons/fa6';

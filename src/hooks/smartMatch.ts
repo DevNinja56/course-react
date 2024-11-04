@@ -9,7 +9,7 @@ export const useSmartMatchTool = () => {
     const dispatch = useAppDispatch();
     const query = useAppSelector((state) => state.smartMatch.query);
 
-    const addQueryAction = (obj: { [key: string]: string }) => {
+    const addQueryAction = (obj: { [key: string]: string | string[] }) => {
         dispatch(addQuery(obj));
     };
 
