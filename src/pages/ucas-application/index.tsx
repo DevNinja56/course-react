@@ -7,13 +7,27 @@ import React from 'react';
 const UcasApplication = () => {
     return (
         <>
-            <div className="w-full py-8 md:py-12 flex justify-center bg-gradient-to-b from-blueColor to-white via-blueColor h-[72vh] md:h-[95vh] lg:h-[87vh] relative px-2 md:px-0">
-                <div className="flex flex-col gap-8 md:gap-10 items-center">
+            <div className="w-full py-8 md:py-12 flex justify-center bg-blueColor relative px-2 md:px-0 h-[80vh]">
+                <Image
+                    height={2202}
+                    width={2347}
+                    alt="pattern"
+                    src="/images/SmartMatch/Pattern.png"
+                    className="absolute left-0 top-0  scale-x-[-1] w-4/12 lg:w-3/12 xl:w-[40%] md:block hidden opacity-35"
+                />
+                <Image
+                    height={2202}
+                    width={2347}
+                    alt="pattern"
+                    src="/images/SmartMatch/Pattern.png"
+                    className="absolute right-0 top-0   w-4/12 lg:w-3/12 xl:w-[40%] md:block hidden opacity-35"
+                />
+                <div className="flex flex-col gap-5 items-center w-5/12 relative">
                     <div className="flex flex-col items-center gap-2">
-                        <h1 className="font-bold text-xl md:text-3xl text-white">
+                        <h1 className="font-bold text-xl md:text-4xl text-white">
                             UCAS Application Support
                         </h1>
-                        <p className="w-full md:w-10/12 lg:w-8/12 text-center text-white text-xs md:text-lg md:px-2 font-light">
+                        <p className="w-full text-center text-white text-xs md:text-sm md:px-2 font-light">
                             Applying for undergraduate courses in the UK can be
                             challenging, but our UCAS Application Support makes
                             it easy. We guide you through each step of the
@@ -26,7 +40,7 @@ const UcasApplication = () => {
                         width={2339}
                         alt="ucas-application"
                         src="/images/Home/home-ucas-image.png"
-                        className="h-48 w-48 md:h-60 md:w-60 lg:h-80 lg:w-80"
+                        className="w-48 md:w-60 lg:w-9/12"
                     />
                 </div>
             </div>
@@ -43,7 +57,7 @@ const UcasApplication = () => {
                         <h1 className="text-[#2563EB] text-2xl md:text-3xl font-extrabold">
                             Key Services:
                         </h1>
-                        <div className="flex flex-col gap-8 md:gap-10 py-5 border-t border-[#2563EB]">
+                        <div className="flex flex-col py-5 border-t border-[#2563EB]">
                             <KeyService
                                 heading="Step-by-Step Guidance:"
                                 description="We help you navigate the UCAS portal and complete your application with ease."
