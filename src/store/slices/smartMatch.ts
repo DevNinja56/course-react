@@ -11,7 +11,10 @@ const smartMatch = createSlice({
     name: 'smartMatch',
     initialState,
     reducers: {
-        addQuery(state, action: PayloadAction<{ [key: string]: string | string[] }>) {
+        addQuery(
+            state,
+            action: PayloadAction<{ [key: string]: string | string[] }>
+        ) {
             state.query = { ...state.query, ...action.payload };
         },
         removeQuery(state, action: PayloadAction<string>) {

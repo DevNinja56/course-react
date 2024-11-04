@@ -1,4 +1,3 @@
-// import { ROUTES } from '@/config/constant';
 import StepsCard from '@/components/Discover/StepsCard';
 import LetUsHelpContainer from '@/components/LetUsHelpContainer';
 import { ROUTES } from '@/config/constant';
