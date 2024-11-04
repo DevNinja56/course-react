@@ -1,11 +1,8 @@
 import GuidanceCard from '@/components/AboutUs/GuidanceCard';
 import SmartMatchBanner from '@/components/AboutUs/SmartMatchBanner';
 import FAQ from '@/components/FAQ/FAQ';
-import { ROUTES } from '@/config/constant';
-import Link from 'next/link';
 import React from 'react';
 import { CiGlobe } from 'react-icons/ci';
-import { HiOutlineSparkles } from 'react-icons/hi';
 import { IoBookOutline, IoBulbOutline } from 'react-icons/io5';
 import { PiBuildings } from 'react-icons/pi';
 import { TbSchool, TbTargetArrow } from 'react-icons/tb';
