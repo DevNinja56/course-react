@@ -106,7 +106,7 @@ const ContactUsForm = () => {
                     <Button
                         text="Send a Message"
                         type="submit"
-                        className="!w-fit px-6 py-2 text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition duration-200 ease-in-out hover:text-white"
+                        className="!w-fit px-6 py-2 transition-all"
                         isLoader={isLoading}
                     />
                 </div>
