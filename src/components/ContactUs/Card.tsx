@@ -21,7 +21,7 @@ const Card = ({ img, title, detail, description, maxWidth = 'max-w-[80%]' }: Car
                 {description}
             </p>
             <h1 className="text-[#2563EB] font-bold text-xs mt-2">
-                {detail}
+                {detail}    
             </h1>
         </div>
     );
