@@ -13,6 +13,7 @@ interface propsTypes {
     variant?: 'filled' | 'outline';
     icon?: React.ReactElement;
     linkClass?: string;
+    iconPlace?: boolean;
 }
 type Props = React.ButtonHTMLAttributes<HTMLButtonElement> & propsTypes;
 type PropsLink = LinkProps & propsTypes;
@@ -26,6 +27,7 @@ const Button: React.FC<Props> = ({
     variant,
     icon,
     linkClass,
+    iconPlace,
     ...props
 }) => {
     const Button = () => (
@@ -39,10 +41,17 @@ const Button: React.FC<Props> = ({
             }   ${className}`}
             {...props}
         >
-            <>
-                {icon}
-                {text}
-            </>
+            {iconPlace ? (
+                <>
+                    {text}
+                    {icon}
+                </>
+            ) : (
+                <>
+                    {icon}
+                    {text}
+                </>
+            )}
             {isLoader && (
                 <LoaderSpinner className="group-hover:text-blueColor" />
             )}
@@ -51,7 +60,7 @@ const Button: React.FC<Props> = ({
     return (
         <>
             {link ? (
-                <Link href={link} className={linkClass} >
+                <Link href={link} className={linkClass}>
                     <Button />
                 </Link>
             ) : (

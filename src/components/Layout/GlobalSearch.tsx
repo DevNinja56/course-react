@@ -22,27 +22,28 @@ const GlobalSearch = () => {
         }
     };
 
+    
     return (
         <form
             onSubmit={handleSubmit}
-            className="rounded-[95px] bg-neutral-200 border border-neutral-400 h-7 relative flex items-center justify-between gap-3 px-4 py-1.5 w-56 xl:w-60"
+            className="rounded-[95px] bg-blueColor bg-opacity-10 border border-blueColor h-9 flex items-center justify-evenly gap-3 px-4 py-1.5 w-56 xl:w-64"
         >
             <input
                 id="course-search"
                 type="search"
                 onChange={(e) => setCourseValue(e.target.value)}
-                className="h-full w-full text-[10px] outline-none bg-transparent text-gray-500 font-semibold"
+                className="h-full w-full text-[10px] outline-none bg-transparent text-gray-500 placeholder:text-[#010F2E] font-semibold"
                 placeholder="Search Course"
             />
-            <hr className="h-full border border-gray-400" />
+            <hr className="h-full border border-[#010F2E] border-1" />
             <input
                 id="institute-search"
                 type="search"
                 onChange={(e) => setInstituteValue(e.target.value)}
-                className="h-full w-full text-[10px] outline-none bg-transparent text-gray-500 font-semibold"
+                className="h-full w-full text-[10px] outline-none bg-transparent text-gray-500 placeholder:text-[#010F2E] font-semibold"
                 placeholder="Search Institute"
             />
-            <button type="submit" className="absolute right-1.5">
+            <button type="submit">
                 <HiSearch />
             </button>
         </form>

@@ -168,7 +168,7 @@ const SmartMatch = () => {
                             </h3>
                             <p className="text-sm">
                                 Receive personalized results that fit your
-                                qualifications and budget.
+                                qualifications and budgetx.
                             </p>
                         </div>
                     </div>
