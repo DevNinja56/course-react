@@ -82,7 +82,7 @@ export const LinkButton: React.FC<PropsLink> = ({
         <Link
             {...props}
             href={to}
-            className={`flex max-w-full min-w-max justify-center rounded-[3.5px] ${color} text-sm mx-auto bg-mainColor px-5 py-2.5 disabled:bg-opacity-60 disabled:cursor-not-allowed ${className}`}
+            className={`flex min-w-max justify-center rounded-[3.5px] ${color} text-sm mx-auto bg-mainColor px-5 py-2.5 disabled:bg-opacity-60 disabled:cursor-not-allowed ${className}`}
         >
             <>{text}</>
             {isLoader && <LoaderSpinner />}
