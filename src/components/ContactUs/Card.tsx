@@ -19,7 +19,7 @@ const Card = ({ img, title, detail, description, maxWidth = 'max-w-[80%]' }: Car
             <h1 className="text-md font-[600] text-gray-800">{title}</h1>
             <p className={`text-xs ${maxWidth} text-gray-500 h-8`}>
                 {description}
-            </p>
+            </p>x``
             <h1 className="text-[#2563EB] font-bold text-xs mt-2">
                 {detail}    
             </h1>
