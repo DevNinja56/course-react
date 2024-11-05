@@ -12,9 +12,11 @@ interface propTypes {
     leftSideContent?: boolean;
     circleStyling: string;
     noCircle?: boolean;
-    backgroundColor?: boolean;
+    backgroundColor?: string;
     imageSize?: string;
     link: string;
+    circleSize?: string;
+    paddingY?: string;
 }
 
 const HomeLearnMoreSection = ({
@@ -28,18 +30,20 @@ const HomeLearnMoreSection = ({
     noCircle,
     backgroundColor,
     imageSize,
-    link
+    link,
+    circleSize,
+    paddingY
 }: propTypes) => {
     return (
         <div
-            className={`${leftSideContent ? 'lg:flex-row-reverse' : 'lg:flex-row'} ${backgroundColor && 'bg-profileBgColor'} w-full flex flex-col-reverse items-center justify-between pt-16 pb-10 relative px-2 md:px-8 lg:px-20 xl:px-36 gap-10 lg:gap-0`}
+            className={`${leftSideContent ? 'lg:flex-row-reverse' : 'lg:flex-row'} ${backgroundColor ? backgroundColor : 'bg-profileBgColor/50'} w-full flex flex-col-reverse items-center justify-between ${paddingY ? paddingY : 'pt-5 pb-10'}  relative px-2 md:px-8 lg:px-20 xl:px-36 gap-10 lg:gap-0`}
         >
             {!noCircle && (
                 <img
                     height={104}
                     width={104}
                     alt="home-round"
-                    className={`${circleStyling} absolute hidden md:block w-24 h-24 lg:h-28 lg:w-28 z-10`}
+                    className={`${circleStyling} ${circleSize ? circleSize : 'w-24 h-24 lg:h-28 lg:w-28'} absolute hidden md:block z-10`}
                     src="/images/Home/ourEventsRoundImgone.svg"
                 />
             )}
@@ -53,7 +57,7 @@ const HomeLearnMoreSection = ({
                 />
             </div>
             <div className="flex flex-col items-center md:items-start gap-5 md:gap-7 w-full lg:w-5/12">
-                <div className="flex flex-col items-center md:items-start gap-4">
+                <div className="flex flex-col items-center md:items-start gap-2">
                     <h1 className="flex items-center font-extrabold text-lg md:text-3xl text-blueColor">
                         {heading}
                     </h1>
@@ -71,14 +75,14 @@ const HomeLearnMoreSection = ({
                             paragraph
                         )}
                     </p>
-                    <hr className="w-full border border-blueColor" />
+                    <hr className="w-full border border-blueColor/10" />
                     <h2 className="font-bold text-xs md:text-base text-center md:text-start">
                         {title}
                     </h2>
                 </div>
                 <Link href={link} className="w-fit">
                     <Button
-                        className="py-2 md:py-3 px-4 md:px-16 rounded-xl text-sm md:text-base font-bold"
+                        className="py-2 md:py-3 px-4 md:px-14 rounded-lg text-sm md:text-base font-bold"
                         text="Learn More"
                     />
                 </Link>

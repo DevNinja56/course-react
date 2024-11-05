@@ -42,18 +42,18 @@ const Header = ({ onlyLogo }: { onlyLogo?: boolean }) => {
             {!onlyLogo ? (
                 <div className="bg-white">
                     <UnVerifiedUser />
-                    <div className="w-full xl:container mx-auto py-4 flex justify-between items-center px-4 md:px-[50px] lg:px-8 2xl:px-8 transition-all duration-300">
-                        <div className="-mt-2">
+                    <div className="w-full mx-auto py-5 flex justify-between items-center px-4 md:px-[50px] lg:px-6 xl:px-10 transition-all duration-300">
+                        <div className="-mt-1">
                             <Logo />
                         </div>
+                        <div className="hidden lg:block">
+                            <GlobalSearch />
+                        </div>
                         <div className="flex items-center print:hidden gap-x-4 xl:gap-x-6">
-                            <div className="hidden lg:block">
-                                <GlobalSearch />
-                            </div>
-                            <div className="hidden lg:flex items-center gap-x-6 lg:gap-x-2 xl:gap-x-5">
+                            <div className="hidden lg:flex items-center gap-x-6 lg:gap-x-4 xl:gap-x-8">
                                 <Link href={ROUTES.FILTER_COURSE}>
                                     <div
-                                        className={`flex items-center gap-x-1 xl:gap-x-1.5 text-xs xl:text-sm font-semibold ${
+                                        className={`flex items-center gap-x-1 xl:gap-x-1.5 text-xs font-semibold ${
                                             router.pathname ===
                                             ROUTES.FILTER_COURSE
                                                 ? 'text-blueColor'
@@ -66,7 +66,7 @@ const Header = ({ onlyLogo }: { onlyLogo?: boolean }) => {
                                 </Link>
                                 <Link href={ROUTES.INSTITUTES}>
                                     <div
-                                        className={`flex items-center gap-x-1 xl:gap-x-1.5 text-xs xl:text-sm font-semibold ${
+                                        className={`flex items-center gap-x-1 xl:gap-x-1.5 text-xs font-semibold ${
                                             router.pathname ===
                                             ROUTES.INSTITUTES
                                                 ? 'text-blueColor'
@@ -79,7 +79,7 @@ const Header = ({ onlyLogo }: { onlyLogo?: boolean }) => {
                                 </Link>
                                 <Link href={ROUTES.FILTER_SCHOLARSHIP}>
                                     <div
-                                        className={`flex items-center gap-x-1 xl:gap-x-1.5 text-xs xl:text-sm font-semibold ${
+                                        className={`flex items-center gap-x-1 xl:gap-x-1.5 text-xs font-semibold ${
                                             router.pathname ===
                                             ROUTES.FILTER_SCHOLARSHIP
                                                 ? 'text-blueColor'
@@ -92,7 +92,7 @@ const Header = ({ onlyLogo }: { onlyLogo?: boolean }) => {
                                 </Link>
                                 <Link href={ROUTES.COMPARE}>
                                     <div
-                                        className={`flex items-center gap-x-1 xl:gap-x-1.5 text-xs xl:text-sm font-semibold ${
+                                        className={`flex items-center gap-x-1 xl:gap-x-1.5 text-xs font-semibold ${
                                             router.pathname === ROUTES.COMPARE
                                                 ? 'text-blueColor'
                                                 : 'text-textBlackColor'
@@ -125,7 +125,7 @@ const Header = ({ onlyLogo }: { onlyLogo?: boolean }) => {
                                             state: ''
                                         })
                                     }
-                                    className="flex items-center  gap-x-1.5 cursor-pointer text-sm font-semibold text-textBlackColor"
+                                    className="flex items-center gap-x-1.5 cursor-pointer text-xs font-semibold text-textBlackColor"
                                 >
                                     <svg
                                         width="24"
@@ -149,7 +149,7 @@ const Header = ({ onlyLogo }: { onlyLogo?: boolean }) => {
                             {showSideBar && (
                                 <Sidebar setShowSideBar={setShowSideBar} />
                             )}
-                            <div className="flex items-center gap-x-2 md:gap-x-2.5">
+                            <div className="flex items-center gap-x-2 md:gap-x-3">
                                 <img
                                     width={46}
                                     height={46}
@@ -197,7 +197,7 @@ const Header = ({ onlyLogo }: { onlyLogo?: boolean }) => {
                                     </div>
                                 ) : (
                                     <Link href={ROUTES.SIGN_IN}>
-                                        <button className=" xl:px-5 py-2.5 px-4 gap-x-1.5 md:flex justify-center items-center rounded-[4px] bg-blueColor hover:bg-blue-600 text-white text-xs xl:text-sm font-medium hidden">
+                                        <button className=" xl:px-5 py-2.5 px-4 gap-x-1.5 md:flex justify-center items-center rounded-[4px] bg-blueColor hover:bg-blue-600 text-white text-xs  font-medium hidden">
                                             <img
                                                 width={16}
                                                 height={16}
