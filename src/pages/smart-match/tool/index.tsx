@@ -2,7 +2,6 @@ import {
     Countries,
     educationalQualifications,
     EnglishTest,
-    feeBudgetOptions,
     gradingScaleFormats,
     gradingScalesPostGraduate,
     Months,
@@ -27,6 +26,7 @@ import {
     ErrorMessages,
     validateFields
 } from '@/components/SmartMatch/Validation';
+import FeeSlider from '@/components/SmartMatch/FeeSlider';
 
 interface OptionType {
     value: string;
@@ -131,8 +131,9 @@ const SmartMatchTool = () => {
             router.push({
                 pathname: ROUTES.FILTER_COURSE,
                 query: {
-                    discipline: data.discipline,
-                    degreeType: data.studyLevel
+                    // discipline: data.discipline,
+                    // degreeType: data.studyLevel
+                    institute: 'Staffordshire University'
                 }
             });
         }
@@ -149,7 +150,20 @@ const SmartMatchTool = () => {
     };
 
     return (
-        <div className="2xl:container mx-auto h-fit bg-white bg-[url('/images/SmartMatch/tool/Background.png')] bg-cover p-4 md:p-10">
+        <div
+            className="2xl:container mx-auto h-fit bg-white bg-[url('/images/SmartMatch/tool/Background.png')] bg-cover p-4 md:p-10
+         relative"
+        >
+            <img
+                alt="Elipse"
+                className="absolute lg:h-48 h-16 -right-24 "
+                src="/images/elipse.png"
+            />
+            <img
+                alt="Elipse"
+                className="absolute  h-28 -left-10 top-72"
+                src="/images/Blogs/Ellipse 426.svg"
+            />
             <div className=" w-full sm:w-3/4 lg:w-[55%] bg-[#f8fbff] rounded-xl mx-auto flex flex-col gap-5 h-fit p-7 px-6 md:px-14 ">
                 <div className="flex justify-center items-center relative">
                     {step > 1 && (
@@ -265,138 +279,145 @@ const SmartMatchTool = () => {
                             />
                         </div>
                         <hr className="border h-0.5 bg-blueColor" />
-                        <Chip
-                            label="Study Level"
-                            data={[
-                                'Foundation',
-                                'Undergraduate',
-                                'Postgraduate'
-                            ]}
-                            onSelect={(value: string) => {
-                                addQuery({
-                                    studyLevel: value
-                                });
-                                clearError(
-                                    errorMessages,
-                                    setErrorMessages,
-                                    'studyLevel'
-                                );
-                            }}
-                            selectedValue={data.studyLevel}
-                            error={errorMessages.studyLevel}
-                        />
-                        <Chip
-                            label="Popular searches"
-                            data={DisciplineData?.map((item) => item.name)}
-                            onSelect={(value: string) => {
-                                const selectedDiscipline = DisciplineData?.find(
-                                    (item) => item.name === value
-                                );
-
-                                if (selectedDiscipline) {
-                                    setDisciplineId(selectedDiscipline.id);
-
-                                    addQuery({
-                                        discipline: selectedDiscipline.name
-                                    });
-
-                                    clearError(
-                                        errorMessages,
-                                        setErrorMessages,
-                                        'discipline'
-                                    );
-                                }
-                            }}
-                            selectedValue={data.discipline}
-                            error={errorMessages.discipline}
-                        />
-                        <div>
+                        <div className="overflow-y-scroll setScrollBar h-[43vh] overflow-x-hidden">
                             <Chip
-                                label="Select Subjects"
-                                useSelect
-                                options={SpecializationData?.filter(
-                                    (item) =>
-                                        item.discipline === disciplineId &&
-                                        !(
-                                            data.specialization &&
-                                            data.specialization.includes(
-                                                item.name
-                                            )
-                                        )
-                                ).map((item) => ({
-                                    label: item.name,
-                                    value: item.name
-                                }))}
-                                onChange={(option) => {
-                                    const selectedValue = (option as OptionType)
-                                        .value;
-
-                                    const specialization = Array.isArray(
-                                        data.specialization
-                                    )
-                                        ? data.specialization
-                                        : [];
-
-                                    const isSelected =
-                                        specialization.includes(selectedValue);
-
-                                    if (
-                                        !isSelected &&
-                                        specialization.length < 3
-                                    ) {
-                                        addQuery({
-                                            specialization: [
-                                                ...specialization,
-                                                selectedValue
-                                            ]
-                                        });
-                                    } else if (isSelected) {
-                                        addQuery({
-                                            specialization:
-                                                specialization.filter(
-                                                    (item) =>
-                                                        item !== selectedValue
-                                                )
-                                        });
-                                    }
+                                label="Study Level"
+                                data={[
+                                    'Foundation',
+                                    'Undergraduate',
+                                    'Postgraduate'
+                                ]}
+                                onSelect={(value: string) => {
+                                    addQuery({
+                                        studyLevel: value
+                                    });
                                     clearError(
                                         errorMessages,
                                         setErrorMessages,
-                                        'specialization'
+                                        'studyLevel'
                                     );
                                 }}
-                                placeholder="Search here to select subjects"
-                                isDisable={
-                                    !data.discipline ||
-                                    (data.specialization
-                                        ? data.specialization.length === 3
-                                        : undefined)
-                                }
-                                error={errorMessages.specialization}
+                                selectedValue={data.studyLevel}
+                                error={errorMessages.studyLevel}
                             />
                             <Chip
-                                data={
-                                    Array.isArray(data.specialization)
-                                        ? data.specialization
-                                        : []
-                                }
-                                selectedValue={
-                                    Array.isArray(data.specialization)
-                                        ? data.specialization
-                                        : []
-                                }
-                                onRemove={(value) => {
-                                    addQuery({
-                                        specialization: Array.isArray(
+                                label="Popular searches"
+                                data={DisciplineData?.map((item) => item.name)}
+                                onSelect={(value: string) => {
+                                    const selectedDiscipline =
+                                        DisciplineData?.find(
+                                            (item) => item.name === value
+                                        );
+
+                                    if (selectedDiscipline) {
+                                        setDisciplineId(selectedDiscipline.id);
+
+                                        addQuery({
+                                            discipline: selectedDiscipline.name
+                                        });
+
+                                        clearError(
+                                            errorMessages,
+                                            setErrorMessages,
+                                            'discipline'
+                                        );
+                                    }
+                                }}
+                                selectedValue={data.discipline}
+                                error={errorMessages.discipline}
+                            />
+                            <div>
+                                <Chip
+                                    label="Select Subjects"
+                                    useSelect
+                                    options={SpecializationData?.filter(
+                                        (item) =>
+                                            item.discipline === disciplineId &&
+                                            !(
+                                                data.specialization &&
+                                                data.specialization.includes(
+                                                    item.name
+                                                )
+                                            )
+                                    ).map((item) => ({
+                                        label: item.name,
+                                        value: item.name
+                                    }))}
+                                    onChange={(option) => {
+                                        const selectedValue = (
+                                            option as OptionType
+                                        ).value;
+
+                                        const specialization = Array.isArray(
                                             data.specialization
                                         )
-                                            ? data.specialization.filter(
-                                                  (item) => item != value
-                                              )
+                                            ? data.specialization
+                                            : [];
+
+                                        const isSelected =
+                                            specialization.includes(
+                                                selectedValue
+                                            );
+
+                                        if (
+                                            !isSelected &&
+                                            specialization.length < 3
+                                        ) {
+                                            addQuery({
+                                                specialization: [
+                                                    ...specialization,
+                                                    selectedValue
+                                                ]
+                                            });
+                                        } else if (isSelected) {
+                                            addQuery({
+                                                specialization:
+                                                    specialization.filter(
+                                                        (item) =>
+                                                            item !==
+                                                            selectedValue
+                                                    )
+                                            });
+                                        }
+                                        clearError(
+                                            errorMessages,
+                                            setErrorMessages,
+                                            'specialization'
+                                        );
+                                    }}
+                                    placeholder="Search here to select subjects"
+                                    isDisable={
+                                        !data.discipline ||
+                                        (data.specialization
+                                            ? data.specialization.length === 3
+                                            : undefined)
+                                    }
+                                    error={errorMessages.specialization}
+                                />
+                                <Chip
+                                    data={
+                                        Array.isArray(data.specialization)
+                                            ? data.specialization
                                             : []
-                                    });
-                                }}
-                            />
+                                    }
+                                    selectedValue={
+                                        Array.isArray(data.specialization)
+                                            ? data.specialization
+                                            : []
+                                    }
+                                    onRemove={(value) => {
+                                        addQuery({
+                                            specialization: Array.isArray(
+                                                data.specialization
+                                            )
+                                                ? data.specialization.filter(
+                                                      (item) => item != value
+                                                  )
+                                                : []
+                                        });
+                                    }}
+                                />
+                            </div>
                         </div>
                     </>
                 )}
@@ -623,90 +644,94 @@ const SmartMatchTool = () => {
                             />
                         </div>
                         <hr className="border h-0.5 bg-blueColor" />
-                        <Chip
-                            data={EnglishTest}
-                            onSelect={(value: string) => {
-                                addQuery({
-                                    englishTest: value
-                                });
-                                clearError(
-                                    errorMessages,
-                                    setErrorMessages,
-                                    'englishTest'
-                                );
-                            }}
-                            selectedValue={data.englishTest}
-                            error={errorMessages.englishTest}
-                        />
-                        {data.englishTest === 'IELTS' && (
-                            <>
-                                <hr className="border h-0.5 bg-blueColor" />
-                                {[
-                                    'overallscore',
-                                    'listening',
-                                    'reading',
-                                    'writing',
-                                    'speaking'
-                                ].map((field) => (
-                                    <InputField
-                                        key={field}
-                                        onSelect={(value) => {
-                                            addQuery({ [field]: value });
-                                            clearError(
-                                                errorMessages,
-                                                setErrorMessages,
-                                                field as keyof ErrorMessages
-                                            );
-                                        }}
-                                        placeholder={
-                                            field === 'overallscore'
-                                                ? 'Overall Band Score (1-10)'
-                                                : `${field.charAt(0).toUpperCase() + field.slice(1)} Score (1-10)`
-                                        }
-                                        error={
-                                            errorMessages[
-                                                field as keyof ErrorMessages
-                                            ]
-                                        }
-                                    />
-                                ))}
-                            </>
-                        )}
+                        <div className="overflow-y-auto setScrollBar max-h-[50vh] overflow-x-hidden">
+                            <Chip
+                                data={EnglishTest}
+                                onSelect={(value: string) => {
+                                    addQuery({
+                                        englishTest: value
+                                    });
+                                    clearError(
+                                        errorMessages,
+                                        setErrorMessages,
+                                        'englishTest'
+                                    );
+                                }}
+                                selectedValue={data.englishTest}
+                                error={errorMessages.englishTest}
+                            />
+                            {data.englishTest === 'IELTS' && (
+                                <>
+                                    <hr className=" h-0.5 mt-2" />
+                                    {[
+                                        'overallscore',
+                                        'listening',
+                                        'reading',
+                                        'writing',
+                                        'speaking'
+                                    ].map((field) => (
+                                        <InputField
+                                            key={field}
+                                            onSelect={(value) => {
+                                                addQuery({ [field]: value });
+                                                clearError(
+                                                    errorMessages,
+                                                    setErrorMessages,
+                                                    field as keyof ErrorMessages
+                                                );
+                                            }}
+                                            gaps
+                                            placeholder={
+                                                field === 'overallscore'
+                                                    ? 'Overall Band Score (1-10)'
+                                                    : `${field.charAt(0).toUpperCase() + field.slice(1)} Score (1-10)`
+                                            }
+                                            error={
+                                                errorMessages[
+                                                    field as keyof ErrorMessages
+                                                ]
+                                            }
+                                        />
+                                    ))}
+                                </>
+                            )}
 
-                        {data.englishTest === 'PTE Academic' && (
-                            <>
-                                <hr className="border h-0.5 bg-blueColor" />
-                                {[
-                                    'overallscore',
-                                    'listening',
-                                    'reading',
-                                    'writing',
-                                    'speaking'
-                                ].map((field) => (
-                                    <InputField
-                                        key={field}
-                                        onSelect={(value) => {
-                                            addQuery({ [field]: value });
-                                            clearError(
-                                                errorMessages,
-                                                setErrorMessages,
-                                                field as keyof ErrorMessages
-                                            );
-                                        }}
-                                        placeholder={
-                                            field === 'overallscore'
-                                                ? 'Overall Score (10-90)'
-                                                : `${field.charAt(0).toUpperCase() + field.slice(1)} Score (10-90)`
-                                        }
-                                        error={
-                                            errorMessages[
-                                                field as keyof ErrorMessages
-                                            ]
-                                        }
-                                    />
-                                ))}
-                            </>
-                        )}
+                            {data.englishTest === 'PTE Academic' && (
+                                <>
+                                    <hr className="border h-0.5 bg-blueColor" />
+                                    {[
+                                        'overallscore',
+                                        'listening',
+                                        'reading',
+                                        'writing',
+                                        'speaking'
+                                    ].map((field) => (
+                                        <InputField
+                                            key={field}
+                                            onSelect={(value) => {
+                                                addQuery({ [field]: value });
+                                                clearError(
+                                                    errorMessages,
+                                                    setErrorMessages,
+                                                    field as keyof ErrorMessages
+                                                );
+                                            }}
+                                            gaps
+                                            placeholder={
+                                                field === 'overallscore'
+                                                    ? 'Overall Score (10-90)'
+                                                    : `${field.charAt(0).toUpperCase() + field.slice(1)} Score (10-90)`
+                                            }
+                                            error={
+                                                errorMessages[
+                                                    field as keyof ErrorMessages
+                                                ]
+                                            }
+                                        />
+                                    ))}
+                                </>
+                            )}
+                        </div>
                     </>
                 )}
 
@@ -723,22 +748,9 @@ const SmartMatchTool = () => {
                             />
                         </div>
                         <hr className="border h-0.5 bg-blueColor" />
-                        <InputField
-                            useSelect
-                            options={feeBudgetOptions}
-                            onChange={(option) => {
-                                addQuery({
-                                    feebudget: (option as OptionType).value
-                                });
-                                clearError(
-                                    errorMessages,
-                                    setErrorMessages,
-                                    'feebudget'
-                                );
-                            }}
-                            placeholder="Fee Budget"
-                            error={errorMessages.feebudget}
-                        />
+                        <div className="flex justify-center mb-4">
+                            <FeeSlider QueryAdd={addQuery} />
+                        </div>
                     </>
                 )}
                 {step === 7 && (
@@ -779,5 +791,5 @@ const SmartMatchTool = () => {
         </div>
     );
 };
-
+SmartMatchTool.layout = { footer: false };
 export default SmartMatchTool;

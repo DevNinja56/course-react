@@ -51,7 +51,7 @@ const UcasApplication = () => {
                     width={2181}
                     alt="circle-1"
                     src="/images/elipse.png"
-                    className="absolute -top-16 -right-8 h-32 w-32 hidden md:block"
+                    className="absolute -top-8 -right-4 h-24 w-24 sm:h-32 sm:w-32 hidden md:block"
                 />
                 <div className="w-full md:w-[87%] lg:w-[80%] xl:w-9/12 mx-auto flex flex-col-reverse md:flex-row items-center gap-8 lg:gap-16 justify-between lg:justify-start">
                     <div className="grid grid-cols-2 gap-6 lg:gap-8 w-60 md:w-[35%] xl:w-[32%] ">
@@ -79,7 +79,7 @@ const UcasApplication = () => {
                             />
                             <KeyService
                                 heading="Deadline Management:"
-                                description="We track deadlines to make sure your application is timely and complete.you are fully prepared."
+                                description="We track deadlines to make sure your application is timely and complete."
                             />
                         </div>
                     </div>
@@ -89,7 +89,7 @@ const UcasApplication = () => {
                     width={2181}
                     alt="circle-1"
                     src="/images/elipse.png"
-                    className="absolute lg:bottom-32 -left-16 h-36 w-36 hidden md:block"
+                    className="absolute bottom-8 left-4 sm:-bottom-16 sm:-left-8 h-28 w-28 sm:h-36 sm:w-36 hidden md:block"
                 />
             </div>
             <LetUsHelpContainer

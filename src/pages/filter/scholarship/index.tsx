@@ -33,7 +33,7 @@ const Scholarship = () => {
                     src="/images/Blogs/Frame 643.svg"
                 />
             </div>
-            <div className="w-full pb-28 pt-10">
+            <div className="w-full lg:px-10 pb-28 pt-10">
                 <div className="container mx-auto px-5 md:px-[50px] lg:px-2 2xl:px-8 transition-all duration-300 flex justify-between">
                     <ScholarshipFilter />
                     <RightScholarshipCardBox />

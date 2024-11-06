@@ -22,7 +22,7 @@ export interface FormData {
     speaking?: string;
     writing?: string;
     overallscore?: string;
-    feebudget?: string;
+    tuitionFee?: string;
     specialization?: string[]; 
 }
 
@@ -154,8 +154,8 @@ export const validateFields = (
             break;
 
         case 6:
-            if (!data.feebudget) {
-                setError(errors, 'feebudget', 'Fee Budget is required');
+            if (!data.tuitionFee) {
+                setError(errors, 'tuitionFee', 'Tuition Fee is required');
                 isValid = false;
             }
             break;

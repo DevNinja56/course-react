@@ -23,7 +23,7 @@ const GuidanceCard: React.FC<GuidanceCardProps> = ({
         <div
             className={`${bgColor} ${textColor} w-52 p-6 rounded-lg flex flex-col justify-between`}
         >
-            <div className="text-xl font-bold mb-4">{number}</div>
+            <div className="text-xl mb-4">{number}</div>
 
             <h1 className="text-3xl font-semibold mb-4">{title}</h1>
             <div className="flex justify-center items-center text-[100px]">

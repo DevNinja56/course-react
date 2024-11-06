@@ -14,7 +14,7 @@ const PageCard = ({
     reverse = false
 }: CardProps) => {
     return (
-        <div className={`${reverse ? 'bg-white' : 'bg-[#EAF2FF]'} p-5 md:p-10`}>
+        <div className={`${!reverse ? 'bg-white' : 'bg-[#fbfcff]'} p-5 md:p-10`}>
             <div
                 className={`flex flex-col ${
                     reverse ? 'lg:flex-row-reverse' : 'lg:flex-row'
