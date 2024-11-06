@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import { ROUTES } from '@/config/constant';
 import { useDispatch } from 'react-redux';
 import { addFiles } from '@/store/slices/apply.slice';
-import { API_ENDPOINTS } from '@/config/Api_EndPoints';
+import { API_ENDPOINTS, bucketNameS3 } from '@/config/Api_EndPoints';
 import axios from 'axios';
 import { BASE_URL } from '@/utils/axios';
 import { getToken } from '@/utils/axios/token';
@@ -56,6 +56,8 @@ const SubmitDocument = () => {
                 for (const file of [...data]) {
                     const formData = new FormData();
                     formData.append('file', file);
+                    formData.append('bucketName', bucketNameS3);
+                    formData.append('folderName', 'uploads');
                     const response = await axios.post(
                         BASE_URL + API_ENDPOINTS.FILE_S3_UPLOAD,
                         formData,

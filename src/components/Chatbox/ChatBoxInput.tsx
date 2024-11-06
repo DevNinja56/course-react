@@ -1,4 +1,4 @@
-import { API_ENDPOINTS } from '@/config/Api_EndPoints';
+import { API_ENDPOINTS, bucketNameS3 } from '@/config/Api_EndPoints';
 import { MessageInterface } from '@/types';
 import { BASE_URL } from '@/utils/axios';
 import { fetchRequest } from '@/utils/axios/fetch';
@@ -84,11 +84,9 @@ const ChatBoxInput = ({ applicationId, setMessage, page }: propTypes) => {
         const token = getToken();
         try {
             const formData = new FormData();
-
             formData.append('file', file);
-            formData.append('bucketName', 'course-options-assets-ragzon');
+            formData.append('bucketName', bucketNameS3);
             formData.append('folderName', 'attachments');
-
             const response = await axios.post(
                 BASE_URL + API_ENDPOINTS.FILE_S3_UPLOAD + '?isDownload=false',
                 formData,
