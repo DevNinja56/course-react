@@ -43,7 +43,7 @@ const Card = () => {
                         />
                     </div>
                 </div>
-                <p className="text-grayColor text-xs md:text-sm mb-1">
+                <p className="text-grayColor text-xs mb-1">
                     Curabitur tristique, sem id sagittis varius, lacus ligula
                     mollis dui, ac condimentum felis metus ut nulla. Aenean ut
                     ultricies turpis, sed sollicitudin eros. Aliquam quis dui ut

@@ -16,10 +16,15 @@ const DisciplineSection = () => {
     const visiblePages = 3;
 
     const getPaginationBars = () => {
-        const startPage = Math.max(1, page - Math.floor(visiblePages / 2));
-        const endPage = Math.min(startPage + visiblePages - 1, totalPages);
-        const pages = [];
+        let startPage = Math.max(1, page - Math.floor(visiblePages / 2));
+        let endPage = startPage + visiblePages - 1;
 
+        if (endPage > totalPages) {
+            endPage = totalPages;
+            startPage = Math.max(1, endPage - visiblePages + 1);
+        }
+
+        const pages = [];
         for (let i = startPage; i <= endPage; i++) {
             pages.push(i);
         }

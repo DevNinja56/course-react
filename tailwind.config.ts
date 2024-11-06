@@ -48,7 +48,8 @@ const config: Config = {
                 progressBarShadow:
                     '0px 11px 25.8px 0px rgba(190, 190, 190, 0.15);',
                 customTermsAndConditionShadow:
-                    '0px 2px 9px 0px rgba(0, 0, 0, 0.09)'
+                    '0px 2px 9px 0px rgba(0, 0, 0, 0.09)',
+                privacyPolicyShadow: '0px 20px 30px 0px #0D173A66'
             },
             height: {
                 headerStickyHeight: 'calc(100vh - 110px)',
