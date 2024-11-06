@@ -11,7 +11,7 @@ import { HiOutlineSparkles } from 'react-icons/hi2';
 
 interface CardProps {
     course: courseType;
-    topFit: boolean;
+    topFit?: boolean;
 }
 
 const CourseCard = ({ course, topFit }: CardProps) => {

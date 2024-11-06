@@ -22,20 +22,19 @@ const BankStatement = () => {
                     <h1 className="text-2xl md:text-3xl text-white font-bold mt-4 mb-2">
                         Bank Statement Calculator
                     </h1>
-                    <div className='flex flex-col gap-3 justify-center items-center'>
-
-                    <p className="text-white w-full md:w-3/4 text-sm  font-light">
-                        Our Bank Statement Calculator is designed to ensure you
-                        know exactly how much financial proof is required for
-                        your UK student visa. This unique feature provides an
-                        accurate calculation tailored to the course and
-                        university you're applying for.
-                    </p>
-                    <p className="text-white w-full md:w-3/4 text-sm  font-light">
-                        Simply click the button on any course page, and within
-                        moments, you'll have the precise amount needed to
-                        support your visa application.
-                    </p>
+                    <div className="flex flex-col gap-3 justify-center items-center">
+                        <p className="text-white w-full md:w-3/4 text-sm  font-light">
+                            Our Bank Statement Calculator is designed to ensure
+                            you know exactly how much financial proof is
+                            required for your UK student visa. This unique
+                            feature provides an accurate calculation tailored to
+                            the course and university you&apos;re applying for.
+                        </p>
+                        <p className="text-white w-full md:w-3/4 text-sm  font-light">
+                            Simply click the button on any course page, and
+                            within moments, you&apos;ll have the precise amount
+                            needed to support your visa application.
+                        </p>
                     </div>
 
                     <div>
@@ -68,7 +67,6 @@ const BankStatement = () => {
                     <h1 className="text-2xl max-[400px]:text-[1.1rem] sm:text-3xl text-[#2563eb] font-extrabold text-left">
                         Key Features:
                     </h1>
-
 
                     <div className="flex flex-col gap-5">
                         <div className="flex flex-col items-start">
