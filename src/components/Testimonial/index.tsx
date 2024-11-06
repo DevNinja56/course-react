@@ -45,25 +45,22 @@ const Testimonial = () => {
                 }`}
             >
                 <img
-                    height={96}
-                    width={96}
+                    height={75}
+                    width={75}
                     alt="testimonial-round"
-                    className="absolute bottom-12 left-8 hidden md:block"
+                    className="absolute bottom-12 -left-6 hidden md:block"
                     src="/images/Blogs/Ellipse 426.svg"
                     // priority
                 />
-                <div className="flex flex-col lg:flex-row justify-between items-start container mx-auto lg:px-2 2xl:px-8 transition-all duration-300 py-5 md:py-28 lg:py-20 gap-x-16 gap-y-5 lg:gap-y-0 px-10">
+                <div className="flex flex-col lg:flex-row justify-between items-start w-full lg:w-10/12 mx-auto lg:px-2 2xl:px-8 transition-all duration-300 py-5 md:py-28 lg:py-20 gap-x-16 gap-y-5 lg:gap-y-0 px-10">
                     <div className="flex flex-col gap-y-2 z-10 relative">
                         <p className="font-bold text-xl md:text-[23px] text-blueColor">
                             Testimonial
                         </p>
-                        <h1
-                            style={{ lineHeight: '57.6px' }}
-                            className="text-[32px] md:text-[40px] font-extrabold text-mainTextColor w-auto md:w-[340px] mb-2"
-                        >
-                            See What OurClient Say’s
+                        <h1 className="text-3xl font-extrabold text-mainTextColor mb-2 leading-snug">
+                            See What <br /> OurClient Say&lsquo;s
                         </h1>
-                        <p className="text-darkGrayColor text-sm w-auto md:w-[559px]">
+                        <p className="text-darkGrayColor text-sm w-auto">
                             Curabitur tristique, sem id sagittis varius, lacus
                             ligula mollis dui, ac condimentum felis metus ut
                             nulla. Aenean ut ultricies turpis, sed sollicitudin
@@ -74,7 +71,7 @@ const Testimonial = () => {
                             height={290}
                             width={290}
                             alt="message"
-                            className="absolute bottom-[-150px] left-0 w-[218px] h-[218px] lg:h-[290px] lg:w-[290px] hidden md:block"
+                            className="absolute bottom-[-150px] left-0 w-[218px] h-[218px] lg:h-[290px] lg:w-5/12 hidden md:block"
                             src="/images/Messages.svg"
                             // priority
                         />
@@ -108,7 +105,7 @@ const Testimonial = () => {
                         height={280}
                         width={280}
                         alt="testimonial-round-2"
-                        className="absolute right-0 top-[-70px] md:top-[-120px] h-20 w-20 md:h-64 md:w-64 lg:h-[280px] lg:w-[280px]"
+                        className="absolute right-0 top-[-70px] md:top-[-120px] w-20 md:w-64 lg:w-44"
                         src="/images/Home/testimoalRoundImg.svg"
                     />
                 ) : router.pathname === ROUTES.FAQ ? (

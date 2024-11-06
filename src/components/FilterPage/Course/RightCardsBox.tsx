@@ -1,10 +1,12 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSearchedCourses } from '@/hooks/filterCourses';
 import CourseCard from './CourseCard';
 import PaginationBox from '../../Pagination';
 import LoaderSpinner from '../../LoaderSpinner';
 import { useFilterQuery } from '@/hooks/filterQuery';
 import SortBy from './SortBy';
+import { SmartMatchToggle } from './SmartMatchToggle';
+import { useRouter } from 'next/router';
 
 const RightCardsBox = () => {
     const {
@@ -14,6 +16,11 @@ const RightCardsBox = () => {
         paginatorInfo: { count, totalPage, page }
     } = useSearchedCourses();
     const { query } = useFilterQuery();
+    const router = useRouter();
+    const [isSmartMatch, setIsSmartMatch] = useState(false);
+    useEffect(() => {
+        setIsSmartMatch(!!Object.keys(router.query).length);
+    }, []);
 
     useEffect(() => {
         fetchCourses();
@@ -28,6 +35,11 @@ const RightCardsBox = () => {
                     <SortBy />
                 </div>
                 <hr className="border border-scholarshipBorderColor" />
+                <SmartMatchToggle
+                    // smartMatch={!!Object.keys(router.query).length}
+                    setSmartMatch={setIsSmartMatch}
+                    smartMatch={isSmartMatch}
+                />
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-10">
                 {isLoading ? (
@@ -37,6 +49,7 @@ const RightCardsBox = () => {
                         <CourseCard
                             key={'course__key__' + course._id}
                             course={course}
+                            topFit={isSmartMatch}
                         />
                     ))
                 )}

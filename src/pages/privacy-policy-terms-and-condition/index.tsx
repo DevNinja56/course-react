@@ -12,7 +12,7 @@ const PrivacyPolicyTermsAndCondition = () => {
                 <h1 className="text-white font-black text-lg md:text-3xl lg:text-4xl">
                     Privacy Policy - Terms & Conditions
                 </h1>
-                <button className="py-2 px-4 md:px-10 bg-white rounded-[29px] text-[#2B79FF] text-xs font-bold hover:bg-[#2B79FF] hover:text-white border hover:border-white">
+                <button className="py-3 px-4 md:px-5 bg-white rounded-[29px] text-[#2B79FF] text-sm font-medium hover:bg-[#2B79FF] hover:text-white border hover:border-white">
                     Check out the details below
                 </button>
             </div>
@@ -46,9 +46,9 @@ const PrivacyPolicyTermsAndCondition = () => {
                     size="h-[8px] w-[8px]"
                 />
                 <div className="h-32 w-32 md:h-40 md:w-40 lg:min-h-44 lg:min-w-44 rounded-full bg-gray-100 bg-opacity-40 flex justify-center items-center p-2.5 md:p-[14px] lg:mt-10">
-                    <div className="h-full w-full rounded-full bg-blueColor/10 flex justify-center items-center p-2.5 md:p-[14px]">
-                        <div className="h-full w-full rounded-full bg-blueColor/10 flex justify-center items-center p-2.5 md:p-[14px]">
-                            <div className="h-full w-full rounded-full bg-blueColor flex items-center justify-center pb-2 pr-2">
+                    <div className="h-full w-full rounded-full bg-[#1D4BF91A] flex justify-center items-center p-2.5 md:p-[14px]">
+                        <div className="h-full w-full rounded-full bg-[#1D4BF91A] flex justify-center items-center p-2.5 md:p-[14px]">
+                            <div className="h-full w-full rounded-full bg-blueColor flex items-center justify-center pb-2 pr-2 shadow-privacyPolicyShadow">
                                 <Image
                                     height={2267}
                                     width={2267}
@@ -119,7 +119,7 @@ const PrivacyPolicyTermsAndCondition = () => {
                 />
                 <div className="w-full">
                     <div className="bg-[#2B79FF] w-full py-6 flex justify-center">
-                        <p className="text-center text-white text-xs md:text-lg font-light w-full md:w-11/12 lg:w-10/12 mx-auto px-2 md:px-0">
+                        <p className="text-center text-white text-xs md:text-sm font-light w-full md:w-11/12 lg:w-7/12 mx-auto px-2 md:px-0">
                             The core purpose of courseoptions.com is helping you
                             and other users find suitable courses, learning
                             providers, and to assist in the admission process.
@@ -131,52 +131,52 @@ const PrivacyPolicyTermsAndCondition = () => {
                     </div>
                     <div className="w-full md:w-11/12 lg:w-10/12 mx-auto px-2 md:px-0 z-10 relative">
                         <div className="bg-white py-5 md:py-12 px-4 md:px-10 lg:pl-20 lg:pr-16 shadow-customTermsAndConditionShadow rounded-[18px] rounded-t-none flex items-start">
-                            <div className="relative h-[420px] md:h-[430px] lg:h-[380px] xl:h-[360px]">
+                            <div className="relative h-[420px] md:h-[342px] lg:h-[335px]">
                                 <hr className="border md:border-2 border-[#2563EB] h-full" />
                             </div>
                             <ul className="font-medium text-sm text-mainTextColor flex flex-col gap-5 -ml-[5px] md:-ml-2.5">
-                                <li className="flex items-start gap-3 md:gap-5 text-xs md:text-base">
+                                <li className="flex items-start gap-3 md:gap-5 text-xs md:text-sm">
                                     <div className="min-h-2 min-w-2 md:min-h-4 md:min-w-4 rounded-full bg-[#2563EB]"></div>
                                     Providing extensive educational information
                                 </li>
-                                <li className="flex items-start gap-3 md:gap-5 text-xs md:text-base">
+                                <li className="flex items-start gap-3 md:gap-5 text-xs md:text-sm">
                                     <div className="min-h-2 min-w-2 md:min-h-4 md:min-w-4 rounded-full bg-[#2563EB]"></div>
                                     Providing advertising and promotional
                                     opportunities for education providers{' '}
                                 </li>
-                                <li className="flex items-start gap-3 md:gap-5 text-xs md:text-base">
+                                <li className="flex items-start gap-3 md:gap-5 text-xs md:text-sm">
                                     <div className="min-h-2 min-w-2 md:min-h-4 md:min-w-4 rounded-full bg-[#2563EB]"></div>
                                     Providing features to enable users to
                                     directly contact education providers{' '}
                                 </li>
-                                <li className="flex items-start gap-3 md:gap-5 text-xs md:text-base">
+                                <li className="flex items-start gap-3 md:gap-5 text-xs md:text-sm">
                                     <div className="min-h-2 min-w-2 md:min-h-4 md:min-w-4 rounded-full bg-[#2563EB]"></div>
                                     Recommending things which we think you`“`ll
                                     like, such as courses and learning providers{' '}
                                 </li>
-                                <li className="flex items-start gap-3 md:gap-5 text-xs md:text-base">
+                                <li className="flex items-start gap-3 md:gap-5 text-xs md:text-sm">
                                     <div className="min-h-2 min-w-2 md:min-h-4 md:min-w-4 rounded-full bg-[#2563EB]"></div>
                                     Notifying you about things you`“`ve told us
                                     you like, such as a new course in your local
                                     area{' '}
                                 </li>
-                                <li className="flex items-start gap-3 md:gap-5 text-xs md:text-base">
+                                <li className="flex items-start gap-3 md:gap-5 text-xs md:text-sm">
                                     <div className="min-h-2 min-w-2 md:min-h-4 md:min-w-4 rounded-full bg-[#2563EB]"></div>
                                     Personalizing sections of our websites to
                                     your preferences{' '}
                                 </li>
-                                <li className="flex items-start gap-3 md:gap-5 text-xs md:text-base">
+                                <li className="flex items-start gap-3 md:gap-5 text-xs md:text-sm">
                                     <div className="min-h-2 min-w-2 md:min-h-4 md:min-w-4 rounded-full bg-[#2563EB]"></div>
                                     Getting in touch if we need to tell you
                                     about something, like a change to our
                                     policies or issues with our service
                                 </li>
-                                <li className="flex items-start gap-3 md:gap-5 text-xs md:text-base">
+                                <li className="flex items-start gap-3 md:gap-5 text-xs md:text-sm">
                                     <div className="min-h-2 min-w-2 md:min-h-4 md:min-w-4 rounded-full bg-[#2563EB]"></div>
                                     Monitoring usage and performance in order to
                                     improve the services we offer.
                                 </li>
-                                <li className="flex items-start gap-3 md:gap-5 text-xs md:text-base">
+                                <li className="flex items-start gap-3 md:gap-5 text-xs md:text-sm">
                                     <div className="min-h-2 min-w-2 md:min-h-4 md:min-w-4 rounded-full bg-[#2563EB]"></div>
                                     Providing assistance and guidance in course
                                     selection, admission application submission,
@@ -198,7 +198,7 @@ const PrivacyPolicyTermsAndCondition = () => {
                     information to any third party.
                 </p>
             </div>
-            <div className="px-2 md:px-0 mb-14 relative">
+            <div className="px-2 md:px-0 mb-14 relative flex flex-col items-center gap-7 text-3xl">
                 <Image
                     height={2168}
                     width={2181}
@@ -213,11 +213,11 @@ const PrivacyPolicyTermsAndCondition = () => {
                     src="/images/elipse.png"
                     className="absolute bottom-96 lg:bottom-80 -left-10 lg:-left-10 h-16 w-16 lg:h-20 lg:w-20 hidden md:block"
                 />
-                <div className="w-full md:w-10/12 bg-[#2C79FF] rounded-[18px] py-7 md:py-12 px-2 md:px-14 lg:px-24 flex flex-col gap-4 md:gap-8 items-center mx-auto">
-                    <h1 className="text-white font-bold text-xl md:text-2xl">
-                        Privacy Policy
-                    </h1>
-                    <div className="flex flex-col gap-7 w-full">
+                <h1 className="font-extrabold text-blueColor text-3xl md:text-4xl">
+                    Privacy Policy
+                </h1>
+                <div className="w-full md:w-10/12 bg-[#2C79FF] rounded-[18px] py-7 md:py-12 px-2 md:px-14 lg:px-20 mx-auto">
+                    <div className="flex flex-col gap-5 w-full">
                         <PrivacyPolicyContainer
                             heading="1. Introduction"
                             description="Introduction We prioritize your privacy and adhere to global data standards, including GDPR (EU), CCPA (California), PIPEDA (Canada), Privacy Act (Australia), POPIA (South Africa), APPI (Japan), PIPL (China), PDP (India), and Middle Eastern regulations."

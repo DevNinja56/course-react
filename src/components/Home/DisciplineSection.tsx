@@ -16,10 +16,15 @@ const DisciplineSection = () => {
     const visiblePages = 3;
 
     const getPaginationBars = () => {
-        const startPage = Math.max(1, page - Math.floor(visiblePages / 2));
-        const endPage = Math.min(startPage + visiblePages - 1, totalPages);
-        const pages = [];
+        let startPage = Math.max(1, page - Math.floor(visiblePages / 2));
+        let endPage = startPage + visiblePages - 1;
 
+        if (endPage > totalPages) {
+            endPage = totalPages;
+            startPage = Math.max(1, endPage - visiblePages + 1);
+        }
+
+        const pages = [];
         for (let i = startPage; i <= endPage; i++) {
             pages.push(i);
         }
@@ -35,13 +40,6 @@ const DisciplineSection = () => {
 
     return (
         <div className="w-full lg:w-10/12 xl:w-11/12 mx-auto px-2 md:px-8 lg:px-0 xl:px-20 2xl:px-8 transition-all duration-300 flex flex-col gap-y-10 md:gap-y-16 lg:flex-row gap-x-8 z-10 relative">
-            <img
-                height={60}
-                width={60}
-                alt="home-round-2"
-                className="absolute -top-28 -left-8 lg:-left-20 xl:-left-7 z-10"
-                src="/images/Home/homeRound2.svg"
-            />
             <div className="w-full lg:w-[35%] z-10 flex flex-col items-center md:items-start justify-center">
                 <p className="text-lg font-extrabold text-mainTextColor">
                     Top Discipline

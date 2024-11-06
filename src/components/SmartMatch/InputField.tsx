@@ -27,8 +27,8 @@ interface InputFieldProps {
     ) => void;
     isMulti?: boolean;
     isDisabled?: boolean;
-    defaultValue?: OptionType ;
-    
+    defaultValue?: OptionType;
+    gaps?: boolean;
 }
 
 export const InputField = ({
@@ -42,7 +42,8 @@ export const InputField = ({
     onChange,
     defaultValue,
     placeholder = 'Search here to select subjects',
-    isMulti = false
+    isMulti = false,
+    gaps
 }: InputFieldProps) => {
     const [inputValue, setInputValue] = useState(selectedValue);
 
@@ -82,7 +83,7 @@ export const InputField = ({
     };
 
     return (
-        <div className="px-2 lg:px-14">
+        <div className={`px-2 lg:px-14 ${gaps?"my-5":""} `}>
             {useSelect ? (
                 <div className="relative">
                     <Select
@@ -113,7 +114,7 @@ export const InputField = ({
                     value={inputValue}
                     onChange={handleInputChange}
                     placeholder={placeholder}
-                    className={`px-4 py-2 rounded-full bg-[#e2ebfb] border-none shadow-none w-full focus:outline-none text-sm placeholder:text-[#727d94] ${isDisabled && "opacity-50"}`}
+                    className={`px-4 py-2 rounded-full bg-[#e2ebfb] border-none shadow-none w-full focus:outline-none text-sm placeholder:text-[#727d94] ${isDisabled && 'opacity-50'}`}
                     style={{
                         borderRadius: '10px',
                         backgroundColor: '#e2ebfb',
