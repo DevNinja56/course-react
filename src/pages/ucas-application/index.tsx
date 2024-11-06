@@ -7,27 +7,27 @@ import React from 'react';
 const UcasApplication = () => {
     return (
         <>
-            <div className="w-full py-8 md:py-12 flex justify-center bg-blueColor relative px-2 md:px-0 h-[80vh]">
+            <div className="w-full py-8 md:py-12 flex justify-center bg-blueColor relative px-4 md:px-6 lg:px-0 h-[80vh] sm:h-auto md:h-[70vh] lg:h-[80vh]">
                 <Image
                     height={2202}
                     width={2347}
                     alt="pattern"
                     src="/images/SmartMatch/Pattern.png"
-                    className="absolute left-0 top-0  scale-x-[-1] w-4/12 lg:w-3/12 xl:w-[40%] md:block hidden opacity-35"
+                    className="absolute left-0 top-0 scale-x-[-1] w-6/12 sm:w-5/12 md:w-4/12 lg:w-3/12 xl:w-[40%] hidden sm:block opacity-35"
                 />
                 <Image
                     height={2202}
                     width={2347}
                     alt="pattern"
                     src="/images/SmartMatch/Pattern.png"
-                    className="absolute right-0 top-0   w-4/12 lg:w-3/12 xl:w-[40%] md:block hidden opacity-35"
+                    className="absolute right-0 top-0 w-6/12 sm:w-5/12 md:w-4/12 lg:w-3/12 xl:w-[40%] hidden sm:block opacity-35"
                 />
-                <div className="flex flex-col gap-5 items-center w-5/12 relative">
-                    <div className="flex flex-col items-center gap-2">
-                        <h1 className="font-bold text-xl md:text-4xl text-white">
+                <div className="flex flex-col gap-5 items-center w-full sm:w-8/12 md:w-6/12 lg:w-5/12 relative px-4">
+                    <div className="flex flex-col items-center gap-2 text-center">
+                        <h1 className="font-bold text-lg sm:text-2xl md:text-4xl text-white">
                             UCAS Application Support
                         </h1>
-                        <p className="w-full text-center text-white text-xs md:text-sm md:px-2 font-light">
+                        <p className="text-white text-sm sm:text-base md:text-lg px-2 font-light">
                             Applying for undergraduate courses in the UK can be
                             challenging, but our UCAS Application Support makes
                             it easy. We guide you through each step of the
@@ -40,24 +40,24 @@ const UcasApplication = () => {
                         width={2339}
                         alt="ucas-application"
                         src="/images/Home/home-ucas-image.png"
-                        className="w-48 md:w-60 lg:w-9/12"
+                        className="w-32 sm:w-48 md:w-60 lg:w-9/12"
                     />
                 </div>
             </div>
-            <div className="w-full py-12 md:py-28 relative px-2 md:px-0">
+            <div className="w-full py-12 md:py-28 relative px-4 md:px-6 lg:px-0">
                 <Image
                     height={2168}
                     width={2181}
                     alt="circle-1"
                     src="/images/elipse.png"
-                    className="absolute -top-16 -right-8 h-32 w-32 hidden md:block"
+                    className="absolute -top-8 -right-4 h-24 w-24 sm:h-32 sm:w-32 hidden md:block"
                 />
-                <div className="w-full md:w-11/12 mx-auto flex md:justify-end">
-                    <div className="flex flex-col gap-5 w-full md:w-8/12 lg:w-7/12">
-                        <h1 className="text-[#2563EB] text-2xl md:text-3xl font-extrabold">
+                <div className="w-full md:w-11/12 mx-auto flex justify-center md:justify-end">
+                    <div className="flex flex-col gap-5 w-full md:w-10/12 lg:w-8/12">
+                        <h1 className="text-blue-500 text-xl sm:text-2xl md:text-3xl font-extrabold">
                             Key Services:
                         </h1>
-                        <div className="flex flex-col py-5 border-t border-[#2563EB]">
+                        <div className="flex flex-col py-5 border-t border-blue-500">
                             <KeyService
                                 heading="Step-by-Step Guidance:"
                                 description="We help you navigate the UCAS portal and complete your application with ease."
@@ -72,7 +72,7 @@ const UcasApplication = () => {
                             />
                             <KeyService
                                 heading="Deadline Management:"
-                                description="We track deadlines to make sure your application is timely and complete.you are fully prepared."
+                                description="We track deadlines to make sure your application is timely and complete."
                             />
                         </div>
                     </div>
@@ -82,7 +82,7 @@ const UcasApplication = () => {
                     width={2181}
                     alt="circle-1"
                     src="/images/elipse.png"
-                    className="absolute lg:bottom-32 -left-16 h-36 w-36 hidden md:block"
+                    className="absolute bottom-8 left-4 sm:-bottom-16 sm:-left-8 h-28 w-28 sm:h-36 sm:w-36 hidden md:block"
                 />
             </div>
             <LetUsHelpContainer

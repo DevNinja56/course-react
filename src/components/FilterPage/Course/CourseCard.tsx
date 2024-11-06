@@ -7,12 +7,14 @@ import FavoriteButton from '../../Button/FavoriteButton';
 import { LuMapPin } from 'react-icons/lu';
 import { CiCalendarDate } from 'react-icons/ci';
 import { useCurrency } from '@/hooks/currency';
+import { HiOutlineSparkles } from 'react-icons/hi2';
 
 interface CardProps {
     course: courseType;
+    topFit: boolean;
 }
 
-const CourseCard = ({ course }: CardProps) => {
+const CourseCard = ({ course, topFit }: CardProps) => {
     const {
         institute,
         degree,
@@ -59,7 +61,15 @@ const CourseCard = ({ course }: CardProps) => {
                         className="h-[200px] w-full object-cover rounded-xl"
                     />
                 </div>
-                <div className="pt-3 px-3 flex flex-col gap-7">
+                <div className="pt-3 px-3 flex flex-col gap-7 relative">
+                    {topFit ? (
+                        <div className="bg-[#70FF95] w-fit flex items-center justify-center text-xs px-4 py-1 rounded-full gap-1 absolute -top-3">
+                            <HiOutlineSparkles />
+                            <p className="font-semibold">Top Fit</p>.
+                        </div>
+                    ) : (
+                        ''
+                    )}
                     <div className="flex flex-col gap-2">
                         <h1
                             title={name}

@@ -2,7 +2,6 @@ import {
     Countries,
     educationalQualifications,
     EnglishTest,
-    feeBudgetOptions,
     gradingScaleFormats,
     gradingScalesPostGraduate,
     Months,
@@ -27,6 +26,7 @@ import {
     ErrorMessages,
     validateFields
 } from '@/components/SmartMatch/Validation';
+import FeeSlider from '@/components/SmartMatch/FeeSlider';
 
 interface OptionType {
     value: string;
@@ -149,7 +149,20 @@ const SmartMatchTool = () => {
     };
 
     return (
-        <div className="2xl:container mx-auto h-fit bg-white bg-[url('/images/SmartMatch/tool/Background.png')] bg-cover p-4 md:p-10">
+        <div
+            className="2xl:container mx-auto h-fit bg-white bg-[url('/images/SmartMatch/tool/Background.png')] bg-cover p-4 md:p-10
+         relative"
+        >
+            <img
+                alt="Elipse"
+                className="absolute lg:h-48 h-16 -right-24 "
+                src="/images/elipse.png"
+            />
+            <img
+                alt="Elipse"
+                className="absolute  h-28 -left-10 top-72"
+                src="/images/Blogs/Ellipse 426.svg"
+            />
             <div className=" w-full sm:w-3/4 lg:w-[55%] bg-[#f8fbff] rounded-xl mx-auto flex flex-col gap-5 h-fit p-7 px-6 md:px-14 ">
                 <div className="flex justify-center items-center relative">
                     {step > 1 && (
@@ -723,22 +736,9 @@ const SmartMatchTool = () => {
                             />
                         </div>
                         <hr className="border h-0.5 bg-blueColor" />
-                        <InputField
-                            useSelect
-                            options={feeBudgetOptions}
-                            onChange={(option) => {
-                                addQuery({
-                                    feebudget: (option as OptionType).value
-                                });
-                                clearError(
-                                    errorMessages,
-                                    setErrorMessages,
-                                    'feebudget'
-                                );
-                            }}
-                            placeholder="Fee Budget"
-                            error={errorMessages.feebudget}
-                        />
+                        <div className="flex justify-center mb-4">
+                            <FeeSlider QueryAdd={addQuery} />
+                        </div>
                     </>
                 )}
                 {step === 7 && (
@@ -779,5 +779,5 @@ const SmartMatchTool = () => {
         </div>
     );
 };
-
+SmartMatchTool.layout = { footer: false };
 export default SmartMatchTool;
