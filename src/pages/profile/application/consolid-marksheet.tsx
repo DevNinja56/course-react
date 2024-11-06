@@ -9,7 +9,7 @@ import PDFSmallViewer from '@/components/PDFViewer/PDFSmallViewer';
 import { FaArrowLeft } from 'react-icons/fa';
 import ReactSelectCustom from '@/components/Select/index';
 import { useRouter } from 'next/router';
-import { API_ENDPOINTS } from '@/config/Api_EndPoints';
+import { API_ENDPOINTS, bucketNameS3 } from '@/config/Api_EndPoints';
 import axios from 'axios';
 import { BASE_URL } from '@/utils/axios';
 import { getToken } from '@/utils/axios/token';
@@ -117,6 +117,8 @@ const ConSolid_MarkSheet = () => {
             for (const file of files) {
                 const formData = new FormData();
                 formData.append('file', file);
+                formData.append('bucketName', bucketNameS3);
+                formData.append('folderName', 'uploads');
                 const response = await axios.post(
                     BASE_URL + API_ENDPOINTS.FILE_S3_UPLOAD,
                     formData,

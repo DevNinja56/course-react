@@ -1,3 +1,6 @@
+export const bucketNameS3 =
+    process.env.NEXT_PUBLIC_BUCKET_NAME || 'course-options-assets-ragzon';
+
 export const API_ENDPOINTS = {
     AUTH: {
         SIGNUP: '/auth/signup',
