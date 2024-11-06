@@ -163,7 +163,16 @@ const Footer = () => {
                                         }
                                     >
                                         <li className="pt-[9px] pb-[10px] text-xs">
-                                            Privacy Policy - Terms & Conditions
+                                            Privacy Policy
+                                        </li>
+                                    </Link>
+                                    <Link
+                                        href={
+                                            ROUTES.PRIVACY_POLICY_TERMS_AND_CONDITION
+                                        }
+                                    >
+                                        <li className="pt-[9px] pb-[10px] text-xs">
+                                            Terms & Conditions
                                         </li>
                                     </Link>
                                 </ul>
