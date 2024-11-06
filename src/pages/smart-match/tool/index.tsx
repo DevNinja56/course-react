@@ -164,7 +164,7 @@ const SmartMatchTool = () => {
                 className="absolute  h-28 -left-10 top-72"
                 src="/images/Blogs/Ellipse 426.svg"
             />
-            <div className=" w-full sm:w-3/4 lg:w-[55%] bg-[#f8fbff] rounded-xl mx-auto flex flex-col gap-5 h-fit p-7 px-6 md:px-14 ">
+            <div className=" w-full sm:w-3/4 lg:w-[55%] bg-[#f8fbff] rounded-xl mx-auto flex flex-col gap-3 h-fit p-7 px-6 md:px-14 ">
                 <div className="flex justify-center items-center relative">
                     {step > 1 && (
                         <BiArrowBack
@@ -214,7 +214,7 @@ const SmartMatchTool = () => {
 
                 {step === 2 && (
                     <>
-                        <div className="flex gap-1 text-center max-sm:flex-col justify-center items-center">
+                        <div className="flex  text-center max-sm:flex-col justify-center items-center">
                             <h1 className=" lg:text-md font-semibold">
                                 When do you plan to kick-start your studies?
                             </h1>
@@ -225,6 +225,7 @@ const SmartMatchTool = () => {
                             />
                         </div>
                         <hr className="border h-0.5 bg-blueColor" />
+
                         <Chip
                             label="Start Year"
                             data={yearOptions}
@@ -644,7 +645,7 @@ const SmartMatchTool = () => {
                             />
                         </div>
                         <hr className="border h-0.5 bg-blueColor" />
-                        <div className="overflow-y-auto setScrollBar max-h-[50vh] overflow-x-hidden">
+                        <div className="overflow-y-auto setScrollBar max-h-[40vh] overflow-x-hidden">
                             <Chip
                                 data={EnglishTest}
                                 onSelect={(value: string) => {
@@ -698,7 +699,7 @@ const SmartMatchTool = () => {
 
                             {data.englishTest === 'PTE Academic' && (
                                 <>
-                                    <hr className="border h-0.5 bg-blueColor" />
+                                    <hr className=" h-0.5 mt-2" />
                                     {[
                                         'overallscore',
                                         'listening',
