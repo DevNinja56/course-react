@@ -8,14 +8,15 @@ const SmartMatchButton: React.FC<{
     gap?: string;
     text: string;
     link?: string;
-}> = ({ fontSize, gap, text, link }) => {
+    radius?: string;
+}> = ({ fontSize, gap, text, link, radius }) => {
     return (
         <Link href={link ?? ROUTES.SMART_MATCH}>
             <button
-                className={`shadow-customHeroSectionButtonShadow rounded-[29px] border border-black/10 flex items-center ${gap ? gap : 'gap-1.5 md:gap-2.5'} py-2 lg:py-3 px-4 lg:px-11 font-bold ${!fontSize ? 'text-xs md:text-base lg:text-lg' : fontSize}  bg-[#2563EB] text-white hover:bg-opacity-80 transition-all duration-300`}
+                className={`${radius ? radius : 'rounded-[90px]'} border border-white flex items-center ${gap ? gap : 'gap-1.5 md:gap-[2px]'} py-2 lg:py-3 px-4 lg:px-6 font-bold ${!fontSize ? 'text-xs md:text-base lg:text-lg' : fontSize}  bg-[#2563EB] text-white hover:bg-opacity-80 transition-all duration-300`}
             >
                 {text}{' '}
-                <span className="flex items-center gap-1 italic text-xs md:text-base lg:text-lg">
+                <span className="flex items-center gap-[2px] italic text-xs md:text-base lg:text-lg">
                     <Image
                         height={24}
                         width={24}

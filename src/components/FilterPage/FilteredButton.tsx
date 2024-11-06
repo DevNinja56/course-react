@@ -33,7 +33,7 @@ export const FilteredButton = ({
         <>
             {!!itemValue && (
                 <div
-                    className="group flex flex-shrink-0 m-1 items-center border border-gray-300 bg-primary rounded-lg text-xs px-2.5 py-2 capitalize text-black cursor-pointer transition duration-200 ease-in-out hover:border-secondary"
+                    className="group flex flex-shrink-0 m-1 items-center bg-[#2C79FF] rounded-full text-xs px-2.5 py-2 capitalize text-white cursor-pointer transition duration-200 ease-in-out hover:border-secondary"
                     onClick={onClick ? onClick : handleDeleteQuery}
                 >
                     {itemKey === 'tuitionFee'
@@ -42,7 +42,7 @@ export const FilteredButton = ({
                           }`
                         : itemValue}
                     {icon && (
-                        <IoClose className="text-sm text-black hover:text-red-600 ms-2 flex-shrink-0 -me-0.5 mt-0.5 transition duration-200 ease-in-out group-hover:text-secondary" />
+                        <IoClose className="text-sm text-white hover:text-red-600 ms-2 flex-shrink-0 -me-0.5 mt-0.5 transition duration-200 ease-in-out group-hover:text-secondary" />
                     )}
                 </div>
             )}

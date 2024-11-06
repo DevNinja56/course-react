@@ -47,10 +47,9 @@ const config: Config = {
                 RequirementBox: '0px 4px 16.1px 0px rgba(190, 190, 190, 0.25)',
                 progressBarShadow:
                     '0px 11px 25.8px 0px rgba(190, 190, 190, 0.15);',
-                customHeroSectionButtonShadow:
-                    '-4px 6px 5.2px 0 rgba(46, 44, 44, 0.31)',
                 customTermsAndConditionShadow:
-                    '0px 2px 9px 0px rgba(0, 0, 0, 0.09)'
+                    '0px 2px 9px 0px rgba(0, 0, 0, 0.09)',
+                privacyPolicyShadow: '0px 20px 30px 0px #0D173A66'
             },
             height: {
                 headerStickyHeight: 'calc(100vh - 110px)',
@@ -66,8 +65,8 @@ const config: Config = {
                 }
             },
             backgroundImage: {
-                'custom-hero-section-gradient':
-                    'linear-gradient(to bottom, #1E293B, #1650CE)'
+                heroSectionImage:
+                    "linear-gradient(to bottom, #2C79FF00 30%, #00387dcc), url('/images/Home/home-page-hero-section-bg.svg')"
             }
         }
     },

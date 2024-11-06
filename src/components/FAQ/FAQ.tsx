@@ -12,7 +12,7 @@ const FAQ = () => {
     return (
         <>
             <div
-                className={`w-full flex items-center justify-center ${router.pathname === '/faq' ?  "h-[200px]" : "p-10"} `}
+                className={`w-full flex items-center justify-center ${router.pathname === '/faq' ? 'h-[200px]' : 'p-10'} `}
             >
                 <div className="flex flex-col gap-4 justify-center items-center ">
                     <p className="text-blueColor text-xl md:text-[23px] font-bold">
@@ -23,9 +23,13 @@ const FAQ = () => {
                     </h1>
                 </div>
             </div>
-            <div className={`flex justify-center items-center w-full relative ${router.pathname === '/faq' && "mb-28"} px-5 md:px-[50px] lg:px-2 2xl:px-8`}>
+            <div
+                className={`flex justify-center items-center w-full relative ${router.pathname === '/faq' && 'mb-28'} px-5 md:px-[50px] lg:px-2 2xl:px-8`}
+            >
                 <div className="w-[880px] flex flex-col border border-grayColor border-opacity-10 rounded relative z-30">
-                    {router.pathname === '/faq' || router.pathname === '/smart-match' ? (
+                    {router.pathname === '/faq' ||
+                    router.pathname === '/smart-match' ||
+                    router.pathname === '/aboutUs' ? (
                         <>
                             <img
                                 height={134}

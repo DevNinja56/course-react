@@ -11,7 +11,7 @@ const PrivacyPolicyContainer = ({ heading, description }: propTypes) => {
             <h1 className="text-white text-base md:text-lg font-bold">
                 {heading}
             </h1>
-            <p className="text-xs md:text-sm text-white font-medium">
+            <p className="text-xs md:text-sm text-white font-medium pl-1.5">
                 {description}
             </p>
         </div>

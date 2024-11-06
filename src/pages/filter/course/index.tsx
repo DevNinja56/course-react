@@ -35,8 +35,8 @@ const FilterPage = () => {
                     src="/images/Blogs/Frame 643.svg"
                 />
             </div>
-            <div className="w-full pb-28 pt-10 bg-mainBackgroundColor bg-opacity-5">
-                <div className="container mx-auto px-5 md:px-[50px] lg:px-2 2xl:px-8 transition-all duration-300 flex justify-between">
+            <div className="w-full  pb-28 pt-10 bg-mainBackgroundColor bg-opacity-5">
+                <div className="container mx-auto px-5 md:px-[50px] lg:px-10 transition-all duration-300 flex justify-between">
                     <CourseFilter />
                     <RightCardsBox />
                 </div>
