@@ -63,16 +63,16 @@ const CourseCard = ({ course, topFit }: CardProps) => {
                         src={`${'https://course-options-assets-ragzon.s3.ap-south-1.amazonaws.com/uploads/1722329836213Staffordshire-University-Stoke-on-Trent.jpg'}`}
                         className="h-[200px] w-full object-cover rounded-t-xl"
                     />
-                </div>
-                <div className="pt-3 px-3 flex flex-col gap-7 relative">
                     {topFit ? (
-                        <div className="bg-[#70FF95] w-fit flex items-center justify-center text-xs px-4 py-1 rounded-full gap-1 absolute -top-3">
+                        <div className="bg-[#70FF95] w-fit flex items-center justify-center text-xs px-4 py-1 rounded-full gap-1 absolute -bottom-3 left-3">
                             <HiOutlineSparkles />
                             <p className="font-semibold">Top Fit</p>.
                         </div>
                     ) : (
                         ''
                     )}
+                </div>
+                <div className="pt-8 px-3 flex flex-col gap-1 relative">
                     <div className="flex flex-col gap-2">
                         <h1
                             title={name}
