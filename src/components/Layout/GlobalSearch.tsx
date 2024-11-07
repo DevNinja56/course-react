@@ -22,17 +22,16 @@ const GlobalSearch = () => {
         }
     };
 
-    
     return (
         <form
             onSubmit={handleSubmit}
-            className="rounded-[95px] bg-blueColor bg-opacity-10 border border-blueColor h-9 flex items-center justify-evenly gap-3 px-4 py-1.5 w-56 xl:w-64"
+            className="rounded-[95px] bg-blueColor bg-opacity-10 border border-blueColor h-8 xl:h-9 flex items-center justify-evenly gap-2 xl:gap-3 px-2 xl:px-4 py-1.5 w-52 xl:w-64"
         >
             <input
                 id="course-search"
                 type="search"
                 onChange={(e) => setCourseValue(e.target.value)}
-                className="h-full w-full text-[10px] outline-none bg-transparent text-gray-500 placeholder:text-[#010F2E] font-semibold"
+                className="h-full w-full text-[9px] xl:text-[10px] outline-none bg-transparent text-gray-500 placeholder:text-[#010F2E] font-semibold"
                 placeholder="Search Course"
             />
             <hr className="h-full border border-[#010F2E] border-1" />
@@ -40,7 +39,7 @@ const GlobalSearch = () => {
                 id="institute-search"
                 type="search"
                 onChange={(e) => setInstituteValue(e.target.value)}
-                className="h-full w-full text-[10px] outline-none bg-transparent text-gray-500 placeholder:text-[#010F2E] font-semibold"
+                className="h-full w-full text-[9px] xl:text-[10px] outline-none bg-transparent text-gray-500 placeholder:text-[#010F2E] font-semibold"
                 placeholder="Search Institute"
             />
             <button type="submit">
