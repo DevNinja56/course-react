@@ -37,7 +37,6 @@ const Universities = () => {
                     src="/images/Blogs/Frame 643.svg"
                 />
             </div>
-
             <div className="w-full pb-8 md:pb-20 mt-16">
                 <div className="max-w-[1100px] 2xl:max-w-[2300px] mx-auto px-2 2xl:px-8 transition-all duration-300 flex justify-between">
                     <div className="flex flex-wrap gap-[30px] items-center justify-center w-full">
