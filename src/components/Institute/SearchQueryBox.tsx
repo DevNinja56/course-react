@@ -59,11 +59,6 @@ const SearchQueryBox: React.FC = () => {
         { value: 'course3', label: 'Course 3' }
     ];
 
-    const gradeOptions = [
-        { value: 'grade1', label: 'Grade 1' },
-        { value: 'grade2', label: 'Grade 2' }
-    ];
-
     const customSelectStyles: StylesConfig = {
         control: (provided) => ({
             ...provided,
@@ -82,7 +77,7 @@ const SearchQueryBox: React.FC = () => {
         }),
         dropdownIndicator: (provided) => ({
             ...provided,
-            color: 'black'
+            display:"none"
         }),
         option: (provided) => ({
             ...provided,
@@ -96,7 +91,6 @@ const SearchQueryBox: React.FC = () => {
             <div className="flex gap-2 items-center bg-white custom-shadow rounded-xl p-1">
                 <div className="flex items-center gap-1">
                     <Select
-                        className="w-[240px]"
                         options={instituteOptions}
                         placeholder="Search by Institute Name"
                         styles={customSelectStyles}
@@ -114,7 +108,6 @@ const SearchQueryBox: React.FC = () => {
                         <span className="invisible">.</span>
                     </div>{' '}
                     <Select
-                        className="w-[240px]"
                         options={courseOptions}
                         placeholder="Search by Location"
                         styles={customSelectStyles}
@@ -128,33 +121,13 @@ const SearchQueryBox: React.FC = () => {
                             (opt: Option) => opt.value === value.course
                         )}
                     />
-                    <div className="w-[1px] bg-gray-300 h-full mx-2">
-                        <span className="invisible">.</span>
-                    </div>{' '}
-                    <Select
-                        className="w-[240px]"
-                        options={gradeOptions}
-                        placeholder="Search by Grade"
-                        styles={customSelectStyles}
-                        onChange={(option) =>
-                            handleSelectChange(
-                                option as SingleValue<Option>,
-                                'grade'
-                            )
-                        }
-                        value={gradeOptions.find(
-                            (opt: Option) => opt.value === value.grade
-                        )}
+                   
+                    <Button
+                        type="submit"
+                        text="Search"
+                        className="py-2 px-6 text-xs !rounded-md !mb-0 mx-2 !w-fit"
                     />
                 </div>
-                <div className="w-[1px] bg-gray-300 h-full mx-2">
-                    <span className="invisible">.</span>
-                </div>
-                <Button
-                    type="submit"
-                    text="Search"
-                    className="py-2 px-6 text-xs !rounded-sm !mb-0 mx-2"
-                />
             </div>
         </form>
     );

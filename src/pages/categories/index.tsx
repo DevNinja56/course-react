@@ -22,7 +22,7 @@ const Fields = () => {
                         Fields
                     </h1>
                     <p className="text-blueColor font-bold text-lg md:text-[23px] text-center">
-                        Top Programs all over the World
+                        Top Programs all over the UK
                     </p>
                 </div>
                 <img

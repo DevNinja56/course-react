@@ -16,9 +16,11 @@ import {
     AiOutlineBank,
     AiOutlineAppstore,
     AiOutlineCalendar,
-    AiOutlineDollarCircle
+    AiOutlinePound
 } from 'react-icons/ai';
 import { useRouter } from 'next/router';
+import { RiEnglishInput } from 'react-icons/ri';
+import { IoFilterOutline } from 'react-icons/io5';
 
 export const FilterRow = () => (
     <div className="px-4">
@@ -51,15 +53,22 @@ const CourseFilter = () => {
                     <h1 className="text-[23px] text-mainTextColor font-bold">
                         Filters
                     </h1>
-                    <p
-                        className="text-sm text-darkGrayColor hover:text-blue-600 cursor-pointer "
-                        onClick={handleClearQuery}
-                    >
-                        Reset All
-                    </p>
+                    <IoFilterOutline />
                 </div>
+
                 {Object.values(query).length > 0 && (
                     <div className="my-2">
+                        <div className="flex justify-between items-center mb-4 px-4">
+                            <h1 className="text-sm text-mainTextColor">
+                                Applied Filter
+                            </h1>
+                            <p
+                                className="text-sm hover:text-darkGrayColor text-blue-600 cursor-pointer "
+                                onClick={handleClearQuery}
+                            >
+                                Reset All
+                            </p>
+                        </div>
                         <div className="flex gap-0.5 flex-wrap px-2">
                             {Object.entries(query).map(([key, item], idx) => {
                                 if (Array.isArray(item)) {
@@ -145,8 +154,19 @@ const CourseFilter = () => {
                     />
                 </FilterAccordion>
                 <FilterAccordion
+                    title="Language Test"
+                    icon={<RiEnglishInput />}
+                    name="LanguageTest"
+                    svg
+                >
+                    <IntakesFilter
+                        data={filters.intakes}
+                        isLoading={isLoading}
+                    />
+                </FilterAccordion>
+                <FilterAccordion
                     title="Tuition Fees"
-                    icon={<AiOutlineDollarCircle />}
+                    icon={<AiOutlinePound />}
                     noBorder
                 >
                     <FeeSlider />
