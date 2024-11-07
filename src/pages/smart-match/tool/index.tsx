@@ -760,6 +760,8 @@ const SmartMatchTool = () => {
                                 {data.englishTest === 'PTE Academic' && (
                                     <>
                                         <hr className=" h-0.5 mt-2" />
+
+                                        <hr className="border h-0.5 bg-blueColor" />
                                         {[
                                             'overallscore',
                                             'listening',
