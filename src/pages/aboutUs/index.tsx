@@ -27,7 +27,7 @@ const AboutUs = () => {
                     About us
                 </div>
                 <h1 className="text-center font-extrabold text-white text-2xl md:text-3xl w-11/12 md:w-3/6">
-                    Transforming the world&apos;s access to international
+                    Transforming the UK&apos;s access to international
                     education
                 </h1>
             </div>

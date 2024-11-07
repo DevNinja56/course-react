@@ -22,7 +22,7 @@ const FilterPage = () => {
                             Discover
                         </p>
                         <h1 className="text-mainTextColor text-2xl md:text-[26px] text-center font-extrabold">
-                            Discover thousands of Institutes across the world
+                            Discover thousands of Institutes across the UK
                         </h1>
                     </div>
                     <SearchQueryBox />

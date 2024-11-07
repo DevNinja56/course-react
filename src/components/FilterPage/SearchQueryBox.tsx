@@ -3,8 +3,44 @@ import React, { useState } from 'react';
 import { useFilterQuery } from '@/hooks/filterQuery';
 import Button from '../Button';
 import { useRouter } from 'next/router';
+import Select, { StylesConfig } from 'react-select';
 
-const SearchQueryBox = () => {
+interface Props {
+    isLocation?: boolean;
+    institutes?: string[];
+    courses?: string[];
+}
+
+interface Option {
+    label: string;
+    value: string;
+}
+
+const customSelectStyles: StylesConfig = {
+    control: (provided) => ({
+        ...provided,
+        border: 'none',
+        boxShadow: 'none'
+    }),
+    placeholder: (provided) => ({
+        ...provided,
+        color: 'black'
+    }),
+    indicatorSeparator: () => ({
+        display: 'none'
+    }),
+    dropdownIndicator: (provided) => ({
+        ...provided,
+        display: 'none'
+    }),
+    option: (provided) => ({
+        ...provided,
+
+        fontSize: '12px'
+    })
+};
+
+const SearchQueryBox = ({ isLocation, institutes, courses }: Props) => {
     const { query } = useRouter();
     const [value, setValue] = useState({
         institute: (query?.instituteQuery as string) ?? '',
@@ -24,35 +60,59 @@ const SearchQueryBox = () => {
             setValue({ institute: '', course: '' });
         }
     };
+
+    const instituteOptions = institutes?.map((institute) => ({
+        value: institute,
+        label: institute
+    }));
+
+    const courseOptions = courses?.map((course) => ({
+        value: course,
+        label: course
+    }));
+
     return (
         <form onSubmit={handleSubmit} className="relative w-full">
             <div className="flex gap-3 items-center bg-white custom-shadow rounded-xl w-full p-2">
                 <CgSearch className="text-3xl min-w-[40px]" />
-                <div className="flex items-center">
-                    <input
-                        className="p-3 outline-none text-base text-mainTextColor w-[320px]"
-                        value={value.institute}
-                        onChange={({ target }) =>
+                <div className="flex items-center w-full">
+                    <Select
+                        options={instituteOptions}
+                        value={instituteOptions?.find(
+                            (option) => option.value === value.institute
+                        )}
+                        onChange={(selectedOption) =>
                             setValue((prev) => ({
                                 ...prev,
-                                institute: target.value
+                                institute:
+                                    (selectedOption as Option)?.value || ''
                             }))
                         }
-                        placeholder="Search by Institute name"
+                        placeholder="Select Institute"
+                        className="w-[320px]"
+                        classNamePrefix="react-select"
+                        styles={customSelectStyles}
                     />
-                    <div className="w-[1px] bg-black h-full mx-2 bg-opacity-20 overflow-hidden ">
+                    <div className="w-[1px] bg-black h-full mx-2 bg-opacity-20 overflow-hidden">
                         <span className="invisible">.</span>
                     </div>
-                    <input
-                        className="p-3 outline-none text-base text-mainTextColor w-[320px]"
-                        value={value.course}
-                        onChange={({ target }) =>
+                    <Select
+                        options={courseOptions}
+                        value={courseOptions?.find(
+                            (option) => option.value === value.course
+                        )}
+                        onChange={(selectedOption) =>
                             setValue((prev) => ({
                                 ...prev,
-                                course: target.value
+                                course: (selectedOption as Option)?.value || ''
                             }))
                         }
-                        placeholder="Search by course name"
+                        placeholder={
+                            isLocation ? 'Select Location' : 'Select Course'
+                        }
+                        className="w-[320px]"
+                        styles={customSelectStyles}
+                        classNamePrefix="react-select"
                     />
                 </div>
                 <Button
