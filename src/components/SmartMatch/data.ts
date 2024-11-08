@@ -162,8 +162,7 @@ export const EnglishTest = [
     'PTE Academic',
     'Language Cert',
     'Oxford ELLT',
-    'Duolingo',
-    "I haven't taken any test"
+    'Duolingo'
 ];
 
 export const months = [
@@ -202,16 +201,14 @@ export const yearOptions = [
     (currentYear + 1).toString(),
     (currentYear + 2).toString(),
     (currentYear + 3).toString(),
-    (currentYear + 4).toString(),
-    'Help me decide'
+    (currentYear + 4).toString()
 ];
 
 export const Months = [
     'January – March',
     'April – June',
     'July – September',
-    'October – December',
-    'Help me decide'
+    'October – December'
 ];
 
 export const feeBudgetOptions = [

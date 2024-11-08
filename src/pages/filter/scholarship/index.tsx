@@ -20,7 +20,7 @@ const Scholarship = () => {
                             Scholarship
                         </p>
                         <h1 className="text-mainTextColor text-2xl md:text-[26px] text-center font-extrabold">
-                            Explore thousands of scholarships across the world
+                            Explore thousands of scholarships across the UK
                         </h1>
                     </div>
                     <SearchQueryBox />

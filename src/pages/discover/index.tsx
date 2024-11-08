@@ -45,7 +45,7 @@ const Discover = () => {
                         </div>
                     </div>
                 </div>
-                <div className="relative mb-10 lg:mt-44">
+                <div className="relative mb-10 mt-44">
                     <StepsCard
                         heading="Choose Location"
                         description="Choose the city in the UK where you want to study."

@@ -39,10 +39,10 @@ export const FilterCheckBox = React.forwardRef<HTMLInputElement, propsType>(
 
         return (
             <label
-                className="w-full p-[6px] hover:bg-profileBgColor px-4 flex gap-x-2 group select-none cursor-pointer "
+                className="w-full py-[6px] hover:bg-profileBgColor px-0.5  flex gap-x-2 group select-none cursor-pointer "
                 htmlFor={id}
             >
-                <div className="relative flex items-center w-full">
+                <div className="relative flex items-center w-full gap-1">
                     <input
                         {...props}
                         id={id}
@@ -50,11 +50,11 @@ export const FilterCheckBox = React.forwardRef<HTMLInputElement, propsType>(
                         ref={ref}
                         onChange={customF! ?? handleCheckedCountry}
                         checked={isChecked! ?? state?.includes(text)}
-                        className="h-5 w-5 rounded-[2px] border border-borderColor cursor-pointer pb-0 group-hover:border-blueColor accent-[blueColor]"
+                        className="h-3.5 w-3.5 rounded-[2px] border border-borderColor cursor-pointer pb-0 group-hover:border-blueColor accent-[blueColor]"
                     />
-                    <p className="text-sm flex-1 text-grayColor group-hover:text-blueColor ml-2 capitalize line-clamp-1 flex justify-between w-full ">
+                    <p className="text-sm font-semibold flex-1 text-black group-hover:text-blueColor ml-2 capitalize line-clamp-1 flex justify-between w-full items-center">
                         <span>{text}</span>
-                        <span className="text-xs font-bold">{count}</span>
+                        {count && <span className="text-gray-500 py-1 px-2  text-xs bg-gray-100 rounded-lg">{count}</span>}
                     </p>
                 </div>
             </label>
