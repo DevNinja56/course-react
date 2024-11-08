@@ -8,7 +8,7 @@ import React from 'react';
 const UcasApplication = () => {
     return (
         <>
-            <div className="w-full py-8 md:py-12 flex justify-center bg-blueColor relative px-2 md:px-0 md:h-[80vh]">
+            <div className="w-full py-8 md:py-12 flex justify-center bg-blueColor relative px-2 md:px-0 md:h-[450px] xl:h-[500px]">
                 <Image
                     height={2202}
                     width={2347}
@@ -41,7 +41,7 @@ const UcasApplication = () => {
                         width={2339}
                         alt="ucas-application"
                         src="/images/Home/home-ucas-image.svg"
-                        className="w-48 md:w-80 lg:w-7/12 xl:w-8/12"
+                        className="w-48 md:w-80 lg:w-7/12 xl:w-8/12 2xl:w-[420px]"
                     />
                 </div>
             </div>
@@ -54,7 +54,7 @@ const UcasApplication = () => {
                     className="absolute -top-8 -right-4 h-24 w-24 sm:h-32 sm:w-32 hidden md:block"
                 />
                 <div className="w-full md:w-[87%] lg:w-[80%] xl:w-9/12 mx-auto flex flex-col-reverse md:flex-row items-center gap-8 lg:gap-16 justify-between lg:justify-start">
-                    <div className="grid grid-cols-2 gap-6 lg:gap-8 w-60 md:w-[35%] xl:w-[32%] ">
+                    <div className="grid grid-cols-2 gap-6 lg:gap-8 w-60 md:w-[35%] xl:w-[32%] 2xl:w-[25%]">
                         <KeyServiceIconContainer src="/images/UcasApplication/Plain.svg" />
                         <KeyServiceIconContainer src="/images/UcasApplication/subject.svg" />
                         <KeyServiceIconContainer src="/images/UcasApplication/Document Add.svg" />

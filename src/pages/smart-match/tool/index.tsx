@@ -697,7 +697,7 @@ const SmartMatchTool = () => {
                                     so far?
                                 </h1>
                                 <img
-                                    src="/images/SmartMatch/Tool/Writing.png"
+                                    src="/images/SmartMatch/Tool/writing.svg"
                                     alt="world"
                                     className="h-6"
                                 />
@@ -822,7 +822,7 @@ const SmartMatchTool = () => {
                         <>
                             <div className="flex justify-center items-center flex-col text-xl font-bold">
                                 <img
-                                    src="/images/SmartMatch/tool/Checkmark.png"
+                                    src="/images/SmartMatch/Tool/Checkmark.png"
                                     alt="Book"
                                     className="h-40"
                                 />

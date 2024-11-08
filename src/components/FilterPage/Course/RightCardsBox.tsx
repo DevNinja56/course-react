@@ -26,7 +26,7 @@ const RightCardsBox = () => {
         fetchCourses();
     }, [query]);
     return (
-        <div className="flex flex-col gap-y-7 w-full lg:w-[73%]">
+        <div className="flex flex-col gap-y-7 w-full lg:w-[74%] xl:w-[73%]">
             <div className="flex flex-col gap-y-4">
                 <div className="w-full flex items-center justify-between">
                     <h1 className="font-bold text-lg md:text-[23px] text-mainTextColor">
@@ -41,7 +41,7 @@ const RightCardsBox = () => {
                     smartMatch={isSmartMatch}
                 />
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-10">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 xl:gap-8 mb-10">
                 {isLoading ? (
                     <LoaderSpinner color="text-black" />
                 ) : (

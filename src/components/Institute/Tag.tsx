@@ -12,7 +12,7 @@ const Tag = ({ icon, text, className }: propTypes) => {
             <div className="p-2 bg-blueColor bg-opacity-20  rounded-full">
                 {icon}
             </div>
-            <p className="text-xs text-blueColor text-center">{text}</p>
+            <p className="text-xs text-[#010F2E] text-center">{text}</p>
         </div>
     );
 };
