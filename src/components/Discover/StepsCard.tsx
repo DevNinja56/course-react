@@ -64,7 +64,7 @@ const StepsCard = ({
             <div
                 className={`${
                     !colorChange ? 'bg-white' : 'bg-[#fbfcff]'
-                } gap-10 md:px-10 m-0 lg:flex justify-end py-5 lg:p-0 lg:!pr-14 2xl:!pr-0 2xl:justify-center`}
+                } gap-10 md:px-10 m-0 lg:flex justify-end py-5 lg:p-0  xl:!pr-28 2xl:!pr-0 2xl:justify-center`}
             >
                 <div className="flex flex-col lg:flex-row items-center justify-center lg:justify-between relative xl:gap-20 lg:gap-10">
                     {bottom && (

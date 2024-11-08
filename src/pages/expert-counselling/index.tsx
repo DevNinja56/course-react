@@ -7,30 +7,7 @@ import React from 'react';
 const ExpertCounselling = () => {
     return (
         <>
-            {/* <div className="w-full py-8 md:py-12 flex justify-center bg-gradient-to-b from-blueColor to-white via-blueColor h-[72vh] md:h-[95vh] lg:h-[87vh] relative px-2 md:px-0">
-                <div className="flex flex-col gap-8 md:gap-10 items-center">
-                    <div className="flex flex-col items-center gap-2">
-                        <h1 className="font-bold text-xl md:text-3xl text-white">
-                            Expert Counselling At Every Step
-                        </h1>
-                        <p className="w-full md:w-10/12 lg:w-8/12 text-center text-white text-xs md:text-lg md:px-2 font-light">
-                            From application submission to visa processing, our
-                            expert counselors guide you every step of the way,
-                            ensuring your success.
-                        </p>
-                    </div>
-                    <div className="w-80 md:w-6/12 lg:w-6/12 pl-10">
-                        <Image
-                            height={2350}
-                            width={2339}
-                            alt="ucas-application"
-                            src="/images/Home/home-counsellor.png"
-                            className="h-full w-full"
-                        />
-                    </div>
-                </div>
-            </div> */}
-            <div className="w-full py-8 md:py-12 flex justify-center bg-blueColor relative px-2 md:px-0 h-[83vh]">
+            <div className="w-full py-8 md:py-12 flex justify-center bg-blueColor relative px-2 md:px-0 md:h-[80vh]">
                 <Image
                     height={2202}
                     width={2347}
@@ -61,11 +38,11 @@ const ExpertCounselling = () => {
                         width={2339}
                         alt="ucas-application"
                         src="/images/expert-counsellor/expert-counsellor-hero-section.svg"
-                        className="w-96 md:w-8/12 lg:w-7/12 xl:w-[74%]"
+                        className="w-96 md:w-[550px] lg:w-7/12 xl:w-[70%]"
                     />
                 </div>
             </div>
-            <div className="w-full py-12 md:pt-32 md:pb-28 lg:pt-40 lg:pb-28 relative px-2 md:px-0">
+            <div className="w-full py-12 md:pt-16 md:pb-28 lg:pt-40 lg:pb-28 relative px-2 md:px-0">
                 <Image
                     height={2168}
                     width={2181}

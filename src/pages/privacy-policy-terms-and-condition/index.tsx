@@ -131,52 +131,52 @@ const PrivacyPolicyTermsAndCondition = () => {
                     </div>
                     <div className="w-full md:w-11/12 lg:w-10/12 mx-auto px-2 md:px-0 z-10 relative">
                         <div className="bg-white py-5 md:py-12 px-4 md:px-10 lg:pl-20 lg:pr-16 shadow-customTermsAndConditionShadow rounded-[18px] rounded-t-none flex items-start">
-                            <div className="relative h-[420px] md:h-[342px] lg:h-[335px]">
+                            <div className="relative h-[50vh] md:h-[339px] lg:h-[335px] hidden md:block">
                                 <hr className="border md:border-2 border-[#2563EB] h-full" />
                             </div>
                             <ul className="font-medium text-sm text-mainTextColor flex flex-col gap-5 -ml-[5px] md:-ml-2.5">
-                                <li className="flex items-start gap-3 md:gap-5 text-xs md:text-sm">
+                                <li className="flex items-center md:items-start gap-3 md:gap-5 text-xs md:text-sm">
                                     <div className="min-h-2 min-w-2 md:min-h-4 md:min-w-4 rounded-full bg-[#2563EB]"></div>
                                     Providing extensive educational information
                                 </li>
-                                <li className="flex items-start gap-3 md:gap-5 text-xs md:text-sm">
+                                <li className="flex items-center md:items-start gap-3 md:gap-5 text-xs md:text-sm">
                                     <div className="min-h-2 min-w-2 md:min-h-4 md:min-w-4 rounded-full bg-[#2563EB]"></div>
                                     Providing advertising and promotional
                                     opportunities for education providers{' '}
                                 </li>
-                                <li className="flex items-start gap-3 md:gap-5 text-xs md:text-sm">
+                                <li className="flex items-center md:items-start gap-3 md:gap-5 text-xs md:text-sm">
                                     <div className="min-h-2 min-w-2 md:min-h-4 md:min-w-4 rounded-full bg-[#2563EB]"></div>
                                     Providing features to enable users to
                                     directly contact education providers{' '}
                                 </li>
-                                <li className="flex items-start gap-3 md:gap-5 text-xs md:text-sm">
+                                <li className="flex items-center md:items-start gap-3 md:gap-5 text-xs md:text-sm">
                                     <div className="min-h-2 min-w-2 md:min-h-4 md:min-w-4 rounded-full bg-[#2563EB]"></div>
                                     Recommending things which we think you`“`ll
                                     like, such as courses and learning providers{' '}
                                 </li>
-                                <li className="flex items-start gap-3 md:gap-5 text-xs md:text-sm">
+                                <li className="flex items-center md:items-start gap-3 md:gap-5 text-xs md:text-sm">
                                     <div className="min-h-2 min-w-2 md:min-h-4 md:min-w-4 rounded-full bg-[#2563EB]"></div>
                                     Notifying you about things you`“`ve told us
                                     you like, such as a new course in your local
                                     area{' '}
                                 </li>
-                                <li className="flex items-start gap-3 md:gap-5 text-xs md:text-sm">
+                                <li className="flex items-center md:items-start gap-3 md:gap-5 text-xs md:text-sm">
                                     <div className="min-h-2 min-w-2 md:min-h-4 md:min-w-4 rounded-full bg-[#2563EB]"></div>
                                     Personalizing sections of our websites to
                                     your preferences{' '}
                                 </li>
-                                <li className="flex items-start gap-3 md:gap-5 text-xs md:text-sm">
+                                <li className="flex items-center md:items-start gap-3 md:gap-5 text-xs md:text-sm">
                                     <div className="min-h-2 min-w-2 md:min-h-4 md:min-w-4 rounded-full bg-[#2563EB]"></div>
                                     Getting in touch if we need to tell you
                                     about something, like a change to our
                                     policies or issues with our service
                                 </li>
-                                <li className="flex items-start gap-3 md:gap-5 text-xs md:text-sm">
+                                <li className="flex items-center md:items-start gap-3 md:gap-5 text-xs md:text-sm">
                                     <div className="min-h-2 min-w-2 md:min-h-4 md:min-w-4 rounded-full bg-[#2563EB]"></div>
                                     Monitoring usage and performance in order to
                                     improve the services we offer.
                                 </li>
-                                <li className="flex items-start gap-3 md:gap-5 text-xs md:text-sm">
+                                <li className="flex items-center md:items-start gap-3 md:gap-5 text-xs md:text-sm">
                                     <div className="min-h-2 min-w-2 md:min-h-4 md:min-w-4 rounded-full bg-[#2563EB]"></div>
                                     Providing assistance and guidance in course
                                     selection, admission application submission,

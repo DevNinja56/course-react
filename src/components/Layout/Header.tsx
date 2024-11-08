@@ -49,11 +49,11 @@ const Header = ({ onlyLogo }: { onlyLogo?: boolean }) => {
                         <div className="hidden lg:block">
                             <GlobalSearch />
                         </div>
-                        <div className="flex items-center print:hidden gap-x-4 xl:gap-x-6">
-                            <div className="hidden lg:flex items-center gap-x-6 lg:gap-x-4 xl:gap-x-8">
+                        <div className="flex items-center print:hidden gap-x-3 xl:gap-x-6">
+                            <div className="hidden lg:flex items-center gap-x-6 lg:gap-x-3 xl:gap-x-8">
                                 <Link href={ROUTES.FILTER_COURSE}>
                                     <div
-                                        className={`flex items-center gap-x-1 xl:gap-x-1.5 text-xs font-semibold ${
+                                        className={`flex items-center gap-x-1 xl:gap-x-1.5 text-[11px] xl:text-xs font-semibold ${
                                             router.pathname ===
                                             ROUTES.FILTER_COURSE
                                                 ? 'text-blueColor'
@@ -66,7 +66,7 @@ const Header = ({ onlyLogo }: { onlyLogo?: boolean }) => {
                                 </Link>
                                 <Link href={ROUTES.INSTITUTES}>
                                     <div
-                                        className={`flex items-center gap-x-1 xl:gap-x-1.5 text-xs font-semibold ${
+                                        className={`flex items-center gap-x-1 xl:gap-x-1.5 text-[11px] xl:text-xs font-semibold ${
                                             router.pathname ===
                                             ROUTES.INSTITUTES
                                                 ? 'text-blueColor'
@@ -79,7 +79,7 @@ const Header = ({ onlyLogo }: { onlyLogo?: boolean }) => {
                                 </Link>
                                 <Link href={ROUTES.FILTER_SCHOLARSHIP}>
                                     <div
-                                        className={`flex items-center gap-x-1 xl:gap-x-1.5 text-xs font-semibold ${
+                                        className={`flex items-center gap-x-1 xl:gap-x-1.5 text-[11px] xl:text-xs font-semibold ${
                                             router.pathname ===
                                             ROUTES.FILTER_SCHOLARSHIP
                                                 ? 'text-blueColor'
@@ -92,7 +92,7 @@ const Header = ({ onlyLogo }: { onlyLogo?: boolean }) => {
                                 </Link>
                                 <Link href={ROUTES.COMPARE}>
                                     <div
-                                        className={`flex items-center gap-x-1 xl:gap-x-1.5 text-xs font-semibold ${
+                                        className={`flex items-center gap-x-1 xl:gap-x-1.5 text-[11px] xl:text-xs font-semibold ${
                                             router.pathname === ROUTES.COMPARE
                                                 ? 'text-blueColor'
                                                 : 'text-textBlackColor'
@@ -125,7 +125,7 @@ const Header = ({ onlyLogo }: { onlyLogo?: boolean }) => {
                                             state: ''
                                         })
                                     }
-                                    className="flex items-center gap-x-1.5 cursor-pointer text-xs font-semibold text-textBlackColor"
+                                    className="flex items-center gap-x-1.5 cursor-pointer text-[11px] xl:text-xs font-semibold text-textBlackColor"
                                 >
                                     <svg
                                         width="24"
@@ -175,10 +175,10 @@ const Header = ({ onlyLogo }: { onlyLogo?: boolean }) => {
                                             />
                                         ) : (
                                             <span className="border rounded-full p-0.5 -mr-1">
-                                                <CiUser className="text-md md:text-2xl" />
+                                                <CiUser className="text-2xl lg:text-lg" />
                                             </span>
                                         )}
-                                        <p className="text-textBlackColor capitalize font-semibold hidden lg:flex gap-x-1 text-sm">
+                                        <p className="text-textBlackColor capitalize font-semibold hidden lg:flex gap-x-1 text-[11px] xl:text-xs">
                                             {user.name?.toLocaleLowerCase()}
                                             <img
                                                 height={16}

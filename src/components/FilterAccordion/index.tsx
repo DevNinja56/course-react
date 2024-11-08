@@ -1,6 +1,8 @@
 import { useFilterQuery } from '@/hooks/filterQuery';
+import Image from 'next/image';
 import React, { useState } from 'react';
-import { FiChevronDown, FiChevronUp } from 'react-icons/fi';
+import { FiChevronUp } from 'react-icons/fi';
+import { IoSearch } from 'react-icons/io5';
 
 interface FilterAccordionProps {
     title: string;
@@ -9,6 +11,7 @@ interface FilterAccordionProps {
     firstOpen?: boolean;
     icon?: React.ReactNode;
     name?: string;
+    svg?: boolean;
 }
 
 const FilterAccordion: React.FC<FilterAccordionProps> = ({
@@ -17,6 +20,7 @@ const FilterAccordion: React.FC<FilterAccordionProps> = ({
     noBorder,
     firstOpen,
     icon,
+    svg,
     name
 }) => {
     const [isOpen, setIsOpen] = useState(firstOpen ?? false);
@@ -39,20 +43,32 @@ const FilterAccordion: React.FC<FilterAccordionProps> = ({
                 onClick={toggleAccordion}
             >
                 <div className="text-lg font-semibold text-gray-800 flex items-center gap-2">
-                    <h1>{icon}</h1>
+                    {!svg ? (
+                        <h1>{icon}</h1>
+                    ) : (
+                        <Image
+                            width={14}
+                            height={14}
+                            src="\images\FilterPage\English.svg"
+                            alt=""
+                            className='ml-0.5 mr-1'
+                        />
+                    )}
                     <h1>{title}</h1>
+
+                    <FiChevronUp
+                        className={`w-5 h-5 text-gray-600 ${isOpen ? 'rotate-0' : 'rotate-180'} text-black`}
+                    />
                 </div>
                 <div className="flex gap-2 items-center">
-                    {name && selectedCount > 0 && (
-                        <h1 className="text-sm font-bold text-white bg-blue-600 w-6 h-6 rounded-full text-center flex items-center justify-center">
-                            {selectedCount}
-                        </h1>
-                    )}
-                    {isOpen ? (
-                        <FiChevronUp className="w-5 h-5 text-gray-600" />
-                    ) : (
-                        <FiChevronDown className="w-5 h-5 text-gray-600" />
-                    )}
+                    <div>
+                        {name && selectedCount > 0 && (
+                            <h1 className="text-sm font-bold text-white bg-blue-600 w-6 h-6 rounded-full text-center flex items-center justify-center">
+                                {selectedCount}
+                            </h1>
+                        )}
+                    </div>
+                    <IoSearch className="text-[#626262] font-bold" />
                 </div>
             </div>
             {isOpen && (
