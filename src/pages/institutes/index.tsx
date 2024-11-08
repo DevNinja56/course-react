@@ -24,7 +24,7 @@ const Universities = () => {
                             Your Quick Book To Explore
                         </p>
                         <h1 className="text-mainTextColor text-2xl md:text-[26px] text-center font-extrabold">
-                            LEADING UK UNIVERSITIES
+                            LEADING WORLD UNIVERSITIES
                         </h1>
                     </div>
                     <SearchQueryBox isLocation />
@@ -37,6 +37,7 @@ const Universities = () => {
                     src="/images/Blogs/Frame 643.svg"
                 />
             </div>
+         
             <div className="w-full pb-8 md:pb-20 mt-16">
                 <div className="max-w-[1100px] 2xl:max-w-[2300px] mx-auto px-2 2xl:px-8 transition-all duration-300 flex justify-between">
                     <div className="flex flex-wrap gap-[30px] items-center justify-center w-full">

@@ -53,9 +53,9 @@ const SmartMatch = () => {
 
                     <div className="flex flex-col items-center p-6">
                         <img
-                            src="/images/SmartMatch/AiBot.png"
+                            src="/images/SmartMatch/Ai Bot Animation.gif"
                             alt="AiBot"
-                            className="h-44"
+                            className="h-44 scale-150"
                         />
                         <img
                             src="/images/SmartMatch/AiBotShadow.png"

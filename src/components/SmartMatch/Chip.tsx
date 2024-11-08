@@ -64,11 +64,13 @@ export const Chip: React.FC<ChipProps> = ({
         }),
         placeholder: (base) => ({
             ...base,
-            color: 'black'
+            color: 'black',
+            fontSize: '0.8rem'
         }),
         menu: (base) => ({
             ...base,
-            fontSize: '0.7rem'
+            fontSize: '0.8rem'
+
         })
     };
 
@@ -78,7 +80,7 @@ export const Chip: React.FC<ChipProps> = ({
 
     return (
         <div className="px-2 lg:px-14 relative flex flex-col">
-            {label && <p className="text-xs font-[500] mb-2">{label}</p>}
+            {label && <p className="text-md font-[500] my-2">{label}</p>}
             {useSelect ? (
                 <div className="relative">
                     <IoIosSearch className="absolute top-2.5 left-3 text-gray-500 z-10" />
@@ -96,7 +98,7 @@ export const Chip: React.FC<ChipProps> = ({
                     />
                 </div>
             ) : (
-                <div className="flex text-[0.7rem] gap-x-3 gap-y-3 flex-wrap my-2 font-[500]">
+                <div className="flex text-sm gap-x-3 gap-y-3 flex-wrap my-2 font-[500]">
                     {data?.map((item) => (
                         <div
                             onClick={() => onSelect && onSelect(item)}
