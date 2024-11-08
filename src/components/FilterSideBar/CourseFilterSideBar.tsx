@@ -15,11 +15,12 @@ import {
     AiOutlineAppstore,
     AiOutlineBank,
     AiOutlineCalendar,
-    AiOutlineDollarCircle,
-    AiOutlineEnvironment
+    AiOutlineEnvironment,
+    AiOutlinePound
 } from 'react-icons/ai';
 import { LuGraduationCap } from 'react-icons/lu';
 import { useRouter } from 'next/router';
+import { RiEnglishInput } from 'react-icons/ri';
 interface ModalProps {
     setFilterSideBar: (show: boolean) => void;
 }
@@ -35,7 +36,7 @@ const FilterSideBar = ({ setFilterSideBar }: ModalProps) => {
         isLoading
     } = useSearchedCourses();
 
-    const {query:urlQuery,push} = useRouter();
+    const { query: urlQuery, push } = useRouter();
 
     const handleClearQuery = () => {
         if (Object.keys(urlQuery).length != 0) {
@@ -173,8 +174,20 @@ const FilterSideBar = ({ setFilterSideBar }: ModalProps) => {
                                 />
                             </FilterAccordion>
                             <FilterAccordion
+                                title="Language Test"
+                                icon={<RiEnglishInput />}
+                                name="LanguageTest"
+                                svg
+                            >
+                                <></>
+                                {/* <IntakesFilter
+                        data={filters.intakes}
+                        isLoading={isLoading}
+                    /> */}
+                            </FilterAccordion>
+                            <FilterAccordion
                                 title="Tuition Fees"
-                                icon={<AiOutlineDollarCircle />}
+                                icon={<AiOutlinePound />}
                                 noBorder
                             >
                                 <FeeSlider />

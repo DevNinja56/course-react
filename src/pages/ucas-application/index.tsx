@@ -8,7 +8,7 @@ import React from 'react';
 const UcasApplication = () => {
     return (
         <>
-            <div className="w-full py-8 md:py-12 flex justify-center bg-blueColor relative px-2 md:px-0 h-[80vh]">
+            <div className="w-full py-8 md:py-12 flex justify-center bg-blueColor relative px-2 md:px-0 md:h-[80vh]">
                 <Image
                     height={2202}
                     width={2347}
@@ -40,8 +40,8 @@ const UcasApplication = () => {
                         height={2350}
                         width={2339}
                         alt="ucas-application"
-                        src="/images/Home/home-ucas-image.png"
-                        className="w-48 md:w-80 lg:w-7/12 xl:w-9/12"
+                        src="/images/Home/home-ucas-image.svg"
+                        className="w-48 md:w-80 lg:w-7/12 xl:w-8/12"
                     />
                 </div>
             </div>

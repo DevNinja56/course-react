@@ -53,9 +53,9 @@ const SmartMatch = () => {
 
                     <div className="flex flex-col items-center p-6">
                         <img
-                            src="/images/SmartMatch/AiBot.png"
+                            src="/images/SmartMatch/Ai Bot Animation.gif"
                             alt="AiBot"
-                            className="h-44"
+                            className="h-44 scale-150"
                         />
                         <img
                             src="/images/SmartMatch/AiBotShadow.png"
@@ -67,7 +67,7 @@ const SmartMatch = () => {
             </div>
 
             <div className="flex flex-col-reverse lg:flex-row justify-between mx-4 my-14 sm:px-20 max-lg:items-center max-lg:gap-10">
-                <div className="px-5 flex flex-col gap-5 justify-center lg:mb-0 mb-8">
+                <div className="px-5 flex flex-col gap-5 justify-center lg:mb-0 mb-8 md:w-5/6 lg:w-auto">
                     <div>
                         <p className="font-bold">PEOPLE LOVE US</p>
                         <h1 className="text-2xl max-[400px]:text-[1.1rem] sm:text-3xl text-[#2563eb] flex items-center gap-1">
@@ -137,11 +137,11 @@ const SmartMatch = () => {
                 </div>
             </div>
 
-            <div className="flex flex-col lg:flex-row justify-between mx-4 sm:px-20 lg:p-10 items-center relative gap-16   ">
+            <div className="flex flex-col lg:flex-row justify-between mx-4 sm:px-20 lg:p-10 items-center relative gap-16">
                 <img
                     src="/images/SmartMatch/Preferences.png"
                     alt="Preferences"
-                    className="h-80 sm:h-[400px] mx-auto object-contain z-100"
+                    className="lg:h-72 xl:h-80 sm:h-[400px] mx-auto object-contain z-100"
                 />
                 <img
                     alt="FAQ-Round"
@@ -154,7 +154,7 @@ const SmartMatch = () => {
                     src="/images/Ellipse 424.svg"
                 />
 
-                <div className="px-5 flex flex-col gap-5 justify-center lg:mb-0 mb-8">
+                <div className="px-5 flex flex-col gap-5 justify-center lg:mb-0 mb-8 md:w-5/6 lg:w-auto">
                     <div>
                         <p className="font-bold">HOW IT WORKS</p>
                         <h1 className="text-2xl max-[400px]:text-[1.1rem] sm:text-[1.75rem] text-[#2563eb] flex items-center gap-1">
