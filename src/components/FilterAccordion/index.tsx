@@ -36,7 +36,6 @@ const FilterAccordion: React.FC<FilterAccordionProps> = ({
         setIsOpen((prev) => !prev);
     };
 
-    console.log(title, 'title');
 
     return (
         <div className={`${noBorder ? '' : 'border-b border-gray-300'}`}>
