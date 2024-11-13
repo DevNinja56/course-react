@@ -108,7 +108,7 @@ const ContactUs = () => {
                         description="Talk to our support center. 
 Live chat now"
                         maxWidth="max-w-[50%]"
-                        button  
+                        button
                     />
                 </div>
                 <img

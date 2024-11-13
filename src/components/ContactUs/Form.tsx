@@ -37,24 +37,24 @@ const ContactUsForm = () => {
                 reset();
             });
     };
-    
+
     return (
         <div className="flex items-center justify-center ">
             <form
                 onSubmit={onSubmit(handleFormSubmit)}
-                className="w-full max-w-md bg-white shadow-md rounded-xl px-6 py-6 space-y-4"
+                className="w-full max-w-md bg-white shadow-md rounded-xl px-4 py-6 space-y-4"
             >
-                <div className='mx-3'>
-                    <h1 className="text-lg font-bold text-center text-gray-800">
+                <div className="mx-3">
+                    <h1 className="text-2xl font-bold text-center text-gray-800">
                         Contact us
                     </h1>
-                    <p className="text-center text-gray-500 text-[0.6rem] mb-4">
+                    <p className="text-center text-gray-500 text-sm mb-4">
                         Contact us for your query or suggestion to help us
                         improve.
                     </p>
                 </div>
                 <div className="space-y-3 mx-3">
-                <h1 className="text-sm font-semibold text-gray-800">
+                    <h1 className="text-lg font-semibold text-gray-800">
                         Get in touch
                     </h1>
                     <div className="flex flex-col md:flex-row gap-3">
@@ -80,20 +80,19 @@ const ContactUsForm = () => {
                         title="Subject"
                         error={errors.subject?.message}
                     />
-                    <label className="flex flex-col text-gray-500 text-[0.6rem] font-semibold">
+                    <label className="flex flex-col text-gray-500 text-sm font-semibold">
                         Message
                         <textarea
                             {...register('message', {
                                 required: 'Message is required'
                             })}
-                        
                             className={` mt-1 p-2 w-full rounded-md border bg-[#f3f7fd] ${
                                 errors.message
                                     ? 'border-red-500'
                                     : 'border-gray500'
                             } focus:outline-none focus:ring-2 focus:ring-blue-400`}
                             placeholder="Write your message..."
-                            rows={10}
+                            rows={5}
                         />
                         {errors.message && (
                             <span className="text-xs text-red-500 mt-1">
