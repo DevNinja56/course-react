@@ -1,6 +1,5 @@
 import Image from 'next/image';
 import React from 'react';
-import Button from '../Button';
 import Link from 'next/link';
 
 interface propTypes {
