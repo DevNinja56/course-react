@@ -20,7 +20,12 @@ const customSelectStyles: StylesConfig = {
     control: (provided) => ({
         ...provided,
         border: 'none',
-        boxShadow: 'none'
+        boxShadow: 'none',
+        '@media only screen and (max-width: 768px)': {
+            marginRight: '1.5rem',
+            fontSize: '10px',
+            padding: '0px'
+        }
     }),
     placeholder: (provided) => ({
         ...provided,
@@ -35,7 +40,6 @@ const customSelectStyles: StylesConfig = {
     }),
     option: (provided) => ({
         ...provided,
-
         fontSize: '12px'
     })
 };
@@ -73,8 +77,8 @@ const SearchQueryBox = ({ isLocation, institutes, courses }: Props) => {
 
     return (
         <form onSubmit={handleSubmit} className="relative w-full">
-            <div className="flex gap-3 items-center bg-white custom-shadow rounded-xl w-full p-2">
-                <CgSearch className="text-3xl min-w-[40px]" />
+            <div className="flex md:gap-3 items-center bg-white custom-shadow rounded-xl w-full p-2">
+                <CgSearch className="text-xl md:text-3xl min-w-[40px] md:block hidden" />
                 <div className="flex items-center w-full">
                     <Select
                         options={instituteOptions}
@@ -88,8 +92,8 @@ const SearchQueryBox = ({ isLocation, institutes, courses }: Props) => {
                                     (selectedOption as Option)?.value || ''
                             }))
                         }
-                        placeholder="Select Institute"
-                        className="w-[320px]"
+                        placeholder="Search by institute name"
+                        className="min-w-[109px] w-5/12 md:min-w-0 md:w-60 lg:w-[320px]"
                         classNamePrefix="react-select"
                         styles={customSelectStyles}
                     />
@@ -108,9 +112,11 @@ const SearchQueryBox = ({ isLocation, institutes, courses }: Props) => {
                             }))
                         }
                         placeholder={
-                            isLocation ? 'Select Location' : 'Select Course'
+                            isLocation
+                                ? 'Search by location'
+                                : 'Search by course name'
                         }
-                        className="w-[320px]"
+                        className="min-w-[109px] w-5/12 md:w-60 lg:w-[320px]"
                         styles={customSelectStyles}
                         classNamePrefix="react-select"
                     />
@@ -118,7 +124,7 @@ const SearchQueryBox = ({ isLocation, institutes, courses }: Props) => {
                 <Button
                     type="submit"
                     text="Search"
-                    className="min-w-[100px] py-2 !mb-0"
+                    className="!w-[20%] md:min-w-[100px] py-2 !mb-0 text-[10px] md:text-base rounded-md md:rounded-lg"
                 />
             </div>
         </form>

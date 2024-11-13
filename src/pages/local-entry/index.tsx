@@ -3,7 +3,7 @@ import React from 'react';
 
 const LocalEntry = () => {
     return (
-        <div className="2xl:container 2xl:mx-auto overflow-hidden">
+        <div className=" overflow-hidden">
             <div className="bg-[#2C79FF] relative w-full h-auto md:h-[520px] flex flex-col items-center">
                 <div className="flex justify-between absolute w-full">
                     <img
@@ -22,7 +22,9 @@ const LocalEntry = () => {
                         Local Entry Requirements
                     </h1>
                     <p className="text-white w-full md:w-3/4 text-sm md:text-base font-light">
-                       We aim to connect UK universities directly with international students worldwide, providing streamlined access to educational opportunities across borders.
+                        We aim to connect UK universities directly with
+                        international students worldwide, providing streamlined
+                        access to educational opportunities across borders.
                     </p>
                     <div className="mt-6 md:mt-10">
                         <img

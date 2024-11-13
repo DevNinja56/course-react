@@ -36,8 +36,6 @@ const DisciplineSection = () => {
         setPage(selectedPage);
     };
 
-    console.log(Card, 'data?.data');
-
     return (
         <div className="w-full lg:w-10/12 xl:w-11/12 mx-auto px-2 md:px-8 lg:px-0 xl:px-20 2xl:px-8 transition-all duration-300 flex flex-col gap-y-10 md:gap-y-16 lg:flex-row gap-x-8 z-10 relative">
             <div className="w-full lg:w-[35%] z-10 flex flex-col items-center md:items-start justify-center">

@@ -159,10 +159,11 @@ const CourseFilter = () => {
                     name="LanguageTest"
                     svg
                 >
-                    <IntakesFilter
+                    <></>
+                    {/* <IntakesFilter
                         data={filters.intakes}
                         isLoading={isLoading}
-                    />
+                    /> */}
                 </FilterAccordion>
                 <FilterAccordion
                     title="Tuition Fees"

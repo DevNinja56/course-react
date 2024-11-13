@@ -9,7 +9,7 @@ import { TbClockBolt, TbTargetArrow } from 'react-icons/tb';
 
 const SmartMatch = () => {
     return (
-        <div className="2xl:container 2xl:mx-auto overflow-hidden">
+        <div className="overflow-hidden">
             <div className="bg-[#2C79FF] relative w-full h-auto flex flex-col items-center justify-center">
                 <img
                     src="/images/SmartMatch/Pattern.png"
@@ -53,9 +53,9 @@ const SmartMatch = () => {
 
                     <div className="flex flex-col items-center p-6">
                         <img
-                            src="/images/SmartMatch/AiBot.png"
+                            src="/images/SmartMatch/Ai Bot Animation.gif"
                             alt="AiBot"
-                            className="h-44"
+                            className="h-44 scale-150"
                         />
                         <img
                             src="/images/SmartMatch/AiBotShadow.png"
@@ -71,7 +71,7 @@ const SmartMatch = () => {
                     <div>
                         <p className="font-bold">PEOPLE LOVE US</p>
                         <h1 className="text-2xl max-[400px]:text-[1.1rem] sm:text-3xl text-[#2563eb] flex items-center gap-1">
-                            <span className="font-extrabold">Why Choose</span>
+                            <span className="font-extrabold 2xl:min-w-fit">Why Choose</span>
                             <HiOutlineSparkles className="text-2xl sm:text-5xl" />
                             <span className="font-extrabold italic">
                                 SmartMatch?
@@ -128,11 +128,11 @@ const SmartMatch = () => {
                         </div>
                     </div>
                 </div>
-                <div className="flex justify-center">
+                <div className="flex justify-center 2xl:justify-end">
                     <img
                         src="/images/SmartMatch/Card.png"
                         alt="AiBotShadow"
-                        className="h-80 sm:h-[550px] drop-shadow-md"
+                        className="h-80 sm:h-[550px] drop-shadow-md 2xl:h-auto 2xl:w-4/12"
                     />
                 </div>
             </div>
@@ -141,7 +141,7 @@ const SmartMatch = () => {
                 <img
                     src="/images/SmartMatch/Preferences.png"
                     alt="Preferences"
-                    className="lg:h-72 xl:h-80 sm:h-[400px] mx-auto object-contain z-100"
+                    className="lg:h-72 xl:h-80 sm:h-[400px] mx-auto object-contain z-100 2xl:h-auto 2xl:w-4/12"
                 />
                 <img
                     alt="FAQ-Round"
