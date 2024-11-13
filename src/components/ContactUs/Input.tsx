@@ -29,7 +29,7 @@ const InputBox = React.forwardRef<HTMLInputElement, propsType>(
         return (
             <label
                 htmlFor={'input-box--' + (id ?? name)}
-                className={`text-[0.6rem] flex flex-col gap-y-1 w-full ${
+                className={`text-sm flex flex-col gap-y-1 w-full ${
                     error ? 'text-red-600' : 'text-gray-500'
                 }`}
             >

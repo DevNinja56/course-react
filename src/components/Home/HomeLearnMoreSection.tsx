@@ -1,6 +1,5 @@
 import Image from 'next/image';
 import React from 'react';
-import Button from '../Button';
 import Link from 'next/link';
 
 interface propTypes {
@@ -81,10 +80,9 @@ const HomeLearnMoreSection = ({
                     </h2>
                 </div>
                 <Link href={link} className="w-fit">
-                    <Button
-                        className="py-2 md:py-3 px-4 md:px-14 rounded-lg text-sm md:text-base font-bold"
-                        text="Learn More"
-                    />
+                    <button className="py-2 md:py-3 px-4 md:px-14 rounded-lg text-sm md:text-base font-bold bg-blueColor text-white hover:bg-opacity-80 transition-all duration-300">
+                        Learn More
+                    </button>
                 </Link>
             </div>
         </div>
