@@ -63,7 +63,6 @@ const StartApplication = () => {
     const [selectedIntake, setSelectedIntake] = useState<string[]>([]);
 
     const { data } = useGetInstituteQuery();
-    console.log(data)
 
     const { data: courseData } = useGetCoursesByInstituteQuery({
         limit: 10,
@@ -345,7 +344,10 @@ const StartApplication = () => {
                                                     e?.value ?? ''
                                                 );
                                             }}
-                                            isDisabled={!selectedIntake || selectedIntake.length === 0}
+                                            isDisabled={
+                                                !selectedIntake ||
+                                                selectedIntake.length === 0
+                                            }
                                             styles={{
                                                 control: (base: {
                                                     [key: string]: unknown;
