@@ -25,7 +25,7 @@ const Home = () => {
                     <div className="flex flex-col gap-8 md:gap-20 lg:gap-28 z-10 pt-14 w-full px-2 md:px-0">
                         <div className="flex flex-col gap-6 lg:gap-12 items-center">
                             <h1 className="font-bold text-white text-lg md:text-4xl lg:text-5xl">
-                                <span className="border-b-4 md:border-b-8 border-[#2563EB]">
+                                <span className="border-b-4 md:border-b-8 border-blueColor">
                                     UK&apos;s Largest
                                 </span>{' '}
                                 Course Search Platform

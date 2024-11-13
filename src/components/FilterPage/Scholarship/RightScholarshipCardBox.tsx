@@ -14,13 +14,12 @@ const RightScholarshipCardBox = () => {
         paginatorInfo: { count, totalPage, page }
     } = useSearchedScholarship();
     const { query } = useFilterQuery();
-    
 
     useEffect(() => {
         fetchScholarship();
     }, [query]);
     return (
-        <div className="flex flex-col gap-y-7 w-full lg:w-[73%]">
+        <div className="flex flex-col gap-y-7 w-full lg:w-[74%] xl:w-[73%]">
             <div className="flex flex-col gap-y-4">
                 <div className="w-full flex items-center justify-between">
                     <h1 className="font-bold text-xl md:text-[23px] text-mainTextColor">
@@ -28,11 +27,10 @@ const RightScholarshipCardBox = () => {
                     </h1>
                     <SortBy />
                 </div>
-               
 
                 <hr className="border border-scholarshipBorderColor" />
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-5 mb-3 px-0 md:px-8 lg:px-0">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-5 mb-3 px-0 lg:px-0">
                 {isLoading ? (
                     <LoaderSpinner color="text-black" />
                 ) : (
@@ -41,7 +39,8 @@ const RightScholarshipCardBox = () => {
                             key={'scholarship__key__' + scholarship._id + i}
                             {...{
                                 name: scholarship.name,
-                                title_description: scholarship.title_description,
+                                title_description:
+                                    scholarship.title_description,
                                 type: scholarship.type,
                                 degree: scholarship.degree,
                                 institute: scholarship.institute,
@@ -50,8 +49,6 @@ const RightScholarshipCardBox = () => {
                                 id: scholarship._id,
                                 image: scholarship.image,
                                 isActive: !!scholarship?.favoriteId?.[0]
-                                
-
                             }}
                         />
                     ))

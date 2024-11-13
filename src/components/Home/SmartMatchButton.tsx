@@ -13,7 +13,7 @@ const SmartMatchButton: React.FC<{
     return (
         <Link href={link ?? ROUTES.SMART_MATCH}>
             <button
-                className={`${radius ? radius : 'rounded-[90px]'} border border-white flex items-center ${gap ? gap : 'gap-1.5 md:gap-[2px]'} py-2 lg:py-3 px-4 lg:px-6 font-bold ${!fontSize ? 'text-xs md:text-base lg:text-lg' : fontSize}  bg-[#2563EB] text-white hover:bg-opacity-80 transition-all duration-300`}
+                className={`${radius ? radius : 'rounded-[90px]'} border border-white flex items-center ${gap ? gap : 'gap-1.5 md:gap-[2px]'} py-2 lg:py-3 px-4 lg:px-6 font-bold ${!fontSize ? 'text-xs md:text-base lg:text-lg' : fontSize}  bg-blueColor text-white hover:bg-opacity-80 transition-all duration-300`}
             >
                 {text}{' '}
                 <span className="flex items-center gap-[2px] italic text-xs md:text-base lg:text-lg">

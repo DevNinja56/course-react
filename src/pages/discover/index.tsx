@@ -7,7 +7,7 @@ import React from 'react';
 const Discover = () => {
     return (
         <>
-            <div className="2xl:container 2xl:mx-auto overflow-hidden">
+            <div className="overflow-hidden">
                 <div className="bg-[#2C79FF] relative w-full h-auto md:h-[520px] flex flex-col items-center">
                     <div className="flex justify-between absolute w-full">
                         <img

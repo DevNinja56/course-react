@@ -1,8 +1,8 @@
 import React from 'react';
-import ScreenLoader from '@/components/Loader/ScreenLoader';
 import UniversitiesCards from '@/components/Universities/UniversitiesCard';
 import { useGetInstituteQuery } from '@/store/slices/allRequests';
 import SearchQueryBox from '@/components/FilterPage/SearchQueryBox';
+import LoaderSpinner from '@/components/LoaderSpinner';
 
 const Universities = () => {
     const { data } = useGetInstituteQuery();
@@ -18,7 +18,7 @@ const Universities = () => {
                     src="/images/Blogs/Frame 642.svg"
                     // priority
                 />
-                <div className="flex flex-col gap-y-5 md:gap-y-8 items-center z-10 px-5 md:px-[50px] lg:px-2">
+                <div className="flex flex-col gap-y-5 md:gap-y-8 items-center z-10 px-2 md:px-[50px] lg:px-2 w-full md:w-auto">
                     <div className="flex flex-col justify-center items-center gap-y-1">
                         <p className="text-darkGrayColor text-xl font-bold">
                             Your Quick Book To Explore
@@ -27,7 +27,7 @@ const Universities = () => {
                             LEADING WORLD UNIVERSITIES
                         </h1>
                     </div>
-                    <SearchQueryBox  />
+                    <SearchQueryBox isLocation />
                 </div>
                 <img
                     height={193}
@@ -49,7 +49,7 @@ const Universities = () => {
                                 />
                             ))
                         ) : (
-                            <ScreenLoader />
+                            <LoaderSpinner color="#010F2E" />
                         )}
                     </div>
                 </div>

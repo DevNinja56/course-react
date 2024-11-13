@@ -14,7 +14,7 @@ const Scholarship = () => {
                     className="absolute top-[-20px] left-[-20px] lg:top-0 lg:left-0 h-[84px] w-[86px] lg:h-[193px] lg:w-[191px]"
                     src="/images/Blogs/Frame 642.svg"
                 />
-                <div className="flex flex-col gap-y-5 md:gap-y-8 items-center z-10 px-5 md:px-[50px] lg:px-2">
+                <div className="flex flex-col gap-y-5 md:gap-y-8 items-center z-10 px-2 md:px-[50px] lg:px-2 md:w-auto w-full">
                     <div className="flex flex-col justify-center items-center gap-y-1">
                         <p className="text-darkGrayColor text-xl font-bold">
                             Scholarship
@@ -34,7 +34,7 @@ const Scholarship = () => {
                 />
             </div>
             <div className="w-full lg:px-10 pb-28 pt-10">
-                <div className="container mx-auto px-5 md:px-[50px] lg:px-2 2xl:px-8 transition-all duration-300 flex justify-between">
+                <div className="w-full lg:container 2xl:max-w-none 2xl:w-10/12 mx-auto px-5 md:px-[50px] lg:px-2 2xl:px-8 transition-all duration-300 flex justify-between">
                     <ScholarshipFilter />
                     <RightScholarshipCardBox />
                 </div>

@@ -162,7 +162,8 @@ export const EnglishTest = [
     'PTE Academic',
     'Language Cert',
     'Oxford ELLT',
-    'Duolingo'
+    'Duolingo',
+    'I haven’t taken any test'
 ];
 
 export const months = [

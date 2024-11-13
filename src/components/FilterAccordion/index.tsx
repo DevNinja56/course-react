@@ -36,13 +36,14 @@ const FilterAccordion: React.FC<FilterAccordionProps> = ({
         setIsOpen((prev) => !prev);
     };
 
+
     return (
         <div className={`${noBorder ? '' : 'border-b border-gray-300'}`}>
             <div
                 className="flex justify-between items-center px-4 py-2 cursor-pointer bg-white hover:bg-gray-200"
                 onClick={toggleAccordion}
             >
-                <div className="text-lg font-semibold text-gray-800 flex items-center gap-2">
+                <div className="text-base xl:text-lg font-semibold text-gray-800 flex items-center gap-1 xl:gap-2">
                     {!svg ? (
                         <h1>{icon}</h1>
                     ) : (
@@ -51,7 +52,7 @@ const FilterAccordion: React.FC<FilterAccordionProps> = ({
                             height={14}
                             src="\images\FilterPage\English.svg"
                             alt=""
-                            className='ml-0.5 mr-1'
+                            className="ml-0.5 mr-1"
                         />
                     )}
                     <h1>{title}</h1>
@@ -68,7 +69,12 @@ const FilterAccordion: React.FC<FilterAccordionProps> = ({
                             </h1>
                         )}
                     </div>
-                    <IoSearch className="text-[#626262] font-bold" />
+                    {title !== 'Degree Levels' &&
+                        title !== 'Intakes' &&
+                        title !== 'Language Test' &&
+                        title !== 'Tuition Fees' && (
+                            <IoSearch className="text-[#626262] font-bold" />
+                        )}
                 </div>
             </div>
             {isOpen && (

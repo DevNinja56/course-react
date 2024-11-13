@@ -12,7 +12,7 @@ const UniversitiesCards = ({ institute }: propsType) => {
     const logoUrl = institute.logo.replace(/\.s3/, '-ragzon.s3');
 
     return (
-        <div className="custom-shadow w-[80%] md:w-[35%] lg:w-[31%] rounded-[10px] bg-white relative overflow-hidden group z-10 ">
+        <div className="custom-shadow w-[80%] md:w-[35%] lg:w-[31%] rounded-[10px] bg-white relative overflow-hidden group z-0 ">
             <FavoriteButton
                 isActive={!!institute?.favoriteId?.[0]}
                 body={{ institute: institute.id }}

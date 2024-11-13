@@ -9,7 +9,7 @@ import { TbSchool, TbTargetArrow } from 'react-icons/tb';
 
 const AboutUs = () => {
     return (
-        <div className="2xl:container 2xl:mx-auto overflow-hidden">
+        <div className="overflow-hidden">
             <div className="bg-[#2B79FF] py-10 text-center flex-col flex justify-center items-center gap-5 relative md:h-[320px]">
                 <div className="flex justify-between absolute w-full">
                     <img
@@ -27,8 +27,7 @@ const AboutUs = () => {
                     About us
                 </div>
                 <h1 className="text-center font-extrabold text-white text-2xl md:text-3xl w-11/12 md:w-3/6">
-                    Transforming the UK&apos;s access to international
-                    education
+                    Transforming the UK&apos;s access to international education
                 </h1>
             </div>
             <div className="flex flex-col-reverse my-14 items-center relative">
@@ -42,12 +41,12 @@ const AboutUs = () => {
                     alt="WorldMap"
                     className="h-60 md:h-96 object-contain my-4 md:mt-10"
                 />
-                 <img
+                <img
                     alt="Elipse"
                     className="absolute lg:h-32 h-24 -left-12  bottom-10"
                     src="/images/elipse.png"
                 />
-                <div className='text-center flex flex-col justify-center items-center my-10'>
+                <div className="text-center flex flex-col justify-center items-center my-10">
                     <h1 className="text-xl md:text-2xl lg:text-3xl text-[#2563eb] font-extrabold mb-6">
                         Our Mission
                     </h1>
@@ -102,12 +101,12 @@ const AboutUs = () => {
             </div>
 
             <div className="flex flex-col items-center bg-[#EAF2FF] py-10 gap-5 relative">
-            <img
+                <img
                     alt="Elipse"
                     className="absolute lg:h-24 h-16 -right-14 top-72"
                     src="/images/elipse.png"
                 />
-                 <img
+                <img
                     alt="Elipse"
                     className="absolute  h-16 -left-10 bottom-10"
                     src="/images/Blogs/Ellipse 426.svg"
@@ -125,7 +124,6 @@ const AboutUs = () => {
                     landscape.
                 </p>
                 <div className=" my-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
-              
                     <GuidanceCard
                         number="01"
                         title="Access"

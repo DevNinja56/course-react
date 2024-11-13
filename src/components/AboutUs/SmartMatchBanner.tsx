@@ -1,10 +1,10 @@
-import { HiOutlineSparkles } from 'react-icons/hi';
+import { HiOutlineSparkles } from 'react-icons/hi2';
 import Link from 'next/link';
 import { ROUTES } from '@/config/constant';
 
 const SmartMatchBanner = () => {
     return (
-        <div className="2xl:container 2xl:mx-auto overflow-hidden">
+        <div className="overflow-hidden">
             <div className="bg-[#2B79FF] w-full relative h-fit flex flex-col  pt-6">
                 <div className="flex flex-col justify-center items-center self-center text-center w-11/12 md:w-1/2 z-10 mt-6">
                     <div className="text-[1.8rem] flex items-center justify-center gap-1">

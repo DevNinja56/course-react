@@ -28,7 +28,7 @@ const English = ({
                     Which English language test have you taken so far?
                 </h1>
                 <img
-                    src="/images/SmartMatch/Tool/Writing.png"
+                    src="/images/SmartMatch/Tool/writing.svg"
                     alt="world"
                     className="h-6"
                 />

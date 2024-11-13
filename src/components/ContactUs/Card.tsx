@@ -20,7 +20,7 @@ const Card = ({
     button
 }: CardProps) => {
     return (
-        <div className="flex flex-col items-center gap-2 py-6 w-[85%] lg:w-72 bg-white rounded-2xl shadow-lg text-center self-center  h-56">
+        <div className="flex flex-col items-center gap-2 py-6 w-[85%] lg:w-72 bg-white rounded-2xl shadow-lg text-center self-center h-56">
             <div className="bg-profileBgColor p-2 rounded-xl mb-3">
                 <img src={img} alt="icon" className="h-7 w-7" />
             </div>

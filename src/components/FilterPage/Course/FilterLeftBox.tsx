@@ -29,7 +29,7 @@ export const FilterRow = () => (
 );
 
 const CourseFilter = () => {
-    const { query: urlQuery, push } = useRouter();
+    const { push } = useRouter();
     const { clearAllQuery, query } = useFilterQuery();
     const {
         fetchSearchedCoursesRequest: refetch,
@@ -38,13 +38,9 @@ const CourseFilter = () => {
     } = useSearchedCourses();
 
     const handleClearQuery = () => {
-        if (Object.keys(urlQuery).length != 0) {
-            push({ query: {} });
-            refetch();
-        } else {
-            clearAllQuery();
-            refetch();
-        }
+        push({ query: {} });
+        clearAllQuery();
+        refetch();
     };
     return (
         <div className="rounded-[15px] w-[24%] py-4 pb-5 overflow-y-auto border-[3px] border-[#eaf2ff] hidden lg:block max-h-headerStickyHeight sticky top-[110px] bg-white customScroll ">

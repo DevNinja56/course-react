@@ -7,7 +7,7 @@ import React from 'react';
 const ExpertCounselling = () => {
     return (
         <>
-            <div className="w-full py-8 md:py-12 flex justify-center bg-blueColor relative px-2 md:px-0 md:h-[80vh]">
+            <div className="w-full py-8 md:py-12 flex justify-center bg-blueColor relative px-2 md:px-0 md:h-[450px] xl:h-[500px]">
                 <Image
                     height={2202}
                     width={2347}
@@ -42,7 +42,7 @@ const ExpertCounselling = () => {
                     />
                 </div>
             </div>
-            <div className="w-full py-12 md:pt-16 md:pb-28 lg:pt-40 lg:pb-28 relative px-2 md:px-0">
+            <div className="w-full py-12 md:pt-16 md:pb-28 lg:pt-40 2xl:pt-32 lg:pb-28 relative px-2 md:px-0">
                 <Image
                     height={2168}
                     width={2181}

@@ -91,18 +91,18 @@ const Card: React.FC<ScholarshipCardPropsType> = ({
                         <div className="px-3 mt-4  ">
                             <h3
                                 title={name}
-                                className={`font-bold mx-auto text-base ${headingClass}`}
+                                className={`font-bold mx-auto text-base line-clamp-2 h-14  ${headingClass}`}
                             >
                                 {name} ({type})
                             </h3>
-                            <p className="text-xs my-2">
+                            <p className="text-xs my-2 line-clamp-2 h-8">
                                 {title_description ??
                                     `The University of ${institute?.name} is the largest in the UK and dates back to the opening.`}
                             </p>
                         </div>
                     </div>
                     {tagBox && (
-                        <div className="grid grid-cols-2 w-full px-3 py-2 mb-2">
+                        <div className="grid grid-cols-2 w-full lg:px-3 py-2 mb-2">
                             <Tag
                                 className=""
                                 icon={
