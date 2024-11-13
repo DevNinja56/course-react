@@ -9,7 +9,7 @@ const FAQs = () => {
             <div className="w-full mb-8">
                 <FAQ />
             </div>
-            <div className="w-full 2xl:mb-[600px] relative">
+            <div className="w-full relative">
                 <img
                     height={250}
                     width={250}

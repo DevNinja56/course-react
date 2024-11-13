@@ -60,17 +60,20 @@ export const InputField = ({
             '&:hover': {
                 boxShadow: 'none'
             },
-            fontSize: '0.75rem',
+            fontSize: '0.8rem',
             fontWeight: '500',
             opacity: isDisabled ? 0.5 : 1
         }),
         placeholder: (base) => ({
             ...base,
-            color: '#727d94'
+            color: '#727d94',
+            fontSize: '0.8rem'
+
         }),
         menu: (base) => ({
             ...base,
-            fontSize: '0.7rem'
+            fontSize: '0.8rem'
+
         })
     };
 
@@ -114,13 +117,8 @@ export const InputField = ({
                     value={inputValue}
                     onChange={handleInputChange}
                     placeholder={placeholder}
-                    className={`px-4 py-2 rounded-full bg-[#e2ebfb] border-none shadow-none w-full focus:outline-none text-sm placeholder:text-[#727d94] ${isDisabled && 'opacity-50'}`}
-                    style={{
-                        borderRadius: '10px',
-                        backgroundColor: '#e2ebfb',
-                        fontSize: '0.75rem',
-                        fontWeight: '500'
-                    }}
+                    className={`px-4 py-2 rounded-lg bg-[#e2ebfb] border-none shadow-none w-full focus:outline-none text-sm placeholder:text-[#727d94] ${isDisabled && 'opacity-50 placeholder:text-[0.8rem]'}`}
+                  
                     disabled={isDisabled}
                 />
             )}

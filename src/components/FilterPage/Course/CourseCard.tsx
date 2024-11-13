@@ -18,7 +18,7 @@ const CourseCard = ({ course, topFit }: CardProps) => {
     const {
         institute,
         degree,
-        logo,
+        // logo,
         _id,
         name,
         tuitionFee,
@@ -26,8 +26,6 @@ const CourseCard = ({ course, topFit }: CardProps) => {
         feeCurrency = 'AUD'
         // specialization
     } = course;
-
-    console.log(logo);
 
     const { getCurrencySymbol, setCurrencyValue, getSingleRate, base_code } =
         useCurrency();
@@ -72,7 +70,7 @@ const CourseCard = ({ course, topFit }: CardProps) => {
                         ''
                     )}
                 </div>
-                <div className="pt-8 px-3 flex flex-col gap-1 relative">
+                <div className="pt-5 xl:pt-8 px-3 flex flex-col gap-1 relative">
                     <div className="flex flex-col gap-2">
                         <h1
                             title={name}
@@ -88,7 +86,7 @@ const CourseCard = ({ course, topFit }: CardProps) => {
                         </p>
                     </div>
                     <div className="flex flex-col gap-3">
-                        <div className="flex items-center justify-between gap-5 py-2 px-3 text-xs font-medium text-mainTextColor bg-profileBgColor rounded-md">
+                        <div className="flex items-center flex-wrap justify-around xl:justify-between gap-5 py-2 px-3 text-xs font-medium text-mainTextColor bg-profileBgColor rounded-md">
                             <div className="flex flex-col items-center gap-1">
                                 <LuMapPin className="h-4 w-4 text-blueColor" />
                                 <p className="text-[0.600rem] xl:text-[0.700rem]">
@@ -115,12 +113,14 @@ const CourseCard = ({ course, topFit }: CardProps) => {
                                     /Year
                                 </p>
                             </div>
-                            <div className="flex flex-col items-center gap-1">
-                                <CiCalendarDate className="h-4 w-4 text-blueColor" />
-                                <p className="text-[0.600rem] xl:text-[0.700rem] capitalize ">
-                                    {intakes.join()}
-                                </p>
-                            </div>
+                            {intakes && intakes.length > 0 && (
+                                <div className="flex flex-col items-center gap-1">
+                                    <CiCalendarDate className="h-4 w-4 text-blueColor" />
+                                    <p className="text-[0.600rem] xl:text-[0.700rem] capitalize ">
+                                        {intakes.join()}
+                                    </p>
+                                </div>
+                            )}
                         </div>
                     </div>
                 </div>

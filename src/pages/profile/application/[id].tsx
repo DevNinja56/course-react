@@ -75,11 +75,11 @@ const UserApplicationDetails = () => {
             />
             {selectedCourse && (
                 <div className="z-20 relative">
-                    <div className="flex flex-col-reverse lg:flex-row gap-5 w-[92%] max-w-[1240px] mx-auto justify-between pt-4 md:pt-8 lg:pt-12 h-auto">
+                    <div className="flex flex-col-reverse lg:flex-row gap-5 w-[92%] max-w-[1240px] 2xl:max-w-none mx-auto justify-between pt-4 md:pt-8 lg:pt-12 h-auto">
                         <YourCounsellorBox selectedCourse={selectedCourse} />
                         <ApplicationStatusBox selectedCourse={selectedCourse} />
                     </div>
-                    <div className="max-w-[1240px] mx-auto p-8 py-16">
+                    <div className="max-w-[1240px] 2xl:max-w-none 2xl:w-[92%] mx-auto p-8 py-16">
                         {selectedCourse?.status?.active ===
                             statusEnum.enroll && (
                             <div className="pb-12">

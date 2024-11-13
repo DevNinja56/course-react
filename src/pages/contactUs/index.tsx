@@ -5,7 +5,7 @@ import React from 'react';
 
 const ContactUs = () => {
     return (
-        <div className="2xl:m-auto 2xl:container overflow-hidden">
+        <div className="overflow-hidden">
             <div className="bg-[#2b79ff] w-full flex flex-col lg:flex-row h-auto lg:h-96">
                 <div className="flex flex-col lg:flex-row justify-center w-full items-center gap-10 lg:gap-32 p-5">
                     <div className="relative flex-[0.7] text-center md:text-left">

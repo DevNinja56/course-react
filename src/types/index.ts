@@ -230,6 +230,10 @@ export type courseType = {
     };
     favoriteId?: string[];
 };
+export interface OptionType {
+    value: string;
+    label: string;
+}
 
 export interface SpecializationType {
     name: string;

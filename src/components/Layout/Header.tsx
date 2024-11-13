@@ -53,7 +53,7 @@ const Header = ({ onlyLogo }: { onlyLogo?: boolean }) => {
                             <div className="hidden lg:flex items-center gap-x-6 lg:gap-x-3 xl:gap-x-8">
                                 <Link href={ROUTES.FILTER_COURSE}>
                                     <div
-                                        className={`flex items-center gap-x-1 xl:gap-x-1.5 text-[11px] xl:text-xs font-semibold ${
+                                        className={`flex items-center gap-x-1 xl:gap-x-1.5 text-[11px] xl:text-xs 2xl:text-base font-semibold ${
                                             router.pathname ===
                                             ROUTES.FILTER_COURSE
                                                 ? 'text-blueColor'
@@ -66,7 +66,7 @@ const Header = ({ onlyLogo }: { onlyLogo?: boolean }) => {
                                 </Link>
                                 <Link href={ROUTES.INSTITUTES}>
                                     <div
-                                        className={`flex items-center gap-x-1 xl:gap-x-1.5 text-[11px] xl:text-xs font-semibold ${
+                                        className={`flex items-center gap-x-1 xl:gap-x-1.5 text-[11px] xl:text-xs 2xl:text-base font-semibold ${
                                             router.pathname ===
                                             ROUTES.INSTITUTES
                                                 ? 'text-blueColor'
@@ -79,7 +79,7 @@ const Header = ({ onlyLogo }: { onlyLogo?: boolean }) => {
                                 </Link>
                                 <Link href={ROUTES.FILTER_SCHOLARSHIP}>
                                     <div
-                                        className={`flex items-center gap-x-1 xl:gap-x-1.5 text-[11px] xl:text-xs font-semibold ${
+                                        className={`flex items-center gap-x-1 xl:gap-x-1.5 text-[11px] xl:text-xs 2xl:text-base font-semibold ${
                                             router.pathname ===
                                             ROUTES.FILTER_SCHOLARSHIP
                                                 ? 'text-blueColor'
@@ -92,7 +92,7 @@ const Header = ({ onlyLogo }: { onlyLogo?: boolean }) => {
                                 </Link>
                                 <Link href={ROUTES.COMPARE}>
                                     <div
-                                        className={`flex items-center gap-x-1 xl:gap-x-1.5 text-[11px] xl:text-xs font-semibold ${
+                                        className={`flex items-center gap-x-1 xl:gap-x-1.5 text-[11px] xl:text-xs 2xl:text-base font-semibold ${
                                             router.pathname === ROUTES.COMPARE
                                                 ? 'text-blueColor'
                                                 : 'text-textBlackColor'
@@ -125,7 +125,7 @@ const Header = ({ onlyLogo }: { onlyLogo?: boolean }) => {
                                             state: ''
                                         })
                                     }
-                                    className="flex items-center gap-x-1.5 cursor-pointer text-[11px] xl:text-xs font-semibold text-textBlackColor"
+                                    className="flex items-center gap-x-1.5 cursor-pointer text-[11px] xl:text-xs 2xl:text-base font-semibold text-textBlackColor"
                                 >
                                     <svg
                                         width="24"
