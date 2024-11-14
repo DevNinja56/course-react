@@ -65,6 +65,7 @@ const DisciplinesFilter: React.FC<PropsType> = ({ data, isLoading }) => {
                                             name={'specialization'}
                                             value={specializationName}
                                             count={count}
+                                            subheading
                                         />
                                     )
                                 )}
