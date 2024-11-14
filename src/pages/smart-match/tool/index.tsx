@@ -117,9 +117,9 @@ const SmartMatchTool = () => {
                 router.push({
                     pathname: ROUTES.FILTER_COURSE,
                     query: {
-                        // discipline: data.discipline,
-                        // degreeType: data.studyLevel
                         institute: 'Staffordshire University'
+                        // intakes: data.month,
+                        // specialization: data.specialization
                     }
                 });
             }, 2000);

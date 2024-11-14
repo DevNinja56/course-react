@@ -19,6 +19,9 @@ type GradingScaleFormat = {
     options?: string[];
 };
 
+
+
+
 type GradingScaleFormats = {
     [key: string]: GradingScaleFormat;
 };
@@ -190,10 +193,10 @@ export const GradingSystem = [
 ];
 
 export const intakesFilterMonths = [
-    { value: ['Jan, Feb, Mar'], label: ['Jan, Feb, Mar'] },
-    { value: ['Apr, May, Jun'], label: ['Apr, May, Jun'] },
-    { value: ['Jul, Aug, Sep'], label: ['Jul, Aug, Sep'] },
-    { value: ['Oct, Nov, Dec'], label: ['Oct, Nov, Dec'] }
+    { label: 'January – March', value: ['Jan, Feb, Mar'] },
+    { label: 'April – June', value: ['Apr, May, Jun'] },
+    { label: 'July – September', value: ['Jul, Aug, Sep'] },
+    { label: 'October – December', value: ['Oct, Nov, Dec'] }
 ];
 
 const currentYear = new Date().getFullYear();

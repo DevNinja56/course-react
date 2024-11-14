@@ -54,7 +54,11 @@ export const FilterCheckBox = React.forwardRef<HTMLInputElement, propsType>(
                     />
                     <p className="text-sm font-semibold flex-1 text-black group-hover:text-blueColor ml-2 capitalize line-clamp-1 flex justify-between w-full items-center">
                         <span>{text}</span>
-                        {count && <span className="text-gray-500 py-1 px-2  text-xs bg-gray-100 rounded-lg">{count}</span>}
+                        {(count && count > 1 )&& (
+                            <span className="text-gray-500 py-1 px-2  text-xs bg-gray-100 rounded-lg">
+                                {count}
+                            </span>
+                        )}
                     </p>
                 </div>
             </label>

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import SubFilterAccordion from '@/components/FilterAccordion/SubFilterAccordion';
 import { FilterCheckBox, FilterCheckBoxLoader } from '../FilterBoxCheck';
+import SearchBox from '../SearchBox';
 // import SearchBox from '../SearchBox';
 
 interface SpecializationType {
@@ -18,29 +19,17 @@ interface PropsType {
 }
 
 const DisciplinesFilter: React.FC<PropsType> = ({ data, isLoading }) => {
-    const [search] = useState<string>('');
+    const [search, setSearch] = useState<string>('');
     return (
         <div className="flex flex-col gap-y-3">
-            {/* {data.length > 5 && (
-                <div className="flex justify-between items-center px-4 relative">
-                    <SearchBox
-                        searchVal={setSearch}
-                        value={search}
-                        className="max-w-full"
-                        placeholder="Search Disciplines"
-                    />
-                </div>
-            )} */}
-            {/* {data.length > 5 && (
-                <div className="flex justify-between items-center px-4 relative">
-                    <SearchBox
-                        searchVal={setSearch}
-                        value={search}
-                        className="max-w-full"
-                        placeholder="Search Disciplines"
-                    />
-                </div>
-            )} */}
+            <div className="flex justify-between items-center relative">
+                <SearchBox
+                    searchVal={setSearch}
+                    value={search}
+                    className="max-w-full"
+                    placeholder="Search Disciplines"
+                />
+            </div>
             <div className="flex flex-col gap-y-1 max-h-[360px] overflow-hidden overflow-y-auto setScrollBar">
                 {isLoading ? (
                     <FilterCheckBoxLoader />
@@ -61,7 +50,10 @@ const DisciplinesFilter: React.FC<PropsType> = ({ data, isLoading }) => {
                                 count={count}
                             >
                                 {specializations.map(
-                                    ({ name: specializationName, count }, j) => (
+                                    (
+                                        { name: specializationName, count },
+                                        j
+                                    ) => (
                                         <FilterCheckBox
                                             key={
                                                 'specialization--list--' +

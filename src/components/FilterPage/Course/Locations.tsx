@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 // import SearchBox from '../SearchBox';
 import { FilterCheckBox, FilterCheckBoxLoader } from '../FilterBoxCheck';
+import SearchBox from '../SearchBox';
 
 interface PropsType {
     data: {
@@ -11,20 +12,18 @@ interface PropsType {
 }
 
 const LocationsFilter: React.FC<PropsType> = ({ data, isLoading }) => {
-    const [search] = useState<string>('');
+    const [search,setSearch] = useState<string>('');
 
     return (
         <div className="flex flex-col gap-y-3">
-            {/* {data.length > 5 && (
-                <div className="flex justify-between items-center px-4 relative">
+                <div className="flex justify-between items-center relative">
                     <SearchBox
                         searchVal={setSearch}
                         value={search}
                         className="max-w-full"
-                        placeholder="Search Disciplines"
+                        placeholder="Search Locations"
                     />
                 </div>
-            )} */}
             <div className="flex flex-col gap-y-1 max-h-[360px] overflow-hidden overflow-y-auto setScrollBar">
                 {isLoading ? (
                     <FilterCheckBoxLoader />
@@ -45,6 +44,7 @@ const LocationsFilter: React.FC<PropsType> = ({ data, isLoading }) => {
                                 name={'location'}
                                 value={name}
                                 count={count}
+                                
                             />
                         ))
                 )}
