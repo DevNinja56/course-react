@@ -46,12 +46,8 @@ const customSelectStyles: StylesConfig = {
     }),
     option: (provided) => ({
         ...provided,
-<<<<<<< HEAD
         fontSize: '14px',
         zIndex: '100'
-=======
-        fontSize: '12px'
->>>>>>> 79fc4b57b628159a05bec622afa31ab6a96c3551
     })
 };
 

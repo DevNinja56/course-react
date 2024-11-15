@@ -5,11 +5,7 @@ import {
     FormData,
     clearError
 } from '@/components/SmartMatch/Validation';
-<<<<<<< HEAD
 import { intakesFilterMonths, yearOptions } from '../data';
-=======
-import { Months, yearOptions } from '../data';
->>>>>>> 79fc4b57b628159a05bec622afa31ab6a96c3551
 
 interface StartIntakeProps {
     data: FormData;
@@ -56,11 +52,7 @@ const StartIntake = ({
                     <hr className="border h-0.5 bg-blueColor" />
                     <Chip
                         label="Start Month"
-<<<<<<< HEAD
                         dataObj={intakesFilterMonths.map((item)=>({label:item.label,value:item.value}))}
-=======
-                        data={Months}
->>>>>>> 79fc4b57b628159a05bec622afa31ab6a96c3551
                         onSelect={(value: string) => {
                             addQuery({
                                 month: value
