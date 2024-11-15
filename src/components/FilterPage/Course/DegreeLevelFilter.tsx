@@ -82,6 +82,7 @@ const DegreeLevelFilter: React.FC<propsType> = ({ data, isLoading }) => {
                                             text={degree?.name ?? 'No Degree'}
                                             name={'degrees'}
                                             value={degree?.name ?? 'No Degree'}
+                                            subheading
                                         />
                                     ))}
                                 </div>

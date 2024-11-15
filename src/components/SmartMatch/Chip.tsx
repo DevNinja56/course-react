@@ -15,6 +15,7 @@ interface OptionType {
 interface ChipProps {
     label?: string;
     data?: string[];
+    dataObj?: { label: string; value: string[]; }[];
     onSelect?: (value: string) => void;
     selectedValue?: string | string[];
     error?: string;
@@ -33,6 +34,7 @@ interface ChipProps {
 export const Chip: React.FC<ChipProps> = ({
     label,
     data,
+    dataObj,
     onSelect,
     selectedValue,
     error,
@@ -70,7 +72,6 @@ export const Chip: React.FC<ChipProps> = ({
         menu: (base) => ({
             ...base,
             fontSize: '0.8rem'
-
         })
     };
 
@@ -99,27 +100,32 @@ export const Chip: React.FC<ChipProps> = ({
                 </div>
             ) : (
                 <div className="flex text-sm gap-x-3 gap-y-3 flex-wrap my-2 font-[500]">
-                    {data?.map((item) => (
-                        <div
-                            onClick={() => onSelect && onSelect(item)}
-                            key={'chip-data' + item}
-                            className={`flex items-center px-4 py-2 rounded-full cursor-pointer select-none transition-all ${
-                                selectedSet.has(item)
-                                    ? 'bg-[#1058d6] text-white'
-                                    : 'bg-[#cee0ff]'
-                            }`}
-                        >
-                            <p>{item}</p>
-                            {onRemove && (
-                                <IoIosClose
-                                    className="ml-1 text-white hover:text-blue-200 text-lg"
-                                    onClick={() => {
-                                        onRemove && onRemove(item);
-                                    }}
-                                />
-                            )}
-                        </div>
-                    ))}
+                    {(data || dataObj)?.map((item) => {
+                        const itemLabel = typeof item === 'string' ? item : item.label;
+                        const itemValue = typeof item === 'string' ? item : item.value.join(', ');
+
+                        return (
+                            <div
+                                onClick={() => onSelect && onSelect(itemValue)}
+                                key={'chip-data' + itemLabel}
+                                className={`flex items-center px-4 py-2 rounded-full cursor-pointer select-none transition-all ${
+                                    selectedSet.has(itemValue)
+                                        ? 'bg-[#1058d6] text-white'
+                                        : 'bg-[#cee0ff]'
+                                }`}
+                            >
+                                <p>{itemLabel}</p>
+                                {onRemove && (
+                                    <IoIosClose
+                                        className="ml-1 text-white hover:text-blue-200 text-lg"
+                                        onClick={() => {
+                                            onRemove && onRemove(itemValue);
+                                        }}
+                                    />
+                                )}
+                            </div>
+                        );
+                    })}
                 </div>
             )}
             {useSelect && (

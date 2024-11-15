@@ -7,7 +7,7 @@ export interface ErrorMessages {
 export interface FormData {
     nationality?: string;
     year?: string;
-    month?: string;
+    month?: string[];
     studyLevel?: string;
     discipline?: string;
     educationCountry?: string;

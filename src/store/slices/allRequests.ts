@@ -52,6 +52,10 @@ export const stateQueryApi = createApi({
             query: () => ({ url: API_ENDPOINTS.DEGREE }),
             transformResponse: (res: { data: degreeType[] }) => res.data! ?? res
         }),
+        getCourses: builder.query<PaginatedResponse<courseType[]>, void>({
+            query: () => ({ url: API_ENDPOINTS.COURSE }),
+            transformResponse: (res: { data: PaginatedResponse<courseType[]> }) => res.data! ?? res
+        }),
         getCoursesByDegree: builder.query<
             singleCourseType[],
             { degreeId: string }
@@ -236,5 +240,6 @@ export const {
     useGetPaginatedEventsQuery,
     useGetCountDisciplineQuery,
     useGetMessagesQuery,
-    useGetCounsellorScheduleQuery
+    useGetCounsellorScheduleQuery,
+    useGetCoursesQuery
 } = stateQueryApi;

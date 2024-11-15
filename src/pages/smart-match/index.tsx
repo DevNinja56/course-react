@@ -57,11 +57,6 @@ const SmartMatch = () => {
                             alt="AiBot"
                             className="h-44 scale-150"
                         />
-                        <img
-                            src="/images/SmartMatch/AiBotShadow.png"
-                            alt="AiBotShadow"
-                            className="h-fit w-36 relative bottom-5"
-                        />
                     </div>
                 </div>
             </div>
@@ -71,7 +66,9 @@ const SmartMatch = () => {
                     <div>
                         <p className="font-bold">PEOPLE LOVE US</p>
                         <h1 className="text-2xl max-[400px]:text-[1.1rem] sm:text-3xl text-[#2563eb] flex items-center gap-1">
-                            <span className="font-extrabold 2xl:min-w-fit">Why Choose</span>
+                            <span className="font-extrabold 2xl:min-w-fit">
+                                Why Choose
+                            </span>
                             <HiOutlineSparkles className="text-2xl sm:text-5xl" />
                             <span className="font-extrabold italic">
                                 SmartMatch?
