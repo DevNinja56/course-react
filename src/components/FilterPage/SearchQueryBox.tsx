@@ -4,6 +4,12 @@ import { useFilterQuery } from '@/hooks/filterQuery';
 import Button from '../Button';
 import { useRouter } from 'next/router';
 import Select, { StylesConfig } from 'react-select';
+import {
+    useGetCoursesQuery,
+    useGetInstituteQuery
+} from '@/store/slices/allRequests';
+import { educationalQualifications } from '../SmartMatch/data';
+import { ROUTES } from '@/config/constant';
 
 interface Props {
     isLocation?: boolean;
@@ -40,39 +46,63 @@ const customSelectStyles: StylesConfig = {
     }),
     option: (provided) => ({
         ...provided,
-        fontSize: '12px'
+        fontSize: '14px',
+        zIndex: '100'
     })
 };
 
-const SearchQueryBox = ({ isLocation, institutes, courses }: Props) => {
-    const { query } = useRouter();
+const SearchQueryBox = ({ isLocation }: Props) => {
+    const router = useRouter();
+    const { data: instituteData } = useGetInstituteQuery();
+    const { data: coursesData } = useGetCoursesQuery();
+
     const [value, setValue] = useState({
-        institute: (query?.instituteQuery as string) ?? '',
-        course: (query?.courseQuery as string) ?? ''
+        institute: (router.query?.instituteQuery as string) ?? '',
+        course: (router.query?.courseQuery as string) ?? '',
+        location: (router.query?.locationQuery as string) ?? ''
     });
+
+    const [error, setError] = useState<string | null>(null);
     const { addQuery } = useFilterQuery();
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        if (value) {
+
+        if (!value.institute && !value.course && !value.location) {
+            setError(
+                'Please select at least one option (Institute, Course, or Location).'
+            );
+            return;
+        }
+
+        if (value && router.pathname !== ROUTES.INSTITUTES) {
             addQuery({
-                ...(value.institute
-                    ? { instituteQuery: [value.institute] }
-                    : null),
-                ...(value.course ? { courseQuery: [value.course] } : null)
+                ...(value.institute ? { institute: [value.institute] } : null),
+                ...(value.course ? { course: [value.course] } : null),
+                ...(value.location ? { location: [value.location] } : null)
             });
-            setValue({ institute: '', course: '' });
+            setValue({ institute: '', course: '', location: '' });
+
+            router.push({
+                pathname: router.pathname,
+                query: {
+                    ...router.query,
+                    instituteQuery: value.institute,
+                    courseQuery: value.course,
+                    locationQuery: value.location
+                }
+            });
         }
     };
 
-    const instituteOptions = institutes?.map((institute) => ({
-        value: institute,
-        label: institute
+    const instituteOptions = instituteData?.map((institute) => ({
+        value: institute.name,
+        label: institute.name
     }));
 
-    const courseOptions = courses?.map((course) => ({
-        value: course,
-        label: course
+    const courseOptions = coursesData?.data?.map((course) => ({
+        value: course.name,
+        label: course.name
     }));
 
     return (
@@ -101,14 +131,22 @@ const SearchQueryBox = ({ isLocation, institutes, courses }: Props) => {
                         <span className="invisible">.</span>
                     </div>
                     <Select
-                        options={courseOptions}
+                        options={
+                            !isLocation
+                                ? courseOptions
+                                : educationalQualifications?.map((item) => ({
+                                      label: item.country,
+                                      value: item.country
+                                  })) || []
+                        }
                         value={courseOptions?.find(
                             (option) => option.value === value.course
                         )}
                         onChange={(selectedOption) =>
                             setValue((prev) => ({
                                 ...prev,
-                                course: (selectedOption as Option)?.value || ''
+                                [isLocation ? 'location' : 'course']:
+                                    (selectedOption as Option)?.value || ''
                             }))
                         }
                         placeholder={
@@ -127,6 +165,7 @@ const SearchQueryBox = ({ isLocation, institutes, courses }: Props) => {
                     className="!w-[20%] md:min-w-[100px] py-2 !mb-0 text-[10px] md:text-base rounded-md md:rounded-lg"
                 />
             </div>
+            {error && <p className="text-red-500 text-xs my-2 mx-5">{error}</p>}
         </form>
     );
 };

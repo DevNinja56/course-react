@@ -396,6 +396,7 @@ export type Qualification = {
     selectedGrade?: string;
 };
 
+
 export interface userDocuments {
     identity: {
         passport: {

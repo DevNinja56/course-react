@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 // import SearchBox from '../SearchBox';
 import { FilterCheckBox, FilterCheckBoxLoader } from '../FilterBoxCheck';
+import SearchBox from '../SearchBox';
 
 interface PropsType {
     data: {
@@ -10,32 +11,19 @@ interface PropsType {
     isLoading: boolean;
 }
 
-
 const InstituteFilter: React.FC<PropsType> = ({ data, isLoading }) => {
-    const [search] = useState<string>('');
+    const [search, setSearch] = useState<string>('');
 
     return (
         <div className="flex flex-col gap-y-3">
-            {/* {data.length > 5 && (
-                <div className="flex justify-between items-center px-4 relative">
-                    <SearchBox
-                        searchVal={setSearch}
-                        value={search}
-                        className="max-w-full"
-                        placeholder="Search Disciplines"
-                    />
-                </div>
-            )} */}
-            {/* {data.length > 5 && (
-                <div className="flex justify-between items-center px-4 relative">
-                    <SearchBox
-                        searchVal={setSearch}
-                        value={search}
-                        className="max-w-full"
-                        placeholder="Search Disciplines"
-                    />
-                </div>
-            )} */}
+            <div className="flex justify-between items-center relative">
+                <SearchBox
+                    searchVal={setSearch}
+                    value={search}
+                    className="max-w-full"
+                    placeholder="Search Institute"
+                />
+            </div>
             <div className="flex flex-col gap-y-1 max-h-[360px] overflow-hidden overflow-y-auto setScrollBar">
                 {isLoading ? (
                     <FilterCheckBoxLoader />
@@ -48,7 +36,7 @@ const InstituteFilter: React.FC<PropsType> = ({ data, isLoading }) => {
                                     .toLowerCase()
                                     .includes(search.toLowerCase())
                         )
-                        .map(({ institute: name,count }, i) => (
+                        .map(({ institute: name, count }, i) => (
                             <FilterCheckBox
                                 key={'Institute--list--' + name + i}
                                 id={name + '--' + i}

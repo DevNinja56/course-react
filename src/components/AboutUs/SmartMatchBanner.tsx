@@ -1,4 +1,4 @@
-import { HiOutlineSparkles } from 'react-icons/hi';
+import { HiOutlineSparkles } from 'react-icons/hi2';
 import Link from 'next/link';
 import { ROUTES } from '@/config/constant';
 

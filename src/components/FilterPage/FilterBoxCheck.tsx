@@ -8,10 +8,23 @@ interface propsType extends InputHTMLAttributes<HTMLInputElement> {
     customF?: () => void;
     isChecked?: boolean;
     count?: number;
+    subheading?: boolean;
 }
 
 export const FilterCheckBox = React.forwardRef<HTMLInputElement, propsType>(
-    ({ id, text, name = '', customF, isChecked, count, ...props }, ref) => {
+    (
+        {
+            id,
+            subheading,
+            text,
+            name = '',
+            customF,
+            isChecked,
+            count,
+            ...props
+        },
+        ref
+    ) => {
         const { query, addQuery, removeQuery } = useFilterQuery();
         const state: string[] = Array.isArray(query[name])
             ? (query[name] as string[])
@@ -52,9 +65,15 @@ export const FilterCheckBox = React.forwardRef<HTMLInputElement, propsType>(
                         checked={isChecked! ?? state?.includes(text)}
                         className="h-3.5 w-3.5 rounded-[2px] border border-borderColor cursor-pointer pb-0 group-hover:border-blueColor accent-[blueColor]"
                     />
-                    <p className="text-sm font-semibold flex-1 text-black group-hover:text-blueColor ml-2 capitalize line-clamp-1 flex justify-between w-full items-center">
+                    <p
+                        className={`${subheading ? 'text-xs' : 'text-sm'} font-semibold flex-1 text-black group-hover:text-blueColor ml-2 capitalize line-clamp-1 flex justify-between w-full items-center`}
+                    >
                         <span>{text}</span>
-                        {count && <span className="text-gray-500 py-1 px-2  text-xs bg-gray-100 rounded-lg">{count}</span>}
+                        {count && count > 1 && (
+                            <span className="text-gray-500 py-1 px-2  text-xs bg-gray-100 rounded-lg">
+                                {count}
+                            </span>
+                        )}
                     </p>
                 </div>
             </label>

@@ -30,6 +30,7 @@ export const API_ENDPOINTS = {
     SCHEDULE: '/schedule',
     COUNSELLOR: '/counsellor',
     SCHOLARSHIP_BY_ID: '/scholarship/:id',
+    COURSE: '/course',
     COURSE_DEGREE_ID: '/course/degree',
     COURSE_By_SPECIALIZATION_ID: '/course/specializations/:id',
     COURSE_INSTITUTE_ID: '/course/institute',
