@@ -86,7 +86,7 @@ const CourseCard = ({ course, topFit }: CardProps) => {
                         </p>
                     </div>
                     <div className="flex flex-col gap-3">
-                        <div className="flex items-center flex-wrap justify-around xl:justify-between gap-5 py-2 px-3 text-xs font-medium text-mainTextColor bg-profileBgColor rounded-md">
+                        <div className="flex items-center justify-around xl:justify-between gap-5 py-2 px-3 text-xs font-medium text-mainTextColor bg-profileBgColor rounded-md">
                             <div className="flex flex-col items-center gap-1">
                                 <LuMapPin className="h-4 w-4 text-blueColor" />
                                 <p className="text-[0.600rem] xl:text-[0.700rem]">
