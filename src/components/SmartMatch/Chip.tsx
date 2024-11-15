@@ -72,6 +72,10 @@ export const Chip: React.FC<ChipProps> = ({
         menu: (base) => ({
             ...base,
             fontSize: '0.8rem'
+<<<<<<< HEAD
+=======
+
+>>>>>>> 79fc4b57b628159a05bec622afa31ab6a96c3551
         })
     };
 
@@ -100,6 +104,7 @@ export const Chip: React.FC<ChipProps> = ({
                 </div>
             ) : (
                 <div className="flex text-sm gap-x-3 gap-y-3 flex-wrap my-2 font-[500]">
+<<<<<<< HEAD
                     {(data || dataObj)?.map((item) => {
                         const itemLabel = typeof item === 'string' ? item : item.label;
                         const itemValue = typeof item === 'string' ? item : item.value.join(', ');
@@ -126,6 +131,29 @@ export const Chip: React.FC<ChipProps> = ({
                             </div>
                         );
                     })}
+=======
+                    {data?.map((item) => (
+                        <div
+                            onClick={() => onSelect && onSelect(item)}
+                            key={'chip-data' + item}
+                            className={`flex items-center px-4 py-2 rounded-full cursor-pointer select-none transition-all ${
+                                selectedSet.has(item)
+                                    ? 'bg-[#1058d6] text-white'
+                                    : 'bg-[#cee0ff]'
+                            }`}
+                        >
+                            <p>{item}</p>
+                            {onRemove && (
+                                <IoIosClose
+                                    className="ml-1 text-white hover:text-blue-200 text-lg"
+                                    onClick={() => {
+                                        onRemove && onRemove(item);
+                                    }}
+                                />
+                            )}
+                        </div>
+                    ))}
+>>>>>>> 79fc4b57b628159a05bec622afa31ab6a96c3551
                 </div>
             )}
             {useSelect && (

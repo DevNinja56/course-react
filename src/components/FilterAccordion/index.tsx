@@ -71,8 +71,12 @@ const FilterAccordion: React.FC<FilterAccordionProps> = ({
                     </div>
                     {title !== 'Degree Levels' &&
                         title !== 'Intakes' &&
+<<<<<<< HEAD
                         title !== 'Language Test' &&
                         title !== 'Tuition Fees' && (
+=======
+                        title !== 'Language Test' && (
+>>>>>>> 79fc4b57b628159a05bec622afa31ab6a96c3551
                             <IoSearch className="text-[#626262] font-bold" />
                         )}
                 </div>
