@@ -64,7 +64,8 @@ const Studies = ({
             <div className="overflow-y-scroll setScrollBar h-[43vh] overflow-x-hidden">
                 <Chip
                     label="Study Level"
-                    data={['Foundation', 'Undergraduate', 'Postgraduate']}
+                    // data={['Foundation', 'Undergraduate', 'Postgraduate']}
+                    data={['Undergraduate', 'Postgraduate']}
                     onSelect={(value: string) => {
                         addQuery({ studyLevel: value });
                         clearError(

@@ -23,7 +23,12 @@ const SmartMatchTool = () => {
     const [progress, setProgress] = useState(0);
     const router = useRouter();
     const TotalStep = 7;
-    const { addQuery, query: data, clearAllQuery } = useSmartMatchTool();
+    const {
+        addQuery,
+        query: data,
+        clearAllQuery,
+        toggleSmartMatch
+    } = useSmartMatchTool();
     const { data: DisciplineData } = useGetDisciplineQuery();
     const [disciplineId, setDisciplineId] = useState('');
     const [errorMessages, setErrorMessages] = useState<ErrorMessages>({});
@@ -109,12 +114,11 @@ const SmartMatchTool = () => {
             setLoading(true);
 
             setTimeout(() => {
+                toggleSmartMatch(false);
                 router.push({
                     pathname: ROUTES.FILTER_COURSE,
                     query: {
-                        institute: 'Staffordshire University'
-                        // intakes: data.month,
-                        // specialization: data.specialization
+                        SmartMatch: true
                     }
                 });
             }, 2000);
