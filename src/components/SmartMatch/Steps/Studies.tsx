@@ -5,7 +5,7 @@ import {
     FormData,
     clearError
 } from '@/components/SmartMatch/Validation';
-import { disciplineType, OptionType, specializationDataType } from '@/types';
+import { disciplineType, OptionType } from '@/types';
 
 interface StudiesProps {
     data: FormData;
@@ -13,7 +13,6 @@ interface StudiesProps {
     errorMessages: ErrorMessages;
     setErrorMessages: React.Dispatch<React.SetStateAction<ErrorMessages>>;
     DisciplineData?: disciplineType[];
-    SpecializationData?: specializationDataType[];
     setDisciplineId: React.Dispatch<React.SetStateAction<string>>;
     disciplineId: string;
 }
@@ -23,11 +22,32 @@ const Studies = ({
     addQuery,
     errorMessages,
     setErrorMessages,
-    DisciplineData,
-    SpecializationData,
-    setDisciplineId,
-    disciplineId
+    DisciplineData
 }: StudiesProps) => {
+    const handleAddDiscipline = (value: string) => {
+        const existingDisciplines = Array.isArray(data.discipline)
+            ? data.discipline
+            : [];
+        if (
+            !existingDisciplines.includes(value) &&
+            existingDisciplines.length < 3
+        ) {
+            const updatedDisciplines = [...existingDisciplines, value];
+            addQuery({ discipline: updatedDisciplines });
+            clearError(errorMessages, setErrorMessages, 'discipline');
+        }
+    };
+
+    const handleRemoveDiscipline = (value: string) => {
+        const existingDisciplines = Array.isArray(data.discipline)
+            ? data.discipline
+            : [];
+        const updatedDisciplines = existingDisciplines.filter(
+            (item) => item !== value
+        );
+        addQuery({ discipline: updatedDisciplines });
+    };
+
     return (
         <>
             <div className="flex gap-1 text-center max-sm:flex-col justify-center items-center">
@@ -46,9 +66,7 @@ const Studies = ({
                     label="Study Level"
                     data={['Foundation', 'Undergraduate', 'Postgraduate']}
                     onSelect={(value: string) => {
-                        addQuery({
-                            studyLevel: value
-                        });
+                        addQuery({ studyLevel: value });
                         clearError(
                             errorMessages,
                             setErrorMessages,
@@ -58,109 +76,48 @@ const Studies = ({
                     selectedValue={data.studyLevel}
                     error={errorMessages.studyLevel}
                 />
-                <Chip
-                    label="Popular searches"
-                    data={DisciplineData?.map((item) => item.name)}
-                    onSelect={(value: string) => {
-                        const selectedDiscipline = DisciplineData?.find(
-                            (item) => item.name === value
-                        );
 
-                        if (selectedDiscipline) {
-                            setDisciplineId(selectedDiscipline.id);
-
-                            addQuery({
-                                discipline: selectedDiscipline.name
-                            });
-
-                            clearError(
-                                errorMessages,
-                                setErrorMessages,
-                                'discipline'
-                            );
-                        }
-                    }}
-                    selectedValue={data.discipline}
-                    error={errorMessages.discipline}
-                />
-                <div>
+                <div className="mt-4">
                     <Chip
-                        label="Select Subjects"
+                        label="Search Subjects"
                         useSelect
-                        options={SpecializationData?.filter(
-                            (item) =>
-                                item.discipline === disciplineId &&
-                                !(
-                                    data.specialization &&
-                                    data.specialization.includes(item.name)
-                                )
-                        ).map((item) => ({
+                        options={DisciplineData?.map((item) => ({
                             label: item.name,
                             value: item.name
                         }))}
                         onChange={(option) => {
                             const selectedValue = (option as OptionType).value;
-
-                            const specialization = Array.isArray(
-                                data.specialization
-                            )
-                                ? data.specialization
-                                : [];
-
-                            const isSelected =
-                                specialization.includes(selectedValue);
-
-                            if (!isSelected && specialization.length < 3) {
-                                addQuery({
-                                    specialization: [
-                                        ...specialization,
-                                        selectedValue
-                                    ]
-                                });
-                            } else if (isSelected) {
-                                addQuery({
-                                    specialization: specialization.filter(
-                                        (item) => item !== selectedValue
-                                    )
-                                });
-                            }
-                            clearError(
-                                errorMessages,
-                                setErrorMessages,
-                                'specialization'
-                            );
+                            handleAddDiscipline(selectedValue);
                         }}
                         placeholder="Search here to select subjects"
-                        isDisable={
-                            !data.discipline ||
-                            (data.specialization
-                                ? data.specialization.length === 3
-                                : undefined)
-                        }
-                        error={errorMessages.specialization}
+                        error={errorMessages.discipline}
+                        isDisable={!DisciplineData?.length}
                     />
+
                     <Chip
                         data={
-                            Array.isArray(data.specialization)
-                                ? data.specialization
+                            Array.isArray(data.discipline)
+                                ? data.discipline
                                 : []
                         }
+                        onRemove={(value) => handleRemoveDiscipline(value)}
                         selectedValue={
-                            Array.isArray(data.specialization)
-                                ? data.specialization
+                            Array.isArray(data.discipline)
+                                ? data.discipline
                                 : []
                         }
-                        onRemove={(value) => {
-                            addQuery({
-                                specialization: Array.isArray(
-                                    data.specialization
-                                )
-                                    ? data.specialization.filter(
-                                          (item) => item != value
-                                      )
-                                    : []
-                            });
-                        }}
+                    />
+
+                    <Chip
+                        label="Popular Searches"
+                        data={DisciplineData?.map((item) => item.name) || []}
+                        onSelect={(value: string) => handleAddDiscipline(value)}
+                        selectedValue={
+                            Array.isArray(data.discipline)
+                                ? data.discipline
+                                : []
+                        }
+                        error={errorMessages.discipline}
                     />
                 </div>
             </div>

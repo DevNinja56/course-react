@@ -206,7 +206,7 @@ const Story = ({
                 isDisabled={!data.gradingSystem}
                 selectedValue={String(data.score)}
             />
-            {data.studyLevel === 'Undergraduate' && (
+            {/* {data.studyLevel === 'Undergraduate' && (
                 <InputField
                     type="number"
                     onSelect={(value) => {
@@ -225,7 +225,7 @@ const Story = ({
                         data.englishPercentage && String(data.englishPercentage)
                     }
                 />
-            )}
+            )} */}
         </>
     );
 };

@@ -75,8 +75,8 @@ const English = ({
                                 gaps
                                 placeholder={
                                     field === 'overallscore'
-                                        ? 'Overall Band Score (1-10)'
-                                        : `${field.charAt(0).toUpperCase() + field.slice(1)} Score (1-10)`
+                                        ? 'Overall Band Score (1-9)'
+                                        : `${field.charAt(0).toUpperCase() + field.slice(1)} Score (1-9)`
                                 }
                                 error={
                                     errorMessages[field as keyof ErrorMessages]

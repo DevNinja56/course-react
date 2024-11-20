@@ -25,7 +25,7 @@ const GlobalSearch = () => {
     return (
         <form
             onSubmit={handleSubmit}
-            className="rounded-[95px] bg-blueColor bg-opacity-10 border border-blueColor h-8 xl:h-9 2xl:h-12 flex items-center justify-evenly gap-2 xl:gap-3 px-2 xl:px-4 py-1.5 w-52 xl:w-64 2xl:w-96"
+            className="rounded-lg bg-blueColor bg-opacity-10 border border-blueColor h-8 xl:h-9 2xl:h-12 flex items-center justify-evenly gap-2 xl:gap-3 px-2 xl:px-4 py-1.5 w-52 xl:w-64 2xl:w-96"
         >
             <input
                 id="course-search"
