@@ -62,6 +62,8 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
         return amount;
     }, [course]);
 
+    console.log(course, 'course');
+
     return (
         <>
             {!course ? (
