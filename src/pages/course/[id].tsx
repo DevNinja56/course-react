@@ -29,16 +29,25 @@ import Card from '@/components/Scholarship/Card';
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import EntryRequirements from '@/components/course/EntryRequirements';
+import { useGetCourseByIdQuery } from '@/store/slices/allRequests';
+import { useRouter } from 'next/router';
+import { skipToken } from '@reduxjs/toolkit/query';
 const InnerHtml = dynamic(() => import('@/components/InnerHtml'), {
     ssr: false
 });
 
-const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
+// const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
+const CourseDetail = () => {
     const { updateModal } = useUi();
+    const { query, isReady } = useRouter();
+    const { data: course, isLoading } = useGetCourseByIdQuery(
+        isReady ? (query.course_id as string) : skipToken
+    );
     const { setCurrencyValue, getSingleRate, base_code } = useCurrency();
     const { initialDeposit } = useCalculate();
-    const isSameCurrency = base_code === course.feeCurrency;
-    const rate = isSameCurrency ? null : getSingleRate(course.feeCurrency);
+
+    const isSameCurrency = base_code === course?.feeCurrency;
+    const rate = isSameCurrency ? null : getSingleRate(course?.feeCurrency);
     const isUkCourse =
         course?.institute?.country?.name
             ?.toLowerCase()
@@ -56,7 +65,7 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
             ? (amount = String(scholarship?.amount ?? 0))
             : (amount = String(
                   scholarship?.amount
-                      ? +scholarship?.amount * course?.tuitionFee
+                      ? +scholarship?.amount * Number(course?.tuitionFee)
                       : 0
               ));
         return amount;
@@ -66,7 +75,7 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
 
     return (
         <>
-            {!course ? (
+            {!course || isLoading ? (
                 <ScreenLoader />
             ) : (
                 <>
