@@ -49,7 +49,7 @@ const EntryRequirements: React.FC<propsType> = ({
                               {entryRequirements?.a_level ? (
                                   <div className="">
                                       {entryRequirements?.a_level} UCAS points
-                                      need to get admission
+                                      required to get admission
                                   </div>
                               ) : (
                                   <>No data found</>
@@ -74,8 +74,8 @@ const EntryRequirements: React.FC<propsType> = ({
                           <div className="description w-full flex flex-col gap-3 md:gap-4 items-start">
                               {entryRequirements?.ib ? (
                                   <div className="">
-                                      {entryRequirements?.ib} (IB) points need
-                                      to get admission
+                                      {entryRequirements?.ib} (IB) points
+                                      required to get admission
                                   </div>
                               ) : (
                                   <>No data found</>
