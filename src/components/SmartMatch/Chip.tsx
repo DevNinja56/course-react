@@ -114,7 +114,7 @@ export const Chip: React.FC<ChipProps> = ({
                                         : 'bg-[#cee0ff]'
                                 }`}
                             >
-                                <p>{itemLabel}</p>
+                                <p className='capitalize'>{itemLabel}</p>
                                 {onRemove && (
                                     <IoIosClose
                                         className="ml-1 text-white hover:text-blue-200 text-lg"

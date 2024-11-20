@@ -56,7 +56,7 @@ const SmartMatchTool = () => {
     }, [data.englishTest]);
 
     useEffect(() => {
-        if (data.studyLevel) {
+        if (data.degreeType) {
             addQuery({
                 educationCountry: '',
                 qualification: '',
@@ -65,7 +65,7 @@ const SmartMatchTool = () => {
             });
             setErrorMessages({});
         }
-    }, [data.studyLevel]);
+    }, [data.degreeType]);
 
     useEffect(() => {
         if (data.educationCountry) {

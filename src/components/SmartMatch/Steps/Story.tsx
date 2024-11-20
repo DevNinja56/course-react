@@ -42,7 +42,12 @@ const Story = ({
         <>
             <div className="flex gap-2 text-center justify-center items-center">
                 <h1 className="lg:text-xl my-2 font-semibold">
-                    {`Tell us your ${data.studyLevel === 'Undergraduate' ? 'Senior High School' : 'Bachelor’s Degree'} story`}
+                    {`Tell us your ${
+                        data.degreeType &&
+                        data.degreeType[0] === 'undergraduate'
+                            ? 'Senior High School'
+                            : 'Bachelor’s Degree'
+                    } story`}
                 </h1>
                 <img
                     src="/images/SmartMatch/Tool/Film Script Book.png"
@@ -80,7 +85,7 @@ const Story = ({
                 }
             />
 
-            {data.studyLevel === 'Undergraduate' && (
+            {data.degreeType && data.degreeType[0] === 'undergraduate' && (
                 <InputField
                     useSelect
                     options={[
@@ -121,7 +126,7 @@ const Story = ({
                 />
             )}
 
-            {data.studyLevel === 'Undergraduate' && (
+            {data.degreeType && data.degreeType[0] === 'undergraduate' && (
                 <InputField
                     useSelect
                     options={
@@ -162,7 +167,8 @@ const Story = ({
                 />
             )}
 
-            {data.studyLevel === 'Postgraduate' && (
+            {data.degreeType && data?.degreeType[0] ===
+                'postgraduate' && (
                 <>
                     <InputField
                         useSelect
@@ -206,7 +212,7 @@ const Story = ({
                 isDisabled={!data.gradingSystem}
                 selectedValue={String(data.score)}
             />
-            {/* {data.studyLevel === 'Undergraduate' && (
+            {/* {data.degreeType[0] === 'undergraduate' && (
                 <InputField
                     type="number"
                     onSelect={(value) => {

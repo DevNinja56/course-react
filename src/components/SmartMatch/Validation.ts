@@ -8,7 +8,7 @@ export interface FormData {
     nationality?: string;
     year?: string;
     month?: string[];
-    studyLevel?: string;
+    degreeType?: string;
     discipline?: string[];
     educationCountry?: string;
     qualification?: string;
@@ -59,8 +59,8 @@ export const validateFields = (
             break;
 
         case 3:
-            if (!data.studyLevel) {
-                setError(errors, 'studyLevel', 'Study level is required');
+            if (!data.degreeType) {
+                setError(errors, 'degreeType', 'Study level is required');
                 isValid = false;
             }
             if (data.discipline?.length === 0 || !data.discipline) {
@@ -82,7 +82,7 @@ export const validateFields = (
                 );
                 isValid = false;
             }
-            if (!data.qualification && data.studyLevel === 'Undergraduate') {
+            if (!data.qualification && data.degreeType === 'Undergraduate') {
                 setError(errors, 'qualification', 'Qualification is required');
                 isValid = false;
             }
@@ -91,7 +91,7 @@ export const validateFields = (
                 isValid = false;
             }
 
-            if (data.studyLevel === 'Postgraduate') {
+            if (data.degreeType === 'postgraduate') {
                 const selectedScale = gradingScalesPostGraduate.find(
                     (scale) => scale.description === data.gradingSystem
                 );
