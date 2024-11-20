@@ -1,4 +1,3 @@
-
 export interface userType {
     id: string;
     name: string;
@@ -128,9 +127,7 @@ export type scholarshipFiltersType = {
         degree: degreeType;
         count: number;
     }[];
-    
-    
-    
+
     types: {
         type: string;
         count: number;
@@ -195,19 +192,19 @@ export type specializationType = {
 
 export interface specializationDataType {
     name: string;
-    discipline: string; 
-    createdAt: string; 
-    updatedAt: string; 
+    discipline: string;
+    createdAt: string;
+    updatedAt: string;
     id: string;
-  }
+}
 
 export interface Discipline {
     name: string;
-    discipline: string; 
-    createdAt: string; 
-    updatedAt: string; 
+    discipline: string;
+    createdAt: string;
+    updatedAt: string;
     id: string;
-  }
+}
 
 export type courseType = {
     _id: string;
@@ -275,9 +272,31 @@ export type filterCourseType = {
 export type courseLanguageRequirement = {
     ielts: { s: string; l: string; r: string; w: string; oa: string };
     pte: { s: string; l: string; r: string; w: string; oa: string };
-    oxford: { oa: string };
-    language: { oa: string };
-    duolingo: { oa: string };
+    language?: { isAvailable: boolean };
+    oxford?: { isAvailable: boolean };
+    duolingo?: { isAvailable: boolean };
+    moi?: { isAvailable: boolean };
+};
+
+export type entryRequirementItems = {
+    local_year_12:
+        | {
+              country: string;
+              qualification: string;
+              grade: string;
+              value: string;
+          }[]
+        | null;
+    bachelor_degrees:
+        | {
+              country: string;
+              qualification: string;
+              grade: string;
+              value: string;
+          }[]
+        | null;
+    a_level: string | null;
+    ib: string | null;
 };
 
 export type singleCourseType = {
@@ -318,13 +337,7 @@ export type singleCourseType = {
             default: boolean;
         }
     ];
-    entryRequirements: [
-        {
-            requirement: string;
-            country: string;
-            default: boolean;
-        }
-    ];
+    entryRequirements: entryRequirementItems;
     documentsRequirement: {
         title: string;
         url: string;
@@ -395,7 +408,6 @@ export type Qualification = {
     selectedScore?: string;
     selectedGrade?: string;
 };
-
 
 export interface userDocuments {
     identity: {
