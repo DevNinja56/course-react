@@ -7,7 +7,7 @@ export interface ErrorMessages {
 export interface FormData {
     nationality?: string;
     year?: string;
-    month?: string[];
+    intakes?: string[];
     degreeType?: string;
     discipline?: string[];
     educationCountry?: string;
@@ -52,8 +52,8 @@ export const validateFields = (
                 setError(errors, 'year', 'Year is required');
                 isValid = false;
             }
-            if (!data.month) {
-                setError(errors, 'month', 'Month is required');
+            if (!data.intakes) {
+                setError(errors, 'intakes', 'Intakes is required');
                 isValid = false;
             }
             break;
