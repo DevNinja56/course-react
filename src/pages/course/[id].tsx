@@ -28,6 +28,7 @@ import { generateIntakes } from '@/utils/generateIntakes';
 import Card from '@/components/Scholarship/Card';
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
+import EntryRequirements from '@/components/course/EntryRequirements';
 const InnerHtml = dynamic(() => import('@/components/InnerHtml'), {
     ssr: false
 });
@@ -280,30 +281,17 @@ const CourseDetail = ({ data: course }: { data: singleCourseType }) => {
                                                                             Requirements
                                                                         </h3>
                                                                         <div className="content text-sm md:text-base">
-                                                                            <InnerHtml
-                                                                                html={
+                                                                            <EntryRequirements
+                                                                                entryRequirements={
+                                                                                    course.entryRequirements
+                                                                                }
+                                                                                isUnderGraduate={
                                                                                     course
-                                                                                        .entryRequirements?.[0]
-                                                                                        ?.requirement ??
-                                                                                    'No Entry Requirements'
+                                                                                        .degree
+                                                                                        .type ===
+                                                                                    'undergraduate'
                                                                                 }
                                                                             />
-
-                                                                            <button
-                                                                                onClick={() =>
-                                                                                    updateModal(
-                                                                                        {
-                                                                                            type: modalType.ucas_calculator,
-                                                                                            state: {}
-                                                                                        }
-                                                                                    )
-                                                                                }
-                                                                                className="bg-blueColor text-white px-3 py-2 rounded-md "
-                                                                            >
-                                                                                UCAS
-                                                                                Points
-                                                                                Calculator
-                                                                            </button>
                                                                         </div>
                                                                         {course?.textEligibility && (
                                                                             <div className="text-sm md:text-base">
