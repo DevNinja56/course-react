@@ -24,7 +24,7 @@ const Universities = () => {
                             Your Quick Book To Explore
                         </p>
                         <h1 className="text-mainTextColor text-2xl md:text-[26px] text-center font-extrabold">
-                            LEADING WORLD UNIVERSITIES
+                            Leading UK Universities
                         </h1>
                     </div>
                     <SearchQueryBox isLocation />

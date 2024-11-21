@@ -2,9 +2,11 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 export interface smartMatchType {
     query: { [key: string]: string | string[] };
+    isActive: boolean;
 }
 const initialState: smartMatchType = {
-    query: {}
+    query: {},
+    isActive: false
 };
 
 const smartMatch = createSlice({
@@ -22,9 +24,13 @@ const smartMatch = createSlice({
         },
         clearAllQuery(state) {
             state.query = {};
+        },
+        toggleQuery(state, action) {
+            state.isActive = action.payload;
         }
     }
 });
 
-export const { addQuery, removeQuery, clearAllQuery } = smartMatch.actions;
+export const { addQuery, removeQuery, clearAllQuery, toggleQuery } =
+    smartMatch.actions;
 export default smartMatch.reducer;

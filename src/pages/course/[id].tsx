@@ -12,7 +12,6 @@ import { singleCourseType } from '@/types';
 import { getSsrRequest } from '@/utils/ssrRequest';
 import { GetServerSideProps } from 'next';
 import Link from 'next/link';
-import { CiCalculator2 } from 'react-icons/ci';
 import { IoShareSocialSharp } from 'react-icons/io5';
 import { IoDocumentText } from 'react-icons/io5';
 import { GiOpenBook, GiTrophy } from 'react-icons/gi';
@@ -70,9 +69,6 @@ const CourseDetail = () => {
               ));
         return amount;
     }, [course]);
-
-    console.log(course, 'course');
-
     return (
         <>
             {!course || isLoading ? (
@@ -86,7 +82,6 @@ const CourseDetail = () => {
                             alt="course-round"
                             className="top-1/3 absolute -left-3 md:-left-5 h-8 w-8 md:h-16 md:w-16 lg:h-24 lg:w-24 z-10"
                             src="/images/CourseDetail/Circle 3.svg"
-                            // priority
                         />
 
                         <div className="w-full pb-10 pt-3 flex justify-center xl:container px-4 md:px-[50px] lg:px-2 2xl:px-8">
@@ -99,7 +94,6 @@ const CourseDetail = () => {
                                     '/images/CourseDetail/courseDetailMain.png'
                                 }
                                 className="z-20 h-full w-full lg:block hidden max-h-[375px] object-cover rounded-lg  "
-                                // priority
                             />
                             <img
                                 height={375}
@@ -110,7 +104,6 @@ const CourseDetail = () => {
                                     '/images/CourseDetail/courseDetailMain.png'
                                 }
                                 className="z-20 h-full w-full lg:hidden block"
-                                // priority
                             />
                         </div>
                         <img
@@ -119,7 +112,6 @@ const CourseDetail = () => {
                             alt="courseDetail-round"
                             className="absolute right-[-40px] lg:-right-20 -top-7 md:-top-16 md:-right-8 md:translate-y-8 lg:translate-y-0 md:bottom-8 lg:-top-16 h-20 w-20 md:h-32 md:w-32 lg:h-80 lg:w-80"
                             src="/images/CourseDetail/Ciecle 4.svg"
-                            // priority
                         />
                     </div>
                     <div className="xl:container mx-auto relative bottom-20 z-[35]">
@@ -133,7 +125,7 @@ const CourseDetail = () => {
                                                 ? 'Intake | Duration'
                                                 : 'Duration'}
                                         </p>
-                                        <ul className="text-[10px] sm:text-sm  lg:text-base text-lightGrayColor">
+                                        <ul className="text-[10px] sm:text-sm flex  lg:text-base text-lightGrayColor">
                                             {isUkCourse && isMasterDegree ? (
                                                 <>
                                                     {generateIntakes(
@@ -146,14 +138,20 @@ const CourseDetail = () => {
                                                     ])}
                                                 </>
                                             ) : (
-                                                getMonths(course.monthDuration)
-                                                    .split('/')
-                                                    .map((month) => (
+                                                course.monthDuration.map(
+                                                    (month, index) => (
                                                         <li key={month}>
                                                             {month}
+                                                            {course
+                                                                .monthDuration
+                                                                .length -
+                                                                1 !==
+                                                                index && '/'}
                                                         </li>
-                                                    ))
+                                                    )
+                                                )
                                             )}
+                                            <p className="ml-1">Months</p>
                                         </ul>
                                     </div>
                                 </div>
@@ -222,7 +220,7 @@ const CourseDetail = () => {
                             <div className="flex pr-0">
                                 <div className="flex flex-wrap items-center gap-1 md:gap-2 lg:gap-3">
                                     <button
-                                        className="rounded-[20px] py-2 px-3 md:px-4 text-xs md:text-sm border-1 border-white hover:border-blueColor text-white hover:text-blueColor bg-blueColor hover:bg-white flex gap-2 items-center"
+                                        className="rounded-md py-2 px-3 md:px-4 text-xs md:text-lg border-1 border-transparent hover:border-blueColor border-2  text-white hover:text-blueColor bg-blueColor hover:bg-white flex gap-2 items-center transition-all"
                                         onClick={() =>
                                             updateModal({
                                                 type: modalType.bank_statement_calculator,
@@ -230,8 +228,7 @@ const CourseDetail = () => {
                                             })
                                         }
                                     >
-                                        <span>Bank Statement</span>
-                                        <CiCalculator2 />
+                                        <span>Bank Statement Calculator</span>
                                     </button>
                                     <FavoriteButton
                                         isActive={!!course?.favoriteId?.[0]}
@@ -591,7 +588,6 @@ const CourseDetail = () => {
                                                 course.institute?.image ??
                                                 '/images/CourseDetail/Rectangle 1697.svg'
                                             }
-                                            // priority
                                         />
                                         <h1 className="absolute w-full bottom-0 left-0 py-2 px-5 bg-gradient-to-t from-blueColor text-center font-bold text-2xl text-white z-10  ">
                                             {course?.institute?.name ??
@@ -681,15 +677,69 @@ const CourseDetail = () => {
                                                 <p className="font-bold text-sm md:text-base text-mainTextColor">
                                                     Available Intakes
                                                 </p>
-                                                <ul className="text-lightGrayColor text-sm md:text-base">
-                                                    {generateIntakes(
+                                                <ul className="text-lightGrayColor text-sm md:text-base flex">
+                                                    {/* {generateIntakes(
                                                         course.intakes,
                                                         1
-                                                    ).map((intake) => (
+                                                    ).map((intake, index) => (
                                                         <li key={intake}>
                                                             {intake}
+                                                            {course.intakes
+                                                                .length -
+                                                                1 !==
+                                                                index && ','}
                                                         </li>
-                                                    ))}
+                                                    ))} */}
+                                                    {(() => {
+                                                        const currentMonth =
+                                                            new Date().getMonth() +
+                                                            1;
+                                                        const currentYear =
+                                                            new Date().getFullYear();
+                                                        const lastIntakeMonth =
+                                                            parseInt(
+                                                                course.intakes[
+                                                                    course
+                                                                        .intakes
+                                                                        .length -
+                                                                        1
+                                                                ]
+                                                            );
+                                                        const year =
+                                                            lastIntakeMonth >=
+                                                            currentMonth
+                                                                ? currentYear
+                                                                : currentYear +
+                                                                  1;
+
+                                                        return (
+                                                            <>
+                                                                {course.intakes.map(
+                                                                    (
+                                                                        intake,
+                                                                        index
+                                                                    ) => (
+                                                                        <li
+                                                                            key={
+                                                                                intake
+                                                                            }
+                                                                        >
+                                                                            {
+                                                                                intake
+                                                                            }
+                                                                            {index <
+                                                                                course
+                                                                                    .intakes
+                                                                                    .length -
+                                                                                    1 &&
+                                                                                ', '}
+                                                                        </li>
+                                                                    )
+                                                                )}{' '}
+                                                               <p className='mx-1'>{year}</p>
+                                                            </>
+                                                        );
+                                                    })()}
                                                 </ul>
                                             </div>
                                         </div>

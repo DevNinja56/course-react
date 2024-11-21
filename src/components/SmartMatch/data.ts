@@ -19,9 +19,6 @@ type GradingScaleFormat = {
     options?: string[];
 };
 
-
-
-
 type GradingScaleFormats = {
     [key: string]: GradingScaleFormat;
 };
@@ -166,6 +163,7 @@ export const EnglishTest = [
     'Language Cert',
     'Oxford ELLT',
     'Duolingo',
+    'MOI',
     'I haven’t taken any test'
 ];
 
@@ -193,10 +191,10 @@ export const GradingSystem = [
 ];
 
 export const intakesFilterMonths = [
-    { label: 'January – March', value: ['Jan, Feb, Mar'] },
-    { label: 'April – June', value: ['Apr, May, Jun'] },
-    { label: 'July – September', value: ['Jul, Aug, Sep'] },
-    { label: 'October – December', value: ['Oct, Nov, Dec'] }
+    { label: 'January – March', value: ['Jan', 'Feb', 'Mar'] },
+    { label: 'April – June', value: ['Apr', 'May', 'Jun'] },
+    { label: 'July – September', value: ['Jul', 'Aug', 'Sep'] },
+    { label: 'October – December', value: ['Oct', 'Nov', 'Dec'] }
 ];
 
 const currentYear = new Date().getFullYear();
