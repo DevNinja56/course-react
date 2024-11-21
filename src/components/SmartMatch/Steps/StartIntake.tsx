@@ -34,8 +34,7 @@ const StartIntake = ({
         clearError(errorMessages, setErrorMessages, 'intakes');
     };
 
-    console.log(data.intakes)
-    return (
+        return (
         <>
             <div className="flex text-center max-sm:flex-col justify-center items-center">
                 <h1 className="lg:text-xl my-2 font-semibold">

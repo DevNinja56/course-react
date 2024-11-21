@@ -21,6 +21,7 @@ import {
 import { useRouter } from 'next/router';
 import { RiEnglishInput } from 'react-icons/ri';
 import { IoFilterOutline } from 'react-icons/io5';
+import EnglishTestFilter from './EnglishTestFilter';
 
 export const FilterRow = () => (
     <div className="px-4">
@@ -155,11 +156,7 @@ const CourseFilter = () => {
                     name="LanguageTest"
                     svg
                 >
-                    <></>
-                    {/* <IntakesFilter
-                        data={filters.intakes}
-                        isLoading={isLoading}
-                    /> */}
+                    <EnglishTestFilter isLoading={isLoading} />
                 </FilterAccordion>
                 <FilterAccordion
                     title="Tuition Fees"

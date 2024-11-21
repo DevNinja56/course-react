@@ -15,7 +15,7 @@ export interface FormData {
     gradingSystem?: string;
     score?: string;
     percentage?: string;
-    englishTest?: string;
+    englishtest?: string;
     listening?: string;
     reading?: string;
     speaking?: string;
@@ -64,11 +64,7 @@ export const validateFields = (
                 isValid = false;
             }
             if (data.discipline?.length === 0 || !data.discipline) {
-                setError(
-                    errors,
-                    'discipline',
-                    'Subject are required'
-                );
+                setError(errors, 'discipline', 'Subject are required');
                 isValid = false;
             }
             break;
@@ -156,30 +152,30 @@ export const validateFields = (
             break;
 
         case 5:
-            if (!data.englishTest) {
-                setError(errors, 'englishTest', 'English test is required');
+            if (!data.englishtest) {
+                setError(errors, 'englishtest', 'English test is required');
                 isValid = false;
-            } else if (['IELTS', 'PTE Academic'].includes(data.englishTest)) {
+            } else if (['ielts', 'pte'].includes(data.englishtest)) {
                 const tests = {
                     listening: {
-                        min: data.englishTest === 'IELTS' ? 1 : 10,
-                        max: data.englishTest === 'IELTS' ? 9 : 90
+                        min: data.englishtest === 'ielts' ? 1 : 10,
+                        max: data.englishtest === 'ielts' ? 9 : 90
                     },
                     reading: {
-                        min: data.englishTest === 'IELTS' ? 1 : 10,
-                        max: data.englishTest === 'IELTS' ? 9 : 90
+                        min: data.englishtest === 'ielts' ? 1 : 10,
+                        max: data.englishtest === 'ielts' ? 9 : 90
                     },
                     speaking: {
-                        min: data.englishTest === 'IELTS' ? 1 : 10,
-                        max: data.englishTest === 'IELTS' ? 9 : 90
+                        min: data.englishtest === 'ielts' ? 1 : 10,
+                        max: data.englishtest === 'ielts' ? 9 : 90
                     },
                     writing: {
-                        min: data.englishTest === 'IELTS' ? 1 : 10,
-                        max: data.englishTest === 'IELTS' ? 9 : 90
+                        min: data.englishtest === 'ielts' ? 1 : 10,
+                        max: data.englishtest === 'ielts' ? 9 : 90
                     },
                     overallscore: {
-                        min: data.englishTest === 'IELTS' ? 1 : 10,
-                        max: data.englishTest === 'IELTS' ? 9 : 90
+                        min: data.englishtest === 'ielts' ? 1 : 10,
+                        max: data.englishtest === 'ielts' ? 9 : 90
                     }
                 };
 

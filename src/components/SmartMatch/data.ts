@@ -157,15 +157,24 @@ export const gradingScaleFormats: GradingScaleFormats = {
         max: 45
     }
 };
-export const EnglishTest = [
-    'IELTS',
-    'PTE Academic',
-    'Language Cert',
-    'Oxford ELLT',
-    'Duolingo',
-    'MOI',
-    'I haven’t taken any test'
-];
+// export const EnglishTest = [
+//     'IELTS',
+//     'PTE Academic',
+//     'Language Cert',
+//     'Oxford ELLT',
+//     'Duolingo',
+//     'MOI',
+//     'I haven’t taken any test'
+// ];
+
+export const EnglishTest: { [key: string]: string } = {
+    IELTS: 'ielts',
+    PTE: 'pte',
+    'Oxford ELLT': 'oxford',
+    'Language Cert': 'language',
+    Duolingo: 'duolingo',
+    MOI: 'moi'
+};
 
 export const months = [
     { label: 'January', value: 'Jan' },
