@@ -219,6 +219,9 @@ const CourseDetail = () => {
                             </h1>
                             <div className="flex pr-0">
                                 <div className="flex flex-wrap items-center gap-1 md:gap-2 lg:gap-3">
+                                    <button className="py-2 px-4 rounded-[20px] bg-purpleColor text-white border-2 border-white shadow-custom">
+                                        {course?.name.split(' ')[0]}
+                                    </button>
                                     <button
                                         className="rounded-md py-2 px-3 md:px-4 text-xs md:text-lg border-1 border-transparent hover:border-blueColor border-2  text-white hover:text-blueColor bg-blueColor hover:bg-white flex gap-2 items-center transition-all"
                                         onClick={() =>
@@ -736,7 +739,9 @@ const CourseDetail = () => {
                                                                         </li>
                                                                     )
                                                                 )}{' '}
-                                                               <p className='mx-1'>{year}</p>
+                                                                <p className="mx-1">
+                                                                    {year}
+                                                                </p>
                                                             </>
                                                         );
                                                     })()}
