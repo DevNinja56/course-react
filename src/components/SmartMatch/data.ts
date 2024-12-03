@@ -173,7 +173,8 @@ export const EnglishTest: { [key: string]: string } = {
     'Oxford ELLT': 'oxford',
     'Language Cert': 'language',
     Duolingo: 'duolingo',
-    MOI: 'moi'
+    MOI: 'moi',
+    'I haven’t taken any test': ''
 };
 
 export const months = [

@@ -73,22 +73,37 @@ export const formateCourseQuery = (query: { [key: string]: any }) => {
         });
     }
 
-    if (query.reading && query.listening && query.speaking && query.writing) {
-        const test = query.englishtest;
+    // if (query.reading && query.listening && query.speaking && query.writing) {
+    //     const test = query.englishtest;
+    //     orConditions.push({
+    //         $or: [
+    //             { [`language.language.${test}.r`]: { $lte: query.reading } },
+    //             { [`language.language.${test}.l`]: { $lte: query.listening } },
+    //             { [`language.language.${test}.s`]: { $lte: query.speaking } },
+    //             { [`language.language.${test}.w`]: { $lte: query.writing } },
+    //             {
+    //                 [`language.language.${test}.oa`]: {
+    //                     $lte: query.overallscore
+    //                 }
+    //             }
+    //         ]
+    //     });
+    // }
+
+    if (query.educationCountry && query.qualification && query.gradingSystem && query.score) {
+        const test = (query.degreeType === "undergraduate" ? "local_year_12": "bachelor_degrees");
+
         orConditions.push({
             $or: [
-                { [`language.language.${test}.r`]: { $lte: query.reading } },
-                { [`language.language.${test}.l`]: { $lte: query.listening } },
-                { [`language.language.${test}.s`]: { $lte: query.speaking } },
-                { [`language.language.${test}.w`]: { $lte: query.writing } },
-                {
-                    [`language.language.${test}.oa`]: {
-                        $lte: query.overallscore
-                    }
-                }
+                { [`entryRequirements.${test}.country`]: { $eq: query.educationCountry } },
+                { [`entryRequirements.${test}.qualification`]: { $eq: query.qualification } },
+                { [`entryRequirements.${test}.grade`]: { $eq: query.gradingSystem } },
+                { [`entryRequirements.${test}.value`]: { $eq: query.score } },
+              
             ]
         });
     }
+
 
     if (query.intakes) {
         orConditions.push({

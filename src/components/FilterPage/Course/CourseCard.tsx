@@ -53,10 +53,10 @@ const CourseCard = ({ course, topFit }: CardProps) => {
                 <div className="relative">
                     <img
                         height={174}
-                        width={200}
+                        width={282}
                         alt="card"
                         src="https://course-options-assets-ragzon.s3.ap-south-1.amazonaws.com/uploads/1722329836213Staffordshire-University-Stoke-on-Trent.jpg"
-                        className="h-[200px] w-full object-cover rounded-t-xl"
+                        className="h-[174px] w-full object-cover rounded-t-xl"
                     />
                     {topFit && router.query.SmartMatch ? (
                         <div className="bg-[#70FF95] w-fit flex items-center justify-center text-xs px-4 py-1 rounded-full gap-1 absolute -bottom-3 left-3">
