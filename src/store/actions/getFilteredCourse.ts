@@ -12,7 +12,7 @@ export const fetchPaginatedCourses = createAsyncThunk(
             query
         }: {
             nextPageParam: number | null;
-            query: { [key: string]: string[] };
+            query: { [key: string]: string[] | string };
         },
         { getState }
     ) => {
