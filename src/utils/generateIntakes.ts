@@ -38,9 +38,9 @@ export function generateIntakes(
     const intakes: string[] = [];
 
     months.forEach((month) => {
-        const fullMonth = shortToFullMap[month.toLowerCase()] || month;
+        const fullMonth = shortToFullMap[month?.toLowerCase()] || month;
         const monthIndex: number = fullMonths.findIndex(
-            (m) => m.toLowerCase() === fullMonth.toLowerCase()
+            (m) => m?.toLowerCase() === fullMonth?.toLowerCase()
         );
         if (monthIndex === -1) return; // If month name is not found, skip processing
 
