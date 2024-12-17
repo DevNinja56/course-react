@@ -12,11 +12,11 @@ import { singleCourseType } from '@/types';
 import { getSsrRequest } from '@/utils/ssrRequest';
 import { GetServerSideProps } from 'next';
 import Link from 'next/link';
-import { IoShareSocialSharp } from 'react-icons/io5';
+import { IoBookSharp, IoShareSocialSharp } from 'react-icons/io5';
 import { IoDocumentText } from 'react-icons/io5';
 import { GiOpenBook, GiTrophy } from 'react-icons/gi';
 import { GoClockFill } from 'react-icons/go';
-import { FaMoneyBillWave } from 'react-icons/fa';
+import { FaCalendarAlt, FaMoneyBillWave } from 'react-icons/fa';
 import { IoLocation } from 'react-icons/io5';
 import { FaCalendar } from 'react-icons/fa';
 import { getMonths } from '@/utils/get-months';
@@ -31,6 +31,8 @@ import EntryRequirements from '@/components/course/EntryRequirements';
 import { useGetCourseByIdQuery } from '@/store/slices/allRequests';
 import { useRouter } from 'next/router';
 import { skipToken } from '@reduxjs/toolkit/query';
+import { SlCalculator } from 'react-icons/sl';
+import StatsCards from '@/components/course/StatsCards';
 const InnerHtml = dynamic(() => import('@/components/InnerHtml'), {
     ssr: false
 });
@@ -219,8 +221,11 @@ const CourseDetail = () => {
                             </h1>
                             <div className="flex pr-0">
                                 <div className="flex flex-wrap items-center gap-1 md:gap-2 lg:gap-3">
+                                    <button className="rounded-full py-1 px-3 md:px-4 text-xs md:text-lg hover:border-blueColor border-4 shadow   text-white border-[#fbfcff] hover:text-blueColor bg-blueColor hover:bg-white flex gap-2 items-center transition-all">
+                                        <span>M.Sc.</span>
+                                    </button>
                                     <button
-                                        className="rounded-md py-2 px-3 md:px-4 text-xs md:text-lg border-1 border-transparent hover:border-blueColor border-2  text-white hover:text-blueColor bg-blueColor hover:bg-white flex gap-2 items-center transition-all"
+                                        className="rounded-full py-1 px-3 md:px-4 text-xs md:text-lg hover:border-blueColor border-4 shadow   text-white border-[#fbfcff] hover:text-blueColor bg-blueColor hover:bg-white flex gap-2 items-center transition-all"
                                         onClick={() =>
                                             updateModal({
                                                 type: modalType.bank_statement_calculator,
@@ -228,6 +233,7 @@ const CourseDetail = () => {
                                             })
                                         }
                                     >
+                                        <SlCalculator />{' '}
                                         <span>Bank Statement Calculator</span>
                                     </button>
                                     <FavoriteButton
@@ -265,7 +271,6 @@ const CourseDetail = () => {
                                                             element: (
                                                                 <div className="description w-full flex flex-col gap-3 md:gap-4 items-start">
                                                                     <h1 className="text-black text-lg md:text-2xl font-bold">
-                                                                        Course
                                                                         Description
                                                                     </h1>
                                                                     <div className="text-sm md:text-base text-left">
@@ -736,7 +741,9 @@ const CourseDetail = () => {
                                                                         </li>
                                                                     )
                                                                 )}{' '}
-                                                               <p className='mx-1'>{year}</p>
+                                                                <p className="mx-1">
+                                                                    {year}
+                                                                </p>
                                                             </>
                                                         );
                                                     })()}
@@ -745,6 +752,21 @@ const CourseDetail = () => {
                                         </div>
                                     </div>
                                 </div>
+
+                                <StatsCards
+                                    date="September 2024"
+                                    label="Upcoming Intakes"
+                                    icon={
+                                        <FaCalendarAlt className="text-[#010f2e] text-2xl" />
+                                    }
+                                />
+                                 <StatsCards
+                                    date="Full Time"
+                                    label="Mode of Study"
+                                    icon={
+                                        <IoBookSharp className="text-[#010f2e] text-2xl" />
+                                    }
+                                />
 
                                 <div className="flex flex-col md:flex-row items-center w-full gap-3 md:gap-5 lg:hidden">
                                     <div className="w-full">

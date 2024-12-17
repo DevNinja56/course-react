@@ -65,7 +65,7 @@ const FavoriteButton: React.FC<propsType> = ({
                 className ??
                 `h-8 w-8  rounded-full  cursor-pointer flex items-center justify-center group ${
                     position ?? 'absolute top-4 right-4'
-                }  z-10 bg-[#717070] bg-opacity-[50%] ${extendClass}`
+                }  z-10 text-[#BEBEBE] bg-white  shadow-md ${extendClass}`
             }
             onClick={handleClick}
         >
@@ -77,7 +77,7 @@ const FavoriteButton: React.FC<propsType> = ({
                 />
             ) : (
                 <AiFillHeart
-                    className={`${iconClass ?? 'text-2xl'} text-white h-5 w-5`}
+                    className={`${iconClass ?? 'text-2xl'}  h-5 w-5`}
                 />
             )}
         </button>
