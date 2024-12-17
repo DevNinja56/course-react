@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Chip } from '@/components/SmartMatch/Chip';
 import {
     ErrorMessages,
@@ -21,6 +21,7 @@ const English = ({
     errorMessages,
     setErrorMessages
 }: EnglishProps) => {
+    const [selectedTest, setSelectedTest] = useState('');
     return (
         <>
             <div className="flex gap-1 text-center max-sm:flex-col justify-center items-center">
@@ -36,23 +37,26 @@ const English = ({
             <hr className="border h-0.5 bg-blueColor" />
             <div className="overflow-y-auto setScrollBar max-h-[40vh] overflow-x-hidden">
                 <Chip
-                    data={EnglishTest}
+                    data={Object.keys(EnglishTest)}
                     onSelect={(value: string) => {
+                        setSelectedTest(value);
+
                         addQuery({
-                            englishTest: value
+                            englishtest: EnglishTest[value]
                         });
                         clearError(
                             errorMessages,
                             setErrorMessages,
-                            'englishTest'
+                            'englishtest'
                         );
                     }}
-                    selectedValue={data.englishTest}
-                    error={errorMessages.englishTest}
+                    selectedValue={selectedTest}
+                    error={errorMessages.englishtest}
                 />
-                {data.englishTest === 'IELTS' && (
+
+                {data.englishtest === 'ielts' && (
                     <>
-                        <hr className=" h-0.5 mt-2" />
+                        <hr className="h-0.5 mt-2" />
                         {[
                             'overallscore',
                             'listening',
@@ -75,8 +79,8 @@ const English = ({
                                 gaps
                                 placeholder={
                                     field === 'overallscore'
-                                        ? 'Overall Band Score (1-10)'
-                                        : `${field.charAt(0).toUpperCase() + field.slice(1)} Score (1-10)`
+                                        ? 'Overall Band Score (1-9)'
+                                        : `${field.charAt(0).toUpperCase() + field.slice(1)} Score (1-9)`
                                 }
                                 error={
                                     errorMessages[field as keyof ErrorMessages]
@@ -86,11 +90,9 @@ const English = ({
                     </>
                 )}
 
-                {data.englishTest === 'PTE Academic' && (
+                {data.englishtest === 'pte' && (
                     <>
-                        <hr className=" h-0.5 mt-2" />
-
-                        <hr className="border h-0.5 bg-blueColor" />
+                        <hr className="h-0.5 mt-2" />
                         {[
                             'overallscore',
                             'listening',

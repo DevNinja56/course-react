@@ -1,4 +1,5 @@
 import { ROUTES } from '@/config/constant';
+import { useSmartMatchTool } from '@/hooks/smartMatch';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { SetStateAction } from 'react';
@@ -11,7 +12,10 @@ interface Props {
 
 export const SmartMatchToggle = ({ smartMatch, setSmartMatch }: Props) => {
     const router = useRouter();
-    const smartMatchData = !!Object.keys(router.query).length;
+    const { toggleSmartMatch } = useSmartMatchTool();
+    const smartMatchData = router.query.SmartMatch;
+
+  
     return (
         <div
             className={`${smartMatchData ? 'bg-[#EAF2FF] border border-1 border-[#2C79FF]' : 'bg-[#2C79FF]'} w-full flex flex-col md:flex-row justify-between items-center p-4 md:px-10 md:py-5 rounded-xl`}
@@ -35,7 +39,10 @@ export const SmartMatchToggle = ({ smartMatch, setSmartMatch }: Props) => {
                 <div className="flex items-center gap-3">
                     <div
                         className={`w-12 h-4 flex items-center rounded-full p-0.5 cursor-pointer ${smartMatch ? 'bg-[#96bdff]' : 'bg-gray-400'}`}
-                        onClick={() => setSmartMatch(!smartMatch)}
+                        onClick={() => {
+                            setSmartMatch(!smartMatch);
+                            toggleSmartMatch(smartMatch ?? false);
+                        }}
                     >
                         <div
                             className={`w-6 h-6 rounded-full shadow-md transform transition-transform ${smartMatch ? 'translate-x-6 bg-[#2C79FF]' : ' bg-white -translate-x-1'}`}

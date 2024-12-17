@@ -19,9 +19,6 @@ type GradingScaleFormat = {
     options?: string[];
 };
 
-
-
-
 type GradingScaleFormats = {
     [key: string]: GradingScaleFormat;
 };
@@ -160,14 +157,25 @@ export const gradingScaleFormats: GradingScaleFormats = {
         max: 45
     }
 };
-export const EnglishTest = [
-    'IELTS',
-    'PTE Academic',
-    'Language Cert',
-    'Oxford ELLT',
-    'Duolingo',
-    'I haven’t taken any test'
-];
+// export const EnglishTest = [
+//     'IELTS',
+//     'PTE Academic',
+//     'Language Cert',
+//     'Oxford ELLT',
+//     'Duolingo',
+//     'MOI',
+//     'I haven’t taken any test'
+// ];
+
+export const EnglishTest: { [key: string]: string } = {
+    IELTS: 'ielts',
+    PTE: 'pte',
+    'Oxford ELLT': 'oxford',
+    'Language Cert': 'language',
+    Duolingo: 'duolingo',
+    MOI: 'moi',
+    'I haven’t taken any test': ''
+};
 
 export const months = [
     { label: 'January', value: 'Jan' },
@@ -193,10 +201,10 @@ export const GradingSystem = [
 ];
 
 export const intakesFilterMonths = [
-    { label: 'January – March', value: ['Jan, Feb, Mar'] },
-    { label: 'April – June', value: ['Apr, May, Jun'] },
-    { label: 'July – September', value: ['Jul, Aug, Sep'] },
-    { label: 'October – December', value: ['Oct, Nov, Dec'] }
+    { label: 'January – March', value: ['Jan', 'Feb', 'Mar'] },
+    { label: 'April – June', value: ['Apr', 'May', 'Jun'] },
+    { label: 'July – September', value: ['Jul', 'Aug', 'Sep'] },
+    { label: 'October – December', value: ['Oct', 'Nov', 'Dec'] }
 ];
 
 const currentYear = new Date().getFullYear();

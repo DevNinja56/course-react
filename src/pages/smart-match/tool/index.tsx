@@ -1,10 +1,7 @@
 import Button from '@/components/Button';
 import { ROUTES } from '@/config/constant';
 import { useSmartMatchTool } from '@/hooks/smartMatch';
-import {
-    useGetDisciplineQuery,
-    useGetSpecializationQuery
-} from '@/store/slices/allRequests';
+import { useGetDisciplineQuery } from '@/store/slices/allRequests';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import { BiArrowBack } from 'react-icons/bi';
@@ -26,9 +23,13 @@ const SmartMatchTool = () => {
     const [progress, setProgress] = useState(0);
     const router = useRouter();
     const TotalStep = 7;
-    const { addQuery, query: data, clearAllQuery } = useSmartMatchTool();
+    const {
+        addQuery,
+        query: data,
+        clearAllQuery,
+        toggleSmartMatch
+    } = useSmartMatchTool();
     const { data: DisciplineData } = useGetDisciplineQuery();
-    const { data: SpecializationData } = useGetSpecializationQuery();
     const [disciplineId, setDisciplineId] = useState('');
     const [errorMessages, setErrorMessages] = useState<ErrorMessages>({});
     const [loading, setLoading] = useState(true);
@@ -42,7 +43,7 @@ const SmartMatchTool = () => {
         clearAllQuery();
     }, []);
     useEffect(() => {
-        if (data.englishTest) {
+        if (data.englishtest) {
             addQuery({
                 reading: '',
                 listening: '',
@@ -52,20 +53,19 @@ const SmartMatchTool = () => {
             });
             setErrorMessages({});
         }
-    }, [data.englishTest]);
+    }, [data.englishtest]);
 
     useEffect(() => {
-        if (data.studyLevel) {
+        if (data.degreeType) {
             addQuery({
                 educationCountry: '',
                 qualification: '',
                 gradingSystem: '',
-                score: '',
-                englishPercentage: ''
+                score: ''
             });
             setErrorMessages({});
         }
-    }, [data.studyLevel]);
+    }, [data.degreeType]);
 
     useEffect(() => {
         if (data.educationCountry) {
@@ -114,12 +114,11 @@ const SmartMatchTool = () => {
             setLoading(true);
 
             setTimeout(() => {
+                toggleSmartMatch(false);
                 router.push({
                     pathname: ROUTES.FILTER_COURSE,
                     query: {
-                        institute: 'Staffordshire University'
-                        // intakes: data.month,
-                        // specialization: data.specialization
+                        SmartMatch: true
                     }
                 });
             }, 2000);
@@ -206,7 +205,6 @@ const SmartMatchTool = () => {
                             errorMessages={errorMessages}
                             setErrorMessages={setErrorMessages}
                             DisciplineData={DisciplineData}
-                            SpecializationData={SpecializationData}
                             disciplineId={disciplineId}
                             setDisciplineId={setDisciplineId}
                         />

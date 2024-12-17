@@ -5,9 +5,8 @@ import { formateCourseQuery } from '@/utils/queryFormate';
 
 export const fetchCourseFilters = createAsyncThunk(
     API_ENDPOINTS.COURSE_FILTERS_SEARCH,
-    async ({ query }: { query: { [key: string]: string[] } }) => {
+    async ({ query }: { query: { [key: string]: string[] | string } }) => {
         const updatedQueryQuery = formateCourseQuery(query);
-
         try {
             return http
                 .post(

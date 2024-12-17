@@ -8,6 +8,7 @@ import { LuMapPin } from 'react-icons/lu';
 import { CiCalendarDate } from 'react-icons/ci';
 import { useCurrency } from '@/hooks/currency';
 import { HiOutlineSparkles } from 'react-icons/hi2';
+import { useRouter } from 'next/router';
 
 interface CardProps {
     course: courseType;
@@ -18,18 +19,17 @@ const CourseCard = ({ course, topFit }: CardProps) => {
     const {
         institute,
         degree,
-        // logo,
         _id,
         name,
         tuitionFee,
         intakes,
         feeCurrency = 'AUD'
-        // specialization
     } = course;
 
     const { getCurrencySymbol, setCurrencyValue, getSingleRate, base_code } =
         useCurrency();
     const rate = useMemo(() => getSingleRate(feeCurrency), [feeCurrency]);
+    const router = useRouter();
 
     return (
         <div
@@ -48,38 +48,31 @@ const CourseCard = ({ course, topFit }: CardProps) => {
                     ),
                     query: { course_id: _id }
                 }}
-                className="h-full flex flex-col justify-between"
+                className="h-full flex flex-col"
             >
                 <div className="relative">
                     <img
                         height={174}
-                        width={200}
+                        width={282}
                         alt="card"
-                        // src={`${
-                        //     logo ?? '/images/FilterPage/Rectangle 3634.svg'
-                        // }`}
-                        src={`${'https://course-options-assets-ragzon.s3.ap-south-1.amazonaws.com/uploads/1722329836213Staffordshire-University-Stoke-on-Trent.jpg'}`}
-                        className="h-[200px] w-full object-cover rounded-t-xl"
+                        src="https://course-options-assets-ragzon.s3.ap-south-1.amazonaws.com/uploads/1722329836213Staffordshire-University-Stoke-on-Trent.jpg"
+                        className="h-[174px] w-full object-cover rounded-t-xl"
                     />
-                    {topFit ? (
+                    {topFit && router.query.SmartMatch ? (
                         <div className="bg-[#70FF95] w-fit flex items-center justify-center text-xs px-4 py-1 rounded-full gap-1 absolute -bottom-3 left-3">
                             <HiOutlineSparkles />
                             <p className="font-semibold">Top Fit</p>.
                         </div>
-                    ) : (
-                        ''
-                    )}
+                    ) : null}
                 </div>
-                <div className="pt-5 xl:pt-8 px-3 flex flex-col gap-1 relative">
-                    <div className="flex flex-col gap-2">
+                <div className={`${topFit?"mt-6":"mt-3"} px-3 flex flex-col gap-1 h-36 justify-between`}>
+                    <div className="flex flex-col ">
                         <h1
                             title={name}
                             className="font-bold text-mainTextColor text-xs xl:text-sm"
                         >
                             {name} <br /> at{' '}
                             {institute?.name ?? 'No Institute Found'}
-                            {/* - (
-                            {specialization?.name ?? 'No Specialization'}) */}
                         </h1>
                         <p className="font-medium text-[0.670rem] xl:text-[0.700rem] text-gray-400 capitalize">
                             {degree?.type}
@@ -116,7 +109,7 @@ const CourseCard = ({ course, topFit }: CardProps) => {
                             {intakes && intakes.length > 0 && (
                                 <div className="flex flex-col items-center gap-1">
                                     <CiCalendarDate className="h-4 w-4 text-blueColor" />
-                                    <p className="text-[0.600rem] xl:text-[0.700rem] capitalize ">
+                                    <p className="text-[0.600rem] xl:text-[0.700rem] capitalize">
                                         {intakes.join()}
                                     </p>
                                 </div>

@@ -9,7 +9,7 @@ import { intakesFilterMonths, yearOptions } from '../data';
 
 interface StartIntakeProps {
     data: FormData;
-    addQuery: (query: Record<string, string>) => void;
+    addQuery: (query: Record<string, string | string[]>) => void;
     errorMessages: ErrorMessages;
     setErrorMessages: React.Dispatch<React.SetStateAction<ErrorMessages>>;
 }
@@ -20,9 +20,23 @@ const StartIntake = ({
     errorMessages,
     setErrorMessages
 }: StartIntakeProps) => {
-    return (
+    
+    const handleMonthSelection = (value: string) => {
+        const selectedMonths = Array.isArray(data.intakes) ? [...data.intakes] : [];
+        if (selectedMonths.includes(value)) {
+            
+            const updatedMonths = selectedMonths.filter((intakes) => intakes !== value);
+            addQuery({ intakes: updatedMonths });
+        } else {
+            
+            addQuery({ intakes: [...selectedMonths, value] });
+        }
+        clearError(errorMessages, setErrorMessages, 'intakes');
+    };
+
+        return (
         <>
-            <div className="flex  text-center max-sm:flex-col justify-center items-center">
+            <div className="flex text-center max-sm:flex-col justify-center items-center">
                 <h1 className="lg:text-xl my-2 font-semibold">
                     When do you plan to kick-start your studies?
                 </h1>
@@ -38,9 +52,7 @@ const StartIntake = ({
                 label="Start Year"
                 data={yearOptions}
                 onSelect={(value: string) => {
-                    addQuery({
-                        year: value
-                    });
+                    addQuery({ year: value });
                     clearError(errorMessages, setErrorMessages, 'year');
                 }}
                 selectedValue={data.year}
@@ -52,19 +64,13 @@ const StartIntake = ({
                     <hr className="border h-0.5 bg-blueColor" />
                     <Chip
                         label="Start Month"
-                        dataObj={intakesFilterMonths.map((item)=>({label:item.label,value:item.value}))}
-                        onSelect={(value: string) => {
-                            addQuery({
-                                month: value
-                            });
-                            clearError(
-                                errorMessages,
-                                setErrorMessages,
-                                'month'
-                            );
-                        }}
-                        selectedValue={data.month}
-                        error={errorMessages.month}
+                        dataObj={intakesFilterMonths.map((item) => ({
+                            label: item.label,
+                            value: item.value
+                        }))}
+                        onSelect={handleMonthSelection}
+                        selectedValue={data.intakes} 
+                        error={errorMessages.intakes}
                     />
                 </>
             )}

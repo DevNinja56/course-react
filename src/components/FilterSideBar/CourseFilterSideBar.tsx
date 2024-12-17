@@ -21,6 +21,7 @@ import {
 import { LuGraduationCap } from 'react-icons/lu';
 import { useRouter } from 'next/router';
 import { RiEnglishInput } from 'react-icons/ri';
+import EnglishTestFilter from '../FilterPage/Course/EnglishTestFilter';
 interface ModalProps {
     setFilterSideBar: (show: boolean) => void;
 }
@@ -179,11 +180,7 @@ const FilterSideBar = ({ setFilterSideBar }: ModalProps) => {
                                 name="LanguageTest"
                                 svg
                             >
-                                <></>
-                                {/* <IntakesFilter
-                        data={filters.intakes}
-                        isLoading={isLoading}
-                    /> */}
+                                <EnglishTestFilter isLoading={isLoading} />
                             </FilterAccordion>
                             <FilterAccordion
                                 title="Tuition Fees"

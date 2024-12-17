@@ -9,6 +9,8 @@ interface propsType extends InputHTMLAttributes<HTMLInputElement> {
     isChecked?: boolean;
     count?: number;
     subheading?: boolean;
+    isValue?: boolean;
+    checkValue?: string;
 }
 
 export const FilterCheckBox = React.forwardRef<HTMLInputElement, propsType>(
@@ -21,6 +23,7 @@ export const FilterCheckBox = React.forwardRef<HTMLInputElement, propsType>(
             customF,
             isChecked,
             count,
+            checkValue,
             ...props
         },
         ref
@@ -29,7 +32,6 @@ export const FilterCheckBox = React.forwardRef<HTMLInputElement, propsType>(
         const state: string[] = Array.isArray(query[name])
             ? (query[name] as string[])
             : [query[name] as string];
-
         const handleCheckedCountry = (
             e: React.ChangeEvent<HTMLInputElement>
         ) => {
@@ -62,7 +64,9 @@ export const FilterCheckBox = React.forwardRef<HTMLInputElement, propsType>(
                         type="checkbox"
                         ref={ref}
                         onChange={customF! ?? handleCheckedCountry}
-                        checked={isChecked! ?? state?.includes(text)}
+                        checked={
+                            isChecked! ?? state?.includes(checkValue ? checkValue : text)
+                        }
                         className="h-3.5 w-3.5 rounded-[2px] border border-borderColor cursor-pointer pb-0 group-hover:border-blueColor accent-[blueColor]"
                     />
                     <p

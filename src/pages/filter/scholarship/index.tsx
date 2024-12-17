@@ -34,7 +34,7 @@ const Scholarship = () => {
                 />
             </div>
             <div className="w-full lg:px-10 pb-28 pt-10">
-                <div className="w-full lg:container 2xl:max-w-none 2xl:w-10/12 mx-auto px-5 md:px-[50px] lg:px-2 2xl:px-8 transition-all duration-300 flex justify-between">
+                <div className="w-full mx-auto px-5 md:px-[50px] lg:px-2 2xl:px-8 transition-all duration-300 flex justify-between">
                     <ScholarshipFilter />
                     <RightScholarshipCardBox />
                 </div>

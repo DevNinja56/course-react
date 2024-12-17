@@ -6,7 +6,7 @@ import LoaderSpinner from '../../LoaderSpinner';
 import { useFilterQuery } from '@/hooks/filterQuery';
 import SortBy from './SortBy';
 import { SmartMatchToggle } from './SmartMatchToggle';
-import { useRouter } from 'next/router';
+import { useSmartMatchTool } from '@/hooks/smartMatch';
 
 const RightCardsBox = () => {
     const {
@@ -16,15 +16,11 @@ const RightCardsBox = () => {
         paginatorInfo: { count, totalPage, page }
     } = useSearchedCourses();
     const { query } = useFilterQuery();
-    const router = useRouter();
-    const [isSmartMatch, setIsSmartMatch] = useState(false);
-    useEffect(() => {
-        setIsSmartMatch(!!Object.keys(router.query).length);
-    }, []);
-
+    const { isActive } = useSmartMatchTool();
+    const [isSmartMatch, setIsSmartMatch] = useState(!isActive);
     useEffect(() => {
         fetchCourses();
-    }, [query]);
+    }, [query, isSmartMatch]);
     return (
         <div className="flex flex-col gap-y-7 w-full lg:w-[74%] xl:w-[73%]">
             <div className="flex flex-col gap-y-4">
@@ -37,11 +33,11 @@ const RightCardsBox = () => {
                 <hr className="border border-scholarshipBorderColor" />
                 <SmartMatchToggle
                     // smartMatch={!!Object.keys(router.query).length}
-                    setSmartMatch={setIsSmartMatch}
                     smartMatch={isSmartMatch}
+                    setSmartMatch={setIsSmartMatch}
                 />
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 xl:gap-8 mb-10">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 mb-10">
                 {isLoading ? (
                     <LoaderSpinner color="text-black" />
                 ) : (
