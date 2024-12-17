@@ -43,7 +43,7 @@ const SmartMatchTool = () => {
         clearAllQuery();
     }, []);
     useEffect(() => {
-        if (data.englishTest) {
+        if (data.englishtest) {
             addQuery({
                 reading: '',
                 listening: '',
@@ -53,7 +53,7 @@ const SmartMatchTool = () => {
             });
             setErrorMessages({});
         }
-    }, [data.englishTest]);
+    }, [data.englishtest]);
 
     useEffect(() => {
         if (data.degreeType) {

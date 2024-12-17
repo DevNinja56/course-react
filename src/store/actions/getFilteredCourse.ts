@@ -18,7 +18,7 @@ export const fetchPaginatedCourses = createAsyncThunk(
     ) => {
         const state = getState() as RootState;
         const updatedQueryQuery = formateCourseQuery(query);
-
+        
         try {
             return http
                 .post(

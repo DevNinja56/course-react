@@ -15,7 +15,7 @@ interface OptionType {
 interface ChipProps {
     label?: string;
     data?: string[];
-    dataObj?: { label: string; value: string[]; }[];
+    dataObj?: { label: string; value: string[] }[];
     onSelect?: (value: string) => void;
     selectedValue?: string | string[];
     error?: string;
@@ -29,12 +29,14 @@ interface ChipProps {
     isMulti?: boolean;
     isDisable?: boolean;
     onRemove?: (value: string) => void;
+    upperCase?: boolean;
 }
 
 export const Chip: React.FC<ChipProps> = ({
     label,
     data,
     dataObj,
+    upperCase,
     onSelect,
     selectedValue,
     error,
@@ -75,6 +77,9 @@ export const Chip: React.FC<ChipProps> = ({
         })
     };
 
+
+    console.log(selectedValue)
+
     const selectedSet = new Set(
         Array.isArray(selectedValue) ? selectedValue : [selectedValue]
     );
@@ -101,8 +106,12 @@ export const Chip: React.FC<ChipProps> = ({
             ) : (
                 <div className="flex text-sm gap-x-3 gap-y-3 flex-wrap my-2 font-[500]">
                     {(data || dataObj)?.map((item) => {
-                        const itemLabel = typeof item === 'string' ? item : item.label;
-                        const itemValue = typeof item === 'string' ? item : item.value.join(', ');
+                        const itemLabel =
+                            typeof item === 'string' ? item : item.label;
+                        const itemValue =
+                            typeof item === 'string'
+                                ? item
+                                : item.value.join(', ');
 
                         return (
                             <div
@@ -114,7 +123,11 @@ export const Chip: React.FC<ChipProps> = ({
                                         : 'bg-[#cee0ff]'
                                 }`}
                             >
-                                <p className='capitalize'>{itemLabel}</p>
+                                <p
+                                    className={`${upperCase ? 'uppercase' : 'capitalize'}`}
+                                >
+                                    {itemLabel}
+                                </p>
                                 {onRemove && (
                                     <IoIosClose
                                         className="ml-1 text-white hover:text-blue-200 text-lg"
