@@ -6,11 +6,11 @@ import React, { useMemo } from 'react';
 import FavoriteButton from '../../Button/FavoriteButton';
 import { LuMapPin } from 'react-icons/lu';
 import { CiCalendarDate } from 'react-icons/ci';
-import { useCurrency } from '@/hooks/currency';
 import { HiOutlineSparkles } from 'react-icons/hi2';
 import { useRouter } from 'next/router';
 // import { FaRegClock } from 'react-icons/fa6';    
 import { TbHourglassEmpty } from 'react-icons/tb';
+import { useCurrency } from '@/hooks/currency';
 
 interface CardProps {
     course: courseType;
@@ -29,12 +29,12 @@ const CourseCard = ({ course, topFit }: CardProps) => {
         intakes,
         feeCurrency = 'AUD'
     } = course;
+    
 
 
     
     
-    const { getCurrencySymbol, setCurrencyValue, getSingleRate, base_code } =
-    useCurrency();
+    const { getCurrencySymbol, setCurrencyValue, getSingleRate, base_code } = useCurrency();
     const rate = useMemo(() => getSingleRate(feeCurrency), [feeCurrency]);
     const router = useRouter();
     
