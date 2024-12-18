@@ -3,9 +3,10 @@ import { IoIosArrowDown } from 'react-icons/io';
 
 interface propsType {
     data: { title: string; element: ReactElement }[];
+    isButton?: boolean; 
 }
 
-const Tabs: React.FC<propsType> = ({ data }) => {
+const Tabs: React.FC<propsType> = ({ data, isButton }) => {
     const [activeIndex, setIndex] = useState<number>(0);
     const [showElementIndex, setShowElementIndex] = useState<number | null>(
         null
@@ -14,6 +15,37 @@ const Tabs: React.FC<propsType> = ({ data }) => {
     const toggleShowElement = (index: number) => {
         setShowElementIndex(showElementIndex === index ? null : index);
     };
+
+    if (isButton) {
+        return (
+            <>
+                <div className="w-full">
+                    <ul className="flex flex-col md:flex-row md:gap-3 justify-start text-center text-sm font-medium capitalize">
+                        {data.map(({ title }, i) => (
+                            <li
+                                key={'tabs-key--' + title}
+                                className="me-0 flex flex-col md:inline-block"
+                            >
+                                <button
+                                    className={`py-3 px-4 w-full md:w-auto text-base font-normal border border-gray-300 
+                                        ${
+                                            activeIndex === i
+                                                ? 'text-white bg-blueColor border-blueCbg-blueColor'
+                                                : 'text-gray-500 bg-white hover:bg-blue-100 hover:text-blueCbg-blueColor'
+                                        }
+                                        md:rounded-md transition-colors duration-200`}
+                                    onClick={() => setIndex(i)}
+                                >
+                                    {title}
+                                </button>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+                <div className="py-8">{data[activeIndex].element}</div>
+            </>
+        );
+    }
 
     return (
         <>
@@ -53,9 +85,7 @@ const Tabs: React.FC<propsType> = ({ data }) => {
                     ))}
                 </ul>
             </div>
-            <div className="py-10 hidden md:block">
-                {data[activeIndex].element}
-            </div>
+            <div className="py-10 hidden md:block">{data[activeIndex].element}</div>
         </>
     );
 };

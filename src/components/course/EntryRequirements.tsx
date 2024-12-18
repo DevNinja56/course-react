@@ -18,9 +18,9 @@ const EntryRequirements: React.FC<propsType> = ({
         ...(isUnderGraduate
             ? [
                   {
-                      title: 'Local Year - 12',
+                      title: 'For Local Qualifications',
                       element: (
-                          <div className="description w-full flex flex-col gap-3 md:gap-4 items-start">
+                          <div className="description w-full flex flex-col gap-3 md:gap-4 items-start border-l-4 border-blueColor py-5 px-9 bg-[#f3f8ff] ">
                               {entryRequirements?.local_year_12 ? (
                                   entryRequirements?.local_year_12?.map(
                                       (item, index) => (
@@ -43,9 +43,9 @@ const EntryRequirements: React.FC<propsType> = ({
                       )
                   },
                   {
-                      title: 'A - Level',
+                      title: 'For Local Qualifications',
                       element: (
-                          <div className="description w-full flex flex-col gap-3 md:gap-4 items-start">
+                          <div className="description w-full flex flex-col gap-3 md:gap-4 items-start border-l-4 border-blueColor py-5 px-9 bg-[#f3f8ff]">
                               {entryRequirements?.a_level ? (
                                   <div className="">
                                       {entryRequirements?.a_level} UCAS points
@@ -69,9 +69,9 @@ const EntryRequirements: React.FC<propsType> = ({
                       )
                   },
                   {
-                      title: 'International Baccalaureate (IB)',
+                      title: 'For International Baccalaureate (IB)',
                       element: (
-                          <div className="description w-full flex flex-col gap-3 md:gap-4 items-start">
+                          <div className="description w-full flex flex-col gap-3 md:gap-4 items- border-l-4 border-blueColor py-5 px-9 bg-[#f3f8ff]">
                               {entryRequirements?.ib ? (
                                   <div className="">
                                       {entryRequirements?.ib} (IB) points
@@ -88,7 +88,7 @@ const EntryRequirements: React.FC<propsType> = ({
                   {
                       title: 'Bachelor Degree',
                       element: (
-                          <div className="description w-full flex flex-col gap-3 md:gap-4 items-start">
+                          <div className="description w-full flex flex-col gap-3 md:gap-4 items-start border-l-4 border-blueColor py-5 px-9 bg-[#f3f8ff]    ">
                               {entryRequirements?.bachelor_degrees ? (
                                   entryRequirements?.bachelor_degrees?.map(
                                       (item, index) => (
@@ -114,7 +114,7 @@ const EntryRequirements: React.FC<propsType> = ({
     ];
     return (
         <div>
-            <Tabs data={data} />
+            <Tabs data={data} isButton/>
         </div>
     );
 };
