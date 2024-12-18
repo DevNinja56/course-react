@@ -10,7 +10,7 @@ const nextConfig = {
             'www.scholarshipsads.com',
             'course-options-assets.s3.ap-south-1.amazonaws.com',
             'mu-website.azureedge.net',
-            'course-options-assets-ragzon.s3.ap-south-1.amazonaws.com'
+            'co-assets-bucket.s3-accelerate.amazonaws.com'
         ]
     }
 };
