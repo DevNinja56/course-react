@@ -71,6 +71,7 @@ const CourseDetail = () => {
               ));
         return amount;
     }, [course]);
+
     return (
         <>
             {!course || isLoading ? (
@@ -221,8 +222,8 @@ const CourseDetail = () => {
                             </h1>
                             <div className="flex pr-0">
                                 <div className="flex flex-wrap items-center gap-1 md:gap-2 lg:gap-3">
-                                    <button className="rounded-full py-1 px-3 md:px-4 text-xs md:text-lg hover:border-blueColor border-4 shadow   text-white border-[#fbfcff] hover:text-blueColor bg-blueColor hover:bg-white flex gap-2 items-center transition-all">
-                                        <span>M.Sc.</span>
+                                    <button className="rounded-full py-1 px-3 md:px-4 text-xs md:text-lg pointer-events-none border-4 shadow   text-white border-[#fbfcff bg-blueColor  flex gap-2 items-center transition-all">
+                                        <span>{course.name.split(' ')[0]}</span>
                                     </button>
                                     <button
                                         className="rounded-full py-1 px-3 md:px-4 text-xs md:text-lg hover:border-blueColor border-4 shadow   text-white border-[#fbfcff] hover:text-blueColor bg-blueColor hover:bg-white flex gap-2 items-center transition-all"
@@ -760,7 +761,7 @@ const CourseDetail = () => {
                                         <FaCalendarAlt className="text-[#010f2e] text-2xl" />
                                     }
                                 />
-                                 <StatsCards
+                                <StatsCards
                                     date="Full Time"
                                     label="Mode of Study"
                                     icon={

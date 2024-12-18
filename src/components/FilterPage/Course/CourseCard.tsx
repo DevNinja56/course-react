@@ -2,14 +2,14 @@
 import { ROUTES } from '@/config/constant';
 import { courseType } from '@/types';
 import Link from 'next/link';
-import React from 'react';
+import React, { useMemo } from 'react';
 import FavoriteButton from '../../Button/FavoriteButton';
 import { LuMapPin } from 'react-icons/lu';
 import { CiCalendarDate } from 'react-icons/ci';
-// import { useCurrency } from '@/hooks/currency';
+import { useCurrency } from '@/hooks/currency';
 import { HiOutlineSparkles } from 'react-icons/hi2';
 import { useRouter } from 'next/router';
-import { FaRegClock } from 'react-icons/fa6';
+// import { FaRegClock } from 'react-icons/fa6';    
 import { TbHourglassEmpty } from 'react-icons/tb';
 
 interface CardProps {
@@ -17,23 +17,27 @@ interface CardProps {
     topFit?: boolean;
 }
 
+
+
 const CourseCard = ({ course, topFit }: CardProps) => {
     const {
         institute,
         degree,
         _id,
         name,
-        // tuitionFee,
+        tuitionFee,
         intakes,
-        // feeCurrency = 'AUD'
+        feeCurrency = 'AUD'
     } = course;
+
+
     
-
-    // const { getCurrencySymbol, setCurrencyValue, getSingleRate, base_code } =
-    //     useCurrency();
-    // const rate = useMemo(() => getSingleRate(feeCurrency), [feeCurrency]);
+    
+    const { getCurrencySymbol, setCurrencyValue, getSingleRate, base_code } =
+    useCurrency();
+    const rate = useMemo(() => getSingleRate(feeCurrency), [feeCurrency]);
     const router = useRouter();
-
+    
     return (
         <div
             className="flex flex-col shadow-custom rounded-xl hover:shadow-xl hover:-translate-y-2 transition-all duration-300 cursor-pointer relative bg-white"
@@ -58,7 +62,7 @@ const CourseCard = ({ course, topFit }: CardProps) => {
                         height={174}
                         width={282}
                         alt="card"
-                        src="https://course-options-assets-ragzon.s3.ap-south-1.amazonaws.com/uploads/1722329836213Staffordshire-University-Stoke-on-Trent.jpg"
+                        src={course.logo || "https://co-assets-bucket.s3-accelerate.amazonaws.com/uploads/1722329836213Staffordshire-University-Stoke-on-Trent.jpg"}
                         className="h-[174px] w-full object-cover rounded-t-xl"
                     />
                     {topFit && router.query.SmartMatch ? (
@@ -98,20 +102,14 @@ const CourseCard = ({ course, topFit }: CardProps) => {
                                         UK
                                 </p>
                             </div>
-                            <div className="flex flex-col items-center gap-1">
+                            {/* <div className="flex flex-col items-center gap-1">
                                 <FaRegClock  className="h-4 w-4 text-blueColor" />
                                 <p className="text-[0.600rem] xl:text-[0.700rem]">
                                 3 Jan 2024
                                 </p>
-                            </div>
-                            <div className="flex flex-col items-center gap-1">
-                                <TbHourglassEmpty className="h-4 w-4 text-blueColor" />
-                                <p className="text-[0.600rem] xl:text-[0.700rem]">
-                                25 Mar 2024
-                                </p>
-                            </div>
-                            {/* <div className="flex flex-col items-center gap-1">
-                                <span className="h-4 w-4 text-blueColor">
+                            </div> */}
+                                 <div className="flex flex-col items-center gap-1">
+                                <span className=" text-blueColor text-[1rem] text-center">
                                     {getCurrencySymbol(
                                         rate ? base_code : feeCurrency
                                     )}
@@ -126,9 +124,16 @@ const CourseCard = ({ course, topFit }: CardProps) => {
                                                       : 1),
                                         rate ? base_code : feeCurrency
                                     )}
-                                    /Year
+                                    /Yr
                                 </p>
-                            </div> */}
+                            </div>
+                            <div className="flex flex-col items-center gap-1">
+                                <TbHourglassEmpty className="h-4 w-4 text-blueColor" />
+                                <p className="text-[0.600rem] xl:text-[0.700rem]">
+                                25 Mar 2024
+                                </p>
+                            </div>
+                       
                             {intakes && intakes.length > 0 && (
                                 <div className="flex flex-col items-center gap-1">
                                     <CiCalendarDate className="h-4 w-4 text-blueColor" />
