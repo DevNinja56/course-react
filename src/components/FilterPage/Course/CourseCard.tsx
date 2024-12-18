@@ -2,13 +2,15 @@
 import { ROUTES } from '@/config/constant';
 import { courseType } from '@/types';
 import Link from 'next/link';
-import React, { useMemo } from 'react';
+import React from 'react';
 import FavoriteButton from '../../Button/FavoriteButton';
 import { LuMapPin } from 'react-icons/lu';
 import { CiCalendarDate } from 'react-icons/ci';
-import { useCurrency } from '@/hooks/currency';
+// import { useCurrency } from '@/hooks/currency';
 import { HiOutlineSparkles } from 'react-icons/hi2';
 import { useRouter } from 'next/router';
+import { FaRegClock } from 'react-icons/fa6';
+import { TbHourglassEmpty } from 'react-icons/tb';
 
 interface CardProps {
     course: courseType;
@@ -21,14 +23,15 @@ const CourseCard = ({ course, topFit }: CardProps) => {
         degree,
         _id,
         name,
-        tuitionFee,
+        // tuitionFee,
         intakes,
-        feeCurrency = 'AUD'
+        // feeCurrency = 'AUD'
     } = course;
+    
 
-    const { getCurrencySymbol, setCurrencyValue, getSingleRate, base_code } =
-        useCurrency();
-    const rate = useMemo(() => getSingleRate(feeCurrency), [feeCurrency]);
+    // const { getCurrencySymbol, setCurrencyValue, getSingleRate, base_code } =
+    //     useCurrency();
+    // const rate = useMemo(() => getSingleRate(feeCurrency), [feeCurrency]);
     const router = useRouter();
 
     return (
@@ -65,14 +68,21 @@ const CourseCard = ({ course, topFit }: CardProps) => {
                         </div>
                     ) : null}
                 </div>
-                <div className={`${topFit?"mt-6":"mt-3"} px-3 flex flex-col gap-1 h-36 justify-between`}>
+                <div
+                    className={`${topFit ? 'mt-3' : 'mt-6'} px-3 flex flex-col gap-1 h-36 justify-between`}
+                >
                     <div className="flex flex-col ">
                         <h1
                             title={name}
-                            className="font-bold text-mainTextColor text-xs xl:text-sm"
+                            className="font-bold text-mainTextColor text-xs xl:text-sm line-clamp-2 "
                         >
-                            {name} <br /> at{' '}
-                            {institute?.name ?? 'No Institute Found'}
+                            {name}
+                        </h1>
+                        <h1
+                            title={name}
+                            className="font-bold text-mainTextColor text-xs xl:text-sm line-clamp-2 "
+                        >
+                            at {institute?.name ?? 'No Institute Found'}
                         </h1>
                         <p className="font-medium text-[0.670rem] xl:text-[0.700rem] text-gray-400 capitalize">
                             {degree?.type}
@@ -83,11 +93,24 @@ const CourseCard = ({ course, topFit }: CardProps) => {
                             <div className="flex flex-col items-center gap-1">
                                 <LuMapPin className="h-4 w-4 text-blueColor" />
                                 <p className="text-[0.600rem] xl:text-[0.700rem]">
-                                    {institute?.location?.split(',')?.[0] ??
-                                        'No Location'}
+                                    {/* {institute?.location?.split(',')?.[0] ??
+                                        'No Location'} */}
+                                        UK
                                 </p>
                             </div>
                             <div className="flex flex-col items-center gap-1">
+                                <FaRegClock  className="h-4 w-4 text-blueColor" />
+                                <p className="text-[0.600rem] xl:text-[0.700rem]">
+                                3 Jan 2024
+                                </p>
+                            </div>
+                            <div className="flex flex-col items-center gap-1">
+                                <TbHourglassEmpty className="h-4 w-4 text-blueColor" />
+                                <p className="text-[0.600rem] xl:text-[0.700rem]">
+                                25 Mar 2024
+                                </p>
+                            </div>
+                            {/* <div className="flex flex-col items-center gap-1">
                                 <span className="h-4 w-4 text-blueColor">
                                     {getCurrencySymbol(
                                         rate ? base_code : feeCurrency
@@ -102,10 +125,10 @@ const CourseCard = ({ course, topFit }: CardProps) => {
                                                       ? +rate?.base_rate
                                                       : 1),
                                         rate ? base_code : feeCurrency
-                                    )}{' '}
+                                    )}
                                     /Year
                                 </p>
-                            </div>
+                            </div> */}
                             {intakes && intakes.length > 0 && (
                                 <div className="flex flex-col items-center gap-1">
                                     <CiCalendarDate className="h-4 w-4 text-blueColor" />

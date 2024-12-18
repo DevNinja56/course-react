@@ -28,7 +28,7 @@ export const fetchPaginatedCourses = createAsyncThunk(
                     },
                     {
                         params: {
-                            limit: 21,
+                            limit: 24,
                             page:
                                 nextPageParam! ??
                                 state.courses?.paginatorInfo?.page ??

@@ -8,7 +8,7 @@ import {
     useGetCoursesQuery,
     useGetInstituteQuery
 } from '@/store/slices/allRequests';
-import { educationalQualifications } from '../SmartMatch/data';
+import {ukCities } from '../SmartMatch/data';
 import { ROUTES } from '@/config/constant';
 
 interface Props {
@@ -134,9 +134,9 @@ const SearchQueryBox = ({ isLocation }: Props) => {
                         options={
                             !isLocation
                                 ? courseOptions
-                                : educationalQualifications?.map((item) => ({
-                                      label: item.country,
-                                      value: item.country
+                                : ukCities?.map((item) => ({
+                                      label: item,
+                                      value: item
                                   })) || []
                         }
                         value={courseOptions?.find(
