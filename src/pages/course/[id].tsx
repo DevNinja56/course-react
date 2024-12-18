@@ -222,7 +222,7 @@ const CourseDetail = () => {
                             </h1>
                             <div className="flex pr-0">
                                 <div className="flex flex-wrap items-center gap-1 md:gap-2 lg:gap-3">
-                                    <button className="rounded-full py-1 px-3 md:px-4 text-xs md:text-lg pointer-events-none border-4 shadow   text-white border-[#fbfcff bg-blueColor  flex gap-2 items-center transition-all">
+                                    <button className="rounded-full py-1 px-3 md:px-4 text-xs md:text-lg pointer-events-none border-4 shadow   text-white border-[#fbfcff bg-blueColor  flex gap-2 items-center transition-all border-white">
                                         <span>{course.name.split(' ')[0]}</span>
                                     </button>
                                     <button
