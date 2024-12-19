@@ -19,11 +19,11 @@ import { GoClockFill } from 'react-icons/go';
 import { FaCalendarAlt, FaMoneyBillWave } from 'react-icons/fa';
 import { IoLocation } from 'react-icons/io5';
 import { FaCalendar } from 'react-icons/fa';
-import { getMonths } from '@/utils/get-months';
+// import { getMonths } from '@/utils/get-months';
 import { useCurrency } from '@/hooks/currency';
 import { useCalculate } from '@/hooks/initial-deposit-calculate';
 import LanguageRequirements from '@/components/course/LanguageRequirements';
-import { generateIntakes } from '@/utils/generateIntakes';
+// import { generateIntakes } from '@/utils/generateIntakes';
 import Card from '@/components/Scholarship/Card';
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
@@ -72,6 +72,7 @@ const CourseDetail = () => {
         return amount;
     }, [course]);
 
+    
     return (
         <>
             {!course || isLoading ? (
@@ -118,38 +119,33 @@ const CourseDetail = () => {
                         />
                     </div>
                     <div className="xl:container mx-auto relative bottom-20 z-[35]">
-                        <div className="h-auto w-[70%] md:w-[85%] mx-auto grid max-[475px]:grid-cols-1 grid-cols-2 xl:grid-cols-4 md:gap-5 justify-around rounded-xl bg-white shadow-md">
+                        <div className="h-auto w-[70%] md:w-[90%] mx-auto grid max-[475px]:grid-cols-1 grid-cols-2 xl:grid-cols-4 md:gap-0 justify-around md:pr-5 rounded-xl bg-white shadow-md">
                             <div className="flex items-center gap-4 border-b-2 lg:border-none border-gray-200 border-opacity-50 w-full md:w-auto px-4 py-2 sm:p-4 justify-start lg:justify-center">
                                 <div className="md:min-w-52 h-auto flex items-center gap-4">
                                     <GoClockFill className="h-6 w-6 sm:h-12 sm:w-12 text-blueColor" />
                                     <div className="flex flex-col md:gap-[6px] text-left">
                                         <p className="font-bold text-xs sm:text-sm md:text-lg text-mainTextColor">
-                                            {isUkCourse && isMasterDegree
-                                                ? 'Intake | Duration'
-                                                : 'Duration'}
+                                            Duration
                                         </p>
-                                        <ul className="text-[10px] sm:text-sm flex  lg:text-base text-lightGrayColor">
+                                        <ul className="text-[10px] sm:text-sm flex lg:text-base text-lightGrayColor">
                                             {isUkCourse && isMasterDegree ? (
                                                 <>
-                                                    {generateIntakes(
-                                                        [course.intakes[0]],
-                                                        1
-                                                    )}{' '}
-                                                    |{' '}
-                                                    {getMonths([
-                                                        course.monthDuration[0]
-                                                    ])}
+                                                    {course.monthDuration
+                                                        .length > 1
+                                                        ? `${course.monthDuration[0]} / ${course.monthDuration[1]}`
+                                                        : course
+                                                              .monthDuration[0]}
                                                 </>
                                             ) : (
                                                 course.monthDuration.map(
                                                     (month, index) => (
                                                         <li key={month}>
                                                             {month}
-                                                            {course
-                                                                .monthDuration
-                                                                .length -
-                                                                1 !==
-                                                                index && '/'}
+                                                            {index <
+                                                                course
+                                                                    .monthDuration
+                                                                    .length -
+                                                                    1 && ' /'}
                                                         </li>
                                                     )
                                                 )
@@ -738,7 +734,7 @@ const CourseDetail = () => {
                                                                                     .intakes
                                                                                     .length -
                                                                                     1 &&
-                                                                                ', '}
+                                                                                ','}
                                                                         </li>
                                                                     )
                                                                 )}{' '}
