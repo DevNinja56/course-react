@@ -5,7 +5,6 @@ import Link from 'next/link';
 import React, { useMemo } from 'react';
 import FavoriteButton from '../../Button/FavoriteButton';
 import { LuMapPin } from 'react-icons/lu';
-import { CiCalendarDate } from 'react-icons/ci';
 import { HiOutlineSparkles } from 'react-icons/hi2';
 import { useRouter } from 'next/router';
 // import { FaRegClock } from 'react-icons/fa6';    
@@ -26,7 +25,6 @@ const CourseCard = ({ course, topFit }: CardProps) => {
         _id,
         name,
         tuitionFee,
-        intakes,
         feeCurrency = 'AUD'
     } = course;
     
@@ -134,14 +132,7 @@ const CourseCard = ({ course, topFit }: CardProps) => {
                                 </p>
                             </div>
                        
-                            {intakes && intakes.length > 0 && (
-                                <div className="flex flex-col items-center gap-1">
-                                    <CiCalendarDate className="h-4 w-4 text-blueColor" />
-                                    <p className="text-[0.600rem] xl:text-[0.700rem] capitalize">
-                                        {intakes.join()}
-                                    </p>
-                                </div>
-                            )}
+                          
                         </div>
                     </div>
                 </div>
