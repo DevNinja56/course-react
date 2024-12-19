@@ -120,6 +120,7 @@ const Home = () => {
                 circleStyling="bottom-0 top-64 lg:-top-20 -right-12 rotate-180"
                 link={ROUTES.DISCOVER}
                 circleSize="h-44 w-44"
+                
             />
             <div className="w-full relative bg-white py-5 md:py-16">
                 <img
@@ -151,7 +152,7 @@ const Home = () => {
                 paragraph="Our Bank Statement Calculator provides accurate financial proof requirements for your visa with a simple click of a button on every course page."
                 title="Accurate, Visa Ready, Convenient, Detailed Calculations"
                 circleStyling="bottom-0 top-96 lg:top-40 -left-10"
-                backgroundColor="bg-transparent"
+                backgroundColor="bg-white"
                 link={ROUTES.BANK_STATEMENT}
                 paddingY="py-5 md:py-12"
             />
@@ -175,7 +176,7 @@ const Home = () => {
                 title="Guidance, Tracking, Preferences, Deadlines"
                 circleStyling="bottom-0 top-64 lg:top-12 -left-10"
                 noCircle
-                backgroundColor="bg-transparent"
+                backgroundColor="bg-white"
                 link={ROUTES.UCAS_APPLICATION}
                 paddingY="py-5 md:py-16"
             />
