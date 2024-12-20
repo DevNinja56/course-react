@@ -95,7 +95,7 @@ const Slider3D: React.FC<Slider3DProps> = (props) => {
     };
 
     return (
-        <div className="slider-3d relative w-[100vw] overflow-hidden">
+        <div className="slider-3d relative overflow-hidden">
             {/* Slider3D */}
             <div className="slideC flex items-center justify-center min-h-[272px] relative ">
                 {items.map((item, i) => (

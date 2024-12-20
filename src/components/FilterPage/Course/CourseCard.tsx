@@ -7,16 +7,15 @@ import FavoriteButton from '../../Button/FavoriteButton';
 import { LuMapPin } from 'react-icons/lu';
 import { HiOutlineSparkles } from 'react-icons/hi2';
 import { useRouter } from 'next/router';
-// import { FaRegClock } from 'react-icons/fa6';    
+// import { FaRegClock } from 'react-icons/fa6';
 import { TbHourglassEmpty } from 'react-icons/tb';
 import { useCurrency } from '@/hooks/currency';
+import { HiOutlineCurrencyDollar } from 'react-icons/hi';
 
 interface CardProps {
     course: courseType;
     topFit?: boolean;
 }
-
-
 
 const CourseCard = ({ course, topFit }: CardProps) => {
     const {
@@ -27,15 +26,11 @@ const CourseCard = ({ course, topFit }: CardProps) => {
         tuitionFee,
         feeCurrency = 'AUD'
     } = course;
-    
 
-
-    
-    
-    const { getCurrencySymbol, setCurrencyValue, getSingleRate, base_code } = useCurrency();
+    const { setCurrencyValue, getSingleRate, base_code } = useCurrency();
     const rate = useMemo(() => getSingleRate(feeCurrency), [feeCurrency]);
     const router = useRouter();
-    
+
     return (
         <div
             className="flex flex-col shadow-custom rounded-xl hover:shadow-xl hover:-translate-y-2 transition-all duration-300 cursor-pointer relative bg-white"
@@ -60,7 +55,10 @@ const CourseCard = ({ course, topFit }: CardProps) => {
                         height={174}
                         width={282}
                         alt="card"
-                        src={course.logo || "https://co-assets-bucket.s3-accelerate.amazonaws.com/uploads/1722329836213Staffordshire-University-Stoke-on-Trent.jpg"}
+                        src={
+                            course.logo ||
+                            'https://co-assets-bucket.s3-accelerate.amazonaws.com/uploads/1722329836213Staffordshire-University-Stoke-on-Trent.jpg'
+                        }
                         className="h-[174px] w-full object-cover rounded-t-xl"
                     />
                     {topFit && router.query.SmartMatch ? (
@@ -97,7 +95,7 @@ const CourseCard = ({ course, topFit }: CardProps) => {
                                 <p className="text-[0.600rem] xl:text-[0.700rem]">
                                     {/* {institute?.location?.split(',')?.[0] ??
                                         'No Location'} */}
-                                        UK
+                                    UK
                                 </p>
                             </div>
                             {/* <div className="flex flex-col items-center gap-1">
@@ -106,12 +104,10 @@ const CourseCard = ({ course, topFit }: CardProps) => {
                                 3 Jan 2024
                                 </p>
                             </div> */}
-                                 <div className="flex flex-col items-center gap-1">
-                                <span className=" text-blueColor text-[1rem] text-center">
-                                    {getCurrencySymbol(
-                                        rate ? base_code : feeCurrency
-                                    )}
-                                </span>
+                            <div className="flex flex-col items-center gap-1">
+                                <p className="text-[17px] text-blueColor">
+                                    <HiOutlineCurrencyDollar />
+                                </p>
                                 <p className="text-[0.600rem] xl:text-[0.700rem]">
                                     {setCurrencyValue(
                                         !rate
@@ -128,11 +124,9 @@ const CourseCard = ({ course, topFit }: CardProps) => {
                             <div className="flex flex-col items-center gap-1">
                                 <TbHourglassEmpty className="h-4 w-4 text-blueColor" />
                                 <p className="text-[0.600rem] xl:text-[0.700rem]">
-                                25 Mar 2024
+                                    25 Mar 2024
                                 </p>
                             </div>
-                       
-                          
                         </div>
                     </div>
                 </div>
