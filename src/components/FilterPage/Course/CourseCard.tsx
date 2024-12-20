@@ -32,7 +32,7 @@ const CourseCard = ({ course, topFit }: CardProps) => {
     const router = useRouter();
 
     return (
-        <div
+        <div    
             className="flex flex-col shadow-custom rounded-xl hover:shadow-xl hover:-translate-y-2 transition-all duration-300 cursor-pointer relative bg-white"
             title={name}
         >
@@ -123,7 +123,7 @@ const CourseCard = ({ course, topFit }: CardProps) => {
                             </div>
                             <div className="flex flex-col items-center gap-1">
                                 <TbHourglassEmpty className="h-4 w-4 text-blueColor" />
-                                <p className="text-[0.600rem] xl:text-[0.700rem]">
+                                <p className="text-[0.600rem] xl:text-[0.700rem] text-center">
                                     25 Mar 2024
                                 </p>
                             </div>
