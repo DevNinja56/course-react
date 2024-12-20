@@ -7,11 +7,13 @@ import { useUi } from '@/hooks/user-interface';
 interface propsType {
     entryRequirements: entryRequirementItems;
     isUnderGraduate: boolean;
+    country: string;
 }
 
 const EntryRequirements: React.FC<propsType> = ({
     entryRequirements,
-    isUnderGraduate
+    isUnderGraduate,
+    country
 }) => {
     const { updateModal } = useUi();
     const data = [
@@ -20,12 +22,12 @@ const EntryRequirements: React.FC<propsType> = ({
                   {
                       title: 'For Local Qualifications',
                       element: (
-                          <div className="description w-full flex flex-col gap-3 md:gap-4 items-start border-l-4 border-blueColor py-5 px-9 bg-[#f3f8ff] ">
+                          <div className="description w-full flex flex-col gap-3 md:gap-4 items-start border-l-4 border-blueColor py-5 px-9 bg-[#f3f8ff]">
                               {entryRequirements?.local_year_12 ? (
                                   entryRequirements?.local_year_12?.map(
                                       (item, index) => (
                                           <div
-                                              className=""
+                                              className="font-medium text-lg mb-1"
                                               key={
                                                   'entry-requirement---' + index
                                               }
@@ -33,6 +35,9 @@ const EntryRequirements: React.FC<propsType> = ({
                                               {item.qualification} require with{' '}
                                               {item.value} {item.grade} from{' '}
                                               {item.country}
+                                              <div className="font-light text-lg italic">
+                                                  Only Required from {country}
+                                              </div>
                                           </div>
                                       )
                                   )
@@ -47,10 +52,15 @@ const EntryRequirements: React.FC<propsType> = ({
                       element: (
                           <div className="description w-full flex flex-col gap-3 md:gap-4 items-start border-l-4 border-blueColor py-5 px-9 bg-[#f3f8ff]">
                               {entryRequirements?.a_level ? (
-                                  <div className="">
-                                      {entryRequirements?.a_level} UCAS points
-                                      required to get admission
-                                  </div>
+                                  <>
+                                      <div className="font-medium text-lg mb-1">
+                                          {entryRequirements?.a_level} UCAS
+                                          points required to get admission
+                                          <div className="font-light text-lg italic">
+                                              Only Required from {country}
+                                          </div>
+                                      </div>
+                                  </>
                               ) : (
                                   <>No data found</>
                               )}
@@ -61,7 +71,7 @@ const EntryRequirements: React.FC<propsType> = ({
                                           state: {}
                                       })
                                   }
-                                  className="bg-blueColor text-white px-3 py-2 rounded-md "
+                                  className="bg-blueColor text-white px-3 py-2 rounded-md"
                               >
                                   UCAS Points Calculator
                               </button>
@@ -71,12 +81,17 @@ const EntryRequirements: React.FC<propsType> = ({
                   {
                       title: 'For International Baccalaureate (IB)',
                       element: (
-                          <div className="description w-full flex flex-col gap-3 md:gap-4 items- border-l-4 border-blueColor py-5 px-9 bg-[#f3f8ff]">
+                          <div className="description w-full flex flex-col gap-3 md:gap-4 items-start border-l-4 border-blueColor py-5 px-9 bg-[#f3f8ff]">
                               {entryRequirements?.ib ? (
-                                  <div className="">
-                                      {entryRequirements?.ib} (IB) points
-                                      required to get admission
-                                  </div>
+                                  <>
+                                      <div className="font-medium text-lg mb-1">
+                                          {entryRequirements?.ib} (IB) points
+                                          required to get admission
+                                          <div className="font-light text-lg italic">
+                                              Only Required from {country}
+                                          </div>
+                                      </div>
+                                  </>
                               ) : (
                                   <>No data found</>
                               )}
@@ -88,12 +103,12 @@ const EntryRequirements: React.FC<propsType> = ({
                   {
                       title: 'Bachelor Degree',
                       element: (
-                          <div className="description w-full flex flex-col gap-3 md:gap-4 items-start border-l-4 border-blueColor py-5 px-9 bg-[#f3f8ff]    ">
+                          <div className="description w-full flex flex-col gap-3 md:gap-4 items-start border-l-4 border-blueColor py-5 px-9 bg-[#f3f8ff]">
                               {entryRequirements?.bachelor_degrees ? (
                                   entryRequirements?.bachelor_degrees?.map(
                                       (item, index) => (
                                           <div
-                                              className=""
+                                              className="font-medium text-lg mb-1"
                                               key={
                                                   'entry-requirement---' + index
                                               }
@@ -101,6 +116,10 @@ const EntryRequirements: React.FC<propsType> = ({
                                               {item.qualification} require with{' '}
                                               {item.value} {item.grade} from{' '}
                                               {item.country}
+                                              <div className="font-light text-lg italic">
+                                                  Only Required from{' '}
+                                                  {country}
+                                              </div>
                                           </div>
                                       )
                                   )
@@ -112,9 +131,10 @@ const EntryRequirements: React.FC<propsType> = ({
                   }
               ])
     ];
+
     return (
         <div>
-            <Tabs data={data} isButton/>
+            <Tabs data={data} isButton />
         </div>
     );
 };

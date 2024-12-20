@@ -71,7 +71,6 @@ const CourseDetail = () => {
               ));
         return amount;
     }, [course]);
-
     
     return (
         <>
@@ -145,7 +144,7 @@ const CourseDetail = () => {
                                                                 course
                                                                     .monthDuration
                                                                     .length -
-                                                                    1 && ' /'}
+                                                                    1 && '/'}
                                                         </li>
                                                     )
                                                 )
@@ -292,6 +291,8 @@ const CourseDetail = () => {
                                                                         </h3>
                                                                         <div className="content text-sm md:text-base">
                                                                             <EntryRequirements
+                                                                            
+                                                                                country={course.language[0].country}
                                                                                 entryRequirements={
                                                                                     course.entryRequirements
                                                                                 }
